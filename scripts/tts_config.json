@@ -1,0 +1,9 @@
+{
+  "engine": "elevenlabs-mcp",
+  "voice_id": "9qYoN7U9tP3w6lhgZOP9",
+  "voice_name": "Nguyễn Khoái - Nam sống động",
+  "model_id": "eleven_v4",
+  "style_tags": "[calm]",
+  "style_note": "Giọng gốc khá vui; thêm [calm] trước mỗi dòng để giữ tông tài liệu, điềm tĩnh.",
+  "flow_id": "YNz8Kf46Xah2OLrfJnAt"
+}

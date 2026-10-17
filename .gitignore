@@ -5,3 +5,7 @@ dist
 
 # Ignore the output video from Git but not videos you import into src/.
 out
+
+# Audio sinh tự động bằng scripts/tts.py — tạo lại được
+public/audio/
+__pycache__/
