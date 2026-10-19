@@ -1,171 +1,229 @@
 import React from "react";
-import { AbsoluteFill, Easing, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
-import { BeatProps, clamp, ramp } from "../../components/BeatShell";
+import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { BeatProps, ramp } from "../../components/BeatShell";
 import { Card } from "../../components/Card";
 import { Tex } from "../../components/MathText";
-import { Axes, FunctionPlot, Plot, PlotLabel, Point, TangentLine, fmt, makeScale } from "../../components/plot";
-import { colors, fontText, shadow, tint } from "../../components/theme";
-import { ZoomInset } from "../../components/ZoomInset";
-import { label } from "./beats1";
+import { colors, fontSize, fontText, halo, tint } from "../../components/theme";
+import { Tag, label } from "./parts";
 
-// ---------------- b04: cát tuyến → kính lúp → độ dốc 10 ----------------
-const fall = (t: number) => 5 * t * t;
-const S4 = makeScale({ xMin: 0, xMax: 2.2, yMin: 0, yMax: 24, width: 700, height: 500 });
-const P4 = { left: 200, top: 170, center: 610 };
-const INSET = { left: 1080, top: 180, width: 640, height: 430 };
+const Ball: React.FC<{ cx: number; cy: number; r?: number; color?: string; opacity?: number }> = ({ cx, cy, r = 14, color = "#F59E0B", opacity = 1 }) => (
+  <circle data-mark="ball" cx={cx} cy={cy} r={r} fill={color} stroke="#B85E06" strokeWidth={3} opacity={opacity} />
+);
 
-/** Trái Đất tròn → phóng tới mặt sân bóng phẳng (p: 0 → 1). */
-const EarthToField: React.FC<{ p: number; width: number; height: number }> = ({ p, width: W, height: H }) => {
-  const surface = H * 0.45;
-  const R = 120 * Math.pow(60, p);
-  const g = Math.min(1, Math.max(0, (p - 0.45) / 0.4));
-  const ocean = [75, 135, 244];
-  const grass = [56, 160, 90];
-  const col = ocean.map((o, i) => Math.round(o + (grass[i] - o) * g));
-  const field = Math.min(1, Math.max(0, (p - 0.8) / 0.2));
-  return (
-    <svg width={W} height={H} style={{ position: "absolute", inset: 0 }}>
-      <rect width={W} height={H} fill="#EAF2FF" />
-      <circle cx={W / 2} cy={surface + R} r={R} fill={`rgb(${col.join(",")})`} />
-      <g opacity={1 - g}>
-        <ellipse cx={W / 2 - R * 0.35} cy={surface + R * 0.55} rx={R * 0.25} ry={R * 0.18} fill="#5CC08A" />
-        <ellipse cx={W / 2 + R * 0.3} cy={surface + R * 0.8} rx={R * 0.2} ry={R * 0.3} fill="#5CC08A" />
-      </g>
-      <g opacity={field}>
-        <line x1={0} x2={W} y1={surface + 30} y2={surface + 30} stroke="white" strokeWidth={4} />
-        <line x1={W / 2} x2={W / 2} y1={surface + 30} y2={H} stroke="white" strokeWidth={4} />
-        <ellipse cx={W / 2} cy={surface + 130} rx={150} ry={50} fill="none" stroke="white" strokeWidth={4} />
-        <g transform={`translate(${W * 0.78}, ${surface})`}>
-          <line x1={0} y1={0} x2={-9} y2={-34} stroke={colors.text} strokeWidth={5} strokeLinecap="round" />
-          <line x1={0} y1={0} x2={9} y2={-34} stroke={colors.text} strokeWidth={5} strokeLinecap="round" />
-          <rect x={-14} y={-76} width={28} height={44} rx={8} fill={colors.brandIndigo} />
-          <circle cx={0} cy={-92} r={15} fill="#F3C9A0" />
-        </g>
-      </g>
-      <text data-text="label" x={24} y={52} fontFamily={fontText} fontWeight={700} fontSize={36} fill={colors.text}>
-        {p < 0.6 ? "Trái Đất: tròn" : "Mặt sân: phẳng"}
-      </text>
-    </svg>
-  );
-};
+/** Chữ thường xen công thức $...$ */
+const MathLine: React.FC<{ text: string }> = ({ text }) => (
+  <>{text.split("$").map((p, i) => (i % 2 ? <Tex key={i} tex={p} /> : <span key={i}>{p}</span>))}</>
+);
+
+// ---------------- b04: VÍ DỤ — quả bóng rơi s = 5t² ----------------
+const RULER = { x: 250, top: 440, pxPerM: 11 }; // 0 m ở trên, 20 m → 260 px
+const yOf = (m: number) => RULER.top + m * RULER.pxPerM;
+const ROWS4 = [
+  { dt: "1 s", fall: "20 − 5 = 15", v: "15" },
+  { dt: "0,1 s", fall: "6,05 − 5 = 1,05", v: "10,5" },
+  { dt: "0,01 s", fall: "5,1005 − 5 = 0,1005", v: "10,05" },
+];
+const GRID4 = "340px 420px 330px";
 
 export const Beat04: React.FC<BeatProps> = ({ L, E }) => {
   const frame = useCurrentFrame();
   const d0 = E[0] - L[0];
-  const tB = interpolate(
-    frame,
-    [L[0] + 10, L[0] + 0.35 * d0, L[0] + 0.45 * d0, L[0] + 0.75 * d0, L[0] + 0.82 * d0, E[0]],
-    [2, 1.1, 1.1, 1.01, 1.01, 1],
-    { ...clamp, easing: Easing.inOut(Easing.cubic) },
-  );
-  const slope = 5 * (tB + 1); // (5tB² − 5) / (tB − 1)
-  const isTangent = tB < 1.001;
-  const plotIn = ramp(frame, 0, 12);
-  const insetO = ramp(frame, L[1], L[1] + 12);
-  const z = 2 * Math.pow(50, ramp(frame, L[1] + 6, E[1], Easing.inOut(Easing.quad)));
-  const gagO = ramp(frame, L[2], L[2] + 8) * (1 - ramp(frame, L[3] - 6, L[3] + 4));
-  const gagP = ramp(frame, L[2] + 4, L[2] + 0.8 * (E[2] - L[2]), Easing.inOut(Easing.quad));
-  const tan = ramp(frame, L[3], L[3] + 14);
-  const lineColor = isTangent ? colors.accent : colors.c2;
-  // Dòng 1: đồ thị ở giữa; dòng 2: trượt sang trái khi kính lúp vào.
-  const plotLeft = interpolate(ramp(frame, L[1] - 6, L[1] + 12), [0, 1], [P4.center, P4.left]);
+  const d3 = E[3] - L[3];
+  const ballO = [0, 1, 2].map((i) => ramp(frame, L[0] + (0.3 + i * 0.2) * d0, L[0] + (0.3 + i * 0.2) * d0 + 8));
+  const hl = ramp(frame, L[1], L[1] + 10);
+  const bar = ramp(frame, L[1] + 8, L[1] + 28);
+  const rowO = [L[2], L[3], L[3] + 0.5 * d3].map((f) => ramp(frame, f, f + 12));
 
   return (
     <AbsoluteFill>
-      <Plot
-        scale={S4}
-        left={plotLeft}
-        top={P4.top}
-        style={{ opacity: plotIn }}
-        overlay={
-          <>
-            <PlotLabel scale={S4} x={1} y={5} dx={-18} dy={-26} anchor="right" color={colors.accent}>
-              A(1; 5)
-            </PlotLabel>
-            <PlotLabel scale={S4} x={tB} y={fall(tB)} dx={-18} dy={-24} anchor="right" color={colors.c2} opacity={tB > 1.3 ? 1 : 0}>
-              B
-            </PlotLabel>
-            <PlotLabel scale={S4} x={0.08} y={22.5} anchor="left" color={lineColor}>
-              {isTangent ? "độ dốc tiếp tuyến: 10" : `độ dốc cát tuyến: ${fmt(slope)}`}
-            </PlotLabel>
-          </>
-        }
-      >
-        <Axes scale={S4} xTicks={[1, 2]} yTicks={[5, 10, 15, 20]} xLabel="t" yLabel="s" />
-        <FunctionPlot scale={S4} f={fall} />
-        <TangentLine scale={S4} x0={1} y0={5} slope={slope} color={lineColor} width={4} />
-        <Point scale={S4} x={tB} y={fall(tB)} color={colors.c2} opacity={tB > 1.05 ? 1 : 0} />
-        <Point scale={S4} x={1} y={5} />
-      </Plot>
-      <ZoomInset
-        base={S4}
-        baseLeft={plotLeft}
-        baseTop={P4.top}
-        f={fall}
-        x0={1}
-        y0={5}
-        z={z}
-        left={INSET.left}
-        top={INSET.top}
-        width={INSET.width}
-        height={INSET.height}
-        opacity={insetO}
-      >
-        {(s) => <TangentLine scale={s} x0={1} y0={5} slope={10} color={colors.accent} width={4} opacity={tan} />}
-      </ZoomInset>
-      <div
-        style={{
-          position: "absolute",
-          left: INSET.left,
-          top: INSET.top,
-          width: INSET.width,
-          height: INSET.height,
-          borderRadius: 16,
-          overflow: "hidden",
-          opacity: gagO,
-          boxShadow: shadow,
-          border: `3px solid ${colors.accent}`,
-        }}
-      >
-        <EarthToField p={gagP} width={INSET.width} height={INSET.height} />
+      <Card style={{ left: 120, top: 120, width: 600, height: 590, opacity: ramp(frame, 0, 12) }}>
+        <div data-text="formula" style={{ position: "absolute", left: 40, top: 22, fontSize: 52, color: colors.text }}>
+          <Tex tex="s=5t^2" />
+        </div>
+        <div data-text="label" style={{ ...label, position: "absolute", left: 40, top: 114, lineHeight: 1.35 }}>
+          <Tex tex="s" />: quãng đường rơi (m)
+          <br />
+          <Tex tex="t" />: thời gian (s)
+        </div>
+      </Card>
+      <svg width={1920} height={1080} style={{ position: "absolute", inset: 0 }}>
+        <g opacity={ramp(frame, 0, 12)}>
+          <line x1={RULER.x} y1={yOf(0)} x2={RULER.x} y2={yOf(20)} stroke={colors.axis} strokeWidth={4} />
+          {[0, 5, 10, 15, 20].map((m) => (
+            <g key={m}>
+              <line x1={RULER.x - 12} x2={RULER.x + 12} y1={yOf(m)} y2={yOf(m)} stroke={colors.axis} strokeWidth={4} />
+              <text data-text="tick" x={RULER.x - 24} y={yOf(m) + 10} textAnchor="end" fontFamily={fontText} fontSize={fontSize.tick} fill={colors.muted}>
+                {m}
+              </text>
+            </g>
+          ))}
+          <text data-text="axis" x={RULER.x - 24} y={yOf(0) - 40} textAnchor="middle" fontFamily={fontText} fontWeight={600} fontSize={fontSize.tick} fill={colors.text}>
+            s (m)
+          </text>
+        </g>
+        <line x1={RULER.x + 30} x2={RULER.x + 30} y1={yOf(5)} y2={yOf(5) + (yOf(20) - yOf(5)) * bar} stroke={colors.c2} strokeWidth={10} strokeLinecap="round" opacity={bar > 0 ? 1 : 0} />
+        {[0, 1, 2].map((t, i) => (
+          <Ball key={t} cx={RULER.x + 90} cy={yOf(5 * t * t)} opacity={ballO[i]} color={t === 1 && hl > 0.5 ? colors.accent : "#F59E0B"} />
+        ))}
+      </svg>
+      {[0, 1, 2].map((t, i) => (
+        <Tag key={t} x={RULER.x + 122} y={yOf(5 * t * t) - (t === 0 ? 34 : 14)} anchor="left" color={t === 1 && hl > 0.5 ? colors.accent : colors.muted} opacity={ballO[i]}>
+          <Tex tex={`t=${t}`} /> s
+        </Tag>
+      ))}
+      <div data-text="label" style={{ ...label, position: "absolute", left: RULER.x + 260, top: yOf(9), color: colors.c2, fontWeight: 700, opacity: bar, lineHeight: 1.25, textShadow: halo() }}>
+        rơi thêm 15 m
+        <br />
+        trong 1 s
       </div>
-      <div data-text="label" style={{ ...label, position: "absolute", left: INSET.left, top: INSET.top + INSET.height + 22, width: INSET.width, textAlign: "center", color: colors.accent, fontWeight: 800, opacity: tan }}>
-        độ dốc = 10
-      </div>
+      <Card group="table" style={{ left: 770, top: 180, overflow: "hidden", opacity: rowO[0] }}>
+        <div style={{ display: "grid", gridTemplateColumns: GRID4, fontSize: 36, fontWeight: 700, background: tint(colors.brandBlue, 0.1), lineHeight: 1.25 }}>
+          <div data-text="th" style={{ padding: "16px 24px" }}>
+            Khoảng thời gian
+            <br />
+            (từ <Tex tex="t=1" /> s)
+          </div>
+          <div data-text="th" style={{ padding: "16px 24px" }}>
+            Quãng rơi thêm (m)
+          </div>
+          <div data-text="th" style={{ padding: "16px 24px" }}>
+            Vận tốc trung bình (m/s)
+          </div>
+        </div>
+        {ROWS4.map((r, i) => (
+          <div key={r.dt} style={{ display: "grid", gridTemplateColumns: GRID4, fontSize: 38, fontWeight: 600, borderTop: `2px solid ${colors.panelBorder}`, opacity: rowO[i] }}>
+            <div data-text="td" style={{ padding: "18px 24px" }}>
+              {r.dt}
+            </div>
+            <div data-text="td" style={{ padding: "18px 24px", color: colors.muted }}>
+              {r.fall}
+            </div>
+            <div data-text="td" style={{ padding: "18px 24px", fontWeight: 800, color: i === 0 ? colors.c2 : colors.accent }}>
+              {r.v}
+            </div>
+          </div>
+        ))}
+      </Card>
     </AbsoluteFill>
   );
 };
 
-// ---------------- b05: bảng tương ứng quả bóng ↔ hàm số ----------------
-const MAP_ROWS = [
-  { a: "thời gian $t$", b: "$x$" },
-  { a: "quãng đường $s(t)$", b: "$f(x)$" },
-  { a: "vận tốc tức thời", b: "$f'(x)$" },
+// ---------------- b05: BẢN CHẤT — các số dồn về 10 = giới hạn ----------------
+const NL = { left: 260, right: 1660, y: 430, min: 9, max: 16 };
+const nx = (v: number) => NL.left + ((v - NL.min) / (NL.max - NL.min)) * (NL.right - NL.left);
+const PTS = [
+  { v: 15, text: "15", note: "khoảng 1 s", top: 300, color: colors.c2, dx: 0 },
+  { v: 10.5, text: "10,5", note: "khoảng 0,1 s", top: 300, color: colors.brandBlue, dx: 70 },
+  { v: 10.05, text: "10,05", note: "khoảng 0,01 s", top: 160, color: colors.brandBlue, dx: -80 },
 ];
 
-const MathLine: React.FC<{ text: string }> = ({ text }) => {
-  const parts = text.split("$");
+export const Beat05: React.FC<BeatProps> = ({ L, E }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const d0 = E[0] - L[0];
+  const drop = PTS.map((_, i) => spring({ frame: frame - L[0] - i * 0.25 * d0, fps, config: { damping: 14 } }));
+  const arrow = ramp(frame, L[0] + 0.75 * d0, E[0]);
+  const lim = ramp(frame, L[1], L[1] + 14);
+  const noDiv = ramp(frame, L[2], L[2] + 12);
+  const card = spring({ frame: frame - L[3], fps, config: { damping: 16 } });
+  const pulse = frame > L[0] + 0.75 * d0 ? 1 + 0.15 * Math.sin((frame - L[0]) * 0.3) : 1;
+
   return (
-    <>
-      {parts.map((p, i) => (i % 2 ? <Tex key={i} tex={p} /> : <span key={i}>{p}</span>))}
-    </>
+    <AbsoluteFill>
+      <svg width={1920} height={1080} style={{ position: "absolute", inset: 0, overflow: "visible" }}>
+        <line x1={NL.left - 20} x2={NL.right + 30} y1={NL.y} y2={NL.y} stroke={colors.axis} strokeWidth={4} />
+        <polygon points={`${NL.right + 46},${NL.y} ${NL.right + 28},${NL.y - 9} ${NL.right + 28},${NL.y + 9}`} fill={colors.axis} />
+        {[9, 10, 11, 12, 13, 14, 15, 16].map((v) => (
+          <g key={v}>
+            <line x1={nx(v)} x2={nx(v)} y1={NL.y - 10} y2={NL.y + 10} stroke={colors.axis} strokeWidth={4} />
+            <text data-text="tick" x={nx(v)} y={NL.y + 46} textAnchor="middle" fontFamily={fontText} fontSize={fontSize.tick} fill={v === 10 ? colors.accent : colors.muted} fontWeight={v === 10 ? 800 : 400}>
+              {v}
+            </text>
+          </g>
+        ))}
+        <circle cx={nx(10)} cy={NL.y} r={14 * pulse} fill="none" stroke={colors.accent} strokeWidth={4} opacity={arrow} />
+        <g opacity={arrow}>
+          <line x1={nx(15) - 150} y1={NL.y - 50} x2={nx(11) + 110} y2={NL.y - 50} stroke={colors.accent} strokeWidth={4} strokeDasharray="12 10" />
+          <polygon points={`${nx(11) + 88},${NL.y - 50} ${nx(11) + 108},${NL.y - 60} ${nx(11) + 108},${NL.y - 40}`} fill={colors.accent} />
+        </g>
+        {PTS.map((p, i) => (
+          <g key={p.v} opacity={drop[i]}>
+            {p.top < 200 ? <line x1={nx(p.v)} x2={nx(p.v)} y1={NL.y - 14} y2={p.top + 96} stroke={colors.muted} strokeWidth={2} /> : null}
+            <circle data-mark="point" cx={nx(p.v)} cy={NL.y - (1 - drop[i]) * 120} r={11} fill={p.color} stroke="#FFFFFF" strokeWidth={3} />
+          </g>
+        ))}
+      </svg>
+      <div data-text="axis" style={{ ...label, position: "absolute", left: NL.right + 30, top: NL.y + 72, translate: "-100% 0", fontSize: 36, color: colors.text, whiteSpace: "nowrap" }}>
+        vận tốc trung bình (m/s)
+      </div>
+      {PTS.map((p, i) => (
+        <div
+          key={p.v}
+          data-text="label"
+          style={{ ...label, position: "absolute", left: nx(p.v) + p.dx, top: p.top, translate: "-50% 0", textAlign: "center", opacity: drop[i], textShadow: halo(), lineHeight: 1.2 }}
+        >
+          <b style={{ fontWeight: 800, fontSize: 42 }}>{p.text}</b>
+          <br />
+          <span style={{ color: colors.muted }}>{p.note}</span>
+        </div>
+      ))}
+      <div data-text="label" style={{ ...label, position: "absolute", left: nx(10), top: NL.y + 76, translate: "-50% 0", color: colors.accent, fontWeight: 800, opacity: lim }}>
+        giới hạn
+      </div>
+      <div data-text="label" style={{ ...label, position: "absolute", left: nx(10) + 110, top: NL.y + 76, color: colors.muted, opacity: lim }}>
+        (khi khoảng thời gian co về 0)
+      </div>
+      <Card style={{ left: 1120, top: 130, padding: "14px 30px", display: "flex", alignItems: "center", gap: 26, opacity: noDiv }}>
+        <div data-text="formula" style={{ position: "relative", fontSize: 44 }}>
+          <Tex tex="\dfrac{0}{0}" />
+          <svg width={70} height={90} style={{ position: "absolute", left: -8, top: -6, overflow: "visible" }}>
+            <line x1={4} y1={86} x2={66} y2={6} stroke={colors.decrease} strokeWidth={7} strokeLinecap="round" />
+          </svg>
+        </div>
+        <div data-text="card" style={{ ...label, color: colors.increase, fontWeight: 700 }}>
+          ✓ không chia cho 0
+        </div>
+      </Card>
+      <Card style={{ left: 560, top: 600, width: 800, padding: "16px 32px", display: "flex", alignItems: "center", gap: 26, opacity: card, translate: `0px ${(1 - card) * 24}px` }}>
+        <svg width={56} height={56}>
+          <circle cx={28} cy={28} r={23} fill="#F59E0B" stroke="#B85E06" strokeWidth={3} />
+        </svg>
+        <div data-text="card" style={{ ...label, fontSize: 40 }}>
+          vận tốc tức thời tại <Tex tex="t=1" /> s: <b style={{ color: colors.accent }}>10 m/s</b>
+        </div>
+      </Card>
+    </AbsoluteFill>
   );
 };
 
-export const Beat05: React.FC<BeatProps> = ({ L }) => {
+// ---------------- b06: ĐỊNH NGHĨA — bảng tương ứng → định nghĩa đạo hàm ----------------
+const MAP_ROWS = [
+  { a: "thời gian $t$ (s)", b: "$x$" },
+  { a: "quãng đường $s$ (m)", b: "$f(x)$" },
+  { a: "vận tốc tức thời tại thời điểm $x_0$", b: "$f'(x_0)$", note: "đạo hàm của $f$ tại $x_0$" },
+];
+const GRID6 = "700px 110px 480px";
+const DEF_PLAIN = "f'(x_0)=\\lim\\limits_{x\\to x_0}\\dfrac{f(x)-f(x_0)}{x-x_0}";
+const DEF_COLOR = `f'(x_0)=\\lim\\limits_{x\\to x_0}\\dfrac{\\textcolor{${colors.c2}}{f(x)-f(x_0)}}{\\textcolor{${colors.c1}}{x-x_0}}`;
+
+export const Beat06: React.FC<BeatProps> = ({ L }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const rows = [L[0], L[0] + 20, L[1]].map((f) => spring({ frame: frame - f, fps, config: { damping: 16 } }));
-  const cap = ramp(frame, L[2], L[2] + 12);
+  const rows = [L[0], L[0] + 18, L[1]].map((f) => spring({ frame: frame - f, fps, config: { damping: 16 } }));
+  const up = ramp(frame, L[2] - 4, L[2] + 16);
+  const def = ramp(frame, L[2] + 8, L[2] + 22);
+  const colored = ramp(frame, L[3], L[3] + 14);
+  // Dòng 3: bảng nhường chỗ cho định nghĩa, còn lại dải tóm tắt ở trên (giữ cỡ chữ tối thiểu).
+
   return (
     <AbsoluteFill>
-      <Card group="table" style={{ left: 410, top: 140, width: 1100, overflow: "hidden" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "560px 120px 420px", background: tint(colors.brandBlue, 0.1), fontSize: 40, fontWeight: 800 }}>
-          <div data-text="th" style={{ padding: "20px 40px" }}>
+      <Card group="table" style={{ left: 960 - 650, top: 190, width: 1300, overflow: "hidden", opacity: 1 - up }}>
+        <div style={{ display: "grid", gridTemplateColumns: GRID6, background: tint(colors.brandBlue, 0.1), fontSize: 40, fontWeight: 800 }}>
+          <div data-text="th" style={{ padding: "16px 36px" }}>
             Quả bóng
           </div>
           <div />
-          <div data-text="th" style={{ padding: "20px 40px" }}>
+          <div data-text="th" style={{ padding: "16px 36px" }}>
             Hàm số
           </div>
         </div>
@@ -174,105 +232,145 @@ export const Beat05: React.FC<BeatProps> = ({ L }) => {
             key={r.a}
             style={{
               display: "grid",
-              gridTemplateColumns: "560px 120px 420px",
+              gridTemplateColumns: GRID6,
               alignItems: "center",
-              fontSize: 42,
+              fontSize: 40,
               fontWeight: 600,
               borderTop: `2px solid ${colors.panelBorder}`,
-              background: i === 2 ? tint(colors.accent, 0.08 * cap + 0.04) : undefined,
+              background: i === 2 ? tint(colors.accent, 0.06) : undefined,
               color: i === 2 ? colors.accent : colors.text,
               opacity: rows[i],
               translate: `${(1 - rows[i]) * -30}px 0px`,
             }}
           >
-            <div data-text="td" style={{ padding: "24px 40px" }}>
+            <div data-text="td" style={{ padding: "20px 36px" }}>
               <MathLine text={r.a} />
             </div>
             <div style={{ textAlign: "center", fontSize: 44, color: colors.muted }}>⟷</div>
-            <div data-text="td" style={{ padding: "24px 40px", fontSize: 48 }}>
+            <div data-text="td" style={{ padding: "16px 36px", fontSize: 46, lineHeight: 1.2 }}>
               <MathLine text={r.b} />
+              {r.note ? (
+                <div style={{ fontSize: 36, color: colors.muted, fontWeight: 600 }}>
+                  <MathLine text={r.note} />
+                </div>
+              ) : null}
             </div>
           </div>
         ))}
       </Card>
-      <div data-text="caption" style={{ ...label, position: "absolute", left: 0, right: 0, top: 652, textAlign: "center", fontSize: 40, opacity: cap }}>
-        <Tex tex="f'(x_0)" />: tốc độ thay đổi của <Tex tex="f" /> ngay tại <Tex tex="x_0" />
-      </div>
+      <Card style={{ left: 140, top: 150, padding: "16px 34px", opacity: up, translate: `0px ${(1 - up) * -20}px` }}>
+        <div data-text="card" style={{ ...label }}>
+          thời gian ↔ <Tex tex="x" /> · quãng đường ↔ <Tex tex="f(x)" /> · vận tốc tức thời ↔ <Tex tex="f'(x_0)" />
+        </div>
+      </Card>
+      <Card style={{ left: 140, top: 330, width: 1640, height: 330, opacity: def }}>
+        <div data-text="label" style={{ ...label, position: "absolute", left: 50, top: 22, color: colors.muted }}>
+          Định nghĩa đạo hàm của <Tex tex="f" /> tại <Tex tex="x_0" />
+        </div>
+        <div style={{ position: "absolute", left: 40, top: 98, fontSize: 56, color: colors.text }}>
+          <div data-text="formula" style={{ position: "absolute", left: 0, opacity: 1 - colored, whiteSpace: "nowrap" }}>
+            <Tex tex={DEF_PLAIN} display />
+          </div>
+          <div style={{ position: "absolute", left: 0, opacity: colored, whiteSpace: "nowrap" }}>
+            <Tex tex={DEF_COLOR} display />
+          </div>
+        </div>
+        <div style={{ position: "absolute", left: 900, top: 80, display: "flex", flexDirection: "column", gap: 20, opacity: colored, whiteSpace: "nowrap" }}>
+          <div data-text="label" style={{ ...label, display: "flex", alignItems: "center", gap: 16 }}>
+            <span style={{ width: 22, height: 22, borderRadius: 11, background: colors.c2 }} />
+            tử: phần <Tex tex="f" /> thay đổi (quãng rơi thêm, m)
+          </div>
+          <div data-text="label" style={{ ...label, display: "flex", alignItems: "center", gap: 16 }}>
+            <span style={{ width: 22, height: 22, borderRadius: 11, background: colors.c1 }} />
+            mẫu: phần <Tex tex="x" /> thay đổi (thời gian trôi, s)
+          </div>
+          <div data-text="label" style={{ ...label, display: "flex", alignItems: "center", gap: 16 }}>
+            <span style={{ width: 22, height: 22, borderRadius: 11, background: colors.accent }} />
+            <Tex tex="\lim" />: cho <Tex tex="x" /> dồn về <Tex tex="x_0" /> (lấy giới hạn)
+          </div>
+        </div>
+      </Card>
     </AbsoluteFill>
   );
 };
 
-// ---------------- b06: công thức → thay số → 10 ----------------
-const STEPS = ["\\dfrac{5x^2-5}{x-1}", "=\\dfrac{5(x-1)(x+1)}{x-1}", "=5(x+1)"];
-
-export const Beat06: React.FC<BeatProps> = ({ L, E }) => {
+// ---------------- b07: CÔNG THỨC — thay số quả bóng → 10 ----------------
+export const Beat07: React.FC<BeatProps> = ({ L, E }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const formula = ramp(frame, 0, 14);
-  const colored = ramp(frame, L[1], L[1] + 14);
-  const d2 = E[2] - L[2];
-  const steps = [L[2], L[2] + 0.35 * d2, L[2] + 0.7 * d2].map((f) => ramp(frame, f, f + 12));
-  const result = spring({ frame: frame - L[3], fps, config: { damping: 14 } });
-  const cardLeft = interpolate(ramp(frame, L[2] - 6, L[2] + 12), [0, 1], [560, 120]);
-  const plain = "f'(x_0)=\\lim\\limits_{x\\to x_0}\\dfrac{f(x)-f(x_0)}{x-x_0}";
-  const col = `f'(x_0)=\\lim\\limits_{x\\to x_0}\\dfrac{\\textcolor{${colors.c2}}{f(x)-f(x_0)}}{\\textcolor{${colors.c1}}{x-x_0}}`;
+  const d1 = E[1] - L[1];
+  const s0 = ramp(frame, L[0], L[0] + 12);
+  const s1 = ramp(frame, L[1], L[1] + 12);
+  const s1b = ramp(frame, L[1] + 0.45 * d1, L[1] + 0.45 * d1 + 12);
+  const s2 = spring({ frame: frame - L[2], fps, config: { damping: 14 } });
+  const s3 = ramp(frame, L[3], L[3] + 14);
 
   return (
     <AbsoluteFill>
-      <Card style={{ left: cardLeft, top: 150, width: 800, height: 520, opacity: formula }}>
-        <div style={{ position: "absolute", left: 0, right: 0, top: 70, fontSize: 60, color: colors.text, textAlign: "center" }}>
-          <div data-text="formula" style={{ position: "absolute", left: 0, right: 0, opacity: 1 - colored }}>
-            <Tex tex={plain} display />
-          </div>
-          <div style={{ position: "absolute", left: 0, right: 0, opacity: colored }}>
-            <Tex tex={col} display />
-          </div>
+      <Card style={{ left: 120, top: 140, width: 640, height: 420, opacity: ramp(frame, 0, 12) }}>
+        <div data-text="label" style={{ ...label, position: "absolute", left: 36, top: 22, color: colors.muted }}>
+          Định nghĩa đạo hàm
         </div>
-        <div style={{ position: "absolute", left: 60, top: 330, display: "flex", flexDirection: "column", gap: 22, opacity: colored }}>
-          <div data-text="label" style={{ ...label, display: "flex", alignItems: "center", gap: 16 }}>
-            <span style={{ width: 22, height: 22, borderRadius: 11, background: colors.c2 }} /> tử: phần <Tex tex="f" /> thay đổi
+        <div data-text="formula" style={{ position: "absolute", left: 30, top: 86, fontSize: 44, color: colors.text, whiteSpace: "nowrap" }}>
+          <Tex tex={DEF_COLOR} display />
+        </div>
+        <div style={{ position: "absolute", left: 36, top: 262, display: "flex", flexDirection: "column", gap: 14 }}>
+          <div data-text="label" style={{ ...label, display: "flex", alignItems: "center", gap: 14 }}>
+            <span style={{ width: 20, height: 20, borderRadius: 10, background: colors.c2 }} /> tử: phần <Tex tex="f" /> thay đổi
           </div>
-          <div data-text="label" style={{ ...label, display: "flex", alignItems: "center", gap: 16 }}>
-            <span style={{ width: 22, height: 22, borderRadius: 11, background: colors.c1 }} /> mẫu: phần <Tex tex="x" /> thay đổi
+          <div data-text="label" style={{ ...label, display: "flex", alignItems: "center", gap: 14 }}>
+            <span style={{ width: 20, height: 20, borderRadius: 10, background: colors.c1 }} /> mẫu: phần <Tex tex="x" /> thay đổi
           </div>
         </div>
       </Card>
-      <Card style={{ left: 980, top: 150, width: 820, height: 520, opacity: steps[0] }}>
-        <div data-text="label" style={{ ...label, position: "absolute", left: 40, top: 28, fontSize: 36, color: colors.muted }}>
-          <Tex tex="f(x)=5x^2,\ x_0=1" />
+      <Card style={{ left: 800, top: 130, width: 1000, height: 470, opacity: s0 }}>
+        <div data-text="step" style={{ position: "absolute", left: 40, top: 20, fontSize: 42, color: colors.text, opacity: s0 }}>
+          <Tex tex="f(x)=5x^2,\quad x_0=1,\quad f(1)=5" />
         </div>
-        <div style={{ position: "absolute", left: 50, top: 110, display: "flex", alignItems: "center", gap: 18, fontSize: 44, color: colors.text }}>
-          <div data-text="step" style={{ opacity: steps[0] }}>
-            <Tex tex={STEPS[0]} />
-          </div>
-          <div data-text="step" style={{ opacity: steps[1] }}>
-            <Tex tex={STEPS[1]} />
-          </div>
+        <div data-text="step" style={{ position: "absolute", left: 40, top: 106, fontSize: 42, color: colors.text, opacity: s1 }}>
+          <Tex tex="\dfrac{f(x)-f(1)}{x-1}=\dfrac{5x^2-5}{x-1}" />
         </div>
-        <div data-text="step" style={{ position: "absolute", left: 50, top: 270, fontSize: 44, color: colors.text, opacity: steps[2] }}>
-          <Tex tex={STEPS[2]} />
+        <div style={{ position: "absolute", left: 40, top: 240, display: "flex", alignItems: "center", gap: 24, fontSize: 42, color: colors.text, opacity: s1b }}>
+          <div data-text="step">
+            <Tex tex="=\dfrac{5\cancel{(x-1)}(x+1)}{\cancel{x-1}}=5(x+1)" />
+          </div>
+          <div data-text="label" style={{ ...label, color: colors.muted }}>
+            (<Tex tex="x\neq 1" />)
+          </div>
         </div>
         <div
-          data-text="step"
           style={{
             position: "absolute",
-            left: 50,
-            top: 390,
+            left: 40,
+            top: 384,
             display: "flex",
             alignItems: "center",
-            gap: 24,
-            fontSize: 44,
+            gap: 20,
+            fontSize: 42,
             color: colors.text,
-            opacity: result,
-            scale: interpolate(result, [0, 1], [0.9, 1]),
+            opacity: s2,
+            scale: interpolate(s2, [0, 1], [0.9, 1]),
             transformOrigin: "left center",
           }}
         >
-          <Tex tex="x\to 1:\ 5(x+1)\to" />
-          <span style={{ padding: "2px 22px", border: `4px solid ${colors.accent}`, borderRadius: 14, color: colors.accent, fontWeight: 800, fontFamily: fontText }}>10</span>
-          <span style={{ ...label, color: colors.increase, fontWeight: 800 }}>✓ 10 m/s</span>
+          <div data-text="step">
+            <Tex tex="f'(1)=\lim\limits_{x\to 1}5(x+1)=" />
+          </div>
+          <span data-text="step" style={{ padding: "2px 22px", border: `4px solid ${colors.accent}`, borderRadius: 14, color: colors.accent, fontWeight: 800, fontFamily: fontText }}>
+            10
+          </span>
+        </div>
+      </Card>
+      <Card style={{ left: 480, top: 626, padding: "8px 30px", display: "flex", alignItems: "center", gap: 22, opacity: s3, translate: `0px ${(1 - s3) * 20}px` }}>
+        <svg width={44} height={44}>
+          <circle cx={22} cy={22} r={18} fill="#F59E0B" stroke="#B85E06" strokeWidth={3} />
+        </svg>
+        <div data-text="card" style={{ ...label, fontSize: 38 }}>
+          bảng vận tốc trung bình: 15 → 10,5 → 10,05 → <b style={{ color: colors.accent }}>dồn về 10 m/s</b>{" "}
+          <span style={{ color: colors.increase, fontWeight: 800 }}>✓ khớp</span>
         </div>
       </Card>
     </AbsoluteFill>
   );
 };
+

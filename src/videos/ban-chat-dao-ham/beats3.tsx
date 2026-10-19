@@ -4,9 +4,8 @@ import { BeatProps, clamp, ramp } from "../../components/BeatShell";
 import { Card } from "../../components/Card";
 import { Tex } from "../../components/MathText";
 import { Axes, FunctionPlot, Plot, PlotLabel, Point, Scale, TangentLine, makeScale } from "../../components/plot";
-import { colors, fontText, tint } from "../../components/theme";
-import { label } from "./beats1";
-import { BallPhoto, TrafficLight } from "./parts";
+import { colors, tint } from "../../components/theme";
+import { Tag, TrafficLight, label } from "./parts";
 
 export const cubic = (x: number) => x ** 3 - 3 * x;
 export const dCubic = (x: number) => 3 * x * x - 3;
@@ -36,10 +35,10 @@ const Hiker: React.FC<{ px: number; py: number; tired: number; frame: number }> 
   );
 };
 
-// ---------------- b07: dấu đạo hàm = hướng dốc ----------------
+// ---------------- b08: TRỰC GIÁC — dấu đạo hàm = hướng dốc ----------------
 const S7 = makeScale({ xMin: -2.5, xMax: 2.5, yMin: -4, yMax: 4, width: 1100, height: 540 });
 
-export const Beat07: React.FC<BeatProps> = ({ L, E }) => {
+export const Beat08: React.FC<BeatProps> = ({ L, E }) => {
   const frame = useCurrentFrame();
   const s = S7;
   const draw = ramp(frame, 0, 30);
@@ -58,14 +57,14 @@ export const Beat07: React.FC<BeatProps> = ({ L, E }) => {
         top={160}
         overlay={
           <>
-            <PlotLabel scale={s} x={2.45} y={-3.45} anchor="right" color={colors.curve} opacity={draw}>
-              <Tex tex="y=x^3-3x" />
+            <PlotLabel scale={s} x={-0.5} y={-3.3} color={colors.curve} opacity={draw}>
+              <Tex tex="y=f(x)=x^3-3x" />
             </PlotLabel>
-            <PlotLabel scale={s} x={-1.6} y={2.9} color={colors.increase} size={44} opacity={up}>
-              <Tex tex="f'>0" />
+            <PlotLabel scale={s} x={-1.6} y={3.1} color={colors.increase} opacity={up}>
+              <Tex tex="f'(x)>0" />: lên dốc
             </PlotLabel>
-            <PlotLabel scale={s} x={1.15} y={2.9} color={colors.decrease} size={44} opacity={down}>
-              <Tex tex="f'<0" />
+            <PlotLabel scale={s} x={1.15} y={3.1} color={colors.decrease} opacity={down}>
+              <Tex tex="f'(x)<0" />: xuống dốc
             </PlotLabel>
             <PlotLabel scale={s} x={-1} y={2} dy={-46} color={colors.accent} opacity={flat}>
               cực đại
@@ -93,7 +92,7 @@ export const Beat07: React.FC<BeatProps> = ({ L, E }) => {
   );
 };
 
-// ---------------- b08: đồ thị f' → bảng biến thiên ----------------
+// ---------------- b09: TRONG ĐỀ THI — đồ thị f' → bảng biến thiên ----------------
 const fp8 = (x: number) => (x + 1) * (x - 2) ** 2;
 const S8 = makeScale({ xMin: -1.5, xMax: 3, yMin: -6.5, yMax: 6, width: 820, height: 460 });
 const P8 = { left: 170, top: 170 };
@@ -112,7 +111,7 @@ const FP = ["", "-", "0", "+", "0", "+", ""];
 const CW = 88; // độ rộng cột
 const LW = 120; // cột nhãn
 
-export const Beat08: React.FC<BeatProps> = ({ L, E, T0 }) => {
+export const Beat09: React.FC<BeatProps> = ({ L, E, T0 }) => {
   const frame = useCurrentFrame();
   const s = S8;
   const draw = ramp(frame, T0, T0 + 30);
@@ -131,10 +130,16 @@ export const Beat08: React.FC<BeatProps> = ({ L, E, T0 }) => {
         top={P8.top}
         overlay={
           <>
-            <PlotLabel scale={s} x={-1.45} y={5.2} anchor="left" color={colors.warn} opacity={draw}>
+            <PlotLabel scale={s} x={-1.45} y={5.4} anchor="left" color={colors.warn} opacity={draw}>
               <Tex tex="y=f'(x)" />
             </PlotLabel>
-            <PlotLabel scale={s} x={-1} y={0} dx={-14} dy={-30} anchor="right" color={colors.accent} opacity={sign1}>
+            <PlotLabel scale={s} x={-1.3} y={1.15} color={colors.decrease} opacity={sign1}>
+              <Tex tex="f'<0" />
+            </PlotLabel>
+            <PlotLabel scale={s} x={0.6} y={1.6} color={colors.increase} opacity={sign1}>
+              <Tex tex="f'>0" />
+            </PlotLabel>
+            <PlotLabel scale={s} x={-1} y={0} dx={18} dy={34} anchor="left" color={colors.accent} opacity={sign1}>
               <Tex tex="x=-1" />
             </PlotLabel>
             <PlotLabel scale={s} x={2} y={0} dy={58} anchor="top" color={colors.warn} opacity={touch}>
@@ -158,6 +163,9 @@ export const Beat08: React.FC<BeatProps> = ({ L, E, T0 }) => {
           <Point scale={s} x={2} y={0} color={colors.warn} />
         </g>
       </Plot>
+      <Tag x={P8.left} y={P8.top + s.height + 24} anchor="left" color={colors.muted} opacity={draw}>
+        ↑ đồ thị của đạo hàm <Tex tex="f'" />, không phải của <Tex tex="f" />
+      </Tag>
       <div style={{ position: "absolute", left: P8.left + s.x(2) - 23, top: P8.top + s.y(0) - 24 - 104, opacity: touch }}>
         <TrafficLight red={red} />
       </div>
@@ -207,43 +215,6 @@ export const Beat08: React.FC<BeatProps> = ({ L, E, T0 }) => {
           Chỉ 1 cực trị: cực tiểu tại <Tex tex="x=-1" />
         </div>
       </Card>
-    </AbsoluteFill>
-  );
-};
-
-// ---------------- b09: tổng kết ----------------
-const S9 = makeScale({ xMin: -2.5, xMax: 2.5, yMin: -4, yMax: 4, width: 820, height: 470 });
-const TICKS9 = [-2.1, -1.6, -1, -0.5, 0, 0.5, 1, 1.6, 2.1];
-
-export const Beat09: React.FC<BeatProps> = ({ L, E }) => {
-  const frame = useCurrentFrame();
-  const photo = ramp(frame, 0, 14);
-  const arrow = ramp(frame, L[0] + 10, L[0] + 30);
-  const plot = ramp(frame, L[1] - 10, L[1] + 6);
-  return (
-    <AbsoluteFill>
-      <BallPhoto left={190} top={175} scale={0.78} opacity={photo}>
-        <g opacity={arrow}>
-          <line x1={236} y1={304} x2={236} y2={300 + 120 * arrow} stroke={colors.accent} strokeWidth={10} strokeLinecap="round" />
-          <polygon points={`220,${300 + 120 * arrow} 252,${300 + 120 * arrow} 236,${330 + 120 * arrow}`} fill={colors.accent} />
-          <text data-text="label" x={262} y={392} fontFamily={fontText} fontWeight={800} fontSize={46} fill={colors.accent}>
-            10 m/s
-          </text>
-        </g>
-      </BallPhoto>
-      <Plot scale={S9} left={900} top={175} style={{ opacity: plot }}>
-        <Axes scale={S9} grid={false} xLabel="x" yLabel="y" />
-        <FunctionPlot scale={S9} f={cubic} />
-        {TICKS9.map((x, i) => {
-          const at = L[1] + (i * (E[1] - L[1]) * 0.6) / TICKS9.length;
-          return (
-            <g key={x} opacity={ramp(frame, at, at + 8)}>
-              <TangentLine scale={S9} x0={x} y0={cubic(x)} slope={dCubic(x)} color={signColor(dCubic(x))} halfLengthPx={60} width={6} />
-              <Point scale={S9} x={x} y={cubic(x)} r={7} color={signColor(dCubic(x))} />
-            </g>
-          );
-        })}
-      </Plot>
     </AbsoluteFill>
   );
 };

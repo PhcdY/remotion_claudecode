@@ -3,7 +3,7 @@ import { interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 import { colors, fontText, shadow } from "./theme";
 
 /** Section nào được hiện cho người xem (skill dung-video › Bước 2). */
-export const VISIBLE_SECTIONS = ["TRONG ĐỀ THI", "BẪY THƯỜNG GẶP"];
+export const VISIBLE_SECTIONS = ["TRONG ĐỀ THI", "BẪY THƯỜNG GẶP", "GIẢI ĐÁP"];
 
 /** Số giây thẻ mở beat chiếm (hình chính vào sau mốc này). */
 export const SECTION_CARD_SECONDS = 1.2;

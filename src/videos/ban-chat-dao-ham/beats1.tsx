@@ -1,504 +1,238 @@
 import React from "react";
-import {
-  AbsoluteFill,
-  interpolate,
-  spring,
-  useCurrentFrame,
-  useVideoConfig,
-} from "remotion";
+import { AbsoluteFill, Easing, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 import { BeatProps, clamp, ramp } from "../../components/BeatShell";
 import { Card } from "../../components/Card";
 import { Tex } from "../../components/MathText";
-import { colors, fontSize, fontText, halo, tint } from "../../components/theme";
-import { BallPhoto, Stopwatch } from "./parts";
+import { colors, fontText, tint } from "../../components/theme";
+import { fmt } from "../../components/plot";
+import { BigQuestion, EBike, Polaroid, RACE_TIME, RaceStats, Runner, TRACK, Tag, Track, boltPos, label, mx } from "./parts";
 
-export const label: React.CSSProperties = {
-  fontFamily: fontText,
-  fontWeight: 600,
-  fontSize: fontSize.label,
-  color: colors.text,
-};
+// Bố cục chung của b01 và b10 (GIẢI ĐÁP dùng lại đúng hình này).
+const TOP = 400; // mép trên đường chạy (2 làn)
+const FOOT = TOP + TRACK.laneH * 0.75; // chân người chạy, làn 1
+const GROUND2 = TOP + TRACK.laneH * 1.85; // bánh xe đạp điện, làn 2
+const BELOW = TOP + TRACK.laneH * 2 + 75; // dòng nhãn dưới số vạch chia
+const E_BIKE = 25 / 3.6; // m/s
+const linear = Easing.linear;
 
-// ---------------- b01: ảnh chụp quả bóng đang rơi ----------------
-export const Beat01: React.FC<BeatProps> = ({ L }) => {
+/** Nhãn "Bolt" trên đầu người chạy. */
+const RunnerName: React.FC<{ x: number; opacity?: number }> = ({ x, opacity = 1 }) => (
+  <Tag x={x + 16} y={FOOT - 212} weight={800} opacity={opacity}>
+    Bolt
+  </Tag>
+);
+
+// ---------------- b01: HIỆN TƯỢNG — cú chạy 9,58 s ----------------
+export const Beat01: React.FC<BeatProps> = ({ L, E }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const flash = interpolate(
-    frame,
-    [L[0], L[0] + 2, L[0] + 8],
-    [0, 0.9, 0],
-    clamp,
-  );
-  const photoIn = ramp(frame, L[0], L[0] + 10);
-  const shift = ramp(frame, L[1], L[1] + 18);
-  const card = spring({
-    frame: frame - L[1] - 8,
-    fps,
-    config: { damping: 16 },
-  });
-  const q = spring({
-    frame: frame - L[2],
-    fps,
-    config: { damping: 11, stiffness: 140 },
-  });
-  // Trạng thái 1: ảnh giữa khung. Trạng thái 2: ảnh + "?" + thẻ cân giữa vùng hình.
-  const photoLeft = interpolate(shift, [0, 1], [700, 330]);
+  const scene = ramp(frame, 0, 12);
+  // Dòng 1: chạy thật (thời gian nén lại); dòng 2: chạy lại cùng xe đạp điện.
+  const t1 = ramp(frame, L[0] + 8, E[0] - 4, linear) * RACE_TIME;
+  const t2 = ramp(frame, L[1] + 6, E[1] - 6, linear) * RACE_TIME;
+  const replay = frame >= L[1];
+  const t = replay ? t2 : t1;
+  const pos = boltPos(t);
+  const bikeO = ramp(frame, L[1], L[1] + 8) * (1 - ramp(frame, L[2] - 4, L[2] + 8));
+  const bikeM = Math.min(100, E_BIKE * t2);
+  const seg = ramp(frame, L[2], L[2] + 14);
+  const freeze = ramp(frame, L[3], L[3] + 10);
+  const flash = interpolate(frame, [L[3] + 4, L[3] + 6, L[3] + 12], [0, 0.7, 0], clamp);
+  const q = spring({ frame: frame - L[3] - 10, fps, config: { damping: 11, stiffness: 140 } });
+  const running = pos > 0 && pos < 100;
 
   return (
-    <AbsoluteFill>
-      <BallPhoto left={photoLeft} top={150} opacity={photoIn} />
-      <div
-        data-text="question"
-        style={{
-          position: "absolute",
-          left: 905,
-          top: 170,
-          fontFamily: fontText,
-          fontWeight: 800,
-          fontSize: 190,
-          lineHeight: 1,
-          color: colors.accent,
-          opacity: interpolate(q, [0, 0.3], [0, 1], clamp),
-          scale: interpolate(q, [0, 1], [0.4, 1]),
-        }}
-      >
-        ?
-      </div>
-      <Card
-        style={{
-          left: 1110,
-          top: 250,
-          width: 500,
-          padding: "32px 36px",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: 22,
-          opacity: card,
-          translate: `${(1 - card) * 40}px 0px`,
-        }}
-      >
-        <Stopwatch label="1,00 s" />
-        <div data-text="card" style={{ ...label, textAlign: "center" }}>
-          Một khoảnh khắc:
-          <br />
-          bóng đứng yên
-        </div>
-      </Card>
+    <AbsoluteFill style={{ opacity: scene }}>
+      <RaceStats time={replay && frame >= E[1] - 6 ? RACE_TIME : t} avgOpacity={ramp(frame, L[1], L[1] + 12)} />
+      <Track top={TOP} lanes={2} highlight={{ from: 60, to: 70, opacity: seg }}>
+        <Runner x={mx(pos)} foot={FOOT} phase={running ? pos * 0.9 : 0} opacity={1 - freeze} />
+        <Runner x={mx(65)} foot={FOOT} phase={1.3} opacity={freeze} />
+        <EBike x={mx(bikeM)} ground={GROUND2} opacity={bikeO} />
+      </Track>
+      <RunnerName x={mx(pos)} opacity={1 - freeze} />
+      <RunnerName x={mx(65)} opacity={freeze} />
+      <Tag x={mx(bikeM) - 40} y={BELOW} anchor="left" color={colors.increase} opacity={bikeO}>
+        xe đạp điện: tối đa 25 km/h
+      </Tag>
+      <Tag x={mx(65)} y={BELOW} color={colors.accent} weight={700} opacity={seg}>
+        đoạn 60 → 70 m: 0,81 s · tốc độ ≈ 44 km/h
+      </Tag>
+      <BigQuestion x={mx(65) + 70} y={FOOT - 190} p={q} />
       <AbsoluteFill style={{ background: "#FFFFFF", opacity: flash }} />
     </AbsoluteFill>
   );
 };
 
-// ---------------- b02: ảnh hoạt nghiệm + bảng vận tốc trung bình ----------------
-const TS = [0, 0.5, 1, 1.5, 2];
-const RULER_TOP = 200; // y của 0 m (toạ độ trang)
-const PX_PER_M = 23; // 20 m → 460 px
-const yOf = (m: number) => RULER_TOP + m * PX_PER_M;
+// ---------------- b02: CÂU HỎI — một khoảnh khắc ra 0/0 ----------------
+const FrozenRunnerPhoto: React.FC = () => (
+  <>
+    <defs>
+      <linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor="#CFE2FF" />
+        <stop offset="1" stopColor="#F2F7FF" />
+      </linearGradient>
+    </defs>
+    <rect width={472} height={472} fill="url(#sky2)" />
+    <rect x={0} y={360} width={472} height={112} fill="#E07A5A" />
+    <line x1={0} x2={472} y1={416} y2={416} stroke="#FFFFFF" strokeWidth={3} opacity={0.8} />
+    {[0, 1, 2].map((i) => (
+      <line key={i} x1={70 + i * 12} x2={170} y1={250 + i * 34} y2={250 + i * 34} stroke={colors.brandBlue} strokeOpacity={0.35} strokeWidth={6} strokeLinecap="round" />
+    ))}
+    <Runner x={250} foot={392} phase={1.3} scale={1.5} />
+  </>
+);
 
-const ROWS = [
-  { to: "giây 2", fall: "20 − 5 = 15 m", v: "15 m/s" },
-  { to: "giây 1,1", fall: "6,05 − 5 = 1,05 m", v: "10,5 m/s" },
-  { to: "giây 1,01", fall: "5,1005 − 5 = 0,1005 m", v: "10,05 m/s" },
-];
-
-export const Beat02: React.FC<BeatProps> = ({ L, E }) => {
+export const Beat02: React.FC<BeatProps> = ({ L }) => {
   const frame = useCurrentFrame();
-  const d0 = E[0] - L[0];
-  const d2 = E[2] - L[2];
-  const seg = ramp(frame, L[1], L[1] + 20);
-  const rowO = [
-    ramp(frame, L[1] + 10, L[1] + 22),
-    ramp(frame, L[2], L[2] + 12),
-    ramp(frame, L[2] + 0.5 * d2, L[2] + 0.5 * d2 + 12),
-  ];
-  // Dòng 1: cột hoạt nghiệm ở giữa khung; dòng 2: trượt sang trái nhường chỗ cho bảng.
-  const shiftX = interpolate(
-    ramp(frame, L[1] - 4, L[1] + 14),
-    [0, 1],
-    [575, 0],
+  const photo = ramp(frame, 0, 12);
+  const f1 = ramp(frame, L[0], L[0] + 12);
+  const f2 = ramp(frame, L[1], L[1] + 12);
+  const f3 = ramp(frame, L[2], L[2] + 12);
+  const strike = ramp(frame, L[2] + 14, L[2] + 30);
+  const X = 760;
+  return (
+    <AbsoluteFill>
+      <Polaroid left={170} top={150} scale={0.86} opacity={photo} caption="một khoảnh khắc">
+        <FrozenRunnerPhoto />
+      </Polaroid>
+      <div data-text="formula" style={{ ...label, position: "absolute", left: X, top: 180, fontSize: 44, opacity: f1 }}>
+        vận tốc trung bình = <span style={{ color: colors.c2 }}>quãng đường (m)</span> : <span style={{ color: colors.c1 }}>thời gian (s)</span>
+      </div>
+      <div data-text="formula" style={{ ...label, position: "absolute", left: X + 430, top: 270, fontSize: 52, fontWeight: 700, opacity: f2 }}>
+        = <span style={{ color: colors.c2 }}>0 m</span> : <span style={{ color: colors.c1 }}>0 s</span>
+      </div>
+      <div style={{ position: "absolute", left: X + 160, top: 380, width: 260, height: 260, opacity: f3 }}>
+        <div data-text="formula" style={{ position: "absolute", left: 0, right: 0, top: 20, textAlign: "center", fontSize: 110, color: colors.text }}>
+          <Tex tex="\dfrac{0}{0}" />
+        </div>
+        <svg width={260} height={260} style={{ position: "absolute", inset: 0, overflow: "visible" }}>
+          <line x1={30} y1={230} x2={30 + 200 * strike} y2={230 - 200 * strike} stroke={colors.decrease} strokeWidth={12} strokeLinecap="round" opacity={strike > 0 ? 1 : 0} />
+        </svg>
+      </div>
+      <Tag x={X + 470} y={480} anchor="left" color={colors.decrease} weight={800} size={48} opacity={strike}>
+        không xác định
+      </Tag>
+    </AbsoluteFill>
   );
+};
+
+// ---------------- b03: TRỰC GIÁC — khoảng ngắn dần trên số liệu thật ----------------
+const T3 = 150; // mép trên đường chạy (1 làn)
+const ROWS3 = [
+  { seg: "0 → 100 m", t: "9,58", v: "10,4", from: 0, to: 100 },
+  { seg: "60 → 80 m", t: "1,63", v: "12,3", from: 60, to: 80 },
+  { seg: "60 → 70 m", t: "0,81", v: "12,35  (≈ 44 km/h)", from: 60, to: 70 },
+  { seg: "đoạn ngắn hơn 10 m", t: "?", v: "không có số liệu", from: 60, to: 70 },
+];
+const GRID3 = "420px 300px 540px";
+
+export const Beat03: React.FC<BeatProps> = ({ L, E }) => {
+  const frame = useCurrentFrame();
+  const d1 = E[1] - L[1];
+  const at = [L[1], L[1] + 0.5 * d1, L[2], L[3]];
+  const rowO = at.map((f) => ramp(frame, f, f + 12));
+  // Đoạn sáng trên đường chạy co dần theo hàng đang xét.
+  const from = interpolate(frame, [at[0], at[1], at[1] + 12], [0, 0, 60], { ...clamp, easing: Easing.inOut(Easing.cubic) });
+  const to = interpolate(frame, [at[1], at[1] + 12, at[2], at[2] + 12], [100, 80, 80, 70], { ...clamp, easing: Easing.inOut(Easing.cubic) });
+  const segO = ramp(frame, L[1], L[1] + 10);
+  const lens = ramp(frame, L[3], L[3] + 14);
+  const arrow = ramp(frame, L[2] + 10, L[2] + 30);
 
   return (
     <AbsoluteFill>
-      <AbsoluteFill style={{ translate: `${shiftX}px 0px` }}>
-        <Card style={{ left: 150, top: 130, width: 470, height: 560 }} />
-        <svg
-          width={1920}
-          height={1080}
-          style={{ position: "absolute", inset: 0 }}
-        >
-          <line
-            x1={250}
-            y1={yOf(0)}
-            x2={250}
-            y2={yOf(20)}
-            stroke={colors.axis}
-            strokeWidth={4}
-          />
-          {[0, 5, 10, 15, 20].map((m) => (
-            <g key={m}>
-              <line
-                x1={238}
-                x2={262}
-                y1={yOf(m)}
-                y2={yOf(m)}
-                stroke={colors.axis}
-                strokeWidth={4}
-              />
-              <text
-                data-text="tick"
-                x={224}
-                y={yOf(m) + 10}
-                textAnchor="end"
-                fontFamily={fontText}
-                fontSize={fontSize.tick}
-                fill={colors.muted}
-              >
-                {m}
-              </text>
-            </g>
-          ))}
-          <text
-            data-text="axis"
-            x={250}
-            y={yOf(0) - 26}
-            textAnchor="middle"
-            fontFamily={fontText}
-            fontWeight={600}
-            fontSize={fontSize.tick}
-            fill={colors.muted}
-          >
-            m
+      <Track top={T3} lanes={1} highlight={{ from, to, opacity: segO }}>
+        <g opacity={lens}>
+          <line x1={mx(65) + 40} y1={T3 + 60} x2={mx(65) + 76} y2={T3 + 96} stroke={colors.text} strokeWidth={12} strokeLinecap="round" />
+          <circle cx={mx(65)} cy={T3 + 22} r={52} fill="#FFFFFF" fillOpacity={0.92} stroke={colors.text} strokeWidth={8} />
+          <text x={mx(65)} y={T3 + 40} textAnchor="middle" fontFamily={fontText} fontWeight={800} fontSize={52} fill={colors.warn}>
+            ?
           </text>
-          <line
-            x1={272}
-            x2={272}
-            y1={yOf(5)}
-            y2={yOf(5) + (yOf(20) - yOf(5)) * seg}
-            stroke={colors.c2}
-            strokeWidth={10}
-            strokeLinecap="round"
-            opacity={seg > 0 ? 1 : 0}
-          />
-          {TS.map((t, i) => (
-            <circle
-              key={t}
-              data-mark="ball"
-              cx={360}
-              cy={yOf(5 * t * t)}
-              r={13}
-              fill="#F59E0B"
-              stroke="#B85E06"
-              strokeWidth={3}
-              opacity={ramp(
-                frame,
-                L[0] + (i * d0) / 6,
-                L[0] + (i * d0) / 6 + 8,
-              )}
-            />
-          ))}
-        </svg>
-        {[1, 2].map((t) => (
-          <div
-            key={t}
-            data-text="label"
-            style={{
-              ...label,
-              position: "absolute",
-              left: 392,
-              top: yOf(5 * t * t),
-              translate: "0 -50%",
-              fontSize: 30,
-              color: colors.muted,
-              opacity: ramp(frame, L[0] + d0 * 0.6, L[0] + d0 * 0.6 + 10),
-            }}
-          >
-            t = {t} s
-          </div>
-        ))}
-        <div
-          data-text="label"
-          style={{
-            ...label,
-            position: "absolute",
-            left: 392,
-            top: yOf(12.5),
-            translate: "0 -50%",
-            color: colors.c2,
-            opacity: seg,
-          }}
-        >
-          +15 m
-        </div>
-        <div
-          data-text="formula"
-          style={{
-            ...label,
-            position: "absolute",
-            left: 400,
-            top: 146,
-            opacity: ramp(frame, L[0], L[0] + 10),
-          }}
-        >
-          <Tex tex="s=5t^2" />
-        </div>
-      </AbsoluteFill>
-      <Card
-        group="table"
-        style={{
-          left: 690,
-          top: 200,
-          width: 1080,
-          overflow: "hidden",
-          opacity: rowO[0],
-        }}
-      >
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "260px 470px 350px",
-            fontSize: 34,
-            fontWeight: 700,
-            background: tint(colors.brandBlue, 0.1),
-          }}
-        >
-          {["Từ giây 1 đến", "Rơi thêm", "Trung bình"].map((h) => (
-            <div key={h} data-text="th" style={{ padding: "18px 26px" }}>
+        </g>
+      </Track>
+      <Card group="table" style={{ left: 140, top: 310, overflow: "hidden", opacity: ramp(frame, L[0], L[0] + 12) }}>
+        <div style={{ display: "grid", gridTemplateColumns: GRID3, fontSize: 36, fontWeight: 700, background: tint(colors.brandBlue, 0.1) }}>
+          {["Đoạn đường", "Thời gian (s)", "Vận tốc trung bình (m/s)"].map((h) => (
+            <div key={h} data-text="th" style={{ padding: "14px 26px" }}>
               {h}
             </div>
           ))}
         </div>
-        {ROWS.map((r, i) => (
+        {ROWS3.map((r, i) => (
           <div
-            key={r.to}
+            key={r.seg}
             style={{
               display: "grid",
-              gridTemplateColumns: "260px 470px 350px",
-              fontSize: 36,
+              gridTemplateColumns: GRID3,
+              fontSize: 38,
               fontWeight: 600,
               borderTop: `2px solid ${colors.panelBorder}`,
               opacity: rowO[i],
+              color: i === 3 ? colors.muted : colors.text,
             }}
           >
-            <div data-text="td" style={{ padding: "20px 26px" }}>
-              {r.to}
+            <div data-text="td" style={{ padding: "14px 26px" }}>
+              {r.seg}
             </div>
-            <div
-              data-text="td"
-              style={{ padding: "20px 26px", color: colors.muted }}
-            >
-              {r.fall}
+            <div data-text="td" style={{ padding: "14px 26px" }}>
+              {r.t}
             </div>
-            <div
-              data-text="td"
-              style={{
-                padding: "20px 26px",
-                fontWeight: 800,
-                color: i === 0 ? colors.c2 : colors.accent,
-              }}
-            >
+            <div data-text="td" style={{ padding: "14px 26px", fontWeight: 800, color: i === 3 ? colors.warn : i === 2 ? colors.accent : colors.text }}>
               {r.v}
             </div>
           </div>
         ))}
       </Card>
+      <svg width={1920} height={1080} style={{ position: "absolute", inset: 0 }}>
+        <g opacity={arrow}>
+          <line x1={1500} y1={400} x2={1500} y2={580} stroke={colors.accent} strokeWidth={8} strokeLinecap="round" />
+          <polygon points="1482,572 1518,572 1500,606" fill={colors.accent} />
+        </g>
+      </svg>
+      <div data-text="label" style={{ ...label, position: "absolute", left: 1540, top: 450, color: colors.accent, fontWeight: 700, opacity: arrow, lineHeight: 1.25 }}>
+        khoảng
+        <br />
+        ngắn dần
+      </div>
     </AbsoluteFill>
   );
 };
 
-// ---------------- b03: các con số dồn về 10 = giới hạn ----------------
-const NL = { left: 260, right: 1660, y: 360, min: 9, max: 16 };
-const nx = (v: number) =>
-  NL.left + ((v - NL.min) / (NL.max - NL.min)) * (NL.right - NL.left);
-const PTS = [
-  { v: 15, text: "15", dy: -54 },
-  { v: 10.5, text: "10,5", dy: -54 },
-  { v: 10.05, text: "10,05", dy: -120 },
-];
-
-export const Beat03: React.FC<BeatProps> = ({ L, E }) => {
+// ---------------- b10: GIẢI ĐÁP — quay lại đường chạy ----------------
+export const Beat10: React.FC<BeatProps> = ({ L, E, T0 }) => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-  const d0 = E[0] - L[0];
-  const drop = PTS.map((_, i) =>
-    spring({
-      frame: frame - L[0] - i * 0.28 * d0,
-      fps,
-      config: { damping: 14 },
-    }),
-  );
-  const arrow = ramp(frame, L[0] + 0.75 * d0, E[0]);
-  const lim = ramp(frame, L[1], L[1] + 14);
-  const card = spring({ frame: frame - L[2], fps, config: { damping: 16 } });
-  const pulse =
-    frame > L[0] + 0.75 * d0 ? 1 + 0.15 * Math.sin((frame - L[0]) * 0.3) : 1;
+  const a0 = Math.max(L[0], T0);
+  const seg = ramp(frame, a0, a0 + 12);
+  const avgNote = ramp(frame, L[1], L[1] + 10);
+  // Dòng 3: đoạn đo co dần 10 m → 1 m → 0,1 m quanh mốc 65 m (thang log).
+  const shrink = ramp(frame, L[2] + 6, E[2] - 6, Easing.inOut(Easing.quad));
+  const len = 10 * Math.pow(0.01, shrink);
+  const inst = ramp(frame, L[3], L[3] + 12);
+  const pointO = ramp(frame, L[2] + 0.6 * (E[2] - L[2]), E[2]);
+  const msg = frame >= L[3] ? 3 : frame >= L[2] ? 2 : frame >= L[1] ? 1 : 0;
 
   return (
     <AbsoluteFill>
-      <svg
-        width={1920}
-        height={1080}
-        style={{ position: "absolute", inset: 0, overflow: "visible" }}
-      >
-        <line
-          x1={NL.left - 20}
-          x2={NL.right + 30}
-          y1={NL.y}
-          y2={NL.y}
-          stroke={colors.axis}
-          strokeWidth={4}
-        />
-        <polygon
-          points={`${NL.right + 46},${NL.y} ${NL.right + 28},${NL.y - 9} ${NL.right + 28},${NL.y + 9}`}
-          fill={colors.axis}
-        />
-        {[9, 10, 11, 12, 13, 14, 15, 16].map((v) => (
-          <g key={v}>
-            <line
-              x1={nx(v)}
-              x2={nx(v)}
-              y1={NL.y - 10}
-              y2={NL.y + 10}
-              stroke={colors.axis}
-              strokeWidth={4}
-            />
-            <text
-              data-text="tick"
-              x={nx(v)}
-              y={NL.y + 46}
-              textAnchor="middle"
-              fontFamily={fontText}
-              fontSize={fontSize.tick}
-              fill={v === 10 ? colors.accent : colors.muted}
-              fontWeight={v === 10 ? 800 : 400}
-            >
-              {v}
-            </text>
-          </g>
-        ))}
-        <circle
-          cx={nx(10)}
-          cy={NL.y}
-          r={14 * pulse}
-          fill="none"
-          stroke={colors.accent}
-          strokeWidth={4}
-          opacity={arrow}
-        />
-        <path
-          d={`M${nx(15)},${NL.y - 120} Q${nx(12.8)},${NL.y - 250} ${nx(11)},${NL.y - 160}`}
-          fill="none"
-          stroke={colors.accent}
-          strokeWidth={4}
-          strokeDasharray="12 10"
-          opacity={arrow}
-        />
-        <polygon
-          points={`${nx(11) - 2},${NL.y - 178} ${nx(11) + 10},${NL.y - 156} ${nx(11) - 16},${NL.y - 152}`}
-          fill={colors.accent}
-          opacity={arrow}
-        />
-        {PTS.map((p, i) => (
-          <g key={p.v} opacity={drop[i]}>
-            {p.dy < -60 ? (
-              <line
-                x1={nx(p.v)}
-                x2={nx(p.v)}
-                y1={NL.y - 14}
-                y2={NL.y + p.dy + 24}
-                stroke={colors.muted}
-                strokeWidth={2}
-              />
-            ) : null}
-            <circle
-              data-mark="point"
-              cx={nx(p.v)}
-              cy={NL.y - (1 - drop[i]) * 120}
-              r={11}
-              fill={i === 0 ? colors.c2 : colors.brandBlue}
-              stroke="#FFFFFF"
-              strokeWidth={3}
-            />
-          </g>
-        ))}
-      </svg>
-      {PTS.map((p, i) => (
-        <div
-          key={p.v}
-          data-text="label"
-          style={{
-            ...label,
-            position: "absolute",
-            left: nx(p.v),
-            top: NL.y + p.dy,
-            translate: "-50% -50%",
-            fontWeight: 700,
-            opacity: drop[i],
-            textShadow: halo(),
-          }}
-        >
-          {p.text}
-        </div>
-      ))}
-      <div
-        data-text="label"
-        style={{
-          ...label,
-          position: "absolute",
-          left: nx(10),
-          top: NL.y + 96,
-          translate: "-50% 0",
-          color: colors.accent,
-          fontWeight: 800,
-          opacity: lim,
-        }}
-      >
-        giới hạn
-      </div>
-      <div
-        data-text="label"
-        style={{
-          ...label,
-          position: "absolute",
-          left: nx(10) + 120,
-          top: NL.y + 100,
-          color: colors.muted,
-          fontSize: 34,
-          opacity: lim,
-          whiteSpace: "nowrap",
-        }}
-      >
-        (khi khoảng thời gian co về 0)
-      </div>
-      <Card
-        style={{
-          left: 560,
-          top: 560,
-          width: 800,
-          padding: "20px 32px",
-          display: "flex",
-          alignItems: "center",
-          gap: 26,
-          opacity: card,
-          translate: `0px ${(1 - card) * 24}px`,
-        }}
-      >
-        <svg width={64} height={64}>
-          <circle
-            cx={32}
-            cy={32}
-            r={27}
-            fill="#F59E0B"
-            stroke="#B85E06"
-            strokeWidth={3}
-          />
-        </svg>
-        <div data-text="card" style={{ ...label, fontSize: 38 }}>
-          Vận tốc tức thời tại <Tex tex="t=1" />:{" "}
-          <b style={{ color: colors.accent }}>10 m/s</b>
-        </div>
-      </Card>
+      <RaceStats time={RACE_TIME} avgOpacity={1} />
+      <Track top={TOP} lanes={2} highlight={{ from: 65 - len / 2, to: 65 + len / 2, opacity: seg }}>
+        <Runner x={mx(65)} foot={FOOT} phase={1.3} />
+        <circle data-mark="point" cx={mx(65)} cy={TOP + TRACK.laneH} r={12} fill={colors.accent} stroke="#FFFFFF" strokeWidth={4} opacity={pointO} />
+      </Track>
+      <RunnerName x={mx(65)} />
+      <Tag x={mx(65)} y={BELOW} color={colors.accent} weight={700} opacity={seg * (msg === 0 ? 1 : 0)}>
+        đoạn 60 → 70 m: 0,81 s · tốc độ ≈ 44 km/h
+      </Tag>
+      <Tag x={mx(65)} y={BELOW} color={colors.accent} weight={700} opacity={avgNote * (msg === 1 ? 1 : 0)}>
+        ≈ 44 km/h = vận tốc trung bình trên đoạn 10 m
+      </Tag>
+      <Tag x={mx(65)} y={BELOW} color={colors.accent} weight={700} opacity={msg === 2 ? 1 : 0}>
+        khoảng đo co dần: {fmt(len, len < 1 ? 2 : 1)} m{shrink > 0.95 ? " → một khoảnh khắc" : ""}
+      </Tag>
+      <Tag x={mx(65)} y={BELOW} color={colors.accent} weight={800} opacity={inst * (msg === 3 ? 1 : 0)}>
+        vận tốc tức thời = <Tex tex="s'(t)" />{" "}
+        <span style={{ color: colors.muted, fontWeight: 600 }}>
+          (<Tex tex="s" />: quãng đường, <Tex tex="t" />: thời gian)
+        </span>
+      </Tag>
     </AbsoluteFill>
   );
 };

@@ -6,9 +6,9 @@ import { BrandFrame, BrandIntro, BrandOutro } from "../../components/BrandFrame"
 import { LayoutProbe } from "../../components/LayoutProbe";
 import { useKatexFonts } from "../../components/MathText";
 import { FPS } from "../../components/timeline";
-import { Beat01, Beat02, Beat03 } from "./beats1";
-import { Beat04, Beat05, Beat06 } from "./beats2";
-import { Beat07, Beat08, Beat09 } from "./beats3";
+import { Beat01, Beat02, Beat03, Beat10 } from "./beats1";
+import { Beat04, Beat05, Beat06, Beat07 } from "./beats2";
+import { Beat08, Beat09 } from "./beats3";
 import { VideoProps, calculateMetadata, script } from "./timeline";
 
 const BEATS: Record<string, React.FC<BeatProps>> = {
@@ -21,6 +21,7 @@ const BEATS: Record<string, React.FC<BeatProps>> = {
   b07: Beat07,
   b08: Beat08,
   b09: Beat09,
+  b10: Beat10,
 };
 
 export const BanChatDaoHam: React.FC<VideoProps> = ({ timeline }) => {

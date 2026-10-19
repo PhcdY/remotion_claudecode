@@ -52,7 +52,12 @@ const measure = () => {
       // các ô trong cùng một bảng/nhóm (data-group) được phép nằm sát nhau
       const ga = a.el.closest("[data-group]");
       if (ga && ga === b.el.closest("[data-group]") && a.kind === "text" && b.kind === "text" && gap(a.r, b.r) >= 0) continue;
-      if (a.kind === "mark" && b.kind === "mark") continue;
+      // hai điểm trên đồ thị được phép sát nhau; vật minh hoạ (bóng, người, xe) thì không được chồng
+      if (a.kind === "mark" && b.kind === "mark") {
+        const isPoint = (x: Item) => x.el.getAttribute("data-mark") === "point";
+        if (!isPoint(a) && !isPoint(b) && gap(a.r, b.r) < 0) issues.push(`chồng — [${a.label}] × [${b.label}]`);
+        continue;
+      }
       const g = gap(a.r, b.r);
       const limit = a.kind === "text" && b.kind === "text" ? 12 : 0;
       if (g < limit) issues.push(`${g < 0 ? "chồng" : "sát"} (${Math.round(g)}px) — [${a.label}] × [${b.label}]`);

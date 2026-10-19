@@ -9,12 +9,12 @@ Quy trình: người dùng nêu từng vấn đề → sửa skill trước → 
 | 3 | b09: chữ trùng — "cực đại" đè điểm và đường đứt nét, "dốc nhất, không phải đỉnh" đè đường cong, điểm đè số trục −1 và 3 | ✅ dung-video › Quy tắc 1 (đặt nhãn, halo, số trục) + kiểm chồng lấn bằng code | ✅ |
 | 4 | Audio đọc đều, ngắt sai chỗ, không giống người → đổi sang ElevenLabs **qua MCP**, giọng giảng bài | ✅ tao-audio (quy trình MCP); viet-kich-ban › "Viết speak cho tai nghe"; CLAUDE.md B2 | ✅ |
 | 5 | Kịch bản: hướng ổn nhưng nối sang toán vội, người xem khó hiểu. **Giữ 2–3 phút**, không nhồi bài tập — một hàm ví dụ là đủ; thiếu chỗ thì cắt ý | ✅ viet-kich-ban › cầu nối ví dụ→toán, tiền đề, hàm ví dụ, "một ý chính", Độ dài 2–3 phút, "những ý đã cắt" | ✅ |
-| 6 | Đổi giọng sang **Vivibe** (giọng clone của người dùng, qua API key), bỏ hẳn ElevenLabs | ✅ tao-audio viết lại; `scripts/vivibe_tts.py` thay `save_audio.py`; CLAUDE.md B2 | ❌ |
-| 7 | Giọng thiếu ngắt nghỉ/nhấn, chỉ giao text cho API, hơi buồn ngủ. Đã test 4 cách trên Vivibe → chọn `...` (dừng rồi nhấn) | ✅ viet-kich-ban › "Viết speak cho tai nghe" (`...`, từ nối), giọng có nhấn nhá; tao-audio › kết quả test | ❌ |
-| 8 | Mở/kết: luôn mở bằng một hiện tượng/ứng dụng thật chưa có lời giải (fun fact), cuối video giải nó bằng kiến thức vừa học | ✅ viet-kich-ban › yêu cầu 1, 5 (`HIỆN TƯỢNG`, `GIẢI ĐÁP`, phải có nguồn); dung-video › thẻ `GIẢI ĐÁP`, dùng lại hình mở đầu | ❌ |
-| 9 | 2:13 hơi ngắn → 2:30–3:00 | ✅ viet-kich-ban › Độ dài (≈ 2400–2900 ký tự); tao-audio + dung-video › kiểm thời lượng; CLAUDE.md | ❌ |
-| 10 | Không bỏ qua bản chất: ví dụ ↔ khái niệm phải đi tới nơi, định nghĩa xuất hiện; người xem luôn biết đang xem gì (không cần nói bài SGK nào) | ✅ viet-kich-ban › yêu cầu 8, 9 | ❌ |
-| 11 | Thiếu chú thích: "15 m/s" không nói là vận tốc trung bình, cột "Trung bình", $s=5t^2$ không giải thích ký hiệu, bóng không nhãn; 2 bóng ở 0 và 1,25 m đè nhau | ✅ viet-kich-ban › quy tắc `text`/`visual` + phép thử tắt tiếng; dung-video › Quy tắc bố cục 7 + mục kiểm tra (8) | ❌ |
+| 6 | Đổi giọng sang **Vivibe** (giọng clone của người dùng, qua API key), bỏ hẳn ElevenLabs | ✅ tao-audio viết lại; `scripts/vivibe_tts.py` thay `save_audio.py`; CLAUDE.md B2 | ✅ |
+| 7 | Giọng thiếu ngắt nghỉ/nhấn, chỉ giao text cho API, hơi buồn ngủ. Đã test 4 cách trên Vivibe → chọn `...` (dừng rồi nhấn) | ✅ viet-kich-ban › "Viết speak cho tai nghe" (`...`, từ nối), giọng có nhấn nhá; tao-audio › kết quả test | ✅ |
+| 8 | Mở/kết: luôn mở bằng một hiện tượng/ứng dụng thật chưa có lời giải (fun fact), cuối video giải nó bằng kiến thức vừa học | ✅ viet-kich-ban › yêu cầu 1, 5 (`HIỆN TƯỢNG`, `GIẢI ĐÁP`, phải có nguồn); dung-video › thẻ `GIẢI ĐÁP`, dùng lại hình mở đầu | ✅ |
+| 9 | 2:13 hơi ngắn → 2:30–3:00 | ✅ viet-kich-ban › Độ dài (≈ 2400–2900 ký tự); tao-audio + dung-video › kiểm thời lượng; CLAUDE.md | ✅ |
+| 10 | Không bỏ qua bản chất: ví dụ ↔ khái niệm phải đi tới nơi, định nghĩa xuất hiện; người xem luôn biết đang xem gì (không cần nói bài SGK nào) | ✅ viet-kich-ban › yêu cầu 8, 9 | ✅ |
+| 11 | Thiếu chú thích: "15 m/s" không nói là vận tốc trung bình, cột "Trung bình", $s=5t^2$ không giải thích ký hiệu, bóng không nhãn; 2 bóng ở 0 và 1,25 m đè nhau | ✅ viet-kich-ban › quy tắc `text`/`visual` + phép thử tắt tiếng; dung-video › Quy tắc bố cục 7 + mục kiểm tra (8) | ✅ |
 
 ## Việc cần làm khi sửa video (vấn đề 1)
 - `Subtitle`: chỉ hiện dòng đang đọc.
@@ -57,3 +57,7 @@ Quy trình: người dùng nêu từng vấn đề → sửa skill trước → 
 ## Trạng thái (17/10/2026)
 Đã làm lại video theo cả 5 vấn đề + khung 9Study (style.md) + hook quả bóng rơi + giọng ElevenLabs (Nguyễn Khoái, [calm]).
 check-layout: 0 chồng lấn / 60 frame. Thời lượng ≈ 2:13.
+
+## Trạng thái (19/10/2026)
+Làm lại theo vấn đề 6–11: kịch bản mở bằng cú chạy 9,58 s của Bolt (số liệu arXiv:0911.1952), beat `GIẢI ĐÁP` cuối dùng lại hình đường chạy; giọng Vivibe (nam - c Bình), ngắt nghỉ theo quy tắc mới; chú thích đủ (trục, bảng, ký hiệu); `SectionCard` hiện thêm `GIẢI ĐÁP`; `check-layout` bắt cả vật minh hoạ chồng nhau.
+check-layout: 0 chồng lấn / 78 frame. Thời lượng ≈ 2:43.
