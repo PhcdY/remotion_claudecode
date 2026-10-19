@@ -40,7 +40,7 @@ const getAudioDuration = async (src: string) => {
 export const buildTimeline = async (script: Script): Promise<Timeline> => {
   const base = `audio/${script.slug}`;
   const res = await fetch(staticFile(`${base}/manifest.json`));
-  if (!res.ok) throw new Error(`Không đọc được ${base}/manifest.json — chạy B2 (scripts/tts.py) trước.`);
+  if (!res.ok) throw new Error(`Không đọc được ${base}/manifest.json — chạy B2 (skill tao-audio) trước.`);
   const manifest = (await res.json()) as Manifest;
 
   const problems: string[] = [];

@@ -5,7 +5,7 @@ description: Viết kịch bản video giải thích bản chất toán (B1 củ
 
 # B1 — Viết kịch bản video bản chất toán
 
-Pipeline: **B1 kịch bản (skill này)** → B2 audio (`scripts/tts.py`) → B3 dựng Remotion.
+Pipeline: **B1 kịch bản (skill này)** → B2 audio (skill `tao-audio`) → B3 dựng Remotion.
 Output duy nhất của skill này là `src/videos/<slug>/script.json`. Không tạo audio, không viết code Remotion.
 
 ## Bối cảnh

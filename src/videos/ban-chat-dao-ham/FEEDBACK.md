@@ -9,6 +9,7 @@ Quy trình: người dùng nêu từng vấn đề → sửa skill trước → 
 | 3 | b09: chữ trùng — "cực đại" đè điểm và đường đứt nét, "dốc nhất, không phải đỉnh" đè đường cong, điểm đè số trục −1 và 3 | ✅ dung-video › Quy tắc 1 (đặt nhãn, halo, số trục) + kiểm chồng lấn bằng code | ✅ |
 | 4 | Audio đọc đều, ngắt sai chỗ, không giống người → đổi sang ElevenLabs **qua MCP**, giọng giảng bài | ✅ tao-audio (quy trình MCP); viet-kich-ban › "Viết speak cho tai nghe"; CLAUDE.md B2 | ✅ |
 | 5 | Kịch bản: hướng ổn nhưng nối sang toán vội, người xem khó hiểu. **Giữ 2–3 phút**, không nhồi bài tập — một hàm ví dụ là đủ; thiếu chỗ thì cắt ý | ✅ viet-kich-ban › cầu nối ví dụ→toán, tiền đề, hàm ví dụ, "một ý chính", Độ dài 2–3 phút, "những ý đã cắt" | ✅ |
+| 6 | Đổi giọng sang **Vivibe** (giọng clone của người dùng, qua API key), bỏ hẳn ElevenLabs | ✅ tao-audio viết lại; `scripts/vivibe_tts.py` thay `save_audio.py`; CLAUDE.md B2 | ❌ |
 
 ## Việc cần làm khi sửa video (vấn đề 1)
 - `Subtitle`: chỉ hiện dòng đang đọc.
@@ -37,6 +38,10 @@ Quy trình: người dùng nêu từng vấn đề → sửa skill trước → 
 ## Việc cần làm khi sửa video (vấn đề 5)
 - Viết lại kịch bản theo skill mới (quay lại B1, duyệt dàn ý trước), vẫn 2–3 phút: một ý bản chất chính, cầu nối ví dụ → toán có bảng tương ứng + thay số, một hàm ví dụ cho phần đề thi; cắt bớt ý (vd. b07 s→v→a hoặc b08 hộp giấy) để có chỗ giải thích chậm.
 - Sau đó tạo lại audio (B2) và dựng lại (B3) theo mọi quy tắc ở trên.
+
+## Việc cần làm khi sửa video (vấn đề 6)
+- ✅ Người dùng đã thêm `VIVIBE_API_KEY` vào `.env`. Giọng không cố định: hỏi người dùng mỗi lần chạy B2 (`--voice`).
+- Tạo lại toàn bộ audio bằng `scripts/vivibe_tts.py` (estimate → nghe thử b01 → cả bài), rồi soát lại B3 (thời lượng đổi theo audio mới).
 
 ## Trạng thái (17/10/2026)
 Đã làm lại video theo cả 5 vấn đề + khung 9Study (style.md) + hook quả bóng rơi + giọng ElevenLabs (Nguyễn Khoái, [calm]).

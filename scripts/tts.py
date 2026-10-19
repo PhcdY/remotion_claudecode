@@ -34,7 +34,7 @@ Giới hạn / lưu ý:
 - Edge TTS là endpoint KHÔNG chính thức của Microsoft Edge "Read Aloud": có thể bị chặn/đổi
   bất cứ lúc nào, và không có điều khoản cho dùng thương mại → CHỈ DÙNG ĐỂ TEST pipeline.
 - Tiếng Việt chỉ có 2 giọng: vi-VN-HoaiMyNeural (nữ), vi-VN-NamMinhNeural (nam).
-- Khi chuyển sang ElevenLabs: chỉ cần thay hàm synthesize(), cấu trúc file giữ nguyên.
+- Giọng thật cho video đăng: scripts/vivibe_tts.py (skill tao-audio).
 """
 
 from __future__ import annotations
