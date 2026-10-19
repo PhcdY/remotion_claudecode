@@ -16,7 +16,9 @@ Hành vi:
 - Kiểm tra cả kịch bản trước khi gọi API: dòng trống hoặc `speak` còn ký hiệu toán → dừng, không tốn credit.
 - Cache: dòng có (voice, speed, speak) không đổi và đã có file thì bỏ qua. --force tạo lại các dòng được chọn.
 - Không tự gửi lại job tạo giọng khi lỗi (mỗi lần gửi là một lần trừ credit); chỉ retry bước hỏi trạng thái / tải file.
-- Vivibe trả WAV → đổi sang MP3 bằng ffmpeg đi kèm Remotion. Ghi qua file tạm rồi rename.
+- Vivibe chỉ cho mỗi tài khoản một job tại một thời điểm → tạo lần lượt từng dòng. Bị từ chối vì
+  "export in progress" (job chưa được tạo, không trừ credit) thì chờ rồi gửi lại.
+- Vivibe trả WAV → cắt lặng đầu/cuối, đổi sang MP3 bằng ffmpeg đi kèm Remotion. Ghi qua file tạm rồi rename.
 """
 
 from __future__ import annotations
@@ -32,7 +34,6 @@ import sys
 import time
 import urllib.error
 import urllib.request
-from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -40,7 +41,9 @@ CONFIG_PATH = ROOT / "scripts" / "tts_config.json"
 API_URL = "https://api.lucylab.io/json-rpc"
 POLL_EVERY = 2.5  # giây, theo khuyến nghị của Vivibe (2–3s)
 POLL_TIMEOUT = 300  # giây cho mỗi dòng
-WORKERS = 4
+BUSY_TIMEOUT = 120  # giây chờ khi tài khoản còn job khác đang chạy
+# Cắt lặng thừa ở đầu và cuối file (giữ KEEP_EDGE giây) để nghỉ giữa các dòng do B3 quyết định.
+SILENCE_DB, KEEP_EDGE = -45, 0.05
 SAFE_ID = re.compile(r"^[A-Za-z0-9_-]+$")
 LATEX_HINT = re.compile(r"[$\\^_{}]")
 
@@ -104,8 +107,40 @@ def line_hash(voice: str, speed: float, speak: str) -> str:
     return hashlib.sha256(f"vivibe|{voice}|{speed}|{speak}".encode("utf-8")).hexdigest()[:16]
 
 
+def submit(key: str, speak: str, voice: str, speed: float) -> dict:
+    deadline = time.time() + BUSY_TIMEOUT
+    while True:
+        try:
+            return rpc(key, "ttsLongText", {"text": speak, "userVoiceId": voice, "speed": speed})
+        except ApiError as e:
+            if "export in progress" not in str(e) or time.time() > deadline:
+                raise
+            time.sleep(POLL_EVERY)
+
+
+def trim_filter(ffmpeg: str, wav: Path) -> str:
+    """Bộ lọc atrim bỏ lặng đầu/cuối (ffmpeg của Remotion không có silenceremove)."""
+    res = subprocess.run(
+        [ffmpeg, "-hide_banner", "-i", str(wav), "-af", f"silencedetect=n={SILENCE_DB}dB:d=0.05", "-f", "null", "-"],
+        capture_output=True, text=True, encoding="utf-8", errors="replace",
+    )
+    log = res.stderr
+    dur = re.search(r"Duration: (\d+):(\d+):([\d.]+)", log)
+    if not dur:
+        return "anull"
+    total = int(dur[1]) * 3600 + int(dur[2]) * 60 + float(dur[3])
+    starts = [float(x) for x in re.findall(r"silence_start: ([\d.]+)", log)]
+    ends = [float(x) for x in re.findall(r"silence_end: ([\d.]+)", log)]
+    begin, end = 0.0, total
+    if starts and starts[0] < 0.01 and ends:
+        begin = max(0.0, ends[0] - KEEP_EDGE)
+    if starts and (len(ends) < len(starts) or ends[-1] >= total - 0.05) and starts[-1] > begin:
+        end = min(total, starts[-1] + KEEP_EDGE)
+    return f"atrim=start={begin:.3f}:end={end:.3f},asetpts=PTS-STARTPTS"
+
+
 def synthesize(key: str, ffmpeg: str, speak: str, voice: str, speed: float, out: Path) -> None:
-    job = rpc(key, "ttsLongText", {"text": speak, "userVoiceId": voice, "speed": speed})
+    job = submit(key, speak, voice, speed)
     export_id = job.get("projectExportId")
     if not export_id:
         raise ApiError(f"ttsLongText không trả projectExportId: {job}")
@@ -130,7 +165,7 @@ def synthesize(key: str, ffmpeg: str, speak: str, voice: str, speed: float, out:
         if wav.stat().st_size < 1000:
             raise ApiError(f"File tải về quá nhỏ ({wav.stat().st_size} byte)")
         res = subprocess.run(
-            [ffmpeg, "-y", "-loglevel", "error", "-i", str(wav), "-codec:a", "libmp3lame", "-q:a", "2", str(tmp)],
+            [ffmpeg, "-y", "-loglevel", "error", "-i", str(wav), "-af", trim_filter(ffmpeg, wav), "-codec:a", "libmp3lame", "-q:a", "2", str(tmp)],
             capture_output=True,
             text=True,
         )
@@ -256,16 +291,12 @@ def main() -> int:
     out_dir.mkdir(parents=True, exist_ok=True)
     failed: list[tuple[str, str]] = []
 
-    def run(item: tuple[str, str, Path]) -> None:
-        key, speak, target = item
+    for key, speak, target in todo:
         try:
             synthesize(key_api, ffmpeg, speak, voice, speed, target)
-            print(f"✓ {key}.mp3")
+            print(f"✓ {key}.mp3", flush=True)
         except Exception as e:
             failed.append((key, str(e)))
-
-    with ThreadPoolExecutor(max_workers=WORKERS) as pool:
-        list(pool.map(run, todo))
 
     failed_keys = {k for k, _ in failed}
     entries, missing = [], []
@@ -274,10 +305,10 @@ def main() -> int:
         h = line_hash(voice, speed, speak)
         fresh = any(k == key for k, _, _ in todo) and key not in failed_keys
         if not target.exists():
-            missing.append(key)
+            missing.append((beat_id, key, key))
             continue
         if not fresh and old.get(target.name) != h:
-            missing.append(f"{key} (audio cũ, lệch kịch bản/giọng)")
+            missing.append((beat_id, key, f"{key} (audio cũ, lệch kịch bản/giọng)"))
         entries.append({"beat": beat_id, "line": i, "file": target.name, "hash": h if fresh else old.get(target.name), "text": text})
 
     manifest = {"slug": data["slug"], "engine": "vivibe", "voice": voice, "voice_name": voice_name, "speed": speed, "lines": entries}
@@ -286,9 +317,12 @@ def main() -> int:
     print(f"\nTạo mới {len(todo) - len(failed)}, lỗi {len(failed)} → {out_dir.relative_to(ROOT)}")
     for k, why in failed:
         print(f"  ✗ {k}: {why}")
-    if missing:
-        print("Chưa có audio khớp: " + ", ".join(missing))
-    return 1 if failed or missing else 0
+    shown = [label for b, k, label in missing if selected(b, k)]
+    if shown:
+        print("Chưa có audio khớp: " + ", ".join(shown))
+    if len(missing) > len(shown):
+        print(f"Ngoài phần đã chọn còn {len(missing) - len(shown)} dòng chưa có audio khớp kịch bản.")
+    return 1 if failed or shown else 0
 
 
 if __name__ == "__main__":

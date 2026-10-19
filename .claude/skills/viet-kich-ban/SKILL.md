@@ -155,12 +155,15 @@ Giọng văn:
 - Công thức dài: **diễn giải bằng lời** thay vì đọc từng ký hiệu ("tử là phần f thay đổi, mẫu là phần x thay đổi"). Bắt buộc đọc nguyên công thức thì đọc theo cụm, có dấu phẩy ở ranh giới cụm.
 
 **Viết `speak` cho tai nghe** (quyết định giọng đọc có giống người hay không):
-- Một câu một ý, tối đa ~20 từ.
-- Dấu phẩy chỉ đặt ở **ranh giới cụm nghĩa** (sau trạng ngữ, giữa hai vế). Không đặt giữa danh từ và phần bổ nghĩa của nó, không tách số khỏi đơn vị, không tách "đạo hàm" khỏi "của f". Dấu chấm cho chỗ nghỉ dài hơn.
-- Có từ chuyển ý ("Vậy thì…", "Nhưng khoan.", "Để ý nhé:") và câu hỏi tu từ để giọng có nhịp giải thích. Không phải câu nào cũng là câu khẳng định.
+- **Ít chỗ ngắt — mượt hơn nhiều chỗ ngắt.** Mỗi dấu `,` `.` `:` `?` `...` giữa dòng làm giọng dừng ≈ 0,3–0,4 s; một dòng 4–5 giây mà dừng 3 lần là nghe vấp, buồn ngủ. Mỗi dòng **tối đa 2 chỗ ngắt, nên là 1**. Một câu 15–20 từ có một dấu phẩy ở giữa đọc mượt hơn hai câu 7 từ.
+- Tối đa ~20 từ mỗi câu; mỗi dòng thường là **một câu**, hai vế nối bằng một dấu phẩy hoặc từ nối ("thì", "nên", "rồi", "tức là") thay cho dấu chấm.
+- Dấu phẩy chỉ đặt ở **ranh giới cụm nghĩa lớn nhất** của câu (giữa vế dẫn và vế chốt, sau trạng ngữ dài). Không đặt giữa danh từ và phần bổ nghĩa của nó, không tách số khỏi đơn vị, không tách "đạo hàm" khỏi "của f".
+- **Ngắt đúng chỗ cần ngắt**: chỗ ngắt duy nhất của dòng nên rơi ngay trước phần quan trọng nhất (kết quả, kết luận), để tai kịp chờ.
+- Không mở câu mới bằng "Và", "Mà", "Còn" ngay sau một câu hỏi trong cùng dòng: giọng sẽ dừng hẳn rồi nhấn mạnh chữ "Và". Gộp thành một câu ("…nhanh bao nhiêu và đo bằng cách nào?").
+- Có từ chuyển ý ("Vậy thì", "Nhưng", "Để ý") và câu hỏi tu từ để giọng có nhịp giải thích, nhưng chúng cũng tính là chỗ ngắt.
 - Số và đơn vị viết theo cách nói: "bốn mươi ki-lô-mét một giờ", "không phẩy không một giây".
 - Đọc nhẩm từng câu: chỗ nào phải lấy hơi giữa một cụm từ là câu quá dài hoặc dấu câu đặt sai.
-- **Dấu ba chấm `...` để ngắt rồi nhấn**: đặt ngay trước từ hoặc cụm cần nhấn (con số kết quả, kết luận, chữ "không" trong câu phủ định quan trọng), hoặc sau từ chuyển ý ("Tức là... vận tốc trung bình mười lăm mét một giây."). Giọng dừng lại rồi nhấn vào phần sau. Tối đa 1–2 lần mỗi dòng, không thay mọi dấu phẩy bằng `...` — dùng tràn thì mất tác dụng và nghe ngập ngừng.
+- **Dấu ba chấm `...` để ngắt rồi nhấn — dùng hiếm**: **tối đa 1 lần mỗi beat**, dành cho điểm nhấn quan trọng nhất của beat (con số kết quả, thuật ngữ mới, câu đùa). Đặt **trước cả một cụm trọn nghĩa** hoặc sau từ chuyển ý: "Tức là... vận tốc trung bình mười lăm mét một giây.", "gọi là... giới hạn". **Không** đặt `...` giữa một cụm chặt: động từ với bổ ngữ ("đo... kiểu gì" ✗), "hết... chín giây" ✗, phó từ với số ("khoảng... bốn mươi" ✗), số với đơn vị.
 - **Từ nối đúng chỗ** để các câu dính thành mạch: "Vậy thì", "Nhưng", "Tức là", "Nói cách khác", "Đó là lý do". Câu đầu của một dòng phải nối được với dòng trước.
 - Không chèn thẻ điều khiển của engine TTS (như `<break>`): đã thử, Vivibe đọc sai. Nhịp chỉ đến từ dấu câu (`.` `,` `...`) và cách viết.
 
@@ -179,7 +182,7 @@ Giọng văn:
 ## Độ dài
 
 - **2 phút 30 – 3 phút** (tính cả intro/outro), tự cân đối nội dung trong khung này. Ngắn hơn 2:30 là đang vội — thêm giải thích cho chỗ khó, không thêm ý mới.
-- Ước lượng: video 2:13 cũ ứng với ≈ 2000 ký tự `speak` → nhắm **≈ 2400–2900 ký tự**. Chỉ để ước lượng: thời lượng thật đo sau B2, lệch khung thì quay lại B1.
+- Ước lượng theo giọng Vivibe (đo thật 19/10/2026: ≈ 20 ký tự/giây sau khi cắt lặng; 2899 ký tự, 10 beat → video 2:43): nhắm **≈ 2700–3200 ký tự `speak`**. Chỉ để ước lượng: thời lượng thật đo sau B2, lệch khung thì quay lại B1.
 - 8–11 beat. `HIỆN TƯỢNG` ≤ 20 giây, `GIẢI ĐÁP` 15–30 giây; không beat nào > 35 giây.
 - Vượt khung → cắt ý (ghi vào "những ý đã cắt" ở dàn ý), không rút gọn lời giải thích của ý chính.
 - Người dùng yêu cầu độ dài khác → theo người dùng.
@@ -199,7 +202,7 @@ Giọng văn:
 - [ ] Không beat nào thừa (đã thử bỏ từng beat).
 - [ ] Không có từ xưng hô.
 - [ ] `speak` không còn ký hiệu toán; `text` mỗi dòng ≤ ~60 ký tự.
-- [ ] Đọc nhẩm mọi `speak`: không câu nào quá ~20 từ, không dấu phẩy chen giữa cụm nghĩa, ký hiệu lần đầu được đọc theo nghĩa; `...` đặt trước chỗ cần nhấn, không quá 2 lần một dòng.
-- [ ] Tổng ký tự `speak` khớp thời lượng đã duyệt ở dàn ý (≈ 2400–2900).
+- [ ] Đọc nhẩm mọi `speak`: không câu nào quá ~20 từ, không dấu phẩy chen giữa cụm nghĩa, ký hiệu lần đầu được đọc theo nghĩa; mỗi dòng ≤ 2 chỗ ngắt (đếm `,` `.` `:` `?` `...` giữa dòng); `...` ≤ 1 lần mỗi beat, không chen giữa cụm chặt; không có "Và/Mà/Còn" mở câu ngay sau câu hỏi.
+- [ ] Tổng ký tự `speak` khớp thời lượng đã duyệt ở dàn ý (≈ 2700–3200).
 - [ ] JSON hợp lệ; `slug` và `id` chỉ gồm `a-z 0-9 - _`; `id` liên tục.
 - [ ] Ký hiệu, thuật ngữ khớp SGK 2018.

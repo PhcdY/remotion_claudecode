@@ -16,7 +16,7 @@ Giọng chuẩn: **giọng clone của người dùng trên Vivibe**, gọi qua 
 Giọng phải nghe như **một giáo viên đang giảng cho học sinh**: rõ, ấm, có nhịp, có nhấn vào ý chính, ngắt hơi theo cụm nghĩa. Không đều đều kiểu đọc máy, không ngắt giữa cụm từ.
 Vivibe không có thẻ chỉnh tông; tông giọng đến từ mẫu clone, nhịp đến từ **`speak` ở B1**: dấu câu đặt đúng cụm nghĩa, câu ngắn, `...` trước chỗ cần nhấn. Đọc sai hay ngắt sai thì sửa `speak` ở B1 rồi tạo lại dòng đó, không chỉnh file audio.
 
-Đã test (19/10/2026, giọng clone): `...` cho cảm giác dừng rồi nhấn vào phần sau — người dùng chọn cách này. Thẻ `<break>` bị đọc sai (audio dài gấp đôi). Tách câu thành nhiều lần gọi rồi chèn khoảng lặng thì điều khiển được độ dài nghỉ nhưng không dùng.
+Đã test (19/10/2026, giọng clone): `...` cho cảm giác dừng rồi nhấn vào phần sau — người dùng chọn cách này. Nghe b01 thật: mỗi dấu câu giữa dòng dừng ≈ 0,3–0,4 s, dòng có 3 chỗ ngắt nghe vấp; `...` đặt giữa cụm chặt ("đo... kiểu gì") nghe gãy → quy tắc ngắt nghỉ ở skill `viet-kich-ban`. Thẻ `<break>` bị đọc sai (audio dài gấp đôi). Tách câu thành nhiều lần gọi rồi chèn khoảng lặng thì điều khiển được độ dài nghỉ nhưng không dùng.
 
 ## Cấu hình
 
@@ -39,6 +39,7 @@ Vivibe không có thẻ chỉnh tông; tông giọng đến từ mẫu clone, nh
 ## Quy ước file
 
 - Mỗi dòng `lines[i]` của beat `bXX` → `bXX-l{i+1:02d}.mp3`, đọc trường `speak`.
+- Script cắt khoảng lặng thừa ở đầu và cuối mỗi file (giữ ~0,05 s), để nghỉ giữa các dòng chỉ do B3 quyết định và đều nhau.
 - Không chèn thẻ điều khiển (như `<break>`) vào `speak`. Nhịp trong câu dựa vào dấu câu; nghỉ giữa các dòng/beat do B3 thêm (GAP_LINE, GAP_BEAT).
 - Sửa một dòng ở B1 → chạy lại script với **đúng giọng đã dùng cho bài** (xem `voice_name` trong `manifest.json`, hỏi lại người dùng nếu muốn đổi); cache tự nhận ra dòng đổi.
 - `manifest.json` giữ định dạng cũ (beat, line, file, hash, text + engine/voice/voice_name/speed) nên B3 không phải sửa. Dòng chưa có audio khớp kịch bản được script báo ở cuối.
@@ -48,3 +49,4 @@ Vivibe không có thẻ chỉnh tông; tông giọng đến từ mẫu clone, nh
 
 - Không sửa file trong `public/audio/` bằng tay.
 - `--force` tạo lại dòng được chọn dù cache khớp; chỉ dùng khi người dùng muốn một bản đọc khác.
+- Vivibe chỉ cho một job mỗi tài khoản tại một thời điểm, nên script tạo lần lượt từng dòng (mỗi dòng vài giây). Cả bài nên chạy nền (`run_in_background`).
