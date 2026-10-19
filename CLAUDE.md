@@ -1,6 +1,6 @@
 # Video AI — video giải thích bản chất toán (Remotion)
 
-Video 2–3 phút (ưu tiên dễ hiểu, thiếu thời gian thì cắt ý), **ngang 16:9 (1920×1080, 30fps)**, giọng đọc tiếng Việt, giải thích *vì sao* chứ không chỉ *cái gì*.
+Video 2:30–3:00 (ưu tiên dễ hiểu, thiếu thời gian thì cắt ý), mở bằng một hiện tượng thật và kết bằng lời giải cho nó, **ngang 16:9 (1920×1080, 30fps)**, giọng đọc tiếng Việt, giải thích *vì sao* chứ không chỉ *cái gì*.
 Dùng skill `remotion-best-practices` (đã cài trong `.agents/skills/`) cho mọi việc liên quan Remotion.
 
 ## Workflow (theo đúng thứ tự)
@@ -28,11 +28,11 @@ B1 `viet-kich-ban` → B2 `tao-audio` → B3 `dung-video`.
   "beats": [
     {
       "id": "b01",
-      "section": "CÂU HỎI",            // cấu trúc; chỉ TRONG ĐỀ THI / BẪY THƯỜNG GẶP hiện trên video
+      "section": "HIỆN TƯỢNG",         // cấu trúc; chỉ TRONG ĐỀ THI / BẪY THƯỜNG GẶP / GIẢI ĐÁP hiện trên video
       "keyword": "Nhưng TẠI SAO?",      // câu chốt của beat, hiện lúc đọc dòng cuối, được dùng $...$
       "visual": "mô tả hình cho beat",  // Claude dựng hình theo mô tả này
       "lines": [
-        { "text": "chữ trên màn hình, LaTeX trong $...$", "speak": "lời đọc, viết toán bằng chữ" }
+        { "text": "chữ trên màn hình, LaTeX trong $...$; số kèm tên đại lượng + đơn vị", "speak": "lời đọc, viết toán bằng chữ; '...' trước chỗ cần nhấn" }
       ]
     }
   ]

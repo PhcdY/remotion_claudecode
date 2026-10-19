@@ -10,6 +10,11 @@ Quy trình: người dùng nêu từng vấn đề → sửa skill trước → 
 | 4 | Audio đọc đều, ngắt sai chỗ, không giống người → đổi sang ElevenLabs **qua MCP**, giọng giảng bài | ✅ tao-audio (quy trình MCP); viet-kich-ban › "Viết speak cho tai nghe"; CLAUDE.md B2 | ✅ |
 | 5 | Kịch bản: hướng ổn nhưng nối sang toán vội, người xem khó hiểu. **Giữ 2–3 phút**, không nhồi bài tập — một hàm ví dụ là đủ; thiếu chỗ thì cắt ý | ✅ viet-kich-ban › cầu nối ví dụ→toán, tiền đề, hàm ví dụ, "một ý chính", Độ dài 2–3 phút, "những ý đã cắt" | ✅ |
 | 6 | Đổi giọng sang **Vivibe** (giọng clone của người dùng, qua API key), bỏ hẳn ElevenLabs | ✅ tao-audio viết lại; `scripts/vivibe_tts.py` thay `save_audio.py`; CLAUDE.md B2 | ❌ |
+| 7 | Giọng thiếu ngắt nghỉ/nhấn, chỉ giao text cho API, hơi buồn ngủ. Đã test 4 cách trên Vivibe → chọn `...` (dừng rồi nhấn) | ✅ viet-kich-ban › "Viết speak cho tai nghe" (`...`, từ nối), giọng có nhấn nhá; tao-audio › kết quả test | ❌ |
+| 8 | Mở/kết: luôn mở bằng một hiện tượng/ứng dụng thật chưa có lời giải (fun fact), cuối video giải nó bằng kiến thức vừa học | ✅ viet-kich-ban › yêu cầu 1, 5 (`HIỆN TƯỢNG`, `GIẢI ĐÁP`, phải có nguồn); dung-video › thẻ `GIẢI ĐÁP`, dùng lại hình mở đầu | ❌ |
+| 9 | 2:13 hơi ngắn → 2:30–3:00 | ✅ viet-kich-ban › Độ dài (≈ 2400–2900 ký tự); tao-audio + dung-video › kiểm thời lượng; CLAUDE.md | ❌ |
+| 10 | Không bỏ qua bản chất: ví dụ ↔ khái niệm phải đi tới nơi, định nghĩa xuất hiện; người xem luôn biết đang xem gì (không cần nói bài SGK nào) | ✅ viet-kich-ban › yêu cầu 8, 9 | ❌ |
+| 11 | Thiếu chú thích: "15 m/s" không nói là vận tốc trung bình, cột "Trung bình", $s=5t^2$ không giải thích ký hiệu, bóng không nhãn; 2 bóng ở 0 và 1,25 m đè nhau | ✅ viet-kich-ban › quy tắc `text`/`visual` + phép thử tắt tiếng; dung-video › Quy tắc bố cục 7 + mục kiểm tra (8) | ❌ |
 
 ## Việc cần làm khi sửa video (vấn đề 1)
 - `Subtitle`: chỉ hiện dòng đang đọc.
@@ -42,6 +47,12 @@ Quy trình: người dùng nêu từng vấn đề → sửa skill trước → 
 ## Việc cần làm khi sửa video (vấn đề 6)
 - ✅ Người dùng đã thêm `VIVIBE_API_KEY` vào `.env`. Giọng không cố định: hỏi người dùng mỗi lần chạy B2 (`--voice`).
 - Tạo lại toàn bộ audio bằng `scripts/vivibe_tts.py` (estimate → nghe thử b01 → cả bài), rồi soát lại B3 (thời lượng đổi theo audio mới).
+
+## Việc cần làm khi sửa video (vấn đề 7–11)
+- Viết lại kịch bản theo skill mới (B1, duyệt dàn ý trước): chọn hiện tượng thật có nguồn cho beat `HIỆN TƯỢNG` + beat `GIẢI ĐÁP` dùng lại hình đó; định nghĩa đạo hàm hiện đầy đủ rồi gắn lại với ví dụ quả bóng; mọi số kèm đại lượng + đơn vị, ký hiệu có chú giải; `speak` có `...` trước chỗ nhấn; nhắm 2400–2900 ký tự.
+- `SectionCard`: thêm `GIẢI ĐÁP` vào `VISIBLE_SECTIONS`.
+- Ảnh hoạt nghiệm b02: trục ghi "quãng đường $s$ (m)", nhãn từng bóng, bỏ/dàn bóng ở 0 và 1,25 m, gắn `data-mark` cho bóng; bảng ghi "Vận tốc trung bình (m/s)".
+- Tạo lại audio (B2, hỏi giọng), dựng lại (B3), soát phép thử tắt tiếng + thời lượng 2:30–3:00.
 
 ## Trạng thái (17/10/2026)
 Đã làm lại video theo cả 5 vấn đề + khung 9Study (style.md) + hook quả bóng rơi + giọng ElevenLabs (Nguyễn Khoái, [calm]).

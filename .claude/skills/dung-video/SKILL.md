@@ -43,7 +43,7 @@ Mỗi beat là một `<Sequence>` từ `startFrame` đến `endFrame`, gồm 4 l
 
 | Trường | Hiện thế nào | Lúc nào |
 |---|---|---|
-| `section` | **không hiện thường trực.** Chỉ `TRONG ĐỀ THI` và `BẪY THƯỜNG GẶP` (có nghĩa với người xem) hiện thành thẻ mở beat: chữ to giữa vùng hình, ~1,2s, rồi biến mất trước khi hình chính vào. Các nhãn khác chỉ dùng nội bộ. | đầu beat |
+| `section` | **không hiện thường trực.** Chỉ `TRONG ĐỀ THI`, `BẪY THƯỜNG GẶP` và `GIẢI ĐÁP` (có nghĩa với người xem) hiện thành thẻ mở beat: chữ to giữa vùng hình, ~1,2s, rồi biến mất trước khi hình chính vào. Các nhãn khác chỉ dùng nội bộ. | đầu beat |
 | `visual` | vùng hình chính (chiếm phần lớn khung) | đầu beat, diễn biến theo mô tả |
 | `keyword` | **câu chốt của beat**, không phải tag ở góc. Chữ to, đặt trong vùng hình cạnh trọng tâm (không che hình), giữ tới hết beat | lúc ý của beat vừa rõ, mặc định = `startFrame` dòng cuối |
 | `lines[i].text` | dòng phụ đề | đúng `startFrame` của dòng i; **chỉ hiện dòng đang đọc**, dòng trước biến mất (không giữ bản mờ) |
@@ -51,6 +51,7 @@ Mỗi beat là một `<Sequence>` từ `startFrame` đến `endFrame`, gồm 4 l
 
 - `text` / `keyword`: tách theo `$...$` → đoạn thường render chữ, đoạn trong `$` render KaTeX inline. Dòng chỉ có công thức → KaTeX display, cỡ lớn hơn.
 - `visual`: dựng đúng mô tả. Cụm "khi đọc dòng N" → animation bắt đầu ở `startFrame` dòng N. Mô tả mơ hồ → chọn cách đơn giản nhất và ghi giả định vào báo cáo.
+- Beat `GIẢI ĐÁP` dùng lại đúng hình của beat `HIỆN TƯỢNG` (cùng component, cùng bố cục) rồi thêm lớp giải thích lên trên, để người xem nhận ra ngay "đây là câu hỏi lúc đầu".
 - Màu ghi theo vai trò ("màu nhấn", "màu cảnh báo") → lấy từ `style.md`.
 
 ## Quy tắc bố cục (bắt buộc, khung 1920×1080)
@@ -111,6 +112,16 @@ Người xem phải nhận ra *cái gì đang thay đổi*. Nếu khung nhìn đ
   Không zoom bằng cách đổi miền vẽ của chính đồ thị mà bỏ hết trục và lưới.
 - Dịch khung, đổi tỉ lệ trục: giữ trục và vạch chia có số để người xem thấy khung đang đổi chứ không phải hình đang đổi.
 
+**7. Mọi thứ trên màn hình đều có chú thích.**
+Phép thử: **tắt tiếng, chỉ nhìn khung hình**, người xem vẫn biết từng con số, ký hiệu, hình là gì. Không biết → thiếu chú thích.
+- Trục, thước đo: tên đại lượng + đơn vị ở đầu trục ("quãng đường $s$ (m)", "thời gian $t$ (s)"), không chỉ "m" hay "s".
+- Con số hiện trên hình (nhãn, ô bảng, giá trị đang chạy): có tên đại lượng + đơn vị ngay cạnh hoặc ở tiêu đề cột ("Vận tốc trung bình (m/s)", không chỉ "Trung bình").
+- Công thức xuất hiện lần đầu: kèm chú giải ký hiệu ngay dưới/cạnh ("$s$: quãng đường · $t$: thời gian"), giữ tới hết beat.
+- Đoạn tô màu, mũi tên, vạch nhấn: có nhãn nói nó biểu diễn gì ("rơi thêm 15 m trong 1 s"). Màu dùng lại ở beat sau với cùng nghĩa thì giữ cùng màu.
+- Điểm, vật minh hoạ (quả bóng ở các thời điểm): mỗi cái cần thiết có nhãn; vật trùng hoặc quá gần nhau thì bỏ bớt hoặc dàn ra, không xếp chồng — mọi vật này cũng gắn `data-mark` để `check-layout` bắt được chồng lấn.
+- Chú thích tuân theo quy tắc 1 (không đè, có halo) và quy tắc 4 (cỡ chữ tối thiểu). Thiếu chỗ → bớt thành phần, không bỏ chú thích.
+- `visual` trong kịch bản thiếu chú thích cho một thành phần → vẫn thêm chú thích theo đúng toán, ghi vào báo cáo; thấy cần đổi `text` thì báo người dùng (không tự sửa kịch bản).
+
 ## Bước 3 — Cấu trúc code
 
 ```
@@ -134,9 +145,10 @@ src/Root.tsx             đăng ký <Composition id="<slug>" ...> 1920×1080, 30
 - Xuất ảnh tĩnh bằng `node scripts/stills.mjs <slug> <frame...>` (bundle một lần).
 - Xuất ảnh tĩnh **cho từng dòng** (frame ngay trước khi dòng kết thúc, lúc mọi thành phần của dòng đó đã hiện đủ), không chỉ giữa beat. Nhiều frame thì bundle một lần rồi gọi `renderStill` lặp lại, thay vì gọi `npx remotion still` từng frame.
 - **Kiểm chồng lấn bằng code trước, mắt sau.** Mọi khối chữ trên hình (nhãn, chú thích, số trục, câu chốt) gắn `data-text`, mọi điểm đánh dấu gắn `data-mark`. Chạy `node scripts/check-layout.mjs <slug>`: script mở từng frame kiểm tra, lấy khung bao (`getBoundingClientRect`) của các phần tử đó và báo mọi cặp chồng nhau hoặc cách nhau < 16px, kèm frame và nội dung chữ. Danh sách phải rỗng mới sang bước soát bằng mắt.
-- Soát từng ảnh theo **Quy tắc bố cục**: (1) có gì chồng lấn hay dính sát không; (2) kim/đường có đè lên chữ không; (3) cụm hình có cân không, có nửa khung trống không; (4) có chữ nào dưới cỡ tối thiểu không; (5) có gì lấn vùng phụ đề không; (6) có thành phần nào người xem không cần không; (7) phóng to hay dịch khung có mốc tham chiếu không. Sửa hết rồi xuất lại để kiểm.
+- Soát từng ảnh theo **Quy tắc bố cục**: (1) có gì chồng lấn hay dính sát không; (2) kim/đường có đè lên chữ không; (3) cụm hình có cân không, có nửa khung trống không; (4) có chữ nào dưới cỡ tối thiểu không; (5) có gì lấn vùng phụ đề không; (6) có thành phần nào người xem không cần không; (7) phóng to hay dịch khung có mốc tham chiếu không; (8) **phép thử tắt tiếng**: mỗi con số, ký hiệu, màu, vật trên ảnh có chú thích nói nó là gì không. Sửa hết rồi xuất lại để kiểm.
 - **Soát toán trên hình**: điểm nằm đúng trên đồ thị, hệ số góc, nghiệm, nhãn trục. Sai toán là lỗi nghiêm trọng nhất.
-- Báo cáo: tổng thời lượng, các giả định khi dựng visual, chỗ cần người dùng xem.
+- **Thời lượng**: tổng phải nằm trong 2:30 – 3:00. Lệch → báo người dùng, đề xuất quay lại B1 (không kéo giãn khoảng nghỉ để bù).
+- Báo cáo: tổng thời lượng, các giả định khi dựng visual, chú thích đã tự thêm, chỗ cần người dùng xem.
 
 ## Bước 5 — Render (khi người dùng duyệt trong Studio)
 
