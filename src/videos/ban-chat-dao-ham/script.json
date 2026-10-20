@@ -10,24 +10,20 @@
     {
       "id": "b01",
       "section": "HIỆN TƯỢNG",
-      "keyword": "Nhanh cỡ nào, ngay lúc ấy?",
-      "visual": "Đường chạy 100 m nhìn ngang, chiếm bề ngang vùng hình: vạch xuất phát bên trái, vạch đích bên phải, vạch chia mỗi 10 m có số 0, 10, …, 100, nhãn cuối thước 'quãng đường (m)'. Người chạy vẽ giản lược (hình bóng một màu, không vẽ mặt, không giống người thật), nhãn 'Bolt' phía trên đầu. Dòng 1: người chạy từ 0 đến 100 m trong suốt dòng; đồng hồ bấm giờ góc trên phải vùng hình (ngoài vùng logo) chạy từ 0,00 đến 9,58, nhãn 'thời gian (s)'. Dòng 2: nhãn lớn 'vận tốc trung bình ≈ 37,6 km/h' phía trên đường chạy; một xe đạp điện nhỏ chạy theo phía sau rồi tụt lại xa dần, nhãn sát xe 'xe đạp điện: tối đa 25 km/h' (hài). Dòng 3: đoạn 60–70 m trên đường chạy tô màu nhấn, nhãn sát đoạn '60 → 70 m: 0,81 s ≈ 44 km/h'. Dòng 4: người chạy đứng hình ở giữa đoạn tô; dấu '?' lớn màu nhấn phía trên, cách người chạy ≥ 40px.",
+      "keyword": "Lúc nhanh nhất: ? km/h",
+      "visual": "CẢNH 1 — đường chạy 100 m nằm ngang, chiếm bề ngang vùng hình: vạch xuất phát trái, vạch đích phải, vạch chia mỗi 10 m có số 0, 10, …, 100, nhãn cuối thước 'quãng đường (m)'. Người chạy vẽ giản lược (hình bóng một màu, không mặt), cao ≥ 140px, nhãn 'Bolt' trên đầu. Dòng 1: người chạy chạy từ 0 đến 100 m trong suốt dòng; đồng hồ bấm giờ phía trên bên phải vùng hình chạy 0,00 → 9,58, nhãn 'thời gian (s)'. Dòng 2: đồng hồ mờ đi; nhãn lớn 'trung bình ≈ 37,6 km/h' hiện phía trên giữa đường chạy. Dòng 3: nhãn trung bình mờ đi; người chạy hiện lại đứng hình giữa sải chân ở mét 52, dấu '?' lớn màu nhấn phía trên, cách đầu người chạy ≥ 40px.",
       "lines": [
         {
-          "text": "Berlin 2009: Usain Bolt chạy 100 m hết 9,58 s.",
+          "text": "100 m · 9,58 s",
           "speak": "Năm hai nghìn không trăm linh chín, Usain Bolt chạy một trăm mét chỉ trong chín phẩy năm tám giây."
         },
         {
-          "text": "Vận tốc trung bình cả bài: khoảng 37,6 km/h.",
-          "speak": "Trung bình khoảng ba mươi bảy phẩy sáu ki-lô-mét một giờ, xe đạp điện đuổi theo... cũng không kịp."
+          "text": "",
+          "speak": "Tính ra, vận tốc trung bình của Bolt khoảng ba mươi bảy phẩy sáu ki-lô-mét một giờ."
         },
         {
-          "text": "Đoạn 60–70 m: tốc độ khoảng 44 km/h.",
-          "speak": "Nhưng ở đoạn từ sáu mươi đến bảy mươi mét, Bolt chạy khoảng bốn mươi bốn ki-lô-mét một giờ."
-        },
-        {
-          "text": "Đúng tại một khoảnh khắc, Bolt chạy nhanh bao nhiêu?",
-          "speak": "Vậy đúng tại một khoảnh khắc, Bolt chạy nhanh bao nhiêu và đo bằng cách nào?"
+          "text": "",
+          "speak": "Nhưng ngay lúc nhanh nhất, Bolt chạy bao nhiêu ki-lô-mét một giờ và đo bằng cách nào?"
         }
       ]
     },
@@ -35,211 +31,327 @@
       "id": "b02",
       "section": "CÂU HỎI",
       "keyword": "Một khoảnh khắc: $\\frac{0}{0}$",
-      "visual": "Bên trái: người chạy của b01 đứng hình trong một khung ảnh kiểu polaroid (nghiêng nhẹ −3°), nhãn dưới khung 'một khoảnh khắc'. Bên phải, xếp dọc: dòng 1: công thức bằng chữ 'vận tốc trung bình = quãng đường (m) : thời gian (s)'. Dòng 2: ngay dưới, thay số thành '0 m : 0 s', số 0 tô màu nhấn. Dòng 3: phân số $\\frac{0}{0}$ cỡ lớn, một nét bút đỏ gạch chéo kiểu chấm bài vẽ dần lên, chữ 'không xác định' màu cảnh báo đặt bên phải phân số, cách ≥ 40px (hài: kiểu bài kiểm tra bị gạch).",
+      "visual": "Giữ CẢNH 1, người chạy đứng hình ở mét 52. Dòng 1: ngoặc màu 1 phía trên đường chạy ôm đoạn 40–60 m; phía trên vùng hình hiện công thức $v_{tb} = \\dfrac{\\text{quãng đường}}{\\text{thời gian}}$ (đây là chú giải ký hiệu $v_{tb}$: vận tốc trung bình). Dòng 2: ngoặc co dần về đúng điểm mét 52 cho tới khi thành một vạch; cùng lúc tử và mẫu của công thức đổi thành '0 m' và '0 s' (số 0 màu nhấn). Dòng 3: một nét bút đỏ kiểu chấm bài vẽ dần gạch chéo phân số $\\frac{0 \\text{ m}}{0 \\text{ s}}$; chữ 'vô nghĩa' màu cảnh báo bên phải phân số, cách ≥ 40px (hài).",
       "lines": [
         {
-          "text": "Vận tốc trung bình = quãng đường : thời gian.",
-          "speak": "Vận tốc trung bình bằng quãng đường chia cho thời gian."
+          "text": "",
+          "speak": "Vận tốc trung bình bằng quãng đường chia cho thời gian, tính trên cả một đoạn đường."
         },
         {
-          "text": "Một khoảnh khắc: đi được 0 m, trong 0 s.",
-          "speak": "Nhưng trong đúng một khoảnh khắc, Bolt đi được không mét trong không giây."
+          "text": "",
+          "speak": "Nhưng một khoảnh khắc thì chẳng có độ dài, quãng đường bằng không và thời gian cũng bằng không."
         },
         {
-          "text": "Ra $\\frac{0}{0}$: phép chia không có nghĩa.",
-          "speak": "Vậy là... không chia cho không, phép chia mà thầy cô nào cũng gạch đỏ."
+          "text": "",
+          "speak": "Vậy là ra... không chia cho không, phép chia mà thầy cô nào cũng gạch đỏ."
         }
       ]
     },
     {
       "id": "b03",
       "section": "TRỰC GIÁC",
-      "keyword": "Khoảng càng ngắn, càng sát",
-      "visual": "Phía trên: đường chạy của b01 thu nhỏ (giữ vạch chia 10 m có số, nhãn 'quãng đường (m)'). Phía dưới: bảng 3 cột, tiêu đề 'Đoạn đường' | 'Thời gian (s)' | 'Vận tốc trung bình (m/s)'. Dòng 1: bảng hiện khung và tiêu đề. Dòng 2: thêm hàng '0 → 100 m' | '9,58' | '10,4', đồng thời cả đường chạy sáng màu 2; rồi hàng '60 → 80 m' | '1,63' | '12,3', đoạn sáng co lại còn 60–80 m. Dòng 3: thêm hàng '60 → 70 m' | '0,81' | '12,35 (≈ 44 km/h)', đoạn sáng co còn 60–70 m; cạnh cột thời gian có mũi tên dọc hướng xuống, nhãn 'khoảng ngắn dần'. Dòng 4: một kính lúp nhỏ đặt lên đoạn 60–70 m, bên trong trống với dấu '?', nhãn cạnh kính lúp 'không có số liệu đoạn ngắn hơn 10 m'.",
+      "keyword": "Cần biết vị trí mọi lúc",
+      "visual": "Giữ CẢNH 1 (đường chạy 100 m nằm ngang, Bolt đứng hình ở mét 52). Dòng 1: phân số gạch đỏ mờ đi; đoạn tô màu 1 trên đường chạy giãn lại 40–60 m rồi co dần quanh mét 52 (40–60 → 48–56 → 51–53), nhãn dưới thước 'khoảng ngắn dần'. Dòng 2: nhãn đó mờ; trên mỗi vạch 10 m hiện một chấm màu 2 (điểm có số liệu), nhãn dưới thước 'số liệu: mỗi 10 m'. Dòng 3: giữa mỗi hai chấm hiện một dấu '?' nhỏ màu nhạt (chỗ không có số liệu).",
       "lines": [
         {
-          "text": "Mẹo: thay khoảnh khắc bằng một khoảng ngắn dần.",
-          "speak": "Mẹo là không lấy một khoảnh khắc, mà lấy một khoảng thời gian ngắn dần."
+          "text": "Khoảng thời gian ngắn dần",
+          "speak": "Cách gỡ là không lấy một khoảnh khắc, mà lấy một khoảng thời gian ngắn dần quanh nó."
         },
         {
-          "text": "Vận tốc trung bình cả 100 m: 10,4 m/s. 60–80 m: 12,3 m/s.",
-          "speak": "Cả một trăm mét là mười phẩy bốn mét một giây, còn đoạn hai mươi mét là mười hai phẩy ba."
+          "text": "",
+          "speak": "Nhưng số liệu của Bolt chỉ đo theo từng đoạn mười mét, không đủ mịn để rút ngắn mãi."
         },
         {
-          "text": "Đoạn 60–70 m: 12,35 m/s (≈ 44 km/h).",
-          "speak": "Đoạn mười mét được mười hai phẩy ba lăm, khoảng càng ngắn càng sát lúc đang xét."
-        },
-        {
-          "text": "Nhưng số liệu chỉ đo từng 10 m. Cần một công thức.",
-          "speak": "Nhưng số liệu chỉ đo từng mười mét, muốn ngắn hơn nữa thì... cần một công thức."
+          "text": "cần: vị trí ở mọi thời điểm",
+          "speak": "Muốn rút ngắn tuỳ ý thì phải biết người chạy ở đâu tại mọi thời điểm, tức là cần một công thức."
         }
       ]
     },
     {
       "id": "b04",
       "section": "VÍ DỤ",
-      "keyword": "$15 \\to 10{,}5 \\to 10{,}05$",
-      "visual": "Bên trái: thước dọc 0 → 20 (0 ở trên, vạch mỗi 5 có số), nhãn đầu thước 'quãng đường rơi $s$ (m)'; công thức '$s=5t^2$' đặt trên thước, ngay dưới là chú giải '$s$: quãng đường rơi (m) · $t$: thời gian (s)'. Dòng 1: bóng màu cam hiện lần lượt ở các mốc t = 0, 1, 2 s (tức s = 0; 5; 20 m), mỗi bóng có nhãn bên phải 't = 0 s', 't = 1 s', 't = 2 s'; không vẽ thêm mốc khác để bóng không chồng nhau. Dòng 2: bóng t = 1 s sáng màu nhấn; vạch màu 2 dọc thước từ 5 m đến 20 m, nhãn sát vạch 'rơi thêm 15 m trong 1 s'. Bên phải: bảng 3 cột, tiêu đề 'Khoảng thời gian (tính từ t = 1 s)' | 'Quãng rơi thêm (m)' | 'Vận tốc trung bình (m/s)'. Dòng 3: hàng '1 s' | '20 − 5 = 15' | '15'. Dòng 4: hàng '0,1 s' | '6,05 − 5 = 1,05' | '10,5', rồi hàng '0,01 s' | '5,1005 − 5 = 0,1005' | '10,05'; cột cuối tô màu nhấn.",
+      "keyword": "Mô hình: $s = t^2$",
+      "visual": "BƯỚC KHÓ — đổi sang mô hình. Dòng 1: Bolt, chấm, dấu '?' mờ đi; đường chạy trượt xuống dưới vùng hình (giữ vạch chia 10 m có số); một người chạy MỚI màu xanh thương hiệu hiện ở vạch xuất phát, nhãn trên đầu 'mô hình' (giữ nhãn này suốt phần dùng mô hình). Dòng 2: người chạy xuất phát từ đứng yên, chạy theo s = t² tới t = 4 s; khi qua t = 2 s và t = 4 s cắm một cờ nhỏ trên làn, nhãn dưới thước '2 s', '4 s' ngay dưới cờ. Dòng 3: chạy tiếp tới t = 6 s (mét 36), cắm cờ '6 s'. Dòng 4: phía trên vùng hình hiện khối công thức: '$s = t^2$' cỡ lớn, dưới là ba phép kiểm '$2^2 = 4$ · $4^2 = 16$ · $6^2 = 36$', dưới cùng chú giải '$s$ là quãng đường (m), $t$ là thời gian (s)'.",
       "lines": [
         {
-          "text": "Một vật có công thức: quả bóng rơi, $s = 5t^2$.",
-          "speak": "Quả bóng rơi có sẵn công thức: quãng đường rơi bằng năm nhân t bình phương, t tính bằng giây."
+          "text": "người chạy mô hình, không phải Bolt",
+          "speak": "Vì vậy, tạm để Bolt sang một bên và xét một người chạy tưởng tượng trong sách toán."
         },
         {
-          "text": "Xét lúc $t = 1$ s. Từ giây 1 đến giây 2: rơi thêm 15 m.",
-          "speak": "Xét lúc t bằng một giây, từ giây thứ nhất đến giây thứ hai bóng rơi thêm mười lăm mét."
+          "text": "",
+          "speak": "Người này xuất phát từ chỗ đứng yên, sau hai giây ở mét thứ tư, sau bốn giây ở mét mười sáu."
         },
         {
-          "text": "Vận tốc trung bình trong 1 s đó: 15 m/s.",
-          "speak": "Tức là... vận tốc trung bình mười lăm mét một giây."
+          "text": "càng chạy càng nhanh",
+          "speak": "Sau sáu giây thì ở mét ba mươi sáu, mỗi giây chạy được xa hơn giây trước."
         },
         {
-          "text": "Khoảng 0,1 s: 10,5 m/s. Khoảng 0,01 s: 10,05 m/s.",
-          "speak": "Co còn không phẩy một giây được mười phẩy năm, còn không phẩy không một giây được mười phẩy không năm."
+          "text": "",
+          "speak": "Các con số này theo cùng một quy tắc, quãng đường bằng... bình phương của thời gian."
         }
       ]
     },
     {
       "id": "b05",
-      "section": "BẢN CHẤT",
-      "keyword": "Giới hạn: vận tốc tức thời",
-      "visual": "Trục số ngang, nhãn 'vận tốc trung bình (m/s)', từ 9 đến 16, vạch mỗi 1 đơn vị có số. Dòng 1: ba điểm lần lượt rơi xuống trục tại 15; 10,5; 10,05, mỗi điểm có nhãn khoảng thời gian tương ứng ('khoảng 1 s', 'khoảng 0,1 s', 'khoảng 0,01 s'); nhãn của 10,5 đặt phía trên trục, nhãn của 10,05 đặt phía dưới trục để không chồng; mũi tên cong chỉ chiều dồn về 10. Dòng 2: điểm 10 sáng màu nhấn, nhãn 'giới hạn'. Dòng 3: phân số $\\frac{0}{0}$ bị gạch đỏ của b02 hiện nhỏ ở vùng trống phía trên rồi mờ đi; cạnh đó dấu tick màu 'tăng' với nhãn 'không chia cho 0'. Dòng 4: dưới điểm 10 hiện nhãn 'vận tốc tức thời tại $t = 1$ s: 10 m/s'.",
+      "section": "VÍ DỤ",
+      "keyword": "Mỗi điểm: một lúc, một chỗ",
+      "visual": "CẢNH 2 — hệ trục đặt phía trên đường chạy (đường chạy + người chạy mô hình + 3 cờ vẫn ở dưới). Trục ngang 'thời gian $t$ (s)' 0 → 6,5, vạch mỗi 1; trục dọc 'quãng đường $s$ (m)' 0 → 44, vạch 10, 20, 30, 40. Dòng 1: khối công thức của b04 mờ đi; hệ trục hiện. Dòng 2: cờ '2 s' trên đường chạy sáng lên; điểm (2; 4) hiện trên hệ trục với hai đường gióng đứt nét xuống trục t (số 2) và sang trục s (thêm số 4 cạnh trục), nhãn '(2; 4)' cạnh điểm. Dòng 3: tương tự hai điểm (4; 16) và (6; 36), mỗi điểm có gióng; nhãn '(2; 4)' mờ đi để bớt chữ. Dòng 4: gióng mờ; người chạy chạy lại từ 0 tới mét 36 trong khi đồ thị $s = t^2$ được vẽ dần theo đúng thời điểm (đầu đường cong luôn ở (t; t²)), đi qua đúng 3 điểm; nhãn '$s = t^2$' ở vùng trống phía trên bên trái đường cong.",
       "lines": [
         {
-          "text": "Vận tốc trung bình dồn dần về 10 m/s.",
-          "speak": "Để ý cột cuối, các con số dồn dần về mười."
+          "text": "",
+          "speak": "Giờ ghi các cặp số này lên một hệ trục, trục ngang là thời gian, trục dọc là quãng đường."
         },
         {
-          "text": "Con số được dồn về gọi là giới hạn.",
-          "speak": "Khi khoảng thời gian co về không, con số được dồn về gọi là... giới hạn."
+          "text": "điểm $(2; 4)$: lúc 2 s, ở mét 4",
+          "speak": "Lúc hai giây người chạy ở mét bốn, ứng với một điểm trên hệ trục."
         },
         {
-          "text": "Không chia cho 0: chỉ xem các số dồn về đâu.",
-          "speak": "Cách này không hề chia cho không, chỉ xem các con số dồn về đâu."
+          "text": "",
+          "speak": "Làm tương tự với bốn giây và sáu giây, được thêm hai điểm nữa."
         },
         {
-          "text": "Vận tốc tức thời tại $t = 1$ s: 10 m/s.",
-          "speak": "Giới hạn ấy chính là vận tốc tức thời tại giây thứ nhất, mười mét một giây."
+          "text": "đồ thị quãng đường theo thời gian",
+          "speak": "Làm với mọi thời điểm rồi nối lại, được đồ thị quãng đường theo thời gian."
         }
       ]
     },
     {
       "id": "b06",
-      "section": "ĐỊNH NGHĨA",
-      "keyword": "Đạo hàm: thay đổi tức thời",
-      "visual": "Dòng 1–2: bảng tương ứng hai cột giữa vùng hình, tiêu đề 'Quả bóng' | 'Hàm số', mỗi hàng có mũi tên hai chiều. Dòng 1: hàng 'thời gian $t$ (s)' ↔ '$x$' và hàng 'quãng đường $s$ (m)' ↔ '$f(x)$'. Dòng 2: thêm hàng 'vận tốc tức thời tại thời điểm $x_0$' ↔ '$f'(x_0)$', dưới '$f'(x_0)$' có chú thích nhỏ 'đạo hàm của $f$ tại $x_0$'. Dòng 3: bảng thu nhỏ trượt lên trên; công thức định nghĩa cỡ lớn hiện giữa vùng hình, phía trên có nhãn 'Định nghĩa đạo hàm của $f$ tại $x_0$'. Dòng 4: tử số tô màu 2, mẫu số tô màu 1; chú thích đặt bên phải công thức, nối bằng đường dẫn mảnh: tử → 'phần $f$ thay đổi (quãng rơi thêm, m)', mẫu → 'phần $x$ thay đổi (thời gian trôi qua, s)'; dưới ký hiệu lim có chú thích 'cho $x$ dồn về $x_0$: lấy giới hạn'.",
+      "section": "VÍ DỤ",
+      "keyword": "Thêm 11 m trong 1 s",
+      "visual": "Giữ CẢNH 2 (hệ trục + đồ thị $s = t^2$ + đường chạy ở dưới; 3 cờ mờ đi). Dòng 1: điểm A tại (5; 25) màu nhấn, gióng đứt nét xuống trục t (số 5) và sang trục s (số 25), nhãn 'A'; người chạy trên đường chạy đứng ở mét 25. Dòng 2: điểm B tại (6; 36), gióng tới trục (số 36), nhãn 'B'; người chạy chạy từ mét 25 tới mét 36. Dòng 3: tam giác vuông từ A: cạnh ngang màu 1 từ A sang (6; 25), nhãn '1 s'; cạnh dọc màu 2 từ (6; 25) lên B, nhãn '11 m'.",
       "lines": [
         {
-          "text": "Hàm số: thời gian ↔ $x$, quãng đường ↔ $f(x)$.",
-          "speak": "Sang ngôn ngữ hàm số, thời gian ứng với x và quãng đường ứng với f của x."
+          "text": "A: lúc 5 s, ở mét 25",
+          "speak": "Xét lúc năm giây, người chạy ở mét hai mươi lăm, trên đồ thị là điểm A."
         },
         {
-          "text": "Vận tốc tức thời tại $x_0$ ↔ đạo hàm $f'(x_0)$.",
-          "speak": "Vận tốc tức thời tại x không ứng với đạo hàm của f tại x không, kí hiệu f phẩy x không."
+          "text": "B: lúc 6 s, ở mét 36",
+          "speak": "Một giây sau thì người chạy ở mét ba mươi sáu, là điểm B."
         },
         {
-          "text": "$f'(x_0)=\\lim\\limits_{x\\to x_0}\\dfrac{f(x)-f(x_0)}{x-x_0}$",
-          "speak": "Đây là... định nghĩa đạo hàm, nó làm đúng việc vừa làm với quả bóng."
-        },
-        {
-          "text": "Tử: $f$ thay đổi bao nhiêu. Mẫu: $x$ thay đổi bao nhiêu.",
-          "speak": "Tử số là phần f thay đổi, mẫu số là phần x thay đổi, rồi cho x dồn về x không."
+          "text": "11 m : 1 s = 11 m/s",
+          "speak": "Trong một giây đó người chạy đi thêm mười một mét, tức vận tốc trung bình... mười một mét một giây."
         }
       ]
     },
     {
       "id": "b07",
-      "section": "CÔNG THỨC",
-      "keyword": "Ra đúng 10 m/s",
-      "visual": "Bên trái: công thức định nghĩa của b06 thu nhỏ (giữ màu tử, mẫu). Bên phải: các bước biến đổi xếp dọc, mỗi dòng đọc hiện một bước. Dòng 1: '$f(x)=5x^2$, $x_0=1$, $f(1)=5$'. Dòng 2: '$\\dfrac{f(x)-f(1)}{x-1}=\\dfrac{5x^2-5}{x-1}=\\dfrac{5(x-1)(x+1)}{x-1}=5(x+1)$', thừa số $x-1$ ở tử và mẫu bị gạch chéo khi rút gọn, ghi chú nhỏ '$x \\neq 1$'. Dòng 3: '$f'(1)=\\lim\\limits_{x\\to 1}5(x+1)=10$', số 10 tô màu nhấn. Dòng 4: bảng của b04 thu nhỏ hiện lại phía dưới, đường dẫn từ số 10 tới cột 'Vận tốc trung bình (m/s)' với nhãn 'dồn về 10 m/s'.",
+      "section": "ĐỊNH NGHĨA",
+      "keyword": "Độ dốc cát tuyến $= v_{tb}$",
+      "visual": "Giữ CẢNH 2 với A, B, tam giác. Dòng 1: A và B nháy sáng, rồi đường thẳng qua A và B (màu cát tuyến) vẽ dần kéo dài hai phía, nhãn 'cát tuyến' ở vùng trống phía trên bên trái đường. Dòng 2: hai cạnh tam giác sáng lên, nhãn đổi thành 'ngang 1' (cạnh ngang) và 'lên 11' (cạnh dọc). Dòng 3: nhãn hai cạnh trở lại '1 s' và '11 m'; cạnh nhãn cát tuyến thêm '11 m/s'.",
       "lines": [
         {
-          "text": "Thay số quả bóng: $f(x)=5x^2$, $x_0=1$.",
-          "speak": "Thử thay số của quả bóng, f của x bằng năm x bình phương và x không bằng một."
+          "text": "",
+          "speak": "Nối A với B được một đường thẳng, gọi là... cát tuyến."
         },
         {
-          "text": "$\\dfrac{5x^2-5}{x-1}=5(x+1)$ với $x \\neq 1$",
-          "speak": "Tử số là năm x bình phương trừ năm, rút gọn với mẫu thì còn năm nhân x cộng một."
+          "text": "độ dốc = lên : ngang",
+          "speak": "Độ dốc của đường thẳng cho biết đi ngang một đơn vị thì nó lên bao nhiêu."
         },
         {
-          "text": "Cho $x$ dồn về 1: được $5 \\cdot 2 = 10$, tức $f'(1)=10$.",
-          "speak": "Cho x dồn về một thì được năm nhân hai, tức f phẩy một bằng mười."
-        },
-        {
-          "text": "Khớp vận tốc tức thời của bóng: 10 m/s.",
-          "speak": "Khớp đúng với bảng lúc nãy... mười mét một giây."
+          "text": "độ dốc $= 11 : 1 = v_{tb}$",
+          "speak": "Ở đây đi ngang một giây thì lên mười một mét, nên độ dốc chính là vận tốc trung bình."
         }
       ]
     },
     {
       "id": "b08",
       "section": "TRỰC GIÁC",
-      "keyword": "Dấu đạo hàm: hướng đi",
-      "visual": "Hệ trục Oxy, nhãn trục 'x' và 'y', x từ −2,5 đến 2,5; y từ −4 đến 4, vạch có số. Đồ thị $y=x^3-3x$ (cực đại (−1; 2), cực tiểu (1; −2)), nhãn '$y=f(x)$' đặt ở vùng trống phía trên bên phải, xa đường cong. Dòng 1: vẽ dần đồ thị; một người leo núi nhỏ đứng tại x = −2,2. Dòng 2: người đi từ x = −2,2 lên đỉnh x = −1, dưới chân là một đoạn ngắn màu 'tăng' chỉ hướng dốc lên; nhãn '$f'(x)>0$: lên dốc' đặt phía trên, xa đường cong. Dòng 3: người đi từ x = −1 xuống x = 1, đoạn chỉ hướng màu 'giảm'; nhãn '$f'(x)<0$: xuống dốc'. Dòng 4: tại đỉnh (−1; 2) và đáy (1; −2) đoạn chỉ hướng nằm ngang màu nhấn; nhãn 'cực đại' phía trên đỉnh, 'cực tiểu' phía dưới đáy; người leo núi dừng ở đáy, cúi người thở (hài nhẹ).",
+      "keyword": "$11 \\to 10{,}1 \\to 10{,}01$",
+      "visual": "Giữ CẢNH 2. Dòng 1: tam giác mờ; B trượt dọc đường cong về (5,1; 26,01), cát tuyến xoay theo, người chạy trên đường chạy lùi về mét 26,01 (vị trí của B); hai điểm gần như dính nhau trên hình. Dòng 2: đồ thị trượt sang nửa trái; KÍNH LÚP: khung soi nhỏ quanh A trên đồ thị, ô phóng to bên phải (lưới, vạch chia có số, mức phóng ghi sát ô) thấy rõ A, B, cát tuyến; dưới ô ghi 'độ dốc cát tuyến: 10,1 m/s'. Dòng 3: B trượt tiếp về (5,01; 25,1001) trong khi khung soi co lại (phóng to ×10 → ×100) để B vẫn thấy rõ trong ô; số dưới ô chạy 10,1 → 10,01. Dòng 4: hình đứng yên.",
       "lines": [
         {
-          "text": "Đạo hàm đo tốc độ thay đổi, nên dấu của nó chỉ hướng.",
-          "speak": "Đạo hàm đo hàm số thay đổi nhanh cỡ nào, còn dấu của nó cho biết thay đổi theo hướng nào."
+          "text": "khoảng 0,1 s",
+          "speak": "Giờ rút khoảng thời gian còn không phẩy một giây, B trượt sát về A."
         },
         {
-          "text": "$f'(x)>0$: $f$ tăng, tức đồng biến.",
-          "speak": "f phẩy dương thì hàm số đang tăng, tức là đồng biến."
+          "text": "",
+          "speak": "Hai điểm gần quá nên dùng kính lúp phóng to, vận tốc trung bình lúc này là mười phẩy một."
         },
         {
-          "text": "$f'(x)<0$: $f$ giảm, tức nghịch biến.",
-          "speak": "f phẩy âm thì hàm số đang giảm, tức là nghịch biến."
+          "text": "khoảng 0,01 s",
+          "speak": "Rút tiếp còn không phẩy không một giây, kính lúp phóng to hơn nữa, được mười phẩy không một."
         },
         {
-          "text": "$f'$ đổi dấu: đỉnh hoặc đáy, gọi là cực trị.",
-          "speak": "Chỗ f phẩy đổi dấu là đỉnh hoặc đáy, gọi là... cực trị."
+          "text": "",
+          "speak": "Các con số cứ dồn dần về mười."
         }
       ]
     },
     {
       "id": "b09",
-      "section": "TRONG ĐỀ THI",
-      "keyword": "Cực trị cần đổi dấu",
-      "visual": "Phía trên: hệ trục nhãn 'x' và 'y', đồ thị $y=f'(x)=(x+1)(x-2)^2$, x từ −1,5 đến 3; y từ −6,5 đến 6 (đi qua (−1; 0), chạm trục tại (2; 0), cực đại tại (0; 4)); nhãn '$y=f'(x)$' ở vùng trống, kèm chú thích nhỏ ngay dưới 'đồ thị của đạo hàm, không phải của $f$'. Phía dưới: bảng biến thiên, cột x: −∞, −1, 2, +∞; hàng '$f'(x)$': −, 0, +, 0, +; hàng '$f(x)$': mũi tên xuống, 'CT', mũi tên lên, mũi tên lên. Dòng 1: vẽ dần đồ thị $f'$, khung bảng biến thiên hiện (chưa có dấu). Dòng 2: tô phần đồ thị dưới trục (x < −1) màu 'giảm' với nhãn '$f'<0$', phần trên trục màu 'tăng' với nhãn '$f'>0$'; đánh dấu điểm (−1; 0); hàng $f'$ điền '−, 0, +'. Dòng 3: đánh dấu điểm (2; 0) màu cảnh báo, nhãn 'chạm trục, không đổi dấu' đặt phía trên; hàng $f'$ điền tiếp '0, +'; biểu tượng đèn giao thông nhỏ cạnh điểm, đèn đỏ rồi xanh (hài). Dòng 4: hàng $f$ điền mũi tên và 'CT' tại x = −1; dòng kết luận 'chỉ 1 cực trị: cực tiểu tại $x=-1$'.",
+      "section": "BẢN CHẤT",
+      "keyword": "Giới hạn = vận tốc tức thời",
+      "visual": "Giữ bố cục b08 (đồ thị trái, kính lúp phải ×100). Dòng 1: trong ô, B và cát tuyến mờ đi, chỉ còn đoạn đồ thị quanh A: trông thẳng. Dòng 2: đường thẳng qua A độ dốc 10 (màu tiếp tuyến) hiện cả trên đồ thị gốc và trong ô (trùng đoạn đồ thị trong ô); nhãn 'tiếp tuyến' trên đồ thị gốc; dưới ô đổi thành 'độ dốc tiếp tuyến: 10 m/s'. Dòng 3: người chạy trên đường chạy về lại mét 25, vòng sáng quanh người chạy. Dòng 4: phân số $\\frac{0}{0}$ bị gạch đỏ của b02 hiện nhỏ ở vùng trống rồi tan đi.",
       "lines": [
         {
-          "text": "Đề cho đồ thị $y=f'(x)$, hỏi $f$ có mấy cực trị.",
-          "speak": "Đề hay cho đồ thị của f phẩy rồi hỏi f có mấy cực trị."
+          "text": "",
+          "speak": "Phóng thật to thì đoạn đồ thị quanh A trông gần như một đường thẳng."
         },
         {
-          "text": "Qua $x=-1$, $f'$ đổi từ âm sang dương: cực tiểu.",
-          "speak": "Qua x bằng âm một, f phẩy đổi từ âm sang dương nên f có cực tiểu tại đó."
+          "text": "",
+          "speak": "Đường thẳng ấy gọi là... tiếp tuyến tại A, độ dốc của nó đúng bằng mười."
         },
         {
-          "text": "Tại $x=2$: $f'$ chạm trục nhưng không đổi dấu.",
-          "speak": "Tại x bằng hai, f phẩy chạm trục nhưng không đổi dấu."
+          "text": "giới hạn: $v = 10$ m/s",
+          "speak": "Số mười mà vận tốc trung bình dồn về gọi là giới hạn, đó là vận tốc tức thời tại giây thứ năm."
         },
         {
-          "text": "Nên $x=2$ không là cực trị. $f$ có 1 cực trị.",
-          "speak": "Dừng lại... không phải quay đầu, nên x bằng hai không là cực trị và f chỉ có một cực trị."
+          "text": "",
+          "speak": "Cách này không hề chia cho không, chỉ xem các con số dồn về đâu."
         }
       ]
     },
     {
       "id": "b10",
-      "section": "GIẢI ĐÁP",
-      "keyword": "Đạo hàm: tốc độ lúc ấy",
-      "visual": "Dùng lại đúng hình đường chạy của b01 (cùng bố cục, vạch chia 10 m có số, nhãn 'quãng đường (m)'), người chạy đứng ở mét 65. Dòng 1: đoạn 60–70 m tô màu nhấn, nhãn sát đoạn '60 → 70 m: 0,81 s ≈ 44 km/h' như b01. Dòng 2: nhãn đổi thành 'vận tốc trung bình trên 10 m'. Dòng 3 (minh hoạ khái niệm, không kèm số vận tốc): đoạn tô co dần về điểm mét 65, nhãn độ dài đoạn đổi theo '10 m' → '1 m' → '0,1 m'; mũi tên chỉ điểm với nhãn 'một khoảnh khắc'. Dòng 4: tại điểm hiện nhãn 'vận tốc tức thời = $s'(t)$', ngay dưới là chú giải '$s$: quãng đường (m) · $t$: thời gian (s)'.",
+      "section": "ĐỊNH NGHĨA",
+      "keyword": "Đạo hàm: thay đổi tức thời",
+      "visual": "Kính lúp và đường chạy mờ đi (hết vai trò); đồ thị giữ ở nửa trái, có A và tiếp tuyến. Nửa phải: Dòng 1: bảng tương ứng 2 hàng 'thời gian $t$ (s) ↔ $x$', 'quãng đường $s$ (m) ↔ $f(x)$'; nhãn trục đổi $t \\to x$, $s \\to y$, nhãn đường cong đổi '$y = f(x) = x^2$'. Dòng 2: cạnh A hiện nhãn '$f(5) = 25$'. Dòng 3: bảng thêm hàng '$v$ tức thời tại $x_0$ ↔ $f'(x_0)$' + chú thích 'đạo hàm của $f$ tại $x_0$'. Dòng 4: dưới bảng hiện nhãn 'Định nghĩa đạo hàm' và công thức $f'(x_0)=\\lim\\limits_{x\\to x_0}\\dfrac{f(x)-f(x_0)}{x-x_0}$.",
       "lines": [
         {
-          "text": "Quay lại Bolt: 44 km/h đo trên đoạn 60–70 m, hết 0,81 s.",
-          "speak": "Quay lại với Bolt, con số bốn mươi bốn ki-lô-mét một giờ tính trên đoạn mười mét."
+          "text": "",
+          "speak": "Đổi sang ngôn ngữ hàm số, thời gian gọi là x, quãng đường gọi là f của x."
         },
         {
-          "text": "Nên 44 km/h vẫn là vận tốc trung bình.",
-          "speak": "Mười mét trong không phẩy tám mốt giây, nên nó... vẫn là vận tốc trung bình."
+          "text": "$f(5) = 25$: lúc 5 s, ở mét 25",
+          "speak": "Chẳng hạn f của năm bằng hai mươi lăm, nghĩa là lúc năm giây người chạy ở mét hai mươi lăm."
         },
         {
-          "text": "Tốc độ tại một khoảnh khắc: giới hạn khi khoảng co về 0.",
-          "speak": "Còn tốc độ tại một khoảnh khắc là giới hạn của vận tốc trung bình, khi khoảng thời gian co về không."
+          "text": "",
+          "speak": "Vận tốc tức thời tại một thời điểm gọi là đạo hàm của f tại điểm đó, kí hiệu f phẩy."
         },
         {
-          "text": "Đó là đạo hàm của quãng đường theo thời gian: $s'(t)$.",
-          "speak": "Đó là đạo hàm của quãng đường theo thời gian, tốc độ thay đổi ngay tại một thời điểm."
+          "text": "",
+          "speak": "Gom cả cách làm vừa rồi vào một dòng, được... định nghĩa đạo hàm."
+        }
+      ]
+    },
+    {
+      "id": "b11",
+      "section": "ĐỊNH NGHĨA",
+      "keyword": "Hai cột: $f(x_0)$ và $f(x)$",
+      "visual": "BƯỚC KHÓ — giải phẫu, từng ký hiệu đơn. Đồ thị trái (chỉ đường cong, tiếp tuyến ẩn), công thức phải; mỗi dòng một cụm sáng màu trên công thức và đúng một thứ trên đồ thị sáng cùng màu, phần còn lại mờ. Dòng 1: $x_0$ (màu x0) ↔ chấm trên trục ngang tại 5. Dòng 2: $f(x_0)$ (màu x0) ↔ CỘT DỌC thứ nhất từ trục lên đồ thị tại x = 5 (điểm A ở đỉnh), nhãn '$f(5) = 25$' bên trái chân cột. Dòng 3: $x$ (màu x) ↔ chấm trên trục ngang tại 6. Dòng 4: $f(x)$ (màu x) ↔ CỘT DỌC thứ hai tại x = 6 (điểm B ở đỉnh), nhãn '$f(6) = 36$' bên phải cột.",
+      "lines": [
+        {
+          "text": "$x_0 = 5$: thời điểm đang xét",
+          "speak": "Soi từng phần trên đồ thị, thời điểm đang xét là ích-không, ở đây bằng năm."
+        },
+        {
+          "text": "$f(x_0)$: cột thứ nhất",
+          "speak": "Độ cao của đồ thị tại đó là f của ích-không, tức hai mươi lăm mét đã chạy."
+        },
+        {
+          "text": "$x = 6$: thời điểm thứ hai",
+          "speak": "Còn x là một thời điểm khác, chẳng hạn sáu giây."
+        },
+        {
+          "text": "$f(x)$: cột thứ hai",
+          "speak": "Độ cao tại đó là f của x, tức ba mươi sáu mét, đây là cột thứ hai."
+        }
+      ]
+    },
+    {
+      "id": "b12",
+      "section": "ĐỊNH NGHĨA",
+      "keyword": "Tử: chạy thêm · Mẫu: trôi qua",
+      "visual": "Tiếp b11 (hai cột vẫn hiện, mờ nhẹ). Dòng 1: tử $f(x)-f(x_0)$ (màu tử) ↔ kẻ ngang đứt nét từ đỉnh cột thứ nhất (A) sang cột thứ hai; phần cột thứ hai nằm trên đường kẻ (từ 25 lên 36) sáng màu tử, nhãn '11'. Dòng 2: mẫu $x-x_0$ (màu mẫu) ↔ đoạn trên trục ngang giữa hai chân cột (5 → 6) sáng màu mẫu, nhãn '1' phía trên đoạn. Dòng 3: cả phân số (màu cát tuyến) ↔ cát tuyến qua A, B. Dòng 4: $\\lim$ (màu tiếp tuyến) ↔ cột thứ hai trượt về cột thứ nhất (x: 6 → 5), phần chênh và đoạn mẫu co lại, cát tuyến xoay thành tiếp tuyến.",
+      "lines": [
+        {
+          "text": "tử $= 36 - 25 = 11$ m",
+          "speak": "Tử số lấy cột cao trừ cột thấp, phần chênh ở đầu cột là quãng đường chạy thêm, mười một mét."
+        },
+        {
+          "text": "mẫu $= 6 - 5 = 1$ s",
+          "speak": "Mẫu số là khoảng cách giữa hai chân cột, tức thời gian trôi qua, một giây."
+        },
+        {
+          "text": "phân số: độ dốc cát tuyến",
+          "speak": "Chia hai số đó là độ dốc của cát tuyến, chính là vận tốc trung bình."
+        },
+        {
+          "text": "$\\lim$: cát tuyến → tiếp tuyến",
+          "speak": "Còn giới hạn là cho x trượt về điểm đang xét, cát tuyến xoay thành tiếp tuyến."
+        }
+      ]
+    },
+    {
+      "id": "b13",
+      "section": "CÔNG THỨC",
+      "keyword": "$f'(5) = 10$ m/s",
+      "visual": "Giữ bố cục b12 (tiếp tuyến tại A). Dòng 1: nhãn đường cong '$y = f(x) = x^2$' sáng lên (đang thay $f(x) = x^2$ vào); phép tính ở phụ đề. Dòng 2: cạnh tiếp tuyến hiện nhãn '10 m/s' màu tiếp tuyến.",
+      "lines": [
+        {
+          "text": "$\\dfrac{x^2-25}{x-5} = x+5$",
+          "speak": "Thay f của x bằng x bình phương, phân số rút gọn còn x cộng năm."
+        },
+        {
+          "text": "$x \\to 5$: $f'(5) = 5+5 = 10$",
+          "speak": "Cho x dồn về năm thì được mười, khớp đúng... mười mét một giây lúc nãy."
+        }
+      ]
+    },
+    {
+      "id": "b14",
+      "section": "TRONG ĐỀ THI",
+      "keyword": "Quay đầu là cực trị",
+      "visual": "CẢNH 3 — Phía trên: hệ trục, nhãn 'x' và 'y', x từ 0 đến 5,5 (vạch mỗi 1); y từ −7 đến 5 (vạch −6, −4, −2, 2, 4). Đồ thị $y=f'(x)=(x-1)(x-4)^2$ trên $[0{,}5;\\,5]$: đi qua (0,5; −6,125), cắt trục tại (1; 0), đỉnh (2; 4), chạm trục tại (4; 0), tới (5; 4). Nhãn '$y = f'(x)$' ở vùng trống bên trái phía trên, ngay dưới chú thích nhỏ 'vận tốc người chạy'. Phía dưới đồ thị: đường chạy nằm ngang (không số), người chạy mô hình cao ≥ 140px; vị trí người chạy = $f(x) = \\frac{x^4}{4} - 3x^3 + 12x^2 - 16x$ (scale chung: f(0,5) ≈ −5,36, f(1) = −6,75, f(2) = −4, f(4) = 0, f(5) = 1,25; khung đường chạy từ −7,5 đến 2). Một điểm quét màu nhấn chạy trên đồ thị $f'$ đồng bộ với người chạy. Dòng 1: đồ thị vẽ dần; đường chạy và người chạy hiện bên dưới, đứng ở f(0,5). Dòng 2: điểm quét chạy từ x = 0,5 tới gần 1; phần đồ thị dưới trục tô màu 'giảm', nhãn '$f'<0$' cạnh phần đó; người chạy quay mặt sang trái, lùi chậm dần. Dòng 3: tại x = 1 người chạy dừng hẳn rồi lật hình quay mặt sang phải; điểm (1; 0) sáng màu nhấn, nhãn 'cực tiểu' phía dưới điểm (không đè số trục).",
+      "lines": [
+        {
+          "text": "Cho đồ thị $f'$ · $f$ có mấy cực trị?",
+          "speak": "Đề hay cho đồ thị f phẩy rồi hỏi f có mấy cực trị, mà f phẩy chính là vận tốc người chạy."
+        },
+        {
+          "text": "$f' < 0$: lùi lại, $f$ giảm",
+          "speak": "Lúc đầu vận tốc âm, người chạy lùi lại, tức f đang giảm."
+        },
+        {
+          "text": "$x = 1$: quay đầu → cực tiểu",
+          "speak": "Đến x bằng một thì người chạy dừng rồi quay đầu, đó là... cực trị."
+        }
+      ]
+    },
+    {
+      "id": "b15",
+      "section": "BẪY THƯỜNG GẶP",
+      "keyword": "Dừng chưa chắc là cực trị",
+      "visual": "Giữ CẢNH 3. Dòng 1: điểm quét chạy từ x = 1 tới gần 4; phần đồ thị trên trục tô màu 'tăng', nhãn '$f'>0$'; người chạy tiến sang phải, nhanh nhất khi điểm quét qua đỉnh (2; 4), chậm dần sau đó. Dòng 2: tại x = 4 người chạy dừng, cúi buộc dây giày (hài), KHÔNG lật hình, rồi chạy tiếp sang phải tới f(5); điểm (4; 0) sáng màu cảnh báo, nhãn 'chạm trục, không đổi dấu' đặt phía trên điểm, xa đường cong. Dòng 3: hình đứng yên; dưới đồ thị hiện kết luận 'chỉ 1 cực trị: cực tiểu tại $x = 1$'.",
+      "lines": [
+        {
+          "text": "$f' > 0$: tiến lên, $f$ tăng",
+          "speak": "Sau đó vận tốc dương, người chạy tiến lên, nhanh nhất ở đỉnh đồ thị."
+        },
+        {
+          "text": "$x = 4$: dừng, không quay đầu",
+          "speak": "Đến x bằng bốn, người chạy dừng lại buộc dây giày rồi chạy tiếp, không hề quay đầu."
+        },
+        {
+          "text": "",
+          "speak": "Nên x bằng bốn không phải cực trị, và f chỉ có... một cực trị."
+        }
+      ]
+    },
+    {
+      "id": "b16",
+      "section": "GIẢI ĐÁP",
+      "keyword": "Tốc độ tức thời $= s'(t)$",
+      "visual": "Quay lại đúng CẢNH 1 (cùng component, bố cục): đường chạy 100 m nằm ngang, vạch chia 10 m có số, nhãn 'quãng đường (m)', Bolt. Dòng 1: biểu tượng máy laser nhỏ (≥ 100px) trên chân máy phía sau vạch xuất phát, nhãn 'laser'; Bolt chạy lại từ 0 tới mét 52, sau lưng để lại dãy chấm vị trí dày đặc màu 2 (mô phỏng 100 lần đo mỗi giây). Dòng 2: kính lúp quanh mét 52: ô phóng to cạnh trên thấy hai chấm liên tiếp, giữa hai chấm có ngoặc nhãn '0,01 s'. Dòng 3: kính lúp mờ đi; Bolt đứng hình ở mét 52; số lớn màu nhấn phía trên Bolt '12,32 m/s ≈ 44,4 km/h', nhãn nhỏ ngay dưới 'tốc độ lớn nhất'. Dòng 4: hình đứng yên hoàn toàn, chỉ câu chốt hiện; giữ nguyên tới hết TAIL.",
+      "lines": [
+        {
+          "text": "laser: đo 100 lần/giây",
+          "speak": "Quay lại với Bolt, máy laser đặt sau vạch xuất phát đo vị trí của anh một trăm lần mỗi giây."
+        },
+        {
+          "text": "khoảng 0,01 s ≈ tức thời",
+          "speak": "Mỗi khoảng chỉ không phẩy không một giây, nên vận tốc trung bình trên đó rất sát vận tốc tức thời."
+        },
+        {
+          "text": "",
+          "speak": "Lúc nhanh nhất ở quanh mét thứ năm mươi hai, Bolt đạt bốn mươi bốn phẩy bốn ki-lô-mét một giờ."
+        },
+        {
+          "text": "",
+          "speak": "Vậy... tốc độ tại một khoảnh khắc chính là đạo hàm của quãng đường theo thời gian."
         }
       ]
     }

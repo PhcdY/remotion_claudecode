@@ -52,8 +52,8 @@ export const ZoomInset: React.FC<{
 
   const xs = niceStep(2 * hx);
   const ys = niceStep(2 * hy);
-  const xTicks = ticksIn(s.xMin, s.xMax, xs).filter((v) => s.x(v) > 60 && s.x(v) < width - 30);
-  const yTicks = ticksIn(s.yMin, s.yMax, ys).filter((v) => s.y(v) > 30 && s.y(v) < height - 50);
+  const xTicks = ticksIn(s.xMin, s.xMax, xs).filter((v) => s.x(v) > 140 && s.x(v) < width - 30);
+  const yTicks = ticksIn(s.yMin, s.yMax, ys).filter((v) => s.y(v) > 30 && s.y(v) < height - 64);
   const tickStyle: React.CSSProperties = {
     position: "absolute",
     fontFamily: fontText,

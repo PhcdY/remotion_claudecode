@@ -42,6 +42,14 @@ const measure = () => {
   const issues: string[] = [];
   items.forEach((a) => {
     if (a.r.left < 0 || a.r.right > layout.width || a.r.top < 0) issues.push(`tràn khung — ${a.label}`);
+    // chữ phải nằm gọn trong khung chứa (thẻ, ô bảng) gắn data-box
+    const box = a.el.closest("[data-box]");
+    if (box && a.kind === "text") {
+      const b = box.getBoundingClientRect();
+      if (a.r.left < b.left - 1 || a.r.right > b.right + 1 || a.r.top < b.top - 1 || a.r.bottom > b.bottom + 1) {
+        issues.push(`tràn khỏi khung chứa — ${a.label}`);
+      }
+    }
     if (a.zone !== "subtitle" && a.r.bottom > layout.subtitleTop - 20) issues.push(`lấn vùng phụ đề — ${a.label}`);
   });
   for (let i = 0; i < items.length; i++) {

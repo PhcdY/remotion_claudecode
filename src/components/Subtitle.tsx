@@ -15,6 +15,7 @@ export const Subtitle: React.FC<{ lines: SubtitleLine[] }> = ({ lines }) => {
   if (current < 0) return null;
 
   const cur = lines[current];
+  if (!cur.text.trim()) return null; // dòng để trống: hình đã nói đủ
   const appear = interpolate(frame - cur.startFrame, [0, 8], [0, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",

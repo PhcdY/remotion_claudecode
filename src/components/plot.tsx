@@ -128,7 +128,9 @@ export const Axes: React.FC<{
   /** số vạch chia không ghi nhãn (vd. bị điểm đánh dấu che) */
   hideXLabels?: number[];
   hideYLabels?: number[];
-}> = ({ scale: s, xTicks = [], yTicks = [], xLabel = "x", yLabel = "y", grid = true, opacity = 1, hideXLabels = [], hideYLabels = [] }) => {
+  /** phía ghi số của trục dọc (mặc định bên trái trục) */
+  yTickSide?: "left" | "right";
+}> = ({ scale: s, xTicks = [], yTicks = [], xLabel = "x", yLabel = "y", grid = true, opacity = 1, hideXLabels = [], hideYLabels = [], yTickSide = "left" }) => {
   const ox = s.x(Math.min(Math.max(0, s.xMin), s.xMax));
   const oy = s.y(Math.min(Math.max(0, s.yMin), s.yMax));
   const tickFont = {
@@ -173,7 +175,13 @@ export const Axes: React.FC<{
           <g key={`ty${t}`}>
             <line x1={ox - 7} x2={ox + 7} y1={s.y(t)} y2={s.y(t)} stroke={colors.axis} strokeWidth={3} />
             {hideYLabels.indexOf(t) >= 0 ? null : (
-              <text data-text="tick" x={ox - 16} y={s.y(t) + 10} textAnchor="end" {...tickFont}>
+              <text
+                data-text="tick"
+                x={yTickSide === "left" ? ox - 16 : ox + 16}
+                y={s.y(t) + 10}
+                textAnchor={yTickSide === "left" ? "end" : "start"}
+                {...tickFont}
+              >
                 {fmt(t)}
               </text>
             )}
