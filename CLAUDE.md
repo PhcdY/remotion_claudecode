@@ -1,6 +1,6 @@
 # Video AI — video giải thích bản chất toán (Remotion)
 
-Video 2:30–3:00 (ưu tiên dễ hiểu, thiếu thời gian thì cắt ý), mở bằng một hiện tượng thật và kết bằng lời giải cho nó, **ngang 16:9 (1920×1080, 30fps)**, giọng đọc tiếng Việt, giải thích *vì sao* chứ không chỉ *cái gì*.
+Video 2:30–4:00 (ưu tiên số một là dễ hiểu, không nhảy bước: bước khó được thêm thời gian, thiếu nữa thì cắt ý phụ), mở bằng một hiện tượng thật và kết bằng lời giải cho nó, **ngang 16:9 (1920×1080, 30fps)**, giọng đọc tiếng Việt, giải thích *vì sao* chứ không chỉ *cái gì*.
 Dùng skill `remotion-best-practices` (đã cài trong `.agents/skills/`) cho mọi việc liên quan Remotion.
 
 ## Workflow (theo đúng thứ tự)
@@ -32,7 +32,7 @@ B1 `viet-kich-ban` → B2 `tao-audio` → B3 `dung-video`.
       "keyword": "Nhưng TẠI SAO?",      // câu chốt của beat, hiện lúc đọc dòng cuối, được dùng $...$
       "visual": "mô tả hình cho beat",  // Claude dựng hình theo mô tả này
       "lines": [
-        { "text": "chữ trên màn hình, LaTeX trong $...$; số kèm tên đại lượng + đơn vị", "speak": "lời đọc, viết toán bằng chữ; '...' trước chỗ cần nhấn" }
+        { "text": "ghi chú ngắn (≤ ~35 ký tự), ký hiệu/số + đơn vị, LaTeX trong $...$; không chép lời đọc; được để \"\"", "speak": "lời đọc, viết toán bằng chữ; ký hiệu có chỉ số đọc liền ('ích-không'); '...' trước chỗ cần nhấn" }
       ]
     }
   ]
@@ -51,6 +51,8 @@ B1 `viet-kich-ban` → B2 `tao-audio` → B3 `dung-video`.
 - Component dùng lại đặt ở `src/components/` (SectionCard, KeyTakeaway, Subtitle, MathText, Axes, FunctionPlot, TangentLine, ZoomInset…).
   Ưu tiên dùng lại, chỉ tạo mới khi thật cần.
 - Đồ thị vẽ bằng SVG, toạ độ toán → pixel qua một hàm scale chung, không hardcode pixel.
+- Một ví dụ xuyên suốt cả video; ít chữ trên hình; mỗi dòng tối đa một thay đổi trên hình và số đổi thì hình đổi theo (chi tiết: skill `viet-kich-ban` yêu cầu 8, 11–13; skill `dung-video` quy tắc 6, 8–10).
+- Không nhảy bước: ký hiệu/khái niệm nào cũng được giải thích riêng (nghĩa + chỗ trên hình) trước khi đem ghép; không dùng phép biến hình lạ mắt để chuyển cảnh.
 - Mọi animation dựa trên `useCurrentFrame()` + `interpolate`/`spring`. Không dùng CSS transition hay `setTimeout`.
 - Không sửa file trong `public/audio/` bằng tay — tạo lại theo skill `tao-audio`.
 

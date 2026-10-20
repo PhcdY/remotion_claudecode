@@ -30,11 +30,12 @@ Vivibe không có thẻ chỉnh tông; tông giọng đến từ mẫu clone, nh
 1. **Kiểm tra + báo chi phí:** `python scripts/vivibe_tts.py src/videos/<slug>/script.json --voice "<giọng>" --estimate`.
    Script duyệt cả kịch bản trước: dòng thiếu `speak` hay `speak` còn ký hiệu toán → dừng, báo người dùng sửa ở B1 (**không tự viết `speak`**).
    Hợp lệ thì in số dòng cần tạo và số ký tự (1 ký tự ≈ 1 credit). Báo người dùng con số này, chờ đồng ý.
-2. **Nghe thử beat đầu:** `... --voice "<giọng>" --only b01`. Người dùng nghe ổn mới tạo phần còn lại. Ngắt sai → quay lại B1 sửa `speak`.
+2. **Nghe thử beat đầu + các dòng đọc ký hiệu:** `... --voice "<giọng>" --only b01`, và thêm `--only <beatId>-lNN` cho mỗi dòng có đọc ký hiệu toán (chỉ số "ích-không", "f phẩy", phân số, khoảng…) — B1 liệt kê các dòng này. Người dùng nghe ổn mới tạo phần còn lại. Ngắt sai hoặc đọc tách ký hiệu → quay lại B1 sửa `speak`.
+   Đã nghe thử (20/10/2026, giọng nam - c Bình): "x không" ($x_0$) bị đọc tách "x" … "không"; viết "ích-không" thì liền, **nhưng** "không" dính sang động từ phía sau ("ích-không ứng với" nghe thành "không ứng") → B1 phải đặt cụm có "không" ở cuối vế (quy tắc ở `viet-kich-ban`). Nghe lại sau khi đảo câu ("Tại ích-không, đạo hàm bằng mười.") → **đúng**, người dùng xác nhận. Khi nghe thử, vẫn để ý riêng chỗ này.
 3. **Tạo cả bài:** cùng `--voice`, không có `--only`. Dòng nào đã có file khớp (cùng giọng, tốc độ, `speak`) thì bỏ qua.
 4. Lỗi một dòng: đọc thông báo, báo người dùng. **Không chạy lại ngay để thử** — mỗi lần gửi là một lần trừ credit. Người dùng đồng ý thì `--only <beatId>-lNN`.
 5. Báo cáo: số dòng đã tạo / lỗi, số ký tự đã gửi, tổng thời lượng audio (đo bằng `ffprobe` đi kèm Remotion, `node_modules/@remotion/compositor-win32-x64-msvc/ffprobe.exe`).
-   Ước lượng thời lượng video = tổng audio + khoảng nghỉ của B3 (≈ 0,25s mỗi dòng, 0,6s mỗi beat, ~5s intro/outro). Ngoài khung 2:30 – 3:00 → báo người dùng trước khi sang B3; sửa bằng cách quay lại B1, không đổi `speed` để bù.
+   Ước lượng thời lượng video = tổng audio + khoảng nghỉ của B3 (≈ 0,25s mỗi dòng, 0,6s mỗi beat, ~5s intro/outro). Ngoài khung 2:30 – 4:00 → báo người dùng trước khi sang B3; sửa bằng cách quay lại B1, không đổi `speed` để bù.
 
 ## Quy ước file
 

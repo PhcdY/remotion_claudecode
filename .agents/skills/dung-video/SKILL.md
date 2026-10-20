@@ -46,12 +46,14 @@ Mỗi beat là một `<Sequence>` từ `startFrame` đến `endFrame`, gồm 4 l
 | `section` | **không hiện thường trực.** Chỉ `TRONG ĐỀ THI`, `BẪY THƯỜNG GẶP` và `GIẢI ĐÁP` (có nghĩa với người xem) hiện thành thẻ mở beat: chữ to giữa vùng hình, ~1,2s, rồi biến mất trước khi hình chính vào. Các nhãn khác chỉ dùng nội bộ. | đầu beat |
 | `visual` | vùng hình chính (chiếm phần lớn khung) | đầu beat, diễn biến theo mô tả |
 | `keyword` | **câu chốt của beat**, không phải tag ở góc. Chữ to, đặt trong vùng hình cạnh trọng tâm (không che hình), giữ tới hết beat | lúc ý của beat vừa rõ, mặc định = `startFrame` dòng cuối |
-| `lines[i].text` | dòng phụ đề | đúng `startFrame` của dòng i; **chỉ hiện dòng đang đọc**, dòng trước biến mất (không giữ bản mờ) |
+| `lines[i].text` | dòng ghi chú ngắn (không phải bản chép lời đọc); `""` → không hiện gì | đúng `startFrame` của dòng i; **chỉ hiện dòng đang đọc**, dòng trước biến mất (không giữ bản mờ) |
 | audio dòng i | `<Audio>` | đúng `startFrame` của dòng i |
 
 - `text` / `keyword`: tách theo `$...$` → đoạn thường render chữ, đoạn trong `$` render KaTeX inline. Dòng chỉ có công thức → KaTeX display, cỡ lớn hơn.
 - `visual`: dựng đúng mô tả. Cụm "khi đọc dòng N" → animation bắt đầu ở `startFrame` dòng N. Mô tả mơ hồ → chọn cách đơn giản nhất và ghi giả định vào báo cáo.
+- `visual` vi phạm quy tắc 8–10 dưới đây: nhãn dài → tự rút gọn theo quy tắc 8 và ghi vào báo cáo; còn nhiều thay đổi dồn vào một dòng, số đổi mà hình không có gì đổi theo, nhân vật không có vai trò → **báo người dùng để sửa ở B1** (vì phải chia lại dòng/lời đọc), không tự dựng cho đủ.
 - Beat `GIẢI ĐÁP` dùng lại đúng hình của beat `HIỆN TƯỢNG` (cùng component, cùng bố cục) rồi thêm lớp giải thích lên trên, để người xem nhận ra ngay "đây là câu hỏi lúc đầu".
+- **Kết có cảm giác kết**: đáp án cụ thể của câu hỏi mở đầu (con số) hiện to, rõ ở trọng tâm hình. Trong dòng cuối, hình **đứng yên** (không chuyển động mới), chỉ câu kết luận/`keyword` hiện lên; giữ nguyên khung đó hết `TAIL` rồi mới sang `BrandOutro`. Không cắt sang outro khi hình còn đang chạy.
 - Màu ghi theo vai trò ("màu nhấn", "màu cảnh báo") → lấy từ `style.md`.
 
 ## Quy tắc bố cục (bắt buộc, khung 1920×1080)
@@ -97,13 +99,15 @@ Lề trái/phải tối thiểu 90px. Không thành phần nào của hình đư
 
 Thiếu chỗ thì bớt chữ hoặc bớt thành phần, không thu nhỏ chữ dưới mức này.
 
+Vật minh hoạ cũng có cỡ tối thiểu: vật chính (người chạy, quả bóng…) cao ≥ 140px, vật phụ (xe đạp, biểu tượng) ≥ 100px, đủ để nhận ra trong một cái liếc. Không đủ chỗ cho cỡ đó → bỏ vật phụ, không vẽ bé.
+
 **5. Mỗi thành phần phải có nghĩa với người xem.**
 - Trước khi đặt bất kỳ thứ gì lên màn hình, trả lời: *người xem cần nó để hiểu điều gì?* Không trả lời được → bỏ.
 - Không có thẻ/tag trang trí, không thẻ thông số đứng riêng một góc. Chỉ số phụ (mức phóng to, giá trị đang chạy…) chỉ dùng khi nó **gắn ngay cạnh** thứ nó mô tả (vd. "×10" sát ô kính lúp, "4,01 m/s" sát cát tuyến), và chỉ khi lời đọc đang nói tới nó.
 
 **6. Biến đổi phải có mốc tham chiếu.**
 Người xem phải nhận ra *cái gì đang thay đổi*. Nếu khung nhìn đổi mà không có mốc, hình sẽ trông như bị biến dạng.
-- **Phóng to (zoom)** dựng theo kiểu **kính lúp**:
+- **Phóng to (zoom)** dựng theo kiểu **kính lúp** (dùng nó mỗi khi giải thích tiếp tuyến, giới hạn, "rất gần"):
   - hình gốc giữ nguyên, đường cong vẫn cong rõ;
   - trên hình gốc có một khung nhỏ đánh dấu vùng đang soi, khung này **co dần** quanh điểm;
   - một ô phóng to lớn (kích thước cố định) nối với khung bằng hai đường dẫn, hiện nội dung bên trong khung;
@@ -115,12 +119,32 @@ Người xem phải nhận ra *cái gì đang thay đổi*. Nếu khung nhìn đ
 **7. Mọi thứ trên màn hình đều có chú thích.**
 Phép thử: **tắt tiếng, chỉ nhìn khung hình**, người xem vẫn biết từng con số, ký hiệu, hình là gì. Không biết → thiếu chú thích.
 - Trục, thước đo: tên đại lượng + đơn vị ở đầu trục ("quãng đường $s$ (m)", "thời gian $t$ (s)"), không chỉ "m" hay "s".
-- Con số hiện trên hình (nhãn, ô bảng, giá trị đang chạy): có tên đại lượng + đơn vị ngay cạnh hoặc ở tiêu đề cột ("Vận tốc trung bình (m/s)", không chỉ "Trung bình").
-- Công thức xuất hiện lần đầu: kèm chú giải ký hiệu ngay dưới/cạnh ("$s$: quãng đường · $t$: thời gian"), giữ tới hết beat.
+- Con số hiện trên hình (nhãn, ô bảng, giá trị đang chạy): **luôn có đơn vị**; tên đại lượng ở tiêu đề cột ("Vận tốc trung bình (m/s)", không chỉ "Trung bình") hoặc bằng ký hiệu đã chú giải ($v$, $\Delta t$), **không viết lại cả cụm tên ở mỗi nhãn** (quy tắc 8).
+- Công thức xuất hiện lần đầu: ký hiệu được chú giải bằng cụm đọc lên có nghĩa (tên trục "quãng đường $s$ (m)", hoặc "$s$ là quãng đường"). Không dùng chú giải viết tắt kiểu "$s$: m · $t$: s".
 - Đoạn tô màu, mũi tên, vạch nhấn: có nhãn nói nó biểu diễn gì ("rơi thêm 15 m trong 1 s"). Màu dùng lại ở beat sau với cùng nghĩa thì giữ cùng màu.
 - Điểm, vật minh hoạ (quả bóng ở các thời điểm): mỗi cái cần thiết có nhãn; vật trùng hoặc quá gần nhau thì bỏ bớt hoặc dàn ra, không xếp chồng — mọi vật này cũng gắn `data-mark` để `check-layout` bắt được chồng lấn.
 - Chú thích tuân theo quy tắc 1 (không đè, có halo) và quy tắc 4 (cỡ chữ tối thiểu). Thiếu chỗ → bớt thành phần, không bỏ chú thích.
 - `visual` trong kịch bản thiếu chú thích cho một thành phần → vẫn thêm chú thích theo đúng toán, ghi vào báo cáo; thấy cần đổi `text` thì báo người dùng (không tự sửa kịch bản).
+
+**8. Ít chữ trên hình.** Người xem nhìn hình, không phải đọc.
+- Nhãn ≤ ~5 từ, ưu tiên ký hiệu/số + đơn vị/mũi tên: "0,81 s · 44 km/h", không phải "đoạn 60 → 70 m: 0,81 s · tốc độ ≈ 44 km/h".
+- **Không lặp thứ đã nhìn thấy**: vạch chia đã ghi 60, 70 thì nhãn đoạn tô không ghi lại "60 → 70 m"; phụ đề đã ghi số thì nhãn trên hình không ghi lại số đó (và ngược lại). Một thông tin — một chỗ.
+- **Gỡ thông tin hết vai trò**: badge/nhãn lời đọc không còn nói tới (vd. "vận tốc trung bình cả bài" khi đã sang đoạn 60–70 m) mờ đi trong ~0,5 s. Chỉ giữ thứ đang nói tới và mốc tham chiếu cần thiết.
+- **Chữ nằm gọn trong khung chứa** của nó (thẻ, ô bảng, khung hình bên trái…), không tràn ra ngoài viền. Nhãn dài hơn khung → rút chữ hoặc đặt nhãn ra ngoài khung hẳn, có đường dẫn.
+- Đếm nhanh mỗi frame: ngoài phụ đề và câu chốt, chữ mới xuất hiện trong dòng đang đọc ≤ ~8 từ.
+
+**9. Nhịp hình: một thay đổi mỗi lần, và thay đổi là lời giải thích.**
+- Mỗi dòng **tối đa một thay đổi chính** trên hình. Thay đổi vào trong 0,5–1 s đầu dòng rồi **đứng yên** để người xem nhìn; không xếp nhiều điểm/hàng/nhãn hiện nối nhau trong một dòng.
+- **Số đổi ⇔ hình đổi, cùng lúc**: bảng nhảy sang hàng mới thì vạch/đoạn tô tương ứng trên hình co lại (hoặc giãn ra) đúng lúc đó, nhãn số đi theo vạch; con số mới phải trông như *sinh ra* từ chuyển động trên hình (đoạn co lại → giá trị chạy tới số mới), không tự hiện ở một chỗ khác.
+- Không mở một hình biểu diễn mới (trục số, bảng, đồ thị khác) khi hình đang có biểu diễn được điều đó. Cần hình mới thì nối với hình cũ bằng bước người xem tự hiểu (lấy số từ hình cũ → bảng nhỏ → chấm từng điểm → nối đồ thị), hình cũ vẫn thấy trong lúc nối.
+- **Không dùng phép biến hình lạ mắt** (xoay đường chạy thành trục, nhân vật nằm ngang, gập/cuộn hình). Đã thử 20/10/2026: người xem không hiểu. Trục, đồ thị, nhân vật luôn ở tư thế quen thuộc.
+
+**10. Nhân vật do toán điều khiển; công thức chỉ lên hình.**
+- Nhân vật/vật minh hoạ chỉ có mặt khi biểu diễn một đại lượng: vị trí = $f(x)$ (qua hàm scale chung), tốc độ chuyển động tỉ lệ với $f'(x)$, $f' = 0$ → đứng yên, $f'$ đổi dấu → quay đầu (lật hình). Nhãn nói rõ nó là gì ("người chạy: vị trí = $f(x)$"). Không có nhân vật đứng trên đồ thị cho vui.
+- Đồ thị $f'$ (dạng bài đề thi) đi kèm đường chạy bên dưới, người chạy di chuyển theo $f'$ khi điểm quét chạy trên đồ thị: chạy nhanh nhất ở đỉnh $f'$, chậm dần về 0, dừng rồi quay đầu khi $f'$ đổi dấu, dừng mà không quay đầu khi $f'$ chạm trục không đổi dấu.
+- **Giải phẫu công thức**: khi lời đọc giải thích một cụm trong công thức, cụm đó trên công thức và thứ tương ứng trên hình **cùng sáng lên một màu**, các phần khác mờ đi. Công thức và hình phải cùng nằm trên màn hình lúc đó (công thức thu nhỏ ở cạnh, không thay hẳn hình).
+- **Dựng phép tính từ thành phần, không nhảy bước**: hiệu $f(x)-f(x_0)$ chỉ hiện sau khi hai **cột dọc** $f(x_0)$ và $f(x)$ (từ trục ngang lên đồ thị, có số) đã hiện và được nói riêng; khi tới phép trừ, kẻ ngang từ đỉnh cột thấp sang cột cao, phần chênh sáng lên. Tương tự $x - x_0$ là khoảng giữa hai chân cột. Không vẽ một đoạn ngắn lơ lửng mà người xem không biết nó từ đâu ra.
+- **Khái niệm hình học mới hiện riêng trước khi dùng**: cát tuyến (đường qua hai điểm của đồ thị, hai điểm sáng lên trước), độ dốc (tam giác ngang–dọc có số), tiếp tuyến dạy bằng **kính lúp** (quy tắc 6): phóng to quanh điểm tới khi đồ thị trông thẳng, đường thẳng đó là tiếp tuyến.
 
 ## Bước 3 — Cấu trúc code
 
@@ -144,10 +168,10 @@ src/Root.tsx             đăng ký <Composition id="<slug>" ...> 1920×1080, 30
 - `npm run lint` sạch.
 - Xuất ảnh tĩnh bằng `node scripts/stills.mjs <slug> <frame...>` (bundle một lần).
 - Xuất ảnh tĩnh **cho từng dòng** (frame ngay trước khi dòng kết thúc, lúc mọi thành phần của dòng đó đã hiện đủ), không chỉ giữa beat. Nhiều frame thì bundle một lần rồi gọi `renderStill` lặp lại, thay vì gọi `npx remotion still` từng frame.
-- **Kiểm chồng lấn bằng code trước, mắt sau.** Mọi khối chữ trên hình (nhãn, chú thích, số trục, câu chốt) gắn `data-text`, mọi điểm đánh dấu gắn `data-mark`. Chạy `node scripts/check-layout.mjs <slug>`: script mở từng frame kiểm tra, lấy khung bao (`getBoundingClientRect`) của các phần tử đó và báo mọi cặp chồng nhau hoặc cách nhau < 16px, kèm frame và nội dung chữ. Danh sách phải rỗng mới sang bước soát bằng mắt.
-- Soát từng ảnh theo **Quy tắc bố cục**: (1) có gì chồng lấn hay dính sát không; (2) kim/đường có đè lên chữ không; (3) cụm hình có cân không, có nửa khung trống không; (4) có chữ nào dưới cỡ tối thiểu không; (5) có gì lấn vùng phụ đề không; (6) có thành phần nào người xem không cần không; (7) phóng to hay dịch khung có mốc tham chiếu không; (8) **phép thử tắt tiếng**: mỗi con số, ký hiệu, màu, vật trên ảnh có chú thích nói nó là gì không. Sửa hết rồi xuất lại để kiểm.
+- **Kiểm chồng lấn bằng code trước, mắt sau.** Mọi khối chữ trên hình (nhãn, chú thích, số trục, câu chốt) gắn `data-text`, mọi điểm đánh dấu gắn `data-mark`. Chạy `node scripts/check-layout.mjs <slug>`: script mở từng frame kiểm tra, lấy khung bao (`getBoundingClientRect`) của các phần tử đó và báo mọi cặp chồng nhau hoặc cách nhau < 16px, kèm frame và nội dung chữ; khung chứa (thẻ, ô bảng) gắn `data-box`, script báo mọi `data-text` nằm trong `data-box` mà tràn ra ngoài viền. Danh sách phải rỗng mới sang bước soát bằng mắt.
+- Soát từng ảnh theo **Quy tắc bố cục**: (1) có gì chồng lấn hay dính sát không; (2) kim/đường có đè lên chữ không; (3) cụm hình có cân không, có nửa khung trống không; (4) có chữ nào dưới cỡ tối thiểu không; (5) có gì lấn vùng phụ đề không; (6) có thành phần nào người xem không cần không; (7) phóng to hay dịch khung có mốc tham chiếu không; (8) **phép thử tắt tiếng**: mỗi con số, ký hiệu, màu, vật trên ảnh có chú thích nói nó là gì không; (9) **ít chữ**: nhãn nào dài quá ~5 từ, lặp phụ đề hoặc lặp số trên trục, chữ nào tràn khỏi khung chứa, thông tin nào đã hết vai trò mà còn; (10) **nhịp**: so ảnh giữa dòng với ảnh cuối dòng — có quá một thay đổi không, số đổi mà hình có đổi theo không; vật minh hoạ đủ lớn chưa; (11) nhân vật có chuyển động đúng theo hàm không, cụm công thức đang giải thích có sáng cùng màu với thứ trên hình không. Sửa hết rồi xuất lại để kiểm.
 - **Soát toán trên hình**: điểm nằm đúng trên đồ thị, hệ số góc, nghiệm, nhãn trục. Sai toán là lỗi nghiêm trọng nhất.
-- **Thời lượng**: tổng phải nằm trong 2:30 – 3:00. Lệch → báo người dùng, đề xuất quay lại B1 (không kéo giãn khoảng nghỉ để bù).
+- **Thời lượng**: tổng phải nằm trong 2:30 – 4:00. Lệch → báo người dùng, đề xuất quay lại B1 (không kéo giãn khoảng nghỉ để bù).
 - Báo cáo: tổng thời lượng, các giả định khi dựng visual, chú thích đã tự thêm, chỗ cần người dùng xem.
 
 ## Bước 5 — Render (khi người dùng duyệt trong Studio)
