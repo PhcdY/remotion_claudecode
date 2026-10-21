@@ -22,7 +22,8 @@ Vivibe không có thẻ chỉnh tông; tông giọng đến từ mẫu clone, nh
 
 1. API key: người dùng tự tạo ở vivibe.app/docs/api-keys và tự thêm `VIVIBE_API_KEY=...` vào `.env` ở gốc project (đã gitignore). **Không** hỏi, đọc, in hay ghi key ở bất kỳ đâu khác. Thiếu key thì script báo, nhắc người dùng.
 2. **Giọng không cố định — hỏi người dùng mỗi lần chạy B2.** Chạy `python scripts/vivibe_tts.py --list-voices`, đưa danh sách tên giọng cho người dùng chọn. Không tự chọn, không lấy lại giọng của lần trước khi chưa hỏi. Giọng đã chọn truyền vào mọi lệnh của lần chạy đó bằng `--voice "<tên hoặc id>"`.
-3. `speed` trong `scripts/tts_config.json` (0.5–2.0, mặc định 1.0). Chỉ đổi khi người dùng nghe xong thấy nhanh/chậm.
+3. `speed` trong `scripts/tts_config.json` (0.5–2.0, mặc định 1.0) là tốc độ chung. Chỉ đổi khi người dùng nghe xong thấy cả bài nhanh/chậm.
+   Beat có trường `"speed"` trong `script.json` (do B1 đặt, vd. 0.85 cho đoạn giải thích "vì sao") thì đọc theo tốc độ đó; cache tính theo tốc độ của từng dòng nên chỉ beat đó phải tạo lại. Không tự thêm `speed` ở B2: người dùng thấy một đoạn nhanh quá → chỉnh `speed` của beat đó ở B1, không đổi tốc độ cả bài.
 4. Đổi giọng hay `speed` làm cache mất hiệu lực → cả bài tạo lại (báo người dùng số ký tự trước). Cả bài một video phải cùng một giọng.
 
 ## Các bước
@@ -31,8 +32,10 @@ Vivibe không có thẻ chỉnh tông; tông giọng đến từ mẫu clone, nh
    Script duyệt cả kịch bản trước: dòng thiếu `speak` hay `speak` còn ký hiệu toán → dừng, báo người dùng sửa ở B1 (**không tự viết `speak`**).
    Hợp lệ thì in số dòng cần tạo và số ký tự (1 ký tự ≈ 1 credit). Báo người dùng con số này, chờ đồng ý.
 2. **Nghe thử beat đầu + các dòng đọc ký hiệu:** `... --voice "<giọng>" --only b01`, và thêm `--only <beatId>-lNN` cho mỗi dòng có đọc ký hiệu toán (chỉ số "ích-không", "f phẩy", phân số, khoảng…) — B1 liệt kê các dòng này. Người dùng nghe ổn mới tạo phần còn lại. Ngắt sai hoặc đọc tách ký hiệu → quay lại B1 sửa `speak`.
+   **Không bỏ bước này, kể cả khi người dùng bảo làm liền tới lúc xem thử.** Tạo b01 + các dòng ký hiệu, gửi file cho người dùng nghe (SendUserFile) rồi mới tạo cả bài; có thể dựng hình B3 song song trong lúc chờ. Đã gặp (22/10/2026, giọng nữ - c Nhi, video đơn điệu): bỏ nghe thử, tạo thẳng 58 dòng → nhiều dòng bị trùng, ríu; "h" đọc thành "hắc", "h của hai" dính; "x" nghe không hay → phải tạo lại. Đo tốc độ đọc (ký tự/giây) không bắt được lỗi trùng/ríu, chỉ tai người mới bắt được.
    Đã nghe thử (20/10/2026, giọng nam - c Bình): "x không" ($x_0$) bị đọc tách "x" … "không"; viết "ích-không" thì liền, **nhưng** "không" dính sang động từ phía sau ("ích-không ứng với" nghe thành "không ứng") → B1 phải đặt cụm có "không" ở cuối vế (quy tắc ở `viet-kich-ban`). Nghe lại sau khi đảo câu ("Tại ích-không, đạo hàm bằng mười.") → **đúng**, người dùng xác nhận. Khi nghe thử, vẫn để ý riêng chỗ này.
 3. **Tạo cả bài:** cùng `--voice`, không có `--only`. Dòng nào đã có file khớp (cùng giọng, tốc độ, `speak`) thì bỏ qua.
+   **Nghe lại sau khi tạo cả bài**: gửi lại (SendUserFile) đúng các file trong bài có đọc chữ cái/ký hiệu, kể cả dòng đã nghe thử ổn — mỗi lần tạo một khác. Đã gặp (22/10/2026): nghe thử ổn, nhưng bản trong bài đọc "f(x)" thừa âm cuối. Dòng lỗi → B1 đổi sang nói theo nghĩa, rồi `--only` dòng đó.
 4. Lỗi một dòng: đọc thông báo, báo người dùng. **Không chạy lại ngay để thử** — mỗi lần gửi là một lần trừ credit. Người dùng đồng ý thì `--only <beatId>-lNN`.
 5. Báo cáo: số dòng đã tạo / lỗi, số ký tự đã gửi, tổng thời lượng audio (đo bằng `ffprobe` đi kèm Remotion, `node_modules/@remotion/compositor-win32-x64-msvc/ffprobe.exe`).
    Ước lượng thời lượng video = tổng audio + khoảng nghỉ của B3 (≈ 0,25s mỗi dòng, 0,6s mỗi beat, ~5s intro/outro). Ngoài khung 2:30 – 4:00 → báo người dùng trước khi sang B3; sửa bằng cách quay lại B1, không đổi `speed` để bù.

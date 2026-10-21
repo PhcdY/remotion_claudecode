@@ -14,7 +14,8 @@ Luôn dùng kèm skill `remotion-best-practices` cho mọi chi tiết API Remoti
 | `src/videos/<slug>/script.json` | B1 | nội dung: section, keyword, visual, lines[].text |
 | `public/audio/<slug>/manifest.json` | B2 | thứ tự + tên file audio từng dòng |
 | `public/audio/<slug>/<beatId>-lNN.mp3` | B2 | giọng đọc; **độ dài file quyết định thời gian** |
-| `style.md` (gốc project) | người dùng | màu, font, layout. Chưa có → nền tối, chữ sáng, bố cục sạch |
+| `style.md` (gốc project) | người dùng | màu, font, layout theo brand 9Study (nền sáng); token ở `src/components/theme.ts` |
+| `src/videos/<slug>/FEEDBACK.md` | người dùng | nếu có: đang sửa theo góp ý — sửa **mọi** mục chưa ✅ một lần, cập nhật cột "đã sửa video" |
 
 `speak` **không** dùng ở B3 (chỉ dành cho TTS). Trên màn hình luôn hiện `text`.
 
@@ -24,18 +25,19 @@ Luôn dùng kèm skill `remotion-best-practices` cho mọi chi tiết API Remoti
 - Mỗi dòng trong `script.json` có đúng một mục trong manifest (khớp `beat` + `line`), và file mp3 tồn tại.
 - `text` trong manifest khớp `text` trong script. Lệch → kịch bản đã sửa sau khi tạo audio → **yêu cầu chạy lại B2**, không tự đoán thời gian.
 - Thiếu file nào thì liệt kê đủ rồi dừng.
+- **Đọc lướt `visual` cả bài trước khi dựng** theo quy tắc 8–10 dưới đây. Lỗi cấu trúc (nhiều thay đổi dồn một dòng, số đổi mà hình không đổi, nhân vật không vai trò, khái niệm dùng trước khi dạy, bảng xét dấu…) → báo người dùng **trước** khi dựng, không dựng xong mới báo.
 
-## Bước 1 — Tính timeline (hàm thuần, file `src/videos/<slug>/timeline.ts`)
+## Bước 1 — Timeline
 
-Hằng số (để ở đầu file, dễ chỉnh):
+Dùng chung `buildTimeline` trong `src/components/timeline.ts` (đo mp3, đối chiếu manifest, tính frame). `src/videos/<slug>/timeline.ts` chỉ bọc lại thành `calculateMetadata` (mẫu: `src/videos/don-dieu/timeline.ts`). Không viết lại bộ đo.
+
+Hằng số (ở đầu `src/components/timeline.ts`):
 ```
 FPS = 30, INTRO = 1.6s, LEAD_IN = 0.3s, GAP_LINE = 0.25s, GAP_BEAT = 0.6s, TAIL = 1.0s, OUTRO = 2.5s
 ```
-- Đo độ dài từng mp3 trong `calculateMetadata` (cách đo theo skill remotion-best-practices).
-- `BrandIntro` chiếm `[0, INTRO)`. Dòng đầu bắt đầu ở `INTRO + LEAD_IN`. Dòng sau = kết thúc dòng trước + `GAP_LINE` (cùng beat) hoặc + `GAP_BEAT` (sang beat mới).
-- Mỗi beat: `start` = start dòng đầu, `end` = end dòng cuối + gap.
-- `BrandOutro` bắt đầu ở end dòng cuối + `TAIL`. `durationInFrames` = mốc đó + `OUTRO`, làm tròn lên theo FPS.
-- Output: `{ beats: [{ id, startFrame, endFrame, lines: [{ startFrame, endFrame, audioSrc }] }], durationInFrames }`.
+- `BrandIntro` chiếm `[0, INTRO)`. Dòng đầu bắt đầu ở `INTRO + LEAD_IN`. Dòng sau = kết thúc dòng trước + `GAP_LINE` (cùng beat; beat có `lineGap` thì dùng giá trị đó) hoặc + `GAP_BEAT` (sang beat mới).
+- `BrandOutro` bắt đầu ở end dòng cuối + `TAIL`. `durationInFrames` = mốc đó + `OUTRO`.
+- Trường `speed` của beat chỉ ảnh hưởng B2 (độ dài audio); B3 không cần làm gì thêm.
 
 ## Bước 2 — Map script.json → màn hình
 
@@ -119,7 +121,7 @@ Người xem phải nhận ra *cái gì đang thay đổi*. Nếu khung nhìn đ
 **7. Mọi thứ trên màn hình đều có chú thích.**
 Phép thử: **tắt tiếng, chỉ nhìn khung hình**, người xem vẫn biết từng con số, ký hiệu, hình là gì. Không biết → thiếu chú thích.
 - Trục, thước đo: tên đại lượng + đơn vị ở đầu trục ("quãng đường $s$ (m)", "thời gian $t$ (s)"), không chỉ "m" hay "s".
-- Con số hiện trên hình (nhãn, ô bảng, giá trị đang chạy): **luôn có đơn vị**; tên đại lượng ở tiêu đề cột ("Vận tốc trung bình (m/s)", không chỉ "Trung bình") hoặc bằng ký hiệu đã chú giải ($v$, $\Delta t$), **không viết lại cả cụm tên ở mỗi nhãn** (quy tắc 8).
+- Con số hiện trên hình (nhãn, ô bảng, giá trị đang chạy): có đơn vị nếu kịch bản dùng đơn vị (mô hình toán có thể là số trơn, không đơn vị — skill `viet-kich-ban` › `text`); tên đại lượng ở tiêu đề cột ("Vận tốc trung bình (m/s)", không chỉ "Trung bình") hoặc bằng ký hiệu đã chú giải ($v$, $\Delta t$), **không viết lại cả cụm tên ở mỗi nhãn** (quy tắc 8).
 - Công thức xuất hiện lần đầu: ký hiệu được chú giải bằng cụm đọc lên có nghĩa (tên trục "quãng đường $s$ (m)", hoặc "$s$ là quãng đường"). Không dùng chú giải viết tắt kiểu "$s$: m · $t$: s".
 - Đoạn tô màu, mũi tên, vạch nhấn: có nhãn nói nó biểu diễn gì ("rơi thêm 15 m trong 1 s"). Màu dùng lại ở beat sau với cùng nghĩa thì giữ cùng màu.
 - Điểm, vật minh hoạ (quả bóng ở các thời điểm): mỗi cái cần thiết có nhãn; vật trùng hoặc quá gần nhau thì bỏ bớt hoặc dàn ra, không xếp chồng — mọi vật này cũng gắn `data-mark` để `check-layout` bắt được chồng lấn.
@@ -140,8 +142,10 @@ Phép thử: **tắt tiếng, chỉ nhìn khung hình**, người xem vẫn bi�
 - **Không dùng phép biến hình lạ mắt** (xoay đường chạy thành trục, nhân vật nằm ngang, gập/cuộn hình). Đã thử 20/10/2026: người xem không hiểu. Trục, đồ thị, nhân vật luôn ở tư thế quen thuộc.
 
 **10. Nhân vật do toán điều khiển; công thức chỉ lên hình.**
-- Nhân vật/vật minh hoạ chỉ có mặt khi biểu diễn một đại lượng: vị trí = $f(x)$ (qua hàm scale chung), tốc độ chuyển động tỉ lệ với $f'(x)$, $f' = 0$ → đứng yên, $f'$ đổi dấu → quay đầu (lật hình). Nhãn nói rõ nó là gì ("người chạy: vị trí = $f(x)$"). Không có nhân vật đứng trên đồ thị cho vui.
-- Đồ thị $f'$ (dạng bài đề thi) đi kèm đường chạy bên dưới, người chạy di chuyển theo $f'$ khi điểm quét chạy trên đồ thị: chạy nhanh nhất ở đỉnh $f'$, chậm dần về 0, dừng rồi quay đầu khi $f'$ đổi dấu, dừng mà không quay đầu khi $f'$ chạm trục không đổi dấu.
+- Nhân vật/vật minh hoạ (người chạy, flycam…) chỉ có mặt khi biểu diễn một đại lượng: vị trí = $f(x)$ (qua hàm scale chung), tốc độ chuyển động tỉ lệ với $f'(x)$, $f' = 0$ → đứng yên, $f'$ đổi dấu → quay đầu (lật hình). Nhãn nói rõ nó là gì ("người chạy: vị trí = $f(x)$"). Không có nhân vật đứng trên đồ thị cho vui.
+- Đồ thị $f'$ (dạng bài đề thi) đi kèm nhân vật của ví dụ xuyên suốt, di chuyển theo $f'$ khi điểm quét chạy trên đồ thị: nhanh nhất ở đỉnh $f'$, chậm dần về 0, dừng rồi quay đầu khi $f'$ đổi dấu, dừng mà không quay đầu khi $f'$ chạm trục không đổi dấu.
+- **Từ $f'$ sang $f$**: hai tầng, $f$ trên, $f'$ dưới, **cùng tỉ lệ trục ngang, thẳng hàng theo chiều dọc**; mỗi khoảng: đoạn $f'$ trên/dưới trục và đoạn $f$ tương ứng sáng cùng màu (leo/hạ), trên đoạn $f$ có hai điểm so sánh (sau cao hơn/thấp hơn trước).
+- Bảng xét dấu, bảng biến thiên không dựng (kiến thức bài khác — skill `viet-kich-ban` › Phạm vi kiến thức); dấu của $f'$ thể hiện bằng tô màu trên đồ thị.
 - **Giải phẫu công thức**: khi lời đọc giải thích một cụm trong công thức, cụm đó trên công thức và thứ tương ứng trên hình **cùng sáng lên một màu**, các phần khác mờ đi. Công thức và hình phải cùng nằm trên màn hình lúc đó (công thức thu nhỏ ở cạnh, không thay hẳn hình).
 - **Dựng phép tính từ thành phần, không nhảy bước**: hiệu $f(x)-f(x_0)$ chỉ hiện sau khi hai **cột dọc** $f(x_0)$ và $f(x)$ (từ trục ngang lên đồ thị, có số) đã hiện và được nói riêng; khi tới phép trừ, kẻ ngang từ đỉnh cột thấp sang cột cao, phần chênh sáng lên. Tương tự $x - x_0$ là khoảng giữa hai chân cột. Không vẽ một đoạn ngắn lơ lửng mà người xem không biết nó từ đâu ra.
 - **Khái niệm hình học mới hiện riêng trước khi dùng**: cát tuyến (đường qua hai điểm của đồ thị, hai điểm sáng lên trước), độ dốc (tam giác ngang–dọc có số), tiếp tuyến dạy bằng **kính lúp** (quy tắc 6): phóng to quanh điểm tới khi đồ thị trông thẳng, đường thẳng đó là tiếp tuyến.
@@ -149,17 +153,21 @@ Phép thử: **tắt tiếng, chỉ nhìn khung hình**, người xem vẫn bi�
 ## Bước 3 — Cấu trúc code
 
 ```
-src/components/          dùng chung: BrandFrame/BrandIntro/BrandOutro (khung 9Study),
-                         SectionCard (thẻ mở beat), KeyTakeaway (câu chốt),
-                         Subtitle, MathText, Axes, FunctionPlot, TangentLine, Point,
-                         ZoomInset (kính lúp), ... (ưu tiên dùng lại)
+src/components/          dùng chung (ưu tiên dùng lại):
+  BrandFrame.tsx         BrandFrame, BrandIntro, BrandOutro (khung 9Study)
+  BeatShell.tsx          BeatShell (thẻ mở beat + câu chốt + phụ đề cho một beat), ramp, clamp
+  timeline.ts            buildTimeline, hằng số nhịp
+  plot.tsx               makeScale, Plot, Axes, FunctionPlot, Point, Segment, TangentLine, PlotLabel
+  ZoomInset.tsx          kính lúp; MathText.tsx: MathText, Tex, useKatexFonts
+  Card, KeyTakeaway, SectionCard, Subtitle, Speedometer, theme.ts (màu, cỡ chữ, halo)
 src/videos/<slug>/
   script.json            (B1 — không sửa)
-  timeline.ts            tính thời gian
-  Video.tsx              composition, mỗi beat một component Beat01, Beat02...
+  timeline.ts            bọc buildTimeline thành calculateMetadata
+  Video.tsx              composition; beats.tsx mỗi beat một component; scene.tsx hình riêng của video
 src/Root.tsx             đăng ký <Composition id="<slug>" ...> 1920×1080, 30fps
 ```
-- Toạ độ toán → pixel qua một hàm scale chung; không hardcode pixel cho điểm trên đồ thị.
+- Trước khi viết component mới, xem `src/components/` **và thư mục các video trước** (`ban-chat-dao-ham/parts.tsx`: người chạy, đường chạy, đồng hồ bấm giờ; `ban-chat-dao-ham/graph.tsx`: đồ thị mô hình, cát tuyến, tam giác độ dốc; `don-dieu/scene.tsx`: flycam trên đồi, đồ thị hai tầng, cột dọc, mũi tên dọc đường cong, thẻ bên phải). Thứ đã dùng ở video trước và cần lại (vd. `Tag`, `label`, `lerp`, bảng màu vai trò `C` đang chép ở cả hai video) → chuyển sang `src/components/` rồi import, không chép lần ba.
+- Toạ độ toán → pixel qua một hàm scale chung (`makeScale`); không hardcode pixel cho điểm trên đồ thị.
 - Animation chỉ dùng `useCurrentFrame()` + `interpolate` / `spring`.
 - Font KaTeX và font chữ phải load xong trước khi render frame.
 

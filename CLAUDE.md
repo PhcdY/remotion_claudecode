@@ -17,6 +17,8 @@ B1 `viet-kich-ban` → B2 `tao-audio` → B3 `dung-video`.
      `scripts/tts.py` (Edge TTS) chỉ để test nhanh.
 3. **Dựng video** → `src/videos/<slug>/` chứa composition, đăng ký trong `src/Root.tsx`.
 4. **Duyệt** → `npm run dev` (Remotion Studio).
+   Góp ý của người dùng ghi vào `src/videos/<slug>/FEEDBACK.md` (cột "đã sửa skill" / "đã sửa video"): sửa skill ngay cho từng mục,
+   gom sửa video một lần khi người dùng bảo. Lỗi cấu trúc kịch bản → quay lại B1 (duyệt dàn ý), không vá trên video cũ.
 5. **Render** → `npx remotion render <compositionId> out/<slug>.mp4`
 
 ## Schema `script.json`
@@ -31,8 +33,9 @@ B1 `viet-kich-ban` → B2 `tao-audio` → B3 `dung-video`.
       "section": "HIỆN TƯỢNG",         // cấu trúc; chỉ TRONG ĐỀ THI / BẪY THƯỜNG GẶP / GIẢI ĐÁP hiện trên video
       "keyword": "Nhưng TẠI SAO?",      // câu chốt của beat, hiện lúc đọc dòng cuối, được dùng $...$
       "visual": "mô tả hình cho beat",  // Claude dựng hình theo mô tả này
+      "speed": 0.85, "lineGap": 0.7,    // (tuỳ chọn) đọc chậm + nghỉ dài hơn, chỉ cho beat giải thích "vì sao"
       "lines": [
-        { "text": "ghi chú ngắn (≤ ~35 ký tự), ký hiệu/số + đơn vị, LaTeX trong $...$; không chép lời đọc; được để \"\"", "speak": "lời đọc, viết toán bằng chữ; ký hiệu có chỉ số đọc liền ('ích-không'); '...' trước chỗ cần nhấn" }
+        { "text": "ghi chú ngắn (≤ ~35 ký tự), ký hiệu/số (đơn vị chỉ khi cần, đơn giản), LaTeX trong $...$; không chép lời đọc; được để \"\"", "speak": "lời đọc, viết toán bằng chữ; ký hiệu có chỉ số đọc liền ('ích-không'); '...' trước chỗ cần nhấn" }
       ]
     }
   ]
@@ -44,11 +47,12 @@ B1 `viet-kich-ban` → B2 `tao-audio` → B3 `dung-video`.
 - **Thời gian lấy từ audio, không đoán.** Đọc `public/audio/<slug>/manifest.json`, đo độ dài từng file
   (trong `calculateMetadata`), mỗi dòng `text` hiện lên đúng lúc file audio của nó bắt đầu.
   Tổng thời lượng composition = tổng audio + khoảng nghỉ.
-- Khoảng nghỉ: 0.25s giữa các dòng, 0.6s giữa các beat. Để thành hằng số dễ chỉnh.
+- Khoảng nghỉ: 0.25s giữa các dòng, 0.6s giữa các beat. Để thành hằng số dễ chỉnh. Beat có `lineGap` thì dùng giá trị đó giữa các dòng.
 - **Không sửa nội dung `text`/`speak` khi dựng.** Thấy sai thì báo người dùng.
 - Công thức render bằng KaTeX. Phải chờ font KaTeX load xong (`delayRender`/`continueRender`) trước khi render frame.
 - Font: Plus Jakarta Sans (brand 9Study) qua `@remotion/google-fonts`. Mọi video bọc trong `BrandFrame`.
-- Component dùng lại đặt ở `src/components/` (SectionCard, KeyTakeaway, Subtitle, MathText, Axes, FunctionPlot, TangentLine, ZoomInset…).
+- Component dùng lại đặt ở `src/components/` (BeatShell, SectionCard, KeyTakeaway, Subtitle, MathText, plot.tsx: Axes/FunctionPlot/TangentLine…, ZoomInset, timeline.ts).
+  Xem cả thư mục các video trước; thứ cần lại lần hai thì chuyển vào `src/components/`, không chép.
   Ưu tiên dùng lại, chỉ tạo mới khi thật cần.
 - Đồ thị vẽ bằng SVG, toạ độ toán → pixel qua một hàm scale chung, không hardcode pixel.
 - Một ví dụ xuyên suốt cả video; ít chữ trên hình; mỗi dòng tối đa một thay đổi trên hình và số đổi thì hình đổi theo (chi tiết: skill `viet-kich-ban` yêu cầu 8, 11–13; skill `dung-video` quy tắc 6, 8–10).
