@@ -86,15 +86,23 @@ export const BanChatDaoHam: React.FC<VideoProps> = ({ timeline }) => {
   );
 };
 
-export const BanChatDaoHamComposition: React.FC = () => (
+const composition = (id: string, audioDir?: string) => (
   <Composition
-    id="ban-chat-dao-ham"
+    id={id}
     component={BanChatDaoHam}
     durationInFrames={300}
     fps={FPS}
     width={1920}
     height={1080}
-    defaultProps={{ timeline: null }}
+    defaultProps={{ timeline: null, audioDir }}
     calculateMetadata={calculateMetadata}
   />
+);
+
+export const BanChatDaoHamComposition: React.FC = () => (
+  <>
+    {composition("ban-chat-dao-ham")}
+    {/* Cùng hình, giọng nữ (chị Nhi): audio ở public/audio/ban-chat-dao-ham-nu/ */}
+    {composition("ban-chat-dao-ham-nu", "ban-chat-dao-ham-nu")}
+  </>
 );

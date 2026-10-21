@@ -168,17 +168,29 @@ src/Root.tsx             đăng ký <Composition id="<slug>" ...> 1920×1080, 30
 - `npm run lint` sạch.
 - Xuất ảnh tĩnh bằng `node scripts/stills.mjs <slug> <frame...>` (bundle một lần).
 - Xuất ảnh tĩnh **cho từng dòng** (frame ngay trước khi dòng kết thúc, lúc mọi thành phần của dòng đó đã hiện đủ), không chỉ giữa beat. Nhiều frame thì bundle một lần rồi gọi `renderStill` lặp lại, thay vì gọi `npx remotion still` từng frame.
-- **Kiểm chồng lấn bằng code trước, mắt sau.** Mọi khối chữ trên hình (nhãn, chú thích, số trục, câu chốt) gắn `data-text`, mọi điểm đánh dấu gắn `data-mark`. Chạy `node scripts/check-layout.mjs <slug>`: script mở từng frame kiểm tra, lấy khung bao (`getBoundingClientRect`) của các phần tử đó và báo mọi cặp chồng nhau hoặc cách nhau < 16px, kèm frame và nội dung chữ; khung chứa (thẻ, ô bảng) gắn `data-box`, script báo mọi `data-text` nằm trong `data-box` mà tràn ra ngoài viền. Danh sách phải rỗng mới sang bước soát bằng mắt.
+- **Kiểm chồng lấn bằng code trước, mắt sau.** Mọi khối chữ trên hình (nhãn, chú thích, số trục, câu chốt) gắn `data-text`, mọi điểm đánh dấu gắn `data-mark`. Chạy `node scripts/check-layout.mjs <slug>`: script mở từng frame kiểm tra, lấy khung bao (`getBoundingClientRect`) của các phần tử đó và báo mọi cặp chồng nhau hoặc cách nhau < 16px, kèm frame và nội dung chữ; khung chứa (thẻ, ô bảng, `Card`) gắn `data-box`, script báo mọi `data-text` nằm trong `data-box` mà tràn ra ngoài viền, và mọi chữ/điểm **bên ngoài** chạm vào khung đó (đã gặp: nhãn đồ thị chạm mép thẻ bảng mà không bị bắt). Danh sách phải rỗng mới sang bước soát bằng mắt.
 - Soát từng ảnh theo **Quy tắc bố cục**: (1) có gì chồng lấn hay dính sát không; (2) kim/đường có đè lên chữ không; (3) cụm hình có cân không, có nửa khung trống không; (4) có chữ nào dưới cỡ tối thiểu không; (5) có gì lấn vùng phụ đề không; (6) có thành phần nào người xem không cần không; (7) phóng to hay dịch khung có mốc tham chiếu không; (8) **phép thử tắt tiếng**: mỗi con số, ký hiệu, màu, vật trên ảnh có chú thích nói nó là gì không; (9) **ít chữ**: nhãn nào dài quá ~5 từ, lặp phụ đề hoặc lặp số trên trục, chữ nào tràn khỏi khung chứa, thông tin nào đã hết vai trò mà còn; (10) **nhịp**: so ảnh giữa dòng với ảnh cuối dòng — có quá một thay đổi không, số đổi mà hình có đổi theo không; vật minh hoạ đủ lớn chưa; (11) nhân vật có chuyển động đúng theo hàm không, cụm công thức đang giải thích có sáng cùng màu với thứ trên hình không. Sửa hết rồi xuất lại để kiểm.
 - **Soát toán trên hình**: điểm nằm đúng trên đồ thị, hệ số góc, nghiệm, nhãn trục. Sai toán là lỗi nghiêm trọng nhất.
 - **Thời lượng**: tổng phải nằm trong 2:30 – 4:00. Lệch → báo người dùng, đề xuất quay lại B1 (không kéo giãn khoảng nghỉ để bù).
 - Báo cáo: tổng thời lượng, các giả định khi dựng visual, chú thích đã tự thêm, chỗ cần người dùng xem.
 
-## Bước 5 — Render (khi người dùng duyệt trong Studio)
+## Bước 5 — Xem trước, rồi render
 
-```
-npx remotion render <slug> out/<slug>.mp4
-```
+- Người dùng muốn xem nhanh ("demo", "chưa cần render") → mở Remotion Studio (`preview_start` với cấu hình `remotion-studio` trong `.claude/launch.json`) ở trang composition, không render.
+- Render khi người dùng bảo, **chạy nền và ghi tiến độ ra file** để trả lời được "đến đâu rồi":
+  ```
+  npx remotion render <id> out/<id>.mp4 > <scratchpad>/render-<id>.log 2>&1
+  ```
+  Không dùng `--log=error` (mất dòng tiến độ). Hỏi tiến độ → đọc dòng cuối của log (frame đã render / tổng), báo phần trăm và thời gian còn lại ước tính.
+- Mốc thời gian (máy người dùng, 21/10/2026): video 3:53 (≈ 7000 frame) render ≈ 14–15 phút; 2:49 ≈ 6–8 phút. Báo mốc này lúc bắt đầu render.
+- Xong: đo thời lượng file bằng `ffprobe`, gửi file cho người dùng. `out/` bị gitignore, không commit video.
+
+## Bản giọng khác (không thay bản cũ)
+
+Audio của bản giọng khác nằm ở `public/audio/<slug>-<hậu tố>/` (skill `tao-audio` › Bản giọng khác). Dựng thêm composition, không chép code beat:
+- `calculateMetadata` nhận prop `audioDir` và gọi `buildTimeline(script, props.audioDir)` (mặc định = slug).
+- Đăng ký thêm `<Composition id="<slug>-<hậu tố>" defaultProps={{ timeline: null, audioDir: "<slug>-<hậu tố>" }} …/>` cạnh composition gốc, cùng component (mẫu: `src/videos/ban-chat-dao-ham/Video.tsx`).
+- Chạy `check-layout` cho id mới (nhịp đọc khác → mốc dòng khác), render ra `out/<slug>-<hậu tố>.mp4`.
 
 ## Không được
 

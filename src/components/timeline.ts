@@ -37,8 +37,9 @@ const getAudioDuration = async (src: string) => {
 };
 
 /** Đối chiếu script với manifest, đo độ dài audio, tính timeline. */
-export const buildTimeline = async (script: Script): Promise<Timeline> => {
-  const base = `audio/${script.slug}`;
+/** audioDir: thư mục audio trong public/audio/ (mặc định = slug; khác slug khi dùng giọng khác). */
+export const buildTimeline = async (script: Script, audioDir = script.slug): Promise<Timeline> => {
+  const base = `audio/${audioDir}`;
   const res = await fetch(staticFile(`${base}/manifest.json`));
   if (!res.ok) throw new Error(`Không đọc được ${base}/manifest.json — chạy B2 (skill tao-audio) trước.`);
   const manifest = (await res.json()) as Manifest;

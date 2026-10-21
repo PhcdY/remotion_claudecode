@@ -4,10 +4,10 @@ import scriptJson from "./script.json";
 
 export const script = scriptJson as Script;
 
-export type VideoProps = { timeline: Timeline | null };
+export type VideoProps = { timeline: Timeline | null; audioDir?: string };
 
-// Thời lượng lấy từ độ dài audio thật (public/audio/ban-chat-dao-ham/).
-export const calculateMetadata: CalculateMetadataFunction<VideoProps> = async () => {
-  const timeline = await buildTimeline(script);
-  return { durationInFrames: timeline.durationInFrames, props: { timeline } };
+// Thời lượng lấy từ độ dài audio thật (public/audio/<audioDir>/, mặc định ban-chat-dao-ham).
+export const calculateMetadata: CalculateMetadataFunction<VideoProps> = async ({ props }) => {
+  const timeline = await buildTimeline(script, props.audioDir);
+  return { durationInFrames: timeline.durationInFrames, props: { ...props, timeline } };
 };

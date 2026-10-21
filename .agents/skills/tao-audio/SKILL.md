@@ -46,6 +46,13 @@ Vivibe không có thẻ chỉnh tông; tông giọng đến từ mẫu clone, nh
 - `manifest.json` giữ định dạng cũ (beat, line, file, hash, text + engine/voice/voice_name/speed) nên B3 không phải sửa. Dòng chưa có audio khớp kịch bản được script báo ở cuối.
 - Các trường khác (`section`, `keyword`, `visual`, `title`, `exams`) bỏ qua — chúng dành cho B3.
 
+## Bản giọng khác (không thay bản cũ)
+
+Người dùng muốn thêm một bản đọc giọng khác bên cạnh bản đã có (vd. "làm thêm bản giọng nữ"):
+- Tạo vào thư mục riêng: `python scripts/vivibe_tts.py src/videos/<slug>/script.json --voice "<giọng>" --audio-dir <slug>-<hậu tố>` (hậu tố ngắn: `nu`, `nam`…). Không sửa `script.json`, không chép kịch bản ra bản khác.
+- Báo số ký tự (`--estimate` cùng `--audio-dir`) trước khi tạo; cả bài một giọng.
+- B3 thêm một composition `<slug>-<hậu tố>` đọc audio từ thư mục đó (skill `dung-video` › Bản giọng khác). Thời lượng đo lại theo audio mới, không dùng lại timeline bản cũ.
+
 ## Ghi chú
 
 - Không sửa file trong `public/audio/` bằng tay.

@@ -4,6 +4,7 @@ import { colors, fontText, shadow } from "./theme";
 // Khối trắng bo góc theo style.md.
 export const Card: React.FC<{ children?: React.ReactNode; style?: React.CSSProperties; group?: string }> = ({ children, style, group }) => (
   <div
+    data-box
     data-group={group}
     style={{
       position: "absolute",

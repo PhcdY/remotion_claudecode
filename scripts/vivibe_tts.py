@@ -231,6 +231,7 @@ def main() -> int:
     ap.add_argument("--only", nargs="+", default=[], help="chỉ tạo các beat (b01) hoặc dòng (b01-l02) này")
     ap.add_argument("--estimate", action="store_true", help="chỉ đếm ký tự sẽ gửi, không gọi API")
     ap.add_argument("--force", action="store_true", help="tạo lại dòng được chọn dù đã có cache")
+    ap.add_argument("--audio-dir", help="thư mục trong public/audio/ (mặc định = slug); dùng cho bản giọng khác, vd. <slug>-nu")
     args = ap.parse_args()
 
     if args.list_voices:
@@ -246,7 +247,7 @@ def main() -> int:
     voice, voice_name = resolve_voice(key_api, args.voice)
 
     data = load_script(args.script)
-    out_dir = ROOT / "public" / "audio" / data["slug"]
+    out_dir = ROOT / "public" / "audio" / (args.audio_dir or data["slug"])
     manifest_path = out_dir / "manifest.json"
     old: dict[str, str] = {}
     if manifest_path.exists():

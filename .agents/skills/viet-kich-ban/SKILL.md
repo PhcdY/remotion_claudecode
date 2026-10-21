@@ -219,7 +219,7 @@ Giọng văn:
 ## Độ dài
 
 - **2 phút 30 – 4 phút** (tính cả intro/outro). Dễ hiểu đứng trên thời lượng: bước khó cần thêm thời gian thì thêm. Ngắn hơn 2:30 là đang vội. Vượt 4 phút → báo người dùng kèm đề xuất ý phụ có thể cắt, không tự rút gọn lời giải thích.
-- Ước lượng theo giọng Vivibe (đo thật 19–20/10/2026: ≈ 20 ký tự/giây sau khi cắt lặng; 3069 ký tự, 11 beat → video 2:49): **≈ 2700–4300 ký tự `speak`**. Thời lượng thật đo sau B2.
+- Ước lượng theo giọng Vivibe (đo thật 19–21/10/2026: ≈ 20 ký tự/giây sau khi cắt lặng, cả giọng nam c Bình và nữ c Nhi; 3069 ký tự, 11 beat → 2:49; 4231 ký tự, 16 beat → 3:53 (nam) / 3:56 (nữ)): **≈ 2700–4300 ký tự `speak`**. Thời lượng thật đo sau B2.
 - 8–16 beat. `HIỆN TƯỢNG` ≤ 20 giây, `GIẢI ĐÁP` 15–30 giây; không beat nào > 40 giây (dài hơn thì tách beat).
 - Vượt khung → cắt ý (ghi vào "những ý đã cắt" ở dàn ý), không rút gọn lời giải thích của ý chính.
 - Người dùng yêu cầu độ dài khác → theo người dùng.

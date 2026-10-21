@@ -40,6 +40,18 @@ const measure = () => {
   });
 
   const issues: string[] = [];
+  // khung chứa (thẻ, ô bảng) là vật cản: chữ/điểm bên ngoài không được chạm vào
+  const boxes: { el: Element; r: DOMRect }[] = [];
+  document.querySelectorAll("[data-box]").forEach((el) => {
+    const r = el.getBoundingClientRect();
+    if (r.width >= 1 && r.height >= 1 && effectiveOpacity(el) >= 0.05) boxes.push({ el, r });
+  });
+  items.forEach((a) => {
+    boxes.forEach((b) => {
+      if (b.el.contains(a.el) || a.el.contains(b.el)) return;
+      if (gap(a.r, b.r) < 0) issues.push(`chạm khung chứa — ${a.label}`);
+    });
+  });
   items.forEach((a) => {
     if (a.r.left < 0 || a.r.right > layout.width || a.r.top < 0) issues.push(`tràn khung — ${a.label}`);
     // chữ phải nằm gọn trong khung chứa (thẻ, ô bảng) gắn data-box
