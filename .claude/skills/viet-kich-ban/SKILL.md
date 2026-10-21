@@ -37,11 +37,13 @@ Trình bày ngắn gọn:
 - ước lượng thời lượng
 - **những ý đã cắt** và lý do (để người dùng biết, có thể làm video khác). Chủ đề rộng (vd. cả chương) → chọn một ý bản chất cốt lõi, phần còn lại ghi vào đây.
 
-**Chờ người dùng duyệt** rồi mới viết đầy đủ.
+**Chờ người dùng duyệt** rồi mới viết đầy đủ. Người dùng bảo làm luôn ("làm đi", "cho xem demo") → được bỏ bước chờ, nhưng vẫn viết dàn ý ra trước (trong đầu báo cáo) và đi theo nó.
 
 ### Bước 2 — Viết `script.json`
 Theo schema và quy tắc bên dưới, lưu vào `src/videos/<slug>/script.json`.
 Nếu file đã tồn tại → hỏi trước khi ghi đè.
+
+**Sửa một phần kịch bản** (vd. viết lại phần giữa theo góp ý) → beat giữ nguyên cũng phải **rà lại theo quy tắc hiện tại** và theo những gì các beat mới đã (hoặc chưa) dạy. Đã gặp (20/10/2026): viết lại b03–b13 nhưng giữ nguyên phần đề thi cũ, phần này dùng "đồ thị $f'$" và "vận tốc âm" mà phần mới chưa hề dạy.
 
 ### Bước 3 — Tự kiểm tra rồi báo cáo
 Chạy hết checklist cuối file. Báo: số beat, số ký tự `speak`, thời lượng ước tính, và **mọi chỗ còn nghi ngờ**.
@@ -80,6 +82,10 @@ Thứ tự và số phần tùy chủ đề, nhưng **bắt buộc có**:
    - Dùng một hàm cụ thể để cho thấy bản chất vừa học giúp đọc/suy ra điều gì trong dạng câu hỏi hay gặp (vd. nhìn đồ thị $f'$ của một hàm → suy ra khoảng đồng biến, cực trị của $f$).
    - Nói rõ *bản chất nào* dẫn tới kết luận, không chỉ nêu kết quả.
    - **Vẫn trong ví dụ xuyên suốt** (yêu cầu 11): dạng bài được kể lại bằng chính nhân vật/vật của video, vd. "đồ thị $f'$" = đồ thị vận tốc của người chạy, "$f$ đổi chiều biến thiên" = người chạy quay đầu. Hình đồ thị và hình ví dụ hiện cùng lúc, chuyển động của nhân vật do hàm điều khiển.
+   - **Chuyển sang phần đề thi cũng là một bước khó, không nhảy bước.** Phần này thường dùng thứ mà phần trước chưa dạy; mỗi thứ cần dòng riêng (hoặc beat riêng) trước khi dùng:
+     - **từ một con số sang một hàm**: phần trước thường chỉ dạy $f'(x_0)$ là *một số* (độ dốc tại một điểm). Đồ thị $f'$ là hàm mới → phải có bước "làm phép đo đó tại mọi thời điểm, ghi lại → được một hàm mới, vận tốc theo thời gian, gọi là $f'$", tốt nhất cho thấy trên chính ví dụ đã có (vd. với $s=t^2$: vận tốc lúc 1 s, 2 s, 3 s… chấm thành đồ thị $v = 2t$);
+     - **đổi hàm** (đề dùng hàm khác ví dụ chính) = đổi mô hình: nói rõ "giờ là một người chạy khác / một đề bài", không để người xem tưởng vẫn là hàm cũ;
+     - **giá trị âm, đổi dấu**: "vận tốc âm nghĩa là chạy lùi" phải được cho thấy (người chạy quay mặt, đi ngược) ở một dòng riêng trước khi suy ra "$f$ giảm".
    - Không liệt kê nhiều dạng bài trong một câu. Không bịa đề thật, không ghi năm/mã đề.
 5. **Kết bằng giải đáp rồi câu chốt**:
    - beat `GIẢI ĐÁP` (gần cuối): quay lại đúng hiện tượng mở đầu (cùng hình), giải nó bằng kiến thức vừa giảng, nói rõ **bước nào dùng ý nào** của video. Người xem phải thấy "à, ra là vì thế" — cảm giác toán dùng được thật;
@@ -91,7 +97,7 @@ Thứ tự và số phần tùy chủ đề, nhưng **bắt buộc có**:
    - đặt tương ứng tường minh trên màn hình, vd. "quãng đường ↔ $f(x)$, thời gian ↔ $x$, vận tốc ↔ $f'(x)$";
    - mỗi ký hiệu mới được giải thích bằng chính ví dụ đó: nó là con số nào, đại lượng nào trong ví dụ;
    - thay số của ví dụ vào công thức, ra đúng kết quả người xem đã thấy trước đó, **rồi** mới phát biểu tổng quát;
-   - mỗi beat tối đa một ký hiệu hoặc khái niệm mới.
+   - mỗi **dòng** tối đa một ký hiệu mới; mỗi **beat** tối đa một khái niệm mới (vd. beat "định nghĩa đạo hàm" giới thiệu $x_0$, $f(x_0)$, $x$, $f(x)$ ở bốn dòng — đó là các ký hiệu của cùng một khái niệm).
 7. **Tiền đề**: kiến thức cũ cần dùng (vd. giới hạn khi nói về đạo hàm) được nhắc lại ngắn bằng trực giác ngay trước khi dùng. Không giả định người xem nhớ.
 8. **Không bỏ qua bản chất toán — định nghĩa phải xuất hiện**:
    - đi từ ví dụ → khái niệm, hoặc khái niệm → ví dụ, nhưng phải **đi tới nơi**: định nghĩa (hoặc định lý, công thức) chính thức hiện trên màn hình với ký hiệu chuẩn, rồi từng phần của nó được gắn lại với ví dụ ("tử số là quãng đường rơi thêm…");
@@ -211,6 +217,7 @@ Giọng văn:
 - **thông tin hết vai trò thì gỡ**: ghi khi nào một nhãn/badge mờ đi (vd. "vận tốc trung bình cả bài" mờ khi chuyển sang đoạn 60–70 m).
 - **nhân vật/vật minh hoạ có vai trò toán**: ghi nó biểu diễn đại lượng nào và chuyển động theo hàm nào (vd. "người chạy trên đường chạy dưới đồ thị, vị trí = $f(x)$; chạy nhanh khi $f'$ lớn, dừng khi $f' = 0$, quay đầu khi $f'$ đổi dấu"). Không có vai trò → không đưa vào.
 - **giải phẫu công thức** (yêu cầu 8): mỗi dòng ghi cụm ký hiệu nào sáng lên và thứ gì trên hình sáng cùng màu.
+- mở đầu `visual` bằng tên cảnh ("CẢNH 2 — …" lần đầu, "Giữ CẢNH 2." các beat sau) và đánh dấu "BƯỚC KHÓ" ở beat khó, để B3 biết hình nào dùng lại và chỗ nào phải dựng chậm.
 - nhân vật, trục, đồ thị ở tư thế quen thuộc; chuyển từ cảnh này sang cảnh kia bằng bước giải thích được (bảng số → chấm điểm → nối đồ thị), không bằng phép biến hình (xoay, gập, cuộn).
 - phóng to: mô tả theo kiểu **kính lúp** (hình gốc giữ nguyên, khung soi co dần quanh điểm, ô phóng to bên cạnh có vạch chia), không viết chung chung "zoom vào đồ thị".
 - không thêm thẻ/tag trang trí; mọi thứ trên hình phải giúp người xem hiểu ý của beat.
@@ -230,6 +237,7 @@ Giọng văn:
 - [ ] Hình trong `visual` khớp số: điểm thật sự nằm trên đồ thị, hệ số góc đúng, nghiệm đúng…
 - [ ] Đủ 13 yêu cầu bắt buộc của khung nội dung.
 - [ ] **Không nhảy bước — theo dõi người xem**: đi từng dòng, ghi "lúc này người xem đang nhìn gì, đã hiểu những gì, đang thắc mắc gì, hình trả lời thế nào". Dòng nào dùng một thứ (ký hiệu, hình, khái niệm) chưa được giải thích ở dòng trước → chèn bước còn thiếu. Chỗ nào người xem phải tự đoán (cái này là gì? sao tự nhiên có cái này? sao lại bằng nhau?) → thêm dòng giải thích hoặc đổi hình.
+- [ ] Phần đề thi không dùng thứ chưa dạy: có bước "một số → một hàm" trước khi đưa đồ thị $f'$, đổi hàm được nói rõ, "giá trị âm" được cho thấy trước khi dùng. Sửa một phần kịch bản → đã rà lại cả các beat giữ nguyên.
 - [ ] Đổi sang mô hình có beat riêng: lý do, "không phải số liệu thật", vài con số trước công thức, nhãn "mô hình" giữ trên hình.
 - [ ] Mỗi khái niệm mới (cát tuyến, tiếp tuyến, độ dốc…) có dòng định nghĩa bằng hình trước khi dùng; tiếp tuyến dạy bằng kính lúp; mọi câu "A chính là B" được cho thấy trên hình.
 - [ ] Mọi ký hiệu đơn ($x_0$, $f(x_0)$, $x$, $f(x)$…) được giải thích riêng (nghĩa + chỗ trên hình + con số) trước khi xuất hiện trong một phép tính; hiệu/thương dựng từ các thành phần (hai cột rồi mới tới phần chênh), không hiện kết quả giữa trời.
