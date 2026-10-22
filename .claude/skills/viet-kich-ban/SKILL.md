@@ -39,7 +39,7 @@ Phần lớn lỗi người dùng bắt được là **lỗi dàn ý** (hiện t
 5. **Đường hiểu**: tiền đề → các bậc hiểu lần lượt, **không bỏ bậc nào** → sau video làm được gì (một câu cụ thể, gắn với dạng bài nào). Đánh dấu các **bước khó**.
 6. **Chuỗi "vì sao"** (phần "Câu trả lời vì sao" bên dưới): viết ra từng mắt xích, mỗi mắt xích sẽ thành một dòng, xuất phát từ công thức học sinh nhớ.
 7. **Giải phẫu công thức trên hình** (yêu cầu 8): cụm ký hiệu nào ↔ thứ gì trên hình.
-8. **Phần đề thi** (yêu cầu 4): hàm ví dụ, và các bước cầu sẽ có (một số → một hàm, đổi hàm, giá trị âm, từ $f'$ sang $f$ có hình).
+8. **Phần đề thi** (yêu cầu 4): có hay không (video chỉ nêu bản chất → không, ghi lý do); nếu có: hàm ví dụ, và các bước cầu sẽ có (một số → một hàm, đổi hàm, giá trị âm, từ $f'$ sang $f$ có hình).
 9. **Danh sách beat**: `section` · ý chính 1 câu · hình định dùng.
 10. **Ước lượng thời lượng**; **những ý đã cắt** và lý do (chủ đề rộng → chọn một ý cốt lõi, phần còn lại ghi vào đây).
 
@@ -96,7 +96,8 @@ Thứ tự và số phần tuỳ chủ đề, nhưng **bắt buộc có** (số 
    - không mở bằng "Hôm nay chúng ta học…".
 2. **Trực giác trước, công thức sau**: công thức chỉ xuất hiện sau khi đã có hình hoặc ví dụ dẫn tới nó (trừ công thức bài trước, hiện ngay làm mốc — yêu cầu 7).
 3. **Ít nhất một hình/ví dụ trực quan** làm lộ ra bản chất (đồ thị, hình học, chuyển động, đếm…).
-4. **Liên hệ đề thi bằng một hàm ví dụ cụ thể**, không cần bài tập đầy đủ:
+4. **Liên hệ đề thi bằng một hàm ví dụ cụ thể**, không cần bài tập đầy đủ — **chỉ khi dạng bài dùng đúng khái niệm của video**:
+   - **video chỉ nêu bản chất một khái niệm** (vd. "đạo hàm thật ra đo cái gì") → **không có phần đề thi**: đi thẳng từ công thức sang `GIẢI ĐÁP`. Không mượn dạng bài của bài khác (cực trị, đơn điệu…) chỉ để có phần đề thi — đó là dạy công cụ bài khác. Dàn ý mục 8 ghi "không có phần đề thi" + lý do. Đã gặp (22/10): video bản chất đạo hàm có b14–b15 đọc đồ thị $f'$ → cực trị, người dùng bảo xoá vì video chỉ để nêu bản chất;
    - dùng một hàm cụ thể để cho thấy bản chất vừa học giúp đọc/suy ra điều gì trong dạng câu hỏi hay gặp (vd. nhìn đồ thị $f'$ → suy ra khoảng đồng biến, cực trị của $f$); nói rõ *bản chất nào* dẫn tới kết luận;
    - **vẫn trong ví dụ xuyên suốt** (yêu cầu 11): dạng bài kể lại bằng chính nhân vật/vật của video ("đồ thị $f'$" = vận tốc của người chạy, "$f$ đổi chiều biến thiên" = người chạy quay đầu). Hình đồ thị và hình ví dụ hiện cùng lúc, chuyển động của nhân vật do hàm điều khiển;
    - **chuyển sang phần đề thi là một bước khó.** Phần này hay dùng thứ phần trước chưa dạy; mỗi thứ cần dòng (hoặc beat) riêng trước khi dùng:
@@ -291,7 +292,7 @@ Công thức dài: **diễn giải bằng lời** ("tử là phần độ cao th
 - [ ] Mọi ký hiệu đơn được giải thích riêng (nghĩa + chỗ trên hình + con số) trước khi vào phép tính; hiệu/thương dựng từ thành phần.
 - [ ] Mỗi khái niệm mới có dòng định nghĩa bằng hình trước khi dùng; mọi câu "A chính là B" được cho thấy trên hình.
 - [ ] Đổi sang mô hình có beat riêng (lý do, "không phải số liệu thật", vài con số trước công thức, nhãn "mô hình").
-- [ ] Phần đề thi: có bước "một số → một hàm", đổi hàm được nói rõ, giá trị âm được cho thấy, $f'$ → $f$ có hình so sánh từng khoảng. Sửa một phần kịch bản → đã rà cả beat giữ nguyên.
+- [ ] Phần đề thi chỉ có khi dạng bài dùng đúng khái niệm của video (video chỉ nêu bản chất → không có). Nếu có: có bước "một số → một hàm", đổi hàm được nói rõ, giá trị âm được cho thấy, $f'$ → $f$ có hình so sánh từng khoảng. Sửa một phần kịch bản → đã rà cả beat giữ nguyên.
 - [ ] Mỗi chỗ chuyển ví dụ → toán có bảng tương ứng trên màn hình và bước thay số khớp kết quả cũ.
 
 **Hình**

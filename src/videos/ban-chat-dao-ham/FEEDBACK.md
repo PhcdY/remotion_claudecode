@@ -30,7 +30,8 @@ Quy trình: người dùng nêu từng vấn đề → sửa skill trước → 
 | 24 | Cát tuyến, tiếp tuyến không được định nghĩa; nên dùng zoom | ✅ viet-kich-ban › yêu cầu 12 (khái niệm mới định nghĩa bằng hình, tiếp tuyến bằng kính lúp, "A chính là B" phải cho thấy); dung-video › Quy tắc 6, 10 | ✅ (demo) |
 | 25 | Đối chiếu đồ thị nhảy bước: chưa hiểu $f(x)$, $f(x_0)$ đã chỉ đoạn $f(x)-f(x_0)$ "giữa trời"; phải kẻ hai cột dọc rồi mới trừ | ✅ viet-kich-ban › "Không nhảy bước" (Bối cảnh), yêu cầu 8 (từng ký hiệu đơn trước, dựng phép tính từ thành phần), checklist theo dõi người xem; dung-video › Quy tắc 10 | ✅ (demo) |
 | 26 | Được tăng thời lượng; ưu tiên tuyệt đối là người xem hiểu, không bị lạc | ✅ viet-kich-ban › Bối cảnh + Độ dài (2:30–4:00, ≈ 2700–4300 ký tự, 8–14 beat); dung-video, tao-audio, CLAUDE.md | ✅ (demo) |
-| 27 | (tự rà) Phần đề thi b14–b15 giữ từ bản cũ, nhảy bước: dùng đồ thị $f'$ (một hàm) khi video mới dạy $f'(x_0)$ là một số; đổi sang hàm khác và "vận tốc âm = chạy lùi" không được giới thiệu | ✅ viet-kich-ban › yêu cầu 4 (chuyển sang đề thi là bước khó: một số → một hàm, đổi hàm, giá trị âm), Bước 2 (sửa một phần thì rà cả beat giữ nguyên), yêu cầu 6 | ⬜ |
+| 27 | (tự rà) Phần đề thi b14–b15 giữ từ bản cũ, nhảy bước: dùng đồ thị $f'$ (một hàm) khi video mới dạy $f'(x_0)$ là một số; đổi sang hàm khác và "vận tốc âm = chạy lùi" không được giới thiệu | ✅ viet-kich-ban › yêu cầu 4 (chuyển sang đề thi là bước khó: một số → một hàm, đổi hàm, giá trị âm), Bước 2 (sửa một phần thì rà cả beat giữ nguyên), yêu cầu 6 | — (bỏ cả phần, xem 28) |
+| 28 | Xoá phần cực trị (b14–b15): video chỉ để nêu bản chất đạo hàm, không cần phần đề thi | ✅ viet-kich-ban › yêu cầu 4 (video chỉ nêu bản chất → không có phần đề thi, không mượn dạng bài bài khác), dàn ý mục 8, checklist | ✅ (22/10) |
 
 ## Việc cần làm khi sửa video (vấn đề 1)
 - `Subtitle`: chỉ hiện dòng đang đọc.
@@ -111,3 +112,7 @@ check-layout: 0 chồng lấn / 110 frame. Thời lượng 3:53. Chưa render, x
 - Trước b14: thêm bước "một số → một hàm": với người chạy mô hình $s=t^2$, đo vận tốc tức thời lúc 1, 2, 3… s (2, 4, 6… m/s), chấm thành đồ thị vận tốc $v = 2t$, gọi nó là $f'$.
 - b14: nói rõ đây là một đề bài / người chạy khác; một dòng riêng cho "vận tốc âm = chạy lùi" (người chạy quay mặt, đi ngược) trước khi suy ra $f$ giảm.
 
+
+## Trạng thái (22/10/2026, vấn đề 28)
+Bỏ b14–b15 (đồ thị $f'$ → cực trị) khỏi `script.json` và `beats.tsx`; b13 (công thức $f'(5)=10$) nối thẳng sang b16 `GIẢI ĐÁP`. Áp dụng cho cả hai bản giọng (dùng chung kịch bản), audio cũ không cần tạo lại.
+Thời lượng: bản nữ 3:32, bản nam 3:30. Mục "Việc cần làm (vấn đề 27)" không còn áp dụng.

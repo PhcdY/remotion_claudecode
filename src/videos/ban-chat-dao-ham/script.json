@@ -292,46 +292,6 @@
       ]
     },
     {
-      "id": "b14",
-      "section": "TRONG ĐỀ THI",
-      "keyword": "Quay đầu là cực trị",
-      "visual": "CẢNH 3 — Phía trên: hệ trục, nhãn 'x' và 'y', x từ 0 đến 5,5 (vạch mỗi 1); y từ −7 đến 5 (vạch −6, −4, −2, 2, 4). Đồ thị $y=f'(x)=(x-1)(x-4)^2$ trên $[0{,}5;\\,5]$: đi qua (0,5; −6,125), cắt trục tại (1; 0), đỉnh (2; 4), chạm trục tại (4; 0), tới (5; 4). Nhãn '$y = f'(x)$' ở vùng trống bên trái phía trên, ngay dưới chú thích nhỏ 'vận tốc người chạy'. Phía dưới đồ thị: đường chạy nằm ngang (không số), người chạy mô hình cao ≥ 140px; vị trí người chạy = $f(x) = \\frac{x^4}{4} - 3x^3 + 12x^2 - 16x$ (scale chung: f(0,5) ≈ −5,36, f(1) = −6,75, f(2) = −4, f(4) = 0, f(5) = 1,25; khung đường chạy từ −7,5 đến 2). Một điểm quét màu nhấn chạy trên đồ thị $f'$ đồng bộ với người chạy. Dòng 1: đồ thị vẽ dần; đường chạy và người chạy hiện bên dưới, đứng ở f(0,5). Dòng 2: điểm quét chạy từ x = 0,5 tới gần 1; phần đồ thị dưới trục tô màu 'giảm', nhãn '$f'<0$' cạnh phần đó; người chạy quay mặt sang trái, lùi chậm dần. Dòng 3: tại x = 1 người chạy dừng hẳn rồi lật hình quay mặt sang phải; điểm (1; 0) sáng màu nhấn, nhãn 'cực tiểu' phía dưới điểm (không đè số trục).",
-      "lines": [
-        {
-          "text": "Cho đồ thị $f'$ · $f$ có mấy cực trị?",
-          "speak": "Đề hay cho đồ thị f phẩy rồi hỏi f có mấy cực trị, mà f phẩy chính là vận tốc người chạy."
-        },
-        {
-          "text": "$f' < 0$: lùi lại, $f$ giảm",
-          "speak": "Lúc đầu vận tốc âm, người chạy lùi lại, tức f đang giảm."
-        },
-        {
-          "text": "$x = 1$: quay đầu → cực tiểu",
-          "speak": "Đến x bằng một thì người chạy dừng rồi quay đầu, đó là... cực trị."
-        }
-      ]
-    },
-    {
-      "id": "b15",
-      "section": "BẪY THƯỜNG GẶP",
-      "keyword": "Dừng chưa chắc là cực trị",
-      "visual": "Giữ CẢNH 3. Dòng 1: điểm quét chạy từ x = 1 tới gần 4; phần đồ thị trên trục tô màu 'tăng', nhãn '$f'>0$'; người chạy tiến sang phải, nhanh nhất khi điểm quét qua đỉnh (2; 4), chậm dần sau đó. Dòng 2: tại x = 4 người chạy dừng, cúi buộc dây giày (hài), KHÔNG lật hình, rồi chạy tiếp sang phải tới f(5); điểm (4; 0) sáng màu cảnh báo, nhãn 'chạm trục, không đổi dấu' đặt phía trên điểm, xa đường cong. Dòng 3: hình đứng yên; dưới đồ thị hiện kết luận 'chỉ 1 cực trị: cực tiểu tại $x = 1$'.",
-      "lines": [
-        {
-          "text": "$f' > 0$: tiến lên, $f$ tăng",
-          "speak": "Sau đó vận tốc dương, người chạy tiến lên, nhanh nhất ở đỉnh đồ thị."
-        },
-        {
-          "text": "$x = 4$: dừng, không quay đầu",
-          "speak": "Đến x bằng bốn, người chạy dừng lại buộc dây giày rồi chạy tiếp, không hề quay đầu."
-        },
-        {
-          "text": "",
-          "speak": "Nên x bằng bốn không phải cực trị, và f chỉ có... một cực trị."
-        }
-      ]
-    },
-    {
       "id": "b16",
       "section": "GIẢI ĐÁP",
       "keyword": "Tốc độ tức thời $= s'(t)$",

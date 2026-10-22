@@ -3,7 +3,7 @@ import { Easing, interpolate, useCurrentFrame } from "remotion";
 import { BeatProps, clamp, ramp } from "../../components/BeatShell";
 import { Card } from "../../components/Card";
 import { MathText, Tex } from "../../components/MathText";
-import { Axes, FunctionPlot, Plot, PlotLabel, Point, Scale, Segment, fmt, makeScale } from "../../components/plot";
+import { PlotLabel, Point, Scale, Segment, fmt } from "../../components/plot";
 import { colors, tint } from "../../components/theme";
 import { ZoomInset } from "../../components/ZoomInset";
 import { C, GraphPoint, LineLabel, ModelGraph, S0, SecantLine, T0 as X0, Triangle, graphLayout, s2, slopeAB } from "./graph";
@@ -13,7 +13,6 @@ import {
   LaserIcon,
   POSE_LOW,
   POSE_MAIN,
-  RunnerFigure,
   Stopwatch,
   TRACK,
   TRACK_BASE,
@@ -771,153 +770,6 @@ export const Beat13: React.FC<BeatProps> = ({ L }) => {
       <Legend rows12={1} row3={1} opacity={0.45} />
       <Formula hl={null} />
     </>
-  );
-};
-
-// =====================================================================
-// Cảnh 3 (b14–b15): đồ thị f' = vận tốc người chạy, đường chạy bên dưới
-// =====================================================================
-const fp = (x: number) => (x - 1) * (x - 4) * (x - 4);
-/** Vị trí người chạy: một nguyên hàm của f'. */
-const F = (x: number) => x ** 4 / 4 - 3 * x ** 3 + 12 * x ** 2 - 16 * x;
-const X_START = 0.5;
-/** Quãng đường đã đi (để tính pha sải chân): lùi tới x = 1 rồi tiến. */
-const travelled = (x: number) => (x <= 1 ? F(X_START) - F(x) : F(X_START) - F(1) + (F(x) - F(1)));
-
-const S3 = makeScale({ xMin: 0, xMax: 5.5, yMin: -7, yMax: 5, width: 1200, height: 320 });
-const S3_LEFT = 330;
-const S3_TOP = 140;
-const LANE = { top: 600, h: 60, left: 300, right: 1580 };
-/** Vị trí (đơn vị của F) → px trên đường chạy. */
-const lanePx = (P: number) => S3_LEFT + (P + 7.5) * (1200 / 9.5);
-
-/** Vùng giữa đồ thị f' và trục hoành trên [a; b]. */
-const Shade: React.FC<{ s: Scale; a: number; b: number; color: string; opacity: number }> = ({ s, a, b, color, opacity }) => {
-  if (opacity <= 0) return null;
-  let d = `M${s.x(a)},${s.y(0)} `;
-  for (let i = 0; i <= 60; i++) {
-    const x = a + ((b - a) * i) / 60;
-    d += `L${s.x(x)},${s.y(fp(x))} `;
-  }
-  d += `L${s.x(b)},${s.y(0)} Z`;
-  return <path d={d} fill={tint(color, 0.22)} opacity={opacity} />;
-};
-
-const ExamScene: React.FC<{
-  draw: number;
-  x: number;
-  facing: number;
-  crouch?: number;
-  runnerO: number;
-  neg: number;
-  pos: number;
-  p1: number;
-  p4: number;
-  done: number;
-  curveLbl: number;
-}> = ({ draw, x, facing, crouch = 0, runnerO, neg, pos, p1, p4, done, curveLbl }) => {
-  const s = S3;
-  const sweep = draw >= 1 ? 1 : 0;
-  return (
-    <>
-      <Plot
-        scale={s}
-        left={S3_LEFT}
-        top={S3_TOP}
-        overlay={
-          <>
-            <PlotLabel scale={s} x={3.6} y={-3.3} anchor="left" color={colors.curve} opacity={curveLbl}>
-              <MathText text="$y = f'(x)$" />
-            </PlotLabel>
-            <PlotLabel scale={s} x={3.6} y={-5.85} anchor="left" color={colors.muted} opacity={curveLbl}>
-              vận tốc người chạy
-            </PlotLabel>
-            <PlotLabel scale={s} x={0.1} y={-2.3} anchor="left" color={colors.decrease} opacity={neg}>
-              <MathText text="$f' < 0$" />
-            </PlotLabel>
-            <PlotLabel scale={s} x={2.5} y={1.2} color={colors.increase} opacity={pos}>
-              <MathText text="$f' > 0$" />
-            </PlotLabel>
-            <PlotLabel scale={s} x={1.12} y={-1.3} anchor="left" color={colors.accent} opacity={p1}>
-              <span style={{ fontWeight: 800 }}>cực tiểu</span>
-            </PlotLabel>
-            <PlotLabel scale={s} x={3.9} y={2.1} color={colors.warn} opacity={p4}>
-              không đổi dấu
-            </PlotLabel>
-            <PlotLabel scale={s} x={0.2} y={3.6} anchor="left" color={colors.accent} opacity={done}>
-              <span style={{ fontWeight: 800 }}>chỉ 1 cực trị</span>
-            </PlotLabel>
-          </>
-        }
-      >
-        <Axes scale={s} xTicks={[1, 2, 3, 4, 5]} yTicks={[-6, -4, -2, 2, 4]} hideXLabels={[1, 4]} />
-        <Shade s={s} a={X_START} b={1} color={colors.decrease} opacity={neg} />
-        <Shade s={s} a={1} b={4} color={colors.increase} opacity={pos} />
-        <FunctionPlot scale={s} f={fp} from={X_START} to={5} progress={draw} />
-        <Segment scale={s} x1={4} y1={0.3} x2={4} y2={1.45} color={colors.warn} width={3} opacity={p4} />
-        <Point scale={s} x={1} y={0} color={colors.accent} opacity={p1} />
-        <Point scale={s} x={4} y={0} color={colors.warn} opacity={p4} />
-        <Point scale={s} x={x} y={fp(x)} r={12} color={colors.text} opacity={sweep * runnerO} />
-      </Plot>
-      <svg width={1920} height={1080} style={{ position: "absolute", inset: 0, opacity: runnerO }}>
-        <rect x={LANE.left} y={LANE.top} width={LANE.right - LANE.left} height={LANE.h} rx={10} fill="#E07A5A" />
-        <g data-mark="runner" transform={`translate(${lanePx(F(x))}, ${LANE.top + 40}) scale(0.95)`}>
-          <RunnerFigure phase={travelled(x) * 6} facing={facing} crouch={crouch} color={colors.brandBlue} />
-        </g>
-      </svg>
-    </>
-  );
-};
-
-// =====================================================================
-// b14 TRONG ĐỀ THI — đồ thị f' là vận tốc; lùi lại; quay đầu tại x = 1
-// =====================================================================
-export const Beat14: React.FC<BeatProps> = ({ L, E, T0 }) => {
-  const f = useCurrentFrame();
-  const draw = ramp(f, T0, T0 + 30);
-  const x = interpolate(f, [L[1] + 4, E[1] - 4], [X_START, 1], clamp);
-  const facing = interpolate(f, [L[2] + 8, L[2] + 20], [-1, 1], clamp);
-  return (
-    <ExamScene
-      draw={draw}
-      x={x}
-      facing={facing}
-      runnerO={ramp(f, T0 + 10, T0 + 24)}
-      neg={ramp(f, L[1], L[1] + 12)}
-      pos={0}
-      p1={ramp(f, L[2] + 12, L[2] + 24)}
-      p4={0}
-      done={0}
-      curveLbl={ramp(f, T0 + 20, T0 + 34)}
-    />
-  );
-};
-
-// =====================================================================
-// b15 BẪY THƯỜNG GẶP — tiến lên; x = 4 dừng buộc dây giày, không quay đầu; chỉ 1 cực trị
-// =====================================================================
-export const Beat15: React.FC<BeatProps> = ({ L, E, T0 }) => {
-  const f = useCurrentFrame();
-  const startRun = Math.max(L[0], T0) + 4;
-  let x: number;
-  if (f < L[1]) x = interpolate(f, [startRun, E[0] - 2], [1, 3.96], clamp);
-  else if (f < L[1] + 44) x = interpolate(f, [L[1], L[1] + 8], [3.96, 4], clamp);
-  else x = interpolate(f, [L[1] + 44, E[1] - 2], [4, 5], clamp);
-  const crouch = ramp(f, L[1] + 8, L[1] + 16) * (1 - ramp(f, L[1] + 34, L[1] + 44));
-  return (
-    <ExamScene
-      draw={1}
-      x={x}
-      facing={1}
-      crouch={crouch}
-      runnerO={1}
-      neg={1}
-      pos={ramp(f, startRun, startRun + 12)}
-      p1={1}
-      p4={ramp(f, L[1] + 8, L[1] + 20)}
-      done={ramp(f, L[2], L[2] + 12)}
-      curveLbl={1}
-    />
   );
 };
 

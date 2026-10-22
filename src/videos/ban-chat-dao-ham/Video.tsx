@@ -20,8 +20,6 @@ import {
   Beat11,
   Beat12,
   Beat13,
-  Beat14,
-  Beat15,
   Beat16,
 } from "./beats";
 import { VideoProps, calculateMetadata, script } from "./timeline";
@@ -40,8 +38,6 @@ const BEATS: Record<string, React.FC<BeatProps>> = {
   b11: Beat11,
   b12: Beat12,
   b13: Beat13,
-  b14: Beat14,
-  b15: Beat15,
   b16: Beat16,
 };
 
