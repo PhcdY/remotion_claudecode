@@ -1,48 +1,10 @@
 import React from "react";
 import { interpolate } from "remotion";
 import { Card } from "../../components/Card";
-import { colors, fontSize, fontText, halo } from "../../components/theme";
+import { label, lerp } from "../../components/parts";
+import { colors, fontSize, fontText } from "../../components/theme";
 
-export const label: React.CSSProperties = {
-  fontFamily: fontText,
-  fontWeight: 600,
-  fontSize: fontSize.label,
-  color: colors.text,
-};
-
-export const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
-
-/** Nhãn HTML đặt tuyệt đối, có halo; anchor theo tâm ngang. */
-export const Tag: React.FC<{
-  x: number;
-  y: number;
-  anchor?: "center" | "left" | "right";
-  color?: string;
-  weight?: number;
-  size?: number;
-  opacity?: number;
-  name?: string;
-  children: React.ReactNode;
-}> = ({ x, y, anchor = "center", color = colors.text, weight = 600, size = fontSize.label, opacity = 1, name = "label", children }) => (
-  <div
-    data-text={name}
-    style={{
-      ...label,
-      position: "absolute",
-      left: x,
-      top: y,
-      translate: anchor === "center" ? "-50% 0" : anchor === "right" ? "-100% 0" : "0 0",
-      whiteSpace: "nowrap",
-      color,
-      fontWeight: weight,
-      fontSize: size,
-      opacity,
-      textShadow: halo(),
-    }}
-  >
-    {children}
-  </div>
-);
+export { Tag, label, lerp } from "../../components/parts";
 
 // ---------------- Số liệu cuộc đua (arXiv:0911.1952, bảng I, Berlin 2009) ----------------
 /** Thời điểm (s, tính từ súng lệnh) Bolt qua mỗi mốc 0, 10, …, 100 m. */

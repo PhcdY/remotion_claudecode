@@ -1,0 +1,390 @@
+{
+  "slug": "cuc-tri-gtln-gtnn",
+  "title": "Đạo hàm bằng 0 thì sao?",
+  "exams": [
+    "THPTQG",
+    "TSA",
+    "HSA"
+  ],
+  "beats": [
+    {
+      "id": "b01",
+      "section": "HIỆN TƯỢNG",
+      "keyword": "Chỗ cao nhất ở đâu?",
+      "visual": "CẢNH 1 — giống CẢNH 1 bài trước: nhìn ngang sườn đồi (hình của $f$, đáy tại $x = 1$, đỉnh tại $x = 3$), nhưng tuyến dài thêm về bên trái: mặt đất từ $x = -1$ (sườn dốc cao, độ cao 22) đến $x = 4$; không hiện trục. Dòng 1: flycam bay từ phải sang trái theo một đường bay nét đứt NẰM NGANG, cao hơn hẳn mặt đất; vạch đo thẳng đứng nối flycam xuống mặt đất dài ngắn thay đổi theo địa hình. Dòng 2: vạch đo ngắn lại rõ khi flycam tới sườn dốc bên trái; chỗ cao nhất của mặt đất (đầu trái) nháy màu nhấn, nhãn 'chỗ cao nhất?'. Dòng 3: sườn đồi mờ hẳn (chỉ còn viền nhạt), bên phải hiện khung 'bản đồ độ cao' chứa $f(x) = -x^3 + 6x^2 - 9x + 6$ như bài trước, góc khung nhãn 'mô hình'. Dòng 4: trên khung hiện dấu '?' lớn.",
+      "lines": [
+        {
+          "text": "Bay ở một độ cao cố định",
+          "speak": "Lần này flycam không bay bám địa hình, mà giữ một độ cao cố định suốt tuyến."
+        },
+        {
+          "text": "phải cao hơn chỗ cao nhất",
+          "speak": "Muốn không đâm vào đất, độ cao đó phải lớn hơn chỗ cao nhất của cả tuyến."
+        },
+        {
+          "text": "chỉ có công thức",
+          "speak": "Máy trên flycam vẫn chỉ biết công thức của mặt đất, giống bài trước."
+        },
+        {
+          "text": "",
+          "speak": "Vậy chỗ cao nhất của tuyến nằm ở đâu, và cao bao nhiêu?"
+        }
+      ]
+    },
+    {
+      "id": "b02",
+      "section": "TRỰC GIÁC",
+      "keyword": "Còn $f' = 0$ thì sao?",
+      "visual": "CẢNH 2 — hệ trục của bài trước: trục ngang 'quãng bay ngang $x$' từ −1 đến 4 (vạch mỗi 1), trục dọc 'độ cao $f(x)$' từ 0 đến 24 (vạch mỗi 2, số ở 0, 4, 8, …, 24); công thức $f(x) = -x^3 + 6x^2 - 9x + 6$ kèm nhãn 'mô hình' ở góc trên trái (giữ đến hết b11, trừ b07). Dòng 1: đồ thị $f$ vẽ dần từ $x = -1$ (độ cao 22) tới $x = 4$ (độ cao 2), qua (0; 6), (1; 2), (2; 4), (3; 6). Dòng 2: đoạn đồ thị trên (1; 3) tô màu leo, kèm nhãn '$f' > 0$'. Dòng 3: hai đoạn (−1; 1) và (3; 4) tô màu hạ, kèm nhãn '$f' < 0$'. Dòng 4: hai điểm (1; 2) và (3; 6) sáng màu đạo hàm, cạnh mỗi điểm dấu '?'. Dòng 5: dấu '?' đổi thành nhãn 'đáy' dưới (1; 2) và 'đỉnh' trên (3; 6).",
+      "lines": [
+        {
+          "text": "",
+          "speak": "Đặt sườn đồi lên hệ trục như bài trước, trục ngang là quãng bay, trục dọc là độ cao."
+        },
+        {
+          "text": "",
+          "speak": "Bài trước đã chỉ ra, chỗ nào đạo hàm dương thì đường đi lên."
+        },
+        {
+          "text": "",
+          "speak": "Chỗ nào đạo hàm âm thì đường đi xuống."
+        },
+        {
+          "text": "$f'(1) = f'(3) = 0$",
+          "speak": "Còn tại một và tại ba, đạo hàm bằng không, vậy ở đó đường làm gì?"
+        },
+        {
+          "text": "",
+          "speak": "Nhìn hình thì tại một là đáy, tại ba là đỉnh."
+        }
+      ]
+    },
+    {
+      "id": "b03",
+      "section": "ĐỊNH NGHĨA",
+      "keyword": "Cực đại: cao hơn hai bên",
+      "visual": "Giữ CẢNH 2, màu leo/hạ và nhãn '$f' > 0$', '$f' < 0$' mờ đi; đồ thị dịch sang trái nhường chỗ thẻ bên phải. BƯỚC KHÓ — khái niệm mới, giải phẫu. Dòng 1: đường ngang đứt nét qua đỉnh (3; 6); đoạn đồ thị từ $x = 2{,}5$ (độ cao 5,375) đến $x = 3{,}5$ (độ cao 5,125) sáng màu nhấn, nằm dưới đường ngang. Dòng 2: bên phải hiện thẻ 'định nghĩa': 'Nếu tồn tại số $h > 0$ sao cho $f(x) < f(x_0)$ với mọi $x \\in (x_0 - h;\\, x_0 + h)$, $x \\ne x_0$ thì $f$ đạt cực đại tại $x_0$.' GIẢI PHẪU, mỗi dòng một cụm sáng màu và đúng một thứ trên hình sáng cùng màu. Dòng 3: $x_0$ (màu x0) ↔ chấm trên trục ngang tại 3. Dòng 4: $(x_0 - h;\\, x_0 + h)$ (màu khoảng) ↔ khoảng (2,5; 3,5) tô trên trục ngang. Dòng 5: $f(x) < f(x_0)$ (màu nhấn) ↔ đoạn đồ thị trên khoảng đó cùng đường ngang qua đỉnh, nhãn '6' ở đầu đường ngang. Dòng 6: nhãn 'đỉnh' đổi thành 'cực đại'. Dòng 7: tại (1; 2) đoạn đồ thị từ 0,5 đến 1,5 sáng, nằm trên đường ngang đứt nét qua đáy; nhãn 'đáy' đổi thành 'cực tiểu'.",
+      "lines": [
+        {
+          "text": "",
+          "speak": "Đỉnh tại ba chỉ cần cao hơn các điểm ở sát hai bên nó."
+        },
+        {
+          "text": "",
+          "speak": "Điểm như vậy gọi là... điểm cực đại, trong sách định nghĩa như sau."
+        },
+        {
+          "text": "$x_0 = 3$",
+          "speak": "Điểm đang xét ở đây là ba, vị trí của đỉnh."
+        },
+        {
+          "text": "khoảng sát hai bên",
+          "speak": "Cụm thứ hai là một khoảng ngắn ở sát hai bên đỉnh."
+        },
+        {
+          "text": "$f(x) < f(x_0) = 6$",
+          "speak": "Trong khoảng đó, mọi điểm khác đều thấp hơn đỉnh, tức thấp hơn sáu."
+        },
+        {
+          "text": "giá trị cực đại: $6$",
+          "speak": "Vậy ba là điểm cực đại, còn sáu là giá trị cực đại."
+        },
+        {
+          "text": "$x = 1$: cực tiểu",
+          "speak": "Đáy tại một thì ngược lại, gọi là cực tiểu, chung lại gọi là cực trị."
+        }
+      ]
+    },
+    {
+      "id": "b04",
+      "section": "BẢN CHẤT",
+      "keyword": "Đạo hàm dương: chưa phải đỉnh",
+      "lineGap": 0.5,
+      "visual": "Giữ CẢNH 2 (đồ thị bên trái); thẻ định nghĩa tắt, các nhãn 'cực đại', 'cực tiểu' giữ nhỏ. BƯỚC KHÓ NHẤT — mỗi dòng một mắt xích ngắn. Dòng 1: đỉnh (3; 6) nháy màu đạo hàm, cạnh đó dấu '?'. Dòng 2: bên phải trên hiện thẻ 'bài trước': $f'(x_0) = \\lim\\limits_{x \\to x_0} \\dfrac{f(x) - f(x_0)}{x - x_0}$. Dòng 3: dưới công thức trong thẻ thêm dòng '$f' > 0$: ngay bên phải cao hơn' (màu leo). Dòng 4: điểm (2; 4) trên đồ thị sáng màu leo, nhãn '$f'(2) = 3$'. Dòng 5: KÍNH LÚP: khung soi nhỏ quanh (2; 4), ô phóng to ở bên phải dưới thẻ (lưới, vạch chia 0,1); trong ô hiện điểm (2,1; 4,3) cao hơn (2; 4), mũi tên ↑ màu leo, đoạn dọc chênh 0,3 màu tử. Dòng 6: dấu ✗ trên điểm (2; 4) ở cả đồ thị chính và trong ô.",
+      "lines": [
+        {
+          "text": "Vì sao tại đỉnh $f' = 0$?",
+          "speak": "Vì sao tại đỉnh, đạo hàm lại bằng không?"
+        },
+        {
+          "text": "",
+          "speak": "Nhắc lại bài trước, đạo hàm là giới hạn của phân số này."
+        },
+        {
+          "text": "",
+          "speak": "Từ đó đã thấy, đạo hàm dương thì điểm ngay bên phải cao hơn."
+        },
+        {
+          "text": "",
+          "speak": "Thử một điểm trước đỉnh, tại hai thì đạo hàm bằng ba, là số dương."
+        },
+        {
+          "text": "",
+          "speak": "Kính lúp cho thấy ngay bên phải có điểm cao hơn."
+        },
+        {
+          "text": "chưa phải đỉnh",
+          "speak": "Còn chỗ cao hơn ở sát bên, nên điểm này chưa phải đỉnh."
+        }
+      ]
+    },
+    {
+      "id": "b05",
+      "section": "BẢN CHẤT",
+      "keyword": "Đỉnh, đáy: $f' = 0$",
+      "lineGap": 0.5,
+      "visual": "Giữ bố cục b04 (đồ thị trái, thẻ 'bài trước' phải trên, ô phóng to phải dưới; điểm (2; 4) vẫn mang dấu ✗ mờ). BƯỚC KHÓ NHẤT — mỗi dòng một mắt xích. Dòng 1: điểm (3,5; 5,125) trên đồ thị sáng màu hạ, nhãn '$f'(3{,}5) < 0$' (giá trị đúng −3,75). Dòng 2: trong thẻ thêm dòng '$f' < 0$: ngay bên trái cao hơn' (màu hạ). Dòng 3: khung soi chuyển sang quanh (3,5; 5,125); trong ô hiện điểm (3,4; 5,456) cao hơn, mũi tên ↑ ở phía trái; rồi dấu ✗ trên (3,5; 5,125). Dòng 4: hai dấu ✗ tại (2; 4) và (3,5; 5,125) cùng sáng lại. Dòng 5: khung soi chuyển về đỉnh (3; 6); trong ô đoạn đồ thị quanh đỉnh gần như nằm ngang, nhãn '$f'(3) = 0$'. Dòng 6: đoạn tiếp tuyến nằm ngang qua đỉnh hiện ở cả đồ thị chính và trong ô (màu tiếp tuyến). Dòng 7: kính lúp tắt; đoạn tiếp tuyến nằm ngang hiện tại đáy (1; 2), nhãn '$f'(1) = 0$'.",
+      "lines": [
+        {
+          "text": "",
+          "speak": "Giờ thử một điểm sau đỉnh, tại đó đạo hàm âm."
+        },
+        {
+          "text": "",
+          "speak": "Đạo hàm âm thì ngược lại, điểm ngay bên trái cao hơn."
+        },
+        {
+          "text": "",
+          "speak": "Kính lúp cho thấy đúng như vậy, nên điểm này cũng chưa phải đỉnh."
+        },
+        {
+          "text": "$f' > 0$ hay $f' < 0$: chưa phải đỉnh",
+          "speak": "Đạo hàm dương hay âm thì ở sát bên luôn còn chỗ cao hơn."
+        },
+        {
+          "text": "Đỉnh $\\Rightarrow f' = 0$",
+          "speak": "Vậy tại đỉnh, đạo hàm chỉ có thể bằng không."
+        },
+        {
+          "text": "tiếp tuyến nằm ngang",
+          "speak": "Nói bằng lời thường, tại đỉnh đường không lên cũng không xuống, tiếp tuyến nằm ngang."
+        },
+        {
+          "text": "Đáy $\\Rightarrow f' = 0$",
+          "speak": "Lập luận y hệt cho đáy, nên tại đáy đạo hàm cũng bằng không."
+        }
+      ]
+    },
+    {
+      "id": "b06",
+      "section": "CÔNG THỨC",
+      "keyword": "$f'$ đổi dấu: có cực trị",
+      "visual": "Giữ CẢNH 2; thẻ 'bài trước' và hai đoạn tiếp tuyến ngang mờ đi. Dòng 1: tại (3; 6) hiện dấu '?' nhỏ. Dòng 2: đoạn đồ thị trên (1; 3) tô màu leo, mũi tên ↑ dọc đường cong, nhãn 'trước 3: $f' > 0$'. Dòng 3: đoạn trên (3; 4) tô màu hạ, mũi tên ↓, nhãn 'sau 3: $f' < 0$'. Dòng 4: bên phải hiện thẻ 'định lý': 'Nếu $f'(x) > 0$ trên $(a; x_0)$ và $f'(x) < 0$ trên $(x_0; b)$ thì $f$ đạt cực đại tại $x_0$.' — cụm '$f'(x) > 0$ trên $(a; x_0)$' sẵn màu leo, cụm '$f'(x) < 0$ trên $(x_0; b)$' sẵn màu hạ, trùng màu hai đoạn trên đồ thị; $x_0$ ứng với 3. Dòng 5: đoạn (−1; 1) màu hạ và (1; 3) màu leo sáng quanh đáy (1; 2); thẻ thêm dòng 'Đổi dấu từ $-$ sang $+$: cực tiểu'.",
+      "lines": [
+        {
+          "text": "",
+          "speak": "Ngược lại, chỗ đạo hàm bằng không, khi nào thì là đỉnh?"
+        },
+        {
+          "text": "",
+          "speak": "Trước ba, đạo hàm dương nên đường đi lên tới đỉnh."
+        },
+        {
+          "text": "",
+          "speak": "Sau ba, đạo hàm âm nên đường đi xuống."
+        },
+        {
+          "text": "$f'$ đổi dấu từ $+$ sang $-$: cực đại",
+          "speak": "Đạo hàm đổi dấu từ dương sang âm thì đó là điểm cực đại, đây là định lý trong sách."
+        },
+        {
+          "text": "",
+          "speak": "Cực tiểu thì ngược lại, đạo hàm đổi dấu từ âm sang dương."
+        }
+      ]
+    },
+    {
+      "id": "b07",
+      "section": "BẪY THƯỜNG GẶP",
+      "keyword": "$f' = 0$ chưa chắc là cực trị",
+      "visual": "Đổi đề: sườn đồi $f$ và nhãn 'mô hình' tắt. Hệ trục mới cùng kiểu: trục ngang 'quãng bay ngang $x$' từ 0 đến 4, trục dọc 'độ cao $g(x)$' từ 0 đến 16 (vạch mỗi 2, số ở 0, 4, 8, 12, 16); góc trên trái nhãn 'sườn dốc khác' và công thức $g(x) = x^3 - 6x^2 + 12x$. Dòng 1: đồ thị $g$ vẽ dần qua (0; 0), (1; 7), (2; 8), (3; 9), (4; 16) — đi lên, phẳng một chút quanh 2, rồi lên tiếp. Dòng 2: điểm (2; 8) sáng màu đạo hàm, đoạn tiếp tuyến ngắn nằm ngang qua đó, nhãn '$g'(2) = 0$'. Dòng 3: đoạn (0; 2) và (2; 4) đều tô màu leo, mỗi bên một mũi tên ↑, cạnh công thức hiện '$g'(x) = 3(x - 2)^2$'. Dòng 4: nhãn 'không phải cực trị' cạnh (2; 8).",
+      "lines": [
+        {
+          "text": "",
+          "speak": "Nhưng đạo hàm bằng không, chưa chắc đã là cực trị, thử xét một sườn dốc khác."
+        },
+        {
+          "text": "",
+          "speak": "Tại hai, đạo hàm của sườn dốc này bằng không, tiếp tuyến nằm ngang."
+        },
+        {
+          "text": "$g' > 0$ cả hai bên",
+          "speak": "Nhưng trước hai đường đi lên, sau hai đường vẫn đi lên."
+        },
+        {
+          "text": "không đổi dấu",
+          "speak": "Đạo hàm không đổi dấu, nên đây không phải cực trị."
+        }
+      ]
+    },
+    {
+      "id": "b08",
+      "section": "GỐC RỄ",
+      "keyword": "Đỉnh đồi chưa chắc cao nhất",
+      "visual": "Quay lại CẢNH 2 (sườn dốc $g$ tắt; đồ thị $f$ trên $[-1; 4]$, nhãn 'mô hình', nhãn 'cực đại' tại (3; 6), 'cực tiểu' tại (1; 2)). Dòng 1: điểm cực đại (3; 6) sáng màu nhấn, nhãn 'cực đại: 6'. Dòng 2: đường bay nét đứt nằm ngang tại độ cao 8 kéo từ $x = 4$ sang trái, nhãn 'bay ở 8'; flycam nhỏ xuất hiện ở đầu phải đường bay. Dòng 3: flycam bay dọc đường bay sang trái và dừng lại khi chạm đồ thị tại $x \\approx -0{,}2$ (nơi $f(x) = 8$), dấu va chạm màu cảnh báo; đoạn đồ thị từ −1 đến −0,2 (cao hơn đường bay) sáng màu cảnh báo.",
+      "lines": [
+        {
+          "text": "cực đại: $6$",
+          "speak": "Quay lại flycam, máy giải đạo hàm bằng không, được đỉnh cao sáu."
+        },
+        {
+          "text": "bay ở độ cao 8",
+          "speak": "Nếu coi đỉnh là chỗ cao nhất, máy cho flycam bay ở độ cao tám."
+        },
+        {
+          "text": "",
+          "speak": "Bay về phía đầu tuyến thì flycam đâm thẳng vào sườn dốc."
+        }
+      ]
+    },
+    {
+      "id": "b09",
+      "section": "ĐỊNH NGHĨA",
+      "keyword": "Lớn nhất: so với cả tuyến",
+      "visual": "Giữ CẢNH 2; flycam, đường bay và màu cảnh báo tắt. Dòng 1: điểm (−1; 22) sáng màu nhấn; đường ngang đứt nét tại độ cao 22 kéo suốt từ $x = -1$ đến $x = 4$; toàn bộ đồ thị nằm dưới đường đó. Dòng 2: bên phải hiện thẻ 'định nghĩa': '$M = \\max\\limits_{[-1; 4]} f(x)$ nếu $f(x) \\le M$ với mọi $x \\in [-1; 4]$ và tồn tại $x_0 \\in [-1; 4]$ sao cho $f(x_0) = M$', dưới thẻ dòng '$M = 22$'. GIẢI PHẪU: Dòng 3: cụm '$f(x) \\le M$ với mọi $x$' (màu nhấn) ↔ cả đồ thị cùng đường ngang sáng cùng màu. Dòng 4: cụm 'tồn tại $x_0$ … $f(x_0) = M$' (màu x0) ↔ điểm (−1; 22) sáng cùng màu. Dòng 5: đỉnh (3; 6) sáng lại cùng khoảng nhỏ (2,5; 3,5) quanh nó (như b03), đặt cạnh đường ngang 22 để so; nhãn 'cực đại: 6' và '$\\max = 22$'.",
+      "lines": [
+        {
+          "text": "",
+          "speak": "Chỗ cao nhất của tuyến phải so với mọi điểm, từ đầu đến cuối tuyến."
+        },
+        {
+          "text": "",
+          "speak": "Độ cao đó gọi là... giá trị lớn nhất, ở đây bằng hai mươi hai."
+        },
+        {
+          "text": "",
+          "speak": "Định nghĩa có hai ý, ý đầu là cả đồ thị không vượt lên trên mức đó."
+        },
+        {
+          "text": "",
+          "speak": "Ý thứ hai là có một chỗ chạm đúng mức đó, ở đây là đầu tuyến."
+        },
+        {
+          "text": "cực đại $\\ne$ giá trị lớn nhất",
+          "speak": "Còn đỉnh tại ba chỉ cao nhất so với các điểm ở sát bên nó."
+        }
+      ]
+    },
+    {
+      "id": "b10",
+      "section": "BẢN CHẤT",
+      "keyword": "Bên trong: chỉ chỗ $f' = 0$",
+      "lineGap": 0.5,
+      "visual": "Giữ CẢNH 2; thẻ định nghĩa thu nhỏ lên góc phải trên, đường ngang 22 mờ. BƯỚC KHÓ — mỗi dòng một mắt xích. Dòng 1: dấu '?' lớn cạnh đồ thị. Dòng 2: phần bên trong (−1; 4) trên trục ngang tô màu nhạt, hai đầu −1 và 4 là hai chấm rỗng, nhãn 'bên trong'. Dòng 3: hai dấu ✗ của b04–b05 tại (2; 4) và (3,5; 5,125) hiện lại mờ, rồi đỉnh (3; 6) và đáy (1; 2) sáng màu đạo hàm, mỗi điểm một đoạn tiếp tuyến ngắn nằm ngang (nhắc b05), nhãn '$f' = 0$'. Dòng 4: tô màu nhạt tắt; chấm đầu tuyến (−1; 22) sáng màu nhấn. Dòng 5: tại (−1; 22) hiện đoạn tiếp tuyến ngắn dốc xuống sang phải (màu hạ), nhãn '$f'(-1) = -24$'. Dòng 6: vùng bên trái $x = -1$ tô gạch xám, nhãn 'hết tuyến'. Dòng 7: chấm (−1; 22) viền đậm màu nhấn, cùng với đỉnh và đáy đều mang nhãn nhỏ 'ứng viên'; chấm (4; 2) cũng mang nhãn 'ứng viên'.",
+      "lines": [
+        {
+          "text": "Chỗ cao nhất: ở đâu?",
+          "speak": "Vậy chỗ cao nhất của một tuyến có thể nằm ở đâu?"
+        },
+        {
+          "text": "",
+          "speak": "Nếu nó nằm bên trong tuyến, thì ở sát hai bên không có chỗ nào cao hơn nó."
+        },
+        {
+          "text": "bên trong $\\Rightarrow f' = 0$",
+          "speak": "Đạo hàm dương hay âm thì sát bên luôn có chỗ cao hơn, nên ở đây đạo hàm bằng không."
+        },
+        {
+          "text": "",
+          "speak": "Còn ở đầu tuyến thì khác."
+        },
+        {
+          "text": "",
+          "speak": "Tại đầu tuyến, đạo hàm âm, lẽ ra bên trái phải có chỗ cao hơn."
+        },
+        {
+          "text": "",
+          "speak": "Nhưng bên trái đã hết tuyến, không còn điểm nào để so."
+        },
+        {
+          "text": "đầu mút: vẫn có thể cao nhất",
+          "speak": "Nên đầu tuyến, tức đầu mút của đoạn, vẫn có thể là chỗ cao nhất."
+        }
+      ]
+    },
+    {
+      "id": "b11",
+      "section": "CÔNG THỨC",
+      "keyword": "So chỗ $f' = 0$ và hai đầu",
+      "visual": "Giữ CẢNH 2 (nhãn 'ứng viên' ở bốn điểm (−1; 22), (1; 2), (3; 6), (4; 2) mờ nhẹ). Bên phải hiện thẻ 'quy tắc' (SGK), mỗi bước một hàng: '1. Tìm các điểm $x_i \\in (a; b)$ mà $f'(x_i) = 0$.' / '2. Tính $f(x_i)$, $f(a)$, $f(b)$.' / '3. Số lớn nhất là $\\max\\limits_{[a;b]} f(x)$, số nhỏ nhất là $\\min\\limits_{[a;b]} f(x)$.' Dòng 1: thẻ hiện, ba hàng còn mờ. Dòng 2: hàng 1 sáng màu đạo hàm ↔ đỉnh (3; 6) và đáy (1; 2) sáng cùng màu. Dòng 3: hàng 2 sáng, cụm $f(a)$, $f(b)$ màu nhấn ↔ hai đầu tuyến (−1; 22), (4; 2) sáng cùng màu, cạnh bốn điểm hiện số độ cao 22, 2, 6, 2. Dòng 4: cụm $\\max$ sáng ↔ số 22 phóng to màu nhấn. Dòng 5: cụm $\\min$ sáng ↔ (1; 2) và (4; 2) sáng màu thứ hai, nhãn '$\\min = 2$'.",
+      "lines": [
+        {
+          "text": "",
+          "speak": "Gom lại thành quy tắc trong sách, tìm giá trị lớn nhất trên một đoạn."
+        },
+        {
+          "text": "",
+          "speak": "Bước một tìm các chỗ đạo hàm bằng không, chính là các đỉnh và đáy."
+        },
+        {
+          "text": "",
+          "speak": "Bước hai tính độ cao tại các chỗ đó và tại hai đầu đoạn."
+        },
+        {
+          "text": "",
+          "speak": "Bước ba so sánh, số lớn nhất là giá trị lớn nhất."
+        },
+        {
+          "text": "",
+          "speak": "Chỗ thấp nhất lập luận y hệt, số nhỏ nhất gọi là giá trị nhỏ nhất."
+        }
+      ]
+    },
+    {
+      "id": "b12",
+      "section": "TRONG ĐỀ THI",
+      "keyword": "Chỉ lấy điểm trong đoạn",
+      "visual": "Giữ CẢNH 2; thẻ quy tắc giữ nhỏ ở góc phải trên; nhãn 'mô hình' đổi thành 'đề bài'; các số và nhãn của b11 tắt. Dòng 1: đoạn [2; 4] tô màu nhấn trên trục ngang, phần đồ thị trên [2; 4] đậm, phần còn lại mờ; dòng đề '$\\max\\limits_{[2;4]} f(x)$, $\\min\\limits_{[2;4]} f(x)$ = ?' hiện trên cùng. Dòng 2: hai chấm tại $x = 1$ và $x = 3$ trên trục ngang sáng màu đạo hàm. Dòng 3: chấm tại 1 (nằm ngoài đoạn) gạch chéo rồi mờ hẳn. Dòng 4: ba cột dọc từ trục ngang lên đồ thị tại $x = 2$, $3$, $4$, đầu cột ghi 4, 6, 2. Dòng 5: cột tại 3 sáng màu nhấn, nhãn '$\\max = 6$'; cột tại 4 sáng màu thứ hai, nhãn '$\\min = 2$'. Dòng 6: nhãn 'cực đại' hiện lại cạnh (3; 6), nhãn 'đầu mút' cạnh (4; 2).",
+      "lines": [
+        {
+          "text": "Đề: $\\max, \\min$ trên $[2; 4]$",
+          "speak": "Trong đề thi, câu hỏi thường cho sẵn một đoạn, chẳng hạn từ hai đến bốn."
+        },
+        {
+          "text": "$f' = 0$: $x = 1$, $x = 3$",
+          "speak": "Giải đạo hàm bằng không, được một và ba."
+        },
+        {
+          "text": "$1 \\notin [2; 4]$: loại",
+          "speak": "Một nằm ngoài đoạn nên bỏ, chỉ giữ ba."
+        },
+        {
+          "text": "",
+          "speak": "Rồi tính độ cao tại ba và tại hai đầu đoạn."
+        },
+        {
+          "text": "$\\max = 6$, $\\min = 2$",
+          "speak": "Lớn nhất là sáu tại ba, nhỏ nhất là hai, ngay đầu mút bên phải."
+        },
+        {
+          "text": "",
+          "speak": "Lần này cực đại lại chính là lớn nhất, còn nhỏ nhất nằm ở đầu mút."
+        }
+      ]
+    },
+    {
+      "id": "b13",
+      "section": "GIẢI ĐÁP",
+      "keyword": "Cao nhất: $f' = 0$ hoặc hai đầu",
+      "visual": "Quay lại đúng CẢNH 1 (cùng component, bố cục b01): sườn đồi nhìn ngang từ $x = -1$ đến $x = 4$, nhãn 'mô hình', flycam ở đầu phải. Bên phải thẻ 'chương trình'. Dòng 1: thẻ hiện '1. giải $f'(x) = 0$: $x = 1$, $x = 3$'; trên mặt đất đáy và đỉnh sáng màu đạo hàm. Dòng 2: thẻ thêm '2. so $f(-1), f(1), f(3), f(4)$'; trên mặt đất bốn chỗ đó hiện số 22, 2, 6, 2. Dòng 3: số 22 ở đầu trái sáng màu nhấn, thẻ thêm 'cao nhất: 22'; đường bay nét đứt nằm ngang đặt cao hơn mức 22, flycam bay một lượt từ phải sang trái không chạm đất. Dòng 4: hình đứng yên.",
+      "lines": [
+        {
+          "text": "",
+          "speak": "Quay lại flycam, chương trình giải đạo hàm bằng không, được đáy và đỉnh."
+        },
+        {
+          "text": "",
+          "speak": "Rồi so độ cao tại hai chỗ đó với độ cao ở hai đầu tuyến."
+        },
+        {
+          "text": "",
+          "speak": "Lớn nhất là hai mươi hai ở ngay đầu tuyến, nên flycam phải bay cao hơn mức đó."
+        },
+        {
+          "text": "",
+          "speak": "Vậy... chỗ cao nhất nằm ở chỗ đạo hàm bằng không, hoặc ở hai đầu."
+        }
+      ]
+    }
+  ]
+}

@@ -50,8 +50,14 @@ export const ZoomInset: React.FC<{
   const ry2 = baseTop + base.y(y0 - hy);
   const insetRight = left > rx2;
 
-  const xs = niceStep(2 * hx);
-  const ys = niceStep(2 * hy);
+  // bước vạch chia "đẹp", số cách nhau đủ xa để không dính (≥ 120px ngang, ≥ 56px dọc)
+  const widen = (step: number, pxPerUnit: number, minPx: number) => {
+    let st = step;
+    while (st * pxPerUnit < minPx) st = niceStep(st * 2.2, 1);
+    return st;
+  };
+  const xs = widen(niceStep(2 * hx), s.sx, 120);
+  const ys = widen(niceStep(2 * hy), s.sy, 56);
   const xTicks = ticksIn(s.xMin, s.xMax, xs).filter((v) => s.x(v) > 140 && s.x(v) < width - 30);
   const yTicks = ticksIn(s.yMin, s.yMax, ys).filter((v) => s.y(v) > 30 && s.y(v) < height - 64);
   const tickStyle: React.CSSProperties = {

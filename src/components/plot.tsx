@@ -246,6 +246,49 @@ export const FunctionPlot: React.FC<{
   );
 };
 
+/**
+ * Mũi tên ngắn chạy dọc đồ thị f tại x (hướng theo chiều x tăng, hoặc ngược lại khi reverse),
+ * lệch ra phía trên đường một khoảng off (px). df: đạo hàm của f.
+ */
+export const CurveArrow: React.FC<{
+  s: Scale;
+  f: (x: number) => number;
+  df: (x: number) => number;
+  x: number;
+  color: string;
+  opacity?: number;
+  len?: number;
+  off?: number;
+  reverse?: boolean;
+}> = ({ s, f, df, x, color, opacity = 1, len = 64, off = 26, reverse = false }) => {
+  if (opacity <= 0) return null;
+  const dx = s.sx;
+  const dy = -df(x) * s.sy;
+  const n = Math.hypot(dx, dy);
+  const ux = dx / n;
+  const uy = dy / n;
+  // pháp tuyến hướng lên trên
+  const nx = uy;
+  const ny = -ux;
+  const sign = ny < 0 ? 1 : -1;
+  const cx = s.x(x) + nx * off * sign;
+  const cy = s.y(f(x)) + ny * off * sign;
+  const d = reverse ? -1 : 1;
+  const x1 = cx - (d * ux * len) / 2;
+  const y1 = cy - (d * uy * len) / 2;
+  const x2 = cx + (d * ux * len) / 2;
+  const y2 = cy + (d * uy * len) / 2;
+  const hx = -d * ux * 18;
+  const hy = -d * uy * 18;
+  return (
+    <g opacity={opacity} stroke={color} strokeWidth={6} strokeLinecap="round" fill="none">
+      <line x1={x1} y1={y1} x2={x2} y2={y2} />
+      <line x1={x2} y1={y2} x2={x2 + hx - d * uy * 12} y2={y2 + hy + d * ux * 12} />
+      <line x1={x2} y1={y2} x2={x2 + hx + d * uy * 12} y2={y2 + hy - d * ux * 12} />
+    </g>
+  );
+};
+
 // ---------- Điểm, đoạn, đường thẳng ----------
 
 export const Point: React.FC<{

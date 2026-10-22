@@ -35,7 +35,7 @@ Phần lớn lỗi người dùng bắt được là **lỗi dàn ý** (hiện t
 1. **slug** (chữ thường không dấu, số, `-`), **tiêu đề**.
 2. **Vị trí trong chuỗi**: bài trước đã dạy gì (chỉ nhắc một dòng) · khái niệm mới của video này · ý để dành bài sau.
 3. **Hiện tượng mở đầu** (yêu cầu 1): mô tả 1–2 câu, **nguồn kiểm chứng**, đáp án cụ thể sẽ đưa ra ở `GIẢI ĐÁP`, và **kết quả ba phép thử** của yêu cầu 1 (đúng bậc khái niệm · toán cần thiết · đại lượng hiển nhiên), mỗi phép thử một câu.
-4. **Ví dụ xuyên suốt** (yêu cầu 11) và danh sách **cảnh** (≤ ~3): cảnh sau nối từ cảnh trước bằng bước nào, có đổi sang mô hình không, beat nào dành cho việc đó; các điểm hài định cài.
+4. **Ví dụ xuyên suốt** (yêu cầu 11) và danh sách **cảnh** (≤ ~3): cảnh sau nối từ cảnh trước bằng bước nào, có đổi sang mô hình không, beat nào dành cho việc đó.
 5. **Đường hiểu**: tiền đề → các bậc hiểu lần lượt, **không bỏ bậc nào** → sau video làm được gì (một câu cụ thể, gắn với dạng bài nào). Đánh dấu các **bước khó**.
 6. **Chuỗi "vì sao"** (phần "Câu trả lời vì sao" bên dưới): viết ra từng mắt xích, mỗi mắt xích sẽ thành một dòng, xuất phát từ công thức học sinh nhớ.
 7. **Giải phẫu công thức trên hình** (yêu cầu 8): cụm ký hiệu nào ↔ thứ gì trên hình.
@@ -181,7 +181,7 @@ Nhãn chủ yếu để cấu trúc kịch bản. Trên video **chỉ** `TRONG �
 2. **Dễ hiểu**: học sinh trung bình xem một lần là hiểu. Mỗi beat chỉ một ý mới. Thuật ngữ mới giải thích ngay lần đầu.
 3. **Minh họa để giải thích, không để trưng**: **beat nào cũng có hình**, không beat nào chỉ chữ. Ưu tiên hình *chuyển động/biến đổi* hơn hình tĩnh — nhưng **ít thay đổi, mỗi thay đổi chậm và có nghĩa** (yêu cầu 13). Hình nói, chữ chỉ ghi chú.
 4. **Thực tế**: mở và kết bằng hiện tượng thật (yêu cầu 1, 5); giữa video neo khái niệm vào **chính ví dụ xuyên suốt** (yêu cầu 11), không kéo thêm ví dụ đời thường khác. Ví dụ đời thường đi trước, toán đi sau.
-5. **Funny**: 1–3 điểm hài mỗi video, đến từ *tình huống hoặc so sánh bất ngờ* (vd. "Tiếp tuyến: đường thẳng chỉ chạm đồ thị một cái rồi đi luôn, không lưu luyến"; người chạy dừng buộc dây giày đúng lúc $f'=0$). Hình có thể góp phần hài. Không meme theo trend, không chế giễu học sinh, không đùa làm sai lệch toán.
+5. **Không cố gây cười**: ví dụ đơn giản, nói thẳng điều cần nói. Không cài câu đùa, so sánh bất ngờ hay tình huống hài (kể cả khi dàn ý có chỗ trống). Đã gặp (22/10, dàn ý cực trị): "cao nhất xóm", "tưởng tới đỉnh hoá ra mới chiếu nghỉ cầu thang" → "đừng hài, cứ ví dụ đơn giản thôi; đạt 0 nhưng không đổi dấu thì không phải cực trị là ok rồi".
 6. **Không lan man, nhưng không vội**:
    - mỗi beat phục vụ ý bản chất. Tự hỏi "bỏ beat này thì người xem có hiểu kém đi không?" — không thì cắt. Không mở bài dài;
    - mọi bước suy luận nói ra thành lời; mọi chỗ chuyển từ ví dụ sang toán có cầu nối (yêu cầu 6);
@@ -191,7 +191,7 @@ Nhãn chủ yếu để cấu trúc kịch bản. Trên video **chỉ** `TRONG �
 
 Giọng văn:
 - **Trung tính, không xưng hô**: không "bạn", "các em", "mình", "chúng ta", "tôi". Dùng câu khẳng định hoặc câu hỏi không chủ ngữ ("Vì sao lại như vậy?").
-- Giọng **giảng bài mang tính tài liệu**: điềm tĩnh, rõ ràng, **có nhấn nhá** — như phim tài liệu khoa học kể cho người đang tò mò. Không dồn dập, không giọng quảng cáo; hài nhẹ, nằm ở hình hoặc so sánh. Câu ngắn nhưng đủ ý. Không rào đón, không "rất dễ thôi", không cảm thán thừa.
+- Giọng **giảng bài mang tính tài liệu**: điềm tĩnh, rõ ràng, **có nhấn nhá** — như phim tài liệu khoa học kể cho người đang tò mò. Không dồn dập, không giọng quảng cáo, không đùa. Câu ngắn nhưng đủ ý. Không rào đón, không "rất dễ thôi", không cảm thán thừa.
 
 ## Quy tắc từng trường
 
@@ -300,7 +300,7 @@ Công thức dài: **diễn giải bằng lời** ("tử là phần độ cao th
 - [ ] Một ví dụ xuyên suốt; ≤ ~3 cảnh, cảnh sau mọc từ cảnh trước; không nhân vật trang trí; không phép biến hình lạ mắt.
 - [ ] Công thức chính giải phẫu trên hình, mỗi cụm một dòng, cùng màu với thứ tương ứng.
 - [ ] Đọc `visual` từng dòng: ≤ 1 thay đổi mỗi dòng; mọi con số mới có một thay đổi trên hình làm nguyên nhân; nhãn ≤ ~5 từ; nhãn hết vai trò có lúc gỡ.
-- [ ] Beat nào cũng có `visual` là hình thật (không phải "hiện chữ"); 1–3 điểm hài.
+- [ ] Beat nào cũng có `visual` là hình thật (không phải "hiện chữ"); không cài câu đùa.
 
 **Chữ trên màn hình**
 - [ ] `text` là ghi chú ngắn (≤ ~35 ký tự, ký hiệu), không chép `speak`, không lặp thứ đã có trên hình; mũi tên chỉ dùng đúng nghĩa toán.
