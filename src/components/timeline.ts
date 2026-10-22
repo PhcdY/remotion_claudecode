@@ -17,6 +17,8 @@ export type ScriptBeat = {
   keyword: string;
   visual: string;
   lines: ScriptLine[];
+  /** khoảng nghỉ riêng giữa các dòng của beat (giây), vd. đoạn giải thích khó; mặc định GAP_LINE */
+  lineGap?: number;
 };
 export type Script = { slug: string; title: string; beats: ScriptBeat[] };
 
@@ -68,7 +70,7 @@ export const buildTimeline = async (script: Script, audioDir = script.slug): Pro
   const beats: TBeat[] = script.beats.map((b, bi) => {
     if (bi > 0) t += GAP_BEAT;
     const lines = b.lines.map((l, li) => {
-      if (li > 0) t += GAP_LINE;
+      if (li > 0) t += b.lineGap ?? GAP_LINE;
       const start = t;
       t += durations[bi][li];
       return {

@@ -39,7 +39,7 @@ Phần lớn lỗi người dùng bắt được là **lỗi dàn ý** (hiện t
 5. **Đường hiểu**: tiền đề → các bậc hiểu lần lượt, **không bỏ bậc nào** → sau video làm được gì (một câu cụ thể, gắn với dạng bài nào). Đánh dấu các **bước khó**.
 6. **Chuỗi "vì sao"** (phần "Câu trả lời vì sao" bên dưới): viết ra từng mắt xích, mỗi mắt xích sẽ thành một dòng, xuất phát từ công thức học sinh nhớ.
 7. **Giải phẫu công thức trên hình** (yêu cầu 8): cụm ký hiệu nào ↔ thứ gì trên hình.
-8. **Phần đề thi** (yêu cầu 4): hàm ví dụ, và các bước cầu sẽ có (một số → một hàm, đổi hàm, giá trị âm, từ $f'$ sang $f$ có hình).
+8. **Phần đề thi** (yêu cầu 4): có hay không (video chỉ nêu bản chất → không, ghi lý do); nếu có: hàm ví dụ, và các bước cầu sẽ có (một số → một hàm, đổi hàm, giá trị âm, từ $f'$ sang $f$ có hình).
 9. **Danh sách beat**: `section` · ý chính 1 câu · hình định dùng.
 10. **Ước lượng thời lượng**; **những ý đã cắt** và lý do (chủ đề rộng → chọn một ý cốt lõi, phần còn lại ghi vào đây).
 
@@ -70,8 +70,8 @@ Chạy hết checklist cuối file. Báo: số beat, số ký tự `speak`, th�
       "section": "CÂU HỎI",                 // chọn từ danh sách nhãn bên dưới
       "keyword": "Nhưng vì sao?",           // câu chốt của beat, ≤ 6 từ, được dùng $...$ — hiện to trên hình lúc đọc dòng cuối
       "visual": "mô tả hình cụ thể",        // để B3 dựng, xem quy tắc visual
-      "speed": 0.85,                        // TUỲ CHỌN: tốc độ đọc riêng của beat (mặc định theo scripts/tts_config.json)
-      "lineGap": 0.7,                       // TUỲ CHỌN: nghỉ giữa các dòng của beat, giây (mặc định 0,25)
+      "speed": 1.0,                         // TUỲ CHỌN, gần như không dùng: tốc độ đọc riêng của beat — chỉ khi người dùng yêu cầu rõ
+      "lineGap": 0.5,                       // TUỲ CHỌN: nghỉ giữa các dòng của beat, giây (mặc định 0,25) — cho chuỗi "vì sao"
       "lines": [
         { "text": "chữ hiện trên màn hình, toán trong $...$", "speak": "lời đọc, toán viết bằng chữ" }
       ]
@@ -80,7 +80,7 @@ Chạy hết checklist cuối file. Báo: số beat, số ký tự `speak`, th�
 }
 ```
 
-`speed` / `lineGap` chỉ dùng cho **beat khó nhất** (chuỗi "vì sao", đổi mô hình): video đơn điệu dùng `speed: 0.85`, `lineGap: 0.7` cho hai beat "vì sao". Không dùng để kéo dài video cho đủ thời lượng.
+`lineGap` (≤ 0,5) chỉ dùng cho **beat khó nhất** (chuỗi "vì sao") để mỗi bước có nhịp dừng. **Không dùng `speed` để làm chậm đoạn giải thích**: đã thử `speed: 0.85` (22/10) → "trời ơi đừng thay đổi tốc độ nói thuần, cần thay đổi nhịp, giải thích nhanh quá thì tìm cách giải thích chậm lại chứ không phải cùng một câu nói rề rà". Không dùng `lineGap` để kéo dài video cho đủ thời lượng.
 
 ## Khung nội dung — linh hoạt nhưng có yêu cầu
 
@@ -96,7 +96,8 @@ Thứ tự và số phần tuỳ chủ đề, nhưng **bắt buộc có** (số 
    - không mở bằng "Hôm nay chúng ta học…".
 2. **Trực giác trước, công thức sau**: công thức chỉ xuất hiện sau khi đã có hình hoặc ví dụ dẫn tới nó (trừ công thức bài trước, hiện ngay làm mốc — yêu cầu 7).
 3. **Ít nhất một hình/ví dụ trực quan** làm lộ ra bản chất (đồ thị, hình học, chuyển động, đếm…).
-4. **Liên hệ đề thi bằng một hàm ví dụ cụ thể**, không cần bài tập đầy đủ:
+4. **Liên hệ đề thi bằng một hàm ví dụ cụ thể**, không cần bài tập đầy đủ — **chỉ khi dạng bài dùng đúng khái niệm của video**:
+   - **video chỉ nêu bản chất một khái niệm** (vd. "đạo hàm thật ra đo cái gì") → **không có phần đề thi**: đi thẳng từ công thức sang `GIẢI ĐÁP`. Không mượn dạng bài của bài khác (cực trị, đơn điệu…) chỉ để có phần đề thi — đó là dạy công cụ bài khác. Dàn ý mục 8 ghi "không có phần đề thi" + lý do. Đã gặp (22/10): video bản chất đạo hàm có b14–b15 đọc đồ thị $f'$ → cực trị, người dùng bảo xoá vì video chỉ để nêu bản chất;
    - dùng một hàm cụ thể để cho thấy bản chất vừa học giúp đọc/suy ra điều gì trong dạng câu hỏi hay gặp (vd. nhìn đồ thị $f'$ → suy ra khoảng đồng biến, cực trị của $f$); nói rõ *bản chất nào* dẫn tới kết luận;
    - **vẫn trong ví dụ xuyên suốt** (yêu cầu 11): dạng bài kể lại bằng chính nhân vật/vật của video ("đồ thị $f'$" = vận tốc của người chạy, "$f$ đổi chiều biến thiên" = người chạy quay đầu). Hình đồ thị và hình ví dụ hiện cùng lúc, chuyển động của nhân vật do hàm điều khiển;
    - **chuyển sang phần đề thi là một bước khó.** Phần này hay dùng thứ phần trước chưa dạy; mỗi thứ cần dòng (hoặc beat) riêng trước khi dùng:
@@ -146,7 +147,8 @@ Thứ tự và số phần tuỳ chủ đề, nhưng **bắt buộc có** (số 
 
 **Câu trả lời "vì sao" của ý bản chất là bước khó nhất, phải chậm nhất**:
 - không chỉ nêu kết luận ("đạo hàm dương nên bên phải cao hơn"): **mỗi mắt xích suy luận một dòng**, có con số hoặc dấu cụ thể nhìn thấy trên hình, rồi một dòng nói lại bằng lời thường;
-- dành **ít nhất 2 beat**, cắt ý khác để bù; được đặt `speed`/`lineGap` cho các beat này;
+- dành **ít nhất 2 beat**, cắt ý khác để bù;
+- **"chậm" nghĩa là chia nhỏ nhịp, không phải nói chậm**: thêm dòng, mỗi dòng **một mắt xích ngắn** (≤ ~12 từ, 0–1 chỗ ngắt), giới thiệu từng thành phần riêng trước khi dùng ("Tử là độ cao chênh lệch giữa hai điểm." / "Mẫu là khoảng cách ngang giữa hai điểm."), có câu hỏi dẫn ("Còn điểm ở ngay bên trái thì sao?"), có câu chốt nói lại bằng lời thường; mỗi dòng hình đổi đúng một thứ. Có thể đặt `lineGap` ≤ 0,5 cho các beat này; **không đặt `speed`**;
 - lập luận **đi thẳng từ công thức** học sinh nhớ (công thức hiện trên màn hình), không vòng qua con số trung gian; cụm đang nói sáng trên công thức và trên hình cùng lúc.
 
 Mẫu người dùng đã chốt (đơn điệu, vì sao $f'>0$ thì đi lên): đạo hàm là $\lim \frac{f(x)-f(x_0)}{x-x_0}$ → đạo hàm dương thì khi $x$ đủ sát, phân số dương → lấy $x$ bên phải: mẫu dương → phân số dương mà mẫu dương thì tử dương → tử dương nghĩa là $f(x) > f(x_0)$: bên phải cao hơn → bên trái: mẫu âm nên tử âm, bên trái thấp hơn → nói gọn. Mỗi mũi tên một dòng, kính lúp quanh điểm.
@@ -270,7 +272,7 @@ Công thức dài: **diễn giải bằng lời** ("tử là phần độ cao th
 ## Độ dài
 
 - **2 phút 30 – 4 phút** (tính cả intro/outro). Ngắn hơn 2:30 là đang vội. Vượt 4 phút → báo người dùng kèm đề xuất ý phụ có thể cắt, không tự rút gọn lời giải thích. Người dùng yêu cầu độ dài khác → theo người dùng.
-- Ước lượng theo giọng Vivibe (đo thật 19–22/10/2026, cả giọng nam c Bình và nữ c Nhi: ≈ 20 ký tự/giây sau khi cắt lặng; 3069 ký tự, 11 beat → 2:49; 4231 ký tự, 16 beat → 3:53–3:56): **≈ 2700–4300 ký tự `speak`**. Beat có `speed` < 1 đọc chậm hơn tương ứng. Thời lượng thật đo sau B2.
+- Ước lượng theo giọng Vivibe (đo thật 19–22/10/2026, cả giọng nam c Bình và nữ c Nhi: ≈ 20 ký tự/giây sau khi cắt lặng; 3069 ký tự, 11 beat → 2:49; 4231 ký tự, 16 beat → 3:53–3:56): **≈ 2700–4300 ký tự `speak`**. Thời lượng thật đo sau B2.
 - 8–16 beat. `HIỆN TƯỢNG` ≤ 20 giây, `GIẢI ĐÁP` 15–30 giây; không beat nào > 40 giây (dài hơn thì tách beat).
 
 ## Checklist trước khi báo xong
@@ -291,7 +293,7 @@ Công thức dài: **diễn giải bằng lời** ("tử là phần độ cao th
 - [ ] Mọi ký hiệu đơn được giải thích riêng (nghĩa + chỗ trên hình + con số) trước khi vào phép tính; hiệu/thương dựng từ thành phần.
 - [ ] Mỗi khái niệm mới có dòng định nghĩa bằng hình trước khi dùng; mọi câu "A chính là B" được cho thấy trên hình.
 - [ ] Đổi sang mô hình có beat riêng (lý do, "không phải số liệu thật", vài con số trước công thức, nhãn "mô hình").
-- [ ] Phần đề thi: có bước "một số → một hàm", đổi hàm được nói rõ, giá trị âm được cho thấy, $f'$ → $f$ có hình so sánh từng khoảng. Sửa một phần kịch bản → đã rà cả beat giữ nguyên.
+- [ ] Phần đề thi chỉ có khi dạng bài dùng đúng khái niệm của video (video chỉ nêu bản chất → không có). Nếu có: có bước "một số → một hàm", đổi hàm được nói rõ, giá trị âm được cho thấy, $f'$ → $f$ có hình so sánh từng khoảng. Sửa một phần kịch bản → đã rà cả beat giữ nguyên.
 - [ ] Mỗi chỗ chuyển ví dụ → toán có bảng tương ứng trên màn hình và bước thay số khớp kết quả cũ.
 
 **Hình**
@@ -311,5 +313,5 @@ Công thức dài: **diễn giải bằng lời** ("tử là phần độ cao th
 
 **Tổng thể**
 - [ ] Chỉ một ý bản chất chính; ý đã cắt được liệt kê; không beat nào thừa (đã thử bỏ từng beat).
-- [ ] Tổng ký tự `speak` khớp thời lượng đã duyệt (≈ 2700–4300); `speed`/`lineGap` chỉ ở beat khó nhất.
+- [ ] Tổng ký tự `speak` khớp thời lượng đã duyệt (≈ 2700–4300); `lineGap` chỉ ở beat khó nhất, không dùng `speed` để làm chậm.
 - [ ] JSON hợp lệ; `slug` và `id` chỉ gồm `a-z 0-9 - _`; `id` liên tục.

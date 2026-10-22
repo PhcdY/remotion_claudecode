@@ -8,7 +8,7 @@ Dùng:
     python scripts/vivibe_tts.py src/videos/<slug>/script.json --voice "<tên hoặc id>" --only b03-l02 --force
 
 API key: biến môi trường VIVIBE_API_KEY, hoặc dòng `VIVIBE_API_KEY=...` trong .env ở gốc project.
-Giọng: chọn mỗi lần chạy bằng --voice (người dùng báo). Tốc độ: scripts/tts_config.json (speed).
+Giọng: chọn mỗi lần chạy bằng --voice (người dùng báo). Tốc độ: scripts/tts_config.json (speed); beat có trường "speed" thì dùng tốc độ riêng của beat đó.
 
 Đầu ra: public/audio/<slug>/<beatId>-lNN.mp3 (mỗi dòng 1 file) + manifest.json.
 
@@ -266,7 +266,8 @@ def main() -> int:
                 problems.append(f"{key}: thiếu 'speak'")
             elif LATEX_HINT.search(speak):
                 problems.append(f"{key}: 'speak' còn ký hiệu toán: {speak!r}")
-            rows.append((beat["id"], i, key, speak, line.get("text", speak)))
+            # tốc độ riêng của beat (vd. đoạn giải thích khó cần đọc chậm), mặc định theo tts_config.json
+            rows.append((beat["id"], i, key, speak, line.get("text", speak), float(beat.get("speed", speed))))
     if problems:
         print("Kịch bản chưa sẵn sàng — sửa ở B1 rồi chạy lại:")
         for p in problems:
@@ -277,13 +278,13 @@ def main() -> int:
         return not args.only or beat_id in args.only or key in args.only
 
     todo = []
-    for beat_id, _, key, speak, _ in rows:
+    for beat_id, _, key, speak, _, sp in rows:
         target = out_dir / f"{key}.mp3"
-        cached = old.get(target.name) == line_hash(voice, speed, speak) and target.exists()
+        cached = old.get(target.name) == line_hash(voice, sp, speak) and target.exists()
         if selected(beat_id, key) and (args.force or not cached):
-            todo.append((key, speak, target))
+            todo.append((key, speak, target, sp))
 
-    chars = sum(len(s) for _, s, _ in todo)
+    chars = sum(len(s) for _, s, _, _ in todo)
     print(f"Giọng {voice_name} · tốc độ {speed} · {len(todo)} dòng cần tạo · {chars} ký tự (≈ {chars} credit)")
     if args.estimate or not todo:
         return 0
@@ -292,19 +293,19 @@ def main() -> int:
     out_dir.mkdir(parents=True, exist_ok=True)
     failed: list[tuple[str, str]] = []
 
-    for key, speak, target in todo:
+    for key, speak, target, sp in todo:
         try:
-            synthesize(key_api, ffmpeg, speak, voice, speed, target)
+            synthesize(key_api, ffmpeg, speak, voice, sp, target)
             print(f"✓ {key}.mp3", flush=True)
         except Exception as e:
             failed.append((key, str(e)))
 
     failed_keys = {k for k, _ in failed}
     entries, missing = [], []
-    for beat_id, i, key, speak, text in rows:
+    for beat_id, i, key, speak, text, sp in rows:
         target = out_dir / f"{key}.mp3"
-        h = line_hash(voice, speed, speak)
-        fresh = any(k == key for k, _, _ in todo) and key not in failed_keys
+        h = line_hash(voice, sp, speak)
+        fresh = any(k == key for k, _, _, _ in todo) and key not in failed_keys
         if not target.exists():
             missing.append((beat_id, key, key))
             continue

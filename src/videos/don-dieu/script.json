@@ -1,0 +1,349 @@
+{
+  "slug": "don-dieu",
+  "title": "Chưa vẽ đồ thị, sao biết dốc lên hay dốc xuống?",
+  "exams": [
+    "THPTQG",
+    "TSA",
+    "HSA"
+  ],
+  "beats": [
+    {
+      "id": "b01",
+      "section": "HIỆN TƯỢNG",
+      "keyword": "Đoạn nào lên, đoạn nào xuống?",
+      "visual": "CẢNH 1 — nhìn ngang một sườn đồi (đường mặt đất màu trung tính, tô nhạt phía dưới), flycam bay phía trên, giữ khoảng cách cố định với mặt đất. Dòng 1: flycam bay từ trái sang phải dọc sườn đồi, nhãn '50 m' cạnh vạch đo thẳng đứng giữa flycam và mặt đất. Dòng 2: sườn đồi mờ hẳn (chỉ còn viền rất nhạt), bên phải hiện khung 'bản đồ độ cao' chứa công thức $f(x) = -x^3 + 6x^2 - 9x + 6$. Dòng 3: phía trên flycam hiện hai mũi tên '↑ ?' (màu leo) và '↓ ?' (màu hạ).",
+      "lines": [
+        {
+          "text": "Flycam bay bám địa hình",
+          "speak": "Flycam khảo sát có chế độ bay bám địa hình, luôn cách mặt đất một khoảng cố định."
+        },
+        {
+          "text": "Chỉ có công thức, chưa vẽ",
+          "speak": "Giả sử máy tính trên flycam chỉ biết độ cao mặt đất qua một công thức, chưa hề vẽ ra."
+        },
+        {
+          "text": "",
+          "speak": "Làm sao lập trình cho máy tự biết đoạn nào phải bay lên, đoạn nào phải hạ xuống?"
+        }
+      ]
+    },
+    {
+      "id": "b02",
+      "section": "VÍ DỤ",
+      "keyword": "Mô hình: sườn đồi tưởng tượng",
+      "visual": "Giữ CẢNH 1, sườn đồi tắt hẳn. BƯỚC KHÓ — đổi sang mô hình, nói chậm. Khung công thức chuyển ra giữa, to hơn. Dòng 1: gắn nhãn 'mô hình' lên góc khung công thức (giữ nhãn này đến hết b12). Dòng 2: mọi chữ $x$ trong công thức sáng màu x, dưới công thức hiện dòng '$x$ — quãng bay ngang' cùng màu. Dòng 3: cụm $f(x)$ sáng màu đồ thị, hiện dòng '$f(x)$ — độ cao mặt đất' cùng màu. Dòng 4: dưới đó hiện phép thay số $f(2) = -8 + 24 - 18 + 6$. Không dùng đơn vị.",
+      "lines": [
+        {
+          "text": "Sườn đồi tưởng tượng",
+          "speak": "Để dễ theo dõi, xét một sườn đồi tưởng tượng có công thức như trên, không phải số đo thật."
+        },
+        {
+          "text": "",
+          "speak": "Biến trong công thức là quãng flycam đã bay theo phương ngang."
+        },
+        {
+          "text": "",
+          "speak": "Còn giá trị của hàm số là độ cao mặt đất tại vị trí đó."
+        },
+        {
+          "text": "$f(2) = 4$",
+          "speak": "Chẳng hạn thay hai vào thì được bốn, tức là ở vị trí hai, mặt đất cao bằng bốn."
+        }
+      ]
+    },
+    {
+      "id": "b03",
+      "section": "VÍ DỤ",
+      "keyword": "Mỗi điểm: vị trí, độ cao",
+      "visual": "CẢNH 2 — hệ trục. Dòng 1: bảng nhỏ giữa khung, cột '$x$': 0, 1, 2, 3, 4; cột '$f(x)$': 6, 2, 4, 6, 2. Dòng 2: bảng dịch sang trái, hệ trục hiện bên phải: trục ngang 'quãng bay ngang $x$' từ 0 đến 4; trục dọc 'độ cao $f(x)$' từ 0 đến 7; từng hàng của bảng sáng lần lượt và chấm điểm tương ứng: (0; 6), (1; 2), (2; 4), (3; 6), (4; 2). Dòng 3: đường cong $f$ vẽ dần qua các điểm, đáy tại (1; 2), đỉnh tại (3; 6); bảng mờ rồi tắt; cạnh đồ thị có biểu tượng máy tính bị che mắt (điểm hài nhẹ). Không dùng đơn vị.",
+      "lines": [
+        {
+          "text": "",
+          "speak": "Để có hình đối chiếu, tính độ cao tại năm vị trí rồi ghi thành bảng."
+        },
+        {
+          "text": "",
+          "speak": "Mỗi cặp số là một điểm trên hệ trục, trục ngang là quãng bay, trục dọc là độ cao."
+        },
+        {
+          "text": "Hình chỉ để đối chiếu",
+          "speak": "Tính thêm thật nhiều điểm rồi nối lại thì được hình sườn đồi."
+        }
+      ]
+    },
+    {
+      "id": "b04",
+      "section": "GỐC RỄ",
+      "keyword": "Vài điểm chưa đủ",
+      "visual": "Giữ CẢNH 2. Dòng 1: đường cong mờ đi, chỉ còn 5 điểm sáng; một đường nối mềm màu nhấn đi qua 5 điểm, nhãn 'nối theo cảm nhận'. Dòng 2: một đường màu cảnh báo cũng đi qua đúng 5 điểm nhưng giữa $x = 2$ và $x = 3$ lồi lên một cái gờ cao khoảng 7, nhãn 'lồi lên?'. Dòng 3: flycam bay theo đường nối mềm (cách phía trên), đâm vào chỗ lồi, mặt choáng (điểm hài). Dòng 4: đường lồi và flycam tắt; đường cong $f$ hiện rõ lại.",
+      "lines": [
+        {
+          "text": "",
+          "speak": "Nhưng thường thì chỉ tính vài điểm, rồi nối lại theo cảm nhận."
+        },
+        {
+          "text": "",
+          "speak": "Ở giữa hai điểm đã tính, nhỡ mặt đất lồi lên thì sao?"
+        },
+        {
+          "text": "",
+          "speak": "Kết quả là... flycam đâm thẳng vào chỗ lồi đó."
+        },
+        {
+          "text": "Phải biết cả hình",
+          "speak": "Muốn chắc chắn thì phải biết cả hình, tức là ở mọi chỗ đường đang lên hay xuống."
+        }
+      ]
+    },
+    {
+      "id": "b05",
+      "section": "ĐỊNH NGHĨA",
+      "keyword": "Đồng biến: càng xa càng cao",
+      "visual": "Giữ CẢNH 2. Dòng 1: khoảng (1; 3) tô màu leo trên trục ngang, đoạn đồ thị tương ứng tô cùng màu. Dòng 2: trên trục ngang hiện hai chấm $x_1$ tại 2 (màu x1) và $x_2$ tại 3 (màu x2). Dòng 3: từ hai chấm dựng hai CỘT DỌC lên tới đồ thị, nhãn '$f(x_1) = 4$' và '$f(x_2) = 6$'; cột bên phải cao hơn rõ ràng. Dòng 4: khoảng (0; 1) và (3; 4) tô màu hạ trên trục ngang và trên đồ thị.",
+      "lines": [
+        {
+          "text": "(1; 3): đồng biến",
+          "speak": "Từ một đến ba càng bay xa thì mặt đất càng cao, hàm số như vậy gọi là... đồng biến."
+        },
+        {
+          "text": "$x_1 < x_2$",
+          "speak": "Lấy hai vị trí bất kỳ trong khoảng đó, một bên trái và một bên phải."
+        },
+        {
+          "text": "$\\Rightarrow f(x_1) < f(x_2)$",
+          "speak": "Đồng biến nghĩa là bên phải luôn cao hơn, như ở đây từ bốn lên sáu."
+        },
+        {
+          "text": "(0; 1), (3; 4): nghịch biến",
+          "speak": "Hai đoạn còn lại thì ngược lại, mặt đất thấp dần, gọi là nghịch biến."
+        }
+      ]
+    },
+    {
+      "id": "b06",
+      "section": "BẢN CHẤT",
+      "keyword": "Đạo hàm dương: phân số dương",
+      "visual": "Giữ CẢNH 2, đồ thị dịch sang trái; màu leo/hạ và hai cột của b05 tắt. BƯỚC KHÓ — mỗi dòng một mắt xích ngắn. Dòng 1: điểm $x_0 = 2$ (2; 4) trên đồ thị sáng màu đạo hàm, cạnh đó dấu '?'. Dòng 2: bên phải hiện thẻ 'đạo hàm (bài trước)' với $f'(x_0) = \\lim\\limits_{x \\to x_0} \\dfrac{f(x) - f(x_0)}{x - x_0}$; dấu '?' tắt; trên đồ thị hiện điểm thứ hai $x$ tại 2,6 (2,6; 5,62). Dòng 3: tử sáng màu tử trên thẻ; trên đồ thị đoạn dọc tại 2,6 từ độ cao 4 lên 5,62 sáng màu tử (độ cao chênh lệch). Dòng 4: mẫu sáng màu mẫu trên thẻ; trên đồ thị đoạn ngang tại độ cao 4 từ 2 tới 2,6 sáng màu mẫu (khoảng cách ngang). Dòng 5: điểm thứ hai và hai đoạn tắt; KÍNH LÚP: khung soi quanh (2; 4), ô phóng to rộng dưới thẻ; cả phân số trên thẻ sáng màu leo, kèm '> 0'.",
+      "lineGap": 0.5,
+      "lines": [
+        {
+          "text": "Vì sao $f' > 0$ thì đi lên?",
+          "speak": "Vậy vì sao đạo hàm dương thì đường đi lên?"
+        },
+        {
+          "text": "",
+          "speak": "Nhắc lại bài trước, đạo hàm là giới hạn của phân số này."
+        },
+        {
+          "text": "Tử: độ cao chênh lệch",
+          "speak": "Tử là độ cao chênh lệch giữa hai điểm."
+        },
+        {
+          "text": "Mẫu: khoảng cách ngang",
+          "speak": "Mẫu là khoảng cách theo chiều ngang giữa hai điểm."
+        },
+        {
+          "text": "$f'(x_0) > 0 \\Rightarrow$ phân số $> 0$",
+          "speak": "Đạo hàm dương, nên khi hai điểm đủ sát nhau thì phân số này cũng dương."
+        }
+      ]
+    },
+    {
+      "id": "b07",
+      "section": "BẢN CHẤT",
+      "keyword": "$f'>0$: tại đó đang đi lên",
+      "visual": "Giữ bố cục b06 (đồ thị trái, thẻ công thức phải trên, ô phóng to phải dưới, phân số vẫn sáng màu leo). BƯỚC KHÓ NHẤT — mỗi dòng một mắt xích. Dòng 1: trong ô phóng to hiện điểm $x$ tại 2,1, ngay bên phải $x_0$. Dòng 2: đoạn ngang từ 2 tới 2,1 màu mẫu kèm dấu '+'; trên thẻ mẫu kèm '(+)'. Dòng 3: đoạn dọc tại 2,1 từ độ cao 4 lên 4,3 màu tử kèm dấu '+'; trên thẻ tử kèm '(+)'. Dòng 4: điểm (2,1; 4,3) đổi màu leo, mũi tên ↑. Dòng 5: phần bên phải mờ đi, dấu trên thẻ tắt; hiện điểm $x$ tại 1,9, ngay bên trái $x_0$. Dòng 6: đoạn ngang từ 1,9 tới 2 màu mẫu kèm '−' và đoạn dọc tại 2 từ 3,7 lên 4 màu tử kèm '−'; trên thẻ mẫu và tử kèm '(−)'. Dòng 7: điểm (1,9; 3,7) đổi màu hạ, mũi tên ↓. Dòng 8: dấu trên thẻ tắt; trên đồ thị chính, tại (2; 4) hiện mũi tên màu leo chạy dọc đường cong, hướng lên phải.",
+      "lineGap": 0.5,
+      "lines": [
+        {
+          "text": "",
+          "speak": "Giờ lấy điểm thứ hai ở ngay bên phải."
+        },
+        {
+          "text": "Bên phải: mẫu $> 0$",
+          "speak": "Đi sang phải thì mẫu dương."
+        },
+        {
+          "text": "$\\Rightarrow$ tử $> 0$",
+          "speak": "Phân số dương mà mẫu dương, nên tử cũng phải dương."
+        },
+        {
+          "text": "$f(x) > f(x_0)$",
+          "speak": "Tử dương nghĩa là điểm bên phải cao hơn."
+        },
+        {
+          "text": "",
+          "speak": "Còn điểm ở ngay bên trái thì sao?"
+        },
+        {
+          "text": "Bên trái: mẫu $< 0 \\Rightarrow$ tử $< 0$",
+          "speak": "Đi sang trái thì mẫu âm, nên tử cũng âm."
+        },
+        {
+          "text": "$f(x) < f(x_0)$",
+          "speak": "Tử âm nghĩa là điểm bên trái thấp hơn."
+        },
+        {
+          "text": "",
+          "speak": "Bên trái thấp và bên phải cao, vậy tại đó đường đang đi lên."
+        }
+      ]
+    },
+    {
+      "id": "b08",
+      "section": "BẢN CHẤT",
+      "keyword": "Mọi chỗ đi lên: đồng biến",
+      "visual": "Giữ CẢNH 2, đồ thị về giữa khung; thẻ định nghĩa và kính lúp tắt. Dòng 1: khoảng (1; 3) tô màu leo trên trục ngang; dọc đoạn đồ thị trên khoảng đó hiện khoảng 8 mũi tên nhỏ màu leo, đều chỉ lên theo đường cong (mỗi mũi tên = một điểm có đạo hàm dương). Dòng 2: chuỗi bậc thang nhỏ bám theo đường cong, flycam đi theo từng bậc, bậc nào cũng lên; cuối dòng hai cột ở hai đầu khoảng hiện lên, nhãn 'thấp' và 'cao'.",
+      "lines": [
+        {
+          "text": "$f'(x) > 0$ tại mọi điểm",
+          "speak": "Giờ giả sử tại mọi điểm của một khoảng, đạo hàm đều dương."
+        },
+        {
+          "text": "",
+          "speak": "Khi đó chỗ nào cũng đi lên, như cầu thang bậc nào cũng lên, nên cả khoảng cao dần."
+        }
+      ]
+    },
+    {
+      "id": "b09",
+      "section": "CÔNG THỨC",
+      "keyword": "Dấu $f'$ quyết định chiều",
+      "visual": "Giữ CẢNH 2 (đồ thị bên trái, mũi tên màu leo trên đoạn (1; 3) mờ nhẹ). Dòng 1: bên phải hiện thẻ định lý: 'Cho $f$ có đạo hàm trên khoảng $K$. Nếu $f'(x) > 0$ với mọi $x \\in K$ thì $f$ đồng biến trên $K$. Nếu $f'(x) < 0$ với mọi $x \\in K$ thì $f$ nghịch biến trên $K$.' GIẢI PHẪU, mỗi dòng một cụm sáng màu, phần còn lại mờ. Dòng 2: cụm '$f'(x) > 0$' sáng màu leo ↔ một mũi tên chỉ lên tại một điểm trên đoạn (1; 3) sáng cùng màu. Dòng 3: cụm 'với mọi $x \\in K$' sáng màu khoảng ↔ khoảng (1; 3) trên trục ngang sáng cùng màu. Dòng 4: cụm '$f$ đồng biến trên $K$' sáng màu leo ↔ cả đoạn đồ thị trên (1; 3) sáng cùng màu; nửa sau dòng, câu 'Nếu $f'(x) < 0$ … nghịch biến' sáng màu hạ ↔ hai đoạn (0; 1), (3; 4) sáng màu hạ.",
+      "lines": [
+        {
+          "text": "",
+          "speak": "Gom lại thành định lý trong sách, đúng cho mọi hàm số có đạo hàm trên một khoảng."
+        },
+        {
+          "text": "",
+          "speak": "Cụm đầu là đạo hàm dương tại một điểm, tức tại đó đang đi lên."
+        },
+        {
+          "text": "",
+          "speak": "Cụm thứ hai nói điều đó đúng ở mọi điểm của khoảng."
+        },
+        {
+          "text": "",
+          "speak": "Kết luận là cả đoạn cao dần, còn đạo hàm âm thì ngược lại."
+        }
+      ]
+    },
+    {
+      "id": "b10",
+      "section": "VÍ DỤ",
+      "keyword": "Dấu $f'$ thay cho vẽ",
+      "visual": "Giữ CẢNH 2; thẻ định lý tắt. Bên phải là thẻ tính toán. Dòng 1: thẻ hiện '$f'(x) = -3x^2 + 12x - 9$'. Dòng 2: dòng công thức đổi thành '$f'(x) = -3(x-1)(x-3)$', số 1 và 3 sáng màu đạo hàm; trên trục ngang, hai chấm tại 1 và 3 sáng lên. Dòng 3: thẻ thêm dòng '$f' > 0$ trên $(1; 3)$' màu leo; đoạn đồ thị trên (1; 3) tô màu leo. Dòng 4: thẻ thêm dòng '$f' < 0$ trên $(0; 1)$, $(3; 4)$' màu hạ; hai đoạn đồ thị tương ứng tô màu hạ. Không dùng bảng xét dấu.",
+      "lines": [
+        {
+          "text": "",
+          "speak": "Áp dụng cho sườn đồi, tính theo quy tắc đạo hàm thì được công thức này."
+        },
+        {
+          "text": "",
+          "speak": "Phân tích thành nhân tử thì thấy đạo hàm đổi dấu tại một và tại ba."
+        },
+        {
+          "text": "",
+          "speak": "Giải ra thì đạo hàm dương từ một đến ba, nên đoạn đó đồng biến."
+        },
+        {
+          "text": "",
+          "speak": "Hai đoạn hai bên đạo hàm âm, nên nghịch biến, khớp đúng hình sườn đồi."
+        }
+      ]
+    },
+    {
+      "id": "b11",
+      "section": "TRỰC GIÁC",
+      "keyword": "Đáy, đỉnh: $f' = 0$",
+      "visual": "Giữ CẢNH 2 và thẻ tính toán. Dòng 1: trên đồ thị hai điểm đáy (1; 2) và đỉnh (3; 6) sáng màu đạo hàm, tại mỗi điểm hiện một đoạn tiếp tuyến ngắn nằm ngang. Dòng 2: nhãn 'đáy ↓↑' dưới điểm (1; 2), 'đỉnh ↑↓' cạnh điểm (3; 6). Dòng 3: hai nhãn đổi thành 'cực trị'.",
+      "lines": [
+        {
+          "text": "$f'(1) = f'(3) = 0$",
+          "speak": "Tại một và tại ba, đạo hàm bằng số không, nên chưa rõ lên hay xuống."
+        },
+        {
+          "text": "",
+          "speak": "Trên hình đó là đáy và đỉnh, chỗ flycam đổi chiều lên xuống."
+        },
+        {
+          "text": "Cực trị, bài sau sẽ nói rõ",
+          "speak": "Những điểm như vậy gọi là... cực trị, bài sau sẽ nói rõ."
+        }
+      ]
+    },
+    {
+      "id": "b12",
+      "section": "TRONG ĐỀ THI",
+      "keyword": "Trên trục leo, dưới trục hạ",
+      "visual": "CẢNH 3 — hai tầng chung trục ngang $x$ (0 đến 4, các vạch thẳng hàng theo chiều dọc). Tầng trên: đồ thị $f$ của sườn đồi thu nhỏ, trục dọc '$f(x)$' (giữ nhãn 'mô hình'). Tầng dưới: hệ trục mới, trục dọc '$f'(x)$' từ −9 đến 3. Dòng 1: tầng dưới vẽ dần parabol $f'(x) = -3(x-1)(x-3)$ từ $x = 0$ (giá trị −9) đến $x = 4$ (giá trị −9), đỉnh tại (2; 3) có chấm. Dòng 2: phần parabol trên trục ngang (1; 3) tô màu leo; đường gióng dọc mảnh tại 1 và 3 nối lên tầng trên, đoạn $f$ trên (1; 3) tô màu leo. Dòng 3: hai phần parabol dưới trục, (0; 1) và (3; 4), tô màu hạ; đoạn $f$ tương ứng ở tầng trên tô màu hạ.",
+      "lines": [
+        {
+          "text": "",
+          "speak": "Đề thi hay cho đồ thị đạo hàm, nên thử vẽ đồ thị đạo hàm ngay dưới sườn đồi."
+        },
+        {
+          "text": "",
+          "speak": "Phần nằm trên trục là chỗ đạo hàm dương, đúng đoạn flycam leo dốc."
+        },
+        {
+          "text": "",
+          "speak": "Phần nằm dưới trục là chỗ đạo hàm âm, đúng hai đoạn flycam hạ xuống."
+        }
+      ]
+    },
+    {
+      "id": "b13",
+      "section": "TRONG ĐỀ THI",
+      "keyword": "Chỉ nhìn trên hay dưới trục",
+      "visual": "Giữ bố cục hai tầng CẢNH 3, đổi đề: nhãn 'mô hình' tắt, nhãn 'đề bài' hiện. Trục ngang $x$ từ −2,8 đến 3,8. Dòng 1: tầng trên chỉ còn trục với dấu '?' và nhãn 'con đường khác'; tầng dưới vẽ dần đồ thị $f'(x) = (x+2)(x-1)(x-3)$, trục dọc '$f'(x)$', ba chấm tại −2, 1, 3 trên trục. Dòng 2: phần $f'$ trên (−2; 1) tô màu leo; tầng trên vẽ đoạn đồ thị $f(x) = \\dfrac{x^4}{4} - \\dfrac{2x^3}{3} - \\dfrac{5x^2}{2} + 6x$ trên (−2; 1), đi lên, màu leo; dấu '?' tắt. Dòng 3: trên đoạn $f$ vừa vẽ, hai cột tại $x = -1$ ($f \\approx -7{,}6$) và $x = 0{,}5$ ($f \\approx 2{,}3$): cột bên phải cao hơn, mũi tên ↑ màu leo giữa hai đỉnh cột. Dòng 4: phần $f'$ trên (1; 3) tô màu hạ; tầng trên vẽ tiếp đoạn $f$ trên (1; 3), đi xuống, màu hạ, kèm hai cột tại 1,5 ($f \\approx 2{,}4$) và 2,5 ($f \\approx -1{,}3$): cột bên phải thấp hơn, mũi tên ↓ màu hạ. Dòng 5: phần $f'$ trước −2 tô màu hạ, từ 3 trở đi tô màu leo; tầng trên vẽ nốt $f$ ở hai đầu (trước −2 đi xuống màu hạ, sau 3 đi lên màu leo); các cột của dòng 3–4 mờ đi.",
+      "lines": [
+        {
+          "text": "Đề cho đồ thị $f'$",
+          "speak": "Giờ sang đề khác chỉ cho đồ thị đạo hàm, nên chỉ cần nhìn nó nằm trên hay dưới trục."
+        },
+        {
+          "text": "$(-2; 1)$: đồng biến",
+          "speak": "Từ âm hai đến một, đồ thị đạo hàm nằm trên trục, nên con đường đi lên."
+        },
+        {
+          "text": "",
+          "speak": "Lấy hai điểm bất kỳ trên đoạn đó thì điểm bên phải luôn cao hơn, đúng là đồng biến."
+        },
+        {
+          "text": "$(1; 3)$: nghịch biến",
+          "speak": "Từ một đến ba, đồ thị đạo hàm nằm dưới trục, nên con đường đi xuống."
+        },
+        {
+          "text": "$(-\\infty; -2)$ giảm, $(3; +\\infty)$ tăng",
+          "speak": "Tương tự, trước âm hai thì đi xuống, còn từ ba trở đi lại đi lên."
+        }
+      ]
+    },
+    {
+      "id": "b14",
+      "section": "GIẢI ĐÁP",
+      "keyword": "Dấu đạo hàm: lệnh lên, xuống",
+      "visual": "Quay lại CẢNH 1: sườn đồi nhìn ngang (chính là hình $f$, đáy tại $x = 1$, đỉnh tại $x = 3$), flycam ở đầu trái; nhãn 'mô hình'. Bên phải: thẻ 'chương trình'. Dòng 1: thẻ hiện '1. tính $f'(x)$' rồi '2. xét dấu'. Dòng 2: thẻ thêm '$f' > 0$ ⇒ trước cao hơn' (màu nhấn). Dòng 3: đoạn mặt đất (1; 3) tô màu leo, hai đoạn (0; 1) và (3; 4) tô màu hạ; thẻ thêm '$(1; 3)$: bay lên' (màu leo) và '$(0; 1), (3; 4)$: hạ' (màu hạ); rồi flycam bay một lượt từ trái sang phải, hạ, leo rồi hạ, bám đúng sườn đồi. Dòng 4: hình đứng yên.",
+      "lines": [
+        {
+          "text": "",
+          "speak": "Quay lại flycam, chương trình chỉ cần tính đạo hàm của độ cao rồi xét dấu."
+        },
+        {
+          "text": "",
+          "speak": "Đạo hàm dương thì phía trước flycam cao hơn, đúng như kính lúp đã cho thấy."
+        },
+        {
+          "text": "",
+          "speak": "Nên từ một đến ba thì bay lên, hai đoạn còn lại thì hạ xuống."
+        },
+        {
+          "text": "",
+          "speak": "Vậy... dấu của đạo hàm cho biết đường lên hay xuống, không cần vẽ."
+        }
+      ]
+    }
+  ]
+}

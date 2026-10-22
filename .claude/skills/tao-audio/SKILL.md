@@ -23,7 +23,7 @@ Vivibe không có thẻ chỉnh tông; tông giọng đến từ mẫu clone, nh
 1. API key: người dùng tự tạo ở vivibe.app/docs/api-keys và tự thêm `VIVIBE_API_KEY=...` vào `.env` ở gốc project (đã gitignore). **Không** hỏi, đọc, in hay ghi key ở bất kỳ đâu khác. Thiếu key thì script báo, nhắc người dùng.
 2. **Giọng không cố định — hỏi người dùng mỗi lần chạy B2.** Chạy `python scripts/vivibe_tts.py --list-voices`, đưa danh sách tên giọng cho người dùng chọn. Không tự chọn, không lấy lại giọng của lần trước khi chưa hỏi. Giọng đã chọn truyền vào mọi lệnh của lần chạy đó bằng `--voice "<tên hoặc id>"`.
 3. `speed` trong `scripts/tts_config.json` (0.5–2.0, mặc định 1.0) là tốc độ chung. Chỉ đổi khi người dùng nghe xong thấy cả bài nhanh/chậm.
-   Beat có trường `"speed"` trong `script.json` (do B1 đặt, vd. 0.85 cho đoạn giải thích "vì sao") thì đọc theo tốc độ đó; cache tính theo tốc độ của từng dòng nên chỉ beat đó phải tạo lại. Không tự thêm `speed` ở B2: người dùng thấy một đoạn nhanh quá → chỉnh `speed` của beat đó ở B1, không đổi tốc độ cả bài.
+   Beat có trường `"speed"` trong `script.json` thì đọc theo tốc độ đó (cache tính theo tốc độ từng dòng). **Không dùng để làm chậm đoạn giải thích**: đã thử 0.85 (22/10) → người dùng: "đừng thay đổi tốc độ nói thuần, cần thay đổi nhịp". Đoạn nào nhanh quá → quay lại B1 chia nhỏ thành nhiều câu ngắn (skill `viet-kich-ban` › câu trả lời "vì sao").
 4. Đổi giọng hay `speed` làm cache mất hiệu lực → cả bài tạo lại (báo người dùng số ký tự trước). Cả bài một video phải cùng một giọng.
 
 ## Các bước
