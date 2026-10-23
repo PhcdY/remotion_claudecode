@@ -70,6 +70,8 @@ Theo schema và quy tắc bên dưới. File đã tồn tại → hỏi trước
 5. Chạy checklist cuối file (phần máy không kiểm được).
 6. Báo: số beat, số ký tự `speak`, thời lượng ước tính, **danh sách dòng cần nghe thử** (script in sẵn) và **mọi chỗ còn nghi ngờ**.
 
+Người dùng chốt kịch bản → sang **B3 bản nháp + storyboard** (skill `dung-video` › Bước 2b), duyệt hình xong mới tạo audio (B2). Góp ý ở storyboard về chữ/lời/nhịp sửa ở đây, chưa tốn credit giọng đọc.
+
 ## Schema
 
 ```jsonc
@@ -81,13 +83,16 @@ Theo schema và quy tắc bên dưới. File đã tồn tại → hỏi trước
   "beats": [
     {
       "id": "b01",                       // b01, b02, … liên tục
+      "scene": 1,                        // số cảnh; beat liền nhau cùng cảnh thì hình nối liền, không nháy
       "section": "HIỆN TƯỢNG",           // nhãn bên dưới
       "keyword": "Nhưng vì sao?",        // câu chốt của beat, ≤ 6 từ, được dùng $...$
-      "visual": "mô tả hình",            // để B3 dựng — quy tắc `visual`
+      "visual": "cảnh, bố cục, thành phần lúc beat bắt đầu", // quy tắc `visual`
       "lineGap": 0.5,                    // TUỲ CHỌN: nghỉ giữa các dòng (giây, ≤ 0,5), chỉ cho chuỗi "vì sao"
       "lines": [
         {
+          "show": "MỘT thay đổi trên hình ở dòng này, vd. 'tô đoạn (1; 3) màu tăng'; không đổi: 'giữ nguyên'",
           "text": "chữ mới hiện trên hình ở dòng này, $...$ cho toán; \"\" nếu không có",
+          "at": "vật mà text gắn vào, vd. 'đỉnh (3; 6)' — bắt buộc khi có text",
           "speak": "lời đọc, không ký hiệu",
           "caption": "TUỲ CHỌN: phụ đề khi `speak` có phiên âm ký hiệu",
           "pauseAfter": 1.5              // TUỲ CHỌN: nghỉ thêm sau dòng (giây, ≤ 2), chỉ sau câu hỏi đoán
@@ -218,11 +223,13 @@ Phụ đề đầy đủ xuất thành file riêng (`.srt`/`.vtt`) từ `speak`.
 
 ≤ 6 từ, là *kết luận* của beat (beat hook được là câu hỏi), không lặp nguyên văn một dòng `text`. B3 hiện nó thành câu chốt trong vùng hình lúc đọc dòng cuối.
 
-### `visual` — đủ cụ thể để dựng mà không phải đoán
+### `scene`, `visual`, `show`, `at` — đủ cụ thể để dựng mà không phải đoán
 
-- Mở bằng tên cảnh ("CẢNH 2 — …" lần đầu, "Giữ CẢNH 2." sau đó); đánh dấu "BƯỚC KHÓ".
+- **`scene`**: số cảnh (1, 2, 3; ≤ ~3 cả video). Các beat liền nhau cùng cảnh được dựng như một sân khấu liền: vật ở lại và biến đổi, không xoá vẽ lại.
+- **`visual`** (beat): mở bằng tên cảnh ("CẢNH 2 — …" lần đầu, "Giữ CẢNH 2." sau đó), rồi tả **trạng thái lúc beat bắt đầu**: bố cục, trục, hàm, thành phần, thứ gì từ beat trước còn ở lại / mờ đi. Đánh dấu "BƯỚC KHÓ". Thay đổi theo từng dòng **không** viết ở đây.
+- **`show`** (dòng): **đúng một thay đổi** trên hình, viết ngắn, động từ + vật + vai trò màu ("điểm (2; 4) sáng màu tăng", "khung soi co về quanh đỉnh", "giữ nguyên"); thay đổi đó là *nguyên nhân* nhìn thấy được của con số/kết luận dòng đó nói. Có chữ "rồi", "đồng thời", ";" là đang gói hai thay đổi → tách dòng (`check_script.py` cảnh báo). Bảng/nhãn đổi số thì hình đổi tương ứng trong cùng `show`.
+- **`at`** (dòng): vật mà `text` gắn vào ("đỉnh (3; 6)", "cột $f(x_0)$", "công thức, dưới mẫu số"); bắt buộc khi có `text`.
 - Số liệu cụ thể: hàm, khoảng vẽ trục, toạ độ, giá trị — đúng toán/khoa học (kiểm ở checklist).
-- Gắn từng thay đổi với dòng ("Dòng 2: …"), **mỗi dòng ≤ 1 thay đổi**, ghi thay đổi đó *gây ra* con số/kết luận nào; ghi `text` dòng đó gắn vào vật nào. Bảng/nhãn đổi số thì hình đổi tương ứng cùng lúc.
 - Màu ghi theo **vai trò** ("màu nhấn", "màu leo/hạ", "màu tử/mẫu"), không mã màu.
 - Chú thích từng thành phần, ghi rõ chữ sẽ hiện; nhãn trên hình ≤ ~5 từ; thông tin hết vai trò thì ghi lúc gỡ; vật quá gần nhau → ghi cách tách.
 - Nhân vật/vật minh hoạ phải có vai trò: ghi nó biểu diễn đại lượng nào, chuyển động theo quy luật nào.
@@ -252,7 +259,7 @@ Phụ đề đầy đủ xuất thành file riêng (`.srt`/`.vtt`) từ `speak`.
 
 **Hình và chữ**
 - [ ] Một ví dụ xuyên suốt, ≤ ~3 cảnh, không nhân vật trang trí, không phép biến hình lạ mắt.
-- [ ] `visual`: ≤ 1 thay đổi mỗi dòng, số mới nào cũng có thay đổi trên hình làm nguyên nhân, `text` nào cũng ghi gắn vào vật nào.
+- [ ] `show`: đúng một thay đổi mỗi dòng, số mới nào cũng có thay đổi trên hình làm nguyên nhân; `text` nào cũng có `at`; beat cùng cảnh nối liền nhau.
 - [ ] Phép thử tắt tiếng: mỗi con số có tên đại lượng/đơn vị đọc được ở đâu đó trên màn hình, đúng một lần.
 
 **Lời đọc**

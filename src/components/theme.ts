@@ -50,7 +50,7 @@ export const layout = {
   subtitleTop: 860,
   /** chế độ chữ trong cảnh (không dải phụ đề, skill dung-video): vùng hình kéo tới đây */
   sceneBottom: 1040,
-  sceneTakeawayTop: 950,
+  sceneTakeawayTop: 930,
   gap: 40, // khoảng hở tối thiểu giữa hai khối
 };
 

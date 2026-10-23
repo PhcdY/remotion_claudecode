@@ -8,7 +8,7 @@ Dùng skill `remotion-best-practices` (đã cài trong `.agents/skills/`) cho m�
 ## Workflow (theo đúng thứ tự)
 
 Mỗi bước có một skill riêng, đọc skill (và gói môn) trước khi làm bước đó:
-B1 `viet-kich-ban` → B2 `tao-audio` → B3 `dung-video`.
+B1 `viet-kich-ban` → B3 nháp + storyboard (`dung-video` › Bước 2b) → B2 `tao-audio` → B3 hoàn thiện (`dung-video`).
 
 1. **Kịch bản** → skill `viet-kich-ban`: chủ đề + ý bản chất → tìm ý (hook, hình trung tâm) → dàn ý (người dùng duyệt)
    → `src/videos/<slug>/script.json` → `python scripts/check_script.py <slug>` (0 lỗi). Người dùng chốt trước khi sang B2.
@@ -17,7 +17,8 @@ B1 `viet-kich-ban` → B2 `tao-audio` → B3 `dung-video`.
    - Sinh `public/audio/<slug>/<beatId>-lNN.mp3` (mỗi dòng 1 file) + `manifest.json`.
    - Giọng: hỏi người dùng mỗi lần chạy (`--voice`). Tốc độ trong `scripts/tts_config.json`, API key `VIVIBE_API_KEY` trong `.env`.
      `scripts/tts.py` (Edge TTS) chỉ để test nhanh.
-3. **Dựng video** → `src/videos/<slug>/` chứa composition, đăng ký trong `src/Root.tsx`.
+   Trước B2: dựng bản nháp (thời gian ước tính, `draft: true`) và `node scripts/storyboard.mjs <id>` → người dùng duyệt hình; sửa chữ/lời lúc này chưa tốn credit.
+3. **Dựng video** → `src/videos/<slug>/` (Video.tsx dùng `ExplainerVideo`, beats.tsx, scene.tsx), đăng ký trong `src/Root.tsx`. `src/videos/lab-thanh-phan/` là composition thử thành phần dùng chung, không phải video đăng.
 4. **Duyệt** → `npm run dev` (Remotion Studio).
    Góp ý của người dùng ghi vào `src/videos/<slug>/FEEDBACK.md` (cột "đã sửa skill" / "đã sửa video"): sửa skill ngay cho từng mục
    (và thêm một dòng vào `.claude/lessons.md`), gom sửa video một lần khi người dùng bảo. Lỗi cấu trúc kịch bản → quay lại B1 (duyệt dàn ý), không vá trên video cũ.
@@ -33,12 +34,15 @@ B1 `viet-kich-ban` → B2 `tao-audio` → B3 `dung-video`.
   "beats": [
     {
       "id": "b01",
+      "scene": 1,                       // số cảnh; beat liền nhau cùng cảnh thì hình nối liền
       "section": "HIỆN TƯỢNG",         // cấu trúc; chỉ TRONG ĐỀ THI / BẪY THƯỜNG GẶP / GIẢI ĐÁP hiện trên video
       "keyword": "Nhưng TẠI SAO?",      // câu chốt của beat, hiện lúc đọc dòng cuối, được dùng $...$
-      "visual": "mô tả hình cho beat",  // Claude dựng hình theo mô tả này
+      "visual": "cảnh, bố cục, thành phần lúc beat bắt đầu",
       "lineGap": 0.5,                   // (tuỳ chọn) nghỉ giữa các dòng, chỉ cho chuỗi "vì sao"
       "lines": [
         {
+          "show": "MỘT thay đổi trên hình ở dòng này ('giữ nguyên' nếu không đổi)",
+          "at": "vật mà text gắn vào (bắt buộc khi có text)",
           "text": "chữ mới hiện TRONG CẢNH ở dòng này, cạnh vật nó nói tới (≤ ~35 ký tự, ký hiệu/số, LaTeX trong $...$); \"\" nếu không có",
           "speak": "lời đọc, không ký hiệu; '...' trước chỗ cần nhấn",
           "caption": "(tuỳ chọn) phụ đề khi speak có phiên âm ký hiệu",
@@ -56,7 +60,8 @@ B1 `viet-kich-ban` → B2 `tao-audio` → B3 `dung-video`.
   (trong `calculateMetadata`), mỗi dòng `text` hiện lên đúng lúc file audio của nó bắt đầu.
   Tổng thời lượng composition = tổng audio + khoảng nghỉ.
 - Khoảng nghỉ: 0.25s giữa các dòng, 0.6s giữa các beat (hằng số ở `src/components/timeline.ts`). Beat có `lineGap` thì dùng giá trị đó giữa các dòng; dòng có `pauseAfter` thì nghỉ thêm.
-- **Chữ sống trong cảnh**: video mới không có dải phụ đề (`BeatShell subtitle={false}`); `text` đặt cạnh vật nó nói tới. Video cũ (trước 23/10/2026) giữ `Subtitle`.
+- **Chữ sống trong cảnh**: video mới không có dải phụ đề; `text` đặt cạnh vật ghi ở `at` bằng `AutoLabels` (nhãn neo tự tránh nhau). Video cũ (trước 23/10/2026) giữ `Subtitle`.
+- **Một sân khấu**: beat cùng `scene` nối liền (không mờ ở ranh giới); màu theo vai trò `role` (`src/components/roles.ts`), ≤ 5 màu nhấn mỗi cảnh.
 - **Không sửa nội dung `text`/`speak` khi dựng.** Thấy sai thì báo người dùng.
 - Công thức render bằng KaTeX. Phải chờ font KaTeX load xong (`delayRender`/`continueRender`) trước khi render frame.
 - Font: Plus Jakarta Sans (brand 9Study) qua `@remotion/google-fonts`. Mọi video bọc trong `BrandFrame`.
@@ -73,7 +78,7 @@ B1 `viet-kich-ban` → B2 `tao-audio` → B3 `dung-video`.
 
 - `python scripts/check_script.py <slug>` không lỗi; `npm run lint` không lỗi.
 - Đối chiếu toán/khoa học trên hình (toạ độ điểm, hệ số góc, công thức, số liệu) với kịch bản. Sai nội dung là lỗi nghiêm trọng nhất.
-- `node scripts/check-layout.mjs <slug>` rỗng; xuất ảnh tĩnh bằng `node scripts/stills.mjs <id> <frame...>` ở các mốc quan trọng để soát bố cục.
+- `node scripts/check-layout.mjs <slug>` (bản nháp thêm `--draft`) không có lỗi, cảnh báo đã soát; xuất ảnh tĩnh bằng `node scripts/stills.mjs <id> <frame...>` ở các mốc quan trọng để soát bố cục.
 
 ## Style
 

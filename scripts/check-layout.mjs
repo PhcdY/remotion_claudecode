@@ -1,6 +1,8 @@
 // Kiểm chồng lấn chữ/điểm trên hình (skill dung-video › Bước 4).
-// Dùng: node scripts/check-layout.mjs <slug> [--frames 120,450] [--browser <đường-dẫn-chrome>]
-// Mặc định kiểm 2 frame mỗi dòng: giữa dòng và ngay trước khi dòng kết thúc.
+// Dùng: node scripts/check-layout.mjs <slug> [--frames 120,450] [--draft] [--browser <đường-dẫn-chrome>]
+// Mặc định kiểm 2 frame mỗi dòng: giữa dòng và ngay trước khi dòng kết thúc. --draft: timeline nháp (chưa có audio).
+// LỖI (chặn): chồng lấn, sát, tràn khung, lấn vùng, chữ nhỏ, nhãn xa vật.
+// CẢNH BÁO (không chặn): khung lệch / nửa khung trống, quá nhiều chữ mới trong một dòng (> 8 từ).
 import { bundle } from "@remotion/bundler";
 import { openBrowser, renderStill, selectComposition } from "@remotion/renderer";
 import { existsSync } from "node:fs";
@@ -23,7 +25,7 @@ const browserExecutable = opt("--browser") ?? (existsSync(localChrome) ? localCh
 const browserOpts = browserExecutable ? { browserExecutable, chromeMode: "chrome-for-testing" } : {};
 
 const serveUrl = await bundle({ entryPoint: path.join(root, "src/index.ts"), publicDir: path.join(root, "public") });
-const inputProps = { layoutCheck: true };
+const inputProps = { layoutCheck: true, ...(args.includes("--draft") ? { draft: true } : {}) };
 const browser = await openBrowser("chrome", browserOpts);
 const composition = await selectComposition({ serveUrl, id: slug, inputProps, puppeteerInstance: browser, ...browserOpts });
 
@@ -41,7 +43,10 @@ if (opt("--frames")) {
   }
 }
 
+const NEW_WORDS_MAX = 8;
 let total = 0;
+const warnings = [];
+let prevTexts = null;
 for (const { frame, where } of frames) {
   let result = null;
   await renderStill({
@@ -59,12 +64,35 @@ for (const { frame, where } of frames) {
   if (result === null) {
     console.log(`? ${where} [${frame}]: không đọc được kết quả đo`);
     total++;
-  } else if (result.length) {
-    total += result.length;
+    continue;
+  }
+  const issues = Array.isArray(result) ? result : result.issues;
+  if (issues.length) {
+    total += issues.length;
     console.log(`✗ ${where} [${frame}]`);
-    for (const r of result) console.log(`    ${r}`);
+    for (const r of issues) console.log(`    ${r}`);
+  }
+  if (!Array.isArray(result)) {
+    for (const w of result.warns) warnings.push(`${where} [${frame}]: ${w}`);
+    // chữ mới so với cuối dòng trước (chỉ so ở frame cuối dòng)
+    if (where.endsWith("(cuối)")) {
+      if (prevTexts) {
+        const before = new Set(prevTexts.map((t) => t.k));
+        const added = result.texts.filter((t) => !before.has(t.k));
+        const n = added.reduce((a, t) => a + t.n, 0);
+        if (n > NEW_WORDS_MAX) warnings.push(`${where} [${frame}]: ${n} từ mới trên hình (> ${NEW_WORDS_MAX}): ${added.map((t) => t.k).join(" | ")}`);
+      }
+      prevTexts = result.texts;
+    }
   }
 }
 await browser.close({ silent: true });
-console.log(total ? `\n${total} vấn đề.` : `\nKhông có chồng lấn (${frames.length} frame).`);
+if (warnings.length) {
+  console.log(`
+CẢNH BÁO (${warnings.length}, không chặn — soát bằng mắt):`);
+  for (const w of warnings) console.log(`  - ${w}`);
+}
+console.log(total ? `
+${total} vấn đề.` : `
+Không có lỗi bố cục (${frames.length} frame).`);
 process.exit(total ? 1 : 0);

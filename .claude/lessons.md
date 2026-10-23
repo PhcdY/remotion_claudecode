@@ -40,6 +40,11 @@ Chi tiết từng video: `src/videos/<slug>/FEEDBACK.md`. Thêm mục mới mỗ
 - 22/10 · đơn điệu · "$x$ (km), $f(x)$ (trăm m)" → "ngoài đời không ai dùng thế". Người dùng không cấm đơn vị, mà cấm đơn vị tự chế. → luật đơn vị (23/10).
 - 23/10 · cả pipeline · Chữ lúc nhiều lúc ít do luật "được để trống khi hình nói đủ" quá mơ hồ; dải ghi chú ở đáy tách khỏi hình. → chữ sống trong cảnh, gắn với vật (nguyên tắc Mayer: chữ cạnh thứ nó nói tới, không in lại lời đọc).
 
+- 23/10 · cả pipeline · `BeatShell` làm mờ cả hình ở mọi ranh giới beat → hai beat cùng đồ thị nháy tắt rồi bật. → `scene` + cảnh liền mạch.
+- 23/10 · cực trị · ~10 màu nhấn; màu xanh lá có video là "tăng", có video là "$x_0$". → `role`, một màu một nghĩa, ≤ 5 màu nhấn mỗi cảnh.
+- 23/10 · cả pipeline · Nhãn đặt bằng toạ độ tay (120–180 chỗ mỗi video) → chữ sai chỗ. → `AutoLabels`. Thử đầu: nhãn "cực đại" nằm sát chấm khác hơn sát đỉnh → luật nhãn phải gần điểm của mình hơn mọi điểm khác.
+- 23/10 · cả pipeline · Duyệt hình chỉ sau khi đã tạo audio và dựng xong → sửa tốn kém. → storyboard bản nháp trước B2 (cách các studio làm: chốt hình trên phác thảo, rồi mới làm chuyển động theo giọng).
+
 ## Giọng đọc (Vivibe)
 - 19/10 · Thử 4 cách nhấn → chọn `...` (dừng rồi nhấn). Mỗi dấu câu giữa dòng dừng ≈ 0,3–0,4 s; dòng 3 chỗ ngắt nghe vấp; `...` giữa cụm chặt nghe gãy; thẻ `<break>` bị đọc sai.
 - 20/10 · giọng nam - c Bình · "x không" đọc tách; "ích-không" liền nhưng "không" dính sang động từ sau. → cụm "không" đứng cuối vế.

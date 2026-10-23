@@ -1,6 +1,6 @@
 ---
 name: dung-video
-description: B3 của pipeline video giải thích bản chất (mọi môn) — dựng video Remotion từ script.json (B1) và audio trong public/audio/<slug>/ (B2). Dùng khi đã có kịch bản và audio, cần dựng/sửa/render video, hoặc gõ /dung-video <slug>.
+description: B3 của pipeline video giải thích bản chất (mọi môn) — dựng video Remotion từ script.json (B1) — bản nháp + storyboard trước khi có audio, rồi hoàn thiện theo audio trong public/audio/<slug>/ (B2). Dùng khi kịch bản đã chốt và cần dựng/storyboard/sửa/render video, hoặc gõ /dung-video <slug>.
 ---
 
 # B3 — Dựng video Remotion
@@ -9,13 +9,15 @@ Luôn dùng kèm skill `remotion-best-practices` cho mọi chi tiết API Remoti
 Đọc gói môn `.claude/mon/<subject>.md` (trường `subject` của `script.json`, thiếu = `toan`), mục "Mẫu dựng khái niệm" và "Dựng hình": hình chuẩn và component có sẵn của môn đó.
 Mục tiêu duy nhất là trải nghiệm người xem; lý do của từng luật ở `.claude/lessons.md`.
 
+**Thứ tự (video mới):** B1 chốt kịch bản → **B3 nháp**: dựng hình với thời gian ước tính, xuất storyboard, người dùng duyệt hình (Bước 2b) → B2 tạo audio → **B3 hoàn thiện**: thời gian thật, `check-layout`, render. Sửa hình hoặc chữ ở storyboard thì chưa tốn credit giọng đọc; sửa sau B2 thì phải tạo lại audio dòng đó.
+
 ## Đầu vào (contract với B1, B2)
 
 | File | Từ | Dùng để |
 |---|---|---|
 | `src/videos/<slug>/script.json` | B1 | nội dung: section, keyword, visual, lines[].text |
-| `public/audio/<slug>/manifest.json` | B2 | thứ tự + tên file audio từng dòng |
-| `public/audio/<slug>/<beatId>-lNN.mp3` | B2 | giọng đọc; **độ dài file quyết định thời gian** |
+| `public/audio/<slug>/manifest.json` | B2 | thứ tự + tên file audio từng dòng (chưa cần ở bản nháp) |
+| `public/audio/<slug>/<beatId>-lNN.mp3` | B2 | giọng đọc; **độ dài file quyết định thời gian** (bản nháp: ước tính theo số chữ) |
 | `style.md` (gốc project) | người dùng | màu, font, layout theo brand 9Study (nền sáng); token ở `src/components/theme.ts` |
 | `src/videos/<slug>/FEEDBACK.md` | người dùng | nếu có: đang sửa theo góp ý — sửa **mọi** mục chưa ✅ một lần, cập nhật cột "đã sửa video" |
 
@@ -24,6 +26,7 @@ Mục tiêu duy nhất là trải nghiệm người xem; lý do của từng lu�
 ## Bước 0 — Kiểm tra đầu vào (dừng nếu lỗi)
 
 - `python scripts/check_script.py <slug>` không có lỗi.
+- Bản nháp (chưa có audio) chỉ cần bước trên và bước đọc lướt `visual` cuối mục này; các bước manifest dưới đây làm ở bản hoàn thiện.
 - Hai file JSON tồn tại và parse được.
 - Mỗi dòng trong `script.json` có đúng một mục trong manifest (khớp `beat` + `line`), và file mp3 tồn tại.
 - `text` trong manifest khớp `text` trong script. Lệch → kịch bản đã sửa sau khi tạo audio → **yêu cầu chạy lại B2**, không tự đoán thời gian.
@@ -32,7 +35,7 @@ Mục tiêu duy nhất là trải nghiệm người xem; lý do của từng lu�
 
 ## Bước 1 — Timeline
 
-Dùng chung `buildTimeline` trong `src/components/timeline.ts` (đo mp3, đối chiếu manifest, tính frame). `src/videos/<slug>/timeline.ts` chỉ bọc lại thành `calculateMetadata` (mẫu: `src/videos/don-dieu/timeline.ts`). Không viết lại bộ đo.
+Video mới dùng `ExplainerVideo` + `explainerMetadata(script)` (`src/components/ExplainerVideo.tsx`, mẫu: `src/videos/lab-thanh-phan/Video.tsx`): gọi `buildTimeline` (đo mp3, đối chiếu manifest, tính frame), nối các beat, audio, intro/outro, cảnh liền mạch. Prop `draft: true` → timeline nháp: mỗi dòng dài ≈ số ký tự `speak` / 20 giây, không có audio, góc phải có nhãn "NHÁP". Không viết lại bộ đo. (Video cũ giữ `Video.tsx` + `timeline.ts` riêng.)
 
 Hằng số (ở đầu `src/components/timeline.ts`):
 ```
@@ -50,20 +53,23 @@ Mỗi beat là một `<Sequence>` từ `startFrame` đến `endFrame`, gồm 4 l
 | Trường | Hiện thế nào | Lúc nào |
 |---|---|---|
 | `section` | **không hiện thường trực.** Chỉ `TRONG ĐỀ THI`, `BẪY THƯỜNG GẶP` và `GIẢI ĐÁP` (có nghĩa với người xem) hiện thành thẻ mở beat: chữ to giữa vùng hình, ~1,2s, rồi biến mất trước khi hình chính vào. Các nhãn khác chỉ dùng nội bộ. | đầu beat |
-| `visual` | vùng hình chính (chiếm phần lớn khung) | đầu beat, diễn biến theo mô tả |
+| `scene` + `visual` | cảnh, bố cục, thành phần của beat | đầu beat |
+| `lines[i].show` | **thay đổi duy nhất** trên hình ở dòng i | vào trong 0,5–1 s đầu dòng i rồi đứng yên |
 | `keyword` | **câu chốt của beat**, không phải tag ở góc. Chữ to, dải dưới cùng vùng hình (không che hình), giữ tới hết beat | lúc ý của beat vừa rõ, mặc định = `startFrame` dòng cuối |
-| `lines[i].text` | **chữ trong cảnh**: nhãn/công thức/kết quả đặt **cạnh vật nó nói tới** (vật ghi trong `visual`), dùng `PlotLabel` hoặc nhãn trong thẻ đang có; `""` → dòng không thêm chữ | vào đúng `startFrame` của dòng i; ở lại khi còn được nói tới, mờ đi khi hết vai trò (theo `visual`) |
+| `lines[i].text` + `at` | **chữ trong cảnh**: nhãn/công thức/kết quả gắn vào vật ghi ở `at`, đặt bằng `AutoLabels` (quy tắc 12) hoặc trong thẻ/công thức đang có; `""` → dòng không thêm chữ | vào đúng `startFrame` của dòng i; ở lại khi còn được nói tới, mờ đi khi hết vai trò |
 | audio dòng i | `<Audio>` | đúng `startFrame` của dòng i |
 
 **Chữ trong cảnh (video mới):** `BeatShell subtitle={false}` — không dải phụ đề ở đáy; vùng hình kéo tới y = 1040, câu chốt ở dải 950–1040. Lý do: người xem hiểu tốt hơn khi chữ nằm sát hình liên quan và màn hình không in lại câu đang đọc; dải ghi chú tách khỏi hình làm chữ lúc nhiều lúc ít, mắt phải nhảy qua lại. Phụ đề đầy đủ xuất thành file riêng (Bước 5). Các video dựng trước 23/10/2026 giữ chế độ cũ (`Subtitle`), chỉ đổi khi người dùng bảo dựng lại.
-`visual` không ghi `text` gắn vào đâu → đặt cạnh thứ sinh ra con số/kết luận đó, ghi giả định vào báo cáo.
+Kịch bản cũ không có `at` → đặt `text` cạnh thứ sinh ra con số/kết luận đó, ghi giả định vào báo cáo.
+
+**Cảnh liền mạch:** beat liền nhau cùng `scene` thì hình **không mờ đi rồi hiện lại** ở ranh giới (`ExplainerVideo` tự lo bằng `BeatShell sceneIn/sceneOut`); chỉ câu chốt của beat cũ mờ đi. Vì vậy frame đầu của beat sau phải vẽ **đúng** trạng thái cuối của beat trước: dựng mỗi cảnh thành một component dùng chung cho các beat của cảnh đó, mỗi beat truyền trạng thái (mẫu: `Scene1` trong `lab-thanh-phan`). Vật đã có trên sân khấu thì ở lại và biến đổi (dịch, đổi màu, mờ bớt), không xoá đi vẽ lại. Đổi cảnh (khác `scene`) mới mờ hẳn.
 
 - `text` / `keyword`: tách theo `$...$` → đoạn thường render chữ, đoạn trong `$` render KaTeX inline. Dòng chỉ có công thức → KaTeX display, cỡ lớn hơn.
 - `visual`: dựng đúng mô tả. Cụm "khi đọc dòng N" → animation bắt đầu ở `startFrame` dòng N. Mô tả mơ hồ → chọn cách đơn giản nhất và ghi giả định vào báo cáo.
 - `visual` vi phạm quy tắc 8–10 dưới đây: nhãn dài → tự rút gọn theo quy tắc 8 và ghi vào báo cáo; còn nhiều thay đổi dồn vào một dòng, số đổi mà hình không có gì đổi theo, nhân vật không có vai trò → **báo người dùng để sửa ở B1** (vì phải chia lại dòng/lời đọc), không tự dựng cho đủ.
 - Beat `GIẢI ĐÁP` dùng lại đúng hình của beat `HIỆN TƯỢNG` (cùng component, cùng bố cục) rồi thêm lớp giải thích lên trên, để người xem nhận ra ngay "đây là câu hỏi lúc đầu".
 - **Kết có cảm giác kết**: đáp án cụ thể của câu hỏi mở đầu (con số) hiện to, rõ ở trọng tâm hình. Trong dòng cuối, hình **đứng yên** (không chuyển động mới), chỉ câu kết luận/`keyword` hiện lên; giữ nguyên khung đó hết `TAIL` rồi mới sang `BrandOutro`. Không cắt sang outro khi hình còn đang chạy.
-- Màu ghi theo vai trò ("màu nhấn", "màu cảnh báo") → lấy từ `style.md`.
+- Màu ghi theo vai trò → `role` trong `src/components/roles.ts` (quy tắc 11).
 
 ## Quy tắc bố cục (bắt buộc, khung 1920×1080)
 
@@ -84,7 +90,7 @@ Lề trái/phải tối thiểu 90px. Ngoài logo, không có tag/nhãn/cột ch
 - Hai thành phần bất kỳ (badge, nhãn, thẻ, dấu `?`, hình) không đè lên nhau và không chạm viền nhau. Khoảng hở tối thiểu **40px** giữa hai khối; nhãn gắn vào một điểm cách điểm đó 16–30px.
 - Badge/chú thích của một hình (vd. "đúng một khoảnh khắc" trên đồng hồ) đặt **ngoài viền** hình đó với khoảng hở, hoặc nằm hẳn bên trong ở vùng trống, không đặt vắt ngang viền.
 - Nhãn không được đè lên **số trên trục**. Điểm đánh dấu nằm trên trục (vd. nghiệm của $f'$) mà che số vạch chia → dời số đó sang phía bên kia trục hoặc ẩn số đó, không để điểm đè lên số.
-- Đặt nhãn theo thứ tự ưu tiên: (a) vùng trống xa mọi đường; (b) phía lõm/ngoài của đường cong; (c) kéo ra xa và nối bằng đường dẫn mảnh. Không bao giờ đặt nhãn ngay trên đường đứt nét, đường cong hay điểm khác.
+- Đặt nhãn theo thứ tự ưu tiên: (a) vùng trống xa mọi đường; (b) phía lõm/ngoài của đường cong; (c) kéo ra xa và nối bằng đường dẫn mảnh. Không bao giờ đặt nhãn ngay trên đường đứt nét, đường cong hay điểm khác. Nhãn gắn vào một điểm thì dùng `AutoLabels` (quy tắc 12), không tự đặt toạ độ.
 - Mọi chữ nằm trong vùng có đường vẽ đều có **viền nền** (halo) cùng màu nền, dày 6–8px (`paint-order: stroke` cho SVG, `text-shadow` nhiều lớp cho HTML), để chữ không lẫn vào nét vẽ.
 - Hai nhãn cùng hiện một lúc quanh một điểm hoặc một đường dọc: tách hẳn sang hai phía, không xếp chồng.
 
@@ -156,20 +162,42 @@ Phép thử: **tắt tiếng, chỉ nhìn khung hình**, người xem vẫn bi�
 - **Dựng phép tính từ thành phần, không nhảy bước**: kết quả của một phép ghép chỉ hiện sau khi từng thành phần đã hiện và được nói riêng, và hiện ra *từ* các thành phần đó (không vẽ một đoạn lơ lửng mà người xem không biết từ đâu ra).
 - **Khái niệm mới hiện riêng trước khi dùng**, mẫu dựng của từng môn (cột dọc, cát tuyến, kính lúp, hai tầng $f$/$f'$…): gói môn › Mẫu dựng khái niệm.
 
+**11. Màu theo vai trò, một màu một nghĩa.**
+- Lấy từ `role` (`src/components/roles.ts`): `main` đồ thị/vật chính · `focus` thứ đang nói tới, kết quả chính · `up`/`down` **chỉ** cho tăng/giảm, dương/âm · `warn` bẫy, chỗ sai · `pairA`/`pairB` hai đại lượng của một cặp (mẫu/tử, ngang/dọc) · `dim` hết vai trò.
+- Một cảnh **tối đa 5 màu nhấn**; cần thêm thì ghi lý do vào báo cáo. Màu đã gán nghĩa giữ nguyên nghĩa suốt video và giữa các video.
+- Cụm trên công thức và thứ tương ứng trên hình cùng một màu (quy tắc 10).
+
+**12. Nhãn neo vào vật (`AutoLabels`).**
+- Mọi nhãn gắn vào một điểm/vật (`text` của dòng, tên điểm, giá trị) đặt bằng `AutoLabels` (`src/components/labels.tsx`): truyền điểm neo (toạ độ toán với `scale`, hoặc px trong khung), chữ, màu, độ mờ; truyền vật cản bằng `curveObstacles` (đường cong), `axesObstacles` (trục + số vạch chia), `segmentObstacles` (đoạn, tiếp tuyến), khung thẻ. Component tự chọn hướng không đè vật cản và nhãn khác, **gần điểm của mình hơn mọi điểm khác**; xa quá thì tự vẽ đường dẫn.
+- Truyền **tất cả** nhãn của cảnh vào một `AutoLabels` (nhãn chưa hiện thì `opacity: 0`) để vị trí cố định suốt cảnh, không nhảy khi nhãn khác hiện. Nhãn quan trọng truyền trước; `prefer` để gợi hướng (vd. `["n"]` cho đỉnh).
+- Vật cản di chuyển trong beat (điểm chạy, flycam): truyền cả quỹ đạo, không chỉ vị trí hiện tại.
+- Kích thước chữ chỉ là ước lượng → `check-layout` là bước kiểm cuối.
+
+## Bước 2b — Storyboard (bản nháp, trước B2)
+
+1. Dựng đủ các beat với `draft: true` (mặc định của composition cho tới khi có audio).
+2. `node scripts/check-layout.mjs <id> --draft` → sửa hết lỗi.
+3. `node scripts/storyboard.mjs <id>` → `out/storyboard/<id>/index.html`: mỗi dòng một ảnh (cuối dòng, lúc thay đổi đã hiện đủ) kèm `show`, `text`, lời đọc. Tự soát từng ảnh theo Bước 4 trước, rồi gửi trang cho người dùng (SendUserFile).
+4. Người dùng duyệt. Góp ý về hình → sửa code; về chữ/lời/nhịp → sửa ở B1 (chưa tốn audio). Duyệt xong mới sang B2.
+5. Sau B2: bỏ `draft` khỏi `defaultProps`, chạy lại Bước 0 đầy đủ + Bước 4 với thời gian thật.
+
 ## Bước 3 — Cấu trúc code
 
 ```
 src/components/          dùng chung (ưu tiên dùng lại):
   BrandFrame.tsx         BrandFrame, BrandIntro, BrandOutro (khung 9Study)
-  BeatShell.tsx          BeatShell (thẻ mở beat + câu chốt [+ phụ đề ở video cũ]; video mới subtitle={false}), ramp, clamp
-  timeline.ts            buildTimeline, hằng số nhịp
+  ExplainerVideo.tsx     ExplainerVideo, explainerMetadata — khung cả video (beats, audio, cảnh liền mạch, nháp)
+  BeatShell.tsx          BeatShell (thẻ mở beat + câu chốt [+ phụ đề ở video cũ]), ramp, clamp
+  labels.tsx             AutoLabels, curveObstacles, axesObstacles, segmentObstacles — nhãn neo tự đặt
+  roles.ts               role — màu theo vai trò
+  timeline.ts            buildTimeline (thật / nháp), hằng số nhịp
   plot.tsx               makeScale, Plot, Axes, FunctionPlot, Point, Segment, TangentLine, PlotLabel
   ZoomInset.tsx          kính lúp; MathText.tsx: MathText, Tex, useKatexFonts
   Card, KeyTakeaway, SectionCard, Subtitle, Speedometer, theme.ts (màu, cỡ chữ, halo)
 src/videos/<slug>/
   script.json            (B1 — không sửa)
-  timeline.ts            bọc buildTimeline thành calculateMetadata
-  Video.tsx              composition; beats.tsx mỗi beat một component; scene.tsx hình riêng của video
+  Video.tsx              đăng ký Composition: ExplainerVideo + explainerMetadata(script); defaultProps { timeline: null, draft: true } tới khi có audio
+  beats.tsx              mỗi beat một component; scene.tsx: mỗi cảnh một component dùng chung cho các beat của cảnh
 src/Root.tsx             đăng ký <Composition id="<slug>" ...> 1920×1080, 30fps
 ```
 - Trước khi viết component mới, xem `src/components/` **và thư mục các video trước** (`ban-chat-dao-ham/parts.tsx`: người chạy, đường chạy, đồng hồ bấm giờ; `ban-chat-dao-ham/graph.tsx`: đồ thị mô hình, cát tuyến, tam giác độ dốc; `don-dieu/scene.tsx`: flycam trên đồi, đồ thị hai tầng, cột dọc, mũi tên dọc đường cong, thẻ bên phải). Thứ đã dùng ở video trước và cần lại (vd. `Tag`, `label`, `lerp`, bảng màu vai trò `C` đang chép ở cả hai video) → chuyển sang `src/components/` rồi import, không chép lần ba.
@@ -182,7 +210,8 @@ src/Root.tsx             đăng ký <Composition id="<slug>" ...> 1920×1080, 30
 - `npm run lint` sạch.
 - Xuất ảnh tĩnh bằng `node scripts/stills.mjs <slug> <frame...>` (bundle một lần).
 - Xuất ảnh tĩnh **cho từng dòng** (frame ngay trước khi dòng kết thúc, lúc mọi thành phần của dòng đó đã hiện đủ), không chỉ giữa beat. Nhiều frame thì bundle một lần rồi gọi `renderStill` lặp lại, thay vì gọi `npx remotion still` từng frame.
-- **Kiểm chồng lấn bằng code trước, mắt sau.** Mọi khối chữ trên hình (nhãn, chú thích, số trục, câu chốt) gắn `data-text`, mọi điểm đánh dấu gắn `data-mark`. Chạy `node scripts/check-layout.mjs <slug>`: script mở từng frame kiểm tra, lấy khung bao (`getBoundingClientRect`) của các phần tử đó và báo mọi cặp chồng nhau hoặc cách nhau < 16px, kèm frame và nội dung chữ; khung chứa (thẻ, ô bảng, `Card`) gắn `data-box`, script báo mọi `data-text` nằm trong `data-box` mà tràn ra ngoài viền, và mọi chữ/điểm **bên ngoài** chạm vào khung đó (đã gặp: nhãn đồ thị chạm mép thẻ bảng mà không bị bắt). Danh sách phải rỗng mới sang bước soát bằng mắt.
+- **Kiểm bố cục bằng code trước, mắt sau.** `check-layout` báo LỖI (phải rỗng): chồng lấn/sát, tràn khung, lấn mép dưới, chữ dưới cỡ tối thiểu, nhãn neo cách vật > 130px; và CẢNH BÁO (soát bằng mắt): nửa khung trống, khung lệch, dòng nào thêm > 8 từ mới lên hình. Bản nháp thêm `--draft`.
+- Chi tiết kiểm chồng lấn: Mọi khối chữ trên hình (nhãn, chú thích, số trục, câu chốt) gắn `data-text`, mọi điểm đánh dấu gắn `data-mark`. Chạy `node scripts/check-layout.mjs <slug>`: script mở từng frame kiểm tra, lấy khung bao (`getBoundingClientRect`) của các phần tử đó và báo mọi cặp chồng nhau hoặc cách nhau < 16px, kèm frame và nội dung chữ; khung chứa (thẻ, ô bảng, `Card`) gắn `data-box`, script báo mọi `data-text` nằm trong `data-box` mà tràn ra ngoài viền, và mọi chữ/điểm **bên ngoài** chạm vào khung đó (đã gặp: nhãn đồ thị chạm mép thẻ bảng mà không bị bắt). Danh sách phải rỗng mới sang bước soát bằng mắt.
 - Soát từng ảnh theo **Quy tắc bố cục**: (1) có gì chồng lấn hay dính sát không; (2) kim/đường có đè lên chữ không; (3) cụm hình có cân không, có nửa khung trống không; (4) có chữ nào dưới cỡ tối thiểu không; (5) có gì lấn mép dưới (y > 1040) không; (6) có thành phần nào người xem không cần không; (7) phóng to hay dịch khung có mốc tham chiếu không; (8) **phép thử tắt tiếng**: mỗi con số, ký hiệu, màu, vật trên ảnh có chú thích nói nó là gì không; (9) **ít chữ**: nhãn nào dài quá ~5 từ, lặp `text` khác hoặc lặp số trên trục, `text` nào đặt xa vật nó nói tới, chữ nào tràn khỏi khung chứa, thông tin nào đã hết vai trò mà còn; (10) **nhịp**: so ảnh giữa dòng với ảnh cuối dòng — có quá một thay đổi không, số đổi mà hình có đổi theo không; vật minh hoạ đủ lớn chưa; (11) nhân vật có chuyển động đúng quy luật không, cụm công thức đang giải thích có sáng cùng màu với thứ trên hình không. Sửa hết rồi xuất lại để kiểm.
 - **Soát toán trên hình**: điểm nằm đúng trên đồ thị, hệ số góc, nghiệm, nhãn trục. Sai toán là lỗi nghiêm trọng nhất.
 - **Thời lượng**: tổng phải nằm trong 2:30 – 4:00. Lệch → báo người dùng, đề xuất quay lại B1 (không kéo giãn khoảng nghỉ để bù).
@@ -203,11 +232,12 @@ src/Root.tsx             đăng ký <Composition id="<slug>" ...> 1920×1080, 30
 ## Bản giọng khác (không thay bản cũ)
 
 Audio của bản giọng khác nằm ở `public/audio/<slug>-<hậu tố>/` (skill `tao-audio` › Bản giọng khác). Dựng thêm composition, không chép code beat:
-- `calculateMetadata` nhận prop `audioDir` và gọi `buildTimeline(script, props.audioDir)` (mặc định = slug).
+- `explainerMetadata` (video cũ: `calculateMetadata` riêng) nhận prop `audioDir` và gọi `buildTimeline(script, props.audioDir)` (mặc định = slug).
 - Đăng ký thêm `<Composition id="<slug>-<hậu tố>" defaultProps={{ timeline: null, audioDir: "<slug>-<hậu tố>" }} …/>` cạnh composition gốc, cùng component (mẫu: `src/videos/ban-chat-dao-ham/Video.tsx`).
 - Chạy `check-layout` cho id mới (nhịp đọc khác → mốc dòng khác), render ra `out/<slug>-<hậu tố>.mp4`.
 
 ## Không được
 
 - Sửa `script.json` hay file audio. Thấy sai → báo, quay lại B1/B2.
-- Tự đặt thời gian cho dòng thay vì lấy từ độ dài audio.
+- Tự đặt thời gian cho dòng thay vì lấy từ độ dài audio (bản nháp dùng ước tính của `buildTimeline`, không tự đặt).
+- Render bản đăng từ timeline nháp.

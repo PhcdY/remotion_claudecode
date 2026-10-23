@@ -19,6 +19,8 @@ export type ScriptLine = {
 };
 export type ScriptBeat = {
   id: string;
+  /** số cảnh (CẢNH n). Hai beat liền nhau cùng cảnh: hình không mờ đi ở ranh giới */
+  scene?: number;
   section: string;
   keyword: string;
   visual: string;
@@ -44,9 +46,21 @@ const getAudioDuration = async (src: string) => {
   }
 };
 
-/** Đối chiếu script với manifest, đo độ dài audio, tính timeline. */
-/** audioDir: thư mục audio trong public/audio/ (mặc định = slug; khác slug khi dùng giọng khác). */
-export const buildTimeline = async (script: Script, audioDir = script.slug): Promise<Timeline> => {
+/** Tốc độ đọc ước tính của giọng Vivibe (đo 19–22/10/2026), dùng cho timeline nháp. */
+export const DRAFT_CHARS_PER_SEC = 20;
+
+/**
+ * Đối chiếu script với manifest, đo độ dài audio, tính timeline.
+ * audioDir: thư mục audio trong public/audio/ (mặc định = slug; khác slug khi dùng giọng khác).
+ * draft: chưa có audio (storyboard trước B2) → độ dài mỗi dòng ước tính theo số ký tự `speak`, không có audioSrc.
+ */
+export const buildTimeline = async (script: Script, audioDir = script.slug, draft = false): Promise<Timeline> => {
+  if (draft) {
+    const durations = script.beats.map((b) =>
+      b.lines.map((l) => Math.max(1, (l.speak ?? l.text).length / DRAFT_CHARS_PER_SEC)),
+    );
+    return layoutTimeline(script, durations, () => "");
+  }
   const base = `audio/${audioDir}`;
   const res = await fetch(staticFile(`${base}/manifest.json`));
   if (!res.ok) throw new Error(`Không đọc được ${base}/manifest.json — chạy B2 (skill tao-audio) trước.`);
@@ -70,7 +84,15 @@ export const buildTimeline = async (script: Script, audioDir = script.slug): Pro
       Promise.all(beat.map((m) => getAudioDuration(staticFile(`${base}/${(m as ManifestLine).file}`)))),
     ),
   );
+  return layoutTimeline(script, durations, (bi, li) => staticFile(`${base}/${(entries[bi][li] as ManifestLine).file}`));
+};
 
+/** Xếp dòng/beat theo độ dài từng dòng (giây) và các khoảng nghỉ. */
+const layoutTimeline = (
+  script: Script,
+  durations: number[][],
+  audioSrc: (bi: number, li: number) => string,
+): Timeline => {
   const f = (sec: number) => Math.round(sec * FPS);
   let t = INTRO + LEAD_IN;
   const beats: TBeat[] = script.beats.map((b, bi) => {
@@ -83,7 +105,7 @@ export const buildTimeline = async (script: Script, audioDir = script.slug): Pro
         text: l.text,
         startFrame: f(start),
         endFrame: f(t),
-        audioSrc: staticFile(`${base}/${(entries[bi][li] as ManifestLine).file}`),
+        audioSrc: audioSrc(bi, li),
       };
       t += Math.min(Math.max(l.pauseAfter ?? 0, 0), 2);
       return line;

@@ -1,0 +1,43 @@
+{
+  "slug": "lab-thanh-phan",
+  "title": "Thử thành phần",
+  "subject": "toan",
+  "beats": [
+    {
+      "id": "b01",
+      "scene": 1,
+      "section": "TRỰC GIÁC",
+      "keyword": "Nhãn tự tránh nhau",
+      "visual": "CẢNH 1 — đồ thị $f(x) = -x^3 + 6x^2 - 9x + 6$ trên $[-1; 4]$, nhiều nhãn sát nhau.",
+      "lines": [
+        { "text": "", "speak": "Đây là đồ thị dùng để thử cách đặt nhãn tự động.", "show": "vẽ đồ thị", "at": "" },
+        { "text": "cực đại: $6$", "speak": "Đỉnh tại ba cao sáu.", "show": "đỉnh sáng màu nhấn", "at": "đỉnh (3; 6)" },
+        { "text": "cực tiểu: $2$", "speak": "Đáy tại một cao hai.", "show": "đáy sáng màu nhấn", "at": "đáy (1; 2)" },
+        { "text": "", "speak": "Vậy nhãn tự né đường cong và số trục.", "show": "giữ nguyên", "at": "" }
+      ]
+    },
+    {
+      "id": "b02",
+      "scene": 1,
+      "section": "BẢN CHẤT",
+      "keyword": "Cùng cảnh: không nháy",
+      "visual": "Giữ CẢNH 1.",
+      "lines": [
+        { "text": "$f'(2) = 3$", "speak": "Tại hai, đạo hàm bằng ba.", "show": "điểm (2; 4) sáng màu tăng", "at": "điểm (2; 4)" },
+        { "text": "$f'(3{,}5) < 0$", "speak": "Sau đỉnh, đạo hàm âm.", "show": "điểm (3,5; 5,125) sáng màu giảm", "at": "điểm (3,5; 5,125)" },
+        { "text": "lớn nhất: $22$", "speak": "Đầu tuyến cao hai mươi hai.", "show": "điểm (−1; 22) sáng màu nhấn", "at": "điểm (−1; 22)" }
+      ]
+    },
+    {
+      "id": "b03",
+      "scene": 2,
+      "section": "GIẢI ĐÁP",
+      "keyword": "Đổi cảnh: mờ rồi hiện",
+      "visual": "CẢNH 2 — chỉ một dòng chữ giữa khung.",
+      "lines": [
+        { "text": "", "speak": "Sang cảnh khác thì hình mờ đi rồi hiện cảnh mới.", "show": "hiện chữ", "at": "" },
+        { "text": "", "speak": "Vậy là xong phần thử.", "show": "giữ nguyên", "at": "" }
+      ]
+    }
+  ]
+}

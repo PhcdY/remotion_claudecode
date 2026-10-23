@@ -42,6 +42,8 @@ UNIT_IN_MATH = re.compile(r"\d\s*(?:\\[,;:!]|~)?\s*" + UNIT + r"(?![A-Za-z])")
 # chữ cái Latin đứng riêng (trừ "y" — từ tiếng Việt) hoặc phiên âm ký hiệu kiểu "ích-không" → nên có caption + nghe thử
 PHONETIC = re.compile(r"(?<![\wÀ-ỹ-])[a-xzA-XZ](?![\wÀ-ỹ-])|[\wÀ-ỹ]+-(không|n|một|hai)\b|đen-ta|lô-ga|lốc nê", re.IGNORECASE)
 CLOSERS = ("Vậy", "Nói gọn", "Đó là lý do", "Tóm lại", "Nói cách khác")
+# dấu hiệu một dòng `show` gói nhiều thay đổi
+MULTI_CHANGE = re.compile(r"\b(rồi|sau đó|tiếp theo|đồng thời|cùng lúc)\b|;|\+|→.*→")
 
 
 def words(s: str) -> list[str]:
@@ -105,6 +107,11 @@ def main() -> int:
     if not beats:
         errors.append("không có beat nào")
         beats = []
+    # định dạng mới (23/10/2026): scene ở beat, show/at ở từng dòng
+    v2 = any("show" in l for b in beats for l in (b.get("lines") or []))
+    if beats and not v2:
+        warns.append("kịch bản định dạng cũ: chưa có scene/show/at (bỏ qua nếu là video cũ)")
+    scenes: list[int] = []
 
     total_chars = 0
     total_sec = INTRO + LEAD_IN + TAIL + OUTRO + GAP_BEAT * max(len(beats) - 1, 0)
@@ -134,6 +141,15 @@ def main() -> int:
         visual = b.get("visual", "")
         if visual and not re.match(r"\s*(CẢNH|Giữ CẢNH|Quay lại)", visual):
             warns.append(f"{where}: visual nên mở bằng 'CẢNH n — …' hoặc 'Giữ CẢNH n.'")
+        if v2:
+            sc = b.get("scene")
+            if not isinstance(sc, int):
+                errors.append(f"{where}: thiếu scene (số cảnh, khớp 'CẢNH n' trong visual)")
+            else:
+                scenes.append(sc)
+                m = re.search(r"CẢNH\s*(\d+)", visual)
+                if m and int(m.group(1)) != sc:
+                    warns.append(f"{where}: scene {sc} nhưng visual ghi CẢNH {m.group(1)}")
         if FAKE_UNITS.search(visual):
             errors.append(f"{where}: visual dùng đơn vị tự chế ('{FAKE_UNITS.search(visual).group(0)}')")
 
@@ -187,6 +203,17 @@ def main() -> int:
                 else:
                     listen.append(f"{w} (câu hỏi đoán — giọng lên cuối câu?): {speak}")
 
+            # --- show / at (định dạng mới) ---
+            if v2:
+                show = (line.get("show") or "").strip()
+                if not show:
+                    errors.append(f"{w}: thiếu show (thay đổi trên hình ở dòng này; không đổi thì ghi 'giữ nguyên')")
+                elif MULTI_CHANGE.search(re.sub(r"\([^)]*\)|\[[^\]]*\]", "", show)):
+                    hit = MULTI_CHANGE.search(re.sub(r"\([^)]*\)|\[[^\]]*\]", "", show)).group(0)
+                    warns.append(f"{w}: show có vẻ nhiều hơn một thay đổi ('{hit}'): {show}")
+                if text and not (line.get("at") or "").strip():
+                    errors.append(f"{w}: có text nhưng thiếu at (chữ gắn vào vật nào)")
+
             # --- text ---
             if text:
                 if not is_pure_math(text) and visible_len(text) > 40:
@@ -217,6 +244,8 @@ def main() -> int:
         total_sec += bsec
 
     # --- cấu trúc cả bài ---
+    if len(set(scenes)) > 3:
+        warns.append(f"{len(set(scenes))} cảnh (nên ≤ 3): {sorted(set(scenes))}")
     if beats:
         if beats[0].get("section") != "HIỆN TƯỢNG":
             warns.append("beat đầu không phải HIỆN TƯỢNG")

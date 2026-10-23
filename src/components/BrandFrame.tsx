@@ -5,7 +5,7 @@ import { colors, fontText, layout, tint } from "./theme";
 // Khung chung 9Study (style.md › Khung chung): nền + logo + thanh tiến độ.
 
 const DotCluster: React.FC<{ left: number; top: number; cols: number; rows: number; color: string }> = ({ left, top, cols, rows, color }) => (
-  <svg width={cols * 22} height={rows * 22} style={{ position: "absolute", left, top }}>
+  <svg data-deco width={cols * 22} height={rows * 22} style={{ position: "absolute", left, top }}>
     {Array.from({ length: rows }).map((_, r) =>
       Array.from({ length: cols }).map((__, c) => <circle key={`${r}-${c}`} cx={c * 22 + 4} cy={r * 22 + 4} r={3.2} fill={color} />),
     )}

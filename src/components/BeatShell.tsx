@@ -31,17 +31,29 @@ export const BeatShell: React.FC<{
   keyword: string;
   lines: SubtitleLine[];
   subtitle?: boolean;
+  /**
+   * false: beat trước cùng cảnh → hình không hiện dần ở đầu beat (đã có sẵn trên màn hình).
+   * Beat phải vẽ frame đầu đúng như frame cuối của beat trước.
+   */
+  sceneIn?: boolean;
+  /** false: beat sau cùng cảnh → hình không mờ đi ở cuối beat. */
+  sceneOut?: boolean;
   children: React.ReactNode;
-}> = ({ section, keyword, lines, subtitle = true, children }) => {
+}> = ({ section, keyword, lines, subtitle = true, sceneIn = true, sceneOut = true, children }) => {
   const frame = useCurrentFrame();
   const { durationInFrames, fps } = useVideoConfig();
   const t0 = introFrames(section, fps);
-  const fade = interpolate(frame, [0, 8, durationInFrames - 8, durationInFrames], [0, 1, 1, 0], clamp);
+  const fadeIn = interpolate(frame, [0, 8], [0, 1], clamp);
+  const fadeOut = interpolate(frame, [durationInFrames - 8, durationInFrames], [1, 0], clamp);
+  const fade = fadeIn * fadeOut;
+  // thẻ mở beat che hình → beat có thẻ luôn hiện hình dần sau thẻ
+  const sceneFade = (sceneIn || t0 > 0 ? fadeIn : 1) * (sceneOut ? fadeOut : 1);
   const visualIn = t0 > 0 ? interpolate(frame, [t0 - 6, t0 + 6], [0, 1], clamp) : 1;
   const from = lines[lines.length - 1].startFrame;
   return (
-    <AbsoluteFill style={{ opacity: fade }}>
-      <AbsoluteFill style={{ opacity: visualIn }}>{children}</AbsoluteFill>
+    <AbsoluteFill>
+      <AbsoluteFill style={{ opacity: sceneFade * visualIn }}>{children}</AbsoluteFill>
+      <AbsoluteFill style={{ opacity: fade }}>
       {t0 > 0 ? <SectionCard label={section} /> : null}
       {subtitle ? (
         <>
@@ -55,6 +67,7 @@ export const BeatShell: React.FC<{
           <div data-layout="scene" style={{ display: "none" }} />
         </>
       )}
+      </AbsoluteFill>
     </AbsoluteFill>
   );
 };

@@ -5,7 +5,7 @@ description: B2 của pipeline video giải thích bản chất (mọi môn) —
 
 # B2 — Tạo audio từ kịch bản
 
-Đầu vào: `src/videos/<slug>/script.json` (output của B1, đã được người dùng chốt).
+Đầu vào: `src/videos/<slug>/script.json` (output của B1, đã được người dùng chốt) **và storyboard bản nháp đã được duyệt** (skill `dung-video` › Bước 2b). Video mới chưa qua storyboard → làm storyboard trước, để sửa chữ/lời ở đó khi chưa tốn credit.
 Đầu ra: `public/audio/<slug>/` gồm `<beatId>-lNN.mp3` (mỗi dòng 1 file) + `manifest.json`.
 
 Giọng chuẩn: **giọng clone của người dùng trên Vivibe**, gọi qua API bằng `scripts/vivibe_tts.py`. Mọi việc gọi API, chờ, tải, đổi WAV → MP3, ghi manifest đều do script làm — không gọi API tay, không tải file tay.

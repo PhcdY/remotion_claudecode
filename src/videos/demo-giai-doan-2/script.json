@@ -1,0 +1,91 @@
+{
+  "slug": "demo-giai-doan-2",
+  "title": "Demo giai đoạn 2: b02–b03 video cực trị",
+  "subject": "toan",
+  "beats": [
+    {
+      "id": "b02",
+      "section": "TRỰC GIÁC",
+      "keyword": "Còn $f' = 0$ thì sao?",
+      "visual": "CẢNH 2 — hệ trục của bài trước: trục ngang 'quãng bay ngang $x$' từ −1 đến 4 (vạch mỗi 1), trục dọc 'độ cao $f(x)$' từ 0 đến 24 (vạch mỗi 2, số ở 0, 4, 8, …, 24); công thức $f(x) = -x^3 + 6x^2 - 9x + 6$ kèm nhãn 'mô hình' ở góc trên trái (giữ đến hết b11, trừ b07). Dòng 1: đồ thị $f$ vẽ dần từ $x = -1$ (độ cao 22) tới $x = 4$ (độ cao 2), qua (0; 6), (1; 2), (2; 4), (3; 6). Dòng 2: đoạn đồ thị trên (1; 3) tô màu leo, kèm nhãn '$f' > 0$'. Dòng 3: hai đoạn (−1; 1) và (3; 4) tô màu hạ, kèm nhãn '$f' < 0$'. Dòng 4: hai điểm (1; 2) và (3; 6) sáng màu đạo hàm, cạnh mỗi điểm dấu '?'. Dòng 5: dấu '?' đổi thành nhãn 'đáy' dưới (1; 2) và 'đỉnh' trên (3; 6).",
+      "lines": [
+        {
+          "show": "vẽ dần đồ thị từ −1 đến 4",
+          "text": "",
+          "speak": "Đặt sườn đồi lên hệ trục như bài trước, trục ngang là quãng bay, trục dọc là độ cao."
+        },
+        {
+          "show": "đoạn (1; 3) tô màu tăng",
+          "text": "",
+          "speak": "Bài trước đã chỉ ra, chỗ nào đạo hàm dương thì đường đi lên."
+        },
+        {
+          "show": "hai đoạn hai bên tô màu giảm",
+          "text": "",
+          "speak": "Chỗ nào đạo hàm âm thì đường đi xuống."
+        },
+        {
+          "show": "điểm 1 và 3 hiện, nhãn đạo hàm bằng 0",
+          "at": "điểm 1 và điểm 3",
+          "text": "$f'(1) = f'(3) = 0$",
+          "speak": "Còn tại một và tại ba, đạo hàm bằng không, vậy ở đó đường làm gì?"
+        },
+        {
+          "show": "nhãn 'đáy', 'đỉnh' cạnh hai điểm",
+          "text": "",
+          "speak": "Nhìn hình thì tại một là đáy, tại ba là đỉnh."
+        }
+      ],
+      "scene": 2
+    },
+    {
+      "id": "b03",
+      "section": "ĐỊNH NGHĨA",
+      "keyword": "Cực đại: cao hơn hai bên",
+      "visual": "Giữ CẢNH 2, màu leo/hạ và nhãn '$f' > 0$', '$f' < 0$' mờ đi; đồ thị dịch sang trái nhường chỗ thẻ bên phải. BƯỚC KHÓ — khái niệm mới, giải phẫu. Dòng 1: đường ngang đứt nét qua đỉnh (3; 6); đoạn đồ thị từ $x = 2{,}5$ (độ cao 5,375) đến $x = 3{,}5$ (độ cao 5,125) sáng màu nhấn, nằm dưới đường ngang. Dòng 2: bên phải hiện thẻ 'định nghĩa': 'Nếu tồn tại số $h > 0$ sao cho $f(x) < f(x_0)$ với mọi $x \\in (x_0 - h;\\, x_0 + h)$, $x \\ne x_0$ thì $f$ đạt cực đại tại $x_0$.' GIẢI PHẪU, mỗi dòng một cụm sáng màu và đúng một thứ trên hình sáng cùng màu. Dòng 3: $x_0$ (màu x0) ↔ chấm trên trục ngang tại 3. Dòng 4: $(x_0 - h;\\, x_0 + h)$ (màu khoảng) ↔ khoảng (2,5; 3,5) tô trên trục ngang. Dòng 5: $f(x) < f(x_0)$ (màu nhấn) ↔ đoạn đồ thị trên khoảng đó cùng đường ngang qua đỉnh, nhãn '6' ở đầu đường ngang. Dòng 6: nhãn 'đỉnh' đổi thành 'cực đại'. Dòng 7: tại (1; 2) đoạn đồ thị từ 0,5 đến 1,5 sáng, nằm trên đường ngang đứt nét qua đáy; nhãn 'đáy' đổi thành 'cực tiểu'.",
+      "lines": [
+        {
+          "show": "đoạn đồ thị quanh đỉnh sáng, đường ngang đứt qua đỉnh",
+          "text": "",
+          "speak": "Đỉnh tại ba chỉ cần cao hơn các điểm ở sát hai bên nó."
+        },
+        {
+          "show": "thẻ định nghĩa hiện bên phải (đồ thị dịch sang trái)",
+          "text": "",
+          "speak": "Điểm như vậy gọi là... điểm cực đại, trong sách định nghĩa như sau."
+        },
+        {
+          "show": "x = 3 sáng trên trục và cụm x₀ trong thẻ",
+          "at": "chân x = 3 trên trục",
+          "text": "$x_0 = 3$",
+          "speak": "Điểm đang xét ở đây là ba, vị trí của đỉnh."
+        },
+        {
+          "show": "khoảng (2,2; 3,8) sáng trên trục và cụm khoảng trong thẻ",
+          "at": "khoảng (2,2; 3,8) trên trục",
+          "text": "khoảng sát hai bên",
+          "speak": "Cụm thứ hai là một khoảng ngắn ở sát hai bên đỉnh."
+        },
+        {
+          "show": "đoạn quanh đỉnh đậm lên và cụm f(x) < f(x₀) trong thẻ",
+          "at": "đoạn đồ thị quanh đỉnh",
+          "text": "$f(x) < f(x_0) = 6$",
+          "speak": "Trong khoảng đó, mọi điểm khác đều thấp hơn đỉnh, tức thấp hơn sáu."
+        },
+        {
+          "show": "nhãn 'đỉnh' đổi thành 'giá trị cực đại: 6'",
+          "at": "đỉnh (3; 6)",
+          "text": "giá trị cực đại: $6$",
+          "speak": "Vậy ba là điểm cực đại, còn sáu là giá trị cực đại."
+        },
+        {
+          "show": "nhãn 'đáy' đổi thành 'x = 1: cực tiểu', đoạn quanh đáy sáng",
+          "at": "đáy (1; 2)",
+          "text": "$x = 1$: cực tiểu",
+          "speak": "Đáy tại một thì ngược lại, gọi là cực tiểu, chung lại gọi là cực trị."
+        }
+      ],
+      "scene": 2
+    }
+  ]
+}
