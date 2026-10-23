@@ -46,6 +46,14 @@ CLOSERS = ("Vậy", "Nói gọn", "Đó là lý do", "Tóm lại", "Nói cách k
 MULTI_CHANGE = re.compile(r"\b(rồi|sau đó|tiếp theo|đồng thời|cùng lúc)\b|;|\+|→.*→")
 
 
+def tokens_in(phrase: str, speak: str) -> bool:
+    """Cụm có nằm nguyên văn trong lời đọc không (tách từ như scripts/align_words.py)."""
+    strip = re.compile(r"^[\"'“”‘’(\[]+|[\"'“”‘’)\],.:;?!…]+$")
+    tok = lambda s: [w for w in (strip.sub("", r).lower() for r in s.replace("...", "…").split()) if w]
+    p, t = tok(phrase), tok(speak)
+    return bool(p) and any(t[i:i + len(p)] == p for i in range(len(t) - len(p) + 1))
+
+
 def words(s: str) -> list[str]:
     """Từ của một chuỗi, mỗi cụm $...$ tính một từ."""
     return MATH.sub(" M ", s).split()
@@ -213,6 +221,12 @@ def main() -> int:
                     warns.append(f"{w}: show có vẻ nhiều hơn một thay đổi ('{hit}'): {show}")
                 if text and not (line.get("at") or "").strip():
                     errors.append(f"{w}: có text nhưng thiếu at (chữ gắn vào vật nào)")
+            cue = (line.get("cue") or "").strip()
+            if cue:
+                if not tokens_in(cue, speak):
+                    errors.append(f"{w}: cue '{cue}' không có trong speak (phải là cụm nguyên văn của lời đọc)")
+                if not line.get("show"):
+                    warns.append(f"{w}: có cue nhưng không có show (cue là lúc thay đổi trên hình vào)")
 
             # --- text ---
             if text:

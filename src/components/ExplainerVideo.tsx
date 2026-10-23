@@ -6,7 +6,7 @@ import { BrandFrame, BrandIntro, BrandOutro } from "./BrandFrame";
 import { LayoutProbe } from "./LayoutProbe";
 import { useKatexFonts } from "./MathText";
 import { colors, fontText } from "./theme";
-import { Script, Timeline, buildTimeline } from "./timeline";
+import { Script, TLine, Timeline, buildTimeline, findPhrase } from "./timeline";
 
 // Khung chung của một video giải thích (video mới từ 23/10/2026; video cũ giữ Video.tsx riêng).
 // Một video chỉ cần: script.json, beats.tsx (mỗi beat một component), và vài dòng đăng ký Composition.
@@ -17,6 +17,13 @@ export type ExplainerProps = {
   audioDir?: string;
   /** chưa có audio: thời gian ước tính theo số ký tự speak (storyboard trước B2) */
   draft?: boolean;
+};
+
+/** Frame tuyệt đối giọng bắt đầu nói `phrase` trong dòng; không có/không thấy thì đầu dòng. */
+const cueFrame = (line: TLine, phrase?: string) => {
+  if (!phrase) return line.startFrame;
+  const i = findPhrase(line.words, phrase);
+  return i >= 0 ? line.words[i].f : line.startFrame;
 };
 
 export const explainerMetadata =
@@ -66,6 +73,8 @@ export const ExplainerVideo: React.FC<{
                 L={rel.map((l) => l.startFrame)}
                 E={b.lines.map((l) => l.endFrame - b.startFrame)}
                 T0={introFrames(sb.section, fps)}
+                C={b.lines.map((l, li) => cueFrame(l, sb.lines[li].cue) - b.startFrame)}
+                cue={(li, phrase) => cueFrame(b.lines[li], phrase) - b.startFrame}
               />
             </BeatShell>
           </Sequence>

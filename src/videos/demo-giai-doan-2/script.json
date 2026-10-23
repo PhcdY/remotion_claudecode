@@ -32,6 +32,7 @@
         },
         {
           "show": "nhãn 'đáy', 'đỉnh' cạnh hai điểm",
+          "cue": "là đáy",
           "text": "",
           "speak": "Nhìn hình thì tại một là đáy, tại ba là đỉnh."
         }
@@ -74,12 +75,14 @@
         },
         {
           "show": "nhãn 'đỉnh' đổi thành 'giá trị cực đại: 6'",
+          "cue": "giá trị cực đại",
           "at": "đỉnh (3; 6)",
           "text": "giá trị cực đại: $6$",
           "speak": "Vậy ba là điểm cực đại, còn sáu là giá trị cực đại."
         },
         {
           "show": "nhãn 'đáy' đổi thành 'x = 1: cực tiểu', đoạn quanh đáy sáng",
+          "cue": "gọi là cực tiểu",
           "at": "đáy (1; 2)",
           "text": "$x = 1$: cực tiểu",
           "speak": "Đáy tại một thì ngược lại, gọi là cực tiểu, chung lại gọi là cực trị."

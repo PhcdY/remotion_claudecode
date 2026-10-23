@@ -45,6 +45,12 @@ Chi tiết từng video: `src/videos/<slug>/FEEDBACK.md`. Thêm mục mới mỗ
 - 23/10 · cả pipeline · Nhãn đặt bằng toạ độ tay (120–180 chỗ mỗi video) → chữ sai chỗ. → `AutoLabels`. Thử đầu: nhãn "cực đại" nằm sát chấm khác hơn sát đỉnh → luật nhãn phải gần điểm của mình hơn mọi điểm khác.
 - 23/10 · cả pipeline · Duyệt hình chỉ sau khi đã tạo audio và dựng xong → sửa tốn kém. → storyboard bản nháp trước B2 (cách các studio làm: chốt hình trên phác thảo, rồi mới làm chuyển động theo giọng).
 
+- 23/10 · demo b02–b03 cực trị · Nhãn bị đẩy xa vì: đệm quanh đường cong quá lớn; nhãn của beat khác giành chỗ dù không cùng hiện; nhiều nhãn cho một điểm; công thức chiếm vùng quanh đỉnh. → đệm theo loại vật cản, `phases`, `steps`, `anchor: "region"`, `textObstacle`, công thức đặt góc trống.
+- 23/10 · demo · Nhãn "$x = 1$: cực tiểu" không có chỗ; trục đã ghi 1 → rút thành "cực tiểu". Nhãn không có chỗ thường là dấu hiệu thừa chữ.
+
+- 23/10 · giai đoạn 3 · Hình đổi ở đầu câu dù chữ quan trọng ở cuối câu (vd. "…còn sáu là giá trị cực đại" — nhãn đổi sớm ~2 s). → `cue` + `align_words.py` (dò khoảng lặng, không cần nhận dạng giọng nói; máy chỉ có GPU tích hợp).
+- 23/10 · giai đoạn 3 · Người viết tự kiểm bài của mình dễ bỏ sót chỗ nhảy bước. → agent `hoc-sinh-ao` đọc độc lập kịch bản và storyboard; thước đo cuối vẫn là học sinh thật + số liệu giữ chân người xem (`beat_at.py`).
+
 ## Giọng đọc (Vivibe)
 - 19/10 · Thử 4 cách nhấn → chọn `...` (dừng rồi nhấn). Mỗi dấu câu giữa dòng dừng ≈ 0,3–0,4 s; dòng 3 chỗ ngắt nghe vấp; `...` giữa cụm chặt nghe gãy; thẻ `<break>` bị đọc sai.
 - 20/10 · giọng nam - c Bình · "x không" đọc tách; "ích-không" liền nhưng "không" dính sang động từ sau. → cụm "không" đứng cuối vế.

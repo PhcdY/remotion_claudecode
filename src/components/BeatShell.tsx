@@ -9,7 +9,18 @@ import { layout } from "./theme";
  * Thời điểm (frame, tương đối với beat) bắt đầu / kết thúc từng dòng.
  * T0: frame hình chính bắt đầu (sau thẻ mở beat nếu có, ngược lại 0).
  */
-export type BeatProps = { L: number[]; E: number[]; T0: number };
+export type BeatProps = {
+  L: number[];
+  E: number[];
+  T0: number;
+  /**
+   * (ExplainerVideo) C[i]: frame giọng bắt đầu nói cụm `cue` của dòng i — thay đổi `show` của dòng vào lúc này.
+   * Dòng không có `cue` thì C[i] = L[i].
+   */
+  C?: number[];
+  /** (ExplainerVideo) frame giọng bắt đầu nói `phrase` trong dòng `line` (0-based); không thấy cụm thì đầu dòng. */
+  cue?: (line: number, phrase: string) => number;
+};
 
 export const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 

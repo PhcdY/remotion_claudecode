@@ -14,7 +14,7 @@ B1 `viet-kich-ban` → B3 nháp + storyboard (`dung-video` › Bước 2b) → B
    → `src/videos/<slug>/script.json` → `python scripts/check_script.py <slug>` (0 lỗi). Người dùng chốt trước khi sang B2.
    (`src/videos/dao-ham-tiep-tuyen/` chỉ là dữ liệu mẫu để test B2/B3.)
 2. **Audio** → skill `tao-audio`: giọng clone trên Vivibe qua API, chạy `scripts/vivibe_tts.py`
-   - Sinh `public/audio/<slug>/<beatId>-lNN.mp3` (mỗi dòng 1 file) + `manifest.json`.
+   - Sinh `public/audio/<slug>/<beatId>-lNN.mp3` (mỗi dòng 1 file) + `manifest.json`; rồi `python scripts/align_words.py <slug>` → `words.json` (mốc từng từ cho `cue`).
    - Giọng: hỏi người dùng mỗi lần chạy (`--voice`). Tốc độ trong `scripts/tts_config.json`, API key `VIVIBE_API_KEY` trong `.env`.
      `scripts/tts.py` (Edge TTS) chỉ để test nhanh.
    Trước B2: dựng bản nháp (thời gian ước tính, `draft: true`) và `node scripts/storyboard.mjs <id>` → người dùng duyệt hình; sửa chữ/lời lúc này chưa tốn credit.
@@ -22,7 +22,8 @@ B1 `viet-kich-ban` → B3 nháp + storyboard (`dung-video` › Bước 2b) → B
 4. **Duyệt** → `npm run dev` (Remotion Studio).
    Góp ý của người dùng ghi vào `src/videos/<slug>/FEEDBACK.md` (cột "đã sửa skill" / "đã sửa video"): sửa skill ngay cho từng mục
    (và thêm một dòng vào `.claude/lessons.md`), gom sửa video một lần khi người dùng bảo. Lỗi cấu trúc kịch bản → quay lại B1 (duyệt dàn ý), không vá trên video cũ.
-5. **Render** → `npx remotion render <compositionId> out/<slug>.mp4`; phụ đề riêng: `node scripts/export-captions.mjs <slug>`.
+5. **Render** → `npx remotion render <compositionId> out/<slug>.mp4`; phụ đề riêng + mốc từng dòng: `node scripts/export-captions.mjs <slug>`.
+6. **Người xem thật** → học sinh xem thử, số liệu giữ chân người xem; thời điểm → câu: `python scripts/beat_at.py <id> 1:23`. Soát kịch bản/storyboard bằng agent `hoc-sinh-ao` (`.claude/agents/`).
 
 ## Schema `script.json`
 
@@ -42,6 +43,7 @@ B1 `viet-kich-ban` → B3 nháp + storyboard (`dung-video` › Bước 2b) → B
       "lines": [
         {
           "show": "MỘT thay đổi trên hình ở dòng này ('giữ nguyên' nếu không đổi)",
+          "cue": "(tuỳ chọn) cụm nguyên văn trong speak: thay đổi vào đúng lúc giọng nói tới",
           "at": "vật mà text gắn vào (bắt buộc khi có text)",
           "text": "chữ mới hiện TRONG CẢNH ở dòng này, cạnh vật nó nói tới (≤ ~35 ký tự, ký hiệu/số, LaTeX trong $...$); \"\" nếu không có",
           "speak": "lời đọc, không ký hiệu; '...' trước chỗ cần nhấn",

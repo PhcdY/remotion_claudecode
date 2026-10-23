@@ -1,6 +1,6 @@
 // Xuất phụ đề đầy đủ (skill dung-video › Bước 5) — file riêng, không in lên hình.
 // Dùng: node scripts/export-captions.mjs <slug> [--id <compositionId>]
-// Ra: out/<id>.srt và out/<id>.vtt. Chữ lấy từ `caption` của dòng, thiếu thì `speak`; mốc thời gian từ timeline thật (độ dài audio).
+// Ra: out/<id>.srt, out/<id>.vtt và out/<id>.timeline.json (mốc từng dòng, cho scripts/beat_at.py). Chữ lấy từ `caption` của dòng, thiếu thì `speak`; mốc thời gian từ timeline thật (độ dài audio).
 import { bundle } from "@remotion/bundler";
 import { openBrowser, selectComposition } from "@remotion/renderer";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
@@ -28,6 +28,7 @@ await browser.close({ silent: true });
 const { fps } = composition;
 const timeline = composition.props.timeline;
 const cues = [];
+const lineMap = [];
 for (const tb of timeline.beats) {
   const sb = script.beats.find((b) => b.id === tb.id);
   if (!sb) throw new Error(`Không thấy beat ${tb.id} trong script.json`);
@@ -35,6 +36,7 @@ for (const tb of timeline.beats) {
     const line = sb.lines[i];
     const text = (line.caption ?? line.speak ?? "").replace(/\.\.\./g, " ").replace(/\s+/g, " ").trim();
     if (text) cues.push({ start: tl.startFrame / fps, end: tl.endFrame / fps, text });
+    lineMap.push({ beat: tb.id, section: sb.section, line: i + 1, start: tl.startFrame / fps, end: tl.endFrame / fps, speak: line.speak, text: line.text, show: line.show });
   });
 }
 
@@ -50,4 +52,6 @@ const outDir = path.join(root, "out");
 mkdirSync(outDir, { recursive: true });
 writeFileSync(path.join(outDir, `${id}.srt`), srt, "utf-8");
 writeFileSync(path.join(outDir, `${id}.vtt`), vtt, "utf-8");
-console.log(`✓ out/${id}.srt, out/${id}.vtt — ${cues.length} câu`);
+// mốc thời gian từng dòng của bản render: tra "phút 1:23 là câu nào" bằng scripts/beat_at.py
+writeFileSync(path.join(outDir, `${id}.timeline.json`), JSON.stringify({ id, slug, fps, lines: lineMap }, null, 1), "utf-8");
+console.log(`✓ out/${id}.srt, out/${id}.vtt, out/${id}.timeline.json — ${cues.length} câu`);

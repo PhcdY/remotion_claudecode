@@ -54,13 +54,15 @@ Mỗi beat là một `<Sequence>` từ `startFrame` đến `endFrame`, gồm 4 l
 |---|---|---|
 | `section` | **không hiện thường trực.** Chỉ `TRONG ĐỀ THI`, `BẪY THƯỜNG GẶP` và `GIẢI ĐÁP` (có nghĩa với người xem) hiện thành thẻ mở beat: chữ to giữa vùng hình, ~1,2s, rồi biến mất trước khi hình chính vào. Các nhãn khác chỉ dùng nội bộ. | đầu beat |
 | `scene` + `visual` | cảnh, bố cục, thành phần của beat | đầu beat |
-| `lines[i].show` | **thay đổi duy nhất** trên hình ở dòng i | vào trong 0,5–1 s đầu dòng i rồi đứng yên |
+| `lines[i].show` (+ `cue`) | **thay đổi duy nhất** trên hình ở dòng i | bắt đầu ở `C[i]` (lúc giọng nói tới cụm `cue`; không có `cue` thì đầu dòng), vào trong 0,5–1 s rồi đứng yên |
 | `keyword` | **câu chốt của beat**, không phải tag ở góc. Chữ to, dải dưới cùng vùng hình (không che hình), giữ tới hết beat | lúc ý của beat vừa rõ, mặc định = `startFrame` dòng cuối |
 | `lines[i].text` + `at` | **chữ trong cảnh**: nhãn/công thức/kết quả gắn vào vật ghi ở `at`, đặt bằng `AutoLabels` (quy tắc 12) hoặc trong thẻ/công thức đang có; `""` → dòng không thêm chữ | vào đúng `startFrame` của dòng i; ở lại khi còn được nói tới, mờ đi khi hết vai trò |
 | audio dòng i | `<Audio>` | đúng `startFrame` của dòng i |
 
 **Chữ trong cảnh (video mới):** `BeatShell subtitle={false}` — không dải phụ đề ở đáy; vùng hình kéo tới y = 1040, câu chốt ở dải 950–1040. Lý do: người xem hiểu tốt hơn khi chữ nằm sát hình liên quan và màn hình không in lại câu đang đọc; dải ghi chú tách khỏi hình làm chữ lúc nhiều lúc ít, mắt phải nhảy qua lại. Phụ đề đầy đủ xuất thành file riêng (Bước 5). Các video dựng trước 23/10/2026 giữ chế độ cũ (`Subtitle`), chỉ đổi khi người dùng bảo dựng lại.
 Kịch bản cũ không có `at` → đặt `text` cạnh thứ sinh ra con số/kết luận đó, ghi giả định vào báo cáo.
+
+**Hình đổi đúng lúc lời nói tới (`cue`):** beat nhận `C[i]` = frame giọng bắt đầu nói cụm `cue` của dòng i (bằng `L[i]` nếu dòng không có `cue`) và hàm `cue(i, "cụm")` cho cụm bất kỳ trong dòng — dùng `C[i]` thay `L[i]` làm mốc cho thay đổi của `show`. Mốc từng từ lấy từ `public/audio/<dir>/words.json` (`python scripts/align_words.py <slug> [--audio-dir <dir>]`, chạy sau mỗi lần tạo/sửa audio); thiếu file hoặc bản nháp thì ước tính theo số âm tiết. Cách căn: dò khoảng lặng trong audio (ffmpeg) ở chỗ có dấu câu, chia đều âm tiết giữa các khoảng lặng — sai số ~0,1–0,3 s; thấy lệch rõ khi xem thì báo người dùng (có thể nâng lên nhận dạng giọng nói Whisper, phải tải model ~470MB).
 
 **Cảnh liền mạch:** beat liền nhau cùng `scene` thì hình **không mờ đi rồi hiện lại** ở ranh giới (`ExplainerVideo` tự lo bằng `BeatShell sceneIn/sceneOut`); chỉ câu chốt của beat cũ mờ đi. Vì vậy frame đầu của beat sau phải vẽ **đúng** trạng thái cuối của beat trước: dựng mỗi cảnh thành một component dùng chung cho các beat của cảnh đó, mỗi beat truyền trạng thái (mẫu: `Scene1` trong `lab-thanh-phan`). Vật đã có trên sân khấu thì ở lại và biến đổi (dịch, đổi màu, mờ bớt), không xoá đi vẽ lại. Đổi cảnh (khác `scene`) mới mờ hẳn.
 
@@ -170,16 +172,20 @@ Phép thử: **tắt tiếng, chỉ nhìn khung hình**, người xem vẫn bi�
 **12. Nhãn neo vào vật (`AutoLabels`).**
 - Mọi nhãn gắn vào một điểm/vật (`text` của dòng, tên điểm, giá trị) đặt bằng `AutoLabels` (`src/components/labels.tsx`): truyền điểm neo (toạ độ toán với `scale`, hoặc px trong khung), chữ, màu, độ mờ; truyền vật cản bằng `curveObstacles` (đường cong), `axesObstacles` (trục + số vạch chia), `segmentObstacles` (đoạn, tiếp tuyến), khung thẻ. Component tự chọn hướng không đè vật cản và nhãn khác, **gần điểm của mình hơn mọi điểm khác**; xa quá thì tự vẽ đường dẫn.
 - Truyền **tất cả** nhãn của cảnh vào một `AutoLabels` (nhãn chưa hiện thì `opacity: 0`) để vị trí cố định suốt cảnh, không nhảy khi nhãn khác hiện. Nhãn quan trọng truyền trước; `prefer` để gợi hướng (vd. `["n"]` cho đỉnh).
+- **Một vật một nhãn**: nhãn của cùng một điểm qua các dòng (vd. "$f'(3) = 0$" → "đỉnh" → "giá trị cực đại: 6") là **một** nhãn có `steps` + `step`, đổi chữ tại chỗ; không đặt nhiều nhãn chen nhau quanh một điểm.
+- `phases` (vd. `["b02"]`): nhãn chỉ hiện trong các beat đó; hai nhãn không chung giai đoạn thì không giành chỗ của nhau.
+- `anchor: "region"` cho nhãn của một vùng (đoạn cong tô màu, khoảng trên trục): gắn bằng màu, không cần luật "gần điểm mình hơn"; mặc định `"point"` cho nhãn của một chấm.
+- Chữ cố định khác trong khung (công thức, "mô hình", tên trục, thẻ) truyền làm vật cản bằng `textObstacle` (giữ khoảng hở như giữa hai nhãn). Đặt chúng ở chỗ **không tranh vùng nhãn**: vùng quanh đỉnh/đáy/điểm đang xét để cho nhãn; công thức để góc trống (đã gặp ở demo: công thức góc trên phải chiếm chỗ của nhãn quanh đỉnh).
 - Vật cản di chuyển trong beat (điểm chạy, flycam): truyền cả quỹ đạo, không chỉ vị trí hiện tại.
-- Kích thước chữ chỉ là ước lượng → `check-layout` là bước kiểm cuối.
+- Kích thước chữ chỉ là ước lượng → `check-layout` là bước kiểm cuối. Nhãn không có chỗ sạch (bị đẩy xa, `check-layout` báo "nhãn xa vật") thường nghĩa là **cảnh quá nhiều chữ**: bớt chữ (một thông tin một chỗ), dời chữ cố định, hoặc báo B1 rút `text` — không ép nhãn vào chỗ chật.
 
 ## Bước 2b — Storyboard (bản nháp, trước B2)
 
 1. Dựng đủ các beat với `draft: true` (mặc định của composition cho tới khi có audio).
 2. `node scripts/check-layout.mjs <id> --draft` → sửa hết lỗi.
-3. `node scripts/storyboard.mjs <id>` → `out/storyboard/<id>/index.html`: mỗi dòng một ảnh (cuối dòng, lúc thay đổi đã hiện đủ) kèm `show`, `text`, lời đọc. Tự soát từng ảnh theo Bước 4 trước, rồi gửi trang cho người dùng (SendUserFile).
+3. `node scripts/storyboard.mjs <id>` → `out/storyboard/<id>/index.html`: mỗi dòng một ảnh (cuối dòng, lúc thay đổi đã hiện đủ) kèm `show`, `text`, lời đọc. Tự soát từng ảnh theo Bước 4, rồi gọi agent `hoc-sinh-ao` (đưa thư mục storyboard + tiền đề) xem như người xem lần đầu; sửa chỗ *nặng*/*vừa* về hình ở đây, chỗ về lời/chữ báo người dùng. Xong mới gửi trang cho người dùng (SendUserFile), kèm tóm tắt những gì học sinh ảo đã bắt và đã sửa.
 4. Người dùng duyệt. Góp ý về hình → sửa code; về chữ/lời/nhịp → sửa ở B1 (chưa tốn audio). Duyệt xong mới sang B2.
-5. Sau B2: bỏ `draft` khỏi `defaultProps`, chạy lại Bước 0 đầy đủ + Bước 4 với thời gian thật.
+5. Sau B2: `python scripts/align_words.py <slug>` (mốc từng từ cho `cue`), bỏ `draft` khỏi `defaultProps`, chạy lại Bước 0 đầy đủ + Bước 4 với thời gian thật.
 
 ## Bước 3 — Cấu trúc code
 
@@ -228,6 +234,14 @@ src/Root.tsx             đăng ký <Composition id="<slug>" ...> 1920×1080, 30
 - Mốc thời gian (máy người dùng, 21/10/2026): video 3:53 (≈ 7000 frame) render ≈ 14–15 phút; 2:49 ≈ 6–8 phút. Báo mốc này lúc bắt đầu render.
 - Xong: đo thời lượng file bằng `ffprobe`, gửi file cho người dùng. `out/` bị gitignore, không commit video.
 - **Phụ đề**: `node scripts/export-captions.mjs <slug> [--id <compositionId>]` → `out/<id>.srt` + `out/<id>.vtt` (từ `caption`, thiếu thì `speak`, đúng mốc thời gian của audio). Gửi kèm video để tải lên web/YouTube dạng phụ đề bật–tắt được; không in phụ đề lên hình.
+
+## Bước 6 — Kiểm với người xem thật
+
+Học sinh ảo chỉ là bước lọc; thước đo thật là người xem. Gợi ý cho người dùng khi gửi video (một lần, ngắn gọn):
+- **Trước khi đăng (nếu được)**: 2–3 học sinh xem **một lần, không tua**, rồi trả lời 3 câu: (1) chỗ nào muốn tua lại / bị lạc — nói thời điểm; (2) kể lại ý chính bằng lời của mình; (3) giải câu hỏi mở đầu hoặc một câu áp dụng. Kể lại lệch ý bản chất → video chưa dạy được ý đó.
+- **Sau khi đăng**: xem biểu đồ giữ chân người xem (YouTube Studio › Analytics › Giữ chân người xem, hoặc số liệu web 9Study): tìm chỗ tụt dốc đột ngột và chỗ người xem tua lại (đỉnh nhô lên).
+
+Người dùng báo thời điểm ("1:23 khó hiểu", "tụt ở 0:40") → `python scripts/beat_at.py <id> 1:23 0:40` (cần `out/<id>.timeline.json` từ `export-captions.mjs` của đúng bản đã render) để biết beat, dòng, lời, hình ở đó; ghi vào `FEEDBACK.md` kèm beat/dòng, sửa theo quy trình góp ý như mọi lần, và thêm bài học vào `.claude/lessons.md`.
 
 ## Bản giọng khác (không thay bản cũ)
 

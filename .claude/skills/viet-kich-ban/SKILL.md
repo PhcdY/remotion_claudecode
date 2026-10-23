@@ -67,6 +67,7 @@ Theo schema và quy tắc bên dưới. File đã tồn tại → hỏi trước
 2. **Đọc mạch**: đọc liên tiếp câu đầu của mọi beat — phải nghe thành một mạch nhân quả.
 3. **Theo dõi người xem**: đi từng dòng, ghi "lúc này người xem đang nhìn gì, đã hiểu gì, đang thắc mắc gì, hình trả lời thế nào". Dòng nào dùng thứ chưa giải thích → chèn bước thiếu.
 4. `python scripts/check_script.py <slug>` — **lỗi phải bằng 0**; từng cảnh báo hoặc sửa, hoặc ghi lý do giữ.
+4b. **Học sinh ảo**: gọi agent `hoc-sinh-ao` (Agent tool, `subagent_type: "hoc-sinh-ao"`), đưa đường dẫn `script.json` và **tiền đề** (học sinh đã học gì, bài trước dạy gì, chưa học gì). Agent đọc độc lập, không thấy dàn ý. Sửa mọi chỗ mức *nặng* và *vừa*; chỗ giữ nguyên thì ghi lý do trong báo cáo. Đoạn "giải thích lại ý chính" của agent mà lệch ý bản chất → video chưa dạy được ý đó, quay lại chuỗi "vì sao". Sửa nhiều thì gọi lại một lần nữa.
 5. Chạy checklist cuối file (phần máy không kiểm được).
 6. Báo: số beat, số ký tự `speak`, thời lượng ước tính, **danh sách dòng cần nghe thử** (script in sẵn) và **mọi chỗ còn nghi ngờ**.
 
@@ -91,6 +92,7 @@ Người dùng chốt kịch bản → sang **B3 bản nháp + storyboard** (ski
       "lines": [
         {
           "show": "MỘT thay đổi trên hình ở dòng này, vd. 'tô đoạn (1; 3) màu tăng'; không đổi: 'giữ nguyên'",
+          "cue": "TUỲ CHỌN: cụm nguyên văn trong speak — thay đổi vào đúng lúc giọng nói tới cụm này",
           "text": "chữ mới hiện trên hình ở dòng này, $...$ cho toán; \"\" nếu không có",
           "at": "vật mà text gắn vào, vd. 'đỉnh (3; 6)' — bắt buộc khi có text",
           "speak": "lời đọc, không ký hiệu",
@@ -228,6 +230,7 @@ Phụ đề đầy đủ xuất thành file riêng (`.srt`/`.vtt`) từ `speak`.
 - **`scene`**: số cảnh (1, 2, 3; ≤ ~3 cả video). Các beat liền nhau cùng cảnh được dựng như một sân khấu liền: vật ở lại và biến đổi, không xoá vẽ lại.
 - **`visual`** (beat): mở bằng tên cảnh ("CẢNH 2 — …" lần đầu, "Giữ CẢNH 2." sau đó), rồi tả **trạng thái lúc beat bắt đầu**: bố cục, trục, hàm, thành phần, thứ gì từ beat trước còn ở lại / mờ đi. Đánh dấu "BƯỚC KHÓ". Thay đổi theo từng dòng **không** viết ở đây.
 - **`show`** (dòng): **đúng một thay đổi** trên hình, viết ngắn, động từ + vật + vai trò màu ("điểm (2; 4) sáng màu tăng", "khung soi co về quanh đỉnh", "giữ nguyên"); thay đổi đó là *nguyên nhân* nhìn thấy được của con số/kết luận dòng đó nói. Có chữ "rồi", "đồng thời", ";" là đang gói hai thay đổi → tách dòng (`check_script.py` cảnh báo). Bảng/nhãn đổi số thì hình đổi tương ứng trong cùng `show`.
+- **`cue`** (dòng, tuỳ chọn): cụm **nguyên văn** trong `speak` mà thay đổi của `show` phải vào đúng lúc giọng nói tới (vd. dòng "Vậy ba là điểm cực đại, còn sáu là giá trị cực đại." + `cue: "giá trị cực đại"` → nhãn đổi khi giọng nói cụm đó, không phải ngay đầu câu). Dùng khi chữ/hình quan trọng nằm ở **nửa sau** câu, hoặc câu nhắc tới hai thứ lần lượt; thiếu `cue` thì thay đổi vào đầu dòng. Hình và lời phải tới cùng lúc: hình vào trước lời thì người xem nhìn mà chưa biết nhìn gì, vào sau thì nghe mà chưa thấy.
 - **`at`** (dòng): vật mà `text` gắn vào ("đỉnh (3; 6)", "cột $f(x_0)$", "công thức, dưới mẫu số"); bắt buộc khi có `text`.
 - Số liệu cụ thể: hàm, khoảng vẽ trục, toạ độ, giá trị — đúng toán/khoa học (kiểm ở checklist).
 - Màu ghi theo **vai trò** ("màu nhấn", "màu leo/hạ", "màu tử/mẫu"), không mã màu.

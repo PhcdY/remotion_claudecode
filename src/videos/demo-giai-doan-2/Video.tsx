@@ -126,12 +126,13 @@ const sceneLabels = (o: Record<string, number>, peakStep: number, troughStep: nu
 ];
 
 // ---------------- b02: f' > 0 lên, f' < 0 xuống; còn f' = 0? Đáy, đỉnh ----------------
-const Beat02: React.FC<BeatProps> = ({ L }) => {
+const Beat02: React.FC<BeatProps> = ({ L, C = L }) => {
   const fr = useCurrentFrame();
   const up = fadeIn(fr, L[1]);
   const down = fadeIn(fr, L[2]);
   const pts = fadeIn(fr, L[3]);
-  const names = fadeIn(fr, L[4]);
+  const names = fadeIn(fr, C[4]); // đúng lúc giọng nói "là đáy"
+
   return (
     <Scene2
       left={POS.center}
@@ -205,7 +206,7 @@ const DefCard: React.FC<{ hl: number; opacity: number }> = ({ hl, opacity }) => 
   );
 };
 
-const Beat03: React.FC<BeatProps> = ({ L }) => {
+const Beat03: React.FC<BeatProps> = ({ L, C = L }) => {
   const fr = useCurrentFrame();
   const line = lineAt(fr, L);
   // b02 xong việc: màu tăng/giảm và nhãn đạo hàm = 0 mờ dần (cùng cảnh, không nháy)
@@ -216,8 +217,9 @@ const Beat03: React.FC<BeatProps> = ({ L }) => {
   const x0 = fadeIn(fr, L[2]);
   const span = fadeIn(fr, L[3]);
   const below = fadeIn(fr, L[4]);
-  const peakT = fadeIn(fr, L[5]);
-  const minAll = fadeIn(fr, L[6]);
+  const peakT = fadeIn(fr, C[5]); // đúng lúc giọng nói "giá trị cực đại"
+  const minAll = fadeIn(fr, C[6]); // đúng lúc giọng nói "gọi là cực tiểu"
+
   const hl = line === 3 ? 1 : line === 4 ? 2 : line === 5 ? 3 : 0;
   return (
     <>
