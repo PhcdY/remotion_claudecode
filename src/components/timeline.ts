@@ -10,7 +10,13 @@ export const GAP_BEAT = 0.6;
 export const TAIL = 1.0;
 export const OUTRO = 2.5; // BrandOutro
 
-export type ScriptLine = { text: string; speak?: string };
+export type ScriptLine = {
+  text: string;
+  speak?: string;
+  caption?: string;
+  /** nghỉ thêm sau dòng (giây), vd. sau câu hỏi đoán */
+  pauseAfter?: number;
+};
 export type ScriptBeat = {
   id: string;
   section: string;
@@ -73,12 +79,14 @@ export const buildTimeline = async (script: Script, audioDir = script.slug): Pro
       if (li > 0) t += b.lineGap ?? GAP_LINE;
       const start = t;
       t += durations[bi][li];
-      return {
+      const line = {
         text: l.text,
         startFrame: f(start),
         endFrame: f(t),
         audioSrc: staticFile(`${base}/${(entries[bi][li] as ManifestLine).file}`),
       };
+      t += Math.min(Math.max(l.pauseAfter ?? 0, 0), 2);
+      return line;
     });
     return { id: b.id, startFrame: lines[0].startFrame, endFrame: 0, lines };
   });

@@ -1,11 +1,13 @@
 ---
 name: dung-video
-description: B3 của pipeline video toán — dựng video Remotion từ script.json (B1) và audio trong public/audio/<slug>/ (B2). Dùng khi đã có kịch bản và audio, cần dựng/sửa/render video, hoặc gõ /dung-video <slug>.
+description: B3 của pipeline video giải thích bản chất (mọi môn) — dựng video Remotion từ script.json (B1) và audio trong public/audio/<slug>/ (B2). Dùng khi đã có kịch bản và audio, cần dựng/sửa/render video, hoặc gõ /dung-video <slug>.
 ---
 
 # B3 — Dựng video Remotion
 
 Luôn dùng kèm skill `remotion-best-practices` cho mọi chi tiết API Remotion (đo audio, font, Sequence, render…).
+Đọc gói môn `.claude/mon/<subject>.md` (trường `subject` của `script.json`, thiếu = `toan`), mục "Mẫu dựng khái niệm" và "Dựng hình": hình chuẩn và component có sẵn của môn đó.
+Mục tiêu duy nhất là trải nghiệm người xem; lý do của từng luật ở `.claude/lessons.md`.
 
 ## Đầu vào (contract với B1, B2)
 
@@ -17,10 +19,11 @@ Luôn dùng kèm skill `remotion-best-practices` cho mọi chi tiết API Remoti
 | `style.md` (gốc project) | người dùng | màu, font, layout theo brand 9Study (nền sáng); token ở `src/components/theme.ts` |
 | `src/videos/<slug>/FEEDBACK.md` | người dùng | nếu có: đang sửa theo góp ý — sửa **mọi** mục chưa ✅ một lần, cập nhật cột "đã sửa video" |
 
-`speak` **không** dùng ở B3 (chỉ dành cho TTS). Trên màn hình luôn hiện `text`.
+`speak` **không** dùng trên hình (chỉ cho TTS và file phụ đề). Trên màn hình chỉ hiện `text`, `keyword` và chữ ghi trong `visual`.
 
 ## Bước 0 — Kiểm tra đầu vào (dừng nếu lỗi)
 
+- `python scripts/check_script.py <slug>` không có lỗi.
 - Hai file JSON tồn tại và parse được.
 - Mỗi dòng trong `script.json` có đúng một mục trong manifest (khớp `beat` + `line`), và file mp3 tồn tại.
 - `text` trong manifest khớp `text` trong script. Lệch → kịch bản đã sửa sau khi tạo audio → **yêu cầu chạy lại B2**, không tự đoán thời gian.
@@ -35,7 +38,8 @@ Hằng số (ở đầu `src/components/timeline.ts`):
 ```
 FPS = 30, INTRO = 1.6s, LEAD_IN = 0.3s, GAP_LINE = 0.25s, GAP_BEAT = 0.6s, TAIL = 1.0s, OUTRO = 2.5s
 ```
-- `BrandIntro` chiếm `[0, INTRO)`. Dòng đầu bắt đầu ở `INTRO + LEAD_IN`. Dòng sau = kết thúc dòng trước + `GAP_LINE` (cùng beat; beat có `lineGap` thì dùng giá trị đó) hoặc + `GAP_BEAT` (sang beat mới).
+- `BrandIntro` chiếm `[0, INTRO)`. Dòng đầu bắt đầu ở `INTRO + LEAD_IN`. Dòng sau = kết thúc dòng trước + `pauseAfter` của dòng trước (nếu có, ≤ 2 s) + `GAP_LINE` (cùng beat; beat có `lineGap` thì dùng giá trị đó) hoặc + `GAP_BEAT` (sang beat mới).
+- Khoảng `pauseAfter` (sau câu hỏi đoán): hình chỉ làm sáng lần lượt các khả năng đang hỏi, không lộ đáp án; đáp án vào ở đầu dòng sau.
 - `BrandOutro` bắt đầu ở end dòng cuối + `TAIL`. `durationInFrames` = mốc đó + `OUTRO`.
 - Trường `speed` của beat chỉ ảnh hưởng B2 (độ dài audio); B3 không cần làm gì thêm.
 
@@ -47,9 +51,12 @@ Mỗi beat là một `<Sequence>` từ `startFrame` đến `endFrame`, gồm 4 l
 |---|---|---|
 | `section` | **không hiện thường trực.** Chỉ `TRONG ĐỀ THI`, `BẪY THƯỜNG GẶP` và `GIẢI ĐÁP` (có nghĩa với người xem) hiện thành thẻ mở beat: chữ to giữa vùng hình, ~1,2s, rồi biến mất trước khi hình chính vào. Các nhãn khác chỉ dùng nội bộ. | đầu beat |
 | `visual` | vùng hình chính (chiếm phần lớn khung) | đầu beat, diễn biến theo mô tả |
-| `keyword` | **câu chốt của beat**, không phải tag ở góc. Chữ to, đặt trong vùng hình cạnh trọng tâm (không che hình), giữ tới hết beat | lúc ý của beat vừa rõ, mặc định = `startFrame` dòng cuối |
-| `lines[i].text` | dòng ghi chú ngắn (không phải bản chép lời đọc); `""` → không hiện gì | đúng `startFrame` của dòng i; **chỉ hiện dòng đang đọc**, dòng trước biến mất (không giữ bản mờ) |
+| `keyword` | **câu chốt của beat**, không phải tag ở góc. Chữ to, dải dưới cùng vùng hình (không che hình), giữ tới hết beat | lúc ý của beat vừa rõ, mặc định = `startFrame` dòng cuối |
+| `lines[i].text` | **chữ trong cảnh**: nhãn/công thức/kết quả đặt **cạnh vật nó nói tới** (vật ghi trong `visual`), dùng `PlotLabel` hoặc nhãn trong thẻ đang có; `""` → dòng không thêm chữ | vào đúng `startFrame` của dòng i; ở lại khi còn được nói tới, mờ đi khi hết vai trò (theo `visual`) |
 | audio dòng i | `<Audio>` | đúng `startFrame` của dòng i |
+
+**Chữ trong cảnh (video mới):** `BeatShell subtitle={false}` — không dải phụ đề ở đáy; vùng hình kéo tới y = 1040, câu chốt ở dải 950–1040. Lý do: người xem hiểu tốt hơn khi chữ nằm sát hình liên quan và màn hình không in lại câu đang đọc; dải ghi chú tách khỏi hình làm chữ lúc nhiều lúc ít, mắt phải nhảy qua lại. Phụ đề đầy đủ xuất thành file riêng (Bước 5). Các video dựng trước 23/10/2026 giữ chế độ cũ (`Subtitle`), chỉ đổi khi người dùng bảo dựng lại.
+`visual` không ghi `text` gắn vào đâu → đặt cạnh thứ sinh ra con số/kết luận đó, ghi giả định vào báo cáo.
 
 - `text` / `keyword`: tách theo `$...$` → đoạn thường render chữ, đoạn trong `$` render KaTeX inline. Dòng chỉ có công thức → KaTeX display, cỡ lớn hơn.
 - `visual`: dựng đúng mô tả. Cụm "khi đọc dòng N" → animation bắt đầu ở `startFrame` dòng N. Mô tả mơ hồ → chọn cách đơn giản nhất và ghi giả định vào báo cáo.
@@ -67,11 +74,11 @@ Mỗi beat là một `<Sequence>` từ `startFrame` đến `endFrame`, gồm 4 l
 | Vùng | Toạ độ y | Chứa |
 |---|---|---|
 | Logo | 30 – 90, x ≤ 260 | logo 9Study (do `BrandFrame` vẽ), không đặt gì khác vào đây |
-| Hình | 110 – 820 | toàn bộ `visual`, câu chốt `keyword` (dải 730 – 820), thẻ mở beat, mọi nhãn/chú thích |
-| Phụ đề | 860 – 1040 | một dòng `text` đang đọc |
+| Hình | 110 – 1040 | toàn bộ `visual`, `text` từng dòng, thẻ mở beat, mọi nhãn/chú thích; câu chốt `keyword` ở dải 950 – 1040 |
 | Thanh tiến độ | 1074 – 1080 | do `BrandFrame` vẽ |
 
-Lề trái/phải tối thiểu 90px. Không thành phần nào của hình được thò xuống vùng phụ đề. Ngoài logo, không có tag/nhãn thường trực ở các góc.
+(Video cũ, chế độ `Subtitle`: hình 110 – 820, câu chốt 730 – 820, phụ đề 860 – 1040.)
+Lề trái/phải tối thiểu 90px. Ngoài logo, không có tag/nhãn/cột chữ thường trực — cả khung là sân khấu của hình.
 
 **1. Không chồng lấn, không dính sát.**
 - Hai thành phần bất kỳ (badge, nhãn, thẻ, dấu `?`, hình) không đè lên nhau và không chạm viền nhau. Khoảng hở tối thiểu **40px** giữa hai khối; nhãn gắn vào một điểm cách điểm đó 16–30px.
@@ -94,8 +101,9 @@ Lề trái/phải tối thiểu 90px. Không thành phần nào của hình đư
 
 | Loại chữ | Tối thiểu |
 |---|---|
-| Phụ đề | 52px (dòng chỉ có công thức: 48px) |
 | Câu chốt `keyword`, thẻ mở beat | 56px |
+| `text` của dòng (kết quả chính đặt trong cảnh) | 44px |
+| Phụ đề (chỉ video cũ) | 52px (dòng chỉ có công thức: 48px) |
 | Badge, nhãn, chú thích, chữ trong thẻ | 36px |
 | Số trên trục, vạch chia đồng hồ | 28px |
 
@@ -121,7 +129,7 @@ Người xem phải nhận ra *cái gì đang thay đổi*. Nếu khung nhìn đ
 **7. Mọi thứ trên màn hình đều có chú thích.**
 Phép thử: **tắt tiếng, chỉ nhìn khung hình**, người xem vẫn biết từng con số, ký hiệu, hình là gì. Không biết → thiếu chú thích.
 - Trục, thước đo: tên đại lượng + đơn vị ở đầu trục ("quãng đường $s$ (m)", "thời gian $t$ (s)"), không chỉ "m" hay "s".
-- Con số hiện trên hình (nhãn, ô bảng, giá trị đang chạy): có đơn vị nếu kịch bản dùng đơn vị (mô hình toán có thể là số trơn, không đơn vị — skill `viet-kich-ban` › `text`); tên đại lượng ở tiêu đề cột ("Vận tốc trung bình (m/s)", không chỉ "Trung bình") hoặc bằng ký hiệu đã chú giải ($v$, $\Delta t$), **không viết lại cả cụm tên ở mỗi nhãn** (quy tắc 8).
+- Con số hiện trên hình: theo skill `viet-kich-ban` › Số và đơn vị — đơn vị nói một lần ở tên trục/tiêu đề cột/câu "($t$ tính bằng giây)", số sát trục và ô bảng không lặp đơn vị; số đứng riêng (kết quả, đáp án, số liệu thật) luôn kèm đơn vị, số và đơn vị liền nhau, cách một khoảng trắng; đơn vị viết ngoài KaTeX cho cùng font. Tên đại lượng ở tiêu đề cột ("Vận tốc trung bình (m/s)", không chỉ "Trung bình") hoặc bằng ký hiệu đã chú giải ($v$, $\Delta t$), **không viết lại cả cụm tên ở mỗi nhãn** (quy tắc 8).
 - Công thức xuất hiện lần đầu: ký hiệu được chú giải bằng cụm đọc lên có nghĩa (tên trục "quãng đường $s$ (m)", hoặc "$s$ là quãng đường"). Không dùng chú giải viết tắt kiểu "$s$: m · $t$: s".
 - Đoạn tô màu, mũi tên, vạch nhấn: có nhãn nói nó biểu diễn gì ("rơi thêm 15 m trong 1 s"). Màu dùng lại ở beat sau với cùng nghĩa thì giữ cùng màu.
 - Điểm, vật minh hoạ (quả bóng ở các thời điểm): mỗi cái cần thiết có nhãn; vật trùng hoặc quá gần nhau thì bỏ bớt hoặc dàn ra, không xếp chồng — mọi vật này cũng gắn `data-mark` để `check-layout` bắt được chồng lấn.
@@ -130,10 +138,10 @@ Phép thử: **tắt tiếng, chỉ nhìn khung hình**, người xem vẫn bi�
 
 **8. Ít chữ trên hình.** Người xem nhìn hình, không phải đọc.
 - Nhãn ≤ ~5 từ, ưu tiên ký hiệu/số + đơn vị/mũi tên: "0,81 s · 44 km/h", không phải "đoạn 60 → 70 m: 0,81 s · tốc độ ≈ 44 km/h".
-- **Không lặp thứ đã nhìn thấy**: vạch chia đã ghi 60, 70 thì nhãn đoạn tô không ghi lại "60 → 70 m"; phụ đề đã ghi số thì nhãn trên hình không ghi lại số đó (và ngược lại). Một thông tin — một chỗ.
+- **Không lặp thứ đã nhìn thấy**: vạch chia đã ghi 60, 70 thì nhãn đoạn tô không ghi lại "60 → 70 m"; `text` của dòng đã ghi số thì nhãn khác không ghi lại số đó. Một thông tin — một chỗ.
 - **Gỡ thông tin hết vai trò**: badge/nhãn lời đọc không còn nói tới (vd. "vận tốc trung bình cả bài" khi đã sang đoạn 60–70 m) mờ đi trong ~0,5 s. Chỉ giữ thứ đang nói tới và mốc tham chiếu cần thiết.
 - **Chữ nằm gọn trong khung chứa** của nó (thẻ, ô bảng, khung hình bên trái…), không tràn ra ngoài viền. Nhãn dài hơn khung → rút chữ hoặc đặt nhãn ra ngoài khung hẳn, có đường dẫn.
-- Đếm nhanh mỗi frame: ngoài phụ đề và câu chốt, chữ mới xuất hiện trong dòng đang đọc ≤ ~8 từ.
+- Đếm nhanh mỗi frame: ngoài câu chốt, chữ mới xuất hiện trong dòng đang đọc ≤ ~8 từ.
 
 **9. Nhịp hình: một thay đổi mỗi lần, và thay đổi là lời giải thích.**
 - Mỗi dòng **tối đa một thay đổi chính** trên hình. Thay đổi vào trong 0,5–1 s đầu dòng rồi **đứng yên** để người xem nhìn; không xếp nhiều điểm/hàng/nhãn hiện nối nhau trong một dòng.
@@ -141,21 +149,19 @@ Phép thử: **tắt tiếng, chỉ nhìn khung hình**, người xem vẫn bi�
 - Không mở một hình biểu diễn mới (trục số, bảng, đồ thị khác) khi hình đang có biểu diễn được điều đó. Cần hình mới thì nối với hình cũ bằng bước người xem tự hiểu (lấy số từ hình cũ → bảng nhỏ → chấm từng điểm → nối đồ thị), hình cũ vẫn thấy trong lúc nối.
 - **Không dùng phép biến hình lạ mắt** (xoay đường chạy thành trục, nhân vật nằm ngang, gập/cuộn hình). Đã thử 20/10/2026: người xem không hiểu. Trục, đồ thị, nhân vật luôn ở tư thế quen thuộc.
 
-**10. Nhân vật do toán điều khiển; công thức chỉ lên hình.**
-- Nhân vật/vật minh hoạ (người chạy, flycam…) chỉ có mặt khi biểu diễn một đại lượng: vị trí = $f(x)$ (qua hàm scale chung), tốc độ chuyển động tỉ lệ với $f'(x)$, $f' = 0$ → đứng yên, $f'$ đổi dấu → quay đầu (lật hình). Nhãn nói rõ nó là gì ("người chạy: vị trí = $f(x)$"). Không có nhân vật đứng trên đồ thị cho vui.
-- Đồ thị $f'$ (dạng bài đề thi) đi kèm nhân vật của ví dụ xuyên suốt, di chuyển theo $f'$ khi điểm quét chạy trên đồ thị: nhanh nhất ở đỉnh $f'$, chậm dần về 0, dừng rồi quay đầu khi $f'$ đổi dấu, dừng mà không quay đầu khi $f'$ chạm trục không đổi dấu.
-- **Từ $f'$ sang $f$**: hai tầng, $f$ trên, $f'$ dưới, **cùng tỉ lệ trục ngang, thẳng hàng theo chiều dọc**; mỗi khoảng: đoạn $f'$ trên/dưới trục và đoạn $f$ tương ứng sáng cùng màu (leo/hạ), trên đoạn $f$ có hai điểm so sánh (sau cao hơn/thấp hơn trước).
-- Bảng xét dấu, bảng biến thiên không dựng (kiến thức bài khác — skill `viet-kich-ban` › Phạm vi kiến thức); dấu của $f'$ thể hiện bằng tô màu trên đồ thị.
-- **Giải phẫu công thức**: khi lời đọc giải thích một cụm trong công thức, cụm đó trên công thức và thứ tương ứng trên hình **cùng sáng lên một màu**, các phần khác mờ đi. Công thức và hình phải cùng nằm trên màn hình lúc đó (công thức thu nhỏ ở cạnh, không thay hẳn hình).
-- **Dựng phép tính từ thành phần, không nhảy bước**: hiệu $f(x)-f(x_0)$ chỉ hiện sau khi hai **cột dọc** $f(x_0)$ và $f(x)$ (từ trục ngang lên đồ thị, có số) đã hiện và được nói riêng; khi tới phép trừ, kẻ ngang từ đỉnh cột thấp sang cột cao, phần chênh sáng lên. Tương tự $x - x_0$ là khoảng giữa hai chân cột. Không vẽ một đoạn ngắn lơ lửng mà người xem không biết nó từ đâu ra.
-- **Khái niệm hình học mới hiện riêng trước khi dùng**: cát tuyến (đường qua hai điểm của đồ thị, hai điểm sáng lên trước), độ dốc (tam giác ngang–dọc có số), tiếp tuyến dạy bằng **kính lúp** (quy tắc 6): phóng to quanh điểm tới khi đồ thị trông thẳng, đường thẳng đó là tiếp tuyến.
+**10. Nhân vật do quy luật điều khiển; công thức chỉ lên hình.**
+- Nhân vật/vật minh hoạ (người chạy, flycam, phân tử…) chỉ có mặt khi biểu diễn một đại lượng, và chuyển động **theo đúng quy luật đó** (vị trí qua hàm scale chung, tốc độ theo đại lượng tương ứng). Nhãn nói rõ nó là gì. Không có nhân vật cho vui.
+- **Giải phẫu công thức/định nghĩa**: khi lời đọc giải thích một cụm, cụm đó trên công thức và thứ tương ứng trên hình **cùng sáng lên một màu**, các phần khác mờ đi. Công thức và hình cùng nằm trên màn hình lúc đó (công thức thu nhỏ ở cạnh, không thay hẳn hình).
+- **Công thức neo trong cảnh trong chuỗi "vì sao"**: công thức học sinh nhớ ở yên cạnh hình suốt chuỗi; mỗi mắt xích đánh dấu **lên chính công thức** (dấu (+)/(−) dưới tử, mẫu…) cùng màu với thứ trên hình. Mắt xích đã qua còn lại dưới dạng dấu trên công thức, không thành câu chữ.
+- **Dựng phép tính từ thành phần, không nhảy bước**: kết quả của một phép ghép chỉ hiện sau khi từng thành phần đã hiện và được nói riêng, và hiện ra *từ* các thành phần đó (không vẽ một đoạn lơ lửng mà người xem không biết từ đâu ra).
+- **Khái niệm mới hiện riêng trước khi dùng**, mẫu dựng của từng môn (cột dọc, cát tuyến, kính lúp, hai tầng $f$/$f'$…): gói môn › Mẫu dựng khái niệm.
 
 ## Bước 3 — Cấu trúc code
 
 ```
 src/components/          dùng chung (ưu tiên dùng lại):
   BrandFrame.tsx         BrandFrame, BrandIntro, BrandOutro (khung 9Study)
-  BeatShell.tsx          BeatShell (thẻ mở beat + câu chốt + phụ đề cho một beat), ramp, clamp
+  BeatShell.tsx          BeatShell (thẻ mở beat + câu chốt [+ phụ đề ở video cũ]; video mới subtitle={false}), ramp, clamp
   timeline.ts            buildTimeline, hằng số nhịp
   plot.tsx               makeScale, Plot, Axes, FunctionPlot, Point, Segment, TangentLine, PlotLabel
   ZoomInset.tsx          kính lúp; MathText.tsx: MathText, Tex, useKatexFonts
@@ -177,7 +183,7 @@ src/Root.tsx             đăng ký <Composition id="<slug>" ...> 1920×1080, 30
 - Xuất ảnh tĩnh bằng `node scripts/stills.mjs <slug> <frame...>` (bundle một lần).
 - Xuất ảnh tĩnh **cho từng dòng** (frame ngay trước khi dòng kết thúc, lúc mọi thành phần của dòng đó đã hiện đủ), không chỉ giữa beat. Nhiều frame thì bundle một lần rồi gọi `renderStill` lặp lại, thay vì gọi `npx remotion still` từng frame.
 - **Kiểm chồng lấn bằng code trước, mắt sau.** Mọi khối chữ trên hình (nhãn, chú thích, số trục, câu chốt) gắn `data-text`, mọi điểm đánh dấu gắn `data-mark`. Chạy `node scripts/check-layout.mjs <slug>`: script mở từng frame kiểm tra, lấy khung bao (`getBoundingClientRect`) của các phần tử đó và báo mọi cặp chồng nhau hoặc cách nhau < 16px, kèm frame và nội dung chữ; khung chứa (thẻ, ô bảng, `Card`) gắn `data-box`, script báo mọi `data-text` nằm trong `data-box` mà tràn ra ngoài viền, và mọi chữ/điểm **bên ngoài** chạm vào khung đó (đã gặp: nhãn đồ thị chạm mép thẻ bảng mà không bị bắt). Danh sách phải rỗng mới sang bước soát bằng mắt.
-- Soát từng ảnh theo **Quy tắc bố cục**: (1) có gì chồng lấn hay dính sát không; (2) kim/đường có đè lên chữ không; (3) cụm hình có cân không, có nửa khung trống không; (4) có chữ nào dưới cỡ tối thiểu không; (5) có gì lấn vùng phụ đề không; (6) có thành phần nào người xem không cần không; (7) phóng to hay dịch khung có mốc tham chiếu không; (8) **phép thử tắt tiếng**: mỗi con số, ký hiệu, màu, vật trên ảnh có chú thích nói nó là gì không; (9) **ít chữ**: nhãn nào dài quá ~5 từ, lặp phụ đề hoặc lặp số trên trục, chữ nào tràn khỏi khung chứa, thông tin nào đã hết vai trò mà còn; (10) **nhịp**: so ảnh giữa dòng với ảnh cuối dòng — có quá một thay đổi không, số đổi mà hình có đổi theo không; vật minh hoạ đủ lớn chưa; (11) nhân vật có chuyển động đúng theo hàm không, cụm công thức đang giải thích có sáng cùng màu với thứ trên hình không. Sửa hết rồi xuất lại để kiểm.
+- Soát từng ảnh theo **Quy tắc bố cục**: (1) có gì chồng lấn hay dính sát không; (2) kim/đường có đè lên chữ không; (3) cụm hình có cân không, có nửa khung trống không; (4) có chữ nào dưới cỡ tối thiểu không; (5) có gì lấn mép dưới (y > 1040) không; (6) có thành phần nào người xem không cần không; (7) phóng to hay dịch khung có mốc tham chiếu không; (8) **phép thử tắt tiếng**: mỗi con số, ký hiệu, màu, vật trên ảnh có chú thích nói nó là gì không; (9) **ít chữ**: nhãn nào dài quá ~5 từ, lặp `text` khác hoặc lặp số trên trục, `text` nào đặt xa vật nó nói tới, chữ nào tràn khỏi khung chứa, thông tin nào đã hết vai trò mà còn; (10) **nhịp**: so ảnh giữa dòng với ảnh cuối dòng — có quá một thay đổi không, số đổi mà hình có đổi theo không; vật minh hoạ đủ lớn chưa; (11) nhân vật có chuyển động đúng quy luật không, cụm công thức đang giải thích có sáng cùng màu với thứ trên hình không. Sửa hết rồi xuất lại để kiểm.
 - **Soát toán trên hình**: điểm nằm đúng trên đồ thị, hệ số góc, nghiệm, nhãn trục. Sai toán là lỗi nghiêm trọng nhất.
 - **Thời lượng**: tổng phải nằm trong 2:30 – 4:00. Lệch → báo người dùng, đề xuất quay lại B1 (không kéo giãn khoảng nghỉ để bù).
 - Báo cáo: tổng thời lượng, các giả định khi dựng visual, chú thích đã tự thêm, chỗ cần người dùng xem.
@@ -192,6 +198,7 @@ src/Root.tsx             đăng ký <Composition id="<slug>" ...> 1920×1080, 30
   Không dùng `--log=error` (mất dòng tiến độ). Hỏi tiến độ → đọc dòng cuối của log (frame đã render / tổng), báo phần trăm và thời gian còn lại ước tính.
 - Mốc thời gian (máy người dùng, 21/10/2026): video 3:53 (≈ 7000 frame) render ≈ 14–15 phút; 2:49 ≈ 6–8 phút. Báo mốc này lúc bắt đầu render.
 - Xong: đo thời lượng file bằng `ffprobe`, gửi file cho người dùng. `out/` bị gitignore, không commit video.
+- **Phụ đề**: `node scripts/export-captions.mjs <slug> [--id <compositionId>]` → `out/<id>.srt` + `out/<id>.vtt` (từ `caption`, thiếu thì `speak`, đúng mốc thời gian của audio). Gửi kèm video để tải lên web/YouTube dạng phụ đề bật–tắt được; không in phụ đề lên hình.
 
 ## Bản giọng khác (không thay bản cũ)
 

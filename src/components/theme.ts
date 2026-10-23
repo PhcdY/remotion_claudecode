@@ -48,6 +48,9 @@ export const layout = {
   /** vùng dành cho câu chốt (KeyTakeaway) ở đáy vùng hình */
   takeawayTop: 730,
   subtitleTop: 860,
+  /** chế độ chữ trong cảnh (không dải phụ đề, skill dung-video): vùng hình kéo tới đây */
+  sceneBottom: 1040,
+  sceneTakeawayTop: 950,
   gap: 40, // khoảng hở tối thiểu giữa hai khối
 };
 

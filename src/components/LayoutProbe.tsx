@@ -52,6 +52,9 @@ const measure = () => {
       if (gap(a.r, b.r) < 0) issues.push(`chạm khung chứa — ${a.label}`);
     });
   });
+  // chế độ chữ trong cảnh (BeatShell subtitle={false}): không có dải phụ đề, chỉ cấm lấn xuống dưới sceneBottom
+  const sceneMode = document.querySelector('[data-layout="scene"]') !== null;
+  const bottomLimit = sceneMode ? layout.sceneBottom : layout.subtitleTop - 20;
   items.forEach((a) => {
     if (a.r.left < 0 || a.r.right > layout.width || a.r.top < 0) issues.push(`tràn khung — ${a.label}`);
     // chữ phải nằm gọn trong khung chứa (thẻ, ô bảng) gắn data-box
@@ -62,7 +65,8 @@ const measure = () => {
         issues.push(`tràn khỏi khung chứa — ${a.label}`);
       }
     }
-    if (a.zone !== "subtitle" && a.r.bottom > layout.subtitleTop - 20) issues.push(`lấn vùng phụ đề — ${a.label}`);
+    if (a.zone !== "subtitle" && a.r.bottom > bottomLimit)
+      issues.push(`${sceneMode ? "lấn mép dưới" : "lấn vùng phụ đề"} — ${a.label}`);
   });
   for (let i = 0; i < items.length; i++) {
     for (let j = i + 1; j < items.length; j++) {

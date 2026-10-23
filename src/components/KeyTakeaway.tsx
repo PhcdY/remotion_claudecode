@@ -4,7 +4,13 @@ import { MathText } from "./MathText";
 import { colors, fontSize, fontText, layout, tint } from "./theme";
 
 // Câu chốt của beat: hiện từ `from` (frame tương đối), nằm ở dải dưới của vùng hình.
-export const KeyTakeaway: React.FC<{ text: string; from: number }> = ({ text, from }) => {
+// top/bottom: dải chứa câu chốt (mặc định dải trên vùng phụ đề; chế độ chữ trong cảnh truyền dải thấp hơn).
+export const KeyTakeaway: React.FC<{ text: string; from: number; top?: number; bottom?: number }> = ({
+  text,
+  from,
+  top = layout.takeawayTop,
+  bottom = layout.visualBottom,
+}) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const pop = spring({ frame: frame - from, fps, config: { damping: 16, stiffness: 150 } });
@@ -15,8 +21,8 @@ export const KeyTakeaway: React.FC<{ text: string; from: number }> = ({ text, fr
         position: "absolute",
         left: layout.side,
         right: layout.side,
-        top: layout.takeawayTop,
-        height: layout.visualBottom - layout.takeawayTop,
+        top,
+        height: bottom - top,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
