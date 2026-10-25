@@ -40,7 +40,7 @@ Người dùng đưa: **chủ đề** + **ý bản chất muốn nói** (+ kỳ 
 
 Phần lớn lỗi người dùng bắt được là lỗi dàn ý; viết xong lời mới phát hiện thì phải làm lại B1–B3. Dàn ý bày đủ:
 
-1. **slug**, **tiêu đề**, **môn** (`subject`).
+1. **slug**, **tiêu đề**, **môn** (`subject`), **lớp / chương / bài** theo SGK (`lop`, `chuong`, `bai`: quyết định thư mục chứa video trong `out/`).
 2. **Vị trí trong chuỗi**: bài trước đã dạy gì (chỉ nhắc một dòng) · khái niệm mới · ý để dành bài sau.
 3. **Hiện tượng**: bảng chấm 3 ý tốt nhất ở Bước 0 (ý chọn + 2 dự phòng), nguồn kiểm chứng, đáp án sẽ đưa ở `GIẢI ĐÁP`, kết quả ba phép thử (mỗi phép một câu).
 4. **Hình trung tâm + khoảnh khắc "à ra thế"** (beat nào).
@@ -80,6 +80,9 @@ Người dùng chốt kịch bản → sang **B3 bản nháp + storyboard** (ski
   "slug": "don-dieu",                    // chữ thường, số, '-'
   "title": "…",
   "subject": "toan",                     // tên gói môn trong .claude/mon/ (thiếu = "toan")
+  "lop": 12,                             // lớp, chương, bài theo SGK → video ra out/<Môn>/Lớp 12/<chuong>/<bai>/
+  "chuong": "Chương I. Ứng dụng đạo hàm để khảo sát và vẽ đồ thị của hàm số",
+  "bai": "Bài 1. Tính đơn điệu và cực trị của hàm số",
   "exams": ["THPTQG", "TSA", "HSA"],
   "beats": [
     {

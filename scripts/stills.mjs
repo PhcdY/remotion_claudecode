@@ -1,7 +1,8 @@
 // Xuất nhiều ảnh tĩnh với một lần bundle (skill dung-video › Bước 4).
 // Dùng: node scripts/stills.mjs <compositionId> <frame> [frame...] [--scale 0.5]
-// Ảnh ra: out/stills/<compositionId>-f<frame>.png
-import { bundle } from "@remotion/bundler";
+// Ảnh ra: out/_lam-viec/<compositionId>/stills/f<frame>.png
+import { bundleProject } from "./lib/bundle.mjs";
+import { workDir } from "./lib/paths.mjs";
 import { openBrowser, renderStill, selectComposition } from "@remotion/renderer";
 import { existsSync, mkdirSync } from "node:fs";
 import path from "node:path";
@@ -18,15 +19,15 @@ if (!id || frameArgs.length === 0) {
 const root = path.resolve(import.meta.dirname, "..");
 const localChrome = "C:/Program Files/Google/Chrome/Application/chrome.exe";
 const browserOpts = existsSync(localChrome) ? { browserExecutable: localChrome, chromeMode: "chrome-for-testing" } : {};
-const outDir = path.join(root, "out/stills");
+const outDir = path.join(workDir(root, id), "stills");
 mkdirSync(outDir, { recursive: true });
 
-const serveUrl = await bundle({ entryPoint: path.join(root, "src/index.ts"), publicDir: path.join(root, "public") });
+const serveUrl = await bundleProject(root);
 const browser = await openBrowser("chrome", browserOpts);
 const composition = await selectComposition({ serveUrl, id, puppeteerInstance: browser, ...browserOpts });
 console.log(`${id}: ${composition.durationInFrames} frame`);
 for (const f of frameArgs.map(Number)) {
-  const output = path.join(outDir, `${id}-f${String(f).padStart(5, "0")}.png`);
+  const output = path.join(outDir, `f${String(f).padStart(5, "0")}.png`);
   await renderStill({ serveUrl, composition, frame: f, output, scale, puppeteerInstance: browser, ...browserOpts });
   console.log(`✓ ${path.relative(root, output)}`);
 }

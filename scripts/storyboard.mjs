@@ -1,9 +1,13 @@
 // Storyboard: mỗi dòng một ảnh tĩnh (lúc thay đổi của dòng đã hiện đủ) + lời đọc, ghép thành một trang HTML
 // để người dùng duyệt hình TRƯỚC khi tạo audio (skill dung-video › Bước 2b).
-// Dùng: node scripts/storyboard.mjs <compositionId> [--slug <slug>] [--real] [--scale 0.4] [--beats b03,b04]
+// Dùng: node scripts/storyboard.mjs <compositionId> [--slug <slug>] [--real] [--scale 0.4] [--beats b03,b04] [--review]
 //   mặc định chế độ nháp (thời gian ước tính, không cần audio); --real: dùng audio thật đã có.
-// Ra: out/storyboard/<id>/index.html (ảnh nhúng sẵn, mở thẳng trong trình duyệt).
-import { bundle } from "@remotion/bundler";
+//   --review: bản rút gọn cho agent hoc-sinh-ao — MỖI BEAT MỘT ẢNH NHỎ (cuối beat, scale 0.3) + review.md có lời đọc,
+//   ra out/_lam-viec/<id>/storyboard/review/; không đụng tới index.html. Lý do: 24/10/2026 agent xem 67 ảnh cỡ 0.5,
+//   mở lại mỗi ảnh ~20 lần, tốn 68% token cả phiên.
+// Ra: out/_lam-viec/<id>/storyboard/index.html (ảnh nhúng sẵn, mở thẳng trong trình duyệt).
+import { bundleProject } from "./lib/bundle.mjs";
+import { workDir } from "./lib/paths.mjs";
 import { openBrowser, renderStill, selectComposition } from "@remotion/renderer";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
@@ -22,19 +26,45 @@ const slug = opt("--slug", id);
 const real = args.includes("--real");
 const scale = Number(opt("--scale", "0.4"));
 const only = opt("--beats", "")?.split(",").filter(Boolean) ?? [];
+const review = args.includes("--review");
 
 const root = path.resolve(import.meta.dirname, "..");
 const script = JSON.parse(readFileSync(path.join(root, "src/videos", slug, "script.json"), "utf-8"));
 const localChrome = "C:/Program Files/Google/Chrome/Application/chrome.exe";
 const browserOpts = existsSync(localChrome) ? { browserExecutable: localChrome, chromeMode: "chrome-for-testing" } : {};
-const outDir = path.join(root, "out/storyboard", id);
+const outDir = path.join(workDir(root, id), "storyboard");
 mkdirSync(outDir, { recursive: true });
 
 const inputProps = real ? {} : { draft: true };
-const serveUrl = await bundle({ entryPoint: path.join(root, "src/index.ts"), publicDir: path.join(root, "public") });
+const serveUrl = await bundleProject(root);
 const browser = await openBrowser("chrome", browserOpts);
 const composition = await selectComposition({ serveUrl, id, inputProps, puppeteerInstance: browser, ...browserOpts });
 const { timeline } = composition.props;
+
+if (review) {
+  const rdir = path.join(outDir, "review");
+  mkdirSync(rdir, { recursive: true });
+  const rscale = Number(opt("--scale", "0.3"));
+  const md = [`# ${script.title} — storyboard rút gọn (mỗi beat một ảnh: cuối beat)`, ""];
+  for (const tb of timeline.beats) {
+    if (only.length && !only.includes(tb.id)) continue;
+    const sb = script.beats.find((b) => b.id === tb.id);
+    const last = tb.lines[tb.lines.length - 1];
+    const frame = Math.max(last.startFrame, last.endFrame - 2);
+    await renderStill({ serveUrl, composition, frame, inputProps, output: path.join(rdir, `${tb.id}.png`), scale: rscale, puppeteerInstance: browser, ...browserOpts });
+    md.push(`## ${tb.id} — ảnh ${tb.id}.png · câu chốt: ${sb.keyword}`);
+    sb.lines.forEach((l, i) => {
+      md.push(`${i + 1}. lời: ${l.speak}`);
+      md.push(`   hình đổi: ${l.show ?? ""}${l.text ? ` · chữ hiện: ${l.text}` : ""}`);
+    });
+    md.push("");
+    process.stdout.write(`\r${tb.id}`);
+  }
+  writeFileSync(path.join(rdir, "review.md"), md.join("\n"), "utf-8");
+  await browser.close({ silent: true });
+  console.log(`\n✓ ${path.relative(root, rdir)}`);
+  process.exit(0);
+}
 
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 const sections = [];

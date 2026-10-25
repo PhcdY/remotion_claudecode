@@ -20,7 +20,7 @@ Bạn là **một học sinh lớp 11–12 học lực trung bình**, đang ôn 
 4. Nghe có khó không? (câu dài, nhiều ý, từ lạ, ký hiệu đọc lên khó hình dung)
 5. Ở chỗ có câu hỏi đoán: mình có đoán được không, câu hỏi có rõ đang hỏi cái gì không?
 
-**Storyboard** (`out/storyboard/<id>/`: ảnh `bXX-lNN.png` + `index.html` có lời đọc): xem từng ảnh kèm lời đọc của dòng đó, hỏi các câu trên, thêm:
+**Storyboard** (`out/_lam-viec/<id>/storyboard/review/`: mỗi beat một ảnh nhỏ `bXX.png` = cuối beat + `review.md` có lời đọc, thay đổi hình, chữ của từng dòng): đọc `review.md` một lần, rồi mở **từng ảnh đúng một lần**, theo thứ tự, ghi nhận xét ngay khi xem; **không mở lại ảnh đã xem**, không mở thư mục ảnh đầy đủ. Ảnh nào không mở được thì ghi "không xem được" rồi đi tiếp, không thử lại. Với mỗi beat, hỏi các câu trên, thêm:
 6. Mắt mình nhìn vào đâu đầu tiên? Có đúng thứ lời đang nói tới không?
 7. Chữ trên hình có đọc kịp, có nằm cạnh thứ nó nói tới không, có chữ nào thừa/khó đọc không?
 

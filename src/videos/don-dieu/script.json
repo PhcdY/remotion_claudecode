@@ -1,6 +1,9 @@
 {
   "slug": "don-dieu",
   "title": "Chưa vẽ đồ thị, sao biết dốc lên hay dốc xuống?",
+  "lop": 12,
+  "chuong": "Chương I. Ứng dụng đạo hàm để khảo sát và vẽ đồ thị của hàm số",
+  "bai": "Bài 1. Tính đơn điệu và cực trị của hàm số",
   "exams": [
     "THPTQG",
     "TSA",

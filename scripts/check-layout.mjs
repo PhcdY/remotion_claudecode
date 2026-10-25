@@ -3,7 +3,7 @@
 // Mặc định kiểm 2 frame mỗi dòng: giữa dòng và ngay trước khi dòng kết thúc. --draft: timeline nháp (chưa có audio).
 // LỖI (chặn): chồng lấn, sát, tràn khung, lấn vùng, chữ nhỏ, nhãn xa vật.
 // CẢNH BÁO (không chặn): khung lệch / nửa khung trống, quá nhiều chữ mới trong một dòng (> 8 từ).
-import { bundle } from "@remotion/bundler";
+import { bundleProject } from "./lib/bundle.mjs";
 import { openBrowser, renderStill, selectComposition } from "@remotion/renderer";
 import { existsSync } from "node:fs";
 import path from "node:path";
@@ -24,7 +24,7 @@ const localChrome = "C:/Program Files/Google/Chrome/Application/chrome.exe";
 const browserExecutable = opt("--browser") ?? (existsSync(localChrome) ? localChrome : null);
 const browserOpts = browserExecutable ? { browserExecutable, chromeMode: "chrome-for-testing" } : {};
 
-const serveUrl = await bundle({ entryPoint: path.join(root, "src/index.ts"), publicDir: path.join(root, "public") });
+const serveUrl = await bundleProject(root);
 const inputProps = { layoutCheck: true, ...(args.includes("--draft") ? { draft: true } : {}) };
 const browser = await openBrowser("chrome", browserOpts);
 const composition = await selectComposition({ serveUrl, id: slug, inputProps, puppeteerInstance: browser, ...browserOpts });

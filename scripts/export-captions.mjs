@@ -1,7 +1,8 @@
 // Xuất phụ đề đầy đủ (skill dung-video › Bước 5) — file riêng, không in lên hình.
 // Dùng: node scripts/export-captions.mjs <slug> [--id <compositionId>]
-// Ra: out/<id>.srt, out/<id>.vtt và out/<id>.timeline.json (mốc từng dòng, cho scripts/beat_at.py). Chữ lấy từ `caption` của dòng, thiếu thì `speak`; mốc thời gian từ timeline thật (độ dài audio).
-import { bundle } from "@remotion/bundler";
+// Ra: <id>.srt, <id>.vtt và <id>.timeline.json cạnh video, trong thư mục bài (scripts/lib/paths.mjs) (mốc từng dòng, cho scripts/beat_at.py). Chữ lấy từ `caption` của dòng, thiếu thì `speak`; mốc thời gian từ timeline thật (độ dài audio).
+import { bundleProject } from "./lib/bundle.mjs";
+import { videoDir } from "./lib/paths.mjs";
 import { openBrowser, selectComposition } from "@remotion/renderer";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
@@ -20,7 +21,7 @@ const script = JSON.parse(readFileSync(path.join(root, "src/videos", slug, "scri
 const localChrome = "C:/Program Files/Google/Chrome/Application/chrome.exe";
 const browserOpts = existsSync(localChrome) ? { browserExecutable: localChrome, chromeMode: "chrome-for-testing" } : {};
 
-const serveUrl = await bundle({ entryPoint: path.join(root, "src/index.ts"), publicDir: path.join(root, "public") });
+const serveUrl = await bundleProject(root);
 const browser = await openBrowser("chrome", browserOpts);
 const composition = await selectComposition({ serveUrl, id, puppeteerInstance: browser, ...browserOpts });
 await browser.close({ silent: true });
@@ -48,10 +49,10 @@ const stamp = (sec, sep) => {
 const srt = cues.map((c, i) => `${i + 1}\n${stamp(c.start, ",")} --> ${stamp(c.end, ",")}\n${c.text}\n`).join("\n");
 const vtt = "WEBVTT\n\n" + cues.map((c) => `${stamp(c.start, ".")} --> ${stamp(c.end, ".")}\n${c.text}\n`).join("\n");
 
-const outDir = path.join(root, "out");
+const outDir = videoDir(root, slug, id).dir;
 mkdirSync(outDir, { recursive: true });
 writeFileSync(path.join(outDir, `${id}.srt`), srt, "utf-8");
 writeFileSync(path.join(outDir, `${id}.vtt`), vtt, "utf-8");
 // mốc thời gian từng dòng của bản render: tra "phút 1:23 là câu nào" bằng scripts/beat_at.py
 writeFileSync(path.join(outDir, `${id}.timeline.json`), JSON.stringify({ id, slug, fps, lines: lineMap }, null, 1), "utf-8");
-console.log(`✓ out/${id}.srt, out/${id}.vtt, out/${id}.timeline.json — ${cues.length} câu`);
+console.log(`✓ ${path.relative(root, outDir)}/${id}.srt, .vtt, .timeline.json — ${cues.length} câu`);

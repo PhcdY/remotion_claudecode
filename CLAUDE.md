@@ -22,7 +22,8 @@ B1 `viet-kich-ban` → B3 nháp + storyboard (`dung-video` › Bước 2b) → B
 4. **Duyệt** → `npm run dev` (Remotion Studio).
    Góp ý của người dùng ghi vào `src/videos/<slug>/FEEDBACK.md` (cột "đã sửa skill" / "đã sửa video"): sửa skill ngay cho từng mục
    (và thêm một dòng vào `.claude/lessons.md`), gom sửa video một lần khi người dùng bảo. Lỗi cấu trúc kịch bản → quay lại B1 (duyệt dàn ý), không vá trên video cũ.
-5. **Render** → `npx remotion render <compositionId> out/<slug>.mp4`; phụ đề riêng + mốc từng dòng: `node scripts/export-captions.mjs <slug>`.
+5. **Render** → `npx remotion render <compositionId> "$(node scripts/out-path.mjs <slug> --id <compositionId>)"`; phụ đề riêng + mốc từng dòng: `node scripts/export-captions.mjs <slug>`.
+   `out/<Môn>/Lớp <lop>/<chuong>/<bai>/`: video + phụ đề (người dùng xem). `out/_lam-viec/<id>/`: stills, storyboard (agent dùng). Không để file nào khác ở gốc `out/`.
 6. **Người xem thật** → học sinh xem thử, số liệu giữ chân người xem; thời điểm → câu: `python scripts/beat_at.py <id> 1:23`. Soát kịch bản/storyboard bằng agent `hoc-sinh-ao` (`.claude/agents/`).
 
 ## Schema `script.json`
@@ -32,6 +33,7 @@ B1 `viet-kich-ban` → B3 nháp + storyboard (`dung-video` › Bước 2b) → B
   "slug": "don-dieu",                  // chỉ chữ thường, số, '-'
   "title": "...",
   "subject": "toan",                   // gói môn trong .claude/mon/ (thiếu = toan)
+  "lop": 12, "chuong": "Chương I. …", "bai": "Bài 1. …",  // theo SGK → thư mục video trong out/
   "beats": [
     {
       "id": "b01",

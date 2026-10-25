@@ -1,0 +1,503 @@
+{
+  "slug": "tiem-can",
+  "title": "Nhanh đến mấy cũng không tới 60?",
+  "lop": 12,
+  "chuong": "Chương I. Ứng dụng đạo hàm để khảo sát và vẽ đồ thị của hàm số",
+  "bai": "Bài 3. Đường tiệm cận của đồ thị hàm số",
+  "subject": "toan",
+  "exams": ["THPTQG", "TSA", "HSA"],
+  "beats": [
+    {
+      "id": "b01",
+      "scene": 1,
+      "section": "HIỆN TƯỢNG",
+      "keyword": "Muốn 60 km/h: xuống bao nhanh?",
+      "visual": "CẢNH 1 — con dốc nhìn ngang chiếm nửa trên khung: sườn trái lên tới đỉnh, sườn phải xuống, mỗi sườn có nhãn '1 km' dọc chân sườn. Xe nhỏ (hình bóng một màu, không chi tiết, ≥ 120px) ở chân sườn trái. Nửa dưới: THANH THỜI GIAN nằm ngang, nhãn 'tổng thời gian' ở đầu trái, vạch chia mỗi 30 s từ 0 đến 3 phút, số ở 0, 1 phút, 2 phút, 3 phút; lúc đầu trống (chỉ có viền). Thanh này đi theo suốt video. Màu theo vai trò: màu lên (sườn trái, khúc leo dốc), màu xuống (sườn phải, khúc xuống dốc, tốc độ xuống), màu mục tiêu (mức 60 km/h). Nhãn '30 km/h' ở dòng 2 gắn cạnh xe, giữ tới hết beat.",
+      "lines": [
+        {
+          "show": "xe hiện ở chân sườn trái",
+          "text": "",
+          "speak": "Có một câu đố từng làm khó cả Einstein."
+        },
+        {
+          "show": "xe leo hết sườn trái, sườn trái tô màu lên",
+          "at": "xe, trên sườn trái",
+          "text": "30 km/h",
+          "speak": "Một chiếc xe leo con dốc dài một ki-lô-mét, với tốc độ ba mươi ki-lô-mét một giờ."
+        },
+        {
+          "show": "dấu '?' màu xuống hiện trên sườn phải",
+          "text": "",
+          "speak": "Muốn trung bình cả hai ki-lô-mét được sáu mươi, thì đoạn xuống dốc phải chạy nhanh bao nhiêu?"
+        }
+      ]
+    },
+    {
+      "id": "b02",
+      "scene": 1,
+      "section": "CÂU HỎI",
+      "keyword": "Trung bình chỉ 45 km/h",
+      "visual": "Giữ CẢNH 1: xe ở đỉnh dốc, nhãn '30 km/h' cạnh sườn trái, dấu '?' trên sườn phải, thanh thời gian trống. Dòng 1: phép tính nhẩm hiện cạnh dấu '?' (gỡ ở dòng 2). Dòng 2: thanh thời gian tô khúc đầu màu lên từ 0 tới 2 phút, nhãn '2 phút' trên khúc đó (giữ suốt video). Dòng 3: dấu '?' gỡ; xe chạy xuống sườn phải, cùng lúc khúc màu xuống trên thanh dài dần từ 2 phút tới 2 phút 40 s, nhãn '40 s' trên khúc đó. Dòng 4: mốc '2 phút 40 s' hiện ở cuối thanh; câu chốt hiện cạnh xe ở chân sườn phải.",
+      "lines": [
+        {
+          "show": "phép tính nhẩm hiện cạnh dấu '?'",
+          "at": "sườn phải, cạnh dấu '?'",
+          "text": "$\\dfrac{30 + 90}{2} = 60$",
+          "speak": "Tính nhẩm thì ra chín mươi, vì trung bình của ba mươi và chín mươi là sáu mươi."
+        },
+        {
+          "show": "thanh thời gian tô khúc leo dốc màu lên, dài 2 phút",
+          "at": "khúc leo dốc trên thanh thời gian",
+          "text": "2 phút",
+          "speak": "Nhưng leo dốc ở ba mươi ki-lô-mét một giờ đã mất hai phút."
+        },
+        {
+          "show": "xe chạy xuống sườn phải, khúc xuống dốc trên thanh dài dần tới 40 s",
+          "at": "khúc xuống dốc trên thanh thời gian",
+          "text": "40 s",
+          "speak": "Xuống ở chín mươi thì mất thêm bốn mươi giây."
+        },
+        {
+          "show": "mốc '2 phút 40 s' hiện ở cuối thanh thời gian",
+          "text": "",
+          "speak": "Hai ki-lô-mét trong hai phút bốn mươi giây, trung bình chỉ... bốn mươi lăm ki-lô-mét một giờ."
+        }
+      ]
+    },
+    {
+      "id": "b03",
+      "scene": 2,
+      "section": "VÍ DỤ",
+      "keyword": "Nhanh hơn, vẫn dưới 60",
+      "visual": "CẢNH 2 — hệ trục chiếm phần lớn khung (trái và giữa). Con dốc và thanh thời gian của CẢNH 1 thu nhỏ thành một khung nhỏ ở góc trên phải (giữ nguyên hình, chỉ nhỏ lại), xe vẫn chạy được trong khung đó. Trục ngang 'tốc độ xuống $v$ (km/h)' từ 0 đến 1000, vạch mỗi 100, số ở 0, 200, 400, 600, 800, 1000; trục dọc 'tốc độ trung bình $v_{tb}$ (km/h)' từ 0 đến 70, vạch mỗi 10, số ở 0, 20, 40, 60. Chữ $v$ và các điểm mang màu xuống. Dòng 1: hệ trục hiện, điểm (90; 45) chấm lên. Dòng 2: điểm (150; 50). Dòng 3: đường ngang nét đứt tại 60 màu mục tiêu, dài hết trục, nhãn 'mục tiêu 60' ở đầu phải (giữ đến b07, đổi nhãn ở b07). Hai điểm cách xa nhau đủ để nhãn không chồng (nhãn điểm (90; 45) đặt bên trái-dưới, (150; 50) bên phải-trên).",
+      "lines": [
+        {
+          "show": "hệ trục hiện, điểm (90; 45) chấm lên",
+          "at": "điểm (90; 45)",
+          "text": "$(90;\\, 45)$",
+          "speak": "Ghi kết quả vừa tính lên hệ trục, trục ngang là tốc độ xuống, trục dọc là trung bình."
+        },
+        {
+          "show": "điểm (150; 50) chấm lên",
+          "at": "điểm (150; 50)",
+          "text": "$(150;\\, 50)$",
+          "speak": "Xuống một trăm năm mươi thì trung bình được năm mươi."
+        },
+        {
+          "show": "đường ngang nét đứt tại 60 hiện, màu mục tiêu",
+          "text": "",
+          "speak": "Mục tiêu sáu mươi là một đường nằm ngang, hai điểm đều ở dưới."
+        }
+      ]
+    },
+    {
+      "id": "b04",
+      "scene": 2,
+      "section": "TRỰC GIÁC",
+      "keyword": "Sát dần 60, vẫn ở dưới",
+      "visual": "Giữ CẢNH 2 (hệ trục, hai điểm, đường mục tiêu 60, khung nhỏ con dốc góc trên phải). Dòng 1 (câu hỏi đoán): gióng dọc nét đứt tại $v = 900$ hiện từ trục ngang lên quá đường 60, nhãn '$v = 900$' ở chân gióng; trong khoảng nghỉ, phần gióng phía trên đường 60 và phía dưới đường 60 sáng lần lượt (không lộ đáp án). Dòng 2: điểm (900; 58,1) chấm lên ngay dưới đường 60, nhãn '58,1'; gióng gỡ. Dòng 3: KHE HỞ — ba đoạn dọc màu nhấn từ ba điểm lên tới đường 60, mỗi đoạn có số cạnh nó: 15 (tại 90), 10 (tại 150), 1,9 (tại 900; đoạn ngắn, số đặt bên phải). Dòng 4: đồ thị $v_{tb} = \\frac{60v}{v+30}$ vẽ dần từ gốc toạ độ $(0; 0)$ tới 1000 qua ba điểm, nằm dưới và sát dần đường 60; ba khe hở mờ nhẹ nhưng còn.",
+      "lines": [
+        {
+          "show": "gióng dọc nét đứt tại v = 900 hiện, hai phía của đường 60 sáng lần lượt",
+          "at": "chân gióng trên trục ngang",
+          "text": "$v = 900$",
+          "speak": "Còn xuống chín trăm, nhanh như máy bay, thì điểm nằm trên hay dưới đường này?",
+          "pauseAfter": 1.5
+        },
+        {
+          "show": "điểm (900; 58,1) chấm lên, ngay dưới đường 60",
+          "at": "điểm (900; 58,1)",
+          "text": "$58{,}1$",
+          "speak": "Vẫn nằm dưới, trung bình chỉ khoảng năm mươi tám."
+        },
+        {
+          "show": "ba khe hở dọc từ ba điểm lên đường 60 sáng màu nhấn, kèm số 15, 10, 1,9",
+          "at": "khe hở tại v = 900",
+          "text": "khoảng cách tới 60",
+          "speak": "Khoảng cách tới đường sáu mươi co dần, từ mười lăm xuống chưa tới hai."
+        },
+        {
+          "show": "đồ thị vẽ dần qua ba điểm, đi sát dưới đường 60",
+          "text": "",
+          "speak": "Nối thật nhiều điểm như vậy, đồ thị cứ sát dần đường sáu mươi."
+        }
+      ]
+    },
+    {
+      "id": "b05",
+      "scene": 2,
+      "section": "BẢN CHẤT",
+      "keyword": "Leo dốc đã hết 2 phút",
+      "lineGap": 0.5,
+      "visual": "Giữ CẢNH 2. BƯỚC KHÓ — chuỗi 'vì sao' (1), mỗi dòng một mắt xích. Đồ thị thu sang nửa trái; khung con dốc + thanh thời gian phóng to ra nửa phải dưới (thanh thời gian đọc rõ: khúc leo dốc màu lên 2 phút, khúc xuống dốc màu xuống, vạch chia 30 s); thẻ công thức ở nửa phải trên. Điểm đang xét: (900; 58,1) với khe hở 1,9. Dòng 1: khe hở tại 900 nháy, dấu '?' cạnh nó. Dòng 2: thẻ công thức hiện $v_{tb} = \\dfrac{\\text{tổng quãng đường}}{\\text{tổng thời gian}}$ (mốc học sinh đã nhớ). Dòng 3: tử sáng màu nhấn đậm, con dốc trong khung sáng cùng màu, nhãn '2 km' dưới tử. Dòng 4: mẫu sáng, viền thanh thời gian sáng cùng lúc, dưới mẫu ghi '2 phút + thời gian xuống'. Dòng 5: VẠCH CHO PHÉP màu mục tiêu dựng trên thanh thời gian tại mốc 2 phút, nhãn 'mức cho phép (60 km/h)'; vạch trùng đúng cuối khúc leo dốc (giữ vạch này đến b10). Dòng 6: khúc leo dốc 2 phút nháy màu lên; đầu khúc trùng đúng vạch cho phép (không còn khoảng trống giữa hai thứ).",
+      "lines": [
+        {
+          "show": "khe hở tại v = 900 nháy, dấu '?' cạnh nó",
+          "text": "",
+          "speak": "Vì sao trung bình cứ sát sáu mươi mà không vượt qua?"
+        },
+        {
+          "show": "thẻ công thức tốc độ trung bình hiện ở nửa phải trên",
+          "at": "thẻ công thức",
+          "text": "$v_{tb} = \\dfrac{\\text{tổng quãng đường}}{\\text{tổng thời gian}}$",
+          "speak": "Tốc độ trung bình bằng tổng quãng đường chia cho tổng thời gian."
+        },
+        {
+          "show": "tử sáng, con dốc trong khung sáng cùng màu",
+          "at": "tử số trong thẻ",
+          "text": "2 km",
+          "speak": "Tổng quãng đường luôn là hai ki-lô-mét."
+        },
+        {
+          "show": "mẫu sáng, viền thanh thời gian sáng cùng màu",
+          "at": "mẫu số trong thẻ",
+          "text": "2 phút + thời gian xuống",
+          "speak": "Tổng thời gian là hai phút leo dốc, cộng thời gian xuống dốc."
+        },
+        {
+          "show": "vạch cho phép màu mục tiêu dựng tại mốc 2 phút, trùng cuối khúc leo dốc",
+          "text": "",
+          "speak": "Muốn trung bình sáu mươi, tức một ki-lô-mét mỗi phút, hai ki-lô-mét phải đi hết đúng hai phút."
+        },
+        {
+          "show": "khúc leo dốc nháy, đầu khúc trùng vạch cho phép",
+          "text": "",
+          "speak": "Nhưng riêng leo dốc đã mất đúng hai phút."
+        }
+      ]
+    },
+    {
+      "id": "b06",
+      "scene": 2,
+      "section": "BẢN CHẤT",
+      "keyword": "Trung bình chỉ dồn về 60",
+      "lineGap": 0.5,
+      "visual": "Giữ CẢNH 2. Bố cục như b05 (đồ thị nửa trái với đường mục tiêu 60; thẻ công thức phải trên; thanh thời gian phải dưới có khúc leo dốc 2 phút và vạch cho phép tại 2 phút). BƯỚC KHÓ NHẤT — chuỗi 'vì sao' (2), mỗi dòng một mắt xích; khoảnh khắc 'à ra thế' ở dòng 6. Thanh thời gian và điểm trên đồ thị gắn với nhau: khúc xuống dốc ngắn đi thì điểm trượt sang phải và khe hở co lại cùng lúc. Dòng 1: khúc xuống dốc co dần qua 40 s, 24 s, 4 s (số đổi theo), điểm trên đồ thị trượt theo từ (90; 45) tới (900; 58,1). Dòng 2: khúc xuống dốc co thành một vạch mảnh màu xuống nhưng vẫn còn, nhãn '> 0'. Dòng 3: đầu cuối thanh (tổng thời gian) sáng, thấy nằm quá vạch cho phép một chút. Dòng 4: khe hở tại điểm đang xét sáng màu nhấn, nhãn '$v_{tb} < 60$'. Dòng 5: điểm trượt tiếp tới mép phải trục, khe hở co gần chạm đường 60 mà vẫn còn; nhãn '$v_{tb} \\to 60$'. Dòng 6: khúc leo dốc 2 phút và vạch cho phép cùng sáng; các nhãn của dòng 2–5 mờ đi.",
+      "lines": [
+        {
+          "show": "khúc xuống dốc co dần qua 40 s, 24 s, 4 s, điểm trên đồ thị trượt theo sang phải",
+          "at": "khúc xuống dốc trên thanh thời gian",
+          "text": "4 s",
+          "speak": "Xuống càng nhanh thì khúc xuống dốc càng ngắn."
+        },
+        {
+          "show": "khúc xuống dốc co thành một vạch mảnh, vẫn còn",
+          "at": "vạch mảnh màu xuống trên thanh",
+          "text": "$> 0$",
+          "speak": "Nhưng nhanh đến mấy, khúc đó vẫn còn, chưa bằng không."
+        },
+        {
+          "show": "cuối thanh thời gian sáng, nằm quá vạch cho phép",
+          "at": "cuối thanh thời gian",
+          "text": "hơn 2 phút",
+          "speak": "Nên tổng thời gian luôn quá hai phút một chút."
+        },
+        {
+          "show": "khe hở tại điểm đang xét sáng màu nhấn",
+          "at": "khe hở trên đồ thị",
+          "text": "$v_{tb} < 60$",
+          "speak": "Thời gian quá mức cho phép, nên trung bình luôn dưới sáu mươi."
+        },
+        {
+          "show": "điểm trượt tiếp tới mép phải trục, khe hở co gần về 0",
+          "at": "điểm ở mép phải đồ thị",
+          "text": "$v_{tb} \\to 60$",
+          "speak": "Khúc xuống dồn về không, nên trung bình dồn về sáu mươi."
+        },
+        {
+          "show": "khúc leo dốc và vạch cho phép cùng sáng",
+          "text": "",
+          "speak": "Nói gọn lại, hai phút leo dốc đã tiêu hết thời gian cho phép."
+        }
+      ]
+    },
+    {
+      "id": "b07",
+      "scene": 2,
+      "section": "ĐỊNH NGHĨA",
+      "keyword": "Tiệm cận ngang: $y = 60$",
+      "visual": "Giữ CẢNH 2: đồ thị nửa trái với đường mục tiêu 60; thanh thời gian thu nhỏ về góc trên phải (mờ nhẹ); thẻ công thức b05 gỡ. BƯỚC KHÓ — khái niệm mới, giải phẫu; mỗi dòng một cụm sáng trên thẻ và đúng một thứ trên hình sáng cùng màu. Dòng 1: thẻ bên phải hiện $\\lim\\limits_{v \\to +\\infty} v_{tb} = 60$. Dòng 2: cụm $v \\to +\\infty$ sáng màu xuống; mũi tên ở đầu phải trục ngang sáng cùng màu, nhãn 'tăng mãi'. Dòng 3: cụm '= 60' sáng màu mục tiêu; khe hở ở mép phải đồ thị sáng màu nhấn, co sát về 0. Dòng 4: nhãn 'mục tiêu 60' của đường ngang đổi thành 'tiệm cận ngang' (giữ đến b11). Dòng 5: nhãn trục đổi: '$v$' thành '$x$', '$v_{tb}$' thành '$y = f(x)$' (đơn vị giữ). Dòng 6: thẻ đổi sang định nghĩa SGK: 'Đường thẳng $y = y_0$ là đường tiệm cận ngang của đồ thị hàm số $y = f(x)$ nếu $\\lim\\limits_{x \\to +\\infty} f(x) = y_0$ hoặc $\\lim\\limits_{x \\to -\\infty} f(x) = y_0$.'; cụm $x \\to +\\infty$ sáng cùng màu như dòng 2, $y_0$ sáng cùng màu với đường 60 (cạnh đường ghi '$y_0 = 60$'); cụm 'hoặc $\\lim\\limits_{x \\to -\\infty} f(x) = y_0$' MỜ (sẽ sáng ở b11 khi nhánh trái hiện ra).",
+      "lines": [
+        {
+          "show": "thẻ giới hạn hiện bên phải",
+          "at": "thẻ bên phải",
+          "text": "$\\lim\\limits_{v \\to +\\infty} v_{tb} = 60$",
+          "speak": "Trong toán, điều này viết bằng giới hạn."
+        },
+        {
+          "show": "cụm v tiến tới dương vô cực sáng, mũi tên đầu phải trục ngang sáng cùng màu",
+          "at": "mũi tên cuối trục ngang",
+          "text": "tăng mãi",
+          "speak": "Cụm nhỏ bên dưới là tốc độ xuống tăng mãi."
+        },
+        {
+          "show": "cụm '= 60' sáng màu mục tiêu, khe hở ở mép phải co sát về 0",
+          "text": "",
+          "speak": "Còn sáu mươi là mức mà trung bình dồn về."
+        },
+        {
+          "show": "nhãn đường ngang đổi thành 'tiệm cận ngang'",
+          "at": "đầu phải đường ngang 60",
+          "text": "tiệm cận ngang",
+          "speak": "Đường thẳng nằm ngang ở mức đó gọi là... tiệm cận ngang."
+        },
+        {
+          "show": "nhãn trục đổi: v thành x, v_tb thành y = f(x)",
+          "text": "",
+          "speak": "Sách viết cho mọi hàm số, nên trục ngang là biến, trục dọc là giá trị hàm."
+        },
+        {
+          "show": "thẻ đổi sang định nghĩa SGK, y₀ sáng cùng đường 60, cụm âm vô cực mờ",
+          "text": "",
+          "speak": "Biến tăng mãi mà giá trị hàm dồn về một số, đường ngang qua số đó là tiệm cận ngang."
+        }
+      ]
+    },
+    {
+      "id": "b08",
+      "scene": 3,
+      "section": "CÂU HỎI",
+      "keyword": "Mục tiêu sát 60: vọt lên",
+      "visual": "CẢNH 3 — Dòng 1–3 diễn ra trong khung con dốc + thanh thời gian (phóng to lại ở nửa trên; đồ thị CẢNH 2 gỡ). Dòng 1: nhãn mục tiêu phía trên đỉnh dốc '59 km/h' (màu mục tiêu). Dòng 2: vạch cho phép trên thanh thời gian dịch từ 2 phút sang 2 phút 2 s; khoảng trống sau khúc leo dốc sáng màu xuống, nhãn '2 phút 2 s' ở vạch cho phép. Dòng 3: xe lao xuống sườn phải, nhãn '≈ 1770 km/h' cạnh xe. Dòng 4: khung con dốc thu về góc trên trái; HỆ TRỤC MỚI hiện: trục ngang 'mục tiêu trung bình $A$ (km/h)' từ 0 đến 70, vạch mỗi 10, số ở 0, 20, 40, 60 (chữ $A$ màu mục tiêu); trục dọc 'tốc độ phải xuống $v$ (km/h)' (dòng 4 nói rõ: lần này $v$ ở trục dọc) từ 0 đến 2000, vạch mỗi 500, số ở 0, 1000, 2000 (chữ $v$ màu xuống, giữ màu như CẢNH 2); điểm (59; 1770) chấm lên. Dòng 5: đồ thị $v = \\frac{30A}{60-A}$ vẽ dần từ gốc $(0; 0)$ qua (50; 150), (55; 330), (58; 870), (59; 1770) tới 59,6 (lúc đó $v = 4470$, vượt mép trên: cắt ở mép trên kèm mũi tên ↑).",
+      "lines": [
+        {
+          "show": "nhãn mục tiêu trên đỉnh dốc đổi thành 59 km/h",
+          "at": "phía trên đỉnh dốc",
+          "text": "mục tiêu 59 km/h",
+          "speak": "Vậy thì hạ mục tiêu, chỉ cần trung bình năm mươi chín thì sao?"
+        },
+        {
+          "show": "vạch cho phép dịch sang phải, khoảng trống sau khúc leo dốc sáng màu xuống",
+          "at": "vạch cho phép trên thanh thời gian",
+          "text": "2 phút 2 s",
+          "speak": "Trung bình năm mươi chín thì được phép thêm chừng hai giây cho khúc xuống."
+        },
+        {
+          "show": "xe lao xuống sườn phải",
+          "at": "xe trên sườn phải",
+          "text": "≈ 1770 km/h",
+          "speak": "Đi một ki-lô-mét trong chừng ấy, phải xuống khoảng một nghìn bảy trăm bảy mươi ki-lô-mét một giờ."
+        },
+        {
+          "show": "hệ trục mới hiện, điểm (59; 1770) chấm lên",
+          "text": "",
+          "speak": "Đặt lên hệ trục mới, lần này tốc độ phải xuống nằm ở trục dọc, mục tiêu ở trục ngang."
+        },
+        {
+          "show": "đồ thị vẽ dần từ A = 0, vọt qua mép trên khi A sát 60",
+          "text": "",
+          "speak": "Mục tiêu càng sát sáu mươi, đồ thị càng vọt lên."
+        }
+      ]
+    },
+    {
+      "id": "b09",
+      "scene": 3,
+      "section": "BẢN CHẤT",
+      "keyword": "Chia cho số sát 0",
+      "lineGap": 0.5,
+      "visual": "Giữ CẢNH 3: hệ trục và đồ thị bên trái; khung con dốc + thanh thời gian ở góc trên trái (vạch cho phép, khúc leo dốc 2 phút); thẻ công thức ở nửa phải (hiện ở dòng 5). BƯỚC KHÓ — chuỗi 'vì sao' cho tiệm cận đứng, mỗi dòng một mắt xích. Dòng 1: đoạn đồ thị sát $A = 60$ nháy, dấu '?' cạnh đó. Dòng 2: vạch cho phép trên thanh thời gian trượt về sát mốc 2 phút, cùng lúc một chấm màu mục tiêu trên trục ngang trượt về sát 60. Dòng 3: khoảng còn lại sau khúc leo dốc co dần, nhãn '$\\to 0$'. Dòng 4: điểm trên đồ thị ứng với chấm đó leo vọt lên mép trên. Dòng 5: thẻ hiện $v = \\dfrac{1 \\text{ km}}{\\text{thời gian còn lại}}$, ngay dưới là dạng rút gọn $v = \\dfrac{30A}{60 - A}$ (dạng rút gọn đậm, dạng trên nhỏ). Dòng 6: mẫu $60 - A$ sáng màu mẫu; trên trục ngang đoạn từ chấm $A$ tới 60 sáng cùng màu, co dần. Dòng 7: tử $30A$ sáng màu tử, nhãn '≈ 1800' dưới tử. Dòng 8: cột dọc từ chân $A$ lên đồ thị (màu xuống) dài vọt qua mép trên.",
+      "lines": [
+        {
+          "show": "đoạn đồ thị sát A = 60 nháy, dấu '?' cạnh đó",
+          "text": "",
+          "speak": "Vì sao đồ thị lại vọt lên như vậy?"
+        },
+        {
+          "show": "vạch cho phép trượt về sát mốc 2 phút, chấm A trên trục ngang trượt về sát 60 theo",
+          "text": "",
+          "speak": "Mục tiêu càng sát sáu mươi, thời gian cho phép càng sát hai phút."
+        },
+        {
+          "show": "khoảng còn lại sau khúc leo dốc co dần",
+          "at": "khoảng còn lại trên thanh thời gian",
+          "text": "$\\to 0$",
+          "speak": "Leo dốc đã tốn đúng hai phút, nên thời gian còn lại để xuống dồn về không."
+        },
+        {
+          "show": "điểm trên đồ thị leo vọt lên mép trên",
+          "text": "",
+          "speak": "Đi một ki-lô-mét trong thời gian sát không, tốc độ phải cực lớn."
+        },
+        {
+          "show": "thẻ công thức hiện ở nửa phải",
+          "at": "thẻ nửa phải",
+          "text": "$v = \\dfrac{1 \\text{ km}}{\\text{thời gian còn lại}} = \\dfrac{30A}{60 - A}$",
+          "speak": "Lấy một ki-lô-mét chia cho thời gian còn lại, rút gọn thì được công thức này."
+        },
+        {
+          "show": "mẫu sáng màu mẫu, đoạn từ A tới 60 trên trục ngang sáng cùng màu",
+          "at": "đoạn trên trục ngang giữa A và 60",
+          "text": "$60 - A \\to 0$",
+          "speak": "Phần dồn về không nằm ở mẫu số, sáu mươi trừ mục tiêu."
+        },
+        {
+          "show": "tử sáng màu tử",
+          "at": "tử số trong thẻ",
+          "text": "$30A \\approx 1800$",
+          "speak": "Còn tử số gần một nghìn tám trăm, không nhỏ đi."
+        },
+        {
+          "show": "cột dọc từ chân A lên đồ thị vọt qua mép trên",
+          "text": "",
+          "speak": "Chia một số khác không cho số sát không, kết quả vượt mọi mức."
+        }
+      ]
+    },
+    {
+      "id": "b10",
+      "scene": 3,
+      "section": "ĐỊNH NGHĨA",
+      "keyword": "Tiệm cận đứng: $A = 60$",
+      "visual": "Giữ CẢNH 3; khung con dốc gỡ, nhãn tử/mẫu của b09 gỡ, thẻ công thức thu nhỏ lên góc phải trên. BƯỚC KHÓ — khái niệm mới. Dòng 1: thẻ giữa phải hiện $\\lim\\limits_{A \\to 60^-} v = +\\infty$. Dòng 2: cụm $60^-$ sáng màu mục tiêu; chấm $A$ trên trục ngang trượt tới 60 từ phía trái, mũi tên → nhỏ dưới chấm. Dòng 3: đường thẳng đứng nét đứt tại $A = 60$ hiện suốt chiều cao trục, nhãn 'tiệm cận đứng'. Dòng 4: nhãn trục đổi '$A$' thành '$x$', '$v$' thành '$y = f(x)$'; số 60 trên trục ngang ghi thêm '$x_0$' (giống b07). Dòng 5: thẻ đổi sang định nghĩa SGK (4 điều kiện xếp lưới 2×2, chữ đủ to): 'Đường thẳng $x = x_0$ là đường tiệm cận đứng của đồ thị hàm số $y = f(x)$ nếu ít nhất một trong các điều kiện sau thoả mãn: $\\lim\\limits_{x \\to x_0^-} f(x) = +\\infty$, $\\lim\\limits_{x \\to x_0^-} f(x) = -\\infty$, $\\lim\\limits_{x \\to x_0^+} f(x) = +\\infty$, $\\lim\\limits_{x \\to x_0^+} f(x) = -\\infty$.' Điều kiện thứ nhất sáng (đúng trường hợp vừa thấy), ba điều kiện còn lại thường. Bên phải $A = 60$ để trống: mục tiêu trên 60 không thể đạt, dòng 2 nói rõ.",
+      "lines": [
+        {
+          "show": "thẻ giới hạn hiện giữa phải",
+          "at": "thẻ giữa phải",
+          "text": "$\\lim\\limits_{A \\to 60^-} v = +\\infty$",
+          "speak": "Viết bằng giới hạn, mục tiêu tiến tới sáu mươi thì tốc độ tiến tới dương vô cực."
+        },
+        {
+          "show": "cụm 60⁻ sáng, chấm A trượt tới 60 từ bên trái",
+          "at": "chấm A trên trục ngang, sát 60",
+          "text": "từ bên trái",
+          "speak": "Dấu trừ nhỏ nghĩa là tiến tới từ bên trái, vì mục tiêu trên sáu mươi là không thể."
+        },
+        {
+          "show": "đường thẳng đứng nét đứt tại A = 60 hiện",
+          "at": "đường thẳng đứng A = 60",
+          "text": "tiệm cận đứng",
+          "speak": "Đường thẳng đứng tại sáu mươi gọi là... tiệm cận đứng."
+        },
+        {
+          "show": "nhãn trục đổi sang x và y = f(x), số 60 trên trục ghi thêm x₀",
+          "at": "số 60 trên trục ngang",
+          "text": "$x_0 = 60$",
+          "speak": "Sách viết cho mọi hàm số, điểm đang xét ở đây là sáu mươi."
+        },
+        {
+          "show": "thẻ đổi sang định nghĩa SGK, điều kiện thứ nhất sáng",
+          "text": "",
+          "speak": "Sát điểm đó, chỉ cần một phía vọt lên hoặc lao xuống vô cực là đủ."
+        }
+      ]
+    },
+    {
+      "id": "b11",
+      "scene": 2,
+      "section": "TRONG ĐỀ THI",
+      "keyword": "Chỉ giữ phần chứa biến",
+      "visual": "Quay lại CẢNH 2 (đồ thị tốc độ trung bình, đường 'tiệm cận ngang' tại 60). BƯỚC KHÓ — chuyển sang đề thi: câu chuyện không có tốc độ âm, đề thi xét mọi giá trị của biến; nói thẳng ở dòng 3. Mỗi dòng chỉ một thay đổi, thêm từng nhánh một. Khung con dốc không hiện. Thẻ định nghĩa tiệm cận ngang của b07 thu nhỏ ở góc dưới phải, cụm 'hoặc $\\lim\\limits_{x \\to -\\infty} f(x) = y_0$' vẫn mờ. Nhãn trục '$x$', '$y = f(x)$' bỏ đơn vị (số trơn). Dòng 1: thẻ 'đề bài' góc trên phải: $y = \\dfrac{60x}{x + 30}$. Dòng 2: dưới thẻ hiện phép thay $x = 90$ ra 45, điểm (90; 45) trên đồ thị nháy; phép thay gỡ ở dòng 3. Dòng 3: CHỈ đổi trục — trục co lại mượt (giữ trục): trục ngang từ −300 đến 300, vạch mỗi 60, số ở −240, −120, 120, 240 (không ghi số tại −30 để khỏi đè đường đứng ở b12); trục dọc từ −180 đến 240, vạch mỗi 60, số ở −120, 60, 120, 180; đồ thị cũ (phần $x > 0$, giờ thấy tới 300, qua (90; 45) và (300; 54,5), vẫn sát dần đường 60) co theo, vẫn sáng; đường 60 kéo dài hết trục. Dòng 4: nhánh trái ($x < -30$) vẽ dần từ $x = -300$ (66,7) qua (−90; 90), (−60; 120) tới (−40; 240), nằm trên đường 60, mũi tên nhỏ dọc nhánh chỉ sang trái. Dòng 5: nhãn '$y = 60$' ở đầu trái đường; đúng lúc giọng nói 'sách tính cả', cụm 'hoặc $x \\to -\\infty$' trên thẻ định nghĩa thu nhỏ sáng lên. Dòng 6: trong thẻ đề bài, cụm cộng 30 ở mẫu mờ đi, dưới thẻ hiện '$\\dfrac{60x}{x} = 60$'. Dòng 7: phép tính dòng 6 mờ, dưới thẻ hiện ví dụ khác '$\\dfrac{2x + 1}{x - 3} \\to \\dfrac{2x}{x} = 2$' (số cộng thêm 1 và −3 mờ).",
+      "lines": [
+        {
+          "show": "thẻ đề bài hiện góc trên phải",
+          "at": "thẻ đề bài",
+          "text": "$y = \\dfrac{60x}{x + 30}$",
+          "speak": "Còn đề thi chỉ cho công thức, như tốc độ trung bình theo tốc độ xuống là thế này."
+        },
+        {
+          "show": "phép thay x = 90 hiện dưới thẻ, ra đúng 45 như điểm (90; 45)",
+          "at": "dưới thẻ đề bài",
+          "text": "$\\dfrac{60 \\cdot 90}{90 + 30} = 45$",
+          "speak": "Thay chín mươi vào, vẫn ra đúng bốn mươi lăm như lúc đầu."
+        },
+        {
+          "show": "trục co lại, mở sang phía âm, đồ thị cũ co theo",
+          "text": "",
+          "speak": "Đề xét cả giá trị âm, dù tốc độ âm không có trong câu chuyện."
+        },
+        {
+          "show": "nhánh trái vẽ dần từ trái sang, sát dần đường 60 từ phía trên",
+          "text": "",
+          "speak": "Bên trái có thêm một nhánh, không còn là tốc độ, nên nằm trên sáu mươi cũng được."
+        },
+        {
+          "show": "cụm 'hoặc x tiến tới âm vô cực' trên thẻ định nghĩa sáng",
+          "cue": "sách tính cả",
+          "at": "đầu trái đường ngang 60",
+          "text": "$y = 60$",
+          "speak": "Đi mãi sang trái, nhánh này cũng dồn về sáu mươi, sách tính cả trường hợp này."
+        },
+        {
+          "show": "cụm cộng 30 ở mẫu mờ đi",
+          "at": "dưới thẻ đề bài",
+          "text": "$\\dfrac{60x}{x} = 60$",
+          "speak": "Vì biến càng xa số không, phần cộng ba mươi ở mẫu càng chẳng đáng kể."
+        },
+        {
+          "show": "dưới thẻ hiện ví dụ (2x + 1)/(x − 3) thành 2x/x = 2, số cộng thêm mờ",
+          "text": "",
+          "speak": "Đề nào cũng vậy, số cộng thêm đều chẳng đáng kể."
+        }
+      ]
+    },
+    {
+      "id": "b12",
+      "scene": 2,
+      "section": "TRONG ĐỀ THI",
+      "keyword": "Mẫu bằng 0, tử khác 0",
+      "visual": "Giữ CẢNH 2 mở rộng (trục −300 → 300, nhánh trái và nhánh $x > 0$, đường 60); thẻ định nghĩa thu nhỏ và ví dụ phụ gỡ; thẻ đề bài giữ góc trên phải. Đây là đồ thị KHÁC đồ thị tiệm cận đứng $A = 60$ của CẢNH 3 — dòng 1 nói rõ 'ở đồ thị này'. Dòng 1: chấm tại $x = -30$ trên trục ngang, đường đứng nét đứt tại $x = -30$ hiện suốt chiều cao, nhãn '$x = -30$' đặt phía trên (không đè số trục); mẫu $x + 30$ trong thẻ sáng màu mẫu. Dòng 2: tử $60x$ trong thẻ sáng màu tử, dưới tử ghi '$60 \\cdot (-30) = -1800$'. Dòng 3: đoạn nhánh trái sát đường đứng sáng, mũi tên ↑ dọc theo nó, nhãn '$\\to +\\infty$' ở đầu trên; cạnh đó dấu nhỏ 'mẫu (−), tử (−)'. Dòng 4: đoạn $-30 < x < 0$ vẽ dần từ (0; 0) qua (−10; −30), (−20; −120) lao xuống sát đường đứng, mũi tên ↓; cạnh đó dấu nhỏ 'mẫu (+), tử (−)'. Câu chốt hiện lúc đọc dòng 4.",
+      "lines": [
+        {
+          "show": "đường đứng nét đứt tại x = −30 hiện, mẫu trong thẻ sáng",
+          "at": "đường đứng x = −30, phía trên",
+          "text": "$x = -30$",
+          "speak": "Tiệm cận đứng của đồ thị này nằm ở chỗ mẫu bằng không, tức âm ba mươi."
+        },
+        {
+          "show": "tử trong thẻ sáng màu tử",
+          "at": "dưới tử số trong thẻ",
+          "text": "$60 \\cdot (-30) = -1800$",
+          "speak": "Tử tại đó bằng âm một nghìn tám trăm, khác không."
+        },
+        {
+          "show": "đoạn nhánh trái sát đường đứng sáng, mũi tên lên",
+          "at": "đầu trên nhánh trái, sát đường đứng",
+          "text": "$\\to +\\infty$",
+          "speak": "Sát âm ba mươi từ bên trái, mẫu âm và tử âm, nên thương dương và rất lớn."
+        },
+        {
+          "show": "đoạn giữa vẽ dần, lao xuống sát đường đứng",
+          "text": "",
+          "speak": "Sát bên phải, mẫu dương mà tử âm, nên đồ thị lao xuống."
+        }
+      ]
+    },
+    {
+      "id": "b13",
+      "scene": 1,
+      "section": "GIẢI ĐÁP",
+      "keyword": "60 km/h chỉ là tiệm cận",
+      "visual": "Quay lại đúng CẢNH 1 (cùng component, bố cục b01–b02): con dốc nhìn ngang, nhãn '30 km/h' trên sườn trái, nhãn mục tiêu '60 km/h' phía trên đỉnh (màu mục tiêu), thanh thời gian có khúc leo dốc 2 phút và vạch cho phép tại 2 phút. Dòng 1: xe lao xuống sườn phải; khúc xuống dốc trên thanh dài 4 s, nhãn '≈ 58,1 km/h' cạnh xe. Dòng 2: khúc leo dốc và vạch cho phép cùng sáng (cùng khoảnh khắc b06). Dòng 3: khúc xuống dốc co thành vạch mảnh màu xuống, vẫn còn, nằm quá vạch cho phép. Dòng 4: giữ nguyên. Dòng 5: nhãn mục tiêu '60 km/h' đổi thành 'tiệm cận'.",
+      "lines": [
+        {
+          "show": "xe lao xuống sườn phải, khúc xuống dốc trên thanh dài 4 s",
+          "at": "xe ở chân sườn phải",
+          "text": "$\\approx 58{,}1$ km/h",
+          "speak": "Quay lại câu đố, xuống nhanh như máy bay cũng chỉ được khoảng năm mươi tám."
+        },
+        {
+          "show": "khúc leo dốc và vạch cho phép cùng sáng",
+          "text": "",
+          "speak": "Hai phút leo dốc đã dùng hết thời gian cho phép."
+        },
+        {
+          "show": "khúc xuống dốc co thành vạch mảnh, vẫn còn",
+          "at": "vạch mảnh màu xuống trên thanh",
+          "text": "$> 0$",
+          "speak": "Đoạn xuống luôn tốn thêm chút ít, nên trung bình chỉ dồn về sáu mươi."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Einstein cũng phải tính ra mới thấy điều này."
+        },
+        {
+          "show": "nhãn mục tiêu 60 km/h đổi thành 'tiệm cận'",
+          "text": "",
+          "speak": "Vậy... không có tốc độ nào đủ, sáu mươi chỉ là tiệm cận."
+        }
+      ]
+    }
+  ]
+}

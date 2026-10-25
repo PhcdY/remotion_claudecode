@@ -110,6 +110,8 @@ def main() -> int:
         subject = "toan"
     if not (MON_DIR / f"{subject}.md").exists():
         errors.append(f"không có gói môn .claude/mon/{subject}.md — tạo từ _mau.md cùng người dùng")
+    if s.get("lop") is None or not s.get("chuong") or not s.get("bai"):
+        warns.append("thiếu lop/chuong/bai (theo SGK) → video render vào out/_lam-viec/ thay vì thư mục bài")
 
     beats = s.get("beats") or []
     if not beats:

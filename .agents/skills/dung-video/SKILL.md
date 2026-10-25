@@ -183,7 +183,7 @@ Phép thử: **tắt tiếng, chỉ nhìn khung hình**, người xem vẫn bi�
 
 1. Dựng đủ các beat với `draft: true` (mặc định của composition cho tới khi có audio).
 2. `node scripts/check-layout.mjs <id> --draft` → sửa hết lỗi.
-3. `node scripts/storyboard.mjs <id>` → `out/storyboard/<id>/index.html`: mỗi dòng một ảnh (cuối dòng, lúc thay đổi đã hiện đủ) kèm `show`, `text`, lời đọc. Tự soát từng ảnh theo Bước 4, rồi gọi agent `hoc-sinh-ao` (đưa thư mục storyboard + tiền đề) xem như người xem lần đầu; sửa chỗ *nặng*/*vừa* về hình ở đây, chỗ về lời/chữ báo người dùng. Xong mới gửi trang cho người dùng (SendUserFile), kèm tóm tắt những gì học sinh ảo đã bắt và đã sửa.
+3. `node scripts/storyboard.mjs <id>` → `out/_lam-viec/<id>/storyboard/index.html`: mỗi dòng một ảnh (cuối dòng, lúc thay đổi đã hiện đủ) kèm `show`, `text`, lời đọc. Tự soát từng ảnh theo Bước 4, rồi `node scripts/storyboard.mjs <id> --review` → `out/_lam-viec/<id>/storyboard/review/`: **mỗi beat một ảnh nhỏ** (cuối beat, scale 0,3) + `review.md` (lời đọc, thay đổi hình, chữ của từng dòng). Gọi agent `hoc-sinh-ao` với **đúng thư mục `review/`** + tiền đề, dặn **mỗi ảnh đọc đúng một lần**, theo thứ tự; không đưa thư mục ảnh đầy đủ. Agent dừng giữa chừng (lỗi, hết lượt) thì **không** cho chạy tiếp ngay: xem nó đã đọc bao nhiêu ảnh, có mở lại ảnh không, rồi mới quyết (24/10: agent xem 67 ảnh cỡ 0,5, mở lại mỗi ảnh ~20 lần, tốn 68% token cả phiên và chạm giới hạn hai lần). Sửa chỗ *nặng*/*vừa* về hình ở đây, chỗ về lời/chữ báo người dùng. Xong mới gửi trang cho người dùng (SendUserFile), kèm tóm tắt những gì học sinh ảo đã bắt và đã sửa.
 4. Người dùng duyệt. Góp ý về hình → sửa code; về chữ/lời/nhịp → sửa ở B1 (chưa tốn audio). Duyệt xong mới sang B2.
 5. Sau B2: `python scripts/align_words.py <slug>` (mốc từng từ cho `cue`), bỏ `draft` khỏi `defaultProps`, chạy lại Bước 0 đầy đủ + Bước 4 với thời gian thật.
 
@@ -214,7 +214,7 @@ src/Root.tsx             đăng ký <Composition id="<slug>" ...> 1920×1080, 30
 ## Bước 4 — Kiểm tra
 
 - `npm run lint` sạch.
-- Xuất ảnh tĩnh bằng `node scripts/stills.mjs <slug> <frame...>` (bundle một lần).
+- Xuất ảnh tĩnh bằng `node scripts/stills.mjs <slug> <frame...>` (bundle một lần) → `out/_lam-viec/<id>/stills/`.
 - Xuất ảnh tĩnh **cho từng dòng** (frame ngay trước khi dòng kết thúc, lúc mọi thành phần của dòng đó đã hiện đủ), không chỉ giữa beat. Nhiều frame thì bundle một lần rồi gọi `renderStill` lặp lại, thay vì gọi `npx remotion still` từng frame.
 - **Kiểm bố cục bằng code trước, mắt sau.** `check-layout` báo LỖI (phải rỗng): chồng lấn/sát, tràn khung, lấn mép dưới, chữ dưới cỡ tối thiểu, nhãn neo cách vật > 130px; và CẢNH BÁO (soát bằng mắt): nửa khung trống, khung lệch, dòng nào thêm > 8 từ mới lên hình. Bản nháp thêm `--draft`.
 - Chi tiết kiểm chồng lấn: Mọi khối chữ trên hình (nhãn, chú thích, số trục, câu chốt) gắn `data-text`, mọi điểm đánh dấu gắn `data-mark`. Chạy `node scripts/check-layout.mjs <slug>`: script mở từng frame kiểm tra, lấy khung bao (`getBoundingClientRect`) của các phần tử đó và báo mọi cặp chồng nhau hoặc cách nhau < 16px, kèm frame và nội dung chữ; khung chứa (thẻ, ô bảng, `Card`) gắn `data-box`, script báo mọi `data-text` nằm trong `data-box` mà tràn ra ngoài viền, và mọi chữ/điểm **bên ngoài** chạm vào khung đó (đã gặp: nhãn đồ thị chạm mép thẻ bảng mà không bị bắt). Danh sách phải rỗng mới sang bước soát bằng mắt.
@@ -228,12 +228,13 @@ src/Root.tsx             đăng ký <Composition id="<slug>" ...> 1920×1080, 30
 - Người dùng muốn xem nhanh ("demo", "chưa cần render") → mở Remotion Studio (`preview_start` với cấu hình `remotion-studio` trong `.claude/launch.json`) ở trang composition, không render.
 - Render khi người dùng bảo, **chạy nền và ghi tiến độ ra file** để trả lời được "đến đâu rồi":
   ```
-  npx remotion render <id> out/<id>.mp4 > <scratchpad>/render-<id>.log 2>&1
+  npx remotion render <id> "$(node scripts/out-path.mjs <slug> --id <id>)" > <scratchpad>/render-<id>.log 2>&1
   ```
+  `out-path.mjs` in đường dẫn `out/<Môn>/Lớp <lop>/<chuong>/<bai>/<id>.mp4` theo `lop`/`chuong`/`bai` trong `script.json` (thiếu thì ra `out/_lam-viec/<id>/`: điền cho đủ trước khi render bản đăng). Không ghi gì khác ra gốc `out/`: thứ người dùng xem nằm ở thư mục bài, thứ chỉ agent dùng ở `out/_lam-viec/<id>/`, log ở scratchpad; file nháp/thử cũ thì xóa.
   Không dùng `--log=error` (mất dòng tiến độ). Hỏi tiến độ → đọc dòng cuối của log (frame đã render / tổng), báo phần trăm và thời gian còn lại ước tính.
 - Mốc thời gian (máy người dùng, 21/10/2026): video 3:53 (≈ 7000 frame) render ≈ 14–15 phút; 2:49 ≈ 6–8 phút. Báo mốc này lúc bắt đầu render.
 - Xong: đo thời lượng file bằng `ffprobe`, gửi file cho người dùng. `out/` bị gitignore, không commit video.
-- **Phụ đề**: `node scripts/export-captions.mjs <slug> [--id <compositionId>]` → `out/<id>.srt` + `out/<id>.vtt` (từ `caption`, thiếu thì `speak`, đúng mốc thời gian của audio). Gửi kèm video để tải lên web/YouTube dạng phụ đề bật–tắt được; không in phụ đề lên hình.
+- **Phụ đề**: `node scripts/export-captions.mjs <slug> [--id <compositionId>]` → `<id>.srt` + `<id>.vtt` + `<id>.timeline.json` cạnh video trong thư mục bài (từ `caption`, thiếu thì `speak`, đúng mốc thời gian của audio). Gửi kèm video để tải lên web/YouTube dạng phụ đề bật–tắt được; không in phụ đề lên hình.
 
 ## Bước 6 — Kiểm với người xem thật
 
@@ -241,14 +242,14 @@ Học sinh ảo chỉ là bước lọc; thước đo thật là người xem. G
 - **Trước khi đăng (nếu được)**: 2–3 học sinh xem **một lần, không tua**, rồi trả lời 3 câu: (1) chỗ nào muốn tua lại / bị lạc — nói thời điểm; (2) kể lại ý chính bằng lời của mình; (3) giải câu hỏi mở đầu hoặc một câu áp dụng. Kể lại lệch ý bản chất → video chưa dạy được ý đó.
 - **Sau khi đăng**: xem biểu đồ giữ chân người xem (YouTube Studio › Analytics › Giữ chân người xem, hoặc số liệu web 9Study): tìm chỗ tụt dốc đột ngột và chỗ người xem tua lại (đỉnh nhô lên).
 
-Người dùng báo thời điểm ("1:23 khó hiểu", "tụt ở 0:40") → `python scripts/beat_at.py <id> 1:23 0:40` (cần `out/<id>.timeline.json` từ `export-captions.mjs` của đúng bản đã render) để biết beat, dòng, lời, hình ở đó; ghi vào `FEEDBACK.md` kèm beat/dòng, sửa theo quy trình góp ý như mọi lần, và thêm bài học vào `.claude/lessons.md`.
+Người dùng báo thời điểm ("1:23 khó hiểu", "tụt ở 0:40") → `python scripts/beat_at.py <id> 1:23 0:40` (cần `<id>.timeline.json` cạnh video, từ `export-captions.mjs` của đúng bản đã render) để biết beat, dòng, lời, hình ở đó; ghi vào `FEEDBACK.md` kèm beat/dòng, sửa theo quy trình góp ý như mọi lần, và thêm bài học vào `.claude/lessons.md`.
 
 ## Bản giọng khác (không thay bản cũ)
 
 Audio của bản giọng khác nằm ở `public/audio/<slug>-<hậu tố>/` (skill `tao-audio` › Bản giọng khác). Dựng thêm composition, không chép code beat:
 - `explainerMetadata` (video cũ: `calculateMetadata` riêng) nhận prop `audioDir` và gọi `buildTimeline(script, props.audioDir)` (mặc định = slug).
 - Đăng ký thêm `<Composition id="<slug>-<hậu tố>" defaultProps={{ timeline: null, audioDir: "<slug>-<hậu tố>" }} …/>` cạnh composition gốc, cùng component (mẫu: `src/videos/ban-chat-dao-ham/Video.tsx`).
-- Chạy `check-layout` cho id mới (nhịp đọc khác → mốc dòng khác), render ra `out/<slug>-<hậu tố>.mp4`.
+- Chạy `check-layout` cho id mới (nhịp đọc khác → mốc dòng khác), render bằng `out-path.mjs <slug> --id <slug>-<hậu tố>` (cùng thư mục bài với bản gốc).
 
 ## Không được
 

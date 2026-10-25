@@ -1,6 +1,9 @@
 {
   "slug": "cuc-tri-gtln-gtnn",
   "title": "Đạo hàm bằng 0 thì sao?",
+  "lop": 12,
+  "chuong": "Chương I. Ứng dụng đạo hàm để khảo sát và vẽ đồ thị của hàm số",
+  "bai": "Bài 2. Giá trị lớn nhất và giá trị nhỏ nhất của hàm số",
   "exams": [
     "THPTQG",
     "TSA",

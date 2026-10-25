@@ -50,6 +50,7 @@ Chi tiết từng video: `src/videos/<slug>/FEEDBACK.md`. Thêm mục mới mỗ
 
 - 23/10 · giai đoạn 3 · Hình đổi ở đầu câu dù chữ quan trọng ở cuối câu (vd. "…còn sáu là giá trị cực đại" — nhãn đổi sớm ~2 s). → `cue` + `align_words.py` (dò khoảng lặng, không cần nhận dạng giọng nói; máy chỉ có GPU tích hợp).
 - 23/10 · giai đoạn 3 · Người viết tự kiểm bài của mình dễ bỏ sót chỗ nhảy bước. → agent `hoc-sinh-ao` đọc độc lập kịch bản và storyboard; thước đo cuối vẫn là học sinh thật + số liệu giữ chân người xem (`beat_at.py`).
+- 24/10 · tiệm cận · `hoc-sinh-ao` xem 67 ảnh storyboard cỡ 0,5, mở lại mỗi ảnh ~20 lần (319 lượt), tốn 68% token cả phiên, chạm giới hạn hai lần; người dùng: "làm gì mà tốn token thế". → `storyboard.mjs --review`: mỗi beat một ảnh nhỏ + `review.md`; agent đọc mỗi ảnh một lần; agent dừng giữa chừng thì xem nguyên nhân trước khi cho chạy tiếp.
 
 ## Giọng đọc (Vivibe)
 - 19/10 · Thử 4 cách nhấn → chọn `...` (dừng rồi nhấn). Mỗi dấu câu giữa dòng dừng ≈ 0,3–0,4 s; dòng 3 chỗ ngắt nghe vấp; `...` giữa cụm chặt nghe gãy; thẻ `<break>` bị đọc sai.

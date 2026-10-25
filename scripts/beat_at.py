@@ -2,7 +2,7 @@
 
 Dùng:
     python scripts/beat_at.py <compositionId> 1:23 2:05 95.5
-Cần out/<compositionId>.timeline.json — tạo bằng `node scripts/export-captions.mjs <slug> [--id <compositionId>]`
+Cần <compositionId>.timeline.json trong out/ (cạnh video, thư mục bài) — tạo bằng `node scripts/export-captions.mjs <slug> [--id <compositionId>]`
 (đúng bản đã render; sửa kịch bản/audio thì tạo lại).
 """
 
@@ -31,9 +31,10 @@ def main() -> int:
     if len(sys.argv) < 3:
         sys.exit(__doc__)
     cid = sys.argv[1]
-    p = ROOT / "out" / f"{cid}.timeline.json"
-    if not p.exists():
-        sys.exit(f"Không thấy {p.relative_to(ROOT)} — chạy: node scripts/export-captions.mjs <slug> --id {cid}")
+    found = sorted((ROOT / "out").rglob(f"{cid}.timeline.json"))
+    if not found:
+        sys.exit(f"Không thấy {cid}.timeline.json trong out/ — chạy: node scripts/export-captions.mjs <slug> --id {cid}")
+    p = found[0]
     data = json.loads(p.read_text(encoding="utf-8"))
     lines = data["lines"]
     for arg in sys.argv[2:]:
