@@ -290,6 +290,38 @@ export const CurveArrow: React.FC<{
   );
 };
 
+/** Mũi tên ở đầu một nhánh: đỉnh mũi tên tại (x; fn(x)), hướng theo tiếp tuyến (dir = 1: sang phải, −1: sang trái). */
+export const EndArrow: React.FC<{ s: Scale; fn: (x: number) => number; dfn: (x: number) => number; x: number; dir: 1 | -1; color: string; o: number }> = ({
+  s,
+  fn,
+  dfn,
+  x,
+  dir,
+  color,
+  o,
+}) => {
+  if (o <= 0) return null;
+  const vx = dir * s.sx;
+  const vy = -dir * dfn(x) * s.sy;
+  const n = Math.hypot(vx, vy);
+  const ux = vx / n;
+  const uy = vy / n;
+  const tx = s.x(x) + ux * 26;
+  const ty = s.y(fn(x)) + uy * 26;
+  const L = 34;
+  const W = 17;
+  const bx = tx - ux * L;
+  const by = ty - uy * L;
+  return (
+    <polygon
+      data-mark="arrow"
+      points={`${tx},${ty} ${bx - uy * W},${by + ux * W} ${bx + uy * W},${by - ux * W}`}
+      fill={color}
+      opacity={o}
+    />
+  );
+};
+
 // ---------- Điểm, đoạn, đường thẳng ----------
 
 export const Point: React.FC<{

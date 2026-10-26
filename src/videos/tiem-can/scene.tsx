@@ -32,9 +32,8 @@ export const K = {
   ground: "#7A8499",
 };
 
-export const clamp01 = (t: number) => Math.min(1, Math.max(0, t));
-/** Nhấp nháy 0 → 1 → 0 trong [a, a + d]. */
-export const pulse = (fr: number, a: number, d = 24) => (fr < a || fr > a + d ? 0 : Math.sin(((fr - a) / d) * Math.PI));
+export { clamp01, pulse } from "../../components/parts";
+import { clamp01 } from "../../components/parts";
 
 /** Chữ đổi bước tại chỗ: [chữ, độ mờ] cho từng bước. */
 export const stepMix = (steps: string[], step: number) => {

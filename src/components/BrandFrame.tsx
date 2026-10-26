@@ -80,7 +80,13 @@ export const BrandFrame: React.FC<{ children: React.ReactNode; logoFrom?: number
     extrapolateRight: "clamp",
   });
   return (
-    <AbsoluteFill style={{ fontFamily: fontText, color: colors.text }}>
+    <AbsoluteFill
+      style={{
+        fontFamily: fontText,
+        color: colors.text,
+        scale: 0.987
+      }}
+    >
       <BrandBackground />
       <AbsoluteFill>{children}</AbsoluteFill>
       <BrandLogo opacity={logo} />

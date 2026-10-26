@@ -1,9 +1,10 @@
 import React from "react";
+import { CalcTable } from "../../components/CalcTable";
 import { Card } from "../../components/Card";
 import { AutoLabelItem, AutoLabels, Rect, axesObstacles, curveObstacles, segmentObstacles } from "../../components/labels";
 import { MathText, Tex } from "../../components/MathText";
 import { Tag, lerp } from "../../components/parts";
-import { Axes, FunctionPlot, Plot, Point, Scale, makeScale } from "../../components/plot";
+import { Axes, EndArrow, FunctionPlot, Plot, Point, Scale, makeScale } from "../../components/plot";
 import { role } from "../../components/roles";
 import { colors, fontText, halo, tint } from "../../components/theme";
 
@@ -50,9 +51,8 @@ export const K = {
   dim: role.dim,
 };
 
-export const clamp01 = (t: number) => Math.min(1, Math.max(0, t));
-/** Nhấp nháy 0 → 1 → 0 trong [a, a + d]. */
-export const pulse = (fr: number, a: number, d = 24) => (fr < a || fr > a + d ? 0 : Math.sin(((fr - a) / d) * Math.PI));
+export { clamp01, pulse } from "../../components/parts";
+import { clamp01 } from "../../components/parts";
 
 // ---------------- Bố cục CẢNH 1 ----------------
 const X_MIN = -0.5;
@@ -82,38 +82,6 @@ const PIECES: [number, number][] = [
   [0.5, 1.5],
   [1.5, X_MAX],
 ];
-
-/** Mũi tên ở đầu một nhánh: đỉnh mũi tên tại (x; fn(x)), hướng theo tiếp tuyến (dir = 1: sang phải, −1: sang trái). */
-export const EndArrow: React.FC<{ s: Scale; fn: (x: number) => number; dfn: (x: number) => number; x: number; dir: 1 | -1; color: string; o: number }> = ({
-  s,
-  fn,
-  dfn,
-  x,
-  dir,
-  color,
-  o,
-}) => {
-  if (o <= 0) return null;
-  const vx = dir * s.sx;
-  const vy = -dir * dfn(x) * s.sy;
-  const n = Math.hypot(vx, vy);
-  const ux = vx / n;
-  const uy = vy / n;
-  const tx = s.x(x) + ux * 26;
-  const ty = s.y(fn(x)) + uy * 26;
-  const L = 34;
-  const W = 17;
-  const bx = tx - ux * L;
-  const by = ty - uy * L;
-  return (
-    <polygon
-      data-mark="arrow"
-      points={`${tx},${ty} ${bx - uy * W},${by + ux * W} ${bx + uy * W},${by - ux * W}`}
-      fill={color}
-      opacity={o}
-    />
-  );
-};
 
 /** Đồ thị chia ba khúc theo chiều (lên, xuống, lên), mỗi khúc có màu riêng. */
 const Pieces: React.FC<{
@@ -600,30 +568,14 @@ const FormulaColumn: React.FC<{ st: S1 }> = ({ st }) => {
         </Tag>
       ) : null}
       {/* bảng giá trị kiểu máy tính bỏ túi */}
-      {v(st.tableO) > 0 ? (
-        <Card style={{ left: COL.left + 20, top: 290, width: 420, padding: "16px 0", opacity: st.tableO, background: "#EEF1F6" }}>
-          <div data-text="table" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", fontSize: 44, textAlign: "center" }}>
-            <div style={{ fontWeight: 700, color: colors.muted, paddingBottom: 8, borderBottom: `2px solid ${colors.panelBorder}` }}>
-              <Tex tex="x" />
-            </div>
-            <div style={{ fontWeight: 700, color: colors.muted, paddingBottom: 8, borderBottom: `2px solid ${colors.panelBorder}` }}>
-              <Tex tex="f(x)" />
-            </div>
-            {rows.map(([a, b], i) =>
-              rowsO[i] > 0 ? (
-                <React.Fragment key={i}>
-                  <div style={{ padding: "6px 0", opacity: rowsO[i], color: i >= 3 ? K.focus : colors.text, fontVariantNumeric: "tabular-nums" }}>
-                    {a}
-                  </div>
-                  <div style={{ padding: "6px 0", opacity: rowsO[i], color: i >= 3 ? K.focus : colors.text, fontWeight: 700, fontVariantNumeric: "tabular-nums" }}>
-                    {b}
-                  </div>
-                </React.Fragment>
-              ) : null,
-            )}
-          </div>
-        </Card>
-      ) : null}
+      <CalcTable
+        left={COL.left + 20}
+        top={290}
+        width={420}
+        headers={["$x$", "$f(x)$"]}
+        rows={rows.map(([a, b], i) => ({ cells: [a, b], o: rowsO[i], color: i >= 3 ? K.focus : undefined }))}
+        opacity={v(st.tableO)}
+      />
       {/* sơ đồ khảo sát (SGK) */}
       {v(st.scheme) > 0 ? (
         <Card style={{ left: COL.left, top: 290, width: 680, padding: "22px 30px", opacity: st.scheme }}>

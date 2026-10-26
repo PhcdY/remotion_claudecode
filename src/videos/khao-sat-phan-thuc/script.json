@@ -1,0 +1,373 @@
+{
+  "slug": "khao-sat-phan-thuc",
+  "title": "Đạo hàm âm mà đồ thị lại đi lên?",
+  "subject": "toan",
+  "lop": 12,
+  "chuong": "Chương I. Ứng dụng đạo hàm để khảo sát và vẽ đồ thị của hàm số",
+  "bai": "Bài 4. Khảo sát sự biến thiên và vẽ đồ thị của hàm số",
+  "exams": [
+    "THPTQG",
+    "TSA",
+    "HSA"
+  ],
+  "beats": [
+    {
+      "id": "b01",
+      "scene": 1,
+      "section": "HIỆN TƯỢNG",
+      "keyword": "Đạo hàm âm mà lại lên?",
+      "visual": "CẢNH 1 — góc trên trái: công thức $f(x) = \\dfrac{x + 1}{x - 1}$ (giữ suốt video). Dưới công thức: bảng kiểu màn hình máy tính bỏ túi (khung bo góc nền xám nhạt), ba cột tiêu đề '$x$', '$f(x)$', '$f'(x)$', hai hàng: 0 | −1 | −2 và 2 | 3 | −2 (cột $f'(x)$ màu giảm). Bên phải: hệ trục, trục ngang $x$ từ −4 đến 6 (vạch mỗi 1, số ở −3, −2, −1, 1, 2, 3, 4, 5), trục dọc $y$ từ −5 đến 6 (vạch mỗi 1, số ở −4, −2, 2, 4). Lúc đầu hệ trục trống. Màu: điểm màu chính; mũi tên tiếp tuyến màu giảm; hai cột độ cao màu nhấn.",
+      "lines": [
+        {
+          "show": "công thức và hàng đầu của bảng (x = 0) hiện",
+          "text": "",
+          "speak": "Máy tính bỏ túi cho biết đạo hàm của hàm này tại không là âm hai."
+        },
+        {
+          "show": "điểm (0; −1) chấm lên, mũi tên ngắn dọc tiếp tuyến chúc xuống sang phải",
+          "at": "điểm (0; −1)",
+          "text": "đang đi xuống",
+          "speak": "Đạo hàm âm, nên tại đó đồ thị đang đi xuống."
+        },
+        {
+          "show": "hàng thứ hai của bảng (x = 2) hiện, điểm (2; 3) chấm lên kèm mũi tên chúc xuống",
+          "text": "",
+          "speak": "Tại hai, đạo hàm cũng là âm hai, cũng đang đi xuống."
+        },
+        {
+          "show": "hai cột dọc từ trục ngang lên hai điểm sáng màu nhấn, cột tại 2 cao hơn hẳn",
+          "cue": "độ cao",
+          "text": "",
+          "speak": "Vậy mà độ cao tại hai là ba, cao hơn hẳn độ cao tại không."
+        },
+        {
+          "show": "dấu '?' màu bẫy hiện giữa hai điểm",
+          "text": "",
+          "speak": "Đi sang phải toàn thấy đi xuống, sao lại lên cao hơn?"
+        }
+      ]
+    },
+    {
+      "id": "b02",
+      "scene": 1,
+      "section": "GỐC RỄ",
+      "keyword": "Không quay đầu, mà vẫn lên?",
+      "visual": "Giữ CẢNH 1: công thức, bảng, hai điểm, hai mũi tên tiếp tuyến; hai cột dọc và dấu '?' mờ đi ở đầu beat. Dòng 2: công thức đạo hàm hiện dưới bảng. Dòng 3: tử −2 trong công thức đạo hàm sáng màu giảm, nhãn '< 0' dưới tử; mẫu $(x-1)^2$ sáng màu phụ A, nhãn '> 0' dưới mẫu. Dòng 4: nhãn kết luận cạnh công thức đạo hàm. Dòng 5: đường 'lẽ ra' nét đứt màu bẫy từ điểm (0; −1) đi xuống sang phải tới khoảng (2,5; −3,5), nhãn 'lẽ ra' cạnh nó; điểm (2; 3) nằm xa phía trên.",
+      "lines": [
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Thử khảo sát như hàm bậc ba ở bài trước, trước hết tìm chỗ quay đầu."
+        },
+        {
+          "show": "công thức đạo hàm hiện dưới bảng",
+          "at": "dưới bảng, cột trái",
+          "text": "$f'(x) = \\dfrac{-2}{(x - 1)^2}$",
+          "speak": "Tính theo quy tắc đạo hàm của thương, được phân số này."
+        },
+        {
+          "show": "tử sáng màu giảm kèm nhãn '< 0', mẫu sáng màu phụ A kèm nhãn '> 0'",
+          "text": "",
+          "speak": "Tử luôn là âm hai, còn mẫu là một bình phương, không bao giờ âm."
+        },
+        {
+          "show": "nhãn kết luận hiện cạnh công thức đạo hàm",
+          "at": "bên phải công thức đạo hàm",
+          "text": "$f'(x) < 0$",
+          "speak": "Nên đạo hàm luôn âm, không bao giờ bằng không."
+        },
+        {
+          "show": "đường 'lẽ ra' nét đứt màu bẫy đi xuống từ điểm (0; −1)",
+          "at": "đường nét đứt màu bẫy",
+          "text": "lẽ ra",
+          "speak": "Không có chỗ quay đầu, lẽ ra đồ thị phải đi xuống mãi."
+        },
+        {
+          "show": "điểm (2; 3) nhấp sáng màu bẫy, nằm xa phía trên đường 'lẽ ra'",
+          "text": "",
+          "speak": "Vậy mà điểm tại hai lại nằm cao hơn hẳn."
+        }
+      ]
+    },
+    {
+      "id": "b03",
+      "scene": 1,
+      "section": "BẢN CHẤT",
+      "keyword": "Mẫu bằng 0: đồ thị đứt",
+      "visual": "Giữ CẢNH 1; đường 'lẽ ra' và nhãn của nó còn ở dòng 1, mờ đi ở dòng 3. Công thức đạo hàm và các nhãn '< 0', '> 0' mờ đi ở đầu beat (nhãn '$f'(x) < 0$' ở lại). Dòng 1: nhãn tập xác định hiện ngay dưới công thức $f$. Dòng 2: mẫu $x - 1$ trong công thức $f$ sáng màu bẫy; đường thẳng đứng nét đứt màu bẫy tại $x = 1$ hiện trên hệ trục, chạy hết chiều cao. Dòng 3: đường 'lẽ ra' mờ đi; nửa trái (x < 1) và nửa phải (x > 1) của vùng vẽ tô nền rất nhạt hai màu khác nhau (phụ A trái, phụ B phải), nhãn 'nhánh trái', 'nhánh phải' ở góc trên mỗi nửa. Dòng 4: điểm (0; −1) đổi sang màu phụ A, điểm (2; 3) đổi sang màu phụ B.",
+      "lines": [
+        {
+          "show": "nhãn tập xác định hiện dưới công thức",
+          "at": "ngay dưới công thức $f$",
+          "text": "$D = \\mathbb{R} \\setminus \\{1\\}$",
+          "speak": "Nhưng bước một của sơ đồ là tìm tập xác định, và ở đây nó khác."
+        },
+        {
+          "show": "đường thẳng đứng nét đứt màu bẫy tại x = 1 hiện, mẫu trong công thức sáng cùng màu",
+          "at": "đường thẳng đứng tại $x = 1$, phía trên",
+          "text": "mẫu $= 0$",
+          "speak": "Tại một, mẫu số bằng không, phân số không có giá trị."
+        },
+        {
+          "show": "hai nửa vùng vẽ tô nền nhạt hai màu, nhãn 'nhánh trái', 'nhánh phải'",
+          "text": "",
+          "speak": "Bài trước đã nói, phân thức có chỗ đồ thị bị đứt, ở đây đồ thị tách thành hai nhánh."
+        },
+        {
+          "show": "điểm tại 0 đổi màu nhánh trái, điểm tại 2 đổi màu nhánh phải",
+          "text": "",
+          "speak": "Điểm tại không nằm bên trái chỗ đứt, điểm tại hai nằm bên phải."
+        }
+      ]
+    },
+    {
+      "id": "b04",
+      "scene": 1,
+      "section": "BẢN CHẤT",
+      "keyword": "Sát chỗ đứt: tiệm cận đứng",
+      "lineGap": 0.5,
+      "visual": "Giữ CẢNH 1 (BƯỚC KHÓ — chuỗi vì sao, phần 1). Nền hai nửa còn rất nhạt. Dòng 1: chấm nhỏ màu nhấn chạy dọc trục ngang từ 0 tới 0,9 (chỉ vị trí x đang xét). Dòng 2: phép chia hiện cạnh công thức $f$, tử 1,9 và mẫu −0,1 (mẫu màu bẫy). Dòng 3: kết quả hiện sau dấu '='; trên hệ trục, mũi tên màu giảm từ chỗ x = 0,9 chỉ thẳng xuống, vượt mép dưới khung (−19 nằm ngoài khung), nhãn '−19' ở mũi tên. Dòng 4: nhánh trái vẽ từ x = 0 tới sát x = 1, lao xuống mép dưới khung (màu phụ A). Dòng 5 (câu hỏi đoán): chấm nhỏ trên trục ngang nhảy sang 1,1; trong khoảng nghỉ, vùng sát mép trên rồi vùng sát mép dưới ngay bên phải đường đứt sáng nhạt lần lượt (không lộ đáp án). Dòng 6: phép chia đổi sang 2,1 chia 0,1 bằng 21; nhánh phải vẽ từ mép trên khung sát x = 1 xuống tới x = 2 (màu phụ B). Dòng 7: đường thẳng đứng tại 1 đổi từ nét đứt màu bẫy sang nét đứt màu nhấn, nhãn đổi thành 'tiệm cận đứng $x = 1$'.",
+      "lines": [
+        {
+          "show": "chấm nhỏ chạy trên trục ngang từ 0 tới 0,9",
+          "text": "",
+          "speak": "Vậy đi trên nhánh trái, tới sát chỗ đứt thì đồ thị đi đâu?"
+        },
+        {
+          "show": "phép chia hiện cạnh công thức",
+          "at": "cạnh công thức $f$, bên phải",
+          "text": "$f(0{,}9) = \\dfrac{1{,}9}{-0{,}1}$",
+          "speak": "Tại không phẩy chín, tử gần bằng hai, mẫu là âm không phẩy một."
+        },
+        {
+          "show": "mũi tên từ x = 0,9 chỉ thẳng xuống ra khỏi khung",
+          "at": "mũi tên tại $x = 0{,}9$",
+          "text": "$-19$",
+          "speak": "Chia ra được âm mười chín, rơi xuống rất sâu."
+        },
+        {
+          "show": "nhánh trái vẽ từ x = 0 lao xuống sát đường đứt",
+          "text": "",
+          "speak": "Càng sát một, mẫu càng sát không, đồ thị càng lao xuống."
+        },
+        {
+          "show": "chấm nhỏ trên trục ngang nhảy sang 1,1",
+          "text": "",
+          "speak": "Còn ngay bên phải chỗ đứt, đồ thị ở trên cao hay dưới thấp?",
+          "pauseAfter": 1.5
+        },
+        {
+          "show": "phép chia đổi sang 2,1 chia 0,1, nhánh phải vẽ từ trên cao xuống tới x = 2",
+          "at": "cạnh công thức $f$, bên phải",
+          "text": "$f(1{,}1) = \\dfrac{2{,}1}{0{,}1} = 21$",
+          "speak": "Tại một phẩy một, mẫu dương rất nhỏ, nên vọt lên tận hai mươi mốt."
+        },
+        {
+          "show": "đường thẳng đứng đổi sang màu nhấn, nhãn đổi thành tiệm cận đứng",
+          "text": "",
+          "speak": "Đường thẳng đứng này chính là tiệm cận đứng, như ở bài tiệm cận."
+        }
+      ]
+    },
+    {
+      "id": "b05",
+      "scene": 1,
+      "section": "BẢN CHẤT",
+      "keyword": "Mỗi nhánh xuống, nhánh phải cao",
+      "lineGap": 0.5,
+      "visual": "Giữ CẢNH 1 (chuỗi vì sao, phần 2 — khoảnh khắc 'à ra thế'). Phép chia và mũi tên −19 mờ đi ở đầu beat. Dòng 1: phép xấp xỉ hiện cạnh công thức $f$ (chỗ phép chia cũ). Dòng 2: đường ngang nét đứt màu nhấn tại y = 1 chạy hết bề ngang, nhãn 'tiệm cận ngang $y = 1$' ở đầu phải. Dòng 3: nhánh trái vẽ nốt từ x = −4 (sát dưới y = 1) tới x = 0 (màu phụ A). Dòng 4: nhánh phải vẽ nốt từ x = 2 tới x = 6, sát trên y = 1 (màu phụ B). Dòng 5: mũi tên nhỏ màu giảm đặt ở đoạn dốc của mỗi nhánh (x ≈ 0,4 và x ≈ 1,6), chỉ chiều đi xuống. Dòng 6: mũi tên cong nét liền màu bẫy (khác màu và kiểu nét với hai tiệm cận) vòng ra bên phải chỗ đứt, từ đáy nhánh trái (mép dưới khung, sát x = 1) lên đầu nhánh phải (sát mép trên, bên phải đường đứt), không cắt nhánh phải; cùng lúc hai điểm (0; −1) và (2; 3) nhấp sáng.",
+      "lines": [
+        {
+          "show": "phép xấp xỉ hiện cạnh công thức",
+          "at": "cạnh công thức $f$, bên phải",
+          "text": "$|x|$ rất lớn: $\\dfrac{x + 1}{x - 1} \\approx \\dfrac{x}{x} = 1$",
+          "speak": "Còn hai đầu, khi x rất lớn hoặc rất âm, cộng một hay trừ một chẳng đáng kể.",
+          "caption": "Còn hai đầu, khi x rất lớn hoặc rất âm, cộng 1 hay trừ 1 chẳng đáng kể."
+        },
+        {
+          "show": "đường ngang nét đứt tại y = 1 hiện",
+          "at": "đường ngang $y = 1$, đầu phải",
+          "text": "tiệm cận ngang $y = 1$",
+          "speak": "Nên đồ thị sát dần đường ngang ở độ cao một, đó là tiệm cận ngang."
+        },
+        {
+          "show": "nhánh trái vẽ nốt từ mép trái, sát dưới đường ngang",
+          "text": "",
+          "speak": "Nhánh trái đi xuống từ sát độ cao một, rồi lao xuống ở chỗ đứt."
+        },
+        {
+          "show": "nhánh phải vẽ nốt tới mép phải, sát trên đường ngang",
+          "text": "",
+          "speak": "Nhánh phải bắt đầu từ trên cao, đi xuống, rồi sát dần độ cao một."
+        },
+        {
+          "show": "mũi tên nhỏ chạy dọc mỗi nhánh chỉ chiều đi xuống",
+          "text": "",
+          "speak": "Mỗi nhánh đều đi xuống, đúng như đạo hàm luôn âm."
+        },
+        {
+          "show": "mũi tên cong màu bẫy vòng qua chỗ đứt, từ đáy nhánh trái lên đầu nhánh phải",
+          "text": "",
+          "speak": "Nhưng qua chỗ đứt, đồ thị không nối liền, nhánh phải bắt đầu lại từ trên cao."
+        }
+      ]
+    },
+    {
+      "id": "b06",
+      "scene": 1,
+      "section": "VÍ DỤ",
+      "keyword": "Thêm điểm cắt hai trục",
+      "visual": "Giữ CẢNH 1: hai nhánh, hai tiệm cận nét đứt màu nhấn với nhãn, điểm (0; −1) và (2; 3). Mũi tên cong và các mũi tên dọc nhánh mờ đi ở đầu beat; phép xấp xỉ mờ đi. Dòng 2: điểm (0; −1) trên trục tung sáng màu nhấn (vòng tròn quanh). Dòng 3: điểm (−1; 0) trên trục hoành chấm lên màu nhấn (vòng tròn quanh); số −1 trên trục ngang ẩn để không bị điểm che. Dòng 4: hai điểm (−1; 0), (0; −1) nhấp sáng màu phụ A.",
+      "lines": [
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Để vẽ cho đúng chỗ, lấy thêm hai điểm dễ tính."
+        },
+        {
+          "show": "điểm (0; −1) trên trục tung được khoanh tròn",
+          "at": "điểm (0; −1)",
+          "text": "$(0;\\, -1)$",
+          "speak": "Thay x bằng không được âm một, đó là chỗ cắt trục tung.",
+          "caption": "Thay x = 0 được −1, đó là chỗ cắt trục tung."
+        },
+        {
+          "show": "điểm (−1; 0) trên trục hoành chấm lên, được khoanh tròn",
+          "at": "điểm (−1; 0)",
+          "text": "$(-1;\\, 0)$",
+          "speak": "Tử bằng không khi x bằng âm một, đó là chỗ cắt trục hoành.",
+          "caption": "Tử bằng 0 khi x = −1, đó là chỗ cắt trục hoành."
+        },
+        {
+          "show": "hai điểm (−1; 0) và (0; −1) nhấp sáng cùng màu nhánh trái",
+          "text": "",
+          "speak": "Hai điểm này đều trên nhánh trái, nhánh phải không cắt trục nào."
+        }
+      ]
+    },
+    {
+      "id": "b07",
+      "scene": 1,
+      "section": "CÔNG THỨC",
+      "keyword": "Tử hằng số: không cực trị",
+      "visual": "Giữ CẢNH 1; hai nhánh và hai tiệm cận ở lại, các vòng khoanh mờ đi. Cột trái: bảng giá trị và nhãn '$f'(x) < 0$' mờ đi ở đầu beat. Dòng 1: dưới công thức $f$ hiện dòng dạng chung '$y = \\dfrac{ax + b}{cx + d}$' và ngay dưới nó công thức đạo hàm chung. Dòng 2: tử $ad - bc$ trong công thức đạo hàm chung sáng màu nhấn. Dòng 3: dòng nhỏ dưới dạng chung ghi hệ số của ví dụ '$a = 1,\\ b = 1,\\ c = 1,\\ d = -1$' (mỗi hệ số trong công thức $f$ sáng nhẹ cùng lúc), rồi phép tính tử hiện dưới công thức đạo hàm chung. Dòng 4: hai dòng nhỏ hiện dưới phép tính: '$ad - bc < 0$: hai nhánh cùng đi xuống' (màu giảm), '$ad - bc > 0$: hai nhánh cùng đi lên' (màu tăng). Dòng 5: dòng '< 0' sáng, đồng thời hai nhánh trên hệ trục nhấp sáng màu giảm.",
+      "lines": [
+        {
+          "show": "dạng chung và công thức đạo hàm chung hiện ở cột trái",
+          "at": "cột trái, dưới dạng chung",
+          "text": "$y' = \\dfrac{ad - bc}{(cx + d)^2}$",
+          "speak": "Hàm này thuộc dạng chung trong sách, đạo hàm của dạng đó luôn ra một phân số như vậy."
+        },
+        {
+          "show": "tử của đạo hàm chung sáng màu nhấn",
+          "text": "",
+          "speak": "Tử là một hằng số, không chứa x, nên đạo hàm không bao giờ bằng không.",
+          "caption": "Tử là một hằng số, không chứa x, nên đạo hàm không bao giờ bằng 0."
+        },
+        {
+          "show": "hệ số của ví dụ hiện, phép tính tử hiện dưới công thức đạo hàm chung",
+          "at": "dưới công thức đạo hàm chung",
+          "text": "$ad - bc = 1 \\cdot (-1) - 1 \\cdot 1 = -2$",
+          "speak": "Thay hệ số của ví dụ vào, tử bằng âm một trừ một, đúng bằng âm hai."
+        },
+        {
+          "show": "hai dòng điều kiện dấu của tử hiện dưới công thức",
+          "text": "",
+          "speak": "Không có cực trị, hai nhánh luôn cùng đi xuống, hoặc cùng đi lên."
+        },
+        {
+          "show": "dòng tử âm sáng, hai nhánh trên hệ trục nhấp sáng màu giảm",
+          "text": "",
+          "speak": "Ở ví dụ này tử âm, nên cả hai nhánh đi xuống."
+        }
+      ]
+    },
+    {
+      "id": "b08",
+      "scene": 1,
+      "section": "BẪY THƯỜNG GẶP",
+      "keyword": "Nghịch biến trên từng khoảng",
+      "visual": "Giữ CẢNH 1; hai nhánh, hai tiệm cận, điểm (0; −1) màu phụ A, (2; 3) màu phụ B. Cột trái: dạng chung, đạo hàm chung và các dòng điều kiện mờ đi ở đầu beat; thay bằng thẻ mệnh đề kiểu đề Đúng/Sai: 'Hàm số nghịch biến trên $\\mathbb{R} \\setminus \\{1\\}$', bên phải thẻ có ô trống để đánh dấu. Dòng 2: ô đánh dấu hiện chữ 'Đúng?' màu bẫy nhạt. Dòng 3: hai điểm (0; −1) và (2; 3) nhấp sáng, hai số 0 và 2 trên trục ngang sáng màu nhấn. Dòng 4: dưới thẻ hiện dòng nhỏ 'đi sang phải ⇒ độ cao giảm' màu muted (nhắc nghĩa nghịch biến). Dòng 5: hai cột dọc từ trục ngang lên hai điểm (cột tại 2 cao hơn), ô đánh dấu đổi thành 'Sai' màu giảm; dòng nhắc mờ đi. Dòng 6: dưới thẻ hiện dòng mệnh đề đúng 'nghịch biến trên $(-\\infty; 1)$ và $(1; +\\infty)$', hai khoảng tô trên trục ngang (trái 1 màu phụ A, phải 1 màu phụ B). Dòng 7: dưới đó dòng viết gộp bằng dấu hợp, cả dòng màu bẫy, kết bằng chữ 'sai'. Dòng 8: hai khoảng tô trên trục ngang nhấp sáng lần lượt, cùng lúc nhánh tương ứng sáng.",
+      "lines": [
+        {
+          "show": "thẻ mệnh đề hiện ở cột trái",
+          "text": "",
+          "speak": "Đề thi hay hỏi, hàm số này có nghịch biến trên cả tập xác định không?"
+        },
+        {
+          "show": "ô đánh dấu hiện chữ 'Đúng?' màu bẫy nhạt",
+          "text": "",
+          "speak": "Đạo hàm âm ở mọi chỗ, nên rất dễ chọn là đúng."
+        },
+        {
+          "show": "hai điểm tại 0 và 2 nhấp sáng, số 0 và 2 trên trục sáng",
+          "text": "",
+          "speak": "Nhưng không và hai đều thuộc tập xác định."
+        },
+        {
+          "show": "hai mũi tên nhỏ chỉ sang phải và xuống hiện cạnh thẻ mệnh đề",
+          "text": "",
+          "speak": "Nghịch biến trên cả tập thì cứ đi sang phải, độ cao phải giảm."
+        },
+        {
+          "show": "hai cột dọc lên hai điểm, ô đánh dấu đổi thành 'Sai'",
+          "cue": "nên mệnh đề sai",
+          "text": "",
+          "speak": "Nhưng từ không sang hai, độ cao lại tăng, nên mệnh đề sai."
+        },
+        {
+          "show": "dòng mệnh đề đúng hiện dưới thẻ, hai khoảng tô trên trục ngang",
+          "at": "dưới thẻ mệnh đề",
+          "text": "$(-\\infty;\\, 1)$ và $(1;\\, +\\infty)$",
+          "speak": "Viết đúng là nghịch biến trên từng khoảng, ở hai bên chỗ đứt."
+        },
+        {
+          "show": "dòng viết gộp bằng dấu hợp hiện dưới, màu bẫy",
+          "at": "dòng viết gộp, dưới mệnh đề đúng",
+          "text": "$(-\\infty;\\, 1) \\cup (1;\\, +\\infty) = \\mathbb{R} \\setminus \\{1\\}$: sai",
+          "speak": "Hai khoảng gộp bằng dấu hợp chính là tập xác định, nên viết vậy vẫn sai."
+        },
+        {
+          "show": "hai khoảng tô trên trục nhấp sáng lần lượt",
+          "text": "",
+          "speak": "Mỗi khoảng là một nhánh liền nét, chỉ so hai điểm trên cùng một nhánh."
+        }
+      ]
+    },
+    {
+      "id": "b09",
+      "scene": 1,
+      "section": "GIẢI ĐÁP",
+      "keyword": "Đạo hàm: chiều của từng nhánh",
+      "visual": "Quay lại CẢNH 1 như b01: công thức, bảng hai hàng (x, f(x), f'(x)), hai điểm (0; −1), (2; 3) với hai mũi tên tiếp tuyến chúc xuống; hai nhánh đồ thị hiện mờ (màu dim), hai tiệm cận ẩn. Dòng 2: nhánh trái đậm lại màu phụ A, nhánh phải đậm lại màu phụ B. Dòng 3: đường thẳng đứng tại x = 1 hiện lại nét đứt màu bẫy, nhãn 'chỗ đứt'. Dòng 4: một vệt sáng chạy dọc nhánh trái từ (0; −1) xuống mép dưới, rồi dọc nhánh phải từ mép trên xuống (2; 3). Dòng 5: hình đứng yên, chỉ câu chốt hiện.",
+      "lines": [
+        {
+          "show": "bảng, hai điểm và hai mũi tên tiếp tuyến hiện lại như lúc đầu",
+          "text": "",
+          "speak": "Quay lại câu hỏi đầu, đạo hàm âm ở cả hai chỗ là đúng."
+        },
+        {
+          "show": "hai nhánh đậm lại, mỗi nhánh một màu",
+          "text": "",
+          "speak": "Nhưng điểm tại không và điểm tại hai nằm trên hai nhánh khác nhau."
+        },
+        {
+          "show": "đường thẳng đứng tại x = 1 hiện lại, nhãn 'chỗ đứt'",
+          "at": "đường thẳng đứng tại $x = 1$, phía trên",
+          "text": "chỗ đứt",
+          "speak": "Giữa chúng là chỗ đứt, nên điểm sau cao hơn mà không cần khúc nào đi lên."
+        },
+        {
+          "show": "một vệt sáng chạy dọc hai nhánh, qua chỗ đứt",
+          "text": "",
+          "speak": "Nhánh trái lao xuống tận đáy, nhánh phải bắt đầu lại từ trên cao."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Vậy... đạo hàm chỉ cho biết chiều trên từng nhánh liền một nét."
+        }
+      ]
+    }
+  ]
+}
