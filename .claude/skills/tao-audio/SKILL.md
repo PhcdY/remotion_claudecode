@@ -1,9 +1,21 @@
 ---
 name: tao-audio
-description: B2 của pipeline video giải thích bản chất (mọi môn) — tạo giọng đọc từ src/videos/<slug>/script.json bằng Vivibe API (giọng clone của người dùng). Dùng khi kịch bản đã chốt và cần audio, hoặc gõ /tao-audio <slug>.
+description: B2 của pipeline video giải thích bản chất (mọi môn) — tạo giọng đọc từ src/videos/<slug>/script.json bằng Vivibe API (giọng clone của người dùng). Chạy trong agent riêng (Sonnet). Dùng khi kịch bản đã chốt và cần audio, hoặc gõ /tao-audio <slug> <giọng> [liet-ke|uoc-tinh|thu|ca-bai|dong <id>…].
+argument-hint: <slug> [giọng] [liet-ke|uoc-tinh|thu|ca-bai|dong <beatId-lNN>…]
+context: fork
+agent: tao-giong
 ---
 
 # B2 — Tạo audio từ kịch bản
+
+Tham số: `$ARGUMENTS` — slug, giọng (tên trong `--list-voices`), chế độ:
+- `liet-ke`: chỉ chạy `--list-voices`, trả danh sách giọng.
+- `uoc-tinh`: `check_script` + `--estimate`, trả số dòng, số ký tự và danh sách dòng cần nghe thử.
+- `thu`: tạo b01 + các dòng cần nghe thử (Bước 2), trả đường dẫn file.
+- `ca-bai`: tạo cả bài (Bước 3) rồi `align_words` (Bước 5), trả số dòng/lỗi, tổng thời lượng, file cần nghe lại.
+- `dong <id>…`: tạo lại đúng các dòng đó (`--only`), rồi `align_words`.
+
+**Skill này chạy trong agent riêng `tao-giong` (Sonnet, effort thấp)**, không thấy hội thoại và **không hỏi được người dùng**. Hỏi giọng, báo chi phí chờ đồng ý, gửi file nghe thử (SendUserFile), quyết chạy lại dòng lỗi → **phiên chính** làm giữa các lần gọi; agent chỉ làm đúng chế độ được giao rồi báo cáo. Thiếu giọng hoặc chế độ → chỉ làm `liet-ke`. Lệnh dài chạy tiền cảnh với timeout 600000 ms; hết giờ thì chạy lại đúng lệnh (cache bỏ qua dòng đã có).
 
 Đầu vào: `src/videos/<slug>/script.json` (output của B1, đã được người dùng chốt) **và storyboard bản nháp đã được duyệt** (skill `dung-video` › Bước 2b). Video mới chưa qua storyboard → làm storyboard trước, để sửa chữ/lời ở đó khi chưa tốn credit.
 Đầu ra: `public/audio/<slug>/` gồm `<beatId>-lNN.mp3` (mỗi dòng 1 file) + `manifest.json`.

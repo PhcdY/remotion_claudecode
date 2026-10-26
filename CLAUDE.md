@@ -8,7 +8,7 @@ Dùng skill `remotion-best-practices` (đã cài trong `.agents/skills/`) cho m�
 ## Workflow (theo đúng thứ tự)
 
 Mỗi bước có một skill riêng, đọc skill (và gói môn) trước khi làm bước đó:
-B1 `viet-kich-ban` → B3 nháp + storyboard (`dung-video` › Bước 2b) → B2 `tao-audio` → B3 hoàn thiện (`dung-video`).
+B1 `viet-kich-ban` → B3 nháp + storyboard (`dung-video` › Bước 2b) → B2 `tao-audio` → B3 hoàn thiện (`dung-video`) → `render`.
 
 1. **Kịch bản** → skill `viet-kich-ban`: chủ đề + ý bản chất → tìm ý (hook, hình trung tâm) → dàn ý (người dùng duyệt)
    → `src/videos/<slug>/script.json` → `python scripts/check_script.py <slug>` (0 lỗi). Người dùng chốt trước khi sang B2.
@@ -22,9 +22,28 @@ B1 `viet-kich-ban` → B3 nháp + storyboard (`dung-video` › Bước 2b) → B
 4. **Duyệt** → `npm run dev` (Remotion Studio).
    Góp ý của người dùng ghi vào `src/videos/<slug>/FEEDBACK.md` (cột "đã sửa skill" / "đã sửa video"): sửa skill ngay cho từng mục
    (và thêm một dòng vào `.claude/lessons.md`), gom sửa video một lần khi người dùng bảo. Lỗi cấu trúc kịch bản → quay lại B1 (duyệt dàn ý), không vá trên video cũ.
-5. **Render** → `npx remotion render <compositionId> "$(node scripts/out-path.mjs <slug> --id <compositionId>)"`; phụ đề riêng + mốc từng dòng: `node scripts/export-captions.mjs <slug>`.
+5. **Render** → skill `render` (`/render <slug> bat-dau`, chờ log xong, rồi `/render <slug> xong`): render nền + phụ đề riêng (`export-captions.mjs`).
    `out/<Môn>/Lớp <lop>/<chuong>/<bai>/`: video + phụ đề (người dùng xem). `out/_lam-viec/<id>/`: stills, storyboard (agent dùng). Không để file nào khác ở gốc `out/`.
 6. **Người xem thật** → học sinh xem thử, số liệu giữ chân người xem; thời điểm → câu: `python scripts/beat_at.py <id> 1:23`. Soát kịch bản/storyboard bằng agent `hoc-sinh-ao` (`.claude/agents/`).
+
+## Model theo bước (thử từ 26/10/2026, bản 2)
+
+Đo 26/10: ghi `model:` trong frontmatter skill **không** đổi model của phiên chính (transcript ghi Opus suốt). Chỉ **agent riêng** mới chạy model khác. Vì vậy:
+phiên chính (model của session) trò chuyện, viết kịch bản, điều phối; việc nặng giao cho skill `context: fork` → agent có `model:` riêng. Agent đọc từ file + tham số, không thấy hội thoại, không hỏi được người dùng.
+
+| Việc | Ai làm | Model |
+|---|---|---|
+| Trò chuyện, tìm ý, dàn ý, `script.json`, soát toán, sửa skill, điều phối | phiên chính | model của session |
+| Dựng cảnh, storyboard, hoàn thiện (B3) | skill `dung-video` → agent `dung-hinh` | Sonnet high |
+| Tạo audio (B2) | skill `tao-audio` → agent `tao-giong` | Sonnet low |
+| Học sinh ảo | agent `hoc-sinh-ao` (phiên chính gọi) | Sonnet medium |
+| check_script, lint, check-layout | skill `kiem-tra` → agent `chay-kiem-tra` | Haiku |
+| Render + phụ đề | skill `render` → agent `render-video` | Haiku |
+
+Agent không gọi được agent khác: học sinh ảo, gửi file, hỏi người dùng luôn do phiên chính làm giữa các lần gọi.
+**Chạy trọn một lượt, tự quyết**: `/lam-video <chủ đề + ý bản chất>` (giọng nữ c Nhi, quyết định ghi ở `src/videos/<slug>/AUTO-LOG.md`).
+Agent mới (file trong `.claude/agents/`) chỉ được nạp khi **mở phiên mới**; thiếu agent thì skill fork âm thầm chạy agent mặc định (model của session) — sau khi clone/sửa agent, mở phiên mới rồi mới dùng.
+Kiểm model thật bằng trường `message.model` trong transcript (`~/.claude/projects/…/<session>/subagents/*.jsonl`), không tin lời nhắc hệ thống.
 
 ## Schema `script.json`
 

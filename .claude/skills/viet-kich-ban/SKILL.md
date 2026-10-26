@@ -7,6 +7,7 @@ description: Viết kịch bản video giải thích bản chất (Toán, Lý, H
 
 Pipeline: **B1 kịch bản (skill này)** → B2 audio (`tao-audio`) → B3 dựng Remotion (`dung-video`).
 Output duy nhất: `src/videos/<slug>/script.json`. Không tạo audio, không viết code Remotion.
+Chạy ở **phiên chính** (cần trò chuyện, duyệt dàn ý). Các bước sau giao cho skill chạy agent riêng: `dung-video` (Sonnet), `tao-audio` (Sonnet), `render` (Haiku). **Đang chạy trong `/lam-video`** → mọi chỗ hỏi/chờ duyệt làm theo bảng ở skill `lam-video`; xong `script.json` thì gọi ngay `dung-video` với `<slug> nhap`.
 
 **Mục tiêu duy nhất là trải nghiệm người xem**: xem một lần là hiểu, không lạc, thấy hay. Mọi luật dưới đây phục vụ điều đó; luật nào làm video sượng hơn trong một trường hợp cụ thể thì báo người dùng thay vì cố theo.
 

@@ -1,9 +1,17 @@
 ---
 name: dung-video
-description: B3 của pipeline video giải thích bản chất (mọi môn) — dựng video Remotion từ script.json (B1) — bản nháp + storyboard trước khi có audio, rồi hoàn thiện theo audio trong public/audio/<slug>/ (B2). Dùng khi kịch bản đã chốt và cần dựng/storyboard/sửa/render video, hoặc gõ /dung-video <slug>.
+description: B3 của pipeline video giải thích bản chất (mọi môn) — dựng video Remotion từ script.json (B1) — bản nháp + storyboard trước khi có audio, rồi hoàn thiện theo audio trong public/audio/<slug>/ (B2). Chạy trong agent riêng (Sonnet). Dùng khi kịch bản đã chốt và cần dựng/storyboard/sửa video, hoặc gõ /dung-video <slug> [nhap|hoan-thien|sua: …].
+argument-hint: <slug> [nhap|hoan-thien|sua: <việc cần sửa>]
+context: fork
+agent: dung-hinh
 ---
 
 # B3 — Dựng video Remotion
+
+Tham số: `$ARGUMENTS` — slug + việc: `nhap` (bản nháp + storyboard, Bước 0–2b), `hoan-thien` (sau khi có audio: Bước 2b.5 + Bước 4), hoặc `sua: …` (sửa đúng các mục được giao rồi kiểm lại).
+
+**Skill này chạy trong agent riêng `dung-hinh` (Sonnet)**, không thấy hội thoại với người dùng: mọi thông tin lấy từ tham số và file (`script.json`, `FEEDBACK.md`, `AUTO-LOG.md` nếu có). Agent **không hỏi được người dùng và không gọi được agent/skill khác**. Mọi chỗ dưới đây bảo "báo/hỏi người dùng", "người dùng duyệt", "gửi file" (SendUserFile), "gọi agent `hoc-sinh-ao`", "gọi skill `kiem-tra`/`render`" → **không làm**, ghi vào báo cáo cuối để phiên chính làm. Kiểm tra máy thì tự chạy lệnh (`check_script`, `npm run lint`, `check-layout`).
+Báo cáo cuối gọn: đã làm gì, lỗi/cảnh báo còn lại, đường dẫn storyboard/`review/`, giả định khi dựng, chú thích tự thêm, chỗ cần người dùng hoặc B1 quyết. **Đang trong `/lam-video`** (tham số có ghi) → quyết định thay người dùng ghi một dòng vào `AUTO-LOG.md`.
 
 Luôn dùng kèm skill `remotion-best-practices` cho mọi chi tiết API Remotion (đo audio, font, Sequence, render…).
 Đọc gói môn `.claude/mon/<subject>.md` (trường `subject` của `script.json`, thiếu = `toan`), mục "Mẫu dựng khái niệm" và "Dựng hình": hình chuẩn và component có sẵn của môn đó.
@@ -183,7 +191,7 @@ Phép thử: **tắt tiếng, chỉ nhìn khung hình**, người xem vẫn bi�
 
 1. Dựng đủ các beat với `draft: true` (mặc định của composition cho tới khi có audio).
 2. `node scripts/check-layout.mjs <id> --draft` → sửa hết lỗi.
-3. `node scripts/storyboard.mjs <id>` → `out/_lam-viec/<id>/storyboard/index.html`: mỗi dòng một ảnh (cuối dòng, lúc thay đổi đã hiện đủ) kèm `show`, `text`, lời đọc. Tự soát từng ảnh theo Bước 4, rồi `node scripts/storyboard.mjs <id> --review` → `out/_lam-viec/<id>/storyboard/review/`: **mỗi beat một ảnh nhỏ** (cuối beat, scale 0,3) + `review.md` (lời đọc, thay đổi hình, chữ của từng dòng). Gọi agent `hoc-sinh-ao` với **đúng thư mục `review/`** + tiền đề, dặn **mỗi ảnh đọc đúng một lần**, theo thứ tự; không đưa thư mục ảnh đầy đủ. Agent dừng giữa chừng (lỗi, hết lượt) thì **không** cho chạy tiếp ngay: xem nó đã đọc bao nhiêu ảnh, có mở lại ảnh không, rồi mới quyết (24/10: agent xem 67 ảnh cỡ 0,5, mở lại mỗi ảnh ~20 lần, tốn 68% token cả phiên và chạm giới hạn hai lần). Sửa chỗ *nặng*/*vừa* về hình ở đây, chỗ về lời/chữ báo người dùng. Xong mới gửi trang cho người dùng (SendUserFile), kèm tóm tắt những gì học sinh ảo đã bắt và đã sửa.
+3. `node scripts/storyboard.mjs <id>` → `out/_lam-viec/<id>/storyboard/index.html`: mỗi dòng một ảnh (cuối dòng, lúc thay đổi đã hiện đủ) kèm `show`, `text`, lời đọc. Tự soát từng ảnh theo Bước 4, rồi `node scripts/storyboard.mjs <id> --review` → `out/_lam-viec/<id>/storyboard/review/`: **mỗi beat một ảnh nhỏ** (cuối beat, scale 0,3) + `review.md` (lời đọc, thay đổi hình, chữ của từng dòng). Phiên chính (không phải agent dựng) gọi agent `hoc-sinh-ao` với **đúng thư mục `review/`** + tiền đề, dặn **mỗi ảnh đọc đúng một lần**, theo thứ tự; không đưa thư mục ảnh đầy đủ; rồi gọi lại skill này với `sua: …`. Agent dừng giữa chừng (lỗi, hết lượt) thì **không** cho chạy tiếp ngay: xem nó đã đọc bao nhiêu ảnh, có mở lại ảnh không, rồi mới quyết (24/10: agent xem 67 ảnh cỡ 0,5, mở lại mỗi ảnh ~20 lần, tốn 68% token cả phiên và chạm giới hạn hai lần). Sửa chỗ *nặng*/*vừa* về hình ở đây, chỗ về lời/chữ báo người dùng. Xong mới gửi trang cho người dùng (SendUserFile), kèm tóm tắt những gì học sinh ảo đã bắt và đã sửa.
 4. Người dùng duyệt. Góp ý về hình → sửa code; về chữ/lời/nhịp → sửa ở B1 (chưa tốn audio). Duyệt xong mới sang B2.
 5. Sau B2: `python scripts/align_words.py <slug>` (mốc từng từ cho `cue`), bỏ `draft` khỏi `defaultProps`, chạy lại Bước 0 đầy đủ + Bước 4 với thời gian thật.
 
@@ -225,16 +233,8 @@ src/Root.tsx             đăng ký <Composition id="<slug>" ...> 1920×1080, 30
 
 ## Bước 5 — Xem trước, rồi render
 
-- Người dùng muốn xem nhanh ("demo", "chưa cần render") → mở Remotion Studio (`preview_start` với cấu hình `remotion-studio` trong `.claude/launch.json`) ở trang composition, không render.
-- Render khi người dùng bảo, **chạy nền và ghi tiến độ ra file** để trả lời được "đến đâu rồi":
-  ```
-  npx remotion render <id> "$(node scripts/out-path.mjs <slug> --id <id>)" > <scratchpad>/render-<id>.log 2>&1
-  ```
-  `out-path.mjs` in đường dẫn `out/<Môn>/Lớp <lop>/<chuong>/<bai>/<id>.mp4` theo `lop`/`chuong`/`bai` trong `script.json` (thiếu thì ra `out/_lam-viec/<id>/`: điền cho đủ trước khi render bản đăng). Không ghi gì khác ra gốc `out/`: thứ người dùng xem nằm ở thư mục bài, thứ chỉ agent dùng ở `out/_lam-viec/<id>/`, log ở scratchpad; file nháp/thử cũ thì xóa.
-  Không dùng `--log=error` (mất dòng tiến độ). Hỏi tiến độ → đọc dòng cuối của log (frame đã render / tổng), báo phần trăm và thời gian còn lại ước tính.
-- Mốc thời gian (máy người dùng, 21/10/2026): video 3:53 (≈ 7000 frame) render ≈ 14–15 phút; 2:49 ≈ 6–8 phút. Báo mốc này lúc bắt đầu render.
-- Xong: đo thời lượng file bằng `ffprobe`, gửi file cho người dùng. `out/` bị gitignore, không commit video.
-- **Phụ đề**: `node scripts/export-captions.mjs <slug> [--id <compositionId>]` → `<id>.srt` + `<id>.vtt` + `<id>.timeline.json` cạnh video trong thư mục bài (từ `caption`, thiếu thì `speak`, đúng mốc thời gian của audio). Gửi kèm video để tải lên web/YouTube dạng phụ đề bật–tắt được; không in phụ đề lên hình.
+- Người dùng muốn xem nhanh ("demo", "chưa cần render") → phiên chính mở Remotion Studio (`preview_start` với cấu hình `remotion-studio` trong `.claude/launch.json`) ở trang composition, không render.
+- Render và xuất phụ đề: chỉ khi người dùng bảo, phiên chính gọi skill `render` (agent riêng, Haiku). Agent dựng không tự render.
 
 ## Bước 6 — Kiểm với người xem thật
 
