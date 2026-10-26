@@ -20,7 +20,7 @@ const opt = (name) => {
 };
 
 const root = path.resolve(import.meta.dirname, "..");
-const localChrome = "C:/Program Files/Google/Chrome/Application/chrome.exe";
+const localChrome = process.env.REMOTION_CHROME ?? "C:/Program Files/Google/Chrome/Application/chrome.exe";
 const browserExecutable = opt("--browser") ?? (existsSync(localChrome) ? localChrome : null);
 const browserOpts = browserExecutable ? { browserExecutable, chromeMode: "chrome-for-testing" } : {};
 

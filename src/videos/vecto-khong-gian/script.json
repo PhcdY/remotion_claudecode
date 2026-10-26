@@ -16,7 +16,7 @@
       "scene": 1,
       "section": "HIỆN TƯỢNG",
       "keyword": "Mỗi drone bay thế nào?",
-      "visual": "CẢNH 1 — BẦU TRỜI ĐÊM. Nền trời tối xanh đậm trong BrandFrame. Khoảng 200 chấm sáng (mỗi chấm một drone) sẽ xếp thành một ngôi sao năm cánh lớn ở nửa trái khung; nhãn nhỏ 'minh họa' sát góc dưới ngôi sao, giữ suốt cảnh (hình của show thật không phải ngôi sao). Dòng 1: nhãn '10.518 drone' ở phía trên ngôi sao. Dòng 3: cả ngôi sao trôi chéo lên phía phải khoảng một phần ba bề rộng của nó, chỗ cũ để lại bóng mờ. Dòng 4: hai drone ở hai đầu cánh xa nhau sáng màu nhấn, các drone khác mờ bớt.",
+      "visual": "CẢNH 1 — BẦU TRỜI ĐÊM. Khung trời: một thẻ lớn bo góc nền xanh rất nhạt (giữ nền sáng của brand), dải nóc nhà thành phố mờ ở đáy thẻ. Khoảng 200 chấm sáng (mỗi chấm một drone) sẽ xếp thành một ngôi sao năm cánh lớn ở nửa trái khung; nhãn nhỏ 'minh họa' sát góc dưới ngôi sao, giữ suốt cảnh (hình của show thật không phải ngôi sao). Dòng 1: nhãn '10.518 drone' ở phía trên ngôi sao. Dòng 3: cả ngôi sao trôi chéo lên phía phải khoảng một phần ba bề rộng của nó, chỗ cũ để lại bóng mờ. Dòng 4: hai drone ở hai đầu cánh xa nhau sáng màu nhấn, các drone khác mờ bớt.",
       "lines": [
         {
           "show": "các chấm sáng hiện dần thành ngôi sao",
@@ -51,7 +51,7 @@
       "scene": 2,
       "section": "VÍ DỤ",
       "keyword": "Mô hình: tám drone",
-      "visual": "CẢNH 2 — HÌNH HỘP TÁM DRONE. BƯỚC KHÓ (đổi sang mô hình). Nền trời tối giữ nguyên; ngôi sao mờ đi ở dòng 1. Hình hộp vẽ kiểu SGK (hình chiếu song song): đáy dưới ABCD nằm ngang, A trước-trái, B trước-phải, C sau-phải, D sau-trái; đáy trên A'B'C'D' ngay phía trên. Cạnh AB = 10 m (nằm ngang trên màn hình), AD = 6 m (xiên vào sâu), AA' = 6 m (thẳng đứng). Cạnh khuất AD, DC, DD' nét đứt. Mỗi đỉnh một chấm drone sáng, cạnh là vệt sáng mảnh. Hộp đặt ở phần dưới-trái khung, chừa chỗ phía trên-phải cho vị trí mới của drone ở b03–b08. Nhãn 'mô hình' cố định ở góc trên phải vùng hình, giữ suốt CẢNH 2. Tên tám đỉnh (dòng 4) giữ suốt CẢNH 2.",
+      "visual": "CẢNH 2 — HÌNH HỘP TÁM DRONE. BƯỚC KHÓ (đổi sang mô hình). Nền sáng; ngôi sao (thu nhỏ) mờ đi ở dòng 1. Hình hộp vẽ kiểu SGK (hình chiếu song song): đáy dưới ABCD nằm ngang, A trước-trái, B trước-phải, C sau-phải, D sau-trái; đáy trên A'B'C'D' ngay phía trên. Cạnh AB = 10 m (nằm ngang trên màn hình), AD = 4 m (xiên vào sâu), AA' = 4 m (thẳng đứng). Cạnh khuất AD, DC, DD' nét đứt. Mỗi đỉnh một chấm drone sáng, cạnh là vệt sáng mảnh. Hộp đặt ở phần dưới-trái khung, chừa chỗ phía trên-phải cho vị trí mới của drone ở b03–b08. Nhãn 'mô hình' cố định ở góc trên phải vùng hình, giữ suốt CẢNH 2. Tên tám đỉnh (dòng 4) giữ suốt CẢNH 2.",
       "lines": [
         {
           "show": "ngôi sao mờ đi, nhãn 'mô hình' hiện",
@@ -92,7 +92,7 @@
       "scene": 2,
       "section": "ĐỊNH NGHĨA",
       "keyword": "Đường bay là một vectơ",
-      "visual": "Giữ CẢNH 2: hình hộp, tên đỉnh, nhãn 'mô hình'; nhãn '$AB = 10$ m' mờ đi ở đầu beat (giữ số 10 m nhỏ sát cạnh AB). Drone A sẽ bay thẳng tới điểm M: chéo lên phía phải trong mặt phẳng chứa mặt trước ABB'A' (sang phải 4,8 m, lên 6,4 m; dài 8 m), M nằm ngay trên-phải đỉnh A', không chạm cạnh nào. Đường bay vẽ thành mũi tên thẳng màu 'vectơ dời' (một màu, giữ nghĩa này suốt video). Chấm drone cũ ở A giữ lại dạng chấm mờ (đỉnh của khối gốc).",
+      "visual": "Giữ CẢNH 2: hình hộp, tên đỉnh, nhãn 'mô hình'; nhãn '$AB = 10$ m' mờ đi ở đầu beat (giữ số 10 m nhỏ sát cạnh AB). Drone A sẽ bay thẳng tới điểm M: chéo lên phía phải trong mặt phẳng chứa mặt trước ABB'A' (sang phải 4,8 m, lên 6,4 m; dài 8 m), M nằm phía trên-phải đỉnh A', cao hơn đáy trên 2,4 m, không chạm cạnh nào. Đường bay vẽ thành mũi tên thẳng màu 'vectơ dời' (một màu, giữ nghĩa này suốt video). Chấm drone cũ ở A giữ lại dạng chấm mờ (đỉnh của khối gốc).",
       "lines": [
         {
           "show": "drone A sáng màu nhấn, các drone khác mờ bớt",
@@ -171,7 +171,7 @@
       "scene": 2,
       "section": "ĐỊNH NGHĨA",
       "keyword": "Cùng phương, rồi mới xét hướng",
-      "visual": "Giữ CẢNH 2: hình hộp, mũi tên AM, thước 8 m, giá của AM. Drone B (đỉnh B) sẽ bay tới N: N = B + cùng độ dời như A (sang phải 4,8 m, lên 6,4 m), mũi tên BN cùng màu 'vectơ dời'. Dòng 2: giá của BN kéo dài mờ, song song giá AM. Dòng 4: mũi tên mờ (dài 8 m) nằm ngay trên giá của AM, nối tiếp phía trên M, minh họa giá trùng nhau; tắt ở dòng 5. Dòng 5: mũi tên thử từ B chĩa xuống-trái (ngược chiều BN, dài bằng), màu bẫy, hiện tạm rồi tắt ở dòng 6.",
+      "visual": "Giữ CẢNH 2: hình hộp, mũi tên AM, thước 8 m, giá của AM. Drone B (đỉnh B) sẽ bay tới N: N = B + cùng độ dời như A (sang phải 4,8 m, lên 6,4 m), mũi tên BN cùng màu 'vectơ dời'. Dòng 2: giá của BN kéo dài mờ, song song giá AM. Dòng 4: mũi tên mờ (dài 8 m) nằm ngay trên giá của AM, nối tiếp phía trên M, minh họa giá trùng nhau; tắt ở dòng 5. Dòng 5: mũi tên thử nằm trên giá của BN, phía trên N, chĩa xuống về N (ngược chiều BN, dài bằng), màu bẫy, hiện tạm rồi tắt ở dòng 6.",
       "lines": [
         {
           "show": "drone B sáng, mũi tên từ B tới N hiện",
@@ -199,7 +199,7 @@
           "speak": "Giá trùng nhau là khi hai mũi tên nằm trên cùng một đường thẳng."
         },
         {
-          "show": "mũi tên thử ngược chiều từ B hiện màu bẫy (mũi tên trên giá AM tắt)",
+          "show": "mũi tên thử ngược chiều trên giá BN hiện màu bẫy (mũi tên trên giá AM tắt)",
           "cue": "ngược hướng",
           "at": "mũi tên thử",
           "text": "ngược hướng",
@@ -374,10 +374,10 @@
       "scene": 2,
       "section": "TRỰC GIÁC",
       "keyword": "Phép cộng: bài sau nói rõ",
-      "visual": "Giữ CẢNH 2: khối hộp mới (sau khi dời) sáng, khối cũ bóng mờ, mũi tên AM. Các nhãn của b07–b08 đã tắt. Dòng 1: mũi tên thứ hai (màu 'vectơ thứ hai', khác màu vectơ dời) từ M đi tiếp sang phải, nằm ngang. Dòng 2: mũi tên nét đứt từ A thẳng tới điểm cuối của mũi tên thứ hai; chữ 'phép cộng vectơ' cạnh nó.",
+      "visual": "Giữ CẢNH 2: khối hộp mới (sau khi dời) sáng, khối cũ bóng mờ, mũi tên AM. Các nhãn của b07–b08 đã tắt. Dòng 1: mũi tên thứ hai (màu 'vectơ thứ hai', khác màu vectơ dời) từ M đi tiếp chéo lên phía trái (ra khỏi khối mới); khối mới mờ bớt. Dòng 2: mũi tên nét đứt từ A thẳng tới điểm cuối của mũi tên thứ hai; chữ 'phép cộng vectơ' cạnh nó.",
       "lines": [
         {
-          "show": "mũi tên thứ hai từ M đi tiếp sang phải",
+          "show": "mũi tên thứ hai từ M đi tiếp chéo lên trái",
           "text": "",
           "speak": "Đội hình còn có thể đổi hướng, dời thêm lần nữa."
         },
