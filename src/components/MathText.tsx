@@ -34,7 +34,8 @@ export const Tex: React.FC<{
 }> = ({ tex, display = false, style }) => {
   const html = useMemo(
     () =>
-      katex.renderToString(tex, {
+      // \vec{AM}: KaTeX chỉ vẽ mũi tên nhỏ giữa hai chữ → tên vectơ nhiều chữ dùng mũi tên phủ hết tên như SGK
+      katex.renderToString(tex.replace(/\\vec\{([^{}]{2,})\}/g, "\\overrightarrow{$1}"), {
         displayMode: display,
         throwOnError: false,
         output: "html",

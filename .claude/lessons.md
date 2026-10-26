@@ -33,7 +33,10 @@ Chi tiết từng video: `src/videos/<slug>/FEEDBACK.md`. Thêm mục mới mỗ
 - 17/10 · đạo hàm · Badge vắt ngang viền đồng hồ, kim đè số, nửa khung trống, nhãn đè đường cong/số trục. → quy tắc bố cục 1–4 + `check-layout`.
 - 17/10 · đạo hàm · Tag section/keyword thường trực ở góc, thẻ "phóng to ×2" đứng riêng → vô nghĩa. → không tag trang trí; chỉ số phụ gắn sát thứ nó mô tả.
 
+- 26/10 · vectơ không gian · Người dùng thấy video có vấn đề, bảo tự soát. Bắt được: trục sâu 45° gần song song vectơ dời (AM trông như đi vào sâu); chữ đè giá/mũi tên thử vì vật tạm không là vật cản; đường gióng không chú thích; đầu cảnh 2 trống trơn; hai ngôi sao trước/sau khi trôi chồng nhau; "phép cộng vectơ" trong `visual` bị quên. → gói Toán › hình không gian; skill `dung-video` › quy tắc 12 (vật tạm là vật cản, chia theo phần), không nét ngoài kịch bản, đầu cảnh không trống.
+
 ## Chữ
+- 26/10 · vectơ không gian · `\vec{AM}` của KaTeX chỉ có mũi tên nhỏ giữa hai chữ. → `Tex` tự đổi sang `\overrightarrow` cho tên nhiều chữ; bộ kiểm bố cục bỏ qua SVG trong KaTeX (mũi tên dài đo ra x ≈ −16000).
 - 19/10 · đạo hàm · Nhãn "đoạn 60 → 70 m: 0,81 s · tốc độ ≈ 44 km/h" lặp số trên thước; badge hết vai trò còn treo; phụ đề chép nguyên lời đọc. → nhãn ≤ 5 từ, một thông tin một chỗ, gỡ thứ hết vai trò.
 - 20/10 · đạo hàm · Chú giải "$s$: m · $t$: s" → không biết để làm gì. → chú giải đọc lên có nghĩa.
 - 22/10 · đơn điệu · "Cực trị → bài sau" → phải là "Cực trị, bài sau sẽ nói rõ". → mũi tên chỉ dùng đúng nghĩa toán.
@@ -58,6 +61,7 @@ Chi tiết từng video: `src/videos/<slug>/FEEDBACK.md`. Thêm mục mới mỗ
 - 22/10 · giọng nữ - c Nhi · Bỏ nghe thử, tạo thẳng 58 dòng → trùng, ríu; "h" đọc "hắc". → không bỏ bước nghe thử; tên hàm $f$.
 - 22/10 · Nghe thử ổn nhưng bản trong bài đọc "f(x)" thừa âm cuối. → mặc định nói theo nghĩa; nghe lại sau khi tạo cả bài.
 - 26/10 · tiệm cận xiên · giọng nữ - c Nhi: "…đường y bằng x." đọc "x" cuối câu thành "xích"; "điểm cùng vị trí ngang" đọc lỗi chữ "ngang". → gói Toán: "x" không đứng cuối câu; tránh cụm lạ, nói bằng cụm quen ("ngay bên dưới").
+- 26/10 · vectơ không gian · giọng nữ - c Nhi: "vectơ A M", "đoạn M N", "A A phẩy" đọc lạ, dấu phẩy lỗi cả bài. Thử 13 cách → chọn "a-mờ", "mờ-nờ", "a-a-phẩy". → gói Toán: tên điểm ghép phiên âm + gạch nối; chưa chắc cách đọc thì tạo vài bản thử trong kịch bản riêng (`--audio-dir`) cho người dùng chọn.
 
 ## Giọng văn
 - 22/10 · dàn ý cực trị · "cao nhất xóm", "chiếu nghỉ cầu thang" → "đừng hài, cứ ví dụ đơn giản thôi". → không cố gây cười.

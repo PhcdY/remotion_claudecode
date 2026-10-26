@@ -177,6 +177,9 @@ Phép thử: **tắt tiếng, chỉ nhìn khung hình**, người xem vẫn bi�
 - `anchor: "region"` cho nhãn của một vùng (đoạn cong tô màu, khoảng trên trục): gắn bằng màu, không cần luật "gần điểm mình hơn"; mặc định `"point"` cho nhãn của một chấm.
 - Chữ cố định khác trong khung (công thức, "mô hình", tên trục, thẻ) truyền làm vật cản bằng `textObstacle` (giữ khoảng hở như giữa hai nhãn). Đặt chúng ở chỗ **không tranh vùng nhãn**: vùng quanh đỉnh/đáy/điểm đang xét để cho nhãn; công thức để góc trống (đã gặp ở demo: công thức góc trên phải chiếm chỗ của nhãn quanh đỉnh).
 - Vật cản di chuyển trong beat (điểm chạy, flycam): truyền cả quỹ đạo, không chỉ vị trí hiện tại.
+- **Vật tạm cũng là vật cản**: giá kéo dài, mũi tên thử, đoạn nối của phản ví dụ, thước đo… đều truyền vào `obstacles`, không chỉ hình chính. Cảnh dài có nhiều phần (định nghĩa → hình mới → đề thi) thì chia **bộ vật cản theo phần** (trạng thái cảnh mang số phần), để vật của phần sau không chiếm chỗ nhãn phần trước; nhãn sống qua hai phần thì so ảnh cuối phần trước với đầu phần sau, không được nhảy chỗ (vectơ không gian 26/10: chữ đè giá, nhãn "điểm cuối" bị đẩy xa 175px vì cạnh của khối chưa hiện).
+- **Không thêm nét ngoài kịch bản mà không chú thích** (đường gióng, bóng chiếu…): người xem không biết nó là gì, lại tranh chỗ nhãn.
+- **Đầu cảnh mới không để khung trống**: thứ của cảnh cũ còn dùng ở dòng 1 thì giữ (mờ bớt) tới lúc hình chính của cảnh mới hiện.
 - Kích thước chữ chỉ là ước lượng → `check-layout` là bước kiểm cuối. Nhãn không có chỗ sạch (bị đẩy xa, `check-layout` báo "nhãn xa vật") thường nghĩa là **cảnh quá nhiều chữ**: bớt chữ (một thông tin một chỗ), dời chữ cố định, hoặc báo B1 rút `text` — không ép nhãn vào chỗ chật.
 
 ## Bước 2b — Storyboard (bản nháp, trước B2)
