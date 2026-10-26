@@ -11,12 +11,12 @@ import { colors, tint } from "../../components/theme";
 // Cảnh 2: bản đồ nhìn từ trên, lưới ô vuông (1 ô = 0,4 km), bắc ở phía trên.
 // Toạ độ theo ô: A = (0; 0) trên tim đường băng; mọi điểm đổi sang px qua gx/gy (không hardcode px).
 export const CELL = 62;
-const OY = 850;
+const OY = 830;
 /** gốc A khi có thẻ công thức bên phải (lưới dịch trái) và khi chưa có (lưới giữa khung) */
 export const OX_LEFT = 680;
 export const OX_CENTER = 960;
 export const gy = (y: number) => OY - y * CELL;
-const GRID = { x0: -8, x1: 8, y0: -0.5, y1: 11.5 };
+const GRID = { x0: -8, x1: 8, y0: -0.5, y1: 11.2 };
 
 /** Góc lệch của mũi máy bay: tan α = 0,8 / 4 → α ≈ 11,3°. */
 export const ALPHA = (Math.atan(0.8 / 4) * 180) / Math.PI;
@@ -277,29 +277,29 @@ type LabDef = {
   size?: number;
 };
 const LABELS: LabDef[] = [
-  { id: "A", at: () => [0, 0], steps: ["$A$"], prefer: ["sw", "w", "s"], phases: ["all"] },
+  { id: "A", at: () => [0, 0], steps: ["$A$"], prefer: ["w", "nw"], phases: ["all"] },
   { id: "speed", at: (s) => [s.plane.x, s.plane.y], steps: ["240 km/h"], color: K.own, prefer: ["e", "ne"], phases: ["b02"] },
-  { id: "AB", at: () => [0, 5], steps: ["4 km", "$\\overrightarrow{AB}$"], color: K.own, prefer: ["w", "e"], phases: ["b02", "b03", "b04", "b05", "b06", "b07", "b08"] },
-  { id: "copyEq", at: (s) => mid(s.arrows.copy), steps: ["$=\\overrightarrow{AB}$"], color: K.own, prefer: ["e"], phases: ["b03"] },
+  { id: "AB", at: () => [0, 5], steps: ["4 km", "$\\overrightarrow{AB}$"], color: K.own, prefer: ["w", "e"], phases: ["b02", "b03", "b04", "b05", "b06", "b07", "b08"], anchor: "region" },
+  { id: "copyEq", at: (s) => mid(s.arrows.copy), steps: ["$=\\overrightarrow{AB}$"], color: K.own, prefer: ["e"], phases: ["b03"], anchor: "region" },
   { id: "B", at: () => [0, 10], steps: ["$B$"], prefer: ["n", "nw"], phases: ["b02", "b03", "b04", "b05", "b06", "b07", "b08"] },
   { id: "windTxt", at: () => [-5, 2], steps: ["48 km/h → 0,8 km mỗi phút"], color: K.wind, prefer: ["n"], phases: ["b04"], anchor: "region" },
   { id: "C", at: () => [2, 10], steps: ["$C$"], prefer: ["ne", "e", "n"], phases: ["b04", "b05", "b06", "b07", "b08"] },
   { id: "dev", at: () => [1, 9.3], steps: ["lệch 0,8 km"], color: K.sum, prefer: ["s", "se"], phases: ["b04"], anchor: "region" },
-  { id: "AC", at: () => [1, 5], steps: ["$\\overrightarrow{AC}$"], color: K.sum, prefer: ["e"], phases: ["b05", "b06", "b07"] },
+  { id: "AC", at: () => [1, 5], steps: ["$\\overrightarrow{AC}$"], color: K.sum, prefer: ["e"], phases: ["b05", "b06", "b07"], anchor: "region" },
   { id: "ACq", at: () => [2.3, 6.5], steps: ["$4{,}8$ km?"], color: K.warn, prefer: ["e", "se", "ne"], phases: ["b08"], anchor: "region" },
   { id: "ACr", at: () => [2.3, 6.5], steps: ["$\\sqrt{4^2+0{,}8^2}\\approx 4{,}08$ km"], color: K.sum, prefer: ["e", "se", "ne"], phases: ["b08", "b09"], anchor: "region" },
   { id: "E", at: () => [2, 0], steps: ["$E$"], prefer: ["e", "se"], phases: ["b06", "b07", "b09", "b10", "b11", "b12"] },
-  { id: "AE", at: () => [1, 0], steps: ["$\\overrightarrow{AE}$"], color: K.wind, prefer: ["s"], phases: ["b06", "b07", "b09", "b10", "b11", "b12"] },
-  { id: "BCeqAE", at: () => [1, 10], steps: ["$\\overrightarrow{BC}=\\overrightarrow{AE}$"], color: K.wind, prefer: ["n", "ne"], phases: ["b06"] },
+  { id: "AE", at: () => [1, 0], steps: ["$\\overrightarrow{AE}$"], color: K.wind, prefer: ["s"], phases: ["b06", "b07", "b09", "b10", "b11", "b12"], anchor: "region" },
+  { id: "BCeqAE", at: () => [1, 10], steps: ["$\\overrightarrow{BC}=\\overrightarrow{AE}$"], color: K.wind, prefer: ["n", "ne"], phases: ["b06"], anchor: "region" },
   { id: "hbh", at: () => [0.6, 2.5], steps: ["hình bình hành"], prefer: ["w", "sw"], phases: ["b07"], anchor: "region" },
-  { id: "len08", at: () => [1, 10], steps: ["0,8 km"], color: K.wind, prefer: ["n"], phases: ["b08"] },
+  { id: "len08", at: () => [1, 10], steps: ["0,8 km"], color: K.wind, prefer: ["n"], phases: ["b08"], anchor: "region" },
   { id: "M", at: () => [0, 10], steps: ["$M$: chỗ cần tới"], color: K.target, prefer: ["ne", "n", "e"], phases: ["b09", "b10", "b11", "b12"] },
-  { id: "AM", at: () => [0, 6.8], steps: ["$\\overrightarrow{AM}$"], color: K.target, prefer: ["e"], phases: ["b09", "b10", "b11", "b12"] },
-  { id: "negIll", at: () => [-7, 2.35], steps: ["$-\\overrightarrow{AE}$"], color: K.wind, prefer: ["w", "nw"], phases: ["b10"] },
+  { id: "AM", at: () => [0, 6.8], steps: ["$\\overrightarrow{AM}$"], color: K.target, prefer: ["e"], phases: ["b09", "b10", "b11", "b12"], anchor: "region" },
+  { id: "negIll", at: () => [-7, 2.35], steps: ["$-\\overrightarrow{AE}$"], color: K.wind, prefer: ["w", "nw"], phases: ["b10"], anchor: "region" },
   { id: "illEq", at: () => [-6, 1.25], steps: ["$\\overrightarrow{AE}+(-\\overrightarrow{AE})=\\vec{0}$"], prefer: ["s"], phases: ["b10"], anchor: "region" },
   { id: "K", at: () => [-2, 10], steps: ["$K$"], color: K.own, prefer: ["nw", "w", "n"], phases: ["b11", "b12"] },
-  { id: "AK", at: () => [-1, 5], steps: ["$\\overrightarrow{AK}$", "$\\overrightarrow{EM}=\\overrightarrow{AK}$"], color: K.own, prefer: ["w"], phases: ["b11", "b12"] },
-  { id: "EM", at: () => [1.5, 2.6], steps: ["$\\overrightarrow{EM}$"], color: K.sum, prefer: ["e"], phases: ["b12"] },
+  { id: "AK", at: () => [-1, 5], steps: ["$\\overrightarrow{AK}$", "$\\overrightarrow{EM}=\\overrightarrow{AK}$"], color: K.own, prefer: ["w"], phases: ["b11", "b12"], anchor: "region" },
+  { id: "EM", at: () => [1.5, 2.6], steps: ["$\\overrightarrow{EM}$"], color: K.sum, prefer: ["e"], phases: ["b12"], anchor: "region" },
   { id: "count", at: () => [2, 7.5], steps: ["trái 2, lên 10"], color: K.sum, prefer: ["e"], phases: ["b12"], anchor: "region" },
 ];
 
@@ -314,7 +314,7 @@ export const Scene2: React.FC<{ st: St2; phase: string }> = ({ st, phase }) => {
   for (const p of Object.values(st.pts)) if (p.o > 0.05) obst.push({ x: gx(p.x) - 10, y: gy(p.y) - 10, w: 20, h: 20 });
   // máy bay không làm vật cản: nó di chuyển, nhãn sẽ nhảy chỗ theo nó
   obst.push(textObstacle(gx(5.2), gy(0.15), gx(8) - gx(5.2), 50)); // chú giải lưới
-  obst.push(textObstacle(gx(6.6), gy(11.4), gx(8) - gx(6.6), 50)); // hướng bắc
+  obst.push(textObstacle(gx(6.6), gy(11.1), gx(8) - gx(6.6), 50)); // hướng bắc
   if (st.cards.sum > 0.05) obst.push(textObstacle(CARD_X, 170, CARD_W, 220));
   if (st.cards.eq > 0.05) obst.push(textObstacle(CARD_X, 170, CARD_W, 190));
   if (st.cards.def > 0.05) obst.push(textObstacle(CARD_X, 400, CARD_W, 120));
@@ -431,7 +431,7 @@ export const Scene2: React.FC<{ st: St2; phase: string }> = ({ st, phase }) => {
       <Tag x={gx(8)} y={gy(0.1)} anchor="right" color={colors.muted} size={36} opacity={st.grid}>
         1 ô = 0,4 km
       </Tag>
-      <Tag x={gx(8)} y={gy(11.35)} anchor="right" color={colors.muted} size={36} weight={700} opacity={st.grid}>
+      <Tag x={gx(8)} y={gy(11.05)} anchor="right" color={colors.muted} size={36} weight={700} opacity={st.grid}>
         Bắc ↑
       </Tag>
       <AutoLabels items={items} obstacles={obst} bounds={{ x: 100, y: 120, w: 1720, h: 806 }} />
