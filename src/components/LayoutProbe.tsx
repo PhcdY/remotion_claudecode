@@ -149,7 +149,10 @@ const composition = () => {
       if (n) texts.push({ k: el.getAttribute("data-label-id") ?? (el.textContent ?? "").trim().slice(0, 60), n });
     }
   });
-  document.querySelectorAll("svg path, svg line, svg circle, svg polygon, svg polyline, svg rect").forEach(add);
+  // SVG trong KaTeX (mũi tên co giãn \overrightarrow…) rộng hàng nghìn px rồi bị cắt: khung chữ đã đại diện
+  document.querySelectorAll("svg path, svg line, svg circle, svg polygon, svg polyline, svg rect").forEach((el) => {
+    if (!el.closest(".katex")) add(el);
+  });
   if (boxes.length) {
     const left = Math.min(...boxes.map((b) => b.left));
     const right = Math.max(...boxes.map((b) => b.right));

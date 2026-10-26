@@ -16,7 +16,7 @@
       "scene": 1,
       "section": "HIỆN TƯỢNG",
       "keyword": "Vì sao phải chĩa xiên?",
-      "visual": "CẢNH 1 — MÁY BAY HẠ CÁNH, nhìn từ trên xuống. Đường băng dọc giữa khung, tim đường băng đứt nét, số hiệu đường băng ở đầu dưới. Máy bay (hình phẳng nhìn từ trên, thân rõ mũi) ở phía dưới đường băng, đang tiến lên dọc tim đường băng, mũi thẳng theo đường băng. Dòng 2: các vệt gió mảnh chạy từ trái sang phải ngang qua đường băng, giữ đến hết beat. Dòng 3: thân máy bay xoay chậm ~11° sang trái (về phía gió thổi tới). Dòng 4: máy bay tiếp tục trượt thẳng lên dọc tim đường băng, thân vẫn xiên.",
+      "visual": "CẢNH 1 — MÁY BAY HẠ CÁNH, nhìn từ trên xuống. Đường băng dọc giữa khung, tim đường băng đứt nét, số hiệu đường băng ở đầu dưới. Máy bay (hình phẳng nhìn từ trên, thân rõ mũi) ở phía dưới đường băng, đang tiến lên dọc tim đường băng, mũi thẳng theo đường băng. Dòng 2: các vệt gió mảnh chạy từ trái sang phải ngang qua đường băng, giữ đến hết beat. Dòng 3: thân máy bay xoay chậm ~11^{\\circ} sang trái (về phía gió thổi tới). Dòng 4: máy bay tiếp tục trượt thẳng lên dọc tim đường băng, thân vẫn xiên.",
       "lines": [
         {
           "show": "máy bay tiến dọc tim đường băng, mũi thẳng",
@@ -94,13 +94,13 @@
         {
           "show": "ký hiệu vectơ hiện cạnh mũi tên A→B",
           "at": "giữa mũi tên A→B, phía phải",
-          "text": "$\\vec{AB}$",
+          "text": "$\\overrightarrow{AB}$",
           "speak": "Mũi tên có hướng và độ dài như thế, chính là vectơ đã học ở bài trước."
         },
         {
           "show": "bản sao mũi tên A→B hiện ở bên phải lưới",
           "at": "bản sao bên phải",
-          "text": "$=\\vec{AB}$",
+          "text": "$=\\overrightarrow{AB}$",
           "speak": "Hai vectơ cùng hướng, cùng độ dài thì bằng nhau."
         },
         {
@@ -120,7 +120,7 @@
       "scene": 2,
       "section": "BẢN CHẤT",
       "keyword": "Chĩa thẳng thì trôi lệch",
-      "visual": "Giữ CẢNH 2: lưới, đường băng, mũi tên $\\vec{AB}$ (4 km), chấm A, B. Dòng 1: mũi tên gió ngắn (2 ô, màu phụ) hiện ở vùng trống bên trái dưới, từ (−6; 2) tới (−4; 2), nhãn '0,8 km'. Dòng 3: máy bay nhỏ hiện lại ở A, mũi thẳng, trượt lên B dọc $\\vec{AB}$. Dòng 4: mũi tên gió dời tới, đuôi đặt vào ngọn B, máy bay trượt theo nó tới C = (2; 10). Dòng 5: đoạn từ B tới C (khoảng lệch khỏi tim đường băng) sáng màu nhấn. Dòng 6: không đổi.",
+      "visual": "Giữ CẢNH 2: lưới, đường băng, mũi tên $\\overrightarrow{AB}$ (4 km), chấm A, B. Dòng 1: mũi tên gió ngắn (2 ô, màu phụ) hiện ở vùng trống bên trái dưới, từ (−6; 2) tới (−4; 2), nhãn '0,8 km'. Dòng 3: máy bay nhỏ hiện lại ở A, mũi thẳng, trượt lên B dọc $\\overrightarrow{AB}$. Dòng 4: mũi tên gió dời tới, đuôi đặt vào ngọn B, máy bay trượt theo nó tới C = (2; 10). Dòng 5: đoạn từ B tới C (khoảng lệch khỏi tim đường băng) sáng màu nhấn. Dòng 6: không đổi.",
       "lines": [
         {
           "show": "mũi tên gió hai ô hiện bên trái lưới",
@@ -162,18 +162,18 @@
       "scene": 2,
       "section": "ĐỊNH NGHĨA",
       "keyword": "Nối đuôi vào ngọn, đi tắt",
-      "visual": "Giữ CẢNH 2: $\\vec{AB}$, mũi tên gió đặt từ B tới C (giờ ghi $\\vec{BC}$), chấm A, B, C; nhãn 'lệch 0,8 km' mờ ở đầu beat. Dòng 1: mũi tên A→C (màu nhấn) vẽ dần từ A. Dòng 2: thẻ công thức hiện ở vùng trống bên phải lưới, giữ đến hết b07. Dòng 3–5: giải phẫu, mỗi dòng một cụm trên công thức và thứ trên hình sáng cùng màu cùng lúc: dòng 3 cụm $\\vec{AB}$ ↔ mũi tên A→B; dòng 4 chữ B ở cuối $\\vec{AB}$ và đầu $\\vec{BC}$ ↔ chấm B nháy; dòng 5 cụm $\\vec{AC}$ ↔ mũi tên A→C.",
+      "visual": "Giữ CẢNH 2: $\\overrightarrow{AB}$, mũi tên gió đặt từ B tới C (giờ ghi $\\overrightarrow{BC}$), chấm A, B, C; nhãn 'lệch 0,8 km' mờ ở đầu beat. Dòng 1: mũi tên A→C (màu nhấn) vẽ dần từ A. Dòng 2: thẻ công thức hiện ở vùng trống bên phải lưới, giữ đến hết b07. Dòng 3–5: giải phẫu, mỗi dòng một cụm trên công thức và thứ trên hình sáng cùng màu cùng lúc: dòng 3 cụm $\\overrightarrow{AB}$ ↔ mũi tên A→B; dòng 4 chữ B ở cuối $\\overrightarrow{AB}$ và đầu $\\overrightarrow{BC}$ ↔ chấm B nháy; dòng 5 cụm $\\overrightarrow{AC}$ ↔ mũi tên A→C.",
       "lines": [
         {
           "show": "mũi tên từ A tới C vẽ dần, màu nhấn",
           "at": "giữa mũi tên A→C",
-          "text": "$\\vec{AC}$",
+          "text": "$\\overrightarrow{AC}$",
           "speak": "Hai chặng nối nhau gộp lại bằng một mũi tên, đi thẳng từ đầu tới cuối."
         },
         {
           "show": "thẻ công thức hiện bên phải lưới",
           "at": "thẻ công thức bên phải lưới",
-          "text": "$\\vec{AB}+\\vec{BC}=\\vec{AC}$",
+          "text": "$\\overrightarrow{AB}+\\overrightarrow{BC}=\\overrightarrow{AC}$",
           "speak": "Mũi tên gộp đó gọi là tổng của hai vectơ."
         },
         {
@@ -204,7 +204,7 @@
       "section": "BẢN CHẤT",
       "keyword": "Dời được thì nối được",
       "lineGap": 0.5,
-      "visual": "Giữ CẢNH 2. BƯỚC KHÓ — chuỗi 'vì sao' (1). Thẻ công thức ba điểm giữ bên phải. Lúc beat bắt đầu: $\\vec{AB}$, mũi tên gió B→C, $\\vec{AC}$, chấm A, B, C. Dòng 1: mũi tên gió trượt từ B về gốc A, thành A→E với E = (2; 0); $\\vec{AC}$ mờ đi. Dòng 2: nhãn $\\vec{AE}$ ở mũi tên gió. Dòng 3: dấu '?' ở khoảng trống giữa hai mũi tên chung gốc. Dòng 4: bản sao mũi tên gió trượt lên, đuôi đặt vào ngọn B (B→C, nét nhạt hơn). Dòng 5: hai mũi tên gió (A→E và B→C) cùng sáng màu phụ. Dòng 6: $\\vec{AC}$ hiện lại. Dòng 7: máy bay nhỏ hiện ở A, trượt thẳng theo $\\vec{AC}$ tới C (không đi vòng qua B), rồi mờ đi.",
+      "visual": "Giữ CẢNH 2. BƯỚC KHÓ — chuỗi 'vì sao' (1). Thẻ công thức ba điểm giữ bên phải. Lúc beat bắt đầu: $\\overrightarrow{AB}$, mũi tên gió B→C, $\\overrightarrow{AC}$, chấm A, B, C. Dòng 1: mũi tên gió trượt từ B về gốc A, thành A→E với E = (2; 0); $\\overrightarrow{AC}$ mờ đi. Dòng 2: nhãn $\\overrightarrow{AE}$ ở mũi tên gió. Dòng 3: dấu '?' ở khoảng trống giữa hai mũi tên chung gốc. Dòng 4: bản sao mũi tên gió trượt lên, đuôi đặt vào ngọn B (B→C, nét nhạt hơn). Dòng 5: hai mũi tên gió (A→E và B→C) cùng sáng màu phụ. Dòng 6: $\\overrightarrow{AC}$ hiện lại. Dòng 7: máy bay nhỏ hiện ở A, trượt thẳng theo $\\overrightarrow{AC}$ tới C (không đi vòng qua B), rồi mờ đi.",
       "lines": [
         {
           "show": "mũi tên gió trượt về gốc A, mũi tên tổng mờ đi",
@@ -214,7 +214,7 @@
         {
           "show": "nhãn vectơ gió hiện",
           "at": "mũi tên gió A→E",
-          "text": "$\\vec{AE}$",
+          "text": "$\\overrightarrow{AE}$",
           "speak": "Cả hai bắt đầu từ cùng một chỗ, nên phải vẽ chung gốc."
         },
         {
@@ -230,7 +230,7 @@
         {
           "show": "hai mũi tên gió cùng sáng màu phụ",
           "at": "bản dời B→C",
-          "text": "$\\vec{BC}=\\vec{AE}$",
+          "text": "$\\overrightarrow{BC}=\\overrightarrow{AE}$",
           "speak": "Cùng hướng, cùng độ dài, nên vẫn là đúng vectơ gió đó."
         },
         {
@@ -251,7 +251,7 @@
       "section": "BẢN CHẤT",
       "keyword": "Hình bình hành: đi nối tiếp",
       "lineGap": 0.5,
-      "visual": "Giữ CẢNH 2. BƯỚC KHÓ — chuỗi 'vì sao' (2). Lúc beat bắt đầu: $\\vec{AB}$, $\\vec{AE}$, bản dời B→C, $\\vec{AC}$, thẻ công thức ba điểm. Dòng 1: bản sao mũi tên máy bay trượt sang, đuôi đặt vào ngọn E (E→C, nét nhạt). Dòng 2: bốn cạnh A–B–C–E tô nền nhạt thành hình bình hành (ở đây là hình chữ nhật, vẫn là hình bình hành). Dòng 3: $\\vec{AC}$ sáng màu nhấn như đường chéo. Dòng 4: dưới thẻ ba điểm hiện công thức hình bình hành. Dòng 5: không đổi. Hết beat, thẻ công thức ba điểm và hình bình hành thu nhỏ, giữ ở góc trên phải đến hết b08.",
+      "visual": "Giữ CẢNH 2. BƯỚC KHÓ — chuỗi 'vì sao' (2). Lúc beat bắt đầu: $\\overrightarrow{AB}$, $\\overrightarrow{AE}$, bản dời B→C, $\\overrightarrow{AC}$, thẻ công thức ba điểm. Dòng 1: bản sao mũi tên máy bay trượt sang, đuôi đặt vào ngọn E (E→C, nét nhạt). Dòng 2: bốn cạnh A–B–C–E tô nền nhạt thành hình bình hành (ở đây là hình chữ nhật, vẫn là hình bình hành). Dòng 3: $\\overrightarrow{AC}$ sáng màu nhấn như đường chéo. Dòng 4: dưới thẻ ba điểm hiện công thức hình bình hành. Dòng 5: không đổi. Hết beat, thẻ công thức ba điểm và hình bình hành thu nhỏ, giữ ở góc trên phải đến hết b08.",
       "lines": [
         {
           "show": "bản sao mũi tên máy bay trượt sang, đuôi đặt vào ngọn E",
@@ -272,7 +272,7 @@
         {
           "show": "công thức hình bình hành hiện dưới thẻ ba điểm",
           "at": "dưới thẻ công thức ba điểm",
-          "text": "$\\vec{AB}+\\vec{AE}=\\vec{AC}$",
+          "text": "$\\overrightarrow{AB}+\\overrightarrow{AE}=\\overrightarrow{AC}$",
           "speak": "Đó là quy tắc hình bình hành."
         },
         {
@@ -286,8 +286,8 @@
       "id": "b08",
       "scene": 2,
       "section": "BẪY THƯỜNG GẶP",
-      "keyword": "$|\\vec{a}+\\vec{b}|\\ne|\\vec{a}|+|\\vec{b}|$",
-      "visual": "Giữ CẢNH 2. Bản dời E→C và nền hình bình hành mờ đi; còn $\\vec{AB}$ (4 km), bản dời gió B→C (0,8 km), $\\vec{AC}$ — tam giác vuông A–B–C, góc vuông ở B có ký hiệu. Thẻ công thức giữ. Dòng 1: nhãn '4 km' và '0,8 km' sáng. Dòng 2 (câu hỏi đoán): nhãn '4,8 km?' mờ cạnh $\\vec{AC}$; trong khoảng nghỉ hai nhãn độ dài nháy lần lượt, không lộ đáp án. Dòng 3: nhãn '4,8 km?' đổi thành số đúng. Dòng 4: đường đi vòng A→B→C sáng nhạt, đặt cạnh đường chéo để so.",
+      "keyword": "$|\\overrightarrow{AC}|\\ne AB+BC$",
+      "visual": "Giữ CẢNH 2. Bản dời E→C và nền hình bình hành mờ đi; còn $\\overrightarrow{AB}$ (4 km), bản dời gió B→C (0,8 km), $\\overrightarrow{AC}$ — tam giác vuông A–B–C, góc vuông ở B có ký hiệu. Thẻ công thức giữ. Dòng 1: nhãn '4 km' và '0,8 km' sáng. Dòng 2 (câu hỏi đoán): nhãn '4,8 km?' mờ cạnh $\\overrightarrow{AC}$; trong khoảng nghỉ hai nhãn độ dài nháy lần lượt, không lộ đáp án. Dòng 3: nhãn '4,8 km?' đổi thành số đúng. Dòng 4: đường đi vòng A→B→C sáng nhạt, đặt cạnh đường chéo để so.",
       "lines": [
         {
           "show": "nhãn độ dài hai chặng sáng",
@@ -335,7 +335,7 @@
         {
           "show": "mũi tên từ A tới M vẽ dần",
           "at": "giữa mũi tên A→M, phía trái",
-          "text": "$\\vec{AM}$",
+          "text": "$\\overrightarrow{AM}$",
           "speak": "Mỗi phút cần tiến đúng bốn ki-lô-mét dọc đường băng."
         },
         {
@@ -346,7 +346,7 @@
         {
           "show": "thẻ phương trình có dấu hỏi hiện",
           "at": "thẻ phương trình góc trên phải",
-          "text": "$\\,?\\,+\\vec{AE}=\\vec{AM}$",
+          "text": "$\\,?\\,+\\overrightarrow{AE}=\\overrightarrow{AM}$",
           "speak": "Cần tìm chặng tự bay, cộng thêm gió thì ra đúng chặng cần đi."
         },
         {
@@ -361,7 +361,7 @@
       "scene": 2,
       "section": "ĐỊNH NGHĨA",
       "keyword": "Trừ là cộng với vectơ đối",
-      "visual": "Giữ CẢNH 2: lưới, $\\vec{AM}$, $\\vec{AE}$, thẻ phương trình. BƯỚC KHÓ — khái niệm mới. Vùng trống dưới trái lưới dùng làm chỗ minh hoạ: dòng 1 một bản sao mũi tên gió (2 ô) đặt ở (−7; 2)→(−5; 2), rồi mũi tên ngược (nét đứt, màu phụ) từ (−5; 2) quay về (−7; 2), vẽ lệch xuống nửa ô để không đè. Dòng 2: nhãn ở mũi tên ngược. Dòng 3: dưới chỗ minh hoạ hiện đẳng thức. Dòng 4: thẻ định nghĩa hiệu hiện ở vùng trống bên phải, giữ đến hết b12. Hết beat chỗ minh hoạ mờ đi.",
+      "visual": "Giữ CẢNH 2: lưới, $\\overrightarrow{AM}$, $\\overrightarrow{AE}$, thẻ phương trình. BƯỚC KHÓ — khái niệm mới. Vùng trống dưới trái lưới dùng làm chỗ minh hoạ: dòng 1 một bản sao mũi tên gió (2 ô) đặt ở (−7; 2)→(−5; 2), rồi mũi tên ngược (nét đứt, màu phụ) từ (−5; 2) quay về (−7; 2), vẽ lệch xuống nửa ô để không đè. Dòng 2: nhãn ở mũi tên ngược. Dòng 3: dưới chỗ minh hoạ hiện đẳng thức. Dòng 4: thẻ định nghĩa hiệu hiện ở vùng trống bên phải, giữ đến hết b12. Hết beat chỗ minh hoạ mờ đi.",
       "lines": [
         {
           "show": "bản sao mũi tên gió và mũi tên ngược nét đứt nối đuôi nhau ở góc dưới trái",
@@ -371,13 +371,13 @@
         {
           "show": "nhãn hiện ở mũi tên ngược",
           "at": "mũi tên ngược nét đứt",
-          "text": "$-\\vec{AE}$",
+          "text": "$-\\overrightarrow{AE}$",
           "speak": "Dịch chuyển cùng độ dài mà ngược hướng đó gọi là vectơ đối."
         },
         {
           "show": "đẳng thức hiện dưới chỗ minh hoạ",
           "at": "dưới chỗ minh hoạ",
-          "text": "$\\vec{AE}+(-\\vec{AE})=\\vec{0}$",
+          "text": "$\\overrightarrow{AE}+(-\\overrightarrow{AE})=\\vec{0}$",
           "speak": "Cộng một vectơ với vectơ đối của nó ra vectơ không, tức là đứng yên."
         },
         {
@@ -398,18 +398,18 @@
       "scene": 2,
       "section": "BẢN CHẤT",
       "keyword": "Tự bay: cần đi trừ gió",
-      "visual": "Giữ CẢNH 2: lưới, $\\vec{AM}$, $\\vec{AE}$, thẻ phương trình (góc trên phải), thẻ định nghĩa hiệu (bên phải). Khoảnh khắc 'à ra thế'. Dòng 1: trong thẻ phương trình, hai vế cùng nối thêm cụm $+(-\\vec{AE})$ màu phụ. Dòng 2: ở vế trái, cụm $\\vec{AE}+(-\\vec{AE})$ gạch đi (đó là đẳng thức của b10); thẻ gọn lại thành dòng mới. Dòng 3: mũi tên ngược gió (nét đứt, màu phụ) đặt nối vào ngọn M, từ M sang trái 2 ô tới K = (−2; 10); chấm K hiện. Dòng 4 (câu hỏi đoán): hai mũi tên ứng viên từ A, mờ: thẳng lên (A→M, như b04) và chếch sang trái tới K; trong khoảng nghỉ hai mũi tên sáng lần lượt. Dòng 5: mũi tên A→K sáng màu chính, mũi tên thẳng tắt. Dòng 6: máy bay nhỏ hiện ở A, thân xoay theo A→K (~11° sang trái). Dòng 7: máy bay trượt thẳng dọc tim đường băng từ A tới M (theo $\\vec{AM}$, không đi vòng qua K), thân giữ xiên theo hướng A→K.",
+      "visual": "Giữ CẢNH 2: lưới, $\\overrightarrow{AM}$, $\\overrightarrow{AE}$, thẻ phương trình (góc trên phải), thẻ định nghĩa hiệu (bên phải). Khoảnh khắc 'à ra thế'. Dòng 1: trong thẻ phương trình, hai vế cùng nối thêm cụm $+(-\\overrightarrow{AE})$ màu phụ. Dòng 2: ở vế trái, cụm $\\overrightarrow{AE}+(-\\overrightarrow{AE})$ gạch đi (đó là đẳng thức của b10); thẻ gọn lại thành dòng mới. Dòng 3: mũi tên ngược gió (nét đứt, màu phụ) đặt nối vào ngọn M, từ M sang trái 2 ô tới K = (−2; 10); chấm K hiện. Dòng 4 (câu hỏi đoán): hai mũi tên ứng viên từ A, mờ: thẳng lên (A→M, như b04) và chếch sang trái tới K; trong khoảng nghỉ hai mũi tên sáng lần lượt. Dòng 5: mũi tên A→K sáng màu chính, mũi tên thẳng tắt. Dòng 6: máy bay nhỏ hiện ở A, thân xoay theo A→K (~11^{\\circ} sang trái). Dòng 7: máy bay trượt thẳng dọc tim đường băng từ A tới M (theo $\\overrightarrow{AM}$, không đi vòng qua K), thân giữ xiên theo hướng A→K.",
       "lines": [
         {
           "show": "hai vế thẻ phương trình cùng nối thêm vectơ đối của gió",
           "at": "thẻ phương trình",
-          "text": "$?+\\vec{AE}+(-\\vec{AE})=\\vec{AM}+(-\\vec{AE})$",
+          "text": "$?+\\overrightarrow{AE}+(-\\overrightarrow{AE})=\\overrightarrow{AM}+(-\\overrightarrow{AE})$",
           "speak": "Cộng vectơ đối của gió vào cả hai vế."
         },
         {
           "show": "cụm gió cộng ngược gió ở vế trái gạch đi, thẻ gọn lại",
           "at": "thẻ phương trình",
-          "text": "$?=\\vec{AM}-\\vec{AE}$",
+          "text": "$?=\\overrightarrow{AM}-\\overrightarrow{AE}$",
           "speak": "Bên trái, gió cộng ngược gió thành đứng yên, chỉ còn chặng tự bay."
         },
         {
@@ -427,7 +427,7 @@
         {
           "show": "mũi tên A tới K sáng màu chính",
           "at": "giữa mũi tên A→K, phía trái",
-          "text": "$\\vec{AK}$",
+          "text": "$\\overrightarrow{AK}$",
           "speak": "Nối đuôi vào ngọn, hai chặng gộp thành mũi tên từ gốc tới đây."
         },
         {
@@ -447,7 +447,7 @@
       "scene": 2,
       "section": "CÔNG THỨC",
       "keyword": "Chung gốc: ngọn tới ngọn",
-      "visual": "Giữ CẢNH 2. BƯỚC KHÓ — quy tắc hiệu. Thẻ phương trình gỡ ở đầu beat, chỉ còn thẻ định nghĩa hiệu bên phải. Lúc beat bắt đầu: $\\vec{AM}$, $\\vec{AE}$, $\\vec{AK}$, mũi tên K→M, chấm A, E, M, K; máy bay nhỏ mờ đi. Dòng 1: $\\vec{AK}$ và K→M mờ, chỉ $\\vec{AM}$, $\\vec{AE}$ sáng (hai mũi tên chung gốc A). Dòng 2: mũi tên E→M (màu nhấn) vẽ dần từ ngọn E tới ngọn M. Dòng 3: dọc mũi tên E→M hiện hai vạch đếm ô (ngang 2 ô sang trái, dọc 10 ô), nhãn đếm. Dòng 4: vạch đếm mờ; $\\vec{AK}$ hiện lại, song song với E→M; tô nhạt hình bình hành A–K–M–E. Dòng 5: thẻ quy tắc hiện dưới thẻ định nghĩa hiệu. Dòng 6: ngọn M và cụm $\\vec{AM}$ trên thẻ quy tắc cùng nháy.",
+      "visual": "Giữ CẢNH 2. BƯỚC KHÓ — quy tắc hiệu. Thẻ phương trình giữ ở góc trên phải; dòng 4: dấu '?' trong thẻ đổi thành $\\overrightarrow{AK}$ (cùng lúc nhãn $\\overrightarrow{EM}=\\overrightarrow{AK}$). Lúc beat bắt đầu: $\\overrightarrow{AM}$, $\\overrightarrow{AE}$, $\\overrightarrow{AK}$, mũi tên K→M, chấm A, E, M, K; máy bay nhỏ mờ đi. Dòng 1: $\\overrightarrow{AK}$ và K→M mờ, chỉ $\\overrightarrow{AM}$, $\\overrightarrow{AE}$ sáng (hai mũi tên chung gốc A). Dòng 2: mũi tên E→M (màu nhấn) vẽ dần từ ngọn E tới ngọn M. Dòng 3: dọc mũi tên E→M hiện hai vạch đếm ô (ngang 2 ô sang trái, dọc 10 ô), nhãn đếm. Dòng 4: vạch đếm mờ; $\\overrightarrow{AK}$ hiện lại, song song với E→M; tô nhạt hình bình hành A–K–M–E. Dòng 5: thẻ quy tắc hiện dưới thẻ định nghĩa hiệu. Dòng 6: ngọn M và cụm $\\overrightarrow{AM}$ trên thẻ quy tắc cùng nháy.",
       "lines": [
         {
           "show": "chỉ còn hai mũi tên chung gốc A sáng",
@@ -457,7 +457,7 @@
         {
           "show": "mũi tên từ ngọn E tới ngọn M vẽ dần, màu nhấn",
           "at": "giữa mũi tên E→M",
-          "text": "$\\vec{EM}$",
+          "text": "$\\overrightarrow{EM}$",
           "speak": "Nối ngọn gió tới ngọn chặng cần đi, được một mũi tên."
         },
         {
@@ -469,13 +469,13 @@
         {
           "show": "mũi tên A tới K hiện lại song song, nền hình bình hành nhạt",
           "at": "giữa mũi tên A→K",
-          "text": "$\\vec{EM}=\\vec{AK}$",
+          "text": "$\\overrightarrow{EM}=\\overrightarrow{AK}$",
           "speak": "Cùng hướng và cùng độ dài, nên nó chính là chặng tự bay."
         },
         {
           "show": "thẻ quy tắc hiệu hiện dưới thẻ định nghĩa",
           "at": "thẻ quy tắc bên phải",
-          "text": "$\\vec{AM}-\\vec{AE}=\\vec{EM}$",
+          "text": "$\\overrightarrow{AM}-\\overrightarrow{AE}=\\overrightarrow{EM}$",
           "speak": "Vậy hai vectơ chung gốc thì hiệu là mũi tên nối hai ngọn."
         },
         {
@@ -490,7 +490,7 @@
       "scene": 1,
       "section": "GIẢI ĐÁP",
       "keyword": "Xiên để cộng gió ra thẳng",
-      "visual": "CẢNH 1 — trở lại: máy bay hạ cánh nhìn từ trên xuống, vệt gió từ trái sang, thân máy bay xiên ~11° sang trái, đang trượt dọc tim đường băng. Dòng 2: trên máy bay hiện mũi tên tự bay dọc thân (màu chính) và mũi tên gió nối vào ngọn của nó (màu phụ); ngọn mũi tên gió rơi đúng trên tim đường băng. Dòng 3: tam giác vuông nhỏ dựng trên mũi tên tự bay (cạnh ngang 0,8, cạnh dọc 4, góc $\\alpha$ ở đuôi). Dòng 4: cung góc giữa thân máy bay và tim đường băng; tam giác mờ. Dòng 5: hai mũi tên mờ, máy bay trượt tiếp tới đường băng. Dòng 6: không đổi.",
+      "visual": "CẢNH 1 — trở lại: máy bay hạ cánh nhìn từ trên xuống, vệt gió từ trái sang, thân máy bay xiên ~11^{\\circ} sang trái, đang trượt dọc tim đường băng. Dòng 2: trên máy bay hiện mũi tên tự bay dọc thân (màu chính) và mũi tên gió nối vào ngọn của nó (màu phụ); ngọn mũi tên gió rơi đúng trên tim đường băng. Dòng 3: tam giác vuông nhỏ dựng trên mũi tên tự bay (cạnh ngang 0,8, cạnh dọc 4, góc $\\alpha$ ở đuôi). Dòng 4: cung góc giữa thân máy bay và tim đường băng; tam giác mờ. Dòng 5: hai mũi tên mờ, máy bay trượt tiếp tới đường băng. Dòng 6: không đổi.",
       "lines": [
         {
           "show": "quay lại máy bay đang hạ cánh với mũi xiên",
@@ -511,7 +511,7 @@
         {
           "show": "cung góc giữa thân và tim đường băng hiện",
           "at": "cung góc ở mũi máy bay",
-          "text": "$\\alpha\\approx 11°$",
+          "text": "$\\alpha\\approx 11^{\\circ}$",
           "speak": "Với gió ngang bốn mươi tám ki-lô-mét một giờ, mũi lệch khoảng mười một độ."
         },
         {

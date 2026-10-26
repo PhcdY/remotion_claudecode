@@ -17,7 +17,7 @@ if (!id || frameArgs.length === 0) {
 }
 
 const root = path.resolve(import.meta.dirname, "..");
-const localChrome = "C:/Program Files/Google/Chrome/Application/chrome.exe";
+const localChrome = process.env.REMOTION_BROWSER ?? "C:/Program Files/Google/Chrome/Application/chrome.exe";
 const browserOpts = existsSync(localChrome) ? { browserExecutable: localChrome, chromeMode: "chrome-for-testing" } : {};
 const outDir = path.join(workDir(root, id), "stills");
 mkdirSync(outDir, { recursive: true });

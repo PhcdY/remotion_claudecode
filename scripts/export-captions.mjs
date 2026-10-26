@@ -18,7 +18,7 @@ const id = ii >= 0 ? args[ii + 1] : slug;
 
 const root = path.resolve(import.meta.dirname, "..");
 const script = JSON.parse(readFileSync(path.join(root, "src/videos", slug, "script.json"), "utf-8"));
-const localChrome = "C:/Program Files/Google/Chrome/Application/chrome.exe";
+const localChrome = process.env.REMOTION_BROWSER ?? "C:/Program Files/Google/Chrome/Application/chrome.exe";
 const browserOpts = existsSync(localChrome) ? { browserExecutable: localChrome, chromeMode: "chrome-for-testing" } : {};
 
 const serveUrl = await bundleProject(root);
