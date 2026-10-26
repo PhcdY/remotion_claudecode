@@ -38,7 +38,8 @@ export const makeScale = (o: {
 
 /** Số thập phân kiểu Việt Nam: 4.01 -> "4,01" */
 export const fmt = (v: number, digits = 2) => {
-  const s = v.toFixed(digits).replace(/\.?0+$/, "");
+  // chỉ bỏ số 0 thừa SAU dấu thập phân (100 với digits = 0 vẫn là "100")
+  const s = digits > 0 ? v.toFixed(digits).replace(/\.?0+$/, "") : v.toFixed(0);
   return (s === "-0" ? "0" : s).replace(".", ",");
 };
 

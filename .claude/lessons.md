@@ -57,6 +57,7 @@ Chi tiết từng video: `src/videos/<slug>/FEEDBACK.md`. Thêm mục mới mỗ
 - 20/10 · giọng nam - c Bình · "x không" đọc tách; "ích-không" liền nhưng "không" dính sang động từ sau. → cụm "không" đứng cuối vế.
 - 22/10 · giọng nữ - c Nhi · Bỏ nghe thử, tạo thẳng 58 dòng → trùng, ríu; "h" đọc "hắc". → không bỏ bước nghe thử; tên hàm $f$.
 - 22/10 · Nghe thử ổn nhưng bản trong bài đọc "f(x)" thừa âm cuối. → mặc định nói theo nghĩa; nghe lại sau khi tạo cả bài.
+- 26/10 · tiệm cận xiên · giọng nữ - c Nhi: "…đường y bằng x." đọc "x" cuối câu thành "xích"; "điểm cùng vị trí ngang" đọc lỗi chữ "ngang". → gói Toán: "x" không đứng cuối câu; tránh cụm lạ, nói bằng cụm quen ("ngay bên dưới").
 
 ## Giọng văn
 - 22/10 · dàn ý cực trị · "cao nhất xóm", "chiếu nghỉ cầu thang" → "đừng hài, cứ ví dụ đơn giản thôi". → không cố gây cười.

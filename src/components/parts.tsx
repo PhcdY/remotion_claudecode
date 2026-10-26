@@ -14,6 +14,11 @@ export const label: React.CSSProperties = {
 
 export const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
+export const clamp01 = (t: number) => Math.min(1, Math.max(0, t));
+
+/** Nhấp nháy 0 → 1 → 0 trong [a, a + d] (frame). */
+export const pulse = (fr: number, a: number, d = 24) => (fr < a || fr > a + d ? 0 : Math.sin(((fr - a) / d) * Math.PI));
+
 /** Số dòng đã bắt đầu (0 trước dòng đầu). */
 export const lineAt = (f: number, L: number[]) => L.filter((l) => f >= l).length;
 

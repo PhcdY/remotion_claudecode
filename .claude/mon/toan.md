@@ -52,6 +52,8 @@ Mặc định **nói theo nghĩa, không đọc chữ cái**: "độ cao tại �
 Buộc phải đọc chữ cái:
 - tên hàm đặt là $f$, viết **"f của x"** (nghe thử 22/10, giọng nữ - c Nhi: tốt nhất). Không đặt tên hàm $h$ (Vivibe đọc "hắc"); buộc dùng thì viết "hát của ích". Chữ cái khác chưa nghe thử → không dùng làm tên hàm;
 - ký hiệu có chỉ số viết liền bằng phiên âm + gạch nối: **"ích-không"** ($x_0$);
+- **chữ "x" không đứng cuối câu** (ngay trước `.` `?`): giọng nữ - c Nhi đọc "x" cuối câu lệch thành "xích" (26/10, "trùng khít đường y bằng x."). Đảo để sau "x" còn một từ: "đường y bằng x trùng khít đồ thị.";
+- **không dùng cụm lạ, ít gặp khi nói** như "vị trí ngang": Vivibe đọc lỗi chữ "ngang" trong cụm này (26/10), trong khi "trục ngang", "nằm ngang", "tiệm cận ngang" đọc đúng. Nói bằng cụm quen: "điểm ngay bên dưới", "cùng chỗ trên trục ngang";
 - **cụm chứa chữ "không" đứng cuối vế**, ngay sau là `,` `.` `?` hoặc một danh từ — "không" dính sang động từ sau nghe thành phủ định ("ích-không ứng với" → "không ứng"). Viết "Tại ích-không, đạo hàm bằng mười." (đã nghe đúng 20/10). Cũng áp dụng cho số "không";
 - dòng nào đọc chữ cái/ký hiệu → thêm `caption` (phụ đề viết bằng ký hiệu thường, vd. "Tại x₀, đạo hàm bằng 10.") và liệt kê trong báo cáo để B2 nghe thử.
 

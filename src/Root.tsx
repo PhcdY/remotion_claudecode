@@ -7,6 +7,7 @@ import { LabComposition } from "./videos/lab-thanh-phan/Video";
 import { DemoGiaiDoan2Composition } from "./videos/demo-giai-doan-2/Video";
 import { TiemCanComposition } from "./videos/tiem-can/Video";
 import { KhaoSatBacBaComposition } from "./videos/khao-sat-bac-ba/Video";
+import { TiemCanXienComposition } from "./videos/tiem-can-xien/Video";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -20,6 +21,7 @@ export const RemotionRoot: React.FC = () => {
       <DemoGiaiDoan2Composition />
       <TiemCanComposition />
       <KhaoSatBacBaComposition />
+      <TiemCanXienComposition />
     </>
   );
 };

@@ -18,6 +18,17 @@ const ticksIn = (a: number, b: number, step: number) => {
   return out;
 };
 
+const insetHalf = (base: Scale, z: number, width: number, height: number) => ({
+  hx: width / (2 * z * base.sx),
+  hy: height / (2 * z * base.sy),
+});
+
+/** Scale của ô phóng (toạ độ trong ô), để vẽ/đặt nhãn khớp với nội dung ô từ bên ngoài. */
+export const insetScale = (base: Scale, x0: number, y0: number, z: number, width: number, height: number): Scale => {
+  const { hx, hy } = insetHalf(base, z, width, height);
+  return makeScale({ xMin: x0 - hx, xMax: x0 + hx, yMin: y0 - hy, yMax: y0 + hy, width, height });
+};
+
 /**
  * Kính lúp: hình gốc giữ nguyên, khung soi trên hình gốc co dần theo z,
  * ô phóng to (kích thước cố định) nối với khung bằng hai đường dẫn, có lưới + số vạch chia.
@@ -38,16 +49,23 @@ export const ZoomInset: React.FC<{
   opacity?: number;
   /** vẽ thêm trong ô phóng (SVG), nhận scale của ô */
   children?: (s: Scale) => React.ReactNode;
-}> = ({ base, baseLeft, baseTop, f, x0, y0, z, left, top, width, height, opacity = 1, children }) => {
-  const hx = width / (2 * z * base.sx);
-  const hy = height / (2 * z * base.sy);
-  const s = makeScale({ xMin: x0 - hx, xMax: x0 + hx, yMin: y0 - hy, yMax: y0 + hy, width, height });
+  /** chấm tại (x0; y0) trong ô (mặc định có) — tắt khi tâm ô không phải một điểm trên đồ thị */
+  showPoint?: boolean;
+  /** cạnh tối thiểu (px) của khung soi trên hình gốc: phóng rất lớn thì khung thật chỉ vài px, không thấy */
+  minBox?: number;
+}> = ({ base, baseLeft, baseTop, f, x0, y0, z, left, top, width, height, opacity = 1, children, showPoint = true, minBox = 0 }) => {
+  const s = insetScale(base, x0, y0, z, width, height);
+  const { hx, hy } = insetHalf(base, z, width, height);
 
-  // khung soi trên hình gốc (toạ độ trang)
-  const rx1 = baseLeft + base.x(x0 - hx);
-  const rx2 = baseLeft + base.x(x0 + hx);
-  const ry1 = baseTop + base.y(y0 + hy);
-  const ry2 = baseTop + base.y(y0 - hy);
+  // khung soi trên hình gốc (toạ độ trang), nới tới minBox quanh tâm
+  const cx = baseLeft + base.x(x0);
+  const cy = baseTop + base.y(y0);
+  const bw = Math.max(base.x(x0 + hx) - base.x(x0 - hx), minBox) / 2;
+  const bh = Math.max(base.y(y0 - hy) - base.y(y0 + hy), minBox) / 2;
+  const rx1 = cx - bw;
+  const rx2 = cx + bw;
+  const ry1 = cy - bh;
+  const ry2 = cy + bh;
   const insetRight = left > rx2;
 
   // bước vạch chia "đẹp", số cách nhau đủ xa để không dính (≥ 120px ngang, ≥ 56px dọc)
@@ -108,7 +126,7 @@ export const ZoomInset: React.FC<{
           ))}
           <FunctionPlot scale={s} f={f} width={7} />
           {children ? children(s) : null}
-          <Point scale={s} x={x0} y={y0} />
+          {showPoint ? <Point scale={s} x={x0} y={y0} /> : null}
         </svg>
         {xTicks.map((v) => (
           <div key={`lx${v}`} data-text="tick" style={{ ...tickStyle, left: s.x(v), bottom: 8, translate: "-50% 0" }}>
