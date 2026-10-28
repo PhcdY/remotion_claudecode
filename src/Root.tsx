@@ -11,6 +11,7 @@ import { KhaoSatPhanThucComposition } from "./videos/khao-sat-phan-thuc/Video";
 import { TiemCanXienComposition } from "./videos/tiem-can-xien/Video";
 import { VectoKhongGianComposition } from "./videos/vecto-khong-gian/Video";
 import { ToiUuLonNhomComposition } from "./videos/toi-uu-lon-nhom/Video";
+import { TichVoHuongComposition } from "./videos/tich-vo-huong/Video";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -28,6 +29,7 @@ export const RemotionRoot: React.FC = () => {
       <TiemCanXienComposition />
       <VectoKhongGianComposition />
       <ToiUuLonNhomComposition />
+      <TichVoHuongComposition />
     </>
   );
 };

@@ -1,0 +1,549 @@
+{
+  "slug": "tich-vo-huong",
+  "title": "Bị kéo suốt mà vệ tinh không nhanh lên",
+  "subject": "toan",
+  "lop": 12,
+  "chuong": "Chương II. Vectơ và hệ trục tọa độ trong không gian",
+  "bai": "Bài 6. Vectơ trong không gian",
+  "exams": [
+    "THPTQG",
+    "TSA",
+    "HSA"
+  ],
+  "beats": [
+    {
+      "id": "b01",
+      "scene": 1,
+      "section": "HIỆN TƯỢNG",
+      "keyword": "Bị kéo mà không nhanh lên?",
+      "visual": "CẢNH 1 — Trái Đất (hình tròn có lục địa đơn giản) ở giữa-trái, quỹ đạo tròn nét mảnh quanh nó, nhãn nhỏ 'không theo tỉ lệ' sát mép quỹ đạo. Vệ tinh (thân hộp + hai tấm pin) đứng yên trên quỹ đạo ở phía trên-phải Trái Đất. Dòng 1: vệ tinh sáng lên, nhãn tên gắn cạnh vệ tinh. Dòng 2: vệ tinh bắt đầu bay chậm đều dọc quỹ đạo, vệt mờ phía sau; bay đều đến hết beat. Dòng 3: mũi tên hướng bay (màu độ dời, tiếp tuyến quỹ đạo) hiện ở vệ tinh, nhãn tốc độ gắn cạnh mũi tên; cả hai chạy theo vệ tinh, giữ tới hết b02. Dòng 4: mũi tên màu lực từ vệ tinh chĩa về tâm Trái Đất, chạy theo vệ tinh, luôn chĩa về tâm.",
+      "lines": [
+        {
+          "show": "vệ tinh sáng lên trên quỹ đạo",
+          "at": "vệ tinh",
+          "text": "Vinasat-1 (2008)",
+          "speak": "Năm hai nghìn không trăm lẻ tám, Việt Nam phóng vệ tinh Vi-na-sát một.",
+          "caption": "Năm 2008, Việt Nam phóng vệ tinh Vinasat-1."
+        },
+        {
+          "show": "vệ tinh bay đều dọc quỹ đạo",
+          "text": "",
+          "speak": "Nó bay vòng quanh Trái Đất, mỗi ngày đúng một vòng."
+        },
+        {
+          "show": "mũi tên hướng bay hiện ở vệ tinh, nhãn tốc độ gắn theo",
+          "cue": "ba phẩy một",
+          "at": "mũi tên hướng bay",
+          "text": "$\\approx 3{,}1$ km/s",
+          "speak": "Tốc độ gần như không đổi, khoảng ba phẩy một ki-lô-mét mỗi giây.",
+          "caption": "Tốc độ gần như không đổi, khoảng 3,1 km/s."
+        },
+        {
+          "show": "mũi tên trọng lực từ vệ tinh chĩa về tâm Trái Đất",
+          "at": "mũi tên trọng lực",
+          "text": "trọng lực",
+          "speak": "Trong khi đó, trọng lực Trái Đất kéo nó liên tục."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Bị kéo suốt như vậy, sao vệ tinh không nhanh lên?"
+        }
+      ]
+    },
+    {
+      "id": "b02",
+      "scene": 1,
+      "section": "VÍ DỤ",
+      "keyword": "Cần công của trọng lực",
+      "visual": "Giữ CẢNH 1: Trái Đất, quỹ đạo, vệ tinh bay đều, mũi tên trọng lực chạy theo. Nhãn 'Vinasat-1 (2008)' mờ đi ở đầu beat; nhãn tốc độ giữ. Vùng trống bên phải Trái Đất dành cho công thức. Dòng 2: công thức công hiện ở vùng trống bên phải. Dòng 3: dòng điều kiện dương/âm hiện ngay dưới công thức. Dòng 4: dòng điều kiện bằng 0 hiện dưới nữa. Cả khối công thức giữ đến hết beat, sang b03 thu nhỏ lên góc trên phải.",
+      "lines": [
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Muốn biết lực làm vật nhanh hay chậm, Vật lý lớp mười dùng công."
+        },
+        {
+          "show": "công thức công hiện bên phải",
+          "at": "vùng trống bên phải Trái Đất",
+          "text": "$A = F\\,s\\cos\\alpha$",
+          "speak": "Công bằng lực nhân quãng đường, nhân côsin của góc giữa chúng."
+        },
+        {
+          "show": "dòng điều kiện dương, âm hiện dưới công thức",
+          "at": "ngay dưới công thức công",
+          "text": "$A > 0$: nhanh lên · $A < 0$: chậm đi",
+          "speak": "Công dương thì vật nhanh lên, công âm thì vật chậm đi."
+        },
+        {
+          "show": "dòng điều kiện bằng 0 hiện dưới",
+          "at": "dưới dòng điều kiện",
+          "text": "$A = 0$: tốc độ giữ nguyên",
+          "speak": "Còn khi công bằng không, tốc độ giữ nguyên."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Vậy cần biết công của trọng lực lên vệ tinh."
+        }
+      ]
+    },
+    {
+      "id": "b03",
+      "scene": 2,
+      "section": "ĐỊNH NGHĨA",
+      "keyword": "Góc vectơ: từ 0° đến 180°",
+      "visual": "CẢNH 2 — kính lúp quanh vệ tinh. BƯỚC KHÓ (khái niệm mới). Hình cảnh 1 thu nhỏ sang trái, khung soi nhỏ quanh vệ tinh, ô phóng lớn bên phải nối bằng hai đường dẫn; vệ tinh dừng bay trong suốt cảnh 2. Công thức công thu nhỏ ở góc trên phải. Trong ô phóng: vệ tinh ở giữa-trái, lưới mờ. Dòng 2: mũi tên trọng lực (màu lực) chĩa xuống-trái về phía Trái Đất. Dòng 3: mũi tên độ dời (màu độ dời) từ vệ tinh dọc hướng bay, vuông góc với mũi tên lực, KHÔNG đánh dấu góc vuông. Dòng 4: cung góc giữa hai mũi tên (màu nhấn). Dòng 5: bản sao mờ của mũi tên độ dời quay chồng lên mũi tên lực. Dòng 6: bản sao mờ quay sang hướng ngược mũi tên lực, rồi mờ đi ở cuối dòng.",
+      "lines": [
+        {
+          "show": "kính lúp mở quanh vệ tinh",
+          "text": "",
+          "speak": "Soi gần vệ tinh, có hai mũi tên cùng xuất phát từ nó."
+        },
+        {
+          "show": "mũi tên trọng lực sáng trong ô phóng",
+          "at": "mũi tên trọng lực",
+          "text": "$\\vec F$",
+          "speak": "Mũi tên thứ nhất là trọng lực, chĩa về tâm Trái Đất.",
+          "caption": "Mũi tên thứ nhất là trọng lực F, chĩa về tâm Trái Đất."
+        },
+        {
+          "show": "mũi tên độ dời hiện dọc hướng bay",
+          "cue": "vectơ độ dời",
+          "at": "mũi tên độ dời",
+          "text": "$\\vec s$",
+          "speak": "Mũi tên thứ hai chỉ quãng bay trong chốc lát, gọi là vectơ độ dời.",
+          "caption": "Mũi tên thứ hai chỉ quãng bay trong chốc lát, gọi là vectơ độ dời s."
+        },
+        {
+          "show": "cung góc giữa hai mũi tên sáng",
+          "at": "cung góc",
+          "text": "$(\\vec F, \\vec s)$",
+          "speak": "Góc giữa hai vectơ là góc mở giữa hai mũi tên, khi đặt chung gốc."
+        },
+        {
+          "show": "bản sao mờ của độ dời quay chồng lên mũi tên lực",
+          "at": "bản sao chồng lên mũi tên lực",
+          "text": "$0^\\circ$",
+          "speak": "Nhỏ nhất là không độ, khi hai vectơ cùng hướng."
+        },
+        {
+          "show": "bản sao mờ quay sang ngược hướng mũi tên lực",
+          "at": "bản sao ngược hướng",
+          "text": "$180^\\circ$",
+          "speak": "Lớn nhất là một trăm tám mươi độ, khi hai vectơ ngược hướng."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Với vệ tinh, chính góc này quyết định trọng lực kéo nó nhanh lên hay chậm đi."
+        }
+      ]
+    },
+    {
+      "id": "b04",
+      "scene": 2,
+      "section": "VÍ DỤ",
+      "keyword": "Mô hình: góc 60°",
+      "visual": "Giữ CẢNH 2 (kính lúp). BƯỚC KHÓ (đổi sang mô hình). Nhãn '0°', '180°' và bản sao đã gỡ. Dòng 1: mũi tên độ dời quay từ từ về phía Trái Đất, dừng ở góc 60° so với mũi tên lực. Dòng 2: nhãn 'mô hình' hiện ở góc trên trái ô phóng, giữ đến hết cảnh 2. Dòng 3: ba vạch chia đều trên mũi tên lực. Dòng 4: hai vạch chia trên mũi tên độ dời (cùng khoảng cách vạch). Dòng 5: số đo góc trên cung góc. Nhãn $\\vec F$, $\\vec s$ đổi thành nhãn độ dài ở dòng 3, 4.",
+      "lines": [
+        {
+          "show": "mũi tên độ dời quay chúc về phía Trái Đất",
+          "text": "",
+          "speak": "Để thấy góc làm thay đổi công thế nào, thử cho vệ tinh bay chúc xuống."
+        },
+        {
+          "show": "nhãn mô hình hiện ở góc ô phóng",
+          "at": "góc trên trái ô phóng",
+          "text": "mô hình",
+          "speak": "Đây là tình huống giả định, số chọn gọn để dễ tính."
+        },
+        {
+          "show": "ba vạch chia hiện trên mũi tên lực",
+          "at": "mũi tên trọng lực",
+          "text": "$|\\vec F| = 3$",
+          "speak": "Mũi tên lực dài ba đơn vị."
+        },
+        {
+          "show": "hai vạch chia hiện trên mũi tên độ dời",
+          "at": "mũi tên độ dời",
+          "text": "$|\\vec s| = 2$",
+          "speak": "Mũi tên độ dời dài hai đơn vị."
+        },
+        {
+          "show": "số đo góc hiện trên cung góc",
+          "at": "cung góc",
+          "text": "$60^\\circ$",
+          "speak": "Góc giữa hai mũi tên là sáu mươi độ."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Giờ tính công của trọng lực trong tình huống này."
+        }
+      ]
+    },
+    {
+      "id": "b05",
+      "scene": 2,
+      "section": "ĐỊNH NGHĨA",
+      "keyword": "Tích vô hướng là một số",
+      "visual": "Giữ CẢNH 2 (kính lúp, mô hình 60°, nhãn 3, 2, 60°). BƯỚC KHÓ (giải phẫu định nghĩa). Công thức công ở góc trên phải mờ đi ở dòng 1. Dòng 1: công thức định nghĩa hiện ở dải trống phía dưới ô phóng, cỡ lớn. Dòng 2: cụm $|\\vec F|$ trên công thức và mũi tên lực sáng cùng màu lực. Dòng 3: cụm $|\\vec s|$ và mũi tên độ dời sáng cùng màu độ dời. Dòng 4: cụm cos và cung góc sáng cùng màu nhấn. Dòng 5: phép thay số hiện nối tiếp ngay sau công thức.",
+      "lines": [
+        {
+          "show": "công thức tích vô hướng hiện dưới ô phóng",
+          "at": "dải trống dưới ô phóng",
+          "text": "$\\vec F \\cdot \\vec s = |\\vec F|\\,|\\vec s|\\cos(\\vec F, \\vec s)$",
+          "speak": "Công thức công lúc nãy chính là một phép nhân hai vectơ, gọi là tích vô hướng."
+        },
+        {
+          "show": "cụm độ dài lực và mũi tên lực sáng cùng màu",
+          "text": "",
+          "speak": "Thừa số đầu là độ dài mũi tên lực, bằng ba."
+        },
+        {
+          "show": "cụm độ dài độ dời và mũi tên độ dời sáng cùng màu",
+          "text": "",
+          "speak": "Thừa số thứ hai là độ dài mũi tên độ dời, bằng hai."
+        },
+        {
+          "show": "cụm côsin và cung góc sáng cùng màu",
+          "at": "cụm côsin trên công thức",
+          "text": "$\\cos 60^\\circ = 0{,}5$",
+          "speak": "Thừa số cuối là côsin của góc giữa chúng, bằng một phần hai."
+        },
+        {
+          "show": "phép thay số hiện sau công thức",
+          "at": "ngay sau công thức",
+          "text": "$= 3 \\cdot 2 \\cdot 0{,}5 = 3$",
+          "speak": "Nhân lại được ba nhân hai nhân một phần hai, bằng ba."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Kết quả là một con số, không phải một mũi tên."
+        }
+      ]
+    },
+    {
+      "id": "b06",
+      "scene": 2,
+      "section": "BẢN CHẤT",
+      "keyword": "Côsin cắt ra cái bóng",
+      "visual": "Giữ CẢNH 2. BƯỚC KHÓ — chuỗi 'vì sao' (1/2). Công thức định nghĩa và phép thay số giữ ở dải dưới (màu thường). Giá của mũi tên lực (đường thẳng mờ) đã có từ đầu beat, kéo dài qua vệ tinh. Dòng 2: đoạn vuông góc nét đứt từ đầu mũi tên độ dời xuống giá lực, có dấu góc vuông ở chân. Dòng 3: tam giác vuông (vệ tinh, đầu mũi tên độ dời, chân đường vuông góc) tô nhạt. Dòng 4: cạnh kề (từ vệ tinh tới chân) đậm màu bóng. Dòng 5: nhãn 'bóng' gắn cạnh kề. Dòng 6: một chấm nhỏ trượt dọc cạnh kề từ vệ tinh tới chân, theo hướng lực.",
+      "lineGap": 0.5,
+      "lines": [
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Nhưng nhân thêm côsin thì có nghĩa gì trên hình?"
+        },
+        {
+          "show": "đường vuông góc nét đứt từ đầu độ dời xuống giá lực",
+          "text": "",
+          "speak": "Từ đầu mũi tên độ dời, kẻ đường vuông góc xuống giá của lực."
+        },
+        {
+          "show": "tam giác vuông tô nhạt",
+          "text": "",
+          "speak": "Được một tam giác vuông, cạnh huyền là mũi tên độ dời."
+        },
+        {
+          "show": "cạnh kề đậm màu bóng",
+          "at": "cạnh kề trên giá lực",
+          "text": "$2 \\cdot \\cos 60^\\circ = 1$",
+          "speak": "Cạnh kề bằng cạnh huyền nhân côsin, tức là hai nhân một phần hai, bằng một."
+        },
+        {
+          "show": "nhãn bóng gắn cạnh kề",
+          "cue": "cái bóng",
+          "at": "cạnh kề",
+          "text": "bóng của $\\vec s$",
+          "speak": "Cạnh kề này như cái bóng của độ dời, in lên hướng của lực."
+        },
+        {
+          "show": "chấm nhỏ trượt dọc cái bóng theo hướng lực",
+          "text": "",
+          "speak": "Nghĩa là vệ tinh chỉ tiến về phía Trái Đất được một đơn vị."
+        }
+      ]
+    },
+    {
+      "id": "b07",
+      "scene": 2,
+      "section": "BẢN CHẤT",
+      "keyword": "Bóng ngược hướng: tích âm",
+      "visual": "Giữ CẢNH 2. BƯỚC KHÓ — chuỗi 'vì sao' (2/3). Còn: kính lúp, mũi tên lực (3), độ dời (2, góc 60°), giá lực, bóng (màu bóng) + nhãn. Dòng 1: dòng 'lực × bóng' hiện dưới phép thay số. Dòng 3: mũi tên độ dời quay ra xa Trái Đất, dừng ở 120°; đường vuông góc và bóng vẽ lại theo. Dòng 4: bóng mới nằm trên phần kéo dài của giá về phía sau vệ tinh, đổi sang màu ngược. Dòng 5: dòng kết quả âm hiện. Dòng mới sau dòng bóng âm: nhãn $\\cos 60^\\circ = 0{,}5$ cũ đổi thành $\\cos 120^\\circ = -0{,}5$ tại cùng chỗ (cụm côsin trên công thức).",
+      "lineGap": 0.5,
+      "lines": [
+        {
+          "show": "dòng lực nhân bóng hiện dưới phép thay số",
+          "at": "dưới phép thay số",
+          "text": "$\\vec F \\cdot \\vec s = 3 \\cdot 1 = 3$",
+          "speak": "Hai nhân côsin chính là cái bóng, nên tích là độ dài lực nhân bóng."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Lực chỉ có tác dụng với phần độ dời đi theo hướng của nó."
+        },
+        {
+          "show": "mũi tên độ dời quay ra xa Trái Đất, tới 120 độ",
+          "at": "cung góc",
+          "text": "$120^\\circ$",
+          "speak": "Còn nếu vệ tinh ngóc lên, bay ra xa Trái Đất thì sao?"
+        },
+        {
+          "show": "bóng mới hiện phía sau vệ tinh, màu ngược",
+          "at": "bóng phía sau",
+          "text": "bóng $= -1$",
+          "speak": "Bóng rơi ra phía sau, ngược hướng với lực."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Bóng ngược hướng lực thì tính là số âm."
+        },
+        {
+          "show": "cụm côsin trên công thức sáng cùng cung góc",
+          "at": "cụm côsin trên công thức",
+          "text": "$\\cos 120^\\circ = -0{,}5$",
+          "speak": "Khớp với công thức: góc tù có côsin âm, côsin một trăm hai mươi độ là âm một phần hai."
+        },
+        {
+          "show": "dòng kết quả âm hiện",
+          "at": "dưới dòng lực nhân bóng",
+          "text": "$\\vec F \\cdot \\vec s = -3$",
+          "speak": "Tích thành âm ba, công âm, nên vệ tinh chậm đi."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Bóng ngược hướng lực thì tích âm, lực đang kìm vệ tinh lại."
+        }
+      ]
+    },
+    {
+      "id": "b08",
+      "scene": 2,
+      "section": "BẢN CHẤT",
+      "keyword": "Vuông góc: tích bằng 0",
+      "visual": "Giữ CẢNH 2. BƯỚC KHÓ — chuỗi 'vì sao' (3/3), khoảnh khắc 'à ra thế' ở dòng 2–3. Còn: kính lúp, mũi tên lực, mũi tên độ dời ở 120°, bóng màu ngược, hai dòng kết quả 3 và −3 ở dải dưới. Dòng 1 (câu hỏi đoán): trong khoảng nghỉ hai bóng mờ — phía trước (của trường hợp 60°) và phía sau (120°) — nháy lần lượt, không lộ đáp án. Dòng 2: mũi tên độ dời quay về đúng 90°, bóng co dần thành một chấm tại vệ tinh. Dòng 3: dòng kết quả bằng 0 hiện dưới dòng −3; giữ đến hết beat.",
+      "lineGap": 0.5,
+      "lines": [
+        {
+          "show": "hai bóng mờ phía trước và phía sau nháy lần lượt",
+          "text": "",
+          "speak": "Giữa hai trường hợp đó, khi góc vuông thì bóng nằm ở đâu?",
+          "pauseAfter": 1.5
+        },
+        {
+          "show": "mũi tên độ dời quay về 90 độ, bóng co lại thành một điểm",
+          "at": "chân đường vuông góc tại vệ tinh",
+          "text": "bóng $= 0$",
+          "speak": "Bóng co lại, chỉ còn đúng một điểm."
+        },
+        {
+          "show": "dòng kết quả bằng 0 hiện",
+          "at": "dưới dòng kết quả âm",
+          "text": "$\\vec F \\cdot \\vec s = 0$",
+          "speak": "Bóng bằng không, nên tích vô hướng cũng bằng không."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Lực vuông góc thì không kéo vật đi chút nào theo hướng của nó."
+        }
+      ]
+    },
+    {
+      "id": "b09",
+      "scene": 2,
+      "section": "TRỰC GIÁC",
+      "keyword": "Chỉ $\\cos 90^\\circ$ bằng 0",
+      "visual": "Giữ CẢNH 2. Kính lúp mờ bớt (vẫn thấy góc vuông và bóng là chấm); các dòng kết quả 3, −3 mờ đi. Dòng 1: dấu góc vuông hiện ở góc giữa hai mũi tên. Dòng 2: vế trái của tính chất hiện ở dải dưới, chỗ các dòng kết quả cũ. Dòng 3: mũi tên ⇔ và vế phải hiện nối tiếp.",
+      "lines": [
+        {
+          "show": "dấu góc vuông hiện giữa hai mũi tên",
+          "text": "",
+          "speak": "Chuyện này đúng với mọi cặp vectơ khác vectơ-không.",
+          "caption": "Chuyện này đúng với mọi cặp vectơ khác vectơ 0."
+        },
+        {
+          "show": "vế vuông góc hiện ở dải dưới",
+          "at": "dải dưới ô phóng",
+          "text": "$\\vec a \\perp \\vec b$",
+          "speak": "Với hai vectơ bất kỳ, vuông góc thì tích vô hướng bằng không."
+        },
+        {
+          "show": "mũi tên tương đương và vế tích bằng 0 hiện",
+          "at": "nối tiếp bên phải",
+          "text": "$\\Leftrightarrow \\vec a \\cdot \\vec b = 0$",
+          "speak": "Ngược lại, tích bằng không thì hai vectơ vuông góc."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Vì trong khoảng từ không tới một trăm tám mươi độ, chỉ có góc vuông cho côsin bằng không."
+        }
+      ]
+    },
+    {
+      "id": "b10",
+      "scene": 3,
+      "section": "TRONG ĐỀ THI",
+      "keyword": "Dời chung gốc rồi đo góc",
+      "visual": "CẢNH 3 — hình lập phương ABCD.A'B'C'D' (hình chiếu song song kiểu SGK, trục sâu 30°, cạnh khuất nét đứt), chiếm nửa trái. Tính chất 'vuông góc ⇔ tích bằng 0' thu nhỏ ở góc trên phải. BƯỚC KHÓ (chuyển sang đề thi). Dòng 1: nhãn cạnh a sát AB. Dòng 2: mũi tên AB (màu lực) và A'C' (màu độ dời) sáng; đề bài hiện ở vùng trống bên phải. Dòng 4: bản sao A'C' trượt thẳng xuống, khít lên đường chéo AC của đáy. Dòng 5: cung góc tại A giữa AB và AC. Dòng 6: phép thay số $a \\cdot a\\sqrt{2} \\cdot \\cos 45^\\circ$ hiện dưới đề bài (độ dài AC đọc trong lời, không thêm nhãn trên cạnh). Dòng 7: phép thay số đổi tại chỗ thành $a \\cdot a\\sqrt{2} \\cdot \\frac{\\sqrt{2}}{2} = a^2$. Dòng 8: cạnh CB (vuông góc AB tại B) sáng nét đứt, đoạn AB sáng màu bóng. Dòng 9: dấu '?' trong đề bài đổi thành $a^2$ (cùng chỗ, không thêm nhãn mới).",
+      "lines": [
+        {
+          "show": "hình lập phương hiện, nhãn cạnh a sát AB",
+          "at": "cạnh AB",
+          "text": "$a$",
+          "speak": "Trong đề thi, tích vô hướng hay được hỏi trên hình lập phương cạnh a.",
+          "caption": "Trong đề thi, tích vô hướng hay được hỏi trên hình lập phương cạnh a."
+        },
+        {
+          "show": "mũi tên AB và A'C' sáng, đề bài hiện bên phải",
+          "at": "vùng trống bên phải hình lập phương",
+          "text": "$\\vec{AB} \\cdot \\vec{A'C'} = \\,?$",
+          "speak": "Ví dụ, tính tích vô hướng của vectơ a-bê và vectơ a-phẩy-xê-phẩy.",
+          "caption": "Ví dụ, tính tích vô hướng của vectơ AB và vectơ A'C'."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Hai vectơ này không chung gốc, nên chưa đo được góc ngay."
+        },
+        {
+          "show": "bản sao A'C' trượt xuống khít đường chéo AC",
+          "at": "đường chéo AC",
+          "text": "$\\vec{A'C'} = \\vec{AC}$",
+          "speak": "Như bài trước, dời một vectơ đi, nó vẫn là vectơ cũ."
+        },
+        {
+          "show": "cung góc tại A giữa AB và AC",
+          "at": "cung góc tại A",
+          "text": "$45^\\circ$",
+          "speak": "Giờ chung gốc A, đường chéo hình vuông tạo với cạnh góc bốn mươi lăm độ.",
+          "caption": "Giờ chung gốc A, đường chéo hình vuông tạo với cạnh góc 45°."
+        },
+        {
+          "show": "phép thay số hiện dưới đề bài",
+          "at": "dưới đề bài",
+          "text": "$a \\cdot a\\sqrt{2} \\cdot \\cos 45^\\circ$",
+          "speak": "Đường chéo dài a căn hai, công thức cho a nhân a căn hai nhân côsin bốn mươi lăm độ.",
+          "caption": "Đường chéo dài a√2, công thức cho a · a√2 · cos 45°."
+        },
+        {
+          "show": "phép thay số đổi côsin thành căn hai trên hai và ra kết quả",
+          "at": "phép thay số dưới đề bài",
+          "text": "$a \\cdot a\\sqrt{2} \\cdot \\frac{\\sqrt{2}}{2} = a^2$",
+          "speak": "Côsin bốn mươi lăm độ là căn hai trên hai, nên ra a bình phương.",
+          "caption": "cos 45° = √2/2, nên ra a²."
+        },
+        {
+          "show": "cạnh CB sáng nét đứt, đoạn AB sáng màu bóng",
+          "at": "đoạn AB",
+          "text": "bóng $= a$",
+          "speak": "Nhìn bóng thì nhanh hơn: bóng của nó trên cạnh a-bê rơi đúng điểm bê, dài a.",
+          "caption": "Nhìn bóng thì nhanh hơn: bóng của nó trên cạnh AB rơi đúng điểm B, dài a."
+        },
+        {
+          "show": "dấu hỏi trong đề bài đổi thành $a^2$",
+          "text": "",
+          "speak": "Hai cách cùng ra a nhân a, tức là a bình phương.",
+          "caption": "Hai cách cùng ra a · a, tức là a²."
+        }
+      ]
+    },
+    {
+      "id": "b11",
+      "scene": 3,
+      "section": "BẪY THƯỜNG GẶP",
+      "keyword": "Góc hai vectơ có thể tù",
+      "visual": "Giữ CẢNH 3. Mũi tên A'C', bản sao AC, cung 45°, bóng và dòng kiểm mờ đi ở đầu beat; kết quả $a^2$ thu nhỏ lên trên. Mũi tên AB giữ. Dòng 1: mũi tên C'D' (màu độ dời) sáng trên đáy trên; đề bài mới hiện bên phải. Dòng 2: giá của AB và C'D' kéo dài mờ, song song; nhãn góc hai đường thẳng đặt giữa hai giá. Dòng 3: bản sao C'D' trượt về đặt gốc tại A, chĩa ngược AB (sang trái, ra ngoài hình — chừa chỗ trống bên trái A). Dòng 4: cung nửa vòng tại A, nhãn 180°. Dòng 5: bóng (màu ngược) nằm phía ngược AB; đề bài đổi '?' thành kết quả âm. Nhãn '0°' (giữa hai giá) và '180°' (tại A) giữ đến hết beat để so sánh.",
+      "lines": [
+        {
+          "show": "mũi tên C'D' sáng, đề bài mới hiện bên phải",
+          "at": "vùng trống bên phải",
+          "text": "$\\vec{AB} \\cdot \\vec{C'D'} = \\,?$",
+          "speak": "Còn tích của vectơ a-bê với vectơ xê-phẩy-đê-phẩy thì sao?",
+          "caption": "Còn tích của vectơ AB với vectơ C'D' thì sao?"
+        },
+        {
+          "show": "giá của AB và C'D' kéo dài mờ, song song",
+          "text": "góc hai đường thẳng: $0^\\circ$",
+          "speak": "Hai cạnh này song song, nên dễ nghĩ góc giữa chúng bằng không độ.",
+          "at": "giữa hai giá song song"
+        },
+        {
+          "show": "bản sao C'D' trượt về gốc A, chĩa ngược AB",
+          "text": "",
+          "speak": "Nhưng dời về chung gốc, mũi tên này chĩa ngược lại."
+        },
+        {
+          "show": "cung nửa vòng tại A",
+          "at": "cung tại A",
+          "text": "góc hai vectơ: $180^\\circ$",
+          "speak": "Hai vectơ ngược hướng, góc giữa chúng là một trăm tám mươi độ."
+        },
+        {
+          "show": "bóng màu ngược hiện, dấu hỏi đổi thành kết quả âm",
+          "at": "đề bài",
+          "text": "$\\vec{AB} \\cdot \\vec{C'D'} = -a^2$",
+          "speak": "Bóng nằm phía ngược lại, nên tích bằng âm a bình phương.",
+          "caption": "Bóng nằm phía ngược lại, nên tích bằng −a²."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Góc giữa hai vectơ có thể tù, còn góc giữa hai đường thẳng thì không."
+        }
+      ]
+    },
+    {
+      "id": "b12",
+      "scene": 1,
+      "section": "GIẢI ĐÁP",
+      "keyword": "Vuông góc: kéo mà không đẩy",
+      "visual": "CẢNH 1 — quay lại đúng như cuối b02 (Trái Đất, quỹ đạo, vệ tinh, mũi tên trọng lực, nhãn tốc độ); khối công thức công gỡ, thay bằng tính chất 'vuông góc ⇔ tích bằng 0' nhỏ ở vùng trống bên phải. Vệ tinh bay đều tiếp. Dòng 2: thêm mũi tên trọng lực mờ ở ba điểm khác trên quỹ đạo, đều chĩa về tâm. Dòng 3: mũi tên độ dời (tiếp tuyến) hiện tại vệ tinh, kèm dấu góc vuông với mũi tên lực; chạy theo vệ tinh. Dòng 4: nhãn tích bằng 0 gắn cạnh dấu góc vuông. Dòng 5: nhãn tốc độ sáng lên.",
+      "lines": [
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Quay lại Vi-na-sát một, bay trên quỹ đạo gần như tròn.",
+          "caption": "Quay lại Vinasat-1, bay trên quỹ đạo gần như tròn."
+        },
+        {
+          "show": "mũi tên trọng lực mờ hiện ở ba điểm khác trên quỹ đạo",
+          "text": "",
+          "speak": "Ở mọi điểm, trọng lực đều chĩa về tâm Trái Đất."
+        },
+        {
+          "show": "mũi tên độ dời tiếp tuyến hiện kèm dấu góc vuông",
+          "cue": "vuông góc với bán kính",
+          "at": "dấu góc vuông tại vệ tinh",
+          "text": "$90^\\circ$",
+          "speak": "Còn hướng bay luôn vuông góc với bán kính, tức là vuông góc với trọng lực."
+        },
+        {
+          "show": "nhãn tích bằng 0 gắn cạnh góc vuông",
+          "at": "cạnh dấu góc vuông",
+          "text": "$\\vec F \\cdot \\vec s = 0$",
+          "speak": "Nên tích vô hướng của lực và độ dời luôn bằng không."
+        },
+        {
+          "show": "nhãn tốc độ sáng lên",
+          "text": "",
+          "speak": "Công bằng không, tốc độ giữ nguyên ba phẩy một ki-lô-mét mỗi giây.",
+          "caption": "Công bằng không, tốc độ giữ nguyên 3,1 km/s."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Vậy lực vuông góc hướng bay thì kéo mãi, vệ tinh vẫn không nhanh lên."
+        }
+      ]
+    }
+  ]
+}
