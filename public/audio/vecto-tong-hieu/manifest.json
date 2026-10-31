@@ -1,0 +1,513 @@
+{
+  "slug": "vecto-tong-hieu",
+  "engine": "vivibe",
+  "voice": "bZ26Wn8YhQJq7aJ912aBsf",
+  "voice_name": "nữ - c Nhi",
+  "speed": 1.0,
+  "lines": [
+    {
+      "beat": "b01",
+      "line": 1,
+      "file": "b01-l01.mp3",
+      "hash": "5e74377ead086b0e",
+      "text": ""
+    },
+    {
+      "beat": "b01",
+      "line": 2,
+      "file": "b01-l02.mp3",
+      "hash": "5841a1aa20649079",
+      "text": "gió ngang 48 km/h"
+    },
+    {
+      "beat": "b01",
+      "line": 3,
+      "file": "b01-l03.mp3",
+      "hash": "a5b7f6d5ad892dbf",
+      "text": ""
+    },
+    {
+      "beat": "b01",
+      "line": 4,
+      "file": "b01-l04.mp3",
+      "hash": "3f841c8fe30a1e51",
+      "text": ""
+    },
+    {
+      "beat": "b01",
+      "line": 5,
+      "file": "b01-l05.mp3",
+      "hash": "7f5df06c87e05d3a",
+      "text": ""
+    },
+    {
+      "beat": "b02",
+      "line": 1,
+      "file": "b02-l01.mp3",
+      "hash": "c72295c303e23d76",
+      "text": "1 ô = 0,4 km"
+    },
+    {
+      "beat": "b02",
+      "line": 2,
+      "file": "b02-l02.mp3",
+      "hash": "a89ff5420cd5fcf7",
+      "text": "$A$"
+    },
+    {
+      "beat": "b02",
+      "line": 3,
+      "file": "b02-l03.mp3",
+      "hash": "f2426baaf940399f",
+      "text": "240 km/h"
+    },
+    {
+      "beat": "b02",
+      "line": 4,
+      "file": "b02-l04.mp3",
+      "hash": "12fbb84f12de81d0",
+      "text": "4 km"
+    },
+    {
+      "beat": "b02",
+      "line": 5,
+      "file": "b02-l05.mp3",
+      "hash": "ff2507636d052394",
+      "text": ""
+    },
+    {
+      "beat": "b03",
+      "line": 1,
+      "file": "b03-l01.mp3",
+      "hash": "6f88fd27b7170df6",
+      "text": "$\\overrightarrow{AB}$"
+    },
+    {
+      "beat": "b03",
+      "line": 2,
+      "file": "b03-l02.mp3",
+      "hash": "2632fb14212fe197",
+      "text": "$=\\overrightarrow{AB}$"
+    },
+    {
+      "beat": "b03",
+      "line": 3,
+      "file": "b03-l03.mp3",
+      "hash": "0916a03d2079fa69",
+      "text": ""
+    },
+    {
+      "beat": "b03",
+      "line": 4,
+      "file": "b03-l04.mp3",
+      "hash": "53fd94f987fb2861",
+      "text": ""
+    },
+    {
+      "beat": "b04",
+      "line": 1,
+      "file": "b04-l01.mp3",
+      "hash": "62628cbcbbe1e120",
+      "text": "48 km/h → 0,8 km mỗi phút"
+    },
+    {
+      "beat": "b04",
+      "line": 2,
+      "file": "b04-l02.mp3",
+      "hash": "3d585fad24cbbd6a",
+      "text": ""
+    },
+    {
+      "beat": "b04",
+      "line": 3,
+      "file": "b04-l03.mp3",
+      "hash": "3507b296fc55c414",
+      "text": ""
+    },
+    {
+      "beat": "b04",
+      "line": 4,
+      "file": "b04-l04.mp3",
+      "hash": "0d8ddfc26cdddbbd",
+      "text": "$C$"
+    },
+    {
+      "beat": "b04",
+      "line": 5,
+      "file": "b04-l05.mp3",
+      "hash": "fa789bd3a94d402a",
+      "text": "lệch 0,8 km"
+    },
+    {
+      "beat": "b04",
+      "line": 6,
+      "file": "b04-l06.mp3",
+      "hash": "d41f83e064a1801a",
+      "text": ""
+    },
+    {
+      "beat": "b05",
+      "line": 1,
+      "file": "b05-l01.mp3",
+      "hash": "8b5a4d0ba0dc9c3f",
+      "text": "$\\overrightarrow{AC}$"
+    },
+    {
+      "beat": "b05",
+      "line": 2,
+      "file": "b05-l02.mp3",
+      "hash": "e103f2901c52c947",
+      "text": "$\\overrightarrow{AB}+\\overrightarrow{BC}=\\overrightarrow{AC}$"
+    },
+    {
+      "beat": "b05",
+      "line": 3,
+      "file": "b05-l03.mp3",
+      "hash": "12e0daf9f9709566",
+      "text": ""
+    },
+    {
+      "beat": "b05",
+      "line": 4,
+      "file": "b05-l04.mp3",
+      "hash": "993640407fc6c9ef",
+      "text": ""
+    },
+    {
+      "beat": "b05",
+      "line": 5,
+      "file": "b05-l05.mp3",
+      "hash": "98a38bddd8f4830d",
+      "text": ""
+    },
+    {
+      "beat": "b05",
+      "line": 6,
+      "file": "b05-l06.mp3",
+      "hash": "d3b1e968fb86efc6",
+      "text": ""
+    },
+    {
+      "beat": "b06",
+      "line": 1,
+      "file": "b06-l01.mp3",
+      "hash": "bc565d9c6baf7b1c",
+      "text": ""
+    },
+    {
+      "beat": "b06",
+      "line": 2,
+      "file": "b06-l02.mp3",
+      "hash": "cf77da3e16f12cd7",
+      "text": "$\\overrightarrow{AE}$"
+    },
+    {
+      "beat": "b06",
+      "line": 3,
+      "file": "b06-l03.mp3",
+      "hash": "f2d0011396b8c1cc",
+      "text": ""
+    },
+    {
+      "beat": "b06",
+      "line": 4,
+      "file": "b06-l04.mp3",
+      "hash": "7d1577cb35b2142b",
+      "text": ""
+    },
+    {
+      "beat": "b06",
+      "line": 5,
+      "file": "b06-l05.mp3",
+      "hash": "f2c93da2f6ab4bd6",
+      "text": "$\\overrightarrow{BC}=\\overrightarrow{AE}$"
+    },
+    {
+      "beat": "b06",
+      "line": 6,
+      "file": "b06-l06.mp3",
+      "hash": "22c02fd5b0f944da",
+      "text": ""
+    },
+    {
+      "beat": "b06",
+      "line": 7,
+      "file": "b06-l07.mp3",
+      "hash": "36bbd0a992519040",
+      "text": ""
+    },
+    {
+      "beat": "b07",
+      "line": 1,
+      "file": "b07-l01.mp3",
+      "hash": "f21b7d949cea217a",
+      "text": ""
+    },
+    {
+      "beat": "b07",
+      "line": 2,
+      "file": "b07-l02.mp3",
+      "hash": "c3244c007842296d",
+      "text": "hình bình hành"
+    },
+    {
+      "beat": "b07",
+      "line": 3,
+      "file": "b07-l03.mp3",
+      "hash": "2cc878965d8e4c39",
+      "text": ""
+    },
+    {
+      "beat": "b07",
+      "line": 4,
+      "file": "b07-l04.mp3",
+      "hash": "5ae004548e787fd0",
+      "text": "$\\overrightarrow{AB}+\\overrightarrow{AE}=\\overrightarrow{AC}$"
+    },
+    {
+      "beat": "b07",
+      "line": 5,
+      "file": "b07-l05.mp3",
+      "hash": "665ae7050982e839",
+      "text": ""
+    },
+    {
+      "beat": "b08",
+      "line": 1,
+      "file": "b08-l01.mp3",
+      "hash": "4b87383e358eb4ed",
+      "text": ""
+    },
+    {
+      "beat": "b08",
+      "line": 2,
+      "file": "b08-l02.mp3",
+      "hash": "182067fd9d791ec9",
+      "text": "$4{,}8$ km?"
+    },
+    {
+      "beat": "b08",
+      "line": 3,
+      "file": "b08-l03.mp3",
+      "hash": "bd8b8331f511dd7a",
+      "text": "$\\sqrt{4^2+0{,}8^2}\\approx 4{,}08$ km"
+    },
+    {
+      "beat": "b08",
+      "line": 4,
+      "file": "b08-l04.mp3",
+      "hash": "b0e2e7994ac82df6",
+      "text": ""
+    },
+    {
+      "beat": "b08",
+      "line": 5,
+      "file": "b08-l05.mp3",
+      "hash": "bee3f11c4ad5e192",
+      "text": ""
+    },
+    {
+      "beat": "b09",
+      "line": 1,
+      "file": "b09-l01.mp3",
+      "hash": "e4f5f82b37d69619",
+      "text": "$M$: chỗ cần tới"
+    },
+    {
+      "beat": "b09",
+      "line": 2,
+      "file": "b09-l02.mp3",
+      "hash": "93f028db7ecfa8a4",
+      "text": "$\\overrightarrow{AM}$"
+    },
+    {
+      "beat": "b09",
+      "line": 3,
+      "file": "b09-l03.mp3",
+      "hash": "5949e5149907e508",
+      "text": ""
+    },
+    {
+      "beat": "b09",
+      "line": 4,
+      "file": "b09-l04.mp3",
+      "hash": "a1b03f0a86a7f093",
+      "text": "$\\,?\\,+\\overrightarrow{AE}=\\overrightarrow{AM}$"
+    },
+    {
+      "beat": "b09",
+      "line": 5,
+      "file": "b09-l05.mp3",
+      "hash": "fcd883c0fc308d26",
+      "text": ""
+    },
+    {
+      "beat": "b10",
+      "line": 1,
+      "file": "b10-l01.mp3",
+      "hash": "66541f521a3db6c5",
+      "text": ""
+    },
+    {
+      "beat": "b10",
+      "line": 2,
+      "file": "b10-l02.mp3",
+      "hash": "91c844a9548e8e9d",
+      "text": "$-\\overrightarrow{AE}$"
+    },
+    {
+      "beat": "b10",
+      "line": 3,
+      "file": "b10-l03.mp3",
+      "hash": "555f45c7e91a1cea",
+      "text": "$\\overrightarrow{AE}+(-\\overrightarrow{AE})=\\vec{0}$"
+    },
+    {
+      "beat": "b10",
+      "line": 4,
+      "file": "b10-l04.mp3",
+      "hash": "501636e842ab40c9",
+      "text": "$\\vec{a}-\\vec{b}=\\vec{a}+(-\\vec{b})$"
+    },
+    {
+      "beat": "b10",
+      "line": 5,
+      "file": "b10-l05.mp3",
+      "hash": "8a1813e26cf323bf",
+      "text": ""
+    },
+    {
+      "beat": "b11",
+      "line": 1,
+      "file": "b11-l01.mp3",
+      "hash": "bbb7a178de35f7e9",
+      "text": "$?+\\overrightarrow{AE}+(-\\overrightarrow{AE})=\\overrightarrow{AM}+(-\\overrightarrow{AE})$"
+    },
+    {
+      "beat": "b11",
+      "line": 2,
+      "file": "b11-l02.mp3",
+      "hash": "f7ed89499f9aa133",
+      "text": "$?=\\overrightarrow{AM}-\\overrightarrow{AE}$"
+    },
+    {
+      "beat": "b11",
+      "line": 3,
+      "file": "b11-l03.mp3",
+      "hash": "ac9c19f0366e253f",
+      "text": "$K$"
+    },
+    {
+      "beat": "b11",
+      "line": 4,
+      "file": "b11-l04.mp3",
+      "hash": "56db2ef9d5d709fc",
+      "text": ""
+    },
+    {
+      "beat": "b11",
+      "line": 5,
+      "file": "b11-l05.mp3",
+      "hash": "c6ff6e83c1dc691c",
+      "text": "$\\overrightarrow{AK}$"
+    },
+    {
+      "beat": "b11",
+      "line": 6,
+      "file": "b11-l06.mp3",
+      "hash": "33da1aeb56f61e0f",
+      "text": ""
+    },
+    {
+      "beat": "b11",
+      "line": 7,
+      "file": "b11-l07.mp3",
+      "hash": "4f0630a77e88f4c3",
+      "text": ""
+    },
+    {
+      "beat": "b12",
+      "line": 1,
+      "file": "b12-l01.mp3",
+      "hash": "e024d685e156af14",
+      "text": ""
+    },
+    {
+      "beat": "b12",
+      "line": 2,
+      "file": "b12-l02.mp3",
+      "hash": "3a9864766471dfed",
+      "text": "$\\overrightarrow{EM}$"
+    },
+    {
+      "beat": "b12",
+      "line": 3,
+      "file": "b12-l03.mp3",
+      "hash": "49c683f338f7c484",
+      "text": "trái 2, lên 10"
+    },
+    {
+      "beat": "b12",
+      "line": 4,
+      "file": "b12-l04.mp3",
+      "hash": "c2f2a1610edfb926",
+      "text": "$\\overrightarrow{EM}=\\overrightarrow{AK}$"
+    },
+    {
+      "beat": "b12",
+      "line": 5,
+      "file": "b12-l05.mp3",
+      "hash": "c8a12a2b4d0c5c4d",
+      "text": "$\\overrightarrow{AM}-\\overrightarrow{AE}=\\overrightarrow{EM}$"
+    },
+    {
+      "beat": "b12",
+      "line": 6,
+      "file": "b12-l06.mp3",
+      "hash": "026324efe3e34f95",
+      "text": ""
+    },
+    {
+      "beat": "b13",
+      "line": 1,
+      "file": "b13-l01.mp3",
+      "hash": "fa7806adc2bdff82",
+      "text": ""
+    },
+    {
+      "beat": "b13",
+      "line": 2,
+      "file": "b13-l02.mp3",
+      "hash": "d116c7581658d738",
+      "text": ""
+    },
+    {
+      "beat": "b13",
+      "line": 3,
+      "file": "b13-l03.mp3",
+      "hash": "39b1a62861b56e97",
+      "text": "$\\tan\\alpha=\\dfrac{0{,}8}{4}$"
+    },
+    {
+      "beat": "b13",
+      "line": 4,
+      "file": "b13-l04.mp3",
+      "hash": "7f56145088187ed9",
+      "text": "$\\alpha\\approx 11^{\\circ}$"
+    },
+    {
+      "beat": "b13",
+      "line": 5,
+      "file": "b13-l05.mp3",
+      "hash": "a23546da24edbfe8",
+      "text": ""
+    },
+    {
+      "beat": "b13",
+      "line": 6,
+      "file": "b13-l06.mp3",
+      "hash": "3f1b63bdcf097a92",
+      "text": ""
+    }
+  ]
+}
