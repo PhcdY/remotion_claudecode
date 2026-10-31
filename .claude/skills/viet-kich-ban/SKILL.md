@@ -32,6 +32,11 @@ Người dùng đưa: **chủ đề** + **ý bản chất muốn nói** (+ kỳ 
 
 ### Bước 0 — Tìm ý (trước dàn ý)
 
+0. **Phân loại bài** (trường `loai`): quyết định khung của cả video, làm trước khi tìm hiện tượng.
+   - **`mot-y` (một ý bản chất)**: bài xoay quanh 1–2 khái niệm và một câu "vì sao" (tiệm cận, đơn điệu, cực trị, tối ưu). Hiện tượng *chính là* đối tượng của bài: số và hình của nó là hàm số, đồ thị hay đại lượng cần tính (xe leo dốc: tốc độ trung bình là hàm của tốc độ xuống). Dùng khung chung bên dưới, có ví dụ xuyên suốt.
+   - **`nhieu-khai-niem` (nhiều định nghĩa, tính chất)**: bài SGK đưa ≥ 3 khái niệm mới, **hoặc** hiện tượng chỉ *giống* đối tượng của bài (drone ↔ vectơ, vệ tinh ↔ tích vô hướng). Dùng **Khung bài nhiều khái niệm** bên dưới.
+   - Phép thử: muốn nói khái niệm qua câu chuyện mà phải "dịch" ("drone A là điểm đầu", "đường bay là vectơ") → `nhieu-khai-niem`. Câu chuyện tự sinh ra đúng hình và số của bài → `mot-y`.
+   - Liệt kê **khái niệm mới** của video (trường `concepts` ở từng beat). Quá 5 → đề xuất tách video ngay ở dàn ý (vd. Bài 6 vectơ trong không gian: khái niệm + vectơ bằng nhau · tổng, hiệu, tích với một số · tích vô hướng).
 1. **Nghĩ 6–8 hiện tượng mở đầu**, chấm từng cái (0–2 mỗi tiêu chí): đúng thật, có nguồn · gây tò mò, nêu được thành câu hỏi trong 15–20 s · qua ba phép thử của yêu cầu 1 · có hình cụ thể để dựng · kết được bằng một đáp án cụ thể (con số, kết luận nhìn thấy) · khớp lời hứa của tiêu đề. Chọn cái cao điểm nhất; giữ 2 phương án dự phòng.
 2. **Chốt hình trung tâm và khoảnh khắc "à ra thế"**: một hình mang được ý bản chất (vd. kính lúp quanh điểm, dấu của tử và mẫu) và khoảnh khắc người xem *thấy* ra lý do. Thiết kế ngược từ khoảnh khắc này: mọi beat trước nó chuẩn bị đủ thứ để nó "nổ".
 3. **Cách hiểu sai phổ biến** của chủ đề (nếu có): học sinh hay nghĩ gì, đề thi hay bẫy gì.
@@ -40,7 +45,7 @@ Người dùng đưa: **chủ đề** + **ý bản chất muốn nói** (+ kỳ 
 
 Phần lớn lỗi người dùng bắt được là lỗi dàn ý; viết xong lời mới phát hiện thì phải làm lại B1–B3. Dàn ý bày đủ:
 
-1. **slug**, **tiêu đề**, **môn** (`subject`), **lớp / chương / bài** theo SGK (`lop`, `chuong`, `bai`: quyết định thư mục chứa video trong `out/`).
+1. **slug**, **tiêu đề**, **môn** (`subject`), **lớp / chương / bài** theo SGK (`lop`, `chuong`, `bai`: quyết định thư mục chứa video trong `out/`); **loại bài** (`loai`) + lý do theo phép thử ở Bước 0; **danh sách khái niệm mới** (đề xuất tách video nếu quá 5).
 2. **Vị trí trong chuỗi**: bài trước đã dạy gì (chỉ nhắc một dòng) · khái niệm mới · ý để dành bài sau.
 3. **Hiện tượng**: bảng chấm 3 ý tốt nhất ở Bước 0 (ý chọn + 2 dự phòng), nguồn kiểm chứng, đáp án sẽ đưa ở `GIẢI ĐÁP`, kết quả ba phép thử (mỗi phép một câu).
 4. **Hình trung tâm + khoảnh khắc "à ra thế"** (beat nào).
@@ -67,7 +72,7 @@ Theo schema và quy tắc bên dưới. File đã tồn tại → hỏi trước
 2. **Đọc mạch**: đọc liên tiếp câu đầu của mọi beat — phải nghe thành một mạch nhân quả.
 3. **Theo dõi người xem**: đi từng dòng, ghi "lúc này người xem đang nhìn gì, đã hiểu gì, đang thắc mắc gì, hình trả lời thế nào". Dòng nào dùng thứ chưa giải thích → chèn bước thiếu.
 4. `python scripts/check_script.py <slug>` — **lỗi phải bằng 0**; từng cảnh báo hoặc sửa, hoặc ghi lý do giữ.
-4b. **Học sinh ảo**: gọi agent `hoc-sinh-ao` (Agent tool, `subagent_type: "hoc-sinh-ao"`), đưa đường dẫn `script.json` và **tiền đề** (học sinh đã học gì, bài trước dạy gì, chưa học gì). Agent đọc độc lập, không thấy dàn ý. Sửa mọi chỗ mức *nặng* và *vừa*; chỗ giữ nguyên thì ghi lý do trong báo cáo. Đoạn "giải thích lại ý chính" của agent mà lệch ý bản chất → video chưa dạy được ý đó, quay lại chuỗi "vì sao". Sửa nhiều thì gọi lại một lần nữa.
+4b. **Học sinh ảo**: gọi agent `hoc-sinh-ao` (Agent tool, `subagent_type: "hoc-sinh-ao"`), đưa đường dẫn `script.json` và **tiền đề** (học sinh đã học gì, bài trước dạy gì, chưa học gì; kiến thức lớp dưới ghi "đã học, đa số đã quên" chứ không ghi như đang nhớ). Phần "Cả bài" của agent (số chuyện phải theo cùng lúc, số khái niệm, thứ tự tính chất → áp dụng) mà có vấn đề → sửa dàn ý, không vá từng dòng. Agent đọc độc lập, không thấy dàn ý. Sửa mọi chỗ mức *nặng* và *vừa*; chỗ giữ nguyên thì ghi lý do trong báo cáo. Đoạn "giải thích lại ý chính" của agent mà lệch ý bản chất → video chưa dạy được ý đó, quay lại chuỗi "vì sao". Sửa nhiều thì gọi lại một lần nữa.
 5. Chạy checklist cuối file (phần máy không kiểm được).
 6. Báo: số beat, số ký tự `speak`, thời lượng ước tính, **danh sách dòng cần nghe thử** (script in sẵn) và **mọi chỗ còn nghi ngờ**.
 
@@ -84,10 +89,12 @@ Người dùng chốt kịch bản → sang **B3 bản nháp + storyboard** (ski
   "chuong": "Chương I. Ứng dụng đạo hàm để khảo sát và vẽ đồ thị của hàm số",
   "bai": "Bài 1. Tính đơn điệu và cực trị của hàm số",
   "exams": ["THPTQG", "TSA", "HSA"],
+  "loai": "mot-y",                       // "mot-y" | "nhieu-khai-niem" (Bước 0) — chọn khung
   "beats": [
     {
       "id": "b01",                       // b01, b02, … liên tục
       "scene": 1,                        // số cảnh; beat liền nhau cùng cảnh thì hình nối liền, không nháy
+      "concepts": ["cùng phương"],       // TUỲ CHỌN: khái niệm MỚI dạy ở beat này (≤ 1); cả video ≤ 5
       "section": "HIỆN TƯỢNG",           // nhãn bên dưới
       "keyword": "Nhưng vì sao?",        // câu chốt của beat, ≤ 6 từ, được dùng $...$
       "visual": "cảnh, bố cục, thành phần lúc beat bắt đầu", // quy tắc `visual`
@@ -119,9 +126,10 @@ Thứ tự và số phần tuỳ chủ đề, nhưng **bắt buộc có** (số 
    - **Ba phép thử**: *đúng bậc khái niệm* (lời giải không cần kiến thức bậc trên cái đang dạy) · *kiến thức cần thiết* (bỏ kiến thức của video đi, người xem không tự trả lời được bằng lẽ thường) · *đại lượng hiển nhiên* (thứ gán cho khái niệm đúng là nó một cách trực tiếp, không phải đi qua một định luật chưa dạy).
    - Lý do người xem cần quan tâm phải rõ trong **30 giây đầu**. Không mở bằng "Hôm nay chúng ta học…".
 2. **Trực giác trước, định nghĩa/công thức sau** (trừ công thức bài trước, hiện ngay làm mốc — yêu cầu 5).
-3. **Một ví dụ xuyên suốt**:
+3. **Một ví dụ xuyên suốt** (bài `mot-y`; bài `nhieu-khai-niem` thì thứ xuyên suốt là hình SGK, xem khung riêng):
    - **một** nhân vật/vật mang được hiện tượng, số liệu, định nghĩa, đề thi và giải đáp; cả video ≤ ~3 cảnh; không nhân vật trang trí;
-   - hiện tượng thật không có công thức → dùng **mô hình của chính vật đó**. **Đổi sang mô hình là bước khó, có beat riêng**: nói vì sao cần mô hình; nói thẳng "đây không phải số liệu thật", đổi hình nhân vật, giữ nhãn "mô hình"; cho vài con số trước rồi mới tới công thức; có một dòng "thở";
+   - hiện tượng thật không có công thức → dùng **mô hình của chính vật đó**. **Đổi sang mô hình là bước khó, có beat riêng**: nói vì sao cần mô hình; nói thẳng **một lần trong lời đọc** "đây là tình huống giả định, không phải số liệu thật"; đổi hình nhân vật cho khác hẳn hình thật; cho vài con số trước rồi mới tới công thức; có một dòng "thở";
+   - **không** để nhãn "mô hình", "minh họa", "không theo tỉ lệ" nằm thường trực trên hình: chi tiết không cần cho việc hiểu, đặt sát hình chính và ở suốt, làm người xem học kém đi (coherence/seductive details: Mayer; Sundararajan & Adesope 2020). Cần nói tỉ lệ, giả định → nói trong lời;
    - hình biểu diễn mới nối với hình cũ bằng bước người xem tự hiểu (lấy số từ hình cũ → bảng nhỏ → chấm điểm → nối đồ thị);
    - **không phép biến hình lạ mắt** (xoay, gập, cuộn hình); trục, nhân vật luôn ở tư thế quen thuộc.
 4. **Cầu nối ví dụ → ký hiệu/thuật ngữ**, mỗi khi chuyển từ đời thường sang ngôn ngữ môn học: tương ứng tường minh trên màn hình ("quãng đường ↔ $f(x)$"); mỗi ký hiệu mới giải thích bằng chính ví dụ; thay số của ví dụ vào, ra đúng kết quả người xem đã thấy, **rồi** mới phát biểu tổng quát. Mỗi dòng ≤ một ký hiệu mới; mỗi beat ≤ một khái niệm mới.
@@ -135,13 +143,34 @@ Thứ tự và số phần tuỳ chủ đề, nhưng **bắt buộc có** (số 
 9. **Nhịp hình: mỗi dòng tối đa một thay đổi trên hình**, và thay đổi đó là *nguyên nhân* nhìn thấy được của con số/kết luận dòng đó nói. Không để số, điểm, hàng bảng tự hiện liên tiếp mà hình không làm gì.
 10. **Chữ sống trong cảnh** — xem quy tắc `text`. Phép thử tắt tiếng: chỉ nhìn màn hình vẫn biết mỗi con số, ký hiệu, hình là gì.
 11. **Liên hệ đề thi bằng một ví dụ cụ thể — chỉ khi dạng bài dùng đúng khái niệm của video.** Video chỉ nêu bản chất một khái niệm → không có phần đề thi, không mượn dạng bài của bài khác. Nếu có:
-    - vẫn trong ví dụ xuyên suốt (dạng bài kể lại bằng chính nhân vật của video);
+    - vẫn trong ví dụ xuyên suốt (bài `mot-y`: dạng bài kể lại bằng chính nhân vật của video; bài `nhieu-khai-niem`: trên chính hình SGK của phần tính chất);
     - **chuyển sang đề thi là bước khó**: thứ phần trước chưa dạy (một số → một hàm, đổi ví dụ, giá trị âm…) cần dòng riêng trước khi dùng — mẫu ở gói môn;
     - kết luận rút ra phải có hình so sánh cụ thể, không chỉ đọc bằng lời; không liệt kê nhiều dạng bài; không bịa đề thật, không ghi năm/mã đề.
 12. **Kết bằng giải đáp rồi câu chốt**:
     - beat `GIẢI ĐÁP` quay lại đúng hiện tượng mở đầu (cùng hình), giải bằng kiến thức vừa giảng, nói rõ bước nào dùng ý nào;
     - trả lời thẳng câu hỏi mở đầu bằng **đáp án cụ thể** (số có nguồn), rồi gọi tên nó bằng kiến thức vừa học; số mở và kết **nhất quán**;
     - **dòng cuối nghe như kết**: câu kết luận ≤ ~15 từ, khẳng định, mở bằng từ khép lại ("Vậy…", "Nói gọn lại…", "Đó là lý do…"); không ý mới, không câu hỏi, không "tiếp theo".
+
+### Khung bài nhiều khái niệm (`loai: "nhieu-khai-niem"`)
+
+Thay yêu cầu 3 và cách dùng yêu cầu 2 ở các điểm dưới; các yêu cầu khác giữ nguyên.
+**Lý do:** khi hiện tượng chỉ *giống* đối tượng của bài, mỗi định nghĩa phải nói hai lần song song (lời đời thường + lời môn học), và người xem phải theo hai chuyện cùng lúc (vectơ không gian, tích vô hướng 26–27/10: người dùng thấy rối, khó hiểu). Nghiên cứu ủng hộ: biết tên và đặc điểm các khái niệm chính trước thì học phần chính sâu hơn (pre-training, Mayer); chi tiết hấp dẫn nhưng không cần, đặt cạnh hình chính, làm học kém đi (Sundararajan & Adesope 2020). Cái cụ thể vẫn giữ ở đầu và cuối (concreteness fading, Fyfe 2014), nhưng không chạy song song suốt bài.
+
+| Phần | `section` | Thời lượng | Nội dung |
+|---|---|---|---|
+| 1. Mở | `HIỆN TƯỢNG` | ≤ 20 s | hiện tượng thật, nêu thành câu hỏi; **không gán khái niệm nào** cho nó |
+| 2. Tính chất | `ĐỊNH NGHĨA` (+ `GỐC RỄ` nếu có cách hiểu sai) | ~1:20–1:40 | **một hình SGK chuẩn** cho cả phần (hình hộp, tam giác, hệ trục); mỗi khái niệm một beat ngắn: cho thấy trên hình → gọi tên → ký hiệu; khái niệm có cặp đối (cùng/ngược hướng) thì một phản ví dụ hiện rồi gỡ |
+| 3. Bảng tính chất | `TỔNG KẾT` | 10–15 s | gom các khái niệm vừa dạy thành một khung cạnh hình, mỗi dòng ký hiệu + ≤ 5 chữ; giữ (thu nhỏ) suốt phần 4–5 |
+| 4. Vì sao | `BẢN CHẤT` | ≥ 2 beat | chuỗi "vì sao" cho đúng **một** tính chất then chốt (vd. hai vectơ bằng nhau thì tứ giác là hình bình hành) |
+| 5. Áp dụng | `TRONG ĐỀ THI`, `BẪY THƯỜNG GẶP` | | dạng bài trên chính hình SGK; mỗi bước giải làm sáng dòng tính chất đang dùng trong bảng |
+| 6. Giải đáp | `GIẢI ĐÁP` | 15–30 s | quay lại đúng hình hiện tượng, giải bằng các dòng của bảng, nói rõ dòng nào |
+
+- **Không kể song song**: phần 2–5 không nhắc nhân vật, câu chuyện mở đầu ("drone A là điểm đầu" ✗ → "A là điểm đầu" ✓). Câu chuyện chỉ ở phần 1 và 6.
+- **Thứ xuyên suốt là hình SGK**, không phải nhân vật. Cả video 2 cảnh là đủ (hiện tượng · hình SGK).
+- **Không đổi sang mô hình**: hình SGK đã là hình của bài; số để giải đáp lấy từ số thật của hiện tượng ở phần 6.
+- **Trực giác trước, định nghĩa sau** (yêu cầu 2) áp dụng **trong từng beat**: cho thấy trên hình trước, gọi tên sau. Không có nghĩa là kể hết câu chuyện rồi mới định nghĩa.
+- **≤ 5 khái niệm mới** cả video, mỗi beat ≤ 1 (ghi trong `concepts`). Bài SGK nhiều hơn → tách video, báo ở dàn ý.
+- Ý bản chất chính (Style 6) là tính chất ở phần 4; các khái niệm còn lại là "tên và đặc điểm" chuẩn bị cho nó.
 
 ### Bước khó và chuỗi "vì sao"
 
@@ -176,7 +205,7 @@ Chỉ `TRONG ĐỀ THI`, `BẪY THƯỜNG GẶP`, `GIẢI ĐÁP` hiện cho ngư
 1. **Bản chất**: trả lời được "vì sao"; câu chốt là *lý do*, không phải công thức lặp lại.
 2. **Dễ hiểu**: học sinh trung bình xem một lần là hiểu; mỗi beat một ý mới; thuật ngữ giải thích ngay lần đầu.
 3. **Minh hoạ để giải thích, không để trưng**: beat nào cũng có hình; ưu tiên hình chuyển động/biến đổi nhưng ít thay đổi, mỗi thay đổi chậm và có nghĩa. Hình nói, chữ chỉ ghi chú.
-4. **Thực tế**: mở và kết bằng hiện tượng thật; giữa video neo vào chính ví dụ xuyên suốt.
+4. **Thực tế**: mở và kết bằng hiện tượng thật; giữa video neo vào chính ví dụ xuyên suốt (bài `mot-y`) hoặc hình SGK (bài `nhieu-khai-niem`).
 5. **Không cố gây cười**: ví dụ đơn giản, nói thẳng; không câu đùa, so sánh bất ngờ, tình huống hài.
 6. **Không lan man, nhưng không vội**: beat nào bỏ đi mà người xem không hiểu kém đi → cắt; mọi bước suy luận nói thành lời; một video chỉ **một ý bản chất chính** + 1–2 hệ quả.
 
@@ -262,9 +291,11 @@ Phụ đề đầy đủ xuất thành file riêng (`.srt`/`.vtt`) từ `speak`.
 - [ ] Chuỗi "vì sao" ≥ 2 beat, mỗi mắt xích một dòng, đi từ thứ học sinh nhớ, có dòng nói lại bằng lời thường.
 - [ ] Mọi thành phần giải thích riêng trước khi ghép; mỗi khái niệm mới định nghĩa bằng hình; "A chính là B" được cho thấy.
 - [ ] Đổi sang mô hình có beat riêng; phần đề thi (nếu có) có đủ bước cầu và hình so sánh.
+- [ ] `loai` đúng phép thử Bước 0; ≤ 5 khái niệm mới, mỗi beat ≤ 1. Bài `nhieu-khai-niem`: tính chất → bảng → vì sao → áp dụng, phần 2–5 không nhắc câu chuyện mở đầu.
 
 **Hình và chữ**
-- [ ] Một ví dụ xuyên suốt, ≤ ~3 cảnh, không nhân vật trang trí, không phép biến hình lạ mắt.
+- [ ] Một ví dụ xuyên suốt (bài `nhieu-khai-niem`: một hình SGK), ≤ ~3 cảnh, không nhân vật trang trí, không phép biến hình lạ mắt.
+- [ ] Không nhãn thường trực "mô hình", "minh họa", "không theo tỉ lệ"; giả định, tỉ lệ nói trong lời.
 - [ ] `show`: đúng một thay đổi mỗi dòng, số mới nào cũng có thay đổi trên hình làm nguyên nhân; `text` nào cũng có `at`; beat cùng cảnh nối liền nhau.
 - [ ] Phép thử tắt tiếng: mỗi con số có tên đại lượng/đơn vị đọc được ở đâu đó trên màn hình, đúng một lần.
 

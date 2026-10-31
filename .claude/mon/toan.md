@@ -10,7 +10,14 @@ Bài học đã gặp kèm ngày: `.claude/lessons.md`.
 - **Nối bản chất với công thức học sinh nhớ**, không chỉ với hình: học sinh nhớ $\lim \frac{f(x)-f(x_0)}{x-x_0}$, không nhớ "độ dốc". Công thức đó hiện trên màn hình làm mốc; hình độ dốc đi kèm.
 - **Công cụ của bài khác** (bảng xét dấu, bảng biến thiên, quy tắc tính đạo hàm…): không dạy cách làm, chỉ nói kết quả ("giải ra thì đạo hàm âm trên khoảng này") và cho thấy kết quả trên hình (tô màu trên đồ thị).
 
-## Mẫu dựng khái niệm (B1 + B3)
+## Phân môn → loại bài (B1, Bước 0)
+
+Mặc định, vẫn kiểm lại bằng phép thử của `viet-kich-ban` › Bước 0:
+- **Giải tích, hàm số** (đạo hàm, đơn điệu, cực trị, tiệm cận, khảo sát, tối ưu, tích phân…) → thường **`mot-y`**: hiện tượng thường *là* một hàm số (độ cao theo thời gian, tốc độ trung bình theo tốc độ xuống), nên câu chuyện xuyên suốt được. Mẫu dựng: mục **Giải tích** dưới đây.
+- **Hình học, vectơ** (vectơ, tích vô hướng, hệ trục toạ độ, quan hệ song song/vuông góc, hình không gian) → thường **`nhieu-khai-niem`**: một bài SGK có nhiều định nghĩa, tính chất; hiện tượng đời thực chỉ *giống* hình. Mẫu dựng: mục **Hình học và vectơ** dưới đây.
+- Đã gặp 26–27/10: video vectơ không gian (drone) và tích vô hướng (vệ tinh) dựng theo khung `mot-y`. Mỗi định nghĩa nói qua câu chuyện ("drone A là điểm đầu"), 14 khái niệm trong 3 phút, có nhãn "mô hình" ở góc. Người dùng: rối, khó hiểu, muốn "các tính chất rồi mới áp dụng".
+
+## Mẫu dựng khái niệm — Giải tích (B1 + B3)
 
 - **Định nghĩa đạo hàm, từ thành phần đến kết quả**, mỗi bước ít nhất một dòng: $x_0$ = một điểm trên trục ngang → $f(x_0)$ = **cột dọc** từ trục lên đồ thị (kèm số; dòng riêng "$f(5) = 25$ nghĩa là…") → $x$ = điểm thứ hai → $f(x)$ = cột dọc thứ hai → $f(x)-f(x_0)$: kẻ ngang từ đỉnh cột thấp, phần chênh ở đầu cột cao sáng lên → $x-x_0$ = khoảng giữa hai chân cột → thương = độ dốc cát tuyến → $\lim$: cho $x$ trượt về $x_0$. Không vẽ đoạn $f(x)-f(x_0)$ "giữa trời".
 - **Cát tuyến**: hai điểm sáng lên trước, rồi đường qua chúng. **Độ dốc**: tam giác ngang–dọc có số (ngang 1, lên 11 → 11 mỗi đơn vị).
@@ -38,6 +45,17 @@ Video `don-dieu` b06–b07 (`lineGap` 0,5) — vì sao $f'>0$ thì đi lên. M�
 | b07·8 | Bên trái thấp và bên phải cao, vậy tại đó đường đang đi lên. |
 
 Đã bị loại: gói cả chuỗi trong 3 dòng ("nói nhanh quá, chỉ nêu ra"); "đạo hàm bằng 3 nên sang phải 0,1 lên 0,3" (không nối với công thức).
+
+## Mẫu dựng khái niệm — Hình học và vectơ (B1 + B3)
+
+Theo khung bài nhiều khái niệm (`viet-kich-ban`): mở bằng hiện tượng → tính chất trên hình SGK → bảng tính chất → một chuỗi "vì sao" → áp dụng → giải đáp. **Chưa có mẫu được người dùng khen**: video đầu tiên làm theo khung này, khi được duyệt thì ghi vào đây (video + beat).
+- **Một hình SGK cho cả phần tính chất**: hình chuẩn của bài (hình hộp $ABCD.A'B'C'D'$, lập phương, tam giác, hệ trục $Oxyz$), vẽ đúng kiểu SGK, đứng yên ở cùng chỗ từ phần tính chất tới áp dụng. Khái niệm nào cũng chỉ trên hình đó, không đổi hình giữa chừng.
+- **Mỗi khái niệm một beat ngắn**, theo thứ tự: thứ trên hình sáng lên → gọi tên → ký hiệu SGK. Vectơ: điểm đầu → điểm cuối → mũi tên ($\vec{AB}$) → độ dài (thước đo sát mũi tên) → giá (đường kéo dài mờ) → phương, hướng.
+- **Khái niệm có cặp đối** (cùng/ngược hướng, cùng phương/không cùng phương, song song/chéo nhau): một phản ví dụ màu bẫy hiện cạnh ví dụ đúng, rồi gỡ ngay ở dòng sau. Không để phản ví dụ ở lại.
+- **Bảng tính chất** (`TỔNG KẾT`): một khung ở rìa phải, mỗi dòng ký hiệu + ≤ 5 chữ (vd. "$\vec a = \vec b$: cùng hướng, cùng độ dài"). Hiện từng dòng, mỗi dòng ứng với một khái niệm vừa dạy, cùng màu với thứ trên hình. Sang phần áp dụng thì thu nhỏ nhưng vẫn giữ; bước giải nào dùng dòng nào thì dòng đó sáng.
+- **Mật độ hình**: tên đỉnh hiện đủ một lần ở đầu, sau đó chỉ tên đỉnh đang được nói tới đậm, còn lại mờ; ≤ ~6 nhãn sáng cùng lúc (tính cả tên đỉnh đậm); thước, giá, phản ví dụ của khái niệm trước gỡ trước khi sang khái niệm sau.
+- **Chuỗi "vì sao" hình học** đi từ tính chất học sinh nhớ (hình bình hành, tam giác vuông, định lý Pythagore), mỗi mắt xích là một thứ sáng lên trên hình, không đọc chứng minh.
+- **Góc, dấu, giá trị lượng giác của góc tù**: học sinh lớp 12 đa số đã quên giá trị lượng giác ngoài tam giác vuông (học sinh ảo tích vô hướng 27/10: không biết cos 120° âm) → nhắc bằng trực giác một dòng trước khi dùng.
 
 ## Số và đơn vị (thay luật chung ở điểm sau)
 
@@ -82,7 +100,8 @@ Công thức dài: diễn giải bằng lời ("tử là phần độ cao thay �
 - Đồ thị vẽ bằng SVG qua `makeScale` (`src/components/plot.tsx`: `Plot`, `Axes`, `FunctionPlot`, `Point`, `Segment`, `TangentLine`, `PlotLabel`, `CurveArrow`); không hardcode pixel cho điểm trên đồ thị.
 - Công thức KaTeX (`MathText`, `Tex`), chờ font KaTeX load xong trước khi render.
 - Nhãn không đè số trên trục: điểm nằm trên trục che số vạch chia → dời số sang phía kia hoặc ẩn số đó.
-- Đã có sẵn: `ZoomInset` (kính lúp), `Drone` (flycam), người chạy/đường chạy/đồng hồ (`ban-chat-dao-ham/parts.tsx`), đồ thị mô hình + cát tuyến + tam giác độ dốc (`ban-chat-dao-ham/graph.tsx`), đồi + đồ thị hai tầng + cột dọc + mũi tên dọc đường cong (`don-dieu/scene.tsx`).
-- Bảng xét dấu, bảng biến thiên không dựng; dấu của $f'$ thể hiện bằng tô màu trên đồ thị.
+- Đã có sẵn trong `src/components/`: `ZoomInset` (kính lúp; `insetScale` để đặt nhãn khớp ô phóng, `minBox` khi phóng rất lớn), `Drone` (flycam), `CalcTable` (bảng giá trị kiểu máy tính bỏ túi, từng hàng hiện dần), `EndArrow` trong `plot.tsx` (mũi tên ở đầu nhánh đồ thị, theo tiếp tuyến), `space3d.tsx` (hình chiếu song song: `makeProj`, `Seg`, `ArrowPx`, `arcPath` cho cung góc), `parts.tsx` (`pulse` nháy, `fadeIn`, `lerp`, `PanelCard`, `Hi` tô sáng cụm công thức).
+- Trong thư mục video (dùng lần hai thì chuyển vào `src/components/`): người chạy/đường chạy/đồng hồ (`ban-chat-dao-ham/parts.tsx`), đồ thị mô hình + cát tuyến + tam giác độ dốc (`ban-chat-dao-ham/graph.tsx`), đồi + đồ thị hai tầng + cột dọc + mũi tên dọc đường cong (`don-dieu/scene.tsx`), hình hộp + vectơ (`vecto-khong-gian/scene.tsx`).
+- Bảng xét dấu, bảng biến thiên không dựng; dấu của $f'$ thể hiện bằng tô màu trên đồ thị. (Bảng giá trị `CalcTable` thì được: nó là số lấy từ hình, không phải công cụ của bài khác.)
 - **Hình không gian** (hình chiếu song song kiểu SGK, mẫu: `vecto-khong-gian/scene.tsx`, hàm `P` 3D → px): chọn góc trục sâu sao cho mọi vectơ/đoạn chính trên hình **lệch hướng cạnh xiên ≥ 20° và cách đỉnh khác ≥ 40px**. Đã gặp 26/10: trục sâu 45°, vectơ dời nghiêng 53° → mũi tên AM gần chồng lên cạnh AD, người xem đọc thành "bay vào sâu", thước đo và nhãn đè tên đỉnh D; đổi trục sâu 30° thì hết. Tên đỉnh đặt phía không có cạnh/giá nào đi qua (tính cả giá kéo dài).
 - Vectơ: viết `$\vec{AM}$` trong kịch bản; `Tex` tự đổi tên nhiều chữ sang `\overrightarrow` (mũi tên phủ hết tên như SGK — `\vec` của KaTeX chỉ vẽ mũi tên nhỏ giữa hai chữ).

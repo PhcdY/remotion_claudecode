@@ -43,6 +43,11 @@ UNIT_IN_MATH = re.compile(r"\d\s*(?:\\[,;:!]|~)?\s*" + UNIT + r"(?![A-Za-z])")
 PHONETIC = re.compile(r"(?<![\wÀ-ỹ-])[a-xzA-XZ](?![\wÀ-ỹ-])|[\wÀ-ỹ]+-(không|n|một|hai)\b|đen-ta|lô-ga|lốc nê", re.IGNORECASE)
 CLOSERS = ("Vậy", "Nói gọn", "Đó là lý do", "Tóm lại", "Nói cách khác")
 # dấu hiệu một dòng `show` gói nhiều thay đổi
+LOAI = {"mot-y", "nhieu-khai-niem"}
+MAX_CONCEPTS = 5
+# nhãn thường trực bị bỏ (31/10/2026): giả định/tỉ lệ nói trong lời
+STANDING_TAG = re.compile(r"mô hình|minh h(?:ọa|oạ)|không theo tỉ lệ", re.IGNORECASE)
+STANDING_TAG_Q = re.compile(r"[‘'\"“](?:mô hình|minh h(?:ọa|oạ)|không theo tỉ lệ)[’'\"”]", re.IGNORECASE)
 MULTI_CHANGE = re.compile(r"\b(rồi|sau đó|tiếp theo|đồng thời|cùng lúc)\b|;|\+|→.*→")
 
 
@@ -112,6 +117,12 @@ def main() -> int:
         errors.append(f"không có gói môn .claude/mon/{subject}.md — tạo từ _mau.md cùng người dùng")
     if s.get("lop") is None or not s.get("chuong") or not s.get("bai"):
         warns.append("thiếu lop/chuong/bai (theo SGK) → video render vào out/_lam-viec/ thay vì thư mục bài")
+    loai = s.get("loai")
+    if loai is None:
+        warns.append("thiếu 'loai' (\"mot-y\" | \"nhieu-khai-niem\", viet-kich-ban › Bước 0) — bỏ qua nếu là video cũ")
+    elif loai not in LOAI:
+        errors.append(f"loai '{loai}' không hợp lệ (chỉ {', '.join(sorted(LOAI))})")
+    concepts_all: list[str] = []
 
     beats = s.get("beats") or []
     if not beats:
@@ -162,6 +173,16 @@ def main() -> int:
                     warns.append(f"{where}: scene {sc} nhưng visual ghi CẢNH {m.group(1)}")
         if FAKE_UNITS.search(visual):
             errors.append(f"{where}: visual dùng đơn vị tự chế ('{FAKE_UNITS.search(visual).group(0)}')")
+        cons = b.get("concepts") or []
+        if not isinstance(cons, list):
+            errors.append(f"{where}: concepts phải là danh sách tên khái niệm")
+            cons = []
+        if len(cons) > 1:
+            warns.append(f"{where}: {len(cons)} khái niệm mới trong một beat (≤ 1): {', '.join(cons)}")
+        concepts_all += cons
+        m = STANDING_TAG_Q.search(visual)
+        if m:
+            warns.append(f"{where}: visual có nhãn thường trực {m.group(0)} — nói giả định/tỉ lệ trong lời, không gắn tag")
 
         lines = b.get("lines") or []
         if not lines:
@@ -247,6 +268,8 @@ def main() -> int:
                     warns.append(f"{w}: mũi tên → chỉ dùng đúng nghĩa (suy ra, dồn về): {text}")
                 if text.strip() == speak.strip():
                     warns.append(f"{w}: text chép nguyên speak")
+                if STANDING_TAG.fullmatch(text.strip()):
+                    warns.append(f"{w}: text '{text.strip()}' là nhãn thường trực — nói trong lời, không gắn tag")
 
             chars = len(speak)
             total_chars += chars
@@ -262,6 +285,19 @@ def main() -> int:
     # --- cấu trúc cả bài ---
     if len(set(scenes)) > 3:
         warns.append(f"{len(set(scenes))} cảnh (nên ≤ 3): {sorted(set(scenes))}")
+    if len(concepts_all) > MAX_CONCEPTS:
+        warns.append(f"{len(concepts_all)} khái niệm mới (≤ {MAX_CONCEPTS}) — đề xuất tách video: {', '.join(concepts_all)}")
+    if loai == "nhieu-khai-niem" and beats:
+        secs = [b.get("section", "") for b in beats]
+        apply_idx = [i for i, x in enumerate(secs) if x in ("TRONG ĐỀ THI", "BẪY THƯỜNG GẶP")]
+        first_apply = apply_idx[0] if apply_idx else len(secs)
+        if not any(x == "TỔNG KẾT" for x in secs[:first_apply]):
+            warns.append("bài nhieu-khai-niem: thiếu beat TỔNG KẾT (bảng tính chất) trước phần áp dụng")
+        late = [beats[i].get("id", "?") for i, x in enumerate(secs) if x == "ĐỊNH NGHĨA" and i > first_apply]
+        if late:
+            warns.append(f"bài nhieu-khai-niem: ĐỊNH NGHĨA sau phần áp dụng ({', '.join(late)}) — tính chất trước, áp dụng sau")
+        if not concepts_all:
+            warns.append("bài nhieu-khai-niem: chưa ghi 'concepts' ở beat nào — không đếm được số khái niệm mới")
     if beats:
         if beats[0].get("section") != "HIỆN TƯỢNG":
             warns.append("beat đầu không phải HIỆN TƯỢNG")

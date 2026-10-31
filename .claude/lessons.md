@@ -18,6 +18,8 @@ Chi tiết từng video: `src/videos/<slug>/FEEDBACK.md`. Thêm mục mới mỗ
 - 22/10 · đơn điệu · "Đạo hàm = 3 nên sang phải 0,1 lên 0,3" → không nối với công thức. → lập luận đi thẳng từ công thức học sinh nhớ.
 - 22/10 · đơn điệu · Đọc chậm `speed: 0.85` → "đừng thay đổi tốc độ nói thuần, cần thay đổi nhịp". → chậm = chia nhỏ dòng, không đặt `speed`.
 - 22/10 · đơn điệu · Rút thời lượng bằng cách cắt dòng vẽ $f$ → "đồng biến cụ thể là như nào, so sánh đi chứ". → không cắt bước giải thích/hình so sánh để bù thời lượng.
+- 31/10 · vectơ không gian, tích vô hướng · Bài nhiều định nghĩa mà dựng theo khung "một ví dụ xuyên suốt": mỗi định nghĩa nói qua drone/vệ tinh, 14 khái niệm trong 3 phút → "chất lượng và bài học nhìn cực rối, khó hiểu… muốn là các tính chất rồi mới áp dụng chứ cứ nói song song rất khó hiểu". → `viet-kich-ban` › Bước 0 phân loại bài (`loai`), khung bài nhiều khái niệm (tính chất → bảng → vì sao → áp dụng), ≤ 5 khái niệm mới; gói Toán › phân môn, mẫu Hình học và vectơ.
+- 31/10 · học sinh ảo · Không bắt được lỗi trên: chỉ soi từng dòng (dòng nào cũng nối được), đọc theo tốc độ của mình, tiền đề ghi "đã học" như đang nhớ, bị dặn "không đề xuất viết lại toàn bài", storyboard chỉ thấy ảnh cuối beat. → agent `hoc-sinh-ao` thêm phần "Cả bài" (số chuyện phải theo, số khái niệm còn nhớ, tính chất trước khi dùng, rối mắt), trí nhớ có hạn, kiến thức lớp dưới nhớ mờ.
 
 ## Phạm vi
 - 22/10 · đơn điệu · 4 beat dựng lại tỉ số, tính $h'(2)$ bằng bảng → "lòng vòng quá, nói ở bài trước rồi". → bài trước chỉ nhắc một dòng + công thức.
@@ -30,6 +32,7 @@ Chi tiết từng video: `src/videos/<slug>/FEEDBACK.md`. Thêm mục mới mỗ
 - 20/10 · đạo hàm · Xoay đường chạy thành trục, người chạy nằm ngang → "siêu lạ mắt, không hiểu gì". → không phép biến hình lạ mắt.
 - 20/10 · đạo hàm · Trục số 15 / 10,5 / 10,05 tự hiện liên tục; bảng nhảy số mà vạch "rơi thêm" đứng yên. → mỗi dòng ≤ 1 thay đổi, số đổi ⇔ hình đổi.
 - 17/10 · đạo hàm · Người leo núi trên đồ thị, đèn giao thông → không rõ là gì. → không nhân vật trang trí; nhân vật do hàm điều khiển.
+- 31/10 · vectơ không gian, tích vô hướng, lon nhôm · Nhãn "mô hình", "minh họa", "không theo tỉ lệ" nằm suốt ở góc/cạnh hình (do `viet-kich-ban` bắt "giữ nhãn 'mô hình'", trái với luật không tag của `dung-video`) → "hình cứ có chú minh họa ở cạnh", rối. → bỏ nhãn thường trực, nói giả định trong lời; `check_script.py` cảnh báo.
 - 17/10 · đạo hàm · Badge vắt ngang viền đồng hồ, kim đè số, nửa khung trống, nhãn đè đường cong/số trục. → quy tắc bố cục 1–4 + `check-layout`.
 - 17/10 · đạo hàm · Tag section/keyword thường trực ở góc, thẻ "phóng to ×2" đứng riêng → vô nghĩa. → không tag trang trí; chỉ số phụ gắn sát thứ nó mô tả.
 

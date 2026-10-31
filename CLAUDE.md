@@ -34,10 +34,12 @@ B1 `viet-kich-ban` → B3 nháp + storyboard (`dung-video` › Bước 2b) → B
   "title": "...",
   "subject": "toan",                   // gói môn trong .claude/mon/ (thiếu = toan)
   "lop": 12, "chuong": "Chương I. …", "bai": "Bài 1. …",  // theo SGK → thư mục video trong out/
+  "loai": "mot-y",                     // "mot-y" | "nhieu-khai-niem": chọn khung kịch bản (viet-kich-ban › Bước 0)
   "beats": [
     {
       "id": "b01",
       "scene": 1,                       // số cảnh; beat liền nhau cùng cảnh thì hình nối liền
+      "concepts": ["cùng phương"],      // (tuỳ chọn) khái niệm mới của beat, ≤ 1; cả video ≤ 5
       "section": "HIỆN TƯỢNG",         // cấu trúc; chỉ TRONG ĐỀ THI / BẪY THƯỜNG GẶP / GIẢI ĐÁP hiện trên video
       "keyword": "Nhưng TẠI SAO?",      // câu chốt của beat, hiện lúc đọc dòng cuối, được dùng $...$
       "visual": "cảnh, bố cục, thành phần lúc beat bắt đầu",
