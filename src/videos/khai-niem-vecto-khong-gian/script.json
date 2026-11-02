@@ -1,0 +1,573 @@
+{
+  "slug": "khai-niem-vecto-khong-gian",
+  "title": "Vì sao bóng nắng song song, bóng đèn xòe ra?",
+  "subject": "toan",
+  "lop": 12,
+  "chuong": "Chương II. Vectơ và hệ trục tọa độ trong không gian",
+  "bai": "Bài 6. Vectơ trong không gian",
+  "exams": [
+    "THPTQG",
+    "TSA",
+    "HSA"
+  ],
+  "loai": "nhieu-khai-niem",
+  "beats": [
+    {
+      "id": "b01",
+      "scene": 1,
+      "section": "HIỆN TƯỢNG",
+      "keyword": "Nắng và đèn khác gì?",
+      "visual": "CẢNH 1 — HAI KHUNG CẠNH NHAU. Khung trái 'ban ngày' (nền sáng), khung phải 'ban đêm' (nền xanh đậm nhạt, vẫn trong brand). Mỗi khung: mặt đất là một hình bình hành nhạt vẽ kiểu hình chiếu song song; ba cột thẳng đứng giống hệt nhau, cách đều, xếp thành hàng chéo vào sâu. Khung trái: Mặt Trời ở góc trên trái khung, vài tia nắng song song nét mảnh chiếu xiên xuống, cung góc nhỏ giữa một tia và mặt đất ghi '$45^\\circ$' (có từ đầu beat). Khung phải: một cột đèn cao hơn hẳn ba cột, đứng giữa hàng ở phía trước, bóng đèn sáng ở đỉnh. Dòng 1 chỉ khung trái hiện; khung phải hiện ở dòng 3. Nhãn '6 m' (dòng 1) gắn dọc cột đầu tiên khung trái, giữ suốt cảnh.",
+      "lines": [
+        {
+          "show": "khung ban ngày hiện, ba cột đứng trên mặt đất",
+          "at": "dọc cột đầu tiên, khung trái",
+          "text": "6 m",
+          "speak": "Một hàng cột giống hệt nhau, cao sáu mét, dưới nắng nghiêng bốn mươi lăm độ."
+        },
+        {
+          "show": "bóng ba cột hiện dần trên mặt đất, song song",
+          "at": "giữa ba bóng, khung trái",
+          "text": "song song, dài bằng nhau",
+          "speak": "Bóng của chúng song song, dài bằng nhau, như in từ một khuôn."
+        },
+        {
+          "show": "khung ban đêm hiện: cùng ba cột quanh một cột đèn cao",
+          "text": "",
+          "speak": "Đêm xuống, cũng hàng cột ấy đứng quanh một cột đèn cao."
+        },
+        {
+          "show": "bóng ba cột dưới đèn hiện, xòe ra nhiều hướng",
+          "at": "giữa ba bóng, khung phải",
+          "text": "xòe ra",
+          "speak": "Lần này bóng xòe ra mỗi chiếc một hướng, dài ngắn khác nhau."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Vì sao dưới nắng, bóng mọi cột lại giống hệt nhau?"
+        }
+      ]
+    },
+    {
+      "id": "b02",
+      "scene": 2,
+      "section": "ĐỊNH NGHĨA",
+      "concepts": [
+        "vectơ"
+      ],
+      "keyword": "Vectơ: đoạn thẳng có hướng",
+      "visual": "CẢNH 2 — HÌNH HỘP. Hình hộp $ABCD.A'B'C'D'$ vẽ kiểu SGK (hình chiếu song song, trục sâu 30°, rút ngắn 0,5): đáy dưới ABCD nằm ngang, A trước-trái, B trước-phải, C sau-phải, D sau-trái; đáy trên A'B'C'D' ngay phía trên, cạnh bên thẳng đứng. AB = 4 (nằm ngang trên màn hình), AD = 3 (xiên vào sâu), AA' = 2 (đứng). Cạnh khuất AD, DC, DD' nét đứt. Hình hộp đặt ở giữa-trái khung, đứng yên ở đúng chỗ này đến hết b11; dải bên phải (~1/3 khung) để trống cho đẳng thức, thẻ đề bài và bảng tính chất. Dòng 1: hai khung cột của CẢNH 1 mờ đi trong lúc hình hộp hiện. Tên tám đỉnh (dòng 2) giữ đến hết b11; từ b03, tên đỉnh không được nói tới thì mờ bớt. Mũi tên AB màu nhấn, đè lên cạnh AB, giữ màu này cả video. Thước đo (đoạn mảnh hai vạch chặn) đặt sát dưới AB ở dòng 6, gỡ ở đầu b03. Nhãn 'điểm đầu', 'điểm cuối' gỡ ở đầu b03.",
+      "lines": [
+        {
+          "show": "hai khung cột mờ đi, hình hộp hiện",
+          "text": "",
+          "speak": "Để trả lời, cần nhắc lại vectơ của lớp mười, giờ đặt trong không gian."
+        },
+        {
+          "show": "tên tám đỉnh hiện",
+          "at": "dưới hình hộp, giữa",
+          "text": "hình hộp $ABCD.A'B'C'D'$",
+          "speak": "Mọi khái niệm sẽ chỉ trên một hình quen thuộc: hình hộp."
+        },
+        {
+          "show": "mũi tên từ A tới B hiện đè lên cạnh AB, màu nhấn",
+          "at": "mũi tên AB, phía dưới",
+          "text": "$\\vec{AB}$",
+          "speak": "Vectơ là một đoạn thẳng có hướng, như mũi tên đi từ a tới bê.",
+          "caption": "Vectơ là một đoạn thẳng có hướng, như mũi tên đi từ A tới B."
+        },
+        {
+          "show": "điểm A nháy",
+          "at": "điểm A",
+          "text": "điểm đầu",
+          "speak": "Điểm a là điểm đầu, nơi mũi tên xuất phát.",
+          "caption": "A là điểm đầu, nơi mũi tên xuất phát."
+        },
+        {
+          "show": "điểm B nháy",
+          "at": "điểm B",
+          "text": "điểm cuối",
+          "speak": "Điểm bê là điểm cuối, nơi mũi tên chĩa tới.",
+          "caption": "B là điểm cuối, nơi mũi tên chĩa tới."
+        },
+        {
+          "show": "thước đo hiện sát dưới mũi tên AB",
+          "at": "thước đo dưới AB",
+          "text": "$|\\vec{AB}| = 4$",
+          "speak": "Độ dài là khoảng cách giữa hai điểm, viết giữa hai vạch đứng, ở đây bằng bốn."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Tên vectơ đọc là a-bê, theo thứ tự điểm đầu rồi điểm cuối.",
+          "caption": "Tên vectơ đọc là AB, theo thứ tự điểm đầu rồi điểm cuối."
+        }
+      ]
+    },
+    {
+      "id": "b03",
+      "scene": 2,
+      "section": "ĐỊNH NGHĨA",
+      "concepts": [
+        "cùng phương"
+      ],
+      "keyword": "Giá song song: cùng phương",
+      "visual": "Giữ CẢNH 2: hình hộp, tên đỉnh, mũi tên AB. Thước đo và nhãn 'điểm đầu', 'điểm cuối' mờ đi ở đầu beat. Giá = đường thẳng nét mảnh, mờ, kéo dài vectơ về hai phía, vượt khỏi hình hộp. Dòng 2: mũi tên DC màu nhấn phụ, đè cạnh DC (cạnh khuất: thân mũi tên nét đứt, đầu mũi tên đặc). Dòng 5: mũi tên AA' màu bẫy trên cạnh AA', giá của nó (thẳng đứng) kéo dài mờ; cả hai tắt ở dòng 6. Giá AB, giá DC và mũi tên DC giữ sang b04.",
+      "lines": [
+        {
+          "show": "giá của AB kéo dài mờ về hai phía",
+          "at": "đầu phải của giá AB",
+          "text": "giá",
+          "speak": "Mỗi vectơ nằm trên một đường thẳng, gọi là giá của nó."
+        },
+        {
+          "show": "mũi tên từ D tới C hiện trên cạnh DC, màu nhấn phụ",
+          "at": "mũi tên DC",
+          "text": "$\\vec{DC}$",
+          "speak": "Lấy thêm vectơ đê-xê, nằm ở cạnh sau của đáy.",
+          "caption": "Lấy thêm vectơ DC, nằm ở cạnh sau của đáy."
+        },
+        {
+          "show": "giá của DC kéo dài mờ, song song giá AB",
+          "text": "",
+          "speak": "Giá của nó song song với giá của a-bê.",
+          "caption": "Giá của nó song song với giá của AB."
+        },
+        {
+          "show": "hai giá sáng cùng màu",
+          "at": "giữa hai giá, bên phải hình hộp",
+          "text": "cùng phương",
+          "speak": "Hai vectơ có giá song song hoặc trùng nhau thì gọi là cùng phương."
+        },
+        {
+          "show": "mũi tên AA' hiện màu bẫy, giá thẳng đứng của nó kéo dài mờ",
+          "at": "giá của AA', phía trên A'",
+          "text": "không cùng phương",
+          "speak": "Còn a-a-phẩy đi thẳng lên, giá cắt giá a-bê, nên không cùng phương.",
+          "caption": "Còn AA' đi thẳng lên, giá cắt giá AB, nên không cùng phương."
+        },
+        {
+          "show": "mũi tên AA' và giá của nó tắt",
+          "text": "",
+          "speak": "Cùng phương mới nói về giá, chưa nói mũi tên chĩa phía nào."
+        }
+      ]
+    },
+    {
+      "id": "b04",
+      "scene": 2,
+      "section": "ĐỊNH NGHĨA",
+      "concepts": [
+        "cùng hướng, ngược hướng"
+      ],
+      "keyword": "Cùng phương: cùng hoặc ngược hướng",
+      "visual": "Giữ CẢNH 2: hình hộp, AB (màu nhấn), DC (màu nhấn phụ), hai giá song song mờ; nhãn 'cùng phương' mờ đi ở đầu beat. Dòng 2: mũi tên CD màu bẫy đè cạnh DC, chĩa từ C về D; mũi tên DC mờ thành bóng trong lúc CD hiện. Dòng 4: CD tắt, DC sáng lại. Hai giá giữ sang b05.",
+      "lines": [
+        {
+          "show": "đầu mũi tên AB và đầu mũi tên DC sáng",
+          "at": "khoảng giữa hai đầu mũi tên B và C",
+          "text": "cùng hướng",
+          "speak": "Nếu chĩa về cùng một phía, như a-bê và đê-xê, gọi là cùng hướng.",
+          "caption": "Nếu chĩa về cùng một phía, như AB và DC, gọi là cùng hướng."
+        },
+        {
+          "show": "mũi tên từ C về D hiện màu bẫy trên cạnh DC",
+          "at": "mũi tên CD",
+          "text": "$\\vec{CD}$",
+          "speak": "Đảo chiều thành vectơ xê-đê, nó vẫn nằm trên giá cũ.",
+          "caption": "Đảo chiều thành vectơ CD, nó vẫn nằm trên giá cũ."
+        },
+        {
+          "show": "đầu mũi tên CD và đầu mũi tên AB sáng",
+          "at": "giữa mũi tên AB và CD",
+          "text": "ngược hướng",
+          "speak": "Nhưng giờ nó chĩa ngược phía với a-bê, gọi là ngược hướng.",
+          "caption": "Nhưng giờ nó chĩa ngược phía với AB, gọi là ngược hướng."
+        },
+        {
+          "show": "mũi tên CD tắt, DC sáng lại",
+          "text": "",
+          "speak": "Cùng hướng hay ngược hướng chỉ xét khi hai vectơ đã cùng phương."
+        }
+      ]
+    },
+    {
+      "id": "b05",
+      "scene": 2,
+      "section": "ĐỊNH NGHĨA",
+      "concepts": [
+        "hai vectơ bằng nhau"
+      ],
+      "keyword": "Cùng hướng, cùng dài: bằng nhau",
+      "visual": "Giữ CẢNH 2. BƯỚC KHÓ (khái niệm chính của video). Còn: hình hộp, AB (màu nhấn), DC (màu nhấn phụ); hai giá mờ đi ở đầu beat; nhãn 'cùng hướng', 'ngược hướng' đã gỡ. Dòng 1: thước đo sát dưới AB với số 4 (như b02). Dòng 2: thước đo thứ hai cùng kiểu, sát cạnh DC phía trong đáy. Dòng 3: đẳng thức ở dải trống bên phải hình hộp, cỡ lớn. Dòng 4: bản sao mờ của mũi tên AB trượt thẳng ra sau dọc theo hướng AD, đặt khít lên DC, rồi mờ đi. Dòng 5: mũi tên CD màu bẫy hiện lại (như b04), DC mờ thành bóng; tắt ở dòng 6, DC sáng lại. Hai thước gỡ ở cuối beat; đẳng thức giữ sang b06 (thu nhỏ).",
+      "lines": [
+        {
+          "show": "thước đo sát AB hiện lại",
+          "at": "thước đo dưới AB",
+          "text": "$4$",
+          "speak": "Cùng hướng rồi, giờ đo độ dài: a-bê dài bốn.",
+          "caption": "Cùng hướng rồi, giờ đo độ dài: AB dài 4."
+        },
+        {
+          "show": "thước đo sát DC hiện",
+          "at": "thước đo cạnh DC",
+          "text": "$4$",
+          "speak": "Đáy là hình bình hành, nên cạnh sau đê-xê cũng dài bốn.",
+          "caption": "Đáy là hình bình hành, nên cạnh sau DC cũng dài 4."
+        },
+        {
+          "show": "đẳng thức hiện ở dải trống bên phải hình hộp",
+          "at": "dải trống bên phải hình hộp",
+          "text": "$\\vec{AB} = \\vec{DC}$",
+          "speak": "Hai vectơ cùng hướng và cùng độ dài gọi là bằng nhau, viết như thế này."
+        },
+        {
+          "show": "bản sao mờ của AB trượt ra sau, đặt khít lên DC",
+          "text": "",
+          "speak": "Trượt mũi tên a-bê ra sau, nó nằm khít lên đê-xê.",
+          "caption": "Trượt mũi tên AB ra sau, nó nằm khít lên DC."
+        },
+        {
+          "show": "mũi tên CD màu bẫy hiện lại trên cạnh DC",
+          "at": "mũi tên CD",
+          "text": "$\\vec{AB} \\ne \\vec{CD}$",
+          "speak": "Còn xê-đê cũng dài bốn, nhưng ngược hướng, nên không bằng.",
+          "caption": "Còn CD cũng dài 4, nhưng ngược hướng, nên không bằng."
+        },
+        {
+          "show": "mũi tên CD tắt, DC sáng lại",
+          "text": "",
+          "speak": "Vectơ chỉ ghi hướng và độ dài, không ghi chỗ đặt."
+        }
+      ]
+    },
+    {
+      "id": "b06",
+      "scene": 2,
+      "section": "ĐỊNH NGHĨA",
+      "concepts": [
+        "vectơ-không"
+      ],
+      "keyword": "Vectơ-không dài bằng 0",
+      "visual": "Giữ CẢNH 2: hình hộp, AB, DC; đẳng thức $\\vec{AB} = \\vec{DC}$ thu nhỏ lên góc trên của dải phải; hai thước đã gỡ. Dòng 1: mũi tên AA' màu chính đậm (một vectơ bình thường, không dùng màu bẫy như ở b03) đè cạnh AA'. Dòng 2: điểm cuối trượt từ A' xuống A dọc cạnh, mũi tên ngắn dần (thân mũi tên co, đầu mũi tên đi theo), cạnh AA' của hình hộp vẫn còn. Dòng 3: chỉ còn một chấm sáng cùng màu tại A. Dòng 5: chấm sáng tắt.",
+      "lines": [
+        {
+          "show": "mũi tên AA' hiện trên cạnh bên",
+          "text": "",
+          "speak": "Còn nếu kéo điểm cuối về sát điểm đầu?"
+        },
+        {
+          "show": "điểm cuối trượt từ A' xuống A, mũi tên ngắn dần",
+          "text": "",
+          "speak": "Mũi tên ngắn dần, cho tới khi hai điểm trùng nhau."
+        },
+        {
+          "show": "tại A chỉ còn một chấm sáng",
+          "at": "điểm A",
+          "text": "$\\vec{AA} = \\vec{0}$",
+          "speak": "Vectơ có điểm đầu trùng điểm cuối gọi là vectơ-không, dài bằng không.",
+          "caption": "Vectơ có điểm đầu trùng điểm cuối gọi là vectơ-không, dài bằng 0."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Sách quy ước vectơ-không cùng hướng với mọi vectơ.",
+          "caption": "Sách quy ước vectơ-không cùng hướng với mọi vectơ."
+        },
+        {
+          "show": "chấm sáng tắt",
+          "text": "",
+          "speak": "Mọi vectơ-không đều bằng nhau, dù đặt ở điểm nào.",
+          "caption": "Mọi vectơ-không đều bằng nhau, dù đặt ở điểm nào."
+        }
+      ]
+    },
+    {
+      "id": "b07",
+      "scene": 2,
+      "section": "TỔNG KẾT",
+      "keyword": "Năm điều cần nhớ",
+      "visual": "Giữ CẢNH 2: hình hộp, AB, DC, đẳng thức nhỏ. BẢNG TÍNH CHẤT: một khung bo góc ở dải phải (dưới đẳng thức), năm dòng, mỗi dòng ký hiệu + ≤ 5 chữ, hiện từng dòng. Dòng nào hiện thì thứ tương ứng trên hình sáng cùng màu với dòng đó trong ~1 s rồi về như cũ: dòng 1 ↔ mũi tên AB; dòng 2 ↔ giá AB, DC hiện mờ; dòng 3 ↔ đầu hai mũi tên; dòng 4 ↔ AB và DC cùng sáng; dòng 5 ↔ chấm tại A. Bảng giữ đến hết b11 (thu nhỏ từ b08), dòng nào được dùng thì sáng.",
+      "lines": [
+        {
+          "show": "bảng hiện ở dải phải với dòng 1, mũi tên AB sáng",
+          "at": "bảng tính chất, dòng 1",
+          "text": "vectơ: đoạn thẳng có hướng",
+          "speak": "Gom lại: vectơ là đoạn thẳng có hướng, có độ dài."
+        },
+        {
+          "show": "dòng 2 hiện, hai giá AB và DC sáng mờ",
+          "at": "bảng tính chất, dòng 2",
+          "text": "cùng phương: giá song song, trùng",
+          "speak": "Cùng phương là giá song song hoặc trùng nhau."
+        },
+        {
+          "show": "dòng 3 hiện, đầu hai mũi tên sáng",
+          "at": "bảng tính chất, dòng 3",
+          "text": "cùng phương thì cùng/ngược hướng",
+          "speak": "Đã cùng phương thì cùng hướng hoặc ngược hướng."
+        },
+        {
+          "show": "dòng 4 hiện, AB và DC cùng sáng",
+          "at": "bảng tính chất, dòng 4",
+          "text": "bằng nhau: cùng hướng, cùng độ dài",
+          "speak": "Bằng nhau là cùng hướng và cùng độ dài, ở đâu cũng được."
+        },
+        {
+          "show": "dòng 5 hiện, chấm tại A nháy",
+          "at": "bảng tính chất, dòng 5",
+          "text": "$\\vec{0}$: điểm đầu trùng điểm cuối",
+          "speak": "Vectơ-không có điểm đầu trùng điểm cuối.",
+          "caption": "Vectơ-không có điểm đầu trùng điểm cuối."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Phần sau sẽ dùng lại từng dòng này."
+        }
+      ]
+    },
+    {
+      "id": "b08",
+      "scene": 2,
+      "section": "BẢN CHẤT",
+      "lineGap": 0.5,
+      "keyword": "Cạnh đối cùng chiều: bằng nhau",
+      "visual": "Giữ CẢNH 2. BƯỚC KHÓ — chuỗi 'vì sao' (1/2), một chiều duy nhất: hình bình hành → hai vectơ bằng nhau (chiều dùng ở b09, b10), mỗi dòng một mắt xích. Bảng thu nhỏ ở mép phải dưới; đẳng thức $\\vec{AB} = \\vec{DC}$ ở dải phải trên, mờ bớt (sẽ sáng lại ở dòng 7). Còn: hình hộp, AB (màu nhấn), DC (màu nhấn phụ). Dòng 2: đáy ABCD tô nhạt màu nhấn. Dòng 3: hai giá AB, DC hiện mờ, song song; dòng 2 của bảng ('cùng phương') sáng. Dòng 4: hai thước 4 sát AB và DC. Dòng 5: hai giá, hai thước mờ đi; đoạn AD (nối hai điểm đầu) và BC (nối hai điểm cuối) sáng đậm. Dòng 6: hai đường chéo AC, BD của đáy hiện mờ màu bẫy, chỗ cắt nhau đánh một chấm nhỏ. Dòng 7: hai đường chéo tắt; dòng 4 của bảng ('bằng nhau') sáng; đẳng thức $\\vec{AB} = \\vec{DC}$ sáng lại.",
+      "lines": [
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Vì sao cứ có hình bình hành là có hai vectơ bằng nhau?"
+        },
+        {
+          "show": "đáy ABCD tô nhạt",
+          "at": "giữa đáy ABCD",
+          "text": "hình bình hành $ABCD$",
+          "speak": "Lấy đáy hình hộp, một hình bình hành."
+        },
+        {
+          "show": "hai giá AB và DC hiện mờ, song song",
+          "text": "",
+          "speak": "Hai cạnh đối song song, nên a-bê và đê-xê cùng phương.",
+          "caption": "Hai cạnh đối song song, nên AB và DC cùng phương."
+        },
+        {
+          "show": "hai thước 4 hiện lại sát AB và DC",
+          "text": "",
+          "speak": "Hai cạnh đối dài bằng nhau, nên hai vectơ cùng độ dài."
+        },
+        {
+          "show": "đoạn AD và BC sáng đậm",
+          "text": "",
+          "speak": "Còn hướng thì nối hai điểm đầu và hai điểm cuối, được hai cạnh còn lại."
+        },
+        {
+          "show": "đường chéo AC và BD hiện mờ màu bẫy, cắt nhau",
+          "text": "",
+          "speak": "Nếu hai mũi tên ngược hướng, hai đoạn nối ấy thành hai đường chéo cắt nhau."
+        },
+        {
+          "show": "đường chéo tắt, dòng 'bằng nhau' trên bảng sáng",
+          "text": "",
+          "speak": "Ở đây hai đoạn nối không cắt nhau, nên cùng hướng, và a-bê bằng đê-xê.",
+          "caption": "Ở đây hai đoạn nối không cắt nhau, nên cùng hướng, và AB bằng DC."
+        }
+      ]
+    },
+    {
+      "id": "b09",
+      "scene": 2,
+      "section": "BẢN CHẤT",
+      "lineGap": 0.5,
+      "keyword": "Trượt qua từng hình bình hành",
+      "visual": "Giữ CẢNH 2. BƯỚC KHÓ — chuỗi 'vì sao' (2/2), khoảnh khắc 'à ra thế' ở dòng 5. Đầu beat: tô đáy, AD, BC đậm và màu A/D, B/C về như cũ; còn hình hộp, AB, DC, đẳng thức $\\vec{AB} = \\vec{DC}$ ở dải phải trên, bảng nhỏ. Dòng 1: mũi tên D'C' (cạnh sau của đáy trên, nhìn thấy) màu nhấn phụ (như DC). Dòng 2 (câu hỏi đoán): trong khoảng nghỉ AB rồi D'C' nháy lần lượt, không hiện dấu gì. Dòng 3: mặt sau DCC'D' tô nhạt, DC sáng. Dòng 4: tô mặt sau tắt, đẳng thức $\\vec{AB} = \\vec{DC}$ nối dài thành chuỗi ba vế, tại chỗ. Dòng 5: tứ giác ABC'D' (xiên qua giữa hộp) tô nhạt màu nhấn, đoạn AD' (nối hai điểm đầu) và BC' (nối hai điểm cuối) sáng. Giữ đến hết beat.",
+      "lines": [
+        {
+          "show": "mũi tên từ D' tới C' hiện trên cạnh sau đáy trên",
+          "at": "mũi tên D'C'",
+          "text": "$\\vec{D'C'}$",
+          "speak": "Còn vectơ đê-phẩy-xê-phẩy, ở cạnh sau của đáy trên thì sao?",
+          "caption": "Còn vectơ D'C', ở cạnh sau của đáy trên thì sao?"
+        },
+        {
+          "show": "AB và D'C' nháy lần lượt",
+          "text": "",
+          "speak": "Hai cạnh này không chung mặt nào. Chúng có bằng nhau không?",
+          "pauseAfter": 1.5
+        },
+        {
+          "show": "mặt sau DCC'D' tô nhạt, DC sáng",
+          "at": "mặt sau DCC'D'",
+          "text": "$\\vec{DC} = \\vec{D'C'}$",
+          "speak": "Mặt sau là hình bình hành, nên đê-xê bằng đê-phẩy-xê-phẩy.",
+          "caption": "Mặt sau là hình bình hành, nên DC bằng D'C'."
+        },
+        {
+          "show": "đẳng thức nối dài thành chuỗi ba vế",
+          "at": "dải trống bên phải hình hộp",
+          "text": "$\\vec{AB} = \\vec{DC} = \\vec{D'C'}$",
+          "speak": "Mà a-bê bằng đê-xê từ trước, hai vectơ cùng bằng đê-xê thì bằng nhau.",
+          "caption": "Mà AB bằng DC từ trước, hai vectơ cùng bằng DC thì bằng nhau."
+        },
+        {
+          "show": "tứ giác ABC'D' tô nhạt, đoạn AD' và BC' sáng",
+          "at": "giữa tứ giác ABC'D'",
+          "text": "hình bình hành $ABC'D'$",
+          "speak": "Nối hai điểm đầu, nối hai điểm cuối, thấy ngay một hình bình hành cắt xiên qua hộp."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Vectơ trượt qua từng hình bình hành, tới đâu vẫn là chính nó."
+        }
+      ]
+    },
+    {
+      "id": "b10",
+      "scene": 2,
+      "section": "TRONG ĐỀ THI",
+      "keyword": "Tìm hình bình hành chứa nó",
+      "visual": "Giữ CẢNH 2. BƯỚC KHÓ (chuyển sang đề thi). Đầu beat: tô ABC'D', chuỗi đẳng thức, mũi tên DC, D'C' mờ đi; còn hình hộp, tên đỉnh, AB (màu nhấn), bảng nhỏ ở mép phải dưới. Thẻ 'đề bài' ở dải phải trên (dòng 1). Mũi tên trả lời màu nhấn phụ, đè lên cạnh, mỗi cái hiện ở một dòng và giữ lại. Dòng 3: mặt trước ABB'A' tô nhạt, tắt ở dòng 4. Dòng 4: tứ giác ABC'D' tô nhạt lại (như b09), tắt ở dòng 5. Dòng 5: tô ABC'D' tắt; bốn cạnh AB, DC, A'B', D'C' sáng cùng lúc, các cạnh khác mờ bớt. Giữ đến hết beat.",
+      "lines": [
+        {
+          "show": "thẻ đề bài hiện ở dải phải trên",
+          "at": "thẻ đề bài",
+          "text": "Vectơ nào bằng $\\vec{AB}$?",
+          "speak": "Đề thi hay hỏi: trên hình hộp, vectơ nào bằng a-bê?",
+          "caption": "Đề thi hay hỏi: trên hình hộp, vectơ nào bằng AB?"
+        },
+        {
+          "show": "mũi tên DC sáng",
+          "at": "mũi tên DC",
+          "text": "$\\vec{DC}$",
+          "speak": "Đáy là hình bình hành, cho vectơ đê-xê.",
+          "caption": "Đáy là hình bình hành, cho vectơ DC."
+        },
+        {
+          "show": "mặt trước ABB'A' tô nhạt, mũi tên A'B' sáng",
+          "at": "mũi tên A'B'",
+          "text": "$\\vec{A'B'}$",
+          "speak": "Mặt trước là hình bình hành, cho vectơ a-phẩy-bê-phẩy.",
+          "caption": "Mặt trước là hình bình hành, cho vectơ A'B'."
+        },
+        {
+          "show": "tứ giác ABC'D' tô nhạt, mũi tên D'C' sáng",
+          "at": "mũi tên D'C'",
+          "text": "$\\vec{D'C'}$",
+          "speak": "Hình bình hành cắt xiên cho vectơ đê-phẩy-xê-phẩy.",
+          "caption": "Hình bình hành cắt xiên cho vectơ D'C'."
+        },
+        {
+          "show": "bốn cạnh song song với AB sáng",
+          "text": "",
+          "speak": "Hình hộp chỉ có bốn cạnh song song với a-bê, nên đủ ba vectơ.",
+          "caption": "Hình hộp chỉ có bốn cạnh song song với AB, nên đủ ba vectơ."
+        }
+      ]
+    },
+    {
+      "id": "b11",
+      "scene": 2,
+      "section": "BẪY THƯỜNG GẶP",
+      "keyword": "Thứ tự chữ quyết định hướng",
+      "visual": "Giữ CẢNH 2. Đầu beat: các mũi tên trả lời và tô của b10 tắt; còn hình hộp, AB (màu nhấn), bảng nhỏ. Thẻ đề bài ở dải phải trên đổi nội dung ở dòng 1. Dòng 2: hai thước 4 sát AB và cạnh DC. Dòng 3: mũi tên CD màu bẫy trên cạnh DC (chĩa từ C về D). Dòng 4: đoạn AC (đường chéo đáy) màu bẫy. Dòng 5: trong thẻ, dấu '=' đổi thành '≠' màu bẫy, tại chỗ. Dòng 6: CD và AC tắt, mũi tên DC màu nhấn phụ hiện, đoạn AD (nối hai điểm đầu) sáng; dòng 4 của bảng sáng.",
+      "lines": [
+        {
+          "show": "thẻ đề bài đổi thành câu đúng sai",
+          "at": "thẻ đề bài",
+          "text": "$\\vec{AB} = \\vec{CD}$ đúng hay sai?",
+          "speak": "Câu đúng sai hay gặp: đáy là hình bình hành, nên a-bê bằng xê-đê?",
+          "caption": "Câu đúng sai hay gặp: đáy là hình bình hành, nên AB bằng CD?"
+        },
+        {
+          "show": "hai thước 4 hiện sát AB và cạnh DC",
+          "text": "",
+          "speak": "Hai cạnh song song, dài bằng nhau, nên dễ chọn đúng."
+        },
+        {
+          "show": "mũi tên từ C về D hiện màu bẫy",
+          "at": "mũi tên CD",
+          "text": "$\\vec{CD}$",
+          "speak": "Nhưng xê-đê đi từ xê về đê, chĩa ngược với a-bê.",
+          "caption": "Nhưng CD đi từ C về D, chĩa ngược với AB."
+        },
+        {
+          "show": "đoạn nối A với C hiện màu bẫy",
+          "text": "",
+          "speak": "Nối hai điểm đầu a và xê, ra đường chéo chứ không phải cạnh.",
+          "caption": "Nối hai điểm đầu A và C, ra đường chéo chứ không phải cạnh."
+        },
+        {
+          "show": "trong thẻ, dấu bằng đổi thành dấu khác màu bẫy",
+          "text": "",
+          "speak": "Nên hai vectơ ngược hướng, câu này sai."
+        },
+        {
+          "show": "mũi tên CD và đường chéo tắt, mũi tên DC hiện, đoạn AD sáng",
+          "at": "mũi tên DC",
+          "text": "$\\vec{AB} = \\vec{DC}$",
+          "speak": "Đúng phải là đê-xê: nối hai điểm đầu a và đê, ra đúng cạnh của đáy.",
+          "caption": "Đúng phải là DC: nối hai điểm đầu A và D, ra đúng cạnh của đáy."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Song song và dài bằng nhau chưa đủ, phải xét cả thứ tự chữ."
+        }
+      ]
+    },
+    {
+      "id": "b12",
+      "scene": 1,
+      "section": "GIẢI ĐÁP",
+      "keyword": "Bóng nắng: cùng một vectơ",
+      "visual": "Quay lại CẢNH 1, đúng bố cục cuối b01 (hai khung cột, Mặt Trời và cung '$45^\\circ$', nhãn '6 m' ở cột đầu, bóng song song bên trái, bóng xòe bên phải). Hình hộp mờ đi ở dòng 1; bảng tính chất thu nhỏ ở mép phải dưới, chỉ dòng 'bằng nhau' rõ, các dòng khác mờ. Dòng 2: ba bóng khung trái thành ba mũi tên màu nhấn, từ chân cột tới đỉnh bóng. Dòng 3: các tia nắng song song sáng. Dòng 4: tam giác vuông tạo bởi cột đầu, tia nắng qua đỉnh cột và bóng tô nhạt, góc vuông ở chân cột đánh dấu, góc 45° ở đỉnh bóng sáng. Dòng 5: tô tam giác mờ đi, thước 6 m hiện sát hai bóng còn lại. Dòng 6: dòng 'bằng nhau' của bảng sáng. Dòng 7: khung phải sáng lên, ba bóng dưới đèn thành ba mũi tên màu bẫy chĩa ba hướng; khung trái mờ nhẹ. Dòng 8: hình đứng yên.",
+      "lines": [
+        {
+          "show": "hình hộp mờ đi, hai khung cột hiện lại",
+          "text": "",
+          "speak": "Quay lại câu hỏi: vì sao dưới nắng, bóng mọi cột giống hệt nhau?"
+        },
+        {
+          "show": "ba bóng khung trái thành ba mũi tên từ chân cột tới đỉnh bóng",
+          "text": "",
+          "speak": "Mỗi bóng là một vectơ, đi từ chân cột tới đỉnh bóng."
+        },
+        {
+          "show": "các tia nắng song song sáng",
+          "at": "ba mũi tên bóng, khung trái",
+          "text": "cùng hướng",
+          "speak": "Tia nắng tới song song, nên ba bóng chĩa cùng một hướng."
+        },
+        {
+          "show": "tam giác vuông cột–tia nắng–bóng của cột đầu tô nhạt",
+          "at": "bóng cột đầu tiên",
+          "text": "bóng 6 m",
+          "speak": "Góc bốn mươi lăm độ cho tam giác vuông cân, nên bóng dài bằng cột, sáu mét."
+        },
+        {
+          "show": "thước 6 m hiện sát hai bóng còn lại",
+          "text": "",
+          "speak": "Cột nào cũng thế, nên ba bóng cùng dài sáu mét."
+        },
+        {
+          "show": "dòng 'bằng nhau' của bảng sáng",
+          "text": "",
+          "speak": "Hướng và độ dài bóng không phụ thuộc chỗ cột đứng: ba vectơ bằng nhau."
+        },
+        {
+          "show": "khung đèn sáng lên, ba bóng thành ba mũi tên màu bẫy chĩa ba hướng",
+          "text": "",
+          "speak": "Dưới đèn, cột đứng chỗ khác thì tia sáng tới khác hướng, nên bóng khác."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Vậy bóng nắng là cùng một vectơ, chỉ đặt ở ba chỗ khác nhau."
+        }
+      ]
+    }
+  ]
+}

@@ -124,6 +124,20 @@ def main() -> int:
         errors.append(f"loai '{loai}' không hợp lệ (chỉ {', '.join(sorted(LOAI))})")
     concepts_all: list[str] = []
 
+    # ký tự điều khiển trong chuỗi: thường là "\v", "\f", "\b" của LaTeX bị Python/JSON hiểu thành escape (\vec → tab dọc + "ec")
+    def _ctrl(o, where):
+        if isinstance(o, dict):
+            for k, v in o.items():
+                _ctrl(v, f"{where}.{k}" if where else k)
+        elif isinstance(o, list):
+            for i, v in enumerate(o):
+                _ctrl(v, f"{where}[{i}]")
+        elif isinstance(o, str):
+            bad = [c for c in o if ord(c) < 32 and c not in "\n"]
+            if bad:
+                errors.append(f"{where}: có ký tự điều khiển {[hex(ord(c)) for c in bad]} — LaTeX hỏng (vd. \\vec thành tab dọc): {o[:60]!r}")
+    _ctrl(s, "")
+
     beats = s.get("beats") or []
     if not beats:
         errors.append("không có beat nào")

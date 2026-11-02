@@ -39,6 +39,7 @@ Chi tiết từng video: `src/videos/<slug>/FEEDBACK.md`. Thêm mục mới mỗ
 - 26/10 · vectơ không gian · Người dùng thấy video có vấn đề, bảo tự soát. Bắt được: trục sâu 45° gần song song vectơ dời (AM trông như đi vào sâu); chữ đè giá/mũi tên thử vì vật tạm không là vật cản; đường gióng không chú thích; đầu cảnh 2 trống trơn; hai ngôi sao trước/sau khi trôi chồng nhau; "phép cộng vectơ" trong `visual` bị quên. → gói Toán › hình không gian; skill `dung-video` › quy tắc 12 (vật tạm là vật cản, chia theo phần), không nét ngoài kịch bản, đầu cảnh không trống.
 
 ## Chữ
+- 31/10 · khái niệm vectơ không gian · Sửa `script.json` bằng Python, chuỗi `"\vec"` không có `r""` → `\v` thành ký tự tab dọc, `$\vec{AB}$` hiện thành rác; học sinh ảo bắt được (cũng gặp trong `vecto-khong-gian/FEEDBACK.md`). → sửa LaTeX trong JSON bằng chuỗi `r"..."`; `check_script.py` báo lỗi ký tự điều khiển.
 - 26/10 · vectơ không gian · `\vec{AM}` của KaTeX chỉ có mũi tên nhỏ giữa hai chữ. → `Tex` tự đổi sang `\overrightarrow` cho tên nhiều chữ; bộ kiểm bố cục bỏ qua SVG trong KaTeX (mũi tên dài đo ra x ≈ −16000).
 - 19/10 · đạo hàm · Nhãn "đoạn 60 → 70 m: 0,81 s · tốc độ ≈ 44 km/h" lặp số trên thước; badge hết vai trò còn treo; phụ đề chép nguyên lời đọc. → nhãn ≤ 5 từ, một thông tin một chỗ, gỡ thứ hết vai trò.
 - 20/10 · đạo hàm · Chú giải "$s$: m · $t$: s" → không biết để làm gì. → chú giải đọc lên có nghĩa.
