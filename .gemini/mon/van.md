@@ -5,7 +5,7 @@ Bài học kinh nghiệm thực tế ghi tại: `.gemini/lessons.md`.
 
 ---
 
-## 1. Triết lý Cốt lõi: "Giải phẫu Văn bản" (Text Anatomy & Kinetic Typography)
+## 1. Tư duy kể chuyện & Trải nghiệm người xem (B1)
 
 > [!IMPORTANT]
 > **Không cố vẽ tranh để gợi cảm xúc**: Chúng ta là hệ thống đồ họa mã nguồn (Remotion/SVG), không phải studio họa sĩ vẽ tay. Mọi nỗ lực vẽ tranh tả thực hay cố tạo không khí cảm xúc đều sẽ dẫn đến hình ảnh nửa mùa, ngô nghê và nghiệp dư.
@@ -22,13 +22,24 @@ Bài học kinh nghiệm thực tế ghi tại: `.gemini/lessons.md`.
 
 ---
 
-## 2. Ngân hàng Kỹ thuật Giải phẫu Văn bản (Text Anatomy Toolkit)
+## 2. Phạm vi kiến thức & Tài liệu tham khảo (B1)
+
+- **Tài liệu tham khảo chuẩn**: Lưu tại `references/van/` gồm SGK 2018 (Kết nối tri thức, Cánh diều, Chân trời sáng tạo) và Đề thi Đánh giá năng lực (HSA, VNUHCM, SPT).
+- Khi viết kịch bản, AI và Biên kịch **BẮT BUỘC tra cứu ngữ liệu trong thư mục này** để đảm bảo trích dẫn chính xác 100% nguyên văn bản tác phẩm, không nhớ mang máng hay sai lệch câu chữ.
+- **Quy chuẩn trích dẫn ngữ liệu**:
+  - Mỗi dòng hiển thị trên màn hình chỉ chứa 1 câu thơ, 1 vế câu hoặc 1 cụm từ then chốt ($\le 35$ ký tự).
+  - Tuyệt đối không bê nguyên cả khổ thơ hay đoạn văn 5–7 dòng lên màn hình (gây quá tải thị giác).
+  - Tác phẩm hoặc ngữ liệu lạ phải ghi rõ tác giả trong nhãn nhỏ.
+
+---
+
+## 3. Mẫu dựng khái niệm (B1 + B3)
 
 Biên kịch non-tech khi viết kịch bản chỉ cần chọn các thao tác mổ xẻ văn bản trực quan dưới đây:
 
-### 2.1. Thao tác Mổ xẻ Từ ngữ & Câu (Word & Syntax Operations)
+### 3.1. Thao tác Mổ xẻ Từ ngữ & Câu (Word & Syntax Operations)
 * **Vệt quét Highlight (Kinetic Scanner)**:
-  - Khi giọng đọc phân tích một từ ngữ đắt giá (nhãn thần của câu thơ, từ Hán Việt, lỗi sai dùng từ): Vệt màu sáng quét qua từ đó, một nhãn neo (`AutoLabels`) bật lên bên cạnh giải thích bản chất.
+  - Khi giọng đọc phân tích một từ ngữ đắt giá (nhãn thần câu thơ, từ Hán Việt, lỗi sai dùng từ): Vệt màu sáng quét qua từ đó, một nhãn neo (`AutoLabels`) bật lên bên cạnh giải thích bản chất.
 * **Tách vế & Căn đối xứng (Spatial Splitting)**:
   - Dành cho *Phép Đối (Thơ Đường luật, câu đối, văn biền ngẫu)*: Câu thơ tự động tách làm hai vế, trượt sang hai bên và căn gióng thẳng hàng dọc ($4 \parallel 4$) để người xem thấy ngay sự cân đối chằn chặn của thanh điệu và từ loại.
 * **Bóc tách Tầng nghĩa (Semantic Unlayering)**:
@@ -36,7 +47,7 @@ Biên kịch non-tech khi viết kịch bản chỉ cần chọn các thao tác 
 * **Khung chịu lực Ngữ pháp (Syntax Wireframe)**:
   - Dành cho *Sửa lỗi câu, câu thiếu chủ - vị, lỗi quan hệ từ*: Câu văn được đóng khung thành các khối nòng cốt ($S$ - $V$). Thành phần Trạng ngữ ($TN$) thừa hoặc sai làm gãy kết cấu hiển thị rõ ràng bằng màu cảnh báo.
 
-### 2.2. Thao tác Mạch liên kết & Cấu tứ (Macro Structure)
+### 3.2. Thao tác Mạch liên kết & Cấu tứ (Macro Structure)
 * **Mạng lưới Mạch ngầm (Connecting Vectors)**:
   - Dành cho *Cấu tứ trong thơ, Các phép liên kết câu/đoạn*: Các câu thơ/câu văn được bố trí trên một bố cục trang nhã. Những đường line vector phát sáng tự động nối từ từ khóa ở câu 1 sang từ khóa ở câu 3, câu 4 $\to$ Làm lộ ra mạng lưới cấu tứ mà mắt thường đọc lướt không nhìn ra được.
 * **Ống kính 4 tầng (4-Step Lens)**:
@@ -46,48 +57,40 @@ Biên kịch non-tech khi viết kịch bản chỉ cần chọn các thao tác 
 
 ---
 
-## 3. Quy chuẩn Viết Kịch bản cho Môn Văn (B1)
+## 4. Số và đơn vị
 
-1. **Ngữ liệu chắt lọc**:
-   - Không đưa cả đoạn văn dài. Chỉ trích xuất đúng 1–2 câu trọng tâm đang được mổ xẻ (mỗi dòng text $\le 35$ ký tự).
-2. **Quy chuẩn trường `show`**:
-   - Viết rõ thao tác can thiệp lên văn bản:
-     - *Đúng*: `"show": "Vệt highlight vàng quét qua từ 'Áo chàm', nhãn neo 'Dấu hiệu trang phục' xuất hiện phía trên"`
-     - *Đúng*: `"show": "Hai vế câu 'Lưng lửng trời xanh' và 'Lom khom dưới núi' dạt sang hai bên, căn đối xứng dọc"`
-     - *Sai*: `"show": "Hiện cảnh bà con Việt Bắc tiễn bộ đội"` (CẤM vẽ minh họa tả thực).
-3. **Quy chuẩn `keyword`**:
-   - Keyword là câu chốt phương pháp/bản chất ở cuối beat (vd: `"Ẩn dụ = Tương đồng ngầm"`, `"Chủ ngữ không thể đứng trong cụm giới từ"`).
+Môn Văn **không có đại lượng vật lý**, áp dụng các quy chuẩn sau:
+- **Số đếm câu/dòng thơ**: Viết chữ số Ả Rập trong `text` và `caption` (vd: "câu 3 và 4", "nhịp 2/2/3"), trong `speak` viết rõ chữ ("câu ba và bốn", "nhịp hai hai ba").
+- **Thế kỷ & Thời kỳ lịch sử**: Viết số La Mã trong `text` (vd: "Thế kỷ XX", "giai đoạn 1930–1945"), trong `speak` đọc thuần Việt ("thế kỷ hai mươi").
+- **Năm sáng tác / Năm sinh mất**: Đặt trong ngoặc đơn nhỏ cạnh tên tác giả/tác phẩm (vd: *Nguyễn Du (1765–1820)*).
 
 ---
 
-## 4. Quy chuẩn Lời đọc & Audio (B2 - Vivibe TTS)
+## 5. Đọc ký hiệu, tên riêng (B2)
 
 1. **Ngắt nhịp thơ & nhịp câu**:
    - Bắt buộc dùng dấu phẩy `,` hoặc `...` để ép giọng đọc AI ngắt đúng nhịp thi pháp (2/2/3, 4/3, 3/3).
 2. **Khoảng dừng (`pauseAfter`)**:
    - Thêm `"pauseAfter": 1.5` sau các câu hỏi tư duy hoặc trước khi công bố đáp án đúng.
-3. **Phiên âm rõ ràng**:
-   - Tên tác giả, thuật ngữ phiên âm thuần Việt trong `speak` (để AI đọc đúng) và viết chuẩn trong `caption` (để học sinh xem).
+3. **Phiên âm chuẩn xác**:
+   - Tên tác giả nước ngoài, thuật ngữ phiên âm thuần Việt trong `speak` (để AI đọc đúng) và viết chuẩn trong `caption` (để học sinh xem):
+
+| Tên / Thuật ngữ | Viết trong `text` / `caption` | Viết trong `speak` | Ghi chú |
+| :--- | :--- | :--- | :--- |
+| Shakespeare | Shakespeare | Sếch-xpia | Đã kiểm tra Vivibe |
+| Victor Hugo | Victor Hugo | Huy-gô | Đọc quen thuộc |
+| Chủ ngữ / Vị ngữ | $S$ / $V$ | chủ ngữ, vị ngữ | CẤM viết "ét", "vê" |
+| Ẩn dụ chuyển đổi cảm giác | Ẩn dụ CĐCG | ẩn dụ chuyển đổi cảm giác | Đọc đầy đủ |
 
 ---
 
-## 5. Quy trình Dựng Video & Phối hợp Tech - Non-tech
+## 6. Dựng hình (B3)
 
-```text
-[Biên kịch Văn] Đưa Ngữ liệu + Vấn đề cốt lõi cần giải thích
-       │
-       ▼
-[AI + Biên kịch] Chọn cách "Giải phẫu văn bản": Highlight? Tách vế? Nối mạch ngầm? Ma trận?
-       │
-       ▼
-[Biên kịch] Điền script.json (tập trung mô tả chữ biến đổi trên màn hình)
-       │
-       ▼
-[Tech] Chạy Storyboard nháp (storyboard.mjs) -> Xuất ảnh tĩnh bố cục text & nhãn
-       │
-       ▼
-[Biên kịch] Soát: "Các điểm mổ xẻ trên chữ đã đúng trọng tâm chưa?"
-       │
-       ▼
-[Tech] Render hoàn thiện theo audio
-```
+- **Bộ Core Components chuyên dụng môn Văn** nằm tại `src/components/van/`:
+  - `TextDissector`: Component hiển thị câu văn với các vệt quét highlight động và nhãn neo `AutoLabels`.
+  - `SplitPoemVerse`: Tách và căn gióng đối xứng hai vế câu thơ tự động bằng CSS Grid/Flex.
+  - `AttributeMatrix`: Bảng 4 thẻ trắc nghiệm ĐGNL có hiệu ứng quét laser và đánh dấu tích xanh/gạch đỏ.
+  - `ConnectingNetwork`: Vẽ các đường line SVG cong mượt nối các từ khóa theo mốc audio `cue`.
+- **Màu sắc & Typography**:
+  - Font chữ: Plus Jakarta Sans làm chủ đạo; trích dẫn thơ/văn có thể điểm xuyết kiểu Serif trang trọng.
+  - Nền tối giản (`#0F172A` hoặc `#1E293B`), chữ trắng/xám sáng, màu highlight dùng vàng amber (`#F59E0B`) hoặc xanh ngọc (`#10B981`) để tập trung mắt nhìn.
