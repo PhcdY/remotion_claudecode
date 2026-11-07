@@ -1,0 +1,5 @@
+{
+  "engine": "vivibe",
+  "speed": 1.0,
+  "note": "Giọng không cố định: người dùng báo mỗi lần chạy, truyền bằng --voice. API key để trong .env (VIVIBE_API_KEY)."
+}
