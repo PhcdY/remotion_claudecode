@@ -179,6 +179,7 @@ Phép thử: **tắt tiếng, chỉ nhìn khung hình**, người xem vẫn bi�
 - **Không lặp thứ đã nhìn thấy**: vạch chia đã ghi 60, 70 thì nhãn đoạn tô không ghi lại "60 → 70 m"; `text` của dòng đã ghi số thì nhãn khác không ghi lại số đó. Một thông tin — một chỗ.
 - **Gỡ thông tin hết vai trò**: badge/nhãn lời đọc không còn nói tới (vd. "vận tốc trung bình cả bài" khi đã sang đoạn 60–70 m) mờ đi trong ~0,5 s. Chỉ giữ thứ đang nói tới và mốc tham chiếu cần thiết.
 - **Chữ nằm gọn trong khung chứa** của nó (thẻ, ô bảng, khung hình bên trái…), không tràn ra ngoài viền. Nhãn dài hơn khung → rút chữ hoặc đặt nhãn ra ngoài khung hẳn, có đường dẫn.
+- **Quy chuẩn thiết kế Thẻ UI (Card, SideCard, Bẫy, Tổng kết)**: Dùng component chuẩn `Card.tsx` (bo góc 24px, viền panel, shadow nhẹ). Bắt buộc có `boxSizing: "border-box"`, chiều rộng thẻ mở rộng đủ thoáng (≥ 620–680px), và các dòng nội dung quan trọng phải có `whiteSpace: "nowrap"` để câu chữ/công thức không bao giờ bị rớt dòng cụt.
 - Đếm nhanh mỗi frame: ngoài câu chốt, chữ mới xuất hiện trong dòng đang đọc ≤ ~8 từ.
 
 **9. Nhịp hình: một thay đổi mỗi lần, và thay đổi là lời giải thích.**
@@ -186,6 +187,8 @@ Phép thử: **tắt tiếng, chỉ nhìn khung hình**, người xem vẫn bi�
 - **Số đổi ⇔ hình đổi, cùng lúc**: bảng nhảy sang hàng mới thì vạch/đoạn tô tương ứng trên hình co lại (hoặc giãn ra) đúng lúc đó, nhãn số đi theo vạch; con số mới phải trông như *sinh ra* từ chuyển động trên hình (đoạn co lại → giá trị chạy tới số mới), không tự hiện ở một chỗ khác.
 - Không mở một hình biểu diễn mới (trục số, bảng, đồ thị khác) khi hình đang có biểu diễn được điều đó. Cần hình mới thì nối với hình cũ bằng bước người xem tự hiểu (lấy số từ hình cũ → bảng nhỏ → chấm từng điểm → nối đồ thị), hình cũ vẫn thấy trong lúc nối.
 - **Không dùng phép biến hình lạ mắt** (xoay đường chạy thành trục, nhân vật nằm ngang, gập/cuộn hình). Đã thử 20/10/2026: người xem không hiểu. Trục, đồ thị, nhân vật luôn ở tư thế quen thuộc.
+- **Clean State Transition (Chống rò rỉ trạng thái giữa các beat)**: Khi chuyển sang beat mới, các đối tượng hình ảnh tạm thời của beat trước (khung viền, thước đo, nét phụ, mũi tên thử) bắt buộc phải được fade out về 0, trừ khi đối tượng đó làm nền liên tục cho beat sau. Tuyệt đối cấm để rò rỉ trạng thái cũ (State Leakage) đè lên hình ảnh mới gây nhiễu loạn thị giác.
+- **Đồng bộ hướng của vật thể chuyển động (Đa môn: Toán, Lý, Hóa, Sinh, Sử, Địa)**: Bất kỳ vật thể nào chuyển động có hướng (đoàn quân/mũi tên tiến công trong Sử, luồng gió/dòng hải lưu trong Địa, tế bào/máu chảy trong Sinh, hạt chuyển động trong Lý, máy bay/vật thể trong Toán): đầu mũi của vật thể bắt buộc phải quay đúng theo tiếp tuyến của quỹ đạo chuyển động (`Math.atan2(dy, dx) * 180 / Math.PI`). Cấm để vật thể trôi ngang hoặc lùi khi đang di chuyển tiến.
 
 **10. Nhân vật do quy luật điều khiển; công thức chỉ lên hình.**
 - Nhân vật/vật minh hoạ (người chạy, flycam, phân tử…) chỉ có mặt khi biểu diễn một đại lượng, và chuyển động **theo đúng quy luật đó** (vị trí qua hàm scale chung, tốc độ theo đại lượng tương ứng). Nhãn nói rõ nó là gì. Không có nhân vật cho vui.
@@ -204,6 +207,8 @@ Phép thử: **tắt tiếng, chỉ nhìn khung hình**, người xem vẫn bi�
 - Truyền **tất cả** nhãn của cảnh vào một `AutoLabels` (nhãn chưa hiện thì `opacity: 0`) để vị trí cố định suốt cảnh, không nhảy khi nhãn khác hiện. Nhãn quan trọng truyền trước; `prefer` để gợi hướng (vd. `["n"]` cho đỉnh).
 - **Một vật một nhãn**: nhãn của cùng một điểm qua các dòng (vd. "$f'(3) = 0$" → "đỉnh" → "giá trị cực đại: 6") là **một** nhãn có `steps` + `step`, đổi chữ tại chỗ; không đặt nhiều nhãn chen nhau quanh một điểm.
 - `phases` (vd. `["b02"]`): nhãn chỉ hiện trong các beat đó; hai nhãn không chung giai đoạn thì không giành chỗ của nhau.
+- `phases` (vd. `["b02"]`): **BẮT BUỘC** khai báo `phases` cho mọi `AutoLabelItem` trong cảnh có nhiều beat. Nếu thiếu `phases`, thuật toán `placeLabels` coi tất cả nhãn của mọi beat trong toàn bộ cảnh đều cùng tồn tại cùng lúc, dẫn tới nghẽn solver và đẩy nhãn văng xa hàng trăm pixel ra khỏi điểm neo.
+- **Đăng ký trục toạ độ và đường nét làm vật cản (`segmentObstacles`)**: Các trục toạ độ chính, các đường di chuyển và đường gióng quan trọng phải được đăng ký vào mảng `obstacles` qua `segmentObstacles(start, end)` để thuật toán không bao giờ cho phép nhãn hoặc đường dóng cắt ngang qua nét vẽ chính.
 - `anchor: "region"` cho nhãn của một vùng (đoạn cong tô màu, khoảng trên trục): gắn bằng màu, không cần luật "gần điểm mình hơn"; mặc định `"point"` cho nhãn của một chấm.
 - Chữ cố định khác trong khung (công thức, "mô hình", tên trục, thẻ) truyền làm vật cản bằng `textObstacle` (giữ khoảng hở như giữa hai nhãn). Đặt chúng ở chỗ **không tranh vùng nhãn**: vùng quanh đỉnh/đáy/điểm đang xét để cho nhãn; công thức để góc trống (đã gặp ở demo: công thức góc trên phải chiếm chỗ của nhãn quanh đỉnh).
 - Vật cản di chuyển trong beat (điểm chạy, flycam): truyền cả quỹ đạo, không chỉ vị trí hiện tại.
