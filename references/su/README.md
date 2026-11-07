@@ -1,15 +1,33 @@
 # Thư viện Tài liệu Tham khảo Chuẩn — Môn Lịch sử (GDPT 2018)
 
-Thư mục này chứa hệ thống tài liệu kiến thức cốt lõi chuẩn SGK (Chương trình GDPT 2018 - Kết nối tri thức, Cánh diều, Chân trời sáng tạo) và các nguồn sử học chính thống, phục vụ việc viết kịch bản video AI giảng dạy bản chất.
+Thư mục này chứa hệ thống tài liệu kiến thức cốt lõi chuẩn SGK (Chương trình GDPT 2018 - Kết nối tri thức, Cánh diều, Chân trời sáng tạo) và Đề thi Tốt nghiệp THPT 2026 của Bộ GD&ĐT, phục vụ việc viết kịch bản video AI giảng dạy bản chất.
 
 ---
 
-## 1. Cấu trúc Danh mục 25 Chủ đề THPT (Lớp 10, 11, 12)
+## 1. Đề thi & Tổng quan Chương trình Chuẩn (Mới Cập nhật)
+
+| Tài liệu | Loại | Mô tả & Trọng tâm |
+| :--- | :--- | :--- |
+| **[`de-thi-chinh-thuc-tot-nghiep-thpt-2026.md`](./de-thi-chinh-thuc-tot-nghiep-thpt-2026.md)** | Đề thi chuẩn 2026 | Đề thi chính thức Bộ GD&ĐT (Mã đề 0809): 24 câu trắc nghiệm nhiều lựa chọn + 4 câu trắc nghiệm Đúng/Sai kèm phân tích bản chất & đáp án. |
+| **[`lop-10/tong-quan-chuong-trinh-10.md`](./lop-10/tong-quan-chuong-trinh-10.md)** | Khung SGK 10 | Tổng quan 7 chủ đề, trọng tâm 4 chủ đề HK2 (Văn minh cổ, Đại Việt, ĐNA, CM Công nghiệp) & Bảng phiên âm tên riêng chuẩn SGK. |
+| **[`lop-11/tong-quan-chuong-trinh-11.md`](./lop-11/tong-quan-chuong-trinh-11.md)** | Khung SGK 11 | Tổng quan 6 chương (CNTB, CNXH, Độc lập ĐNA, Khởi nghĩa & Chiến tranh bảo vệ TQ, Cải cách Hồ Quý Ly - Lê Thánh Tông - Minh Mạng, Biển Đông). |
+| **[`lop-12/tong-quan-chuong-trinh-12.md`](./lop-12/tong-quan-chuong-trinh-12.md)** | Khung SGK 12 | Trọng tâm kỳ thi THPT: Chiến tranh Lạnh, ASEAN, Kháng chiến chống Pháp (Điện Biên Phủ) & Mỹ (1954–1975), Đổi mới 1986, Đối ngoại & Hồ Chí Minh. |
+
+---
+
+## 2. Cấu trúc Danh mục 25 Chủ đề THPT (Lớp 10, 11, 12)
 
 ```text
 references/su/
 ├── README.md
+├── de-thi-chinh-thuc-tot-nghiep-thpt-2026.md          # Đề thi tốt nghiệp THPT 2026 (Bộ GD&ĐT)
+├── raw_pdf/                                         # (Bị .gitignore) Chứa 4 file PDF/DOCX gốc
+│   ├── thuvienhoclieu.com-De-thi-TN-THPT-2026-mon-Lich-su-Bo-GD-ma-de-0809.docx
+│   ├── thuvienhoclieu.com-SGK-Lich-Su-10-thong-nhat-tu-nam-2026.pdf
+│   ├── thuvienhoclieu.com-SGK-Lich-Su-11-thong-nhat-tu-nam-2026.pdf
+│   └── thuvienhoclieu.com-SGK-Lich-Su-12-thong-nhat-tu-nam-2026.pdf
 ├── lop-10/
+│   ├── tong-quan-chuong-trinh-10.md                  # Tổng quan & Bảng phiên âm SGK 10
 │   └── hk2/
 │       ├── chu-de-10.1.1-van-minh-co-viet-nam.md
 │       ├── chu-de-10.1.2-van-minh-dai-viet.md
@@ -20,6 +38,7 @@ references/su/
 │       ├── chu-de-10.4.1-cach-mang-cong-nghiep-can-dai.md
 │       └── chu-de-10.4.2-cach-mang-cong-nghiep-hien-dai.md
 ├── lop-11/
+│   ├── tong-quan-chuong-trinh-11.md                  # Tổng quan SGK 11
 │   ├── hk1/
 │   │   ├── chu-de-11.1.1-mot-so-van-de-chung-cach-mang-tu-san.md
 │   │   ├── chu-de-11.1.2-su-xac-lap-va-phat-trien-chu-nghia-tu-ban.md
@@ -36,6 +55,7 @@ references/su/
 │       ├── chu-de-11.6.1-vi-tri-tam-quan-trong-bien-dong.md
 │       └── chu-de-11.6.2-viet-nam-va-bien-dong.md
 └── lop-12/
+    ├── tong-quan-chuong-trinh-12.md                  # Tổng quan & Bảng phiên âm SGK 12
     ├── hk1/
     │   ├── chu-de-12.1.1-lien-hop-quoc.md
     │   ├── chu-de-12.1.2-trat-tu-the-gioi-trong-chien-tranh-lanh.md
@@ -59,12 +79,12 @@ references/su/
 
 ---
 
-## 2. Nguyên tắc Biên soạn Kịch bản từ Tài liệu Tham khảo
+## 3. Nguyên tắc Sử dụng đối với AI & Creator
 
-1. **AI BẮT BUỘC tra cứu file tương ứng trước khi viết kịch bản**:
-   - Đối chiếu niên đại, địa danh lịch sử chuẩn theo từng thời kỳ.
-   - Nắm chắc quan điểm định hướng của SGK 2018 (đặc biệt là bài học cải cách, đánh giá nhân vật).
+1. **AI BẮT BUỘC tra cứu trước khi viết kịch bản**:
+   - Mở file tổng quan lớp và file chủ đề tương ứng để nắm chắc chuẩn kiến thức SGK, thuật ngữ và hoạt động khởi động.
+   - Tra cứu bảng phiên âm tên riêng nước ngoài để viết `speak` cho Vivibe TTS đọc chuẩn xác.
 2. **Tuân thủ 3 Lằn ranh đỏ**:
-   - Chủ quyền biển đảo (Hoàng Sa, Trường Sa).
-   - Quan điểm sử học chính thống.
-   - Chuẩn xác dữ liệu.
+   - 100% bản đồ có đầy đủ Hoàng Sa và Trường Sa.
+   - Bám sát quan điểm sử học chính thống của SGK 2018 và Bộ GD&ĐT.
+   - Chuẩn xác tuyệt đối về niên đại, địa danh cổ và tước hiệu nhân vật.
