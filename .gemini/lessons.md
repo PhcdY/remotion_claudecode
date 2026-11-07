@@ -109,3 +109,10 @@ Chi tiết từng video: `src/videos/<slug>/FEEDBACK.md`. Thêm mục mới mỗ
 - **Quy tắc đúc kết**:
   - **Môn Toán**: Bắt buộc dùng `src/components/space.tsx` (`<Arrow>` và `<Seg>`); cấm tự vẽ polygon mũi tên hardcode; chuyển động cộng vectơ bắt buộc dùng `lerp3` tịnh tiến mượt mà từ gốc $O$ sang ngọn; góc máy bay `deg` tính bằng `Math.atan2(vy, vx) * 180 / Math.PI`; nét đứt hình chiếu chỉ vẽ xuống sàn $Oxy$ và dóng vào trục (cấm vẽ khung hộp 12 cạnh nếu không dùng tới); mọi chuỗi LaTeX trong code TSX bắt buộc escape đúng `$\\vec{u}$` (double backslash); đăng ký 3 trục vào `segmentObstacles`.
   - **Skill chung**: Clean State Transition (dọn sạch các biến hiển thị tạm thời của beat trước khi sang beat sau); bắt buộc khai báo `phases` cho mọi nhãn neo trong cảnh nhiều beat; thẻ UI mở rộng ≥ 620–680px có `boxSizing: "border-box"` và `whiteSpace: "nowrap"`; vật thể chuyển động có hướng (đa môn) phải luôn quay đầu theo tiếp tuyến quỹ đạo.
+
+### 07/11/2026 — Quy chuẩn Quản lý Asset & Phối hợp Môn Sử (Request User → Maintainer Push Nhánh Default)
+- **Triết lý**: Repo là framework công cụ; video và assets cụ thể mang tính local-first.
+- **Workflow tạo và đồng bộ Component**:
+  1. Khi User ở local thiếu asset/component: AI **Request trực tiếp từ User** (yêu cầu gửi ảnh tư liệu, phác thảo địa hình) $\to$ AI đọc ảnh và code thành component SVG/React trong `src/components/su/`.
+  2. Người dùng sau đó nhắn gửi component cho Maintainer $\to$ Maintainer kiểm duyệt và tự tay push lên nhánh default (`gemini`).
+  3. Tất cả các Creators khác chỉ cần `git pull origin gemini` là tự động có toàn bộ kho components dùng chung mới nhất để tái sử dụng ngay.
