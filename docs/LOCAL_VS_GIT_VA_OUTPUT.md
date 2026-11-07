@@ -61,5 +61,13 @@ out/
    - Nếu không dùng `OUTPUT_DIR`, bạn copy file `.mp4` từ `out/` ra ổ cá nhân/kênh phân phối.
 
 3. **Dọn dẹp giải phóng ổ cứng (Clean-up)**:
-   - Thư mục `out/` có thể xoá bất cứ lúc nào khi ổ cứng bị đầy.
+   - Thư mục `out/` có thể xoá bất cứ lúc nào khi ổ cứng bị đầy (nếu bạn đã cài `OUTPUT_DIR` thì video đã nằm an toàn ở ổ riêng/Google Drive).
    - **Không sợ mất dữ liệu**: Toàn bộ kịch bản, animation, toạ độ toán học và logic video đều được lưu trữ vĩnh viễn trong `src/videos/<slug>/`. Bất cứ khi nào bạn muốn xuất lại video, chỉ cần chạy một lệnh render là có lại video y hệt trong vài phút!
+
+---
+
+## 3. Triết lý làm việc Local-First (Clone 1 lần duy nhất)
+
+- **Không xóa thư mục để clone lại**: Bạn chỉ cần clone dự án về máy đúng 1 lần duy nhất.
+- **Không lo conflict hay mất bài**: Các bài video mới bạn làm cứ để nguyên trong `src/videos/<slug>/` trên máy cá nhân.
+- **Cập nhật tính năng mới**: Khi hệ thống có component mới hoặc sửa lỗi, bạn chỉ cần gõ `git pull origin gemini`. Git sẽ tự động hợp nhất công cụ mới mà không đụng chạm hay làm mất bất kỳ bài video nào của bạn!
