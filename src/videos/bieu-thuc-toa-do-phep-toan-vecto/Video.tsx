@@ -20,7 +20,7 @@ export const BieuThucToaDoPhepToanVectoComposition: React.FC = () => (
     fps={FPS}
     width={1920}
     height={1080}
-    defaultProps={{ timeline: null } as ExplainerProps}
+    defaultProps={{ timeline: null, draft: true } as ExplainerProps}
     calculateMetadata={explainerMetadata(script)}
   />
 );

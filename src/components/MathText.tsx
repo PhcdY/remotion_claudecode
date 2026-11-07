@@ -32,17 +32,18 @@ export const Tex: React.FC<{
   display?: boolean;
   style?: React.CSSProperties;
 }> = ({ tex, display = false, style }) => {
-  const html = useMemo(
-    () =>
-      // \vec{AM}: KaTeX chỉ vẽ mũi tên nhỏ giữa hai chữ → tên vectơ nhiều chữ dùng mũi tên phủ hết tên như SGK
-      katex.renderToString(tex.replace(/\\vec\{([^{}]{2,})\}/g, "\\overrightarrow{$1}"), {
-        displayMode: display,
-        throwOnError: false,
-        output: "html",
-        trust: false,
-      }),
-    [tex, display],
-  );
+  const html = useMemo(() => {
+    // Chuẩn hoá: nếu chuỗi bị double backslash (từ JSX attribute), sửa lại thành single backslash cho lệnh KaTeX
+    const sanitized = tex
+      .replace(/\\{2,}([a-zA-Z,;!]+)/g, (_, cmd) => "\\" + cmd)
+      .replace(/\\vec\{([^{}]{2,})\}/g, "\\overrightarrow{$1}");
+    return katex.renderToString(sanitized, {
+      displayMode: display,
+      throwOnError: false,
+      output: "html",
+      trust: false,
+    });
+  }, [tex, display]);
   return <span style={style} dangerouslySetInnerHTML={{ __html: html }} />;
 };
 
