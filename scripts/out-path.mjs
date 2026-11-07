@@ -17,4 +17,6 @@ const root = path.resolve(import.meta.dirname, "..");
 const { dir, missing } = videoDir(root, slug, id);
 if (missing) console.error(`(script.json của ${slug} thiếu lop/chuong/bai → ra out/_lam-viec/)`);
 mkdirSync(dir, { recursive: true });
-console.log(path.relative(root, path.join(dir, `${id}.${opt("--ext", "mp4")}`)).replaceAll("\\", "/"));
+const fullOut = path.resolve(dir, `${id}.${opt("--ext", "mp4")}`);
+const rel = path.relative(root, fullOut);
+console.log((rel.startsWith("..") ? fullOut : rel).replaceAll("\\", "/"));

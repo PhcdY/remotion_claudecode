@@ -24,11 +24,20 @@ cd "Video AI"
 npm install
 ```
 
-### Bước 3: Cấu hình API Key âm thanh
+### Bước 3: Cấu hình file `.env` (API Key & Nơi lưu Video tự động)
 Tạo một file tên là `.env` ở ngay thư mục gốc của dự án với nội dung:
 ```env
+# 1. API Key giọng đọc Vivibe (TTS)
 VIVIBE_API_KEY=dien_api_key_cua_ban_vao_day
+
+# 2. (Khuyên dùng) Nơi tự động lưu Video thành phẩm ra ổ riêng hoặc Google Drive:
+# Nếu bỏ trống, mặc định sẽ lưu vào thư mục 'out/' bên trong dự án.
+OUTPUT_DIR="D:/Video_Thanh_Pham"
+# hoặc Google Drive: OUTPUT_DIR="G:/My Drive/9Study_Videos"
 ```
+
+> [!TIP]
+> **Điểm tiện lợi của `OUTPUT_DIR`**: Khi cài đặt dòng này, toàn bộ video `.mp4` và ảnh storyboard khi render sẽ **tự động xuất thẳng vào ổ cá nhân hoặc Google Drive của bạn**, hoàn toàn tách biệt khỏi thư mục code. Bạn không bao giờ phải kéo file thủ công và không bao giờ lo mất video!
 *(Nếu bạn chưa có key Vivibe, bạn vẫn có thể tạo kịch bản, dựng hình nháp và xem video hoàn toàn miễn phí trên Remotion Studio).*
 
 ---
