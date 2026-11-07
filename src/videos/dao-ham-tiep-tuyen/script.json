@@ -1,0 +1,58 @@
+{
+  "slug": "dao-ham-tiep-tuyen",
+  "title": "Đạo hàm là hệ số góc tiếp tuyến",
+  "beats": [
+    {
+      "id": "b01",
+      "section": "CÂU HỎI",
+      "keyword": "Nhưng nó thật sự là gì?",
+      "visual": "Công thức f'(x_0) to ở giữa, dấu chấm hỏi hiện ra bên cạnh.",
+      "lines": [
+        {
+          "text": "Ai cũng thuộc: $f'(x_0)$ là đạo hàm tại $x_0$.",
+          "speak": "Ai cũng thuộc: f phẩy x không là đạo hàm tại x không."
+        },
+        {
+          "text": "Nhưng nó thật sự là gì?",
+          "speak": "Nhưng nó thật sự là gì?"
+        }
+      ]
+    },
+    {
+      "id": "b02",
+      "section": "BẢN CHẤT",
+      "keyword": "Phóng to đồ thị",
+      "visual": "Hệ trục Oxy, vẽ dần đồ thị y = x^2/4 + 0.5. Chấm điểm tại x_0 = 2. Zoom vào quanh điểm cho đến khi đường cong trông gần như thẳng, rồi vẽ tiếp tuyến màu vàng đi qua điểm.",
+      "lines": [
+        {
+          "text": "Vẽ đồ thị và chọn một điểm trên đó.",
+          "speak": "Vẽ đồ thị, và chọn một điểm trên đó."
+        },
+        {
+          "text": "Phóng to quanh điểm ấy: đường cong gần như thẳng.",
+          "speak": "Phóng to quanh điểm ấy, đường cong gần như thẳng."
+        },
+        {
+          "text": "Đường thẳng đó chính là tiếp tuyến.",
+          "speak": "Đường thẳng đó chính là tiếp tuyến."
+        }
+      ]
+    },
+    {
+      "id": "b03",
+      "section": "KẾT LUẬN",
+      "keyword": "$f'(x_0)$ = hệ số góc tiếp tuyến",
+      "visual": "Giữ đồ thị và tiếp tuyến. Hiện khung công thức phương trình tiếp tuyến, tô sáng f'(x_0) trong công thức.",
+      "lines": [
+        {
+          "text": "$f'(x_0)$ là hệ số góc của tiếp tuyến tại $x_0$.",
+          "speak": "f phẩy x không là hệ số góc của tiếp tuyến tại x không."
+        },
+        {
+          "text": "$y = f'(x_0)(x - x_0) + f(x_0)$",
+          "speak": "Nên phương trình tiếp tuyến là: y bằng f phẩy x không, nhân x trừ x không, cộng f của x không."
+        }
+      ]
+    }
+  ]
+}

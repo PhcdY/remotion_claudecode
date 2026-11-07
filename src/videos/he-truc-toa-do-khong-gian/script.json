@@ -1,0 +1,454 @@
+{
+  "slug": "he-truc-toa-do-khong-gian",
+  "title": "Hai máy bay chồng lên nhau trên radar: Vì sao không va chạm?",
+  "subject": "toan",
+  "lop": 12,
+  "chuong": "Chương II. Vectơ và hệ trục tọa độ trong không gian",
+  "bai": "Bài 7. Hệ trục tọa độ trong không gian",
+  "exams": [
+    "THPTQG",
+    "TSA",
+    "HSA"
+  ],
+  "beats": [
+    {
+      "id": "b01",
+      "scene": 1,
+      "section": "HIỆN TƯỢNG",
+      "keyword": "Vì sao không va chạm?",
+      "visual": "CẢNH 1 — MÀN HÌNH RADAR KHÔNG LƯU 2D. Nền xanh navy dịu của brand 9Study với các vòng tròn đồng tâm và vạch chia góc radar mờ. Chuyến bay A (chấm sáng xanh lơ) ở góc trên trái, chuyến bay B (chấm sáng cam) ở góc dưới phải. Cả hai có đuôi vệt sáng mờ chỉ hướng bay cắt chéo nhau. Dòng 2: hai chấm sáng trượt vào tâm và chồng khít lên nhau, phát sáng nhấp nháy. Dòng 3: một vòng bảo vệ xanh lá hiện quanh điểm giao, hai vệt bay tiếp tục tách ra bình yên.",
+      "lines": [
+        {
+          "show": "màn hình radar hiện, hai chấm sáng A và B bay cắt chéo nhau",
+          "at": "chấm sáng A",
+          "text": "chuyến bay A",
+          "speak": "Trên màn hình radar kiểm soát không lưu, hai chuyến bay đang tiến lại gần nhau."
+        },
+        {
+          "show": "hai chấm sáng trượt vào giữa và chồng khít lên nhau",
+          "at": "tâm giao nhau",
+          "text": "10:15 trùng khít",
+          "speak": "Đúng mười giờ mười lăm phút, hai tín hiệu chồng khít lên nhau tại cùng một điểm."
+        },
+        {
+          "show": "vòng bảo vệ xanh lá hiện, hai máy bay lướt qua nhau an toàn",
+          "at": "vòng bảo vệ",
+          "text": "an toàn",
+          "speak": "Nhưng trên bầu trời thực tế, không có vụ va chạm nào xảy ra."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Trùng khít trên màn hình, vì sao ngoài đời thực lại an toàn tuyệt đối?"
+        }
+      ]
+    },
+    {
+      "id": "b02",
+      "scene": 1,
+      "section": "CÂU HỎI",
+      "keyword": "Mặt phẳng: 2 số là đủ",
+      "visual": "Giữ CẢNH 1. Các vòng tròn radar mờ đi, thay bằng lưới tọa độ vuông phẳng Oxy trên mặt radar. Trục ngang Ox màu xanh lam chỉ hướng đông, trục dọc Oy chỉ hướng bắc. Vị trí giao nhau được dóng vuông góc xuống hai trục, ra hai con số tọa độ 40 và 60.",
+      "lines": [
+        {
+          "show": "vòng tròn mờ đi, lưới vuông phẳng Oxy sáng lên",
+          "at": "gốc tọa độ",
+          "text": "mặt phẳng $Oxy$",
+          "speak": "Màn hình ở trạm kiểm soát thực chất là một mặt phẳng hai chiều."
+        },
+        {
+          "show": "hai đường dóng từ điểm giao xuống hai trục Ox và Oy",
+          "at": "hai trục",
+          "text": "$(40; 60)$",
+          "speak": "Trên mặt phẳng này, vị trí mỗi máy bay được định vị bằng hai con số."
+        },
+        {
+          "show": "mũi tên ngang 40 km và mũi tên dọc 60 km sáng màu nhấn",
+          "at": "trục Ox",
+          "text": "đông 40, bắc 60",
+          "speak": "Khoảng cách theo hướng đông, và khoảng cách theo hướng bắc."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Hai con số là đủ để định vị mọi điểm trên một bề mặt phẳng."
+        }
+      ]
+    },
+    {
+      "id": "b03",
+      "scene": 2,
+      "section": "TRỰC GIÁC",
+      "keyword": "Bầu trời: Cần chiều thứ ba",
+      "visual": "CẢNH 2 — KHÔNG GIAN BẦU TRỜI 3D. Màn hình radar 2D từ từ ngả nghiêng xuống thành mặt sàn đáy nằm ngang (mặt phẳng Oxy). Khoảng không gian phía trên mở rộng ra. Hai mô hình máy bay nhỏ xuất hiện lơ lửng phía trên mặt sàn, một chiếc bay cao hơn hẳn chiếc kia.",
+      "lines": [
+        {
+          "show": "mặt radar ngả xuống thành sàn đáy Oxy trong không gian 3D",
+          "at": "mặt sàn",
+          "text": "sàn đáy $Oxy$",
+          "speak": "Nhưng bầu trời không phải là một mặt phẳng nằm im."
+        },
+        {
+          "show": "hai mô hình máy bay A và B hiện lơ lửng ở hai độ cao khác nhau",
+          "at": "mô hình máy bay",
+          "text": "độ cao bay",
+          "speak": "Máy bay còn có thể bay vút lên cao hoặc hạ thấp xuống."
+        },
+        {
+          "show": "mũi tên thẳng đứng chỉ lên trời xuất hiện",
+          "at": "mũi tên đứng",
+          "text": "hướng thẳng đứng",
+          "speak": "Chiều cao là một hướng độc lập hoàn toàn với mặt đất."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Muốn biết máy bay đang ở đâu trong không gian, bắt buộc phải có thêm một hướng thứ ba."
+        }
+      ]
+    },
+    {
+      "id": "b04",
+      "scene": 2,
+      "section": "GỐC RỄ",
+      "keyword": "Hệ trục $Oxyz$ vuông góc",
+      "visual": "Giữ CẢNH 2. Tại gốc O trên mặt sàn, hai trục Ox và Oy đang vuông góc với nhau (dấu góc vuông trên mặt sàn). Một trục thẳng đứng bắn vút lên từ O, vuông góc với cả Ox và Oy, đặt tên là Oz. Ba dấu góc vuông xuất hiện giữa từng cặp trục.",
+      "lines": [
+        {
+          "show": "hai trục Ox và Oy trên mặt sàn sáng rõ kèm dấu góc vuông",
+          "at": "mặt sàn",
+          "text": "$Ox \\perp Oy$",
+          "speak": "Xuất phát từ gốc O trên mặt đất, ta đã có trục hoành O x và trục tung O y.",
+          "caption": "Xuất phát từ gốc O trên mặt đất, ta đã có trục hoành Ox và trục tung Oy."
+        },
+        {
+          "show": "trục thẳng đứng Oz vươn lên từ gốc O",
+          "at": "trục đứng",
+          "text": "trục cao $Oz$",
+          "speak": "Giờ dựng thêm một trục thẳng đứng đi qua O, vuông góc với cả hai trục trước.",
+          "caption": "Giờ dựng thêm một trục thẳng đứng đi qua O, vuông góc với cả hai trục trước."
+        },
+        {
+          "show": "ba dấu góc vuông xuất hiện nối từng cặp trục",
+          "at": "gốc O",
+          "text": "$Ox, Oy, Oz$ đôi một vuông góc",
+          "speak": "Đó là trục cao O z. Ba trục đôi một vuông góc tạo nên hệ trục tọa độ O x y z trong không gian.",
+          "caption": "Đó là trục cao Oz. Ba trục đôi một vuông góc tạo nên hệ trục tọa độ Oxyz trong không gian."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Gốc O là điểm chung, và ba trục phân chia toàn bộ không gian bao la.",
+          "caption": "Gốc O là điểm chung, và ba trục phân chia toàn bộ không gian bao la."
+        }
+      ]
+    },
+    {
+      "id": "b05",
+      "scene": 2,
+      "section": "BẢN CHẤT",
+      "keyword": "Thước đo chuẩn: $\\vec{i}, \\vec{j}, \\vec{k}$",
+      "visual": "Giữ CẢNH 2. Cận cảnh gốc O. Trên trục Ox, một mũi tên đậm dài 1 đơn vị xuất hiện (vectơ i). Trên trục Oy, mũi tên dài 1 đơn vị (vectơ j). Trên trục Oz, mũi tên dài 1 đơn vị (vectơ k). Ba mũi tên mang ba màu vai trò phân biệt rõ ràng.",
+      "lines": [
+        {
+          "show": "trên mỗi trục xuất hiện một vạch chia chuẩn độ dài 1",
+          "at": "gốc O",
+          "text": "độ dài bằng $1$",
+          "speak": "Để đo đạc, trên mỗi trục ta đặt một chiếc thước chuẩn dài đúng một đơn vị."
+        },
+        {
+          "show": "mũi tên vectơ i hiện đậm trên trục Ox",
+          "at": "trục Ox",
+          "text": "$\\vec{i}$ trên $Ox$",
+          "speak": "Trên trục hoành, đó là vectơ đơn vị i.",
+          "caption": "Trên trục hoành, đó là vectơ đơn vị i."
+        },
+        {
+          "show": "mũi tên vectơ j hiện đậm trên trục Oy",
+          "at": "trục Oy",
+          "text": "$\\vec{j}$ trên $Oy$",
+          "speak": "Trên trục tung, đó là véc-tơ đơn vị di.",
+          "caption": "Trên trục tung, đó là vectơ đơn vị j."
+        },
+        {
+          "show": "mũi tên vectơ k hiện đậm trên trục Oz",
+          "at": "trục Oz",
+          "text": "$\\vec{k}$ trên $Oz$",
+          "speak": "Trên trục cao, đó là vectơ đơn vị ca.",
+          "caption": "Trên trục cao, đó là vectơ đơn vị k."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Ba vectơ đơn vị này vuông góc từng đôi một, làm nền tảng cho mọi phép đo."
+        }
+      ]
+    },
+    {
+      "id": "b06",
+      "scene": 2,
+      "section": "ĐỊNH NGHĨA",
+      "keyword": "$\\vec{OM} = x\\vec{i} + y\\vec{j} + z\\vec{k} \\Leftrightarrow M(x; y; z)$",
+      "visual": "Giữ CẢNH 2. Một điểm M lơ lửng trong không gian. Từ gốc O, một đường đi đứt nét màu sáng lần lượt chạy: x bước theo hướng vectơ i tới điểm P trên Ox, rẽ vuông góc đi y bước song song Oy tới điểm Q trên sàn, rồi bay thẳng đứng z bước song song Oz lên đúng điểm M. Mũi tên vectơ OM nối thẳng từ O đến M.",
+      "lines": [
+        {
+          "show": "điểm M hiện lơ lửng trong không gian",
+          "at": "điểm M",
+          "text": "điểm $M$",
+          "speak": "Xét một điểm M bất kỳ đang lơ lửng trong không gian.",
+          "caption": "Xét một điểm M bất kỳ đang lơ lửng trong không gian."
+        },
+        {
+          "show": "đoạn thẳng chạy dọc Ox từ O đến x lần vectơ i",
+          "at": "trục Ox",
+          "text": "$x\\vec{i}$",
+          "speak": "Xuất phát từ gốc O, ta đi x bước dọc theo vectơ i.",
+          "caption": "Xuất phát từ gốc O, ta đi x bước dọc theo vectơ i."
+        },
+        {
+          "show": "đoạn thẳng rẽ ngang trên sàn Oxy dài y lần vectơ j",
+          "at": "mặt sàn Oxy",
+          "text": "$y\\vec{j}$",
+          "speak": "Rẽ sang ngang, đi y bước dọc theo véc-tơ di.",
+          "caption": "Rẽ sang ngang, đi y bước dọc theo vectơ j."
+        },
+        {
+          "show": "đoạn thẳng bay thẳng đứng lên điểm M dài z lần vectơ k",
+          "at": "đoạn thẳng đứng",
+          "text": "$z\\vec{k}$",
+          "speak": "Rồi bay thẳng đứng lên cao, z bước dọc theo vectơ ca.",
+          "caption": "Rồi bay thẳng đứng lên cao, z bước dọc theo vectơ k."
+        },
+        {
+          "show": "mũi tên vectơ OM nối thẳng từ O tới M bừng sáng",
+          "at": "vectơ OM",
+          "text": "$\\vec{OM}$",
+          "speak": "Véc-tơ ô-mờ gộp lại bằng x lần véc-tơ i, cộng y lần véc-tơ di, cộng z lần véc-tơ ca.",
+          "caption": "Vectơ OM = xi + yj + zk."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Bộ ba số ích y dét duy nhất đó, được gọi là tọa độ của điểm mờ.",
+          "caption": "Bộ ba số (x; y; z) duy nhất đó được gọi là tọa độ của điểm M."
+        }
+      ]
+    },
+    {
+      "id": "b07",
+      "scene": 2,
+      "section": "CÔNG THỨC",
+      "keyword": "Hình hộp chiếu tọa độ",
+      "visual": "Giữ CẢNH 2. Khung hình hộp chữ nhật bao quanh đường đi từ O tới M hoàn thiện với các nét dóng mảnh. Gốc O và điểm M là hai đỉnh đối diện của hình hộp. Điểm hình chiếu M' nằm ngay trên mặt sàn Oxy bên dưới M. Ba đoạn thẳng dóng vuông góc từ M tới ba trục tọa độ sáng lần lượt.",
+      "lines": [
+        {
+          "show": "khung hình hộp chữ nhật bao quanh điểm M hiện rõ",
+          "at": "hình hộp",
+          "text": "hình hộp chữ nhật",
+          "speak": "Nối các đường dóng lại, ta thấy điểm M chính là đỉnh đối diện của một hình hộp chữ nhật.",
+          "caption": "Nối các đường dóng lại, ta thấy điểm M chính là đỉnh đối diện của một hình hộp chữ nhật."
+        },
+        {
+          "show": "đoạn thẳng dóng từ M thẳng đứng xuống mặt sàn Oxy tạo điểm M'",
+          "at": "điểm M'",
+          "text": "$M'(x; y; 0)$",
+          "speak": "Chiếu vuông góc điểm mờ xuống mặt đất O x y, ta được điểm mờ-phẩy.",
+          "caption": "Chiếu vuông góc điểm M xuống mặt đất Oxy, ta được điểm M'."
+        },
+        {
+          "show": "đoạn dóng z bằng 0 sáng lên cạnh nhãn M'",
+          "at": "điểm M'",
+          "text": "$z = 0$",
+          "speak": "Vì nằm ngay trên mặt đất, điểm mờ-phẩy không có độ cao, nên tọa độ dét bằng không.",
+          "caption": "Vì nằm ngay trên mặt đất, điểm M' không có độ cao, nên tọa độ z bằng 0."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Tọa độ của mờ-phẩy trên mặt sàn, chỉ còn lại ích và y.",
+          "caption": "Tọa độ của M' trên mặt sàn chỉ còn lại x và y."
+        }
+      ]
+    },
+    {
+      "id": "b08",
+      "scene": 2,
+      "section": "VÍ DỤ",
+      "keyword": "Cùng $(x; y)$, khác $z$",
+      "visual": "Giữ CẢNH 2. Hai máy bay A và B quay trở lại với các đường dóng tọa độ cụ thể. Máy bay A ở vị trí (40; 60; 100), máy bay B ở vị trí (40; 60; 103) (đơn vị: 100 m). Cả hai máy bay cùng nằm trên một đường thẳng đứng dóng xuống chung một điểm chân M' trên sàn Oxy.",
+      "lines": [
+        {
+          "show": "máy bay A hiện với nhãn tọa độ ba chiều",
+          "at": "máy bay A",
+          "text": "$A(40; 60; 100)$",
+          "speak": "Quay lại hai chiếc máy bay lúc mười giờ mười lăm phút."
+        },
+        {
+          "show": "đoạn dóng độ cao của A sáng lên với số 10.000 m",
+          "at": "máy bay A",
+          "text": "cao $10.000\\text{ m}$",
+          "speak": "Chiếc A ở tọa độ bốn mươi, sáu mươi và độ cao mười nghìn mét.",
+          "caption": "Chiếc A ở tọa độ (40; 60) và độ cao 10.000 m."
+        },
+        {
+          "show": "máy bay B hiện với nhãn tọa độ ba chiều",
+          "at": "máy bay B",
+          "text": "$B(40; 60; 103)$",
+          "speak": "Chiếc B có tọa độ bốn mươi, sáu mươi, một trăm lẻ ba.",
+          "caption": "Chiếc B có tọa độ (40; 60; 103)."
+        },
+        {
+          "show": "đoạn dóng độ cao của B sáng lên với số 10.300 m",
+          "at": "máy bay B",
+          "text": "cao $10.300\\text{ m}$",
+          "speak": "Tức là đang bay ở độ cao mười nghìn ba trăm mét."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Cả hai máy bay có cùng vị trí kinh độ và vĩ độ, nhưng lệch nhau về độ cao."
+        }
+      ]
+    },
+    {
+      "id": "b09",
+      "scene": 2,
+      "section": "GIẢI ĐÁP",
+      "keyword": "Radar triệt tiêu trục $z$",
+      "visual": "Giữ CẢNH 2. Góc nhìn từ trên cao thẳng đứng (nhìn từ đỉnh trục Oz xuống mặt sàn Oxy). Hai mô hình máy bay A và B từ từ chồng khít lên nhau khi nhìn từ trên xuống, rơi đúng vào chấm M'(40; 60). Sau đó góc nhìn nghiêng trở lại, khoảng cách thẳng đứng giữa hai máy bay sáng màu nhấn vàng kèm số đo 300 m.",
+      "lines": [
+        {
+          "show": "góc nhìn xoay từ trên đỉnh nhìn thẳng xuống mặt sàn Oxy",
+          "at": "điểm giao",
+          "text": "nhìn từ trên: $(40; 60)$",
+          "speak": "Màn hình radar hai chiều hoạt động bằng cách chiếu vuông góc vị trí máy bay xuống mặt đất."
+        },
+        {
+          "show": "hai chấm máy bay chập làm một trên mặt sàn",
+          "at": "mặt sàn",
+          "text": "$z$ bị nén về $0$",
+          "speak": "Phép chiếu này ép phẳng toàn bộ trục cao z về số không.",
+          "caption": "Phép chiếu này ép phẳng toàn bộ trục cao z về số 0."
+        },
+        {
+          "show": "góc nhìn nghiêng trở lại, khoảng cách dọc 300 m sáng rực rỡ",
+          "at": "khoảng cách thẳng đứng",
+          "text": "chênh lệch $300\\text{ m}$",
+          "speak": "Trùng nhau trên màn hình, nhưng ngoài đời hai máy bay cách nhau ba trăm mét thẳng đứng."
+        },
+        {
+          "show": "vòng an toàn xanh lá xuất hiện giữa hai máy bay",
+          "at": "giữa hai máy bay",
+          "text": "chuẩn phân cách ICAO",
+          "speak": "Khoảng cách ba trăm mét này hoàn toàn đạt chuẩn phân cách an toàn hàng không thế giới."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Bí mật nằm ở chỗ, màn hình hai chiều đã giấu mất chiều không gian thứ ba."
+        }
+      ]
+    },
+    {
+      "id": "b10",
+      "scene": 2,
+      "section": "TRONG ĐỀ THI",
+      "keyword": "Chiếu lên đâu: Giữ chữ đó",
+      "visual": "Giữ CẢNH 2. Khung bài tập đề thi hiện ở góc phải: Cho điểm M(2; -3; 5). Dòng 2: câu hỏi tìm hình chiếu lên mặt phẳng (Oyz). Dòng 3: hình chiếu M1 xuất hiện trên mặt phẳng Oyz, tọa độ x bị gạch bỏ và thay bằng số 0.",
+      "lines": [
+        {
+          "show": "thẻ bài tập hiện điểm M(2; -3; 5) trong không gian",
+          "at": "thẻ bài tập",
+          "text": "$M(2; -3; 5)$",
+          "speak": "Quy luật này là chìa khóa để giải quyết hàng loạt câu hỏi trong đề thi."
+        },
+        {
+          "show": "dòng câu hỏi tìm hình chiếu lên mặt phẳng Oyz hiện lên",
+          "at": "thẻ bài tập",
+          "text": "chiếu lên $(Oyz) \\rightarrow ?$",
+          "speak": "Điểm mờ hai âm ba năm, chiếu lên mặt phẳng O y z ra bao nhiêu?",
+          "caption": "Điểm M(2; -3; 5), chiếu lên mặt phẳng (Oyz) ra bao nhiêu?",
+          "pauseAfter": 1.5
+        },
+        {
+          "show": "tọa độ x bằng 2 đổi thành số 0, điểm M1(0; -3; 5) sáng trên mặt Oyz",
+          "at": "mặt phẳng Oyz",
+          "text": "$M_1(0; -3; 5)$",
+          "speak": "Chiếu lên mặt phẳng O y z, trục hoành ích bị triệt tiêu về không, giữ nguyên y và dét.",
+          "caption": "Chiếu lên mặt phẳng (Oyz), trục hoành x bị triệt tiêu về 0, giữ nguyên y và z."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Mẹo nhớ nằm lòng: chiếu lên mặt nào thì giữ nguyên chữ cái đó, chữ còn lại bằng không."
+        }
+      ]
+    },
+    {
+      "id": "b11",
+      "scene": 2,
+      "section": "BẪY THƯỜNG GẶP",
+      "keyword": "Luôn đủ bộ ba số",
+      "visual": "Giữ CẢNH 2. Thẻ cảnh báo bẫy thường gặp. Dòng 2: Chiếu điểm M(2; -3; 5) lên trục Ox. Lựa chọn sai chỉ ghi số 2 bị gạch chéo đỏ. Lựa chọn đúng (2; 0; 0) sáng màu xanh lục kèm chú thích.",
+      "lines": [
+        {
+          "show": "thẻ bẫy hiện câu hỏi chiếu lên trục Ox",
+          "at": "thẻ bẫy",
+          "text": "chiếu lên trục $Ox$",
+          "speak": "Bẫy nguy hiểm nhất là khi bài toán yêu cầu chiếu điểm mờ lên trục O x.",
+          "caption": "Bẫy nguy hiểm nhất là khi bài toán yêu cầu chiếu điểm M lên trục Ox."
+        },
+        {
+          "show": "đáp án sai ghi số 2 trơn bị dấu gạch chéo đỏ",
+          "at": "thẻ bẫy",
+          "text": "$2$ sai, $(2; 0; 0)$ đúng",
+          "speak": "Nhiều học sinh vội vàng ghi tọa độ là hai, làm mất dạng của điểm trong không gian."
+        },
+        {
+          "show": "hai số 0 sáng rõ tại vị trí y và z của điểm M2 trên trục Ox",
+          "at": "trục Ox",
+          "text": "$M_2(2; 0; 0)$",
+          "speak": "Chiếu lên trục O x thì cả y và dét bằng không, tọa độ chuẩn là hai không không.",
+          "caption": "Chiếu lên trục Ox thì cả y và z bằng 0, tọa độ chuẩn là (2; 0; 0)."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Trong không gian ba chiều, tọa độ của một điểm bắt buộc phải là một bộ ba con số."
+        }
+      ]
+    },
+    {
+      "id": "b12",
+      "scene": 2,
+      "section": "TỔNG KẾT",
+      "keyword": "3 trục định vị không gian",
+      "visual": "Giữ CẢNH 2. Khung hình thu nhỏ góc nhìn bao quát toàn bộ hệ tọa độ Oxyz với ba trục, ba vectơ đơn vị, các mặt phẳng tọa độ và vô số quỹ đạo bay an toàn trên bầu trời. Logo 9Study và khẩu hiệu hiển thị trang trọng.",
+      "lines": [
+        {
+          "show": "hệ tọa độ Oxyz sáng bừng toàn diện với ba trục và các máy bay",
+          "at": "gốc O",
+          "text": "hệ trục $Oxyz$",
+          "speak": "Từ mặt đất phẳng hai chiều bước lên không gian ba chiều là bước nhảy vĩ đại của hình học."
+        },
+        {
+          "show": "ba trục Ox, Oy, Oz và các mặt phẳng tọa độ tỏa sáng hài hòa",
+          "at": "ba trục",
+          "text": "3 trục vuông góc",
+          "speak": "Thêm trục thẳng đứng và ba vectơ đơn vị, mọi vị trí đều được định vị chuẩn xác."
+        },
+        {
+          "show": "nhãn bộ ba số (x; y; z) hiện to rõ ràng giữa không gian",
+          "at": "không gian",
+          "text": "$(x; y; z)$",
+          "speak": "Ba con số độc lập, định vị mọi vật thể, và giữ cho bầu trời luôn luôn an toàn."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Đó là lý do ba trục tọa độ kiểm soát trọn vẹn cả không gian."
+        }
+      ]
+    }
+  ]
+}

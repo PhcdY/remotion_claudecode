@@ -1,0 +1,446 @@
+{
+  "slug": "khao-sat-bac-ba",
+  "title": "Tính bao nhiêu điểm mới đủ vẽ đồ thị?",
+  "subject": "toan",
+  "lop": 12,
+  "chuong": "Chương I. Ứng dụng đạo hàm để khảo sát và vẽ đồ thị của hàm số",
+  "bai": "Bài 4. Khảo sát sự biến thiên và vẽ đồ thị của hàm số",
+  "exams": [
+    "THPTQG",
+    "TSA",
+    "HSA"
+  ],
+  "beats": [
+    {
+      "id": "b01",
+      "scene": 1,
+      "section": "HIỆN TƯỢNG",
+      "keyword": "Tính bao nhiêu điểm mới đủ?",
+      "visual": "CẢNH 1 — góc trên trái: công thức $f(x) = 4x^3 - 12x^2 + 9x + 1$ (giữ suốt cảnh). Giữa khung: hệ trục, trục ngang $x$ từ −0,5 đến 2,5 (vạch mỗi 0,5, số ở 0, 1, 2), trục dọc $y$ từ −1 đến 5 (vạch mỗi 1, số ở 1, 2, 3, 4). Bên phải: màn hình bảng giá trị kiểu máy tính bỏ túi (khung bo góc nền xám nhạt, chữ đơn cách), hai cột tiêu đề '$x$' và '$f(x)$', ba hàng 0 | 1, 1 | 2, 2 | 3. Lúc đầu hệ trục trống. Màu: đồ thị và điểm màu chính, đường nối ba điểm nét đứt màu chính nhạt, dấu '?' màu bẫy.",
+      "lines": [
+        {
+          "show": "công thức và bảng giá trị ba hàng hiện",
+          "text": "",
+          "speak": "Lập bảng giá trị bằng máy tính bỏ túi cho hàm bậc ba này."
+        },
+        {
+          "show": "ba điểm (0; 1), (1; 2), (2; 3) chấm lên hệ trục",
+          "text": "",
+          "speak": "Kết quả lần lượt là một, hai và ba."
+        },
+        {
+          "show": "đường thẳng nét đứt nối ba điểm",
+          "at": "đường nét đứt, phía trên-phải điểm (2; 3)",
+          "text": "thẳng hàng",
+          "speak": "Ba điểm thẳng hàng, nối lại thành một đường đi lên đều."
+        },
+        {
+          "show": "dấu '?' màu bẫy hiện ở khoảng giữa các điểm",
+          "text": "",
+          "speak": "Nhưng máy chỉ tính ở ba chỗ, vậy phải tính bao nhiêu điểm mới chắc đúng hình?"
+        }
+      ]
+    },
+    {
+      "id": "b02",
+      "scene": 1,
+      "section": "GỐC RỄ",
+      "keyword": "Dày đến đâu cũng chưa chắc",
+      "visual": "Giữ CẢNH 1: công thức, bảng giá trị, ba điểm, đường nét đứt; dấu '?' gỡ ở đầu beat. Dòng 1: vạch 0,5 trên trục ngang sáng màu nhấn; trong khoảng nghỉ sau câu hỏi, vùng ngay trên rồi ngay dưới đường nét đứt tại 0,5 sáng nhạt lần lượt (không lộ đáp án). Dòng 2–3: mỗi điểm mới thêm một hàng vào bảng giá trị (0,5 | 3; 1,5 | 1) đồng thời với điểm chấm lên — bảng và hình đổi cùng nhau. Nhãn $f(0{,}5) = 3$ đặt trên điểm (0,5; 3), nhãn $f(1{,}5) = 1$ đặt dưới điểm (1,5; 1); hai nhãn mờ đi ở dòng 4. Dòng 4: thêm 22 điểm nhỏ màu chữ đậm cách đều 0,1 từ 0 đến 2,1 (vẽ trên đường cong để còn thấy), rồi đường cong thật vẽ qua chúng (màu chính). Dòng 5: đường nét đứt mờ hẳn. Dòng 6: khoảng giữa hai điểm nhỏ liền nhau x = 1,2 và 1,3 (không trùng điểm của bảng) được khoanh màu bẫy với một dấu '?' nhỏ.",
+      "lines": [
+        {
+          "show": "vạch 0,5 trên trục ngang sáng màu nhấn",
+          "text": "",
+          "speak": "Thử tính thêm tại không phẩy năm, điểm mới nằm trên hay dưới đường thẳng?",
+          "pauseAfter": 1.5
+        },
+        {
+          "show": "điểm (0,5; 3) chấm lên, cao hơn đường nét đứt",
+          "at": "điểm (0,5; 3), phía trên",
+          "text": "$f(0{,}5) = 3$",
+          "speak": "Được ba, cao hơn hẳn đường thẳng."
+        },
+        {
+          "show": "điểm (1,5; 1) chấm lên, thấp hơn đường nét đứt",
+          "at": "điểm (1,5; 1), phía dưới",
+          "text": "$f(1{,}5) = 1$",
+          "speak": "Tại một phẩy năm được một, lại thấp hơn đường thẳng."
+        },
+        {
+          "show": "nhiều điểm nhỏ dày đặc chấm lên, đường cong thật vẽ qua chúng",
+          "text": "",
+          "speak": "Tính thật dày rồi nối lại thì đồ thị lên, xuống rồi lại lên."
+        },
+        {
+          "show": "đường thẳng nét đứt mờ đi",
+          "text": "",
+          "speak": "Nối vài điểm thì có thể sai hẳn hình."
+        },
+        {
+          "show": "khe giữa hai điểm nhỏ liền nhau được khoanh màu bẫy, dấu '?' nhỏ",
+          "text": "",
+          "speak": "Nhưng đây vẫn là nối điểm, giữa hai điểm liền nhau vẫn chưa biết chắc."
+        }
+      ]
+    },
+    {
+      "id": "b03",
+      "scene": 1,
+      "section": "TRỰC GIÁC",
+      "keyword": "Quay đầu chỉ ở chỗ $f' = 0$",
+      "visual": "Giữ CẢNH 1: đường cong thật, hai điểm (0,5; 3), (1,5; 1) và ba điểm ban đầu; các điểm nhỏ, khoanh '?', bảng giá trị gỡ ở đầu beat. Dòng 1: hệ trục tầng trên co lên nửa trên khung (giữ tỉ lệ ngang). Dòng 2: dòng nhắc bài trước hiện dưới công thức $f$. Dòng 3: công thức đạo hàm hiện dưới dòng nhắc. Dòng 4: tầng dưới — hệ trục thứ hai cùng tỉ lệ ngang, thẳng hàng dọc với tầng trên, trục dọc ghi '$f'(x)$' (vạch không ghi số), vẽ parabol $f'(x) = 12x^2 - 24x + 9$ (màu chính, cắt bớt phần vượt khung, y từ −4 đến 10). Dòng 5: hai giao điểm (0,5; 0) và (1,5; 0) sáng màu nhấn, nhãn dưới trục. Dòng 6: hai đường dọc nét đứt màu nhấn kéo từ hai giao điểm lên tới đỉnh (0,5; 3) và đáy (1,5; 1) ở tầng trên (giữ tới hết b05).",
+      "lines": [
+        {
+          "show": "hệ trục tầng trên co lên nửa trên khung",
+          "text": "",
+          "speak": "Muốn biết giữa các điểm, phải biết ở mọi chỗ đồ thị đang lên hay xuống."
+        },
+        {
+          "show": "dòng nhắc bài trước hiện dưới công thức",
+          "at": "dưới công thức $f$",
+          "text": "$f' > 0$: lên, $f' < 0$: xuống",
+          "speak": "Bài trước đã chỉ ra, đạo hàm dương thì đi lên, âm thì đi xuống."
+        },
+        {
+          "show": "công thức đạo hàm hiện dưới dòng nhắc",
+          "at": "dưới dòng nhắc, góc trên trái",
+          "text": "$f'(x) = 12x^2 - 24x + 9$",
+          "speak": "Tính theo quy tắc đạo hàm, được biểu thức bậc hai này."
+        },
+        {
+          "show": "tầng dưới hiện, parabol đạo hàm vẽ từ trái sang",
+          "text": "",
+          "speak": "Đồ thị đạo hàm là một parabol, vẽ ngay bên dưới cho thẳng hàng."
+        },
+        {
+          "show": "hai giao điểm của parabol với trục ngang sáng màu nhấn",
+          "at": "hai giao điểm parabol với trục ngang, phía dưới trục",
+          "text": "$0{,}5$ và $1{,}5$",
+          "speak": "Parabol cắt trục ngang tại không phẩy năm và một phẩy năm."
+        },
+        {
+          "show": "hai đường dọc nét đứt kéo từ hai giao điểm lên đỉnh và đáy ở tầng trên",
+          "cue": "đỉnh và đáy",
+          "text": "",
+          "speak": "Kéo lên tầng trên, bài trước đã chỉ ra đỉnh và đáy chỉ có thể nằm ở đây."
+        }
+      ]
+    },
+    {
+      "id": "b04",
+      "scene": 1,
+      "section": "BẢN CHẤT",
+      "keyword": "Không thể có đáy nào khác",
+      "lineGap": 0.5,
+      "visual": "Giữ CẢNH 1 hai tầng (BƯỚC KHÓ — chuỗi vì sao, phần 1). Dòng 1: khúc đường cong từ (0,5; 3) tới (1,5; 1) sáng màu nhấn. Dòng 2: chỗ nhấp nhô giả định vẽ nét đứt màu bẫy đè lên khúc giữa: quanh x từ 0,9 đến 1,3, đường võng xuống một đáy nhỏ rồi nhô lên lại rồi nhập về đường thật (hình minh hoạ, không theo công thức), nhãn 'giả sử có' cạnh nó. Dòng 3: đáy nhỏ của chỗ nhấp nhô sáng màu bẫy (chấm). Dòng 4: nhãn '$f' = 0$?' hiện ngay dưới chấm đó. Dòng 5: đường dọc mảnh từ chấm đáy giả định chiếu xuống tầng dưới; điểm của parabol ở đó (giá trị ≈ −3) sáng màu giảm, nhãn '$f' < 0$' cạnh nó. Dòng 6: công thức $f'(x)$ ở góc trái nhấp sáng màu nhấn cùng lúc với parabol (parabol tính từ công thức này, cố định). Dòng 7: nhãn '$f' = 0$?' đổi thành '$f' = 0$?' gạch chéo màu bẫy, đặt cạnh '$f' < 0$' — hai điều trái nhau. Dòng 8: chỗ nhấp nhô giả định, chấm, đường chiếu và các nhãn của nó mờ đi.",
+      "lines": [
+        {
+          "show": "khúc giữa của đồ thị, từ đỉnh tới đáy, sáng màu nhấn",
+          "text": "",
+          "speak": "Nhưng vì sao chắc chắn giữa đỉnh và đáy không còn chỗ nhấp nhô nào ẩn?"
+        },
+        {
+          "show": "một chỗ nhấp nhô giả định nét đứt màu bẫy vẽ đè lên khúc giữa",
+          "at": "chỗ nhấp nhô nét đứt",
+          "text": "giả sử có",
+          "speak": "Giả sử có một chỗ nhấp nhô như thế này."
+        },
+        {
+          "show": "đáy nhỏ của chỗ nhấp nhô giả định sáng màu bẫy",
+          "text": "",
+          "speak": "Đồ thị đa thức liền một nét, đang xuống mà quay lên thì phải qua một đáy."
+        },
+        {
+          "show": "nhãn hỏi hiện dưới đáy giả định",
+          "at": "đáy giả định, phía dưới",
+          "text": "$f' = 0$?",
+          "speak": "Bài trước đã chỉ ra, tại đáy thì đạo hàm bằng không."
+        },
+        {
+          "show": "đường chiếu từ đáy giả định xuống tầng dưới, điểm parabol ở đó sáng màu giảm",
+          "at": "điểm parabol ngay dưới đáy giả định",
+          "text": "$f' < 0$",
+          "speak": "Nhưng ngay bên dưới, parabol đạo hàm đang nằm dưới trục."
+        },
+        {
+          "show": "công thức đạo hàm nhấp sáng cùng parabol",
+          "text": "",
+          "speak": "Parabol này tính thẳng từ công thức, không thể tuỳ ý đổi."
+        },
+        {
+          "show": "nhãn '$f' = 0$?' bị gạch chéo màu bẫy",
+          "text": "",
+          "speak": "Tại đáy phải bằng không, mà ở đây lại âm, nên đáy đó không thể có."
+        },
+        {
+          "show": "chỗ nhấp nhô giả định và các nhãn của nó mờ đi",
+          "text": "",
+          "speak": "Parabol chỉ cắt trục ở hai chỗ, ngoài đỉnh và đáy không còn chỗ quay đầu."
+        }
+      ]
+    },
+    {
+      "id": "b05",
+      "scene": 1,
+      "section": "BẢN CHẤT",
+      "keyword": "Đỉnh, đáy đủ quyết định hình",
+      "lineGap": 0.5,
+      "visual": "Giữ CẢNH 1 hai tầng (chuỗi vì sao, phần 2 — khoảnh khắc 'à ra thế'). Dòng 1: khúc giữa của $f$ và đoạn parabol dưới trục (0,5 đến 1,5) cùng đổi sang màu giảm. Dòng 2: hai đoạn parabol ngoài (x < 0,5 và x > 1,5, trên trục) sáng màu tăng. Dòng 3: hai khúc ngoài của $f$ tô màu tăng. Dòng 4: đỉnh (0,5; 3) và đáy (1,5; 1) nhấp sáng màu nhấn; nhãn $f(0{,}5) = 3$ đổi tại chỗ thành 'đỉnh', $f(1{,}5) = 1$ đổi thành 'đáy'. Dòng 5: đồ thị $f$ mờ hẳn, chỉ còn đỉnh, đáy và ba điểm ban đầu; đường cong vẽ lại từ trái sang theo màu từng khúc: tăng tới đỉnh, giảm tới đáy, tăng tiếp. Dòng 6: giữ nguyên.",
+      "lines": [
+        {
+          "show": "khúc giữa của đồ thị và đoạn parabol dưới trục cùng đổi sang màu giảm",
+          "text": "",
+          "speak": "Vậy cả khúc giữa, đồ thị chỉ đi xuống."
+        },
+        {
+          "show": "hai đoạn parabol ngoài, nằm trên trục, sáng màu tăng",
+          "text": "",
+          "speak": "Hai khúc ngoài thì parabol nằm trên trục, đạo hàm dương."
+        },
+        {
+          "show": "hai khúc ngoài của đồ thị tô màu tăng",
+          "text": "",
+          "speak": "Nên ở đó đồ thị chỉ đi lên, không quay đầu lần nào."
+        },
+        {
+          "show": "đỉnh và đáy nhấp sáng màu nhấn, nhãn đổi thành 'đỉnh', 'đáy'",
+          "text": "",
+          "speak": "Hai điểm tính thêm lúc nãy hoá ra chính là đỉnh và đáy."
+        },
+        {
+          "show": "đồ thị vẽ lại từ trái sang theo đúng chiều từng khúc",
+          "text": "",
+          "speak": "Biết hai điểm này và chiều của từng khúc, hình đã cố định."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Giữa đỉnh và đáy, đồ thị không có chỗ nào để đổi chiều."
+        }
+      ]
+    },
+    {
+      "id": "b06",
+      "scene": 1,
+      "section": "BẢN CHẤT",
+      "keyword": "Dấu $a$ quyết định hai đầu",
+      "visual": "Giữ CẢNH 1 (BƯỚC KHÓ — hai đầu). Tầng dưới (parabol) và hai đường dọc nét đứt mờ đi ở đầu beat; tầng trên giãn lại như b01. Dòng nhắc '$f' > 0$…' và công thức $f'$ gỡ. Công thức $f$ ở góc trên trái phóng to vừa đủ để đặt ngoặc dưới từng phần. Dòng 1: đầu phải của đường cong (chỗ đi ra khỏi khung, x ≈ 2,2) nhấp màu nhấn, dấu '?' nhỏ ở mép phải. Dòng 2: ngoặc dưới hạng tử $4x^3$ (màu nhấn), dưới ngoặc giá trị tại $x = 10$; nhãn nhỏ '$x = 10$' cạnh công thức. Dòng 3: ngoặc dưới ba hạng tử còn lại (màu dim), dưới ngoặc giá trị. Dòng 4: nhãn '$x = 10$' đổi thành '$x = 100$', hai giá trị dưới ngoặc đổi tương ứng thành '4 triệu' và '≈ −119 nghìn'. Dòng 5: mũi tên hướng lên ở đầu phải đường cong (cùng màu với khúc đó), giữ tới hết video. Dòng 6: hệ số 4 trong công thức sáng màu nhấn, nhãn '$a = 4 > 0$' dưới nó; hai ngoặc mờ đi; dòng chú giải mờ 'dạng chung $y = ax^3 + bx^2 + cx + d$' hiện dưới công thức (giữ tới hết b07) để người xem biết $a$, $d$ là hệ số nào. Dòng 7: mũi tên hướng xuống ở đầu trái đường cong (cùng màu với khúc đó), giữ tới hết video.",
+      "lines": [
+        {
+          "show": "đầu phải đường cong nhấp màu nhấn, dấu '?' ở mép phải",
+          "text": "",
+          "speak": "Còn hai đầu, đi mãi sang phải thì đồ thị đi về đâu?"
+        },
+        {
+          "show": "ngoặc dưới hạng tử $4x^3$ trong công thức, kèm giá trị tại $x = 10$",
+          "at": "dưới $4x^3$ trong công thức",
+          "text": "$4000$",
+          "speak": "Tại x bằng mười, riêng phần bốn x lập phương đã là bốn nghìn.",
+          "caption": "Tại x = 10, riêng phần 4x³ đã là 4000."
+        },
+        {
+          "show": "ngoặc dưới ba hạng tử còn lại, kèm giá trị",
+          "at": "dưới $-12x^2 + 9x + 1$ trong công thức",
+          "text": "$\\approx -1100$",
+          "speak": "Ba hạng tử còn lại cộng lại chỉ khoảng âm một nghìn một trăm."
+        },
+        {
+          "show": "hai giá trị dưới ngoặc đổi sang $x = 100$",
+          "at": "giữa hai ngoặc",
+          "text": "gấp hơn 30 lần",
+          "speak": "Tại một trăm, phần lập phương gấp hơn ba mươi lần phần còn lại."
+        },
+        {
+          "show": "mũi tên hướng lên ở đầu phải đường cong",
+          "text": "",
+          "speak": "Càng ra xa, phần lập phương càng lấn át, nên đồ thị đi lên mãi."
+        },
+        {
+          "show": "hệ số 4 trong công thức sáng màu nhấn",
+          "at": "hệ số 4 trong công thức, phía dưới",
+          "text": "$a = 4 > 0$",
+          "speak": "Đầu phải đi lên, là vì hệ số của x lập phương dương.",
+          "caption": "Đầu phải đi lên, là vì hệ số của x³ dương."
+        },
+        {
+          "show": "mũi tên hướng xuống ở đầu trái đường cong",
+          "text": "",
+          "speak": "Đi mãi sang trái thì phần lập phương âm và vẫn lấn át, nên đồ thị đi xuống mãi."
+        }
+      ]
+    },
+    {
+      "id": "b07",
+      "scene": 1,
+      "section": "VÍ DỤ",
+      "keyword": "Cắt trục tung tại $d$",
+      "visual": "Giữ CẢNH 1: đường cong (màu theo từng khúc), đỉnh, đáy, hai mũi tên hai đầu, nhãn '$a = 4 > 0$' dưới hệ số 4. Dòng 1: điểm (0; 1) trên trục tung sáng màu nhấn. Dòng 2: ba hạng tử chứa $x$ trong công thức mờ đi, số 1 cuối công thức sáng màu nhấn, nhãn '$d = 1$' dưới nó. Dòng 3: điểm (0; 1) nhấp sáng lần nữa; ba hạng tử hiện lại bình thường.",
+      "lines": [
+        {
+          "show": "điểm (0; 1) trên trục tung sáng màu nhấn",
+          "text": "",
+          "speak": "Còn chỗ cắt trục tung là lúc x bằng không.",
+          "caption": "Còn chỗ cắt trục tung là lúc x = 0."
+        },
+        {
+          "show": "ba hạng tử chứa $x$ trong công thức mờ đi, số 1 cuối công thức sáng",
+          "at": "số 1 cuối công thức, phía dưới",
+          "text": "$d = 1$",
+          "speak": "Mọi hạng tử chứa x đều mất, chỉ còn hệ số tự do, bằng một.",
+          "caption": "Mọi hạng tử chứa x đều mất, chỉ còn hệ số tự do, bằng 1."
+        },
+        {
+          "show": "điểm (0; 1) nhấp sáng lần nữa",
+          "text": "",
+          "speak": "Không cần lập bảng, nhìn công thức là biết đồ thị cắt trục tung ở độ cao một."
+        }
+      ]
+    },
+    {
+      "id": "b08",
+      "scene": 1,
+      "section": "CÔNG THỨC",
+      "keyword": "Ba bước: đủ để vẽ",
+      "visual": "Giữ CẢNH 1; đồ thị giữ chỗ bên phải, cột trái (dưới công thức) là khung 'Sơ đồ khảo sát hàm số' theo SGK, ba bước xếp dọc: '1. Tập xác định' · '2. Sự biến thiên: dấu $f'$, cực trị, giới hạn tại vô cực' · '3. Vẽ đồ thị: điểm cắt các trục'. Mỗi bước sáng lên khi được nói tới, bước đã nói chuyển màu chữ thường. Dòng 4: hình nhỏ (≈ 300×180) ở cột trái dưới khung sơ đồ: đồ thị $y = \frac{1}{x}$ hai nhánh tách rời, trục mảnh, chỗ đứt tại 0 khoanh màu bẫy; gỡ ở dòng 5. Dòng 5: bước 2 sáng, cùng màu nhấn với đỉnh, đáy và hai mũi tên hai đầu trên đồ thị. Dòng 6: bước 3 sáng, cùng màu nhấn với điểm (0; 1).",
+      "lines": [
+        {
+          "show": "khung sơ đồ ba bước hiện bên phải",
+          "text": "",
+          "speak": "Gom lại, sách gọi đây là sơ đồ khảo sát hàm số."
+        },
+        {
+          "show": "bước 1 trong sơ đồ sáng màu nhấn",
+          "at": "bước 1 trong sơ đồ, bên phải",
+          "text": "$D = \\mathbb{R}$",
+          "speak": "Bước một tìm tập xác định, với đa thức thì x nào cũng được.",
+          "caption": "Bước một tìm tập xác định, với đa thức thì x nào cũng được."
+        },
+        {
+          "show": "đồ thị nhấp sáng một lượt từ trái sang phải",
+          "text": "",
+          "speak": "Đa thức lại liên tục, nên đồ thị liền một nét, không chỗ nào bị đứt."
+        },
+        {
+          "show": "hình nhỏ hai nhánh tách rời hiện ở góc dưới phải",
+          "at": "hình nhỏ hai nhánh",
+          "text": "phân thức",
+          "speak": "Hàm phân thức thì có chỗ đồ thị bị đứt, bài sau sẽ nói rõ."
+        },
+        {
+          "show": "bước 2 sáng, đỉnh, đáy và hai mũi tên hai đầu sáng cùng màu",
+          "text": "",
+          "speak": "Bước hai xét dấu đạo hàm, tìm cực trị và giới hạn ở hai đầu."
+        },
+        {
+          "show": "bước 3 sáng, điểm (0; 1) sáng cùng màu",
+          "text": "",
+          "speak": "Bước ba lấy thêm điểm dễ tính như chỗ cắt trục tung, rồi nối theo chiều từng khúc."
+        }
+      ]
+    },
+    {
+      "id": "b09",
+      "scene": 2,
+      "section": "TRONG ĐỀ THI",
+      "keyword": "Hình cho dấu $a$ và $d$",
+      "visual": "CẢNH 2 — đề thi (BƯỚC KHÓ: đi ngược từ hình ra công thức). Trên cùng, dòng đề: 'Hàm số $y = ax^3 + bx^2 + cx + d$ có đồ thị như hình. Xét dấu $a$ và $d$.' Dưới: đúng đồ thị của video (cùng hệ trục như CẢNH 1 nhưng đặt ở nửa trái, đường cong một màu chính, không công thức, không ghi toạ độ đỉnh đáy), giữ hai mũi tên hai đầu. Nửa phải để trống cho đồ thị so sánh ở b10. Dòng 2: đầu phải đường cong và mũi tên sáng màu tăng, nhãn cạnh nó. Dòng 3: giao điểm với trục tung sáng màu nhấn, nhãn bên trái nó. Dòng 4: hai nhãn '$a > 0$', '$d > 0$' nhấp sáng cùng lúc.",
+      "lines": [
+        {
+          "show": "khung đề và đồ thị không công thức hiện",
+          "text": "",
+          "speak": "Đề thi hay làm ngược lại, cho đồ thị và giấu các hệ số."
+        },
+        {
+          "show": "đầu phải đường cong sáng màu tăng",
+          "at": "đầu phải đường cong",
+          "text": "$a > 0$",
+          "speak": "Đầu bên phải đi lên, nên hệ số của x lập phương dương.",
+          "caption": "Đầu bên phải đi lên, nên hệ số của x³ dương."
+        },
+        {
+          "show": "giao điểm với trục tung sáng màu nhấn",
+          "at": "giao điểm với trục tung, bên trái",
+          "text": "$d > 0$",
+          "speak": "Đồ thị cắt trục tung phía trên gốc, nên hệ số tự do dương."
+        },
+        {
+          "show": "hai nhãn dấu nhấp sáng",
+          "text": "",
+          "speak": "Hai chi tiết trên hình cho ngay dấu của hai hệ số."
+        }
+      ]
+    },
+    {
+      "id": "b10",
+      "scene": 2,
+      "section": "TRONG ĐỀ THI",
+      "keyword": "Đầu phải xuống: $a < 0$",
+      "visual": "Giữ CẢNH 2; đồ thị thứ nhất và nhãn '$a > 0$', '$d > 0$' ở lại bên trái. Dòng 1: đồ thị thứ hai hiện ở nửa phải, cùng cỡ hệ trục, x từ −0,5 đến 2,5, y từ −5 đến 1: $y = -4x^3 + 12x^2 - 9x - 1$ (đáy (0,5; −3), đỉnh (1,5; −1), cắt trục tung tại (0; −1)), không ghi công thức trên hình, mũi tên hai đầu (trái lên, phải xuống). Dòng 2: đầu phải đồ thị thứ hai sáng màu giảm, nhãn cạnh nó. Dòng 3: giao điểm với trục tung của đồ thị thứ hai sáng màu nhấn, nhãn bên trái nó. Dòng 4: đầu phải của cả hai đồ thị nhấp sáng cùng lúc (màu tăng bên trái, màu giảm bên phải).",
+      "lines": [
+        {
+          "show": "đồ thị thứ hai hiện ở nửa phải",
+          "text": "",
+          "speak": "Đặt cạnh đồ thị của một hàm bậc ba khác."
+        },
+        {
+          "show": "đầu phải đồ thị thứ hai sáng màu giảm",
+          "at": "đầu phải đồ thị thứ hai",
+          "text": "$a < 0$",
+          "speak": "Đầu bên phải đi xuống, nên hệ số của x lập phương âm.",
+          "caption": "Đầu bên phải đi xuống, nên hệ số của x³ âm."
+        },
+        {
+          "show": "giao điểm với trục tung của đồ thị thứ hai sáng màu nhấn",
+          "at": "giao điểm với trục tung của đồ thị thứ hai, bên trái",
+          "text": "$d < 0$",
+          "speak": "Cắt trục tung phía dưới gốc, nên hệ số tự do âm."
+        },
+        {
+          "show": "đầu phải của hai đồ thị nhấp sáng",
+          "text": "",
+          "speak": "Nhìn đầu bên phải trước, là biết ngay dấu của hệ số đầu tiên."
+        }
+      ]
+    },
+    {
+      "id": "b11",
+      "scene": 1,
+      "section": "GIẢI ĐÁP",
+      "keyword": "Tính đúng chỗ, không cần dày",
+      "visual": "Quay lại CẢNH 1 đúng như b01: công thức, bảng giá trị ba hàng, ba điểm (0; 1), (1; 2), (2; 3) và đường nét đứt; đường cong thật hiện mờ (màu dim), hai mũi tên hai đầu ẩn. Dòng 2: dấu '?' màu bẫy hiện ở khoảng giữa các điểm (như b01), gỡ ở dòng 3. Dòng 3: đỉnh (0,5; 3) và đáy (1,5; 1) chấm lên màu nhấn. Dòng 4: nhãn 'đỉnh cao 3' trên đỉnh, 'đáy cao 1' dưới đáy (một nhãn mỗi điểm). Dòng 5: hai mũi tên hai đầu và điểm (0; 1) sáng màu nhấn. Dòng 6: đường nét đứt mờ hẳn, đường cong thật vẽ đậm lại theo màu từng khúc (tăng, giảm, tăng).",
+      "lines": [
+        {
+          "show": "bảng giá trị, ba điểm thẳng hàng và đường nét đứt hiện lại",
+          "text": "",
+          "speak": "Quay lại ba điểm thẳng hàng từ máy tính bỏ túi."
+        },
+        {
+          "show": "dấu '?' màu bẫy hiện ở khoảng giữa các điểm",
+          "text": "",
+          "speak": "Bảng giá trị chỉ cho biết vài chỗ, còn giữa chúng thì không."
+        },
+        {
+          "show": "đỉnh và đáy chấm lên màu nhấn",
+          "text": "",
+          "speak": "Đạo hàm chỉ ra đồ thị chỉ quay đầu tại không phẩy năm và một phẩy năm."
+        },
+        {
+          "show": "nhãn độ cao hiện ở đỉnh và đáy",
+          "at": "đỉnh (0,5; 3), phía trên",
+          "text": "đỉnh cao 3",
+          "speak": "Tính độ cao ở hai chỗ đó, được đỉnh cao ba và đáy cao một."
+        },
+        {
+          "show": "hai mũi tên hai đầu và điểm cắt trục tung sáng màu nhấn",
+          "text": "",
+          "speak": "Thêm hai đầu theo dấu hệ số, và chỗ cắt trục tung."
+        },
+        {
+          "show": "đường cong thật vẽ đậm theo màu từng khúc",
+          "text": "",
+          "speak": "Vậy... chỉ cần vài điểm đúng chỗ, không cần tính dày."
+        }
+      ]
+    }
+  ]
+}

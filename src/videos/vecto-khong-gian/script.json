@@ -1,0 +1,538 @@
+{
+  "slug": "vecto-khong-gian",
+  "title": "Một mũi tên điều khiển mười nghìn drone",
+  "subject": "toan",
+  "lop": 12,
+  "chuong": "Chương II. Vectơ và hệ trục tọa độ trong không gian",
+  "bai": "Bài 6. Vectơ trong không gian",
+  "exams": [
+    "THPTQG",
+    "TSA",
+    "HSA"
+  ],
+  "beats": [
+    {
+      "id": "b01",
+      "scene": 1,
+      "section": "HIỆN TƯỢNG",
+      "keyword": "Mỗi drone bay thế nào?",
+      "visual": "CẢNH 1 — BẦU TRỜI ĐÊM. Khung trời: một thẻ lớn bo góc nền xanh rất nhạt (giữ nền sáng của brand), dải nóc nhà thành phố mờ ở đáy thẻ. Khoảng 200 chấm sáng (mỗi chấm một drone) sẽ xếp thành một ngôi sao năm cánh lớn ở nửa trái khung; nhãn nhỏ 'minh họa' sát góc dưới ngôi sao, giữ suốt cảnh (hình của show thật không phải ngôi sao). Dòng 1: nhãn '10.518 drone' ở phía trên ngôi sao. Dòng 3: cả ngôi sao trôi chéo lên phía phải khoảng một phần ba bề rộng của nó, chỗ cũ để lại bóng mờ. Dòng 4: hai drone ở hai đầu cánh xa nhau sáng màu nhấn, các drone khác mờ bớt.",
+      "lines": [
+        {
+          "show": "các chấm sáng hiện dần thành ngôi sao",
+          "text": "",
+          "speak": "Năm hai nghìn không trăm hai mươi lăm, bầu trời Thành phố Hồ Chí Minh lập kỷ lục thế giới.", "caption": "Năm 2025, bầu trời Thành phố Hồ Chí Minh lập kỷ lục thế giới."
+        },
+        {
+          "show": "nhãn số drone hiện phía trên ngôi sao",
+          "at": "phía trên ngôi sao",
+          "text": "10.518 drone",
+          "speak": "Mười nghìn năm trăm mười tám drone cùng sáng trên trời một lúc.", "caption": "10.518 drone cùng sáng trên trời một lúc."
+        },
+        {
+          "show": "cả ngôi sao trôi chéo lên phía phải, bóng mờ ở chỗ cũ",
+          "text": "",
+          "speak": "Cả bức hình trôi đi, không méo, không xoay."
+        },
+        {
+          "show": "hai drone ở hai đầu cánh xa nhau sáng màu nhấn",
+          "text": "",
+          "speak": "Mà mỗi drone ở một chỗ khác nhau trên bầu trời."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Vậy mỗi drone phải bay thế nào, để cả hình giữ nguyên?"
+        }
+      ]
+    },
+    {
+      "id": "b02",
+      "scene": 2,
+      "section": "VÍ DỤ",
+      "keyword": "Mô hình: tám drone",
+      "visual": "CẢNH 2 — HÌNH HỘP TÁM DRONE. BƯỚC KHÓ (đổi sang mô hình). Nền sáng; ngôi sao (thu nhỏ) mờ đi ở dòng 1. Hình hộp vẽ kiểu SGK (hình chiếu song song): đáy dưới ABCD nằm ngang, A trước-trái, B trước-phải, C sau-phải, D sau-trái; đáy trên A'B'C'D' ngay phía trên. Cạnh AB = 10 m (nằm ngang trên màn hình), AD = 4 m (xiên vào sâu), AA' = 4 m (thẳng đứng). Cạnh khuất AD, DC, DD' nét đứt. Mỗi đỉnh một chấm drone sáng, cạnh là vệt sáng mảnh. Hộp đặt ở phần dưới-trái khung, chừa chỗ phía trên-phải cho vị trí mới của drone ở b03–b08. Nhãn 'mô hình' cố định ở góc trên phải vùng hình, giữ suốt CẢNH 2. Tên tám đỉnh (dòng 4) giữ suốt CẢNH 2.",
+      "lines": [
+        {
+          "show": "ngôi sao mờ đi, nhãn 'mô hình' hiện",
+          "text": "",
+          "speak": "Mười nghìn chiếc thì quá nhiều để theo dõi.", "caption": "10.000 chiếc thì quá nhiều để theo dõi."
+        },
+        {
+          "show": "tám drone hiện ở tám đỉnh, cạnh hộp sáng thành vệt mảnh",
+          "text": "",
+          "speak": "Nên thu về một mô hình nhỏ: tám drone ở tám góc một khối hộp.", "caption": "Nên thu về một mô hình nhỏ: 8 drone ở 8 góc một khối hộp."
+        },
+        {
+          "show": "nhãn 'mô hình' nháy nhẹ",
+          "text": "",
+          "speak": "Đây là mô hình, không phải số liệu của show thật."
+        },
+        {
+          "show": "tên tám đỉnh hiện: A, B, C, D ở đáy dưới, A', B', C', D' ở đáy trên",
+          "text": "",
+          "speak": "Góc dưới đặt tên A B C D, góc trên là a-phẩy, bê-phẩy, xê-phẩy, đê-phẩy.",
+          "caption": "Góc dưới đặt tên A, B, C, D; góc trên thêm dấu phẩy: A', B', C', D'."
+        },
+        {
+          "show": "cạnh AB sáng màu nhấn",
+          "at": "cạnh AB",
+          "text": "$AB = 10$ m",
+          "speak": "Cạnh phía trước của đáy dưới dài mười mét.", "caption": "Cạnh phía trước của đáy dưới dài 10 m."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Muốn cả khối trôi nguyên vẹn, xét từng drone một."
+        }
+      ]
+    },
+    {
+      "id": "b03",
+      "scene": 2,
+      "section": "ĐỊNH NGHĨA",
+      "keyword": "Đường bay là một vectơ",
+      "visual": "Giữ CẢNH 2: hình hộp, tên đỉnh, nhãn 'mô hình'; nhãn '$AB = 10$ m' mờ đi ở đầu beat (giữ số 10 m nhỏ sát cạnh AB). Drone A sẽ bay thẳng tới điểm M: chéo lên phía phải trong mặt phẳng chứa mặt trước ABB'A' (sang phải 4,8 m, lên 6,4 m; dài 8 m), M nằm phía trên-phải đỉnh A', cao hơn đáy trên 2,4 m, không chạm cạnh nào. Đường bay vẽ thành mũi tên thẳng màu 'vectơ dời' (một màu, giữ nghĩa này suốt video). Chấm drone cũ ở A giữ lại dạng chấm mờ (đỉnh của khối gốc).",
+      "lines": [
+        {
+          "show": "drone A sáng màu nhấn, các drone khác mờ bớt",
+          "text": "",
+          "speak": "Bắt đầu với drone ở góc A, bay thẳng tới một chỗ mới.",
+          "caption": "Bắt đầu với drone ở góc A, bay thẳng tới một chỗ mới."
+        },
+        {
+          "show": "drone A trượt thẳng tới M, để lại mũi tên từ A tới M",
+          "at": "giữa mũi tên AM",
+          "text": "$\\vec{AM}$",
+          "speak": "Đường bay là một đoạn thẳng có hướng, gọi là vectơ a-mờ, đọc theo chiều bay.",
+          "caption": "Đường bay là một đoạn thẳng có hướng, gọi là vectơ AM, đọc theo chiều bay."
+        },
+        {
+          "show": "điểm A nháy",
+          "at": "điểm A",
+          "text": "điểm đầu",
+          "speak": "A là điểm đầu, chỗ drone xuất phát.",
+          "caption": "A là điểm đầu, chỗ drone xuất phát."
+        },
+        {
+          "show": "điểm M nháy",
+          "at": "điểm M",
+          "text": "điểm cuối",
+          "speak": "Mờ là điểm cuối, chỗ drone dừng lại.",
+          "caption": "M là điểm cuối, chỗ drone dừng lại."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Y như lớp mười, chỉ khác là mũi tên giờ nằm trong không gian.", "caption": "Y như lớp 10, chỉ khác là mũi tên giờ nằm trong không gian."
+        }
+      ]
+    },
+    {
+      "id": "b04",
+      "scene": 2,
+      "section": "ĐỊNH NGHĨA",
+      "keyword": "Độ dài và giá",
+      "visual": "Giữ CẢNH 2: hình hộp, mũi tên AM. Nhãn 'điểm đầu', 'điểm cuối' mờ đi ở đầu beat. Dòng 2: thước đo (đoạn mảnh có hai vạch chặn) đặt song song, sát bên dưới-phải mũi tên AM. Dòng 3: giá = đường thẳng nét mảnh, mờ, kéo dài mũi tên AM về hai phía, vượt khỏi hộp; chữ 'giá' ở đầu trên đường kéo dài. Thước và giá giữ đến hết b06.",
+      "lines": [
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Mũi tên này mang hai thông tin."
+        },
+        {
+          "show": "thước đo hiện dọc mũi tên AM",
+          "cue": "tám mét",
+          "at": "thước đo cạnh mũi tên AM",
+          "text": "$|\\vec{AM}| = 8$ m",
+          "speak": "Thứ nhất là độ dài, tức quãng bay, ở đây là tám mét.", "caption": "Thứ nhất là độ dài, tức quãng bay, ở đây là 8 m."
+        },
+        {
+          "show": "đường thẳng chứa AM kéo dài mờ về hai phía",
+          "cue": "gọi là giá",
+          "at": "đầu trên đường kéo dài",
+          "text": "giá",
+          "speak": "Thứ hai là đường thẳng chứa mũi tên, gọi là giá."
+        },
+        {
+          "show": "đầu mũi tên AM nháy",
+          "text": "",
+          "speak": "Giá cho biết bay theo phương nào, đầu mũi tên cho biết đi chiều nào."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Phương và chiều gộp lại, đó là hướng của vectơ."
+        }
+      ]
+    },
+    {
+      "id": "b05",
+      "scene": 2,
+      "section": "ĐỊNH NGHĨA",
+      "keyword": "Cùng phương, rồi mới xét hướng",
+      "visual": "Giữ CẢNH 2: hình hộp, mũi tên AM, thước 8 m, giá của AM. Drone B (đỉnh B) sẽ bay tới N: N = B + cùng độ dời như A (sang phải 4,8 m, lên 6,4 m), mũi tên BN cùng màu 'vectơ dời'. Dòng 2: giá của BN kéo dài mờ, song song giá AM. Dòng 4: mũi tên mờ (dài 8 m) nằm ngay trên giá của AM, nối tiếp phía trên M, minh họa giá trùng nhau; tắt ở dòng 5. Dòng 5: mũi tên thử nằm trên giá của BN, phía trên N, chĩa xuống về N (ngược chiều BN, dài bằng), màu bẫy, hiện tạm rồi tắt ở dòng 6.",
+      "lines": [
+        {
+          "show": "drone B sáng, mũi tên từ B tới N hiện",
+          "at": "giữa mũi tên BN",
+          "text": "$\\vec{BN}$",
+          "speak": "Giờ drone ở góc B cũng bay, tới điểm nờ.",
+          "caption": "Giờ drone ở góc B cũng bay, tới điểm N."
+        },
+        {
+          "show": "giá của BN kéo dài mờ, song song giá AM",
+          "text": "",
+          "speak": "Giá của hai mũi tên song song với nhau."
+        },
+        {
+          "show": "hai giá sáng cùng màu",
+          "cue": "cùng phương",
+          "at": "khoảng giữa hai giá",
+          "text": "cùng phương",
+          "speak": "Hai vectơ có giá song song hoặc trùng nhau thì gọi là cùng phương."
+        },
+        {
+          "show": "một mũi tên mờ hiện ngay trên giá của AM, phía trên M",
+          "at": "mũi tên trên giá AM",
+          "text": "giá trùng nhau",
+          "speak": "Giá trùng nhau là khi hai mũi tên nằm trên cùng một đường thẳng."
+        },
+        {
+          "show": "mũi tên thử ngược chiều trên giá BN hiện màu bẫy (mũi tên trên giá AM tắt)",
+          "cue": "ngược hướng",
+          "at": "mũi tên thử",
+          "text": "ngược hướng",
+          "speak": "Mũi tên này vẫn cùng phương, nhưng chĩa ngược lại: đó là ngược hướng."
+        },
+        {
+          "show": "mũi tên thử tắt, BN sáng lại",
+          "at": "mũi tên BN",
+          "text": "cùng hướng",
+          "speak": "Còn chĩa cùng chiều như hai mũi tên này là cùng hướng."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Nên hướng chỉ so được khi hai vectơ đã cùng phương."
+        }
+      ]
+    },
+    {
+      "id": "b06",
+      "scene": 2,
+      "section": "GỐC RỄ",
+      "keyword": "Bằng nhau không cần trùng chỗ",
+      "visual": "Giữ CẢNH 2: hình hộp, AM, BN, hai giá mờ, thước 8 m cạnh AM. Nhãn 'cùng phương', 'cùng hướng' mờ đi ở đầu beat. Dòng 2 (câu hỏi đoán): trong khoảng nghỉ AM rồi BN nháy lần lượt, không hiện dấu gì. Dòng 3: thước 8 m thứ hai hiện cạnh BN (cùng kiểu thước của AM). Dòng 4: đẳng thức đặt ở khoảng trống phía trên-phải hai mũi tên. Dòng 5: bản sao mờ của mũi tên AM trượt ngang sang, đặt khít lên BN, rồi mờ đi.",
+      "lines": [
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Hai mũi tên này đặt ở hai góc khác nhau của khối hộp."
+        },
+        {
+          "show": "AM và BN nháy lần lượt",
+          "text": "",
+          "speak": "Chúng có phải là cùng một vectơ không?",
+          "pauseAfter": 1.5
+        },
+        {
+          "show": "thước đo cạnh BN hiện",
+          "cue": "tám mét",
+          "at": "thước đo cạnh BN",
+          "text": "$8$ m",
+          "speak": "Cùng hướng, và đo ra cũng dài tám mét.", "caption": "Cùng hướng, và đo ra cũng dài 8 m."
+        },
+        {
+          "show": "đẳng thức hiện phía trên hai mũi tên",
+          "at": "khoảng trống trên hai mũi tên",
+          "text": "$\\vec{AM} = \\vec{BN}$",
+          "speak": "Cùng hướng và cùng độ dài thì hai vectơ bằng nhau."
+        },
+        {
+          "show": "bản sao mờ của AM trượt sang đặt khít lên BN",
+          "text": "",
+          "speak": "Không cần trùng chỗ: dời bản sao sang, nó nằm khít lên mũi tên kia."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Vectơ chỉ ghi hướng và độ dài, không ghi chỗ đặt."
+        }
+      ]
+    },
+    {
+      "id": "b07",
+      "scene": 2,
+      "section": "BẢN CHẤT",
+      "keyword": "Cùng vectơ, cạnh giữ nguyên",
+      "visual": "Giữ CẢNH 2. BƯỚC KHÓ — chuỗi 'vì sao' (1/2). Còn: hình hộp, AM, BN, đẳng thức $\\vec{AM} = \\vec{BN}$ (thu nhỏ, dời lên góc trên phải dưới nhãn 'mô hình'), số 10 m nhỏ sát cạnh AB. Thước đo và hai giá mờ đi ở đầu beat. Dòng 2: đoạn MN (vệt sáng như cạnh hộp) nối hai điểm mới. Dòng 3: hai giá của AM, BN hiện lại mờ, song song. Dòng 5: tứ giác ABNM (nằm trong mặt phẳng mặt trước) tô nhạt màu nhấn phụ. Dòng 6: MN và AB sáng cùng màu nhấn. Dòng 7: sáu drone còn lại cùng dời theo vectơ AM (mũi tên mảnh cùng màu), khối hộp mới hiện đủ 12 cạnh, khối cũ còn bóng mờ; giữ đến hết b09.",
+      "lineGap": 0.5,
+      "lines": [
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Vậy vì sao cùng một vectơ thì khối hộp không méo?"
+        },
+        {
+          "show": "đoạn MN nối hai điểm mới hiện",
+          "text": "",
+          "speak": "Nối hai chỗ mới được đoạn mờ-nờ, cạnh mới của khối.",
+          "caption": "Nối hai chỗ mới được đoạn MN, cạnh mới của khối."
+        },
+        {
+          "show": "hai giá của AM và BN hiện lại mờ",
+          "text": "",
+          "speak": "Hai vectơ bằng nhau thì cùng hướng, nên trước hết là cùng phương."
+        },
+        {
+          "show": "AM và BN sáng đậm",
+          "text": "",
+          "speak": "Vậy a-mờ và bê-nờ song song, và dài bằng nhau.",
+          "caption": "Vậy AM và BN song song, và dài bằng nhau."
+        },
+        {
+          "show": "tứ giác ABNM tô nhạt",
+          "cue": "hình bình hành",
+          "at": "trong tứ giác ABNM",
+          "text": "hình bình hành",
+          "speak": "Tứ giác có hai cạnh đối song song và bằng nhau là hình bình hành."
+        },
+        {
+          "show": "cạnh MN và AB sáng cùng màu",
+          "cue": "mười mét",
+          "at": "cạnh MN",
+          "text": "$MN = AB = 10$ m",
+          "speak": "Nên cạnh mới song song với cạnh cũ, và vẫn dài mười mét.", "caption": "Nên cạnh mới song song với cạnh cũ, và vẫn dài 10 m."
+        },
+        {
+          "show": "sáu drone còn lại dời theo vectơ AM, khối mới hiện, khối cũ còn bóng mờ",
+          "text": "",
+          "speak": "Cặp drone nào cũng vậy, nên cạnh nào cũng giữ nguyên."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Tức là cả khối chỉ trượt đi, không nghiêng và không co."
+        }
+      ]
+    },
+    {
+      "id": "b08",
+      "scene": 2,
+      "section": "BẢN CHẤT",
+      "keyword": "Lệch một chiếc là méo",
+      "visual": "Giữ CẢNH 2. BƯỚC KHÓ — chuỗi 'vì sao' (2/2), hình so sánh. Còn: khối cũ (bóng mờ), khối mới, AM, BN, MN. Dòng 1: khối mới, BN, MN và tô hình bình hành mờ thành bóng (để so sánh), khối cũ sáng lại. Dòng 2: mũi tên thử từ B thẳng đứng lên 8 m, màu bẫy, kèm thước 8 m. Dòng 3: đoạn nối M với đầu mũi tên thử (màu bẫy) — nghiêng rõ so với AB. Dòng 4: mũi tên thử và đoạn nghiêng tắt; drone B nháy tại chỗ. Dòng 5: nhãn vectơ-không cạnh B. Dòng 6: đoạn nối M với B (màu bẫy) — xiên xuống. Dòng 7: mọi thứ màu bẫy tắt, khối mới, BN, MN sáng lại, khối cũ về bóng mờ.",
+      "lineGap": 0.5,
+      "lines": [
+        {
+          "show": "BN và MN mờ thành bóng",
+          "text": "",
+          "speak": "Còn nếu drone B bay cũng tám mét, nhưng lệch hướng thì sao?",
+          "caption": "Còn nếu drone B bay cũng 8 m, nhưng lệch hướng thì sao?"
+        },
+        {
+          "show": "mũi tên thử từ B thẳng đứng lên 8 m, màu bẫy",
+          "at": "mũi tên thử",
+          "text": "$8$ m, khác hướng",
+          "speak": "Cùng độ dài mà khác hướng, hai vectơ không bằng nhau."
+        },
+        {
+          "show": "đoạn nối M với đầu mũi tên thử hiện, nghiêng",
+          "text": "",
+          "speak": "Cạnh mới bị nghiêng, khối hộp méo ngay."
+        },
+        {
+          "show": "mũi tên thử và đoạn nghiêng tắt, drone B nháy tại chỗ",
+          "text": "",
+          "speak": "Còn một kiểu lệch nữa: drone B đứng yên tại chỗ.",
+          "caption": "Còn một kiểu lệch nữa: drone B đứng yên tại chỗ."
+        },
+        {
+          "show": "nhãn hiện cạnh B",
+          "cue": "vectơ-không",
+          "at": "điểm B",
+          "text": "$\\vec{BB} = \\vec{0}$",
+          "speak": "Điểm đầu trùng điểm cuối, đó là vectơ-không, dài bằng không.",
+          "caption": "Điểm đầu trùng điểm cuối, đó là vectơ-không, dài bằng 0."
+        },
+        {
+          "show": "đoạn nối M với B hiện, xiên",
+          "text": "",
+          "speak": "Nó khác vectơ a-mờ, nên cạnh mới lại xiên.",
+          "caption": "Nó khác vectơ AM, nên cạnh mới lại xiên."
+        },
+        {
+          "show": "mọi thứ màu bẫy tắt, khối mới sáng lại",
+          "text": "",
+          "speak": "Nên cả tám drone phải nhận đúng một vectơ, cả hướng lẫn độ dài.", "caption": "Nên cả 8 drone phải nhận đúng một vectơ, cả hướng lẫn độ dài."
+        }
+      ]
+    },
+    {
+      "id": "b09",
+      "scene": 2,
+      "section": "TRỰC GIÁC",
+      "keyword": "Phép cộng: bài sau nói rõ",
+      "visual": "Giữ CẢNH 2: khối hộp mới (sau khi dời) sáng, khối cũ bóng mờ, mũi tên AM. Các nhãn của b07–b08 đã tắt. Dòng 1: mũi tên thứ hai (màu 'vectơ thứ hai', khác màu vectơ dời) từ M đi tiếp chéo lên phía trái (ra khỏi khối mới); khối mới mờ bớt. Dòng 2: mũi tên nét đứt từ A thẳng tới điểm cuối của mũi tên thứ hai; chữ 'phép cộng vectơ' cạnh nó.",
+      "lines": [
+        {
+          "show": "mũi tên thứ hai từ M đi tiếp chéo lên trái",
+          "text": "",
+          "speak": "Đội hình còn có thể đổi hướng, dời thêm lần nữa."
+        },
+        {
+          "show": "mũi tên nét đứt từ A tới điểm cuối cùng",
+          "cue": "phép cộng vectơ",
+          "text": "",
+          "speak": "Gộp hai lần dời thành một là phép cộng vectơ, bài sau sẽ nói rõ."
+        }
+      ]
+    },
+    {
+      "id": "b10",
+      "scene": 2,
+      "section": "TRONG ĐỀ THI",
+      "keyword": "Chỉ xét hướng và độ dài",
+      "visual": "Giữ CẢNH 2. Khối mới, mũi tên dời và mũi tên nét đứt mờ đi ở đầu beat; còn lại khối hộp gốc với tên tám đỉnh, nhãn 'mô hình', số 10 m sát AB. Các mũi tên trong beat này vẽ trùng lên cạnh hộp, màu nhấn; mũi tên sai màu bẫy. Dòng 3: ba mũi tên BB', CC', DD' (DD' trên cạnh khuất, nét đứt). Dòng 5: AB và D'C' sáng cùng màu (D'C' là cạnh sau của đáy trên). Dòng 6: đáy dưới ABCD tô nhạt, cạnh DC sáng (bậc trung gian). Dòng 7: mặt sau DCC'D' tô nhạt; đáy dưới bỏ tô. Dòng 8: tô mặt tắt, giá của AB và D'C' kéo dài mờ, song song.",
+      "lines": [
+        {
+          "show": "mũi tên dời tắt, còn hình hộp gốc",
+          "at": "phía dưới đáy hình hộp",
+          "text": "$ABCD.A'B'C'D'$",
+          "speak": "Chính khối hộp này hay gặp trong đề thi, dưới tên hình hộp."
+        },
+        {
+          "show": "mũi tên từ A lên A' sáng màu nhấn",
+          "at": "cạnh AA'",
+          "text": "$\\vec{AA'}$",
+          "speak": "Một câu đúng sai quen thuộc: những vectơ nào bằng vectơ a-a-phẩy?",
+          "caption": "Một câu đúng sai quen thuộc: những vectơ nào bằng vectơ AA'?",
+          "pauseAfter": 1.5
+        },
+        {
+          "show": "ba mũi tên trên ba cạnh bên còn lại sáng",
+          "at": "cạnh bên CC'",
+          "text": "$\\vec{BB'},\\ \\vec{CC'},\\ \\vec{DD'}$",
+          "speak": "Ba cạnh bên còn lại, đi từ dưới lên, cùng hướng và cùng độ dài."
+        },
+        {
+          "show": "mũi tên từ A' xuống A hiện màu bẫy",
+          "at": "cạnh AA'",
+          "text": "$\\vec{A'A} \\ne \\vec{AA'}$",
+          "speak": "Còn đi từ trên xuống thì ngược hướng, không bằng."
+        },
+        {
+          "show": "mũi tên trên cạnh AB và D'C' sáng cùng màu",
+          "text": "",
+          "speak": "Câu nhìn lạ hơn: cạnh trước ở đáy dưới, và cạnh sau ở đáy trên."
+        },
+        {
+          "show": "đáy dưới ABCD tô nhạt, cạnh DC sáng",
+          "text": "",
+          "speak": "Đáy dưới là hình bình hành, nên cạnh trước song song và bằng cạnh sau."
+        },
+        {
+          "show": "mặt sau DCC'D' tô nhạt",
+          "text": "",
+          "speak": "Mặt sau cũng là hình bình hành, đưa cạnh đó lên đáy trên."
+        },
+        {
+          "show": "giá AB và D'C' kéo dài mờ",
+          "cue": "bằng nhau",
+          "at": "cạnh D'C'",
+          "text": "$\\vec{AB} = \\vec{D'C'}$",
+          "speak": "Cùng hướng, cùng dài mười mét, nên hai vectơ bằng nhau.", "caption": "Cùng hướng, cùng dài 10 m, nên hai vectơ bằng nhau."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Bằng nhau hay không, chỉ cần xét hướng và độ dài."
+        }
+      ]
+    },
+    {
+      "id": "b11",
+      "scene": 2,
+      "section": "BẪY THƯỜNG GẶP",
+      "keyword": "Không cắt chưa chắc song song",
+      "visual": "Giữ CẢNH 2: hình hộp gốc, tên đỉnh. Mũi tên và nhãn của b10 tắt ở đầu beat. Dòng 1: mũi tên AB (màu nhấn) và mũi tên B'C' (màu nhấn phụ; cạnh bên phải của đáy trên, chạy vào sâu). Dòng 2: hai giá kéo dài mờ ra ngoài hộp, hai đầu không gặp nhau trong khung. Dòng 4: chữ 'chéo nhau' giữa hai giá. Dòng 5: chữ 'không cùng phương' cạnh hai mũi tên, chữ 'chéo nhau' giữ lại.",
+      "lines": [
+        {
+          "show": "mũi tên AB và B'C' sáng hai màu",
+          "text": "",
+          "speak": "Còn cạnh trước ở đáy dưới với cạnh bên phải ở đáy trên?"
+        },
+        {
+          "show": "hai giá kéo dài mờ ra ngoài hộp",
+          "text": "",
+          "speak": "Kéo dài hai giá, chúng không bao giờ cắt nhau."
+        },
+        {
+          "show": "giá B'C' nháy, giá AB nháy lần lượt",
+          "text": "",
+          "speak": "Nhưng cũng không song song: một đường chạy ngang, một đường chạy vào sâu."
+        },
+        {
+          "show": "nhãn hiện giữa hai giá",
+          "cue": "chéo nhau",
+          "at": "khoảng giữa hai giá",
+          "text": "chéo nhau",
+          "speak": "Hai đường như vậy gọi là chéo nhau, trên mặt phẳng không có."
+        },
+        {
+          "show": "nhãn hiện cạnh hai mũi tên",
+          "at": "cạnh hai mũi tên",
+          "text": "không cùng phương",
+          "speak": "Giá chéo nhau, nên hai vectơ này không cùng phương."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Trong không gian, không cắt nhau chưa chắc đã song song."
+        }
+      ]
+    },
+    {
+      "id": "b12",
+      "scene": 1,
+      "section": "GIẢI ĐÁP",
+      "keyword": "Một vectơ cho mọi drone",
+      "visual": "Quay lại CẢNH 1: bầu trời đêm, ngôi sao drone ở chỗ cũ như b01, nhãn '10.518 drone' và 'minh họa'. Hình hộp mô hình mờ đi ở dòng 1. Dòng 2: ở 5 drone rải rác (hai đầu cánh, tâm, hai đỉnh lõm) hiện mũi tên giống hệt nhau — cùng hướng chéo lên phải, cùng độ dài — màu 'vectơ dời' như CẢNH 2; ký hiệu $\\vec{u}$ cạnh một mũi tên. Dòng 3: cả ngôi sao trôi theo các mũi tên, bóng mờ ở chỗ cũ. Dòng 4: một cạnh cánh sao cũ (bóng) và cạnh tương ứng của ngôi sao mới sáng cùng màu nhấn.",
+      "lines": [
+        {
+          "show": "hình hộp mờ đi, ngôi sao drone hiện lại",
+          "text": "",
+          "speak": "Quay lại bầu trời Thành phố Hồ Chí Minh với hơn mười nghìn drone.", "caption": "Quay lại bầu trời Thành phố Hồ Chí Minh với hơn 10.000 drone."
+        },
+        {
+          "show": "mũi tên giống hệt nhau hiện ở năm drone rải rác",
+          "cue": "cùng một vectơ",
+          "at": "một mũi tên ở đầu cánh",
+          "text": "$\\vec{u}$",
+          "speak": "Lời giải là: mọi drone nhận cùng một vectơ."
+        },
+        {
+          "show": "cả ngôi sao trôi theo mũi tên, bóng mờ ở chỗ cũ",
+          "text": "",
+          "speak": "Cùng hướng và cùng độ dài, dù mỗi chiếc ở một chỗ khác nhau."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Tức là mười nghìn vectơ bằng nhau, đặt ở mười nghìn chỗ khác nhau.", "caption": "Tức là 10.000 vectơ bằng nhau, đặt ở 10.000 chỗ khác nhau."
+        },
+        {
+          "show": "một cạnh cũ và cạnh mới tương ứng sáng cùng màu",
+          "text": "",
+          "speak": "Nên mỗi cạnh của hình chỉ trượt đi, song song và bằng chính nó."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Vậy chỉ một vectơ là đủ dời cả mười nghìn drone.", "caption": "Vậy chỉ một vectơ là đủ dời cả 10.000 drone."
+        }
+      ]
+    }
+  ]
+}

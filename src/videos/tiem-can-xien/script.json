@@ -1,0 +1,548 @@
+{
+  "slug": "tiem-can-xien",
+  "title": "Nhìn xa trùng khít, soi gần vẫn cách 1",
+  "subject": "toan",
+  "lop": 12,
+  "chuong": "Chương I. Ứng dụng đạo hàm để khảo sát và vẽ đồ thị của hàm số",
+  "bai": "Bài 3. Đường tiệm cận của đồ thị hàm số",
+  "exams": [
+    "THPTQG",
+    "TSA",
+    "HSA"
+  ],
+  "beats": [
+    {
+      "id": "b01",
+      "scene": 1,
+      "section": "HIỆN TƯỢNG",
+      "keyword": "Mẹo sai ở đâu?",
+      "visual": "CẢNH 1 — NHÌN XA. Hệ trục chiếm gần hết khung, hai trục cùng tỉ lệ: trục ngang $x$ từ 0 đến 1200, trục dọc $y$ từ 0 đến 1200, vạch mỗi 200, số ở 200, 400, …, 1200. Thẻ công thức góc trên trái (vùng trống phía trên đường chéo), giữ suốt cảnh: $f(x) = \\dfrac{x^2}{x + 1}$. Đồ thị $f$ trên $[0; 1200]$ đã vẽ sẵn (màu chính), nhìn như một đường thẳng chéo. Ô phóng của kính lúp (`ZoomInset`) sẽ đặt ở vùng trống dưới phải (dưới đường chéo), khung soi rất nhỏ quanh điểm đang xét, hai đường dẫn nối khung soi với ô; trong ô có lưới, vạch chia có số theo trục dọc (vd. 998, 999, 1000 khi soi tại 1000), mức phóng ghi sát ô. Dòng 2: số '+ 1' ở mẫu trong thẻ mờ đi, cạnh thẻ hiện phép rút gọn. Dòng 3: đường $y = x$ màu bẫy vẽ dọc từ gốc lên, chồng khít đồ thị ở mức nhìn này; nhãn '$y = x$' ở đầu trên. Dòng 4: kính lúp mở tại $x = 1000$: trong ô, đường $y = x$ (màu bẫy) và đồ thị (màu chính) tách nhau rõ, đồ thị nằm dưới; khe giữa hai đường có nhãn. Phép rút gọn ở dòng 2 giữ đến hết beat (là 'lời đoán' của mẹo).",
+      "lines": [
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Bài trước có một mẹo: đi thật xa thì số cộng thêm chẳng đáng kể."
+        },
+        {
+          "show": "số cộng 1 ở mẫu trong thẻ mờ đi",
+          "at": "cạnh thẻ công thức",
+          "text": "$\\approx \\dfrac{x^2}{x} = x$",
+          "speak": "Bỏ số một ở mẫu của hàm này, còn x bình phương chia x, tức là x.",
+          "caption": "Bỏ số 1 ở mẫu của hàm này, còn x² chia x, tức là x."
+        },
+        {
+          "show": "đường y = x màu bẫy vẽ dọc, chồng khít đồ thị",
+          "cue": "trùng khít",
+          "at": "đầu trên đường y = x",
+          "text": "$y = x$",
+          "speak": "Vẽ ra, nhìn từ xa thì đường y bằng x trùng khít đồ thị.",
+          "caption": "Vẽ ra, nhìn từ xa thì đường y = x trùng khít đồ thị."
+        },
+        {
+          "show": "kính lúp mở tại x = 1000, trong ô hai đường tách nhau",
+          "cue": "soi kỹ",
+          "at": "khe giữa hai đường trong ô phóng",
+          "text": "cách $\\approx 1$",
+          "speak": "Nhưng soi kỹ tại một nghìn, đồ thị vẫn nằm dưới, cách gần đúng một."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Tiệm cận phải sát dần, vậy mẹo bỏ số cộng sai ở đâu?"
+        }
+      ]
+    },
+    {
+      "id": "b02",
+      "scene": 1,
+      "section": "TRỰC GIÁC",
+      "keyword": "Cách dồn về 1, không 0",
+      "visual": "Giữ CẢNH 1: hệ trục nhìn xa, đồ thị, đường $y = x$ màu bẫy, thẻ công thức; phép rút gọn của b01 mờ đi ở đầu beat. Kính lúp còn mở (ô phóng dưới phải). Đoạn đo: đoạn thẳng đứng trong ô phóng nối điểm trên đồ thị lên điểm trên đường $y = x$ cùng hoành độ, màu nhấn, số ghi cạnh đoạn. Số đo của các lần trước xếp thành một cột nhỏ ngay trên ô phóng (mỗi số một hàng, kèm hoành độ: '$x = 10$: 0,91'…), để so sánh. Dòng 3 (câu hỏi đoán): khung soi dời tới $x = 100$; trong ô chỉ hiện một vạch mốc mờ dài bằng đoạn 0,91 đặt cạnh khe, đoạn đo mới chưa hiện; trong khoảng nghỉ, vạch mốc nháy nhẹ (không lộ đáp án). Vạch chia trong ô đổi theo chỗ soi (vd. 9, 9,5, 10 khi soi tại 10).",
+      "lines": [
+        {
+          "show": "khung soi dời về x = 10",
+          "text": "",
+          "speak": "Thử đo khoảng cách dọc giữa đồ thị và đường này, bắt đầu tại mười."
+        },
+        {
+          "show": "đoạn đo thẳng đứng trong ô sáng màu nhấn",
+          "at": "đoạn đo trong ô phóng",
+          "text": "$0{,}91$",
+          "speak": "Được không phẩy chín mốt."
+        },
+        {
+          "show": "khung soi dời tới x = 100, vạch mốc 0,91 mờ đặt cạnh khe",
+          "text": "",
+          "speak": "Ra xa tới một trăm, khoảng cách này co lại hay vẫn cỡ đó?",
+          "pauseAfter": 1.5
+        },
+        {
+          "show": "đoạn đo tại 100 hiện, dài hơn vạch mốc một chút",
+          "at": "đoạn đo trong ô phóng",
+          "text": "$0{,}99$",
+          "speak": "Không co, còn nhỉnh hơn, không phẩy chín chín."
+        },
+        {
+          "show": "khung soi dời tới x = 1000, đoạn đo hiện",
+          "at": "đoạn đo trong ô phóng",
+          "text": "$0{,}999$",
+          "speak": "Tại một nghìn, không phẩy chín chín chín."
+        },
+        {
+          "show": "cột ba số đo trên ô phóng sáng, mũi tên ở cuối cột",
+          "at": "cuối cột số đo",
+          "text": "$\\to 1$",
+          "speak": "Khoảng cách dồn về một, chứ không dồn về không."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Nên đồ thị không sát dần đường này, chỉ chạy gần như song song với nó."
+        }
+      ]
+    },
+    {
+      "id": "b03",
+      "scene": 1,
+      "section": "BẢN CHẤT",
+      "keyword": "Phần hụt của 60 về 0",
+      "lineGap": 0.5,
+      "visual": "Giữ CẢNH 1. BƯỚC KHÓ — chuỗi 'vì sao' (1), mỗi dòng một mắt xích. Hệ trục, đồ thị, đường $y = x$, kính lúp tại 1000 (đoạn đo 0,999) giữ nguyên; cột số đo của b02 mờ đi ở đầu beat. Vùng trống trên phải dành cho thẻ mốc bài trước (thẻ nhỏ, viền nhạt, ghi 'bài trước' ở góc thẻ). Dòng 1: đoạn đo trong ô nháy, dấu '?' cạnh nó. Dòng 2: thẻ mốc hiện. Dòng 3: cụm '+ 30' trong mẫu của thẻ sáng màu bẫy. Dòng 4–5: dưới thẻ hiện từng hàng phần hụt (hàng thứ hai ngắn hơn rõ, có thanh nhỏ dài tỉ lệ phần hụt đặt trước số: 1,9 dài, 0,2 ngắn). Thẻ mốc và hai hàng gỡ ở đầu b04.",
+      "lines": [
+        {
+          "show": "đoạn đo trong ô nháy, dấu '?' cạnh nó",
+          "text": "",
+          "speak": "Vậy sao bài trước bỏ được số cộng, còn ở đây thì không?"
+        },
+        {
+          "show": "thẻ mốc bài trước hiện ở vùng trên phải",
+          "at": "thẻ mốc bài trước",
+          "text": "$\\dfrac{60x}{x + 30} \\to 60$",
+          "speak": "Ở bài trước, tốc độ trung bình dồn về sáu mươi, một con số cố định."
+        },
+        {
+          "show": "cụm cộng 30 trong mẫu của thẻ sáng màu bẫy",
+          "text": "",
+          "speak": "Thêm ba mươi ở mẫu chỉ làm kết quả hụt đi vài phần trăm của sáu mươi."
+        },
+        {
+          "show": "dưới thẻ hiện hàng thứ nhất, thanh hụt dài",
+          "at": "dưới thẻ mốc",
+          "text": "$x = 900$: hụt $1{,}9$",
+          "speak": "Tại chín trăm, hụt một phẩy chín."
+        },
+        {
+          "show": "hàng thứ hai hiện, thanh hụt ngắn hẳn",
+          "at": "dưới hàng thứ nhất",
+          "text": "$x = 9000$: hụt $0{,}2$",
+          "speak": "Tại chín nghìn, chỉ còn hụt không phẩy hai."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Số phần trăm hụt nhỏ dần, mà sáu mươi cố định, nên phần hụt dồn về không."
+        }
+      ]
+    },
+    {
+      "id": "b04",
+      "scene": 1,
+      "section": "BẢN CHẤT",
+      "keyword": "1% của 100 vẫn là 1",
+      "lineGap": 0.5,
+      "visual": "Giữ CẢNH 1. BƯỚC KHÓ NHẤT — chuỗi 'vì sao' (2), mỗi dòng một mắt xích. Thẻ mốc bài trước và hai hàng hụt gỡ ở đầu beat. Vùng trên phải thành thẻ phép chia (cùng chỗ thẻ mốc cũ). Kính lúp: dòng 1 dời về $x = 100$ (ô phóng có vạch 98, 99, 100). Dòng 2: hàng thứ nhất của thẻ phép chia hiện; trong ô, điểm trên đường $y = x$ tại 100 sáng màu bẫy (cùng màu hàng này). Dòng 3: hàng thứ hai hiện; trong ô, điểm trên đồ thị tại 100 sáng màu chính (cùng màu hàng này). Dòng 4: số 101 trong hàng thứ hai sáng, nhãn nhỏ dưới nó. Dòng 5: đoạn đo trong ô (giữa hai điểm) sáng màu nhấn, nhãn cạnh đoạn. Dòng 6: kính lúp dời tới $x = 1000$, thẻ phép chia đổi số sang 1000, nhãn cạnh đoạn đo đổi. Dòng 7: mũi tên nhỏ chạy dọc đồ thị trên hệ trục lớn, từ gần gốc lên phía 1200 (thương lớn dần). Thẻ phép chia gỡ ở đầu b05.",
+      "lines": [
+        {
+          "show": "khung soi dời về x = 100, thẻ mốc bài trước gỡ",
+          "text": "",
+          "speak": "Còn ở đây, xét tại một trăm."
+        },
+        {
+          "show": "hàng thứ nhất của thẻ phép chia hiện, điểm trên đường y = x trong ô sáng",
+          "at": "thẻ phép chia, hàng thứ nhất",
+          "text": "$\\dfrac{10\\,000}{100} = 100$",
+          "speak": "Bình phương của một trăm là mười nghìn, chia một trăm được một trăm."
+        },
+        {
+          "show": "hàng thứ hai hiện, điểm trên đồ thị trong ô sáng",
+          "at": "thẻ phép chia, hàng thứ hai",
+          "text": "$\\dfrac{10\\,000}{101} \\approx 99{,}01$",
+          "speak": "Nhưng mẫu thật là một trăm lẻ một, chia ra chỉ được chừng chín mươi chín."
+        },
+        {
+          "show": "số 101 trong hàng thứ hai sáng",
+          "at": "dưới số 101",
+          "text": "lớn hơn $1\\%$",
+          "speak": "Mẫu lớn hơn chừng một phần trăm, nên thương hụt chừng một phần trăm."
+        },
+        {
+          "show": "đoạn đo giữa hai điểm trong ô sáng màu nhấn",
+          "at": "đoạn đo trong ô phóng",
+          "text": "$1\\%$ của $100$ là $1$",
+          "speak": "Mà một phần trăm của một trăm là một."
+        },
+        {
+          "show": "khung soi dời tới x = 1000, số trong thẻ phép chia đổi theo",
+          "at": "đoạn đo trong ô phóng",
+          "text": "$0{,}1\\%$ của $1000$ là $1$",
+          "speak": "Tại một nghìn, hụt một phần nghìn của một nghìn, vẫn là một."
+        },
+        {
+          "show": "mũi tên nhỏ chạy dọc đồ thị lên phía 1200",
+          "text": "",
+          "speak": "Số phần trăm hụt nhỏ dần, nhưng thương lớn dần theo x, nên phần hụt cứ ở mức một.",
+          "caption": "Số phần trăm hụt nhỏ dần, nhưng thương lớn dần theo x, nên phần hụt cứ ở mức 1."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Nói gọn lại, thêm một ở mẫu kéo đồ thị xuống chừng một."
+        }
+      ]
+    },
+    {
+      "id": "b05",
+      "scene": 1,
+      "section": "TRỰC GIÁC",
+      "keyword": "Hạ xuống 1: sát dần",
+      "visual": "Giữ CẢNH 1. Khoảnh khắc 'à ra thế' (1). Thẻ phép chia gỡ. Kính lúp đang ở $x = 1000$, đoạn đo cũ (0,999) mờ đi ở đầu beat. Dòng 1: trong ô phóng, một bản sao của đường $y = x$ trượt xuống đúng 1 vạch chia, đổi sang màu nhấn, thành đường $y = x - 1$; trên hệ trục lớn đường mới cũng hiện (trùng khít ở mức nhìn xa). Đường $y = x$ ở lại, mờ bớt (màu bẫy nhạt). Dòng 2–4: kính lúp dời lần lượt 10 → 100 → 1000; mỗi chỗ, đoạn đo mới (màu nhấn) nối đồ thị với đường $y = x - 1$, có số; số đo xếp thành cột nhỏ trên ô phóng như ở b02, các đoạn ngắn dần thấy rõ (tại 1000 đoạn chỉ còn là một vạch, đồ thị gần như dính vào đường).",
+      "lines": [
+        {
+          "show": "bản sao đường y = x trượt xuống đúng 1 vạch, thành đường màu nhấn",
+          "cue": "hạ đường",
+          "at": "đường mới trong ô phóng",
+          "text": "$y = x - 1$",
+          "speak": "Vậy thì hạ đường y bằng x xuống đúng một đơn vị.",
+          "caption": "Vậy thì hạ đường y = x xuống đúng 1 đơn vị."
+        },
+        {
+          "show": "khung soi dời về x = 10, đoạn đo tới đường mới hiện",
+          "at": "đoạn đo trong ô phóng",
+          "text": "$0{,}09$",
+          "speak": "Tại mười, đồ thị cách đường mới không phẩy không chín."
+        },
+        {
+          "show": "khung soi dời tới x = 100, đoạn đo ngắn hơn",
+          "at": "đoạn đo trong ô phóng",
+          "text": "$0{,}01$",
+          "speak": "Tại một trăm, chỉ còn chừng không phẩy không một."
+        },
+        {
+          "show": "khung soi dời tới x = 1000, đồ thị gần như dính vào đường mới",
+          "at": "đoạn đo trong ô phóng",
+          "text": "$0{,}001$",
+          "speak": "Tại một nghìn, còn một phần nghìn."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Khoảng cách dồn về không, đồ thị sát dần đường này."
+        }
+      ]
+    },
+    {
+      "id": "b06",
+      "scene": 2,
+      "section": "ĐỊNH NGHĨA",
+      "keyword": "Đoạn đo co về 0",
+      "visual": "CẢNH 2 — NHÌN GẦN GỐC TOẠ ĐỘ. Cùng hàm, cùng hai đường, vẽ lại trên hệ trục khác (chuyển cảnh bằng câu dòng 1, không biến hình): trục ngang $x$ từ −7 đến 7, trục dọc $y$ từ −9 đến 7, hai trục cùng tỉ lệ, vạch mỗi 1, số ở −6, −4, −2, 2, 4, 6. Thẻ công thức $f(x) = \\dfrac{x^2}{x + 1}$ góc trên trái (vùng trống phía trên các đường). Hiện sẵn: nhánh phải của đồ thị ($x > -1$, qua gốc, (1; 0,5), (2; 1,33), (6; 5,14)), đường $y = x - 1$ màu nhấn có nhãn, đường $y = x$ màu bẫy nhạt. Nhánh trái và đường đứng tại −1 CHƯA hiện (b10). BƯỚC KHÓ — thành phần trước, phép ghép sau. Dòng 2: chấm $M$ trên nhánh phải tại $x = 2$, cột dọc từ trục ngang lên $M$ (màu chính). Dòng 3: chấm $H$ trên đường $y = x - 1$ tại $x = 2$, cột dọc tới $H$ (màu nhấn), cột này nằm trong cột tới $M$ — vẽ hai cột lệch nhau vài px theo chiều ngang để thấy cả hai. Dòng 4: phần chênh ở đầu cột cao (đoạn $MH$) sáng màu nhấn đậm; hai cột mờ bớt. Dòng 5: $M$ và $H$ cùng trượt sang phải tới $x = 6$, đoạn $MH$ co dần (0,33 → 0,14), nhãn đi theo đoạn.",
+      "lines": [
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Để thấy rõ khoảng cách ấy, vẽ lại đồ thị ở gần gốc toạ độ, nơi đồ thị chưa sát."
+        },
+        {
+          "show": "chấm M trên đồ thị tại x = 2, cột dọc từ trục lên M",
+          "at": "cột dọc tới M",
+          "text": "$f(x)$",
+          "speak": "Lấy một điểm trên đồ thị, độ cao của nó là giá trị hàm số."
+        },
+        {
+          "show": "chấm H trên đường tiệm cận, ngay dưới M, cột dọc tới H",
+          "at": "cột dọc tới H",
+          "text": "$x - 1$",
+          "speak": "Điểm ngay bên dưới, trên đường thẳng, có độ cao là x trừ một.",
+          "caption": "Điểm ngay bên dưới, trên đường thẳng, có độ cao là x − 1."
+        },
+        {
+          "show": "đoạn MH ở đầu cột cao sáng màu nhấn đậm",
+          "at": "đoạn MH",
+          "text": "$MH = f(x) - (x - 1)$",
+          "speak": "Hiệu hai độ cao chính là đoạn thẳng đứng đã đo."
+        },
+        {
+          "show": "M và H trượt sang phải, đoạn MH co dần",
+          "text": "",
+          "speak": "Cho điểm trượt ra xa, đoạn này co dần về không."
+        }
+      ]
+    },
+    {
+      "id": "b07",
+      "scene": 2,
+      "section": "ĐỊNH NGHĨA",
+      "keyword": "Tiệm cận xiên: $MH \\to 0$",
+      "visual": "Giữ CẢNH 2. BƯỚC KHÓ — khái niệm mới, giải phẫu định nghĩa: mỗi dòng một cụm trên thẻ sáng và đúng một thứ trên hình sáng cùng màu, cùng lúc. $M$, $H$ ở $x = 6$ (MH ngắn), hai cột dọc hiện lại mờ. Thẻ định nghĩa hiện ở vùng trống trên trái, dưới thẻ công thức hàm, cả thẻ màu nhạt đều nhau (chưa cụm nào sáng) để các dòng sau sáng từng cụm; giữ tới hết b10 (thu nhỏ từ b08). Dòng 2: cụm $f(x)$ trên thẻ ↔ cột tới $M$ (màu chính). Dòng 3: cụm $ax + b$ ↔ cột tới $H$ (màu nhấn); cạnh cụm có chú thích nhỏ 'ở đây: $x - 1$'. Dòng 4: dấu trừ và cặp ngoặc vuông ↔ đoạn $MH$. Dòng 5: cụm $\\lim\\limits_{x \\to +\\infty} \\ldots = 0$ sáng; $M$, $H$ trượt từ 6 sang mép phải, $MH$ co. Dòng 6: nhãn đường đổi thành 'tiệm cận xiên'. Dòng 7: dưới thẻ hiện '$a \\neq 0$'; một đường nằm ngang nét đứt mờ thoáng hiện qua hình rồi tắt (gợi tiệm cận ngang).",
+      "lines": [
+        {
+          "show": "thẻ định nghĩa hiện dưới thẻ công thức hàm",
+          "at": "thẻ định nghĩa",
+          "text": "$\\lim\\limits_{x \\to +\\infty} \\left[f(x) - (ax + b)\\right] = 0$",
+          "speak": "Sách viết điều đó bằng giới hạn này, với đường thẳng viết ở dạng chung."
+        },
+        {
+          "show": "cụm f(x) trên thẻ và cột tới M sáng cùng màu",
+          "text": "",
+          "speak": "Cụm đầu là độ cao của điểm trên đồ thị."
+        },
+        {
+          "show": "cụm a x cộng b và cột tới H sáng cùng màu",
+          "at": "cạnh cụm ax + b",
+          "text": "ở đây: $x - 1$",
+          "speak": "Cụm sau là độ cao của điểm ngay bên dưới, trên đường thẳng."
+        },
+        {
+          "show": "dấu trừ và ngoặc vuông sáng cùng màu đoạn MH",
+          "text": "",
+          "speak": "Hiệu của chúng là đoạn thẳng đứng vừa đo."
+        },
+        {
+          "show": "cụm giới hạn bằng không sáng, M và H trượt ra mép phải",
+          "text": "",
+          "speak": "Giới hạn bằng không, tức là đi ra xa thì đoạn ấy co về không."
+        },
+        {
+          "show": "nhãn của đường thẳng đổi thành 'tiệm cận xiên'",
+          "cue": "tiệm cận xiên",
+          "at": "đường y = x − 1",
+          "text": "tiệm cận xiên",
+          "speak": "Đường thẳng như vậy gọi là... tiệm cận xiên."
+        },
+        {
+          "show": "dưới thẻ hiện a ≠ 0",
+          "text": "",
+          "speak": "Hệ số góc phải khác không, vì đường nằm ngang là tiệm cận ngang đã học."
+        }
+      ]
+    },
+    {
+      "id": "b08",
+      "scene": 2,
+      "section": "BẢN CHẤT",
+      "keyword": "Tử $= (x + 1)(x - 1) + 1$",
+      "lineGap": 0.5,
+      "visual": "Giữ CẢNH 2. Thẻ định nghĩa thu nhỏ, mờ bớt (vẫn đọc được). $M$, $H$ về lại $x = 3$ (MH = 0,25 thấy rõ). Dòng 1: số '− 1' trong nhãn '$y = x - 1$' nháy, dấu '?' cạnh. Dòng 2: dưới thẻ công thức hiện phép nhân thử theo lời đoán của mẹo. Dòng 3: cụm '+ x' trong kết quả sáng màu bẫy; ngay dưới, chú thích nhỏ so cụm $x$ với mẫu $x + 1$ (hai cụm đặt thẳng hàng, gần bằng nhau). Dòng 4: hàng mới hiện dưới hàng cũ (hàng cũ mờ): phép nhân với $x - 1$; cụm '− 1' cuối sáng. Dòng 5: hàng phép nhân đổi thành đẳng thức có '+ 1' (số 1 thêm vào sáng màu nhấn, giữ sang b09).",
+      "lines": [
+        {
+          "show": "số − 1 trong nhãn đường tiệm cận nháy, dấu '?' cạnh",
+          "text": "",
+          "speak": "Nhưng vì sao lại đúng là trừ một?"
+        },
+        {
+          "show": "dưới thẻ công thức hiện phép nhân mẫu với x",
+          "at": "dưới thẻ công thức",
+          "text": "$(x + 1) \\cdot x = x^2 + x$",
+          "speak": "Mẹo đoán tử chia mẫu được x, nhưng nhân lại thì ra x bình phương cộng x.",
+          "caption": "Mẹo đoán tử chia mẫu được x, nhưng nhân lại thì ra x² + x."
+        },
+        {
+          "show": "cụm cộng x sáng màu bẫy, đặt thẳng hàng với mẫu",
+          "at": "dưới cụm + x",
+          "text": "thừa $x$, gần bằng mẫu",
+          "speak": "Thừa mất x, mà x gần bằng mẫu, nên phải nhân ít đi một lần.",
+          "caption": "Thừa mất x, mà x gần bằng mẫu, nên phải nhân ít đi một lần."
+        },
+        {
+          "show": "hàng mới: phép nhân mẫu với x − 1",
+          "at": "dưới thẻ công thức",
+          "text": "$(x + 1)(x - 1) = x^2 - 1$",
+          "speak": "Nhân với x trừ một, được x bình phương trừ một, chỉ thiếu một.",
+          "caption": "Nhân với x − 1, được x² − 1, chỉ thiếu 1."
+        },
+        {
+          "show": "phép nhân đổi thành đẳng thức có cộng 1",
+          "at": "dưới thẻ công thức",
+          "text": "",
+          "speak": "Vậy tử bằng mẫu nhân x trừ một, cộng thêm một.",
+          "caption": "Vậy tử bằng mẫu nhân (x − 1), cộng thêm 1."
+        }
+      ]
+    },
+    {
+      "id": "b09",
+      "scene": 2,
+      "section": "BẢN CHẤT",
+      "keyword": "Đường thẳng nằm sẵn trong hàm",
+      "visual": "Giữ CẢNH 2. Khoảnh khắc 'à ra thế' (2). Đẳng thức $x^2 = (x + 1)(x - 1) + 1$ của b08 còn dưới thẻ công thức. Dòng 1: cả hai vế của đẳng thức hiện thêm '$\\div (x + 1)$', rồi thẻ công thức hàm viết lại ngay tại chỗ (dạng cũ trượt sang dạng mới, không xoay/gập); đẳng thức gỡ. Dòng 2: cụm $x - 1$ trong thẻ và đường tiệm cận sáng cùng màu nhấn. Dòng 3: cụm $\\dfrac{1}{x + 1}$ và đoạn $MH$ sáng cùng màu nhấn đậm, nhãn cạnh đoạn. Dòng 4: $M$, $H$ trượt ra mép phải, dưới thẻ đọc số mẫu lớn dần (4, 5, 6, 7), đoạn $MH$ co.",
+      "lines": [
+        {
+          "show": "chia hai vế cho mẫu, thẻ công thức hàm viết lại thành hai phần",
+          "at": "thẻ công thức",
+          "text": "$f(x) = x - 1 + \\dfrac{1}{x + 1}$",
+          "speak": "Chia cả hai vế cho mẫu, hàm số tách thành hai phần."
+        },
+        {
+          "show": "cụm x − 1 trong thẻ và đường tiệm cận sáng cùng màu",
+          "text": "",
+          "speak": "Phần đầu chính là đường thẳng, số trừ một nằm sẵn trong công thức."
+        },
+        {
+          "show": "cụm 1 chia mẫu và đoạn MH sáng cùng màu",
+          "at": "đoạn MH",
+          "text": "$MH = \\dfrac{1}{x + 1}$",
+          "speak": "Số một còn thiếu, chia cho mẫu, chính là đoạn thẳng đứng."
+        },
+        {
+          "show": "M và H trượt ra mép phải, số ở mẫu lớn dần, đoạn MH co",
+          "text": "",
+          "speak": "Mẫu lớn mãi, nên phần này dồn về không."
+        }
+      ]
+    },
+    {
+      "id": "b10",
+      "scene": 2,
+      "section": "VÍ DỤ",
+      "keyword": "Phía $x \\to -\\infty$ cũng sát",
+      "visual": "Giữ CẢNH 2. Thẻ công thức giữ dạng tách $f(x) = x - 1 + \\dfrac{1}{x + 1}$. Dòng 1: đường thẳng đứng nét đứt màu bẫy tại $x = -1$, nhãn ở đầu trên; không ghi số −1 trên trục ngang (đè đường đứng). Dòng 2: nhánh trái của đồ thị ($x < -1$) vẽ dần từ sát $x = -1$ (mép dưới) qua đỉnh (−2; −4) ra tới $x = -7$ (−8,17); chấm $M'$ tại $x = -3$ (−4,5) và $H'$ trên đường tại (−3; −4), đoạn $M'H'$ nằm DƯỚI đường, màu nhấn. Dòng 3: $M'$, $H'$ trượt sang trái tới mép trái, đoạn co dần; trên thẻ định nghĩa thu nhỏ thêm cụm 'hoặc $x \\to -\\infty$' sáng lên; câu chốt hiện.",
+      "lines": [
+        {
+          "show": "đường thẳng đứng nét đứt tại x = −1 hiện",
+          "at": "đầu trên đường thẳng đứng",
+          "text": "$x = -1$",
+          "speak": "Tại âm một mẫu bằng không, đường thẳng đứng ở đó là tiệm cận đứng, như bài trước."
+        },
+        {
+          "show": "nhánh trái vẽ dần, đoạn M'H' tại x = −3 nằm dưới đường",
+          "cue": "nhánh trái",
+          "text": "",
+          "speak": "Bên trái chỗ đó mẫu âm, nên phần thừa âm, nhánh trái nằm dưới đường."
+        },
+        {
+          "show": "M' và H' trượt sang trái, đoạn co dần",
+          "text": "",
+          "speak": "Đi mãi sang trái cũng sát dần, dù định nghĩa chỉ cần một phía là đủ."
+        }
+      ]
+    },
+    {
+      "id": "b11",
+      "scene": 2,
+      "section": "TRONG ĐỀ THI",
+      "keyword": "Bước 1: hệ số góc",
+      "visual": "Giữ CẢNH 2: cả hai nhánh, tiệm cận xiên (màu nhấn), tiệm cận đứng (màu bẫy nét đứt), đường $y = x$ màu bẫy nhạt. BƯỚC KHÓ — chuyển sang đề thi: không có hình để đo, phải tính. Thẻ định nghĩa gỡ; thẻ công thức hàm thu nhỏ. Vùng trống trên trái thành cột 'đề bài' gồm từng hàng, giữ sang b12. Dòng 2: hàng công thức $a$. Dòng 3: cạnh đường tiệm cận ở mép phải, chú thích phép chia độ cao cho $x$ (cụm $\\dfrac{b}{x}$ mờ dần). Dòng 4: hàng phép thay dưới công thức $a$, số '+ 1' mờ đi. Dòng 5: đường $y = x$ sáng lại, mũi tên nhỏ chỉ hai đường song song.",
+      "lines": [
+        {
+          "show": "cột đề bài hiện ở vùng trên trái",
+          "at": "cột đề bài",
+          "text": "Tìm tiệm cận xiên của $y = \\dfrac{x^2}{x + 1}$",
+          "speak": "Đề thi thường hỏi thẳng: tìm tiệm cận xiên của đồ thị này."
+        },
+        {
+          "show": "hàng công thức a hiện dưới đề bài",
+          "at": "cột đề bài, hàng 2",
+          "text": "$a = \\lim\\limits_{x \\to +\\infty} \\dfrac{f(x)}{x}$",
+          "speak": "Không có hình để đo, sách cho hai bước, bước một tìm hệ số góc."
+        },
+        {
+          "show": "chú thích phép chia độ cao cho x hiện cạnh đường tiệm cận, phần b chia x mờ dần",
+          "at": "cạnh đường tiệm cận, mép phải",
+          "text": "$\\dfrac{ax + b}{x} = a + \\dfrac{b}{x} \\to a$",
+          "speak": "Đi thật xa, chia độ cao cho x thì phần cộng thêm biến mất, còn hệ số góc.",
+          "caption": "Đi thật xa, chia độ cao cho x thì phần cộng thêm biến mất, còn hệ số góc."
+        },
+        {
+          "show": "hàng phép thay hiện dưới công thức a, số cộng 1 mờ đi",
+          "at": "cột đề bài, hàng 3",
+          "text": "$\\dfrac{f(x)}{x} = \\dfrac{x}{x + 1} \\to 1$",
+          "speak": "Ở đây thương ấy dồn về một số, nên mẹo bỏ số cộng dùng đúng chỗ, ra một."
+        },
+        {
+          "show": "đường y = x sáng lại, song song với tiệm cận",
+          "text": "",
+          "speak": "Hệ số góc chỉ cho hướng, mà đường y bằng x cũng có hướng ấy.",
+          "caption": "Hệ số góc chỉ cho hướng, mà đường y = x cũng có hướng ấy."
+        }
+      ]
+    },
+    {
+      "id": "b12",
+      "scene": 2,
+      "section": "TRONG ĐỀ THI",
+      "keyword": "Bước 2: độ cao",
+      "visual": "Giữ CẢNH 2 và cột đề bài của b11 (hàng $a$ thu gọn còn '$a = 1$'). Dòng 1: hàng công thức $b$. Dòng 2: hàng phép quy đồng dưới công thức $b$. Dòng 3: trên hình, đoạn hụt giữa đồ thị và đường $y = x$ ở mép phải (dài khoảng 0,9, đang dồn về 1) sáng màu nhấn; nhãn kết quả ghi trong cột đề bài, mũi tên nhỏ nối sang đoạn. Dòng 4: nhãn '$y = x$' đổi thành '$y = x$: sai', dấu ✗ nhỏ ở đầu trên đường $y = x$. Dòng 5: thẻ công thức hàm dạng tách (b09) sáng lại.",
+      "lines": [
+        {
+          "show": "hàng công thức b hiện",
+          "at": "cột đề bài, hàng 4",
+          "text": "$b = \\lim\\limits_{x \\to +\\infty} \\left[f(x) - ax\\right]$",
+          "speak": "Bước hai tìm độ cao, lấy hàm số trừ đi hệ số góc nhân x.",
+          "caption": "Bước hai tìm độ cao, lấy hàm số trừ đi hệ số góc nhân x."
+        },
+        {
+          "show": "hàng phép quy đồng hiện dưới công thức b",
+          "at": "cột đề bài, hàng 5",
+          "text": "$\\dfrac{x^2}{x + 1} - x = \\dfrac{-x}{x + 1}$",
+          "speak": "Quy đồng, hiệu này thành âm x chia cho x cộng một.",
+          "caption": "Quy đồng, hiệu này thành −x chia cho x + 1."
+        },
+        {
+          "show": "đoạn hụt giữa đồ thị và đường y = x ở mép phải sáng",
+          "at": "cột đề bài, hàng 6",
+          "text": "$b = -1$",
+          "speak": "Lại dồn về một số, ra âm một, đúng bằng khoảng hụt đã đo."
+        },
+        {
+          "show": "nhãn đường y = x đổi thành 'sai', dấu ✗ ở đầu đường",
+          "at": "đầu trên đường y = x",
+          "text": "$y = x$: sai",
+          "speak": "Chỉ tìm hệ số góc rồi viết y bằng x là đúng hướng, sai độ cao.",
+          "caption": "Chỉ tìm hệ số góc rồi viết y = x là đúng hướng, sai độ cao."
+        },
+        {
+          "show": "thẻ công thức hàm dạng tách sáng lại",
+          "text": "",
+          "speak": "Với phân thức, chia tử cho mẫu như vừa làm còn nhanh hơn."
+        }
+      ]
+    },
+    {
+      "id": "b13",
+      "scene": 1,
+      "section": "GIẢI ĐÁP",
+      "keyword": "Đúng hướng, đúng cả độ cao",
+      "visual": "Quay lại CẢNH 1 (cùng component, bố cục b01): hệ trục nhìn xa 0–1200, thẻ $f(x) = \\dfrac{x^2}{x + 1}$, đồ thị, đường $y = x$ màu bẫy, đường $y = x - 1$ màu nhấn với nhãn 'tiệm cận xiên'; kính lúp tại $x = 1000$, trong ô thấy cả ba: đường $y = x$ ở trên, đồ thị gần như dính đường $y = x - 1$ ở dưới. Dòng 1: phép rút gọn của mẹo ($\\approx \\dfrac{x^2}{x} = x$) hiện lại cạnh thẻ, đường $y = x$ sáng. Dòng 2: trong ô, đoạn đo tới $y = x$ sáng màu bẫy. Dòng 3: đoạn đo tới $y = x - 1$ sáng màu nhấn. Dòng 4: nhãn 'tiệm cận xiên' nháy. Dòng 5: giữ nguyên, câu chốt hiện.",
+      "lines": [
+        {
+          "show": "phép rút gọn của mẹo hiện lại cạnh thẻ, đường y = x sáng",
+          "text": "",
+          "speak": "Quay lại câu hỏi đầu, mẹo bỏ số cộng chỉ giữ được hướng của đường thẳng."
+        },
+        {
+          "show": "trong ô, đoạn đo tới đường y = x sáng",
+          "at": "đoạn đo tới y = x trong ô phóng",
+          "text": "$0{,}999$",
+          "speak": "Tại một nghìn, đồ thị vẫn cách đường y bằng x chừng một.",
+          "caption": "Tại 1000, đồ thị vẫn cách đường y = x chừng 1."
+        },
+        {
+          "show": "trong ô, đoạn đo tới tiệm cận xiên sáng",
+          "at": "đoạn đo tới y = x − 1 trong ô phóng",
+          "text": "$0{,}001$",
+          "speak": "Còn tới tiệm cận xiên, chỉ cách một phần nghìn."
+        },
+        {
+          "show": "nhãn 'tiệm cận xiên' nháy",
+          "text": "",
+          "speak": "Số một ở mẫu đã kéo đồ thị xuống đúng một đơn vị, đi xa mấy cũng vậy."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Vậy... tiệm cận xiên phải đúng cả hướng lẫn độ cao."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,508 @@
+{
+  "slug": "toi-uu-lon-nhom",
+  "title": "Lon nhôm nên cao bao nhiêu?",
+  "subject": "toan",
+  "lop": 12,
+  "chuong": "Chương I. Ứng dụng đạo hàm để khảo sát và vẽ đồ thị của hàm số",
+  "bai": "Bài 5. Ứng dụng đạo hàm để giải quyết một số vấn đề liên quan đến thực tiễn",
+  "exams": [
+    "THPTQG",
+    "TSA",
+    "HSA"
+  ],
+  "beats": [
+    {
+      "id": "b01",
+      "scene": 1,
+      "section": "HIỆN TƯỢNG",
+      "keyword": "Dáng nào tốn ít nhôm nhất?",
+      "visual": "CẢNH 1 — Sân khấu lon nhôm. Giữa khung: một lon nước ngọt vẽ phẳng kiểu sơ đồ (hình trụ nhìn nghiêng hơi từ trên, thân màu nhôm, nắp và đáy là hai elip), tỉ lệ cao ≈ 1,9 lần bề ngang. Chưa có vạch kích thước. Bên phải khung trống (dành cho công thức các beat sau). Không ghi số đo lon thật trên hình.",
+      "lines": [
+        {
+          "show": "vạch chiều cao (bên phải lon) và vạch bề ngang (dưới lon) hiện lên",
+          "at": "vạch chiều cao",
+          "text": "cao ≈ 2 × bề ngang",
+          "speak": "Lon nước ngọt nào cũng có dáng cao gầy, cao gần gấp đôi bề ngang."
+        },
+        {
+          "show": "nhãn 330 ml hiện trên thân lon",
+          "at": "thân lon",
+          "text": "330 ml",
+          "speak": "Mỗi lon chứa ba trăm ba mươi mi-li-lít, vỏ làm bằng nhôm."
+        },
+        {
+          "show": "hai lon cùng 330 ml hiện mờ hai bên: bên trái một lon gầy cao, bên phải một lon thấp béo",
+          "text": "",
+          "speak": "Cùng lượng nước đó, vẫn làm được lon gầy hơn hoặc béo hơn."
+        },
+        {
+          "show": "ba lon sáng lần lượt từ trái sang phải",
+          "text": "",
+          "speak": "Vậy lon phải cao bao nhiêu, rộng bao nhiêu... thì tốn ít nhôm nhất?"
+        }
+      ]
+    },
+    {
+      "id": "b02",
+      "scene": 1,
+      "section": "GỐC RỄ",
+      "keyword": "Giữ 330 ml, chỉ đổi dáng",
+      "visual": "Giữ CẢNH 1. Hai lon mờ hai bên đã tắt khi beat bắt đầu; lon gốc ở giữa, nhãn 330 ml trên thân, hai vạch kích thước còn (bỏ chữ 'cao ≈ 2 × bề ngang'). Bên trong lon vẽ mực nước đầy (màu nước nhạt).",
+      "lines": [
+        {
+          "show": "lon co đều lại còn khoảng một nửa kích thước",
+          "text": "",
+          "speak": "Muốn tốn ít nhôm, cách nghĩ đầu tiên là thu nhỏ lon lại."
+        },
+        {
+          "show": "phần nước 330 ml tràn ra ngoài lon nhỏ, tô màu cảnh báo",
+          "at": "phần nước thừa ra",
+          "text": "không đủ 330 ml",
+          "speak": "Nhưng lon nhỏ thì không còn chứa đủ ba trăm ba mươi mi-li-lít."
+        },
+        {
+          "show": "lon nở về cỡ cũ, nhãn 330 ml đổi sang khung cố định có biểu tượng khoá",
+          "text": "",
+          "speak": "Nên lượng nước phải giữ nguyên, chỉ được đổi dáng lon."
+        }
+      ]
+    },
+    {
+      "id": "b03",
+      "scene": 1,
+      "section": "TRỰC GIÁC",
+      "keyword": "Ở giữa có dáng tốt nhất",
+      "visual": "Giữ CẢNH 1. Lon là nhân vật do bán kính điều khiển: bán kính r (cm), chiều cao tự tính h = 330/(πr²) để luôn giữ 330 ml. Từ beat này dùng hai màu vai trò cho cả video: màu nắp-đáy (nắp + đáy) và màu thân. Lon đặt chân trên một đường nền cố định; cả cảnh dùng một tỉ lệ cm → px vừa cho lon cao 26 cm và lon rộng 14 cm.",
+      "lines": [
+        {
+          "show": "lon kéo gầy dần tới bán kính 2 cm, chiều cao vươn lên 26 cm",
+          "at": "lon gầy",
+          "text": "$r = 2$ cm → cao ≈ 26 cm",
+          "speak": "Kéo lon thật gầy, bán kính chỉ còn hai xăng-ti-mét, lon cao tới hai mươi sáu."
+        },
+        {
+          "show": "thân lon sáng màu thân",
+          "text": "",
+          "speak": "Nắp và đáy nhỏ đi, nhưng thân lon dài ra rất nhiều."
+        },
+        {
+          "show": "lon dãn béo tới bán kính 7 cm, chiều cao hạ còn 2,1 cm",
+          "at": "lon béo",
+          "text": "$r = 7$ cm → cao ≈ 2,1 cm",
+          "speak": "Ngược lại, kéo lon béo ra như cái đĩa, bán kính bảy xăng-ti-mét."
+        },
+        {
+          "show": "nắp và đáy sáng màu nắp-đáy",
+          "text": "",
+          "speak": "Thân thấp đi, nhưng nắp và đáy lại to ra rất nhiều."
+        },
+        {
+          "show": "lon trở về dáng ban đầu, thân và nắp-đáy giữ hai màu",
+          "text": "",
+          "speak": "Gầy quá thì tốn ở thân, béo quá thì tốn ở nắp và đáy."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Nên ở khoảng giữa phải có một dáng tốn ít nhôm nhất."
+        }
+      ]
+    },
+    {
+      "id": "b04",
+      "scene": 1,
+      "section": "CÔNG THỨC",
+      "keyword": "$S = 2\\pi r^2 + 2\\pi r h$",
+      "visual": "Giữ CẢNH 1. BƯỚC KHÓ (đổi sang mô hình). Lon ở dáng ban đầu, dời sang nửa trái; nửa phải trống cho công thức (khung công thức ở trên phải). Nhãn 'mô hình' ở dòng 1 giữ tới hết cảnh 1. Thân và nắp-đáy giữ hai màu vai trò.",
+      "lines": [
+        {
+          "show": "nhãn 'mô hình' hiện cạnh lon",
+          "at": "lon",
+          "text": "mô hình: vỏ dày đều",
+          "speak": "Để tính được, coi vỏ lon dày đều khắp nơi."
+        },
+        {
+          "show": "toàn bộ vỏ lon tô nhạt một lớp",
+          "at": "vỏ lon",
+          "text": "ít nhôm ⇔ diện tích vỏ $S$ nhỏ",
+          "speak": "Khi đó, tốn ít nhôm nghĩa là diện tích vỏ nhỏ."
+        },
+        {
+          "show": "vạch bán kính đáy và vạch chiều cao hiện ký hiệu r, h",
+          "at": "vạch bán kính và chiều cao",
+          "text": "$r$, $h$ tính bằng cm",
+          "speak": "Gọi bán kính đáy và chiều cao của lon, tính bằng xăng-ti-mét."
+        },
+        {
+          "show": "nắp và đáy sáng màu nắp-đáy",
+          "at": "nắp và đáy",
+          "text": "$2\\pi r^2$",
+          "speak": "Nắp và đáy là hai hình tròn, diện tích hai pi nhân bình phương bán kính.",
+          "caption": "Nắp và đáy là hai hình tròn, diện tích 2πr²."
+        },
+        {
+          "show": "thân sáng màu thân",
+          "at": "thân lon",
+          "text": "$2\\pi r h$",
+          "speak": "Thân lon là chu vi đáy nhân chiều cao, tức hai pi nhân bán kính nhân chiều cao.",
+          "caption": "Thân lon là chu vi đáy nhân chiều cao, tức 2πrh."
+        },
+        {
+          "show": "hai cụm $2\\pi r^2$ và $2\\pi r h$ chuyển sang khung công thức bên phải, nối bằng dấu cộng",
+          "text": "",
+          "speak": "Cộng hai phần lại, được diện tích vỏ lon."
+        }
+      ]
+    },
+    {
+      "id": "b05",
+      "scene": 1,
+      "section": "BẢN CHẤT",
+      "keyword": "$h$ bị buộc theo $r$",
+      "lineGap": 0.5,
+      "visual": "Giữ CẢNH 1. BƯỚC KHÓ (ràng buộc buộc hai ẩn vào nhau). Lon bên trái (nhãn mô hình), khung phải trên: $S = 2\\pi r^2 + 2\\pi r h$. Lon vẫn do bán kính điều khiển, chiều cao tự tính để giữ 330 ml.",
+      "lines": [
+        {
+          "show": "chữ r và h trong công thức S sáng lên",
+          "text": "",
+          "speak": "Công thức này có hai thứ thay đổi, bán kính và chiều cao."
+        },
+        {
+          "show": "dưới công thức S hiện công thức thể tích",
+          "at": "khung phải, dưới công thức S",
+          "text": "$V = \\pi r^2 h = 330$",
+          "speak": "Nhưng hai thứ đó không tự do, vì thể tích phải đúng ba trăm ba mươi.",
+          "caption": "Nhưng hai thứ đó không tự do, vì thể tích V = πr²h phải đúng 330."
+        },
+        {
+          "show": "chú thích nhỏ hiện cạnh số 330",
+          "at": "số 330 trong công thức V",
+          "text": "330 ml = 330 cm³",
+          "speak": "Ba trăm ba mươi mi-li-lít chính là ba trăm ba mươi xăng-ti-mét khối."
+        },
+        {
+          "show": "lon đổi bán kính về 3 cm, chiều cao tự kéo lên 11,7 cm",
+          "at": "lon",
+          "text": "$r = 3$ ⇒ $h \\approx 11{,}7$",
+          "speak": "Chọn bán kính ba xăng-ti-mét, tính từ thể tích thì chiều cao buộc phải là mười một phẩy bảy."
+        },
+        {
+          "show": "lon đổi bán kính thành 4 cm, chiều cao tự hạ còn 6,6 cm (nhãn cũ thay bằng nhãn mới)",
+          "at": "lon",
+          "text": "$r = 4$ ⇒ $h \\approx 6{,}6$",
+          "speak": "Chọn bán kính bốn, chiều cao chỉ còn sáu phẩy sáu."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Tức là... chọn bán kính xong, chiều cao không còn được chọn nữa."
+        }
+      ]
+    },
+    {
+      "id": "b06",
+      "scene": 1,
+      "section": "BẢN CHẤT",
+      "keyword": "Hai ẩn thành một hàm số",
+      "lineGap": 0.5,
+      "visual": "Giữ CẢNH 1. BƯỚC KHÓ (thay vào, còn một biến). Lon bên trái ở bán kính 4. Khung phải: dòng trên $S = 2\\pi r^2 + 2\\pi r h$, dòng dưới $V = \\pi r^2 h = 330$ (chú thích 330 ml = 330 cm³ đã mờ).",
+      "lines": [
+        {
+          "show": "công thức V biến đổi tại chỗ, tách chiều cao ra một vế",
+          "at": "khung phải, chỗ công thức V",
+          "text": "$h = \\dfrac{330}{\\pi r^2}$",
+          "speak": "Từ thể tích, chiều cao bằng ba trăm ba mươi chia cho pi nhân bình phương bán kính.",
+          "caption": "Từ thể tích, chiều cao h = 330 / (πr²)."
+        },
+        {
+          "show": "chữ h trong công thức S sáng cùng màu với h vừa tách",
+          "text": "",
+          "speak": "Đem chiều cao này thay vào công thức diện tích."
+        },
+        {
+          "show": "cụm thân $2\\pi r h$ viết lại thành $2\\pi r \\cdot \frac{330}{\\pi r^2}$",
+          "at": "cụm thân trong công thức S",
+          "text": "$2\\pi r \\cdot \\dfrac{330}{\\pi r^2}$",
+          "speak": "Phần thân thành hai pi nhân bán kính, nhân với phân số đó.",
+          "caption": "Phần thân thành 2πr nhân 330 / (πr²)."
+        },
+        {
+          "show": "hai chữ π gạch chéo, một chữ r trên tử gạch cùng một r dưới mẫu",
+          "at": "phân số ở cụm thân",
+          "text": "$\\pi$ và một $r$ triệt tiêu",
+          "speak": "Pi trên tử và pi dưới mẫu triệt nhau, bán kính cũng bớt đi một lần."
+        },
+        {
+          "show": "cụm thân gọn lại thành $\frac{660}{r}$",
+          "at": "cụm thân trong công thức S",
+          "text": "$2 \\cdot 330 = 660$ ⇒ $\\dfrac{660}{r}$",
+          "speak": "Còn lại hai nhân ba trăm ba mươi, là sáu trăm sáu mươi chia cho bán kính.",
+          "caption": "Còn lại 2 · 330 = 660, chia cho r."
+        },
+        {
+          "show": "công thức S viết lại, chỉ còn chữ r",
+          "at": "khung phải, thay công thức S",
+          "text": "$S(r) = 2\\pi r^2 + \\dfrac{660}{r}$",
+          "speak": "Giờ diện tích chỉ còn phụ thuộc một thứ, là bán kính."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Bài toán hai ẩn đã thành một hàm số một biến."
+        }
+      ]
+    },
+    {
+      "id": "b07",
+      "scene": 2,
+      "section": "TRỰC GIÁC",
+      "keyword": "Có một chỗ thấp nhất",
+      "visual": "CẢNH 2 — Đồ thị. Trái ~60%: hệ trục, trục ngang 'bán kính $r$ (cm)' từ 0 đến 9, vạch 1…9; trục dọc 'diện tích vỏ $S$ (cm²)' từ 0 đến 600, vạch 100…600. Góc trên phải: $S(r) = 2\\pi r^2 + \\frac{660}{r}$ (mang từ cảnh 1). Dưới phải: lon nhỏ do bán kính điều khiển (cao = 330/(πr²)), cùng hai màu thân / nắp-đáy, đang ở bán kính 4. Chưa có đường cong. Đường cong vẽ từ r = 1,15 (S ≈ 582) tới r = 9 (S ≈ 582).",
+      "lines": [
+        {
+          "show": "đường cong S(r) vẽ dần từ trái sang phải",
+          "text": "",
+          "speak": "Vẽ hàm này lên đồ thị, trục ngang là bán kính, trục dọc là diện tích vỏ."
+        },
+        {
+          "show": "điểm (2; 355) sáng trên đường cong, lon bên phải đổi thành dáng gầy bán kính 2",
+          "at": "điểm r = 2 trên đường cong",
+          "text": "$S \\approx 355$",
+          "speak": "Lon gầy bán kính hai ở đây, diện tích khoảng ba trăm năm mươi lăm."
+        },
+        {
+          "show": "điểm (7; 402) sáng trên đường cong, lon bên phải đổi thành dáng béo bán kính 7",
+          "at": "điểm r = 7 trên đường cong",
+          "text": "$S \\approx 402$",
+          "speak": "Lon béo bán kính bảy ở đây, diện tích khoảng bốn trăm linh hai."
+        },
+        {
+          "show": "đường $y = 2\\pi r^2$ màu nắp-đáy vẽ mờ, đi lên",
+          "at": "đường nắp-đáy, gần r = 6",
+          "text": "nắp + đáy",
+          "speak": "Phần nắp và đáy tăng dần khi lon béo ra."
+        },
+        {
+          "show": "đường $y = \\frac{660}{r}$ màu thân vẽ mờ, đi xuống",
+          "at": "đường thân, gần r = 2,5",
+          "text": "thân",
+          "speak": "Phần thân thì giảm dần khi lon béo ra."
+        },
+        {
+          "show": "đường S sáng đậm, chỗ trũng quanh r ≈ 3,7 sáng nhẹ",
+          "text": "",
+          "speak": "Cộng hai phần lại, đồ thị đi xuống rồi đi lên, có một chỗ thấp nhất."
+        }
+      ]
+    },
+    {
+      "id": "b08",
+      "scene": 2,
+      "section": "BẢN CHẤT",
+      "keyword": "Thấp nhất tại $r \\approx 3{,}74$ cm",
+      "visual": "Giữ CẢNH 2. Hai đường thành phần và hai nhãn 'nắp + đáy', 'thân' mờ đi khi beat bắt đầu; hai điểm r = 2, r = 7 mờ, nhãn S ≈ 355, S ≈ 402 gỡ. Giữ đường S và công thức S(r) góc trên phải.",
+      "lines": [
+        {
+          "show": "dưới công thức S(r) hiện mốc bài trước",
+          "at": "khung phải, dưới S(r)",
+          "text": "thấp nhất ở bên trong ⇒ $S' = 0$",
+          "speak": "Bài trước đã chỉ ra, chỗ thấp nhất nằm bên trong thì đạo hàm bằng không."
+        },
+        {
+          "show": "hai đầu đường cong sáng: gần r = 0 và phía r lớn, đều vọt lên",
+          "at": "trục ngang",
+          "text": "$r > 0$",
+          "speak": "Bán kính dần về không hay rất lớn thì đồ thị đều vọt lên, nên đáy nằm bên trong."
+        },
+        {
+          "show": "dưới mốc bài trước hiện công thức đạo hàm",
+          "at": "khung phải, dưới mốc bài trước",
+          "text": "$S'(r) = 4\\pi r - \\dfrac{660}{r^2}$",
+          "speak": "Tính ra, đạo hàm là bốn pi nhân bán kính, trừ sáu trăm sáu mươi chia bình phương bán kính.",
+          "caption": "Tính ra, đạo hàm S'(r) = 4πr − 660 / r²."
+        },
+        {
+          "show": "dưới công thức đạo hàm hiện phương trình",
+          "at": "dưới công thức S'",
+          "text": "$4\\pi r = \\dfrac{660}{r^2}$ ⇒ $r^3 = \\dfrac{165}{\\pi}$",
+          "speak": "Cho đạo hàm bằng không, chuyển vế được lập phương bán kính bằng một trăm sáu mươi lăm chia pi.",
+          "caption": "Cho đạo hàm bằng 0: r³ = 165 / π."
+        },
+        {
+          "show": "tiếp tuyến nằm ngang hiện tại đáy, chân đáy chiếu xuống trục ngang bằng nét đứt",
+          "at": "chân đáy trên trục ngang",
+          "text": "$r \\approx 3{,}74$",
+          "speak": "Lấy căn bậc ba, bán kính khoảng ba phẩy bảy bốn, đúng chỗ đáy trên hình."
+        },
+        {
+          "show": "đường cong bên trái đáy tô màu hạ, bên phải đáy tô màu leo",
+          "text": "",
+          "speak": "Trước đó đạo hàm âm, sau đó dương, nên đây đúng là chỗ thấp nhất."
+        }
+      ]
+    },
+    {
+      "id": "b09",
+      "scene": 2,
+      "section": "BẢN CHẤT",
+      "keyword": "Tốt nhất: cao bằng bề ngang",
+      "visual": "Giữ CẢNH 2. Đáy đồ thị đã đánh dấu (r ≈ 3,74, S ≈ 264), tiếp tuyến ngang mờ đi. Lon nhỏ dưới phải phóng to lên (cùng tỉ lệ), có vạch chiều cao bên phải lon và vạch bề ngang dưới lon.",
+      "lines": [
+        {
+          "show": "lon bên phải đổi về bán kính 3,74",
+          "at": "vạch chiều cao lon",
+          "text": "$h = \\dfrac{330}{\\pi \\cdot 3{,}74^2} \\approx 7{,}5$",
+          "speak": "Thay vào công thức chiều cao, lon cao khoảng bảy phẩy năm xăng-ti-mét.",
+          "caption": "Thay vào h = 330 / (πr²), lon cao khoảng 7,5 cm."
+        },
+        {
+          "show": "vạch bề ngang dưới lon sáng, dài bằng vạch chiều cao",
+          "at": "vạch bề ngang lon",
+          "text": "ngang ≈ 7,5 cm",
+          "speak": "Bề ngang gấp đôi bán kính, cũng khoảng bảy phẩy năm."
+        },
+        {
+          "show": "khung vuông nét đứt bao quanh hình lon",
+          "text": "$h = 2r$",
+          "speak": "Nhìn ngang, lon tốt nhất vuông vức, cao đúng bằng bề ngang.",
+          "at": "dưới lon"
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Vậy chiều cao bằng hai lần bán kính."
+        }
+      ]
+    },
+    {
+      "id": "b10",
+      "scene": 2,
+      "section": "BẢN CHẤT",
+      "keyword": "Mấu chốt: đưa về một biến",
+      "visual": "Giữ CẢNH 2. Lon nhỏ thu về góc dưới phải. Khung phải hiện lại thành cột bốn dòng công thức đã có: $S = 2\\pi r^2 + 2\\pi r h$ · $h = \\frac{330}{\\pi r^2}$ · $r > 0$ · $S' = 0 \\Rightarrow r \\approx 3{,}74$ (các dòng mờ, chờ sáng). Mỗi dòng của beat: một số thứ tự sáng cạnh dòng công thức tương ứng.",
+      "lines": [
+        {
+          "show": "cột bốn dòng công thức hiện rõ",
+          "text": "",
+          "speak": "Nhìn lại, bài lon nhôm đã đi đúng bốn bước."
+        },
+        {
+          "show": "dòng công thức S sáng, số 1 hiện cạnh",
+          "at": "dòng công thức S",
+          "text": "1. thứ cần nhỏ nhất",
+          "speak": "Một, viết công thức cho thứ cần nhỏ nhất, ở đây là diện tích vỏ."
+        },
+        {
+          "show": "dòng $h = \\frac{330}{\\pi r^2}$ sáng, số 2 hiện cạnh",
+          "at": "dòng công thức h",
+          "text": "2. điều kiện cố định ⇒ một biến",
+          "speak": "Hai, dùng điều kiện cố định để đưa về một biến."
+        },
+        {
+          "show": "dòng $r > 0$ sáng cùng phần trục r > 0, số 3 hiện cạnh",
+          "at": "dòng r > 0",
+          "text": "3. biến chạy trong khoảng nào",
+          "speak": "Ba, xác định biến chạy trong khoảng nào."
+        },
+        {
+          "show": "dòng $S' = 0$ sáng cùng đáy đồ thị, số 4 hiện cạnh",
+          "at": "dòng S' = 0",
+          "text": "4. đạo hàm tìm nhỏ nhất",
+          "speak": "Bốn, tìm giá trị nhỏ nhất bằng đạo hàm, như bài trước."
+        },
+        {
+          "show": "bước 2 sáng đậm, ba bước còn lại mờ",
+          "text": "",
+          "speak": "Bước hai là chìa khoá, có một biến thì mới tìm được đáy."
+        }
+      ]
+    },
+    {
+      "id": "b11",
+      "scene": 3,
+      "section": "TRONG ĐỀ THI",
+      "keyword": "Cùng bốn bước, khác đáp số",
+      "visual": "CẢNH 3 — So sánh. Trái: lon tốt nhất từ cảnh 2 (r ≈ 3,74, cao ≈ 7,5, có nắp), nhãn nhỏ 'lon có nắp', có vạch bán kính và vạch chiều cao (chiều cao dài gấp đôi bán kính). Phải: chỗ trống cho cốc. Hai hình cùng tỉ lệ cm, chân thẳng hàng trên một đường nền. Dưới hai hình: vùng công thức. BƯỚC KHÓ (đổi bài): bỏ nắp → công thức bước một đổi.",
+      "lines": [
+        {
+          "show": "cốc hình trụ không nắp hiện bên phải, miệng để hở",
+          "at": "cốc",
+          "text": "không nắp, 330 ml",
+          "speak": "Đề thi hay đổi lon thành cốc hình trụ không nắp, vẫn ba trăm ba mươi mi-li-lít."
+        },
+        {
+          "show": "đáy cốc sáng màu nắp-đáy, thân cốc sáng màu thân",
+          "at": "dưới cốc",
+          "text": "$S = \\pi r^2 + 2\\pi r h$",
+          "speak": "Bước một, vỏ chỉ còn một đáy và phần thân.",
+          "caption": "Bước một, vỏ chỉ còn một đáy và phần thân: S = πr² + 2πrh."
+        },
+        {
+          "show": "cụm $2\\pi r h$ đổi thành $\\frac{660}{r}$ như ở lon",
+          "at": "dưới cốc, thay công thức cũ",
+          "text": "$S(r) = \\pi r^2 + \\dfrac{660}{r}$",
+          "speak": "Bước hai, thể tích vẫn buộc chiều cao, thay vào như lúc nãy."
+        },
+        {
+          "show": "cạnh công thức hiện khoảng của biến",
+          "at": "cạnh công thức S(r) của cốc",
+          "text": "$r > 0$",
+          "speak": "Bước ba, bán kính vẫn chỉ cần lớn hơn không."
+        },
+        {
+          "show": "cốc co giãn về bán kính 4,72",
+          "at": "vạch bán kính cốc",
+          "text": "$S' = 0$ ⇒ $r \\approx 4{,}72$",
+          "speak": "Bước bốn, cho đạo hàm bằng không, được bán kính khoảng bốn phẩy bảy hai."
+        },
+        {
+          "show": "vạch chiều cao cốc sáng, dài bằng vạch bán kính cốc",
+          "at": "vạch chiều cao cốc",
+          "text": "$h = r$",
+          "speak": "Lần này chiều cao chỉ bằng bán kính, cốc thấp hơn hẳn lon."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Cùng bốn bước, chỉ khác công thức ở bước một."
+        }
+      ]
+    },
+    {
+      "id": "b12",
+      "scene": 3,
+      "section": "GIẢI ĐÁP",
+      "keyword": "Đưa về một biến, tìm đáy",
+      "visual": "Giữ CẢNH 3. Cốc và các công thức mờ đi. Trái: lon tốt nhất (vuông vức). Phải: lon thật của beat mở đầu hiện lại (cao gần gấp đôi bề ngang, nhãn 330 ml), cùng đường nền.",
+      "lines": [
+        {
+          "show": "lon tốt nhất và lon thật sáng cạnh nhau",
+          "text": "",
+          "speak": "Quay lại câu hỏi đầu, lon ba trăm ba mươi mi-li-lít nên có dáng nào."
+        },
+        {
+          "show": "vạch cao và vạch ngang của lon tốt nhất sáng, dài bằng nhau",
+          "at": "lon tốt nhất",
+          "text": "cao = ngang ≈ 7,5 cm",
+          "speak": "Nếu vỏ dày đều, lon tốn ít nhôm nhất cao bằng bề ngang, khoảng bảy phẩy năm xăng-ti-mét."
+        },
+        {
+          "show": "nắp và đáy lon thật vẽ dày lên, tô đậm màu nắp-đáy",
+          "at": "nắp lon thật",
+          "text": "nắp, đáy dày hơn thân",
+          "speak": "Một lý do lon thật cao hơn, là nắp và đáy làm dày hơn thân để đủ cứng."
+        },
+        {
+          "show": "mũi tên từ lon vuông vức chỉ sang lon thật",
+          "text": "",
+          "speak": "Nắp đáy tốn nhôm hơn thì nên làm nắp nhỏ lại, nên lon tốt nhất gầy hơn."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Vậy bài tối ưu nào cũng thế, đưa về một biến, rồi tìm đáy."
+        }
+      ]
+    }
+  ]
+}

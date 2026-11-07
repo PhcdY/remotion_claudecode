@@ -1,0 +1,367 @@
+{
+  "slug": "bieu-thuc-toa-do-phep-toan-vecto",
+  "title": "Máy bay tính quỹ đạo trong gió chỉ bằng 3 phép cộng: Vì sao?",
+  "subject": "toan",
+  "lop": 12,
+  "chuong": "Chương II. Vectơ và hệ trục tọa độ trong không gian",
+  "bai": "Bài 8. Biểu thức tọa độ của các phép toán vectơ",
+  "exams": [
+    "THPTQG",
+    "TSA",
+    "HSA"
+  ],
+  "beats": [
+    {
+      "id": "b01",
+      "scene": 1,
+      "section": "HIỆN TƯỢNG",
+      "keyword": "3 phép cộng chớp nhoáng",
+      "visual": "CẢNH 1 — Màn hình định vị không gian 3D trên buồng lái với hệ trục định hướng mờ, máy bay đang bay thẳng theo trục dọc Ox. Mũi tên vận tốc động cơ màu xanh lơ v1 hướng thẳng. Bất ngờ luồng gió thổi chéo tạt vào với mũi tên gió v2 màu cam nhạt lệch 3 chiều. Máy tính buồng lái hiện bảng số tính toán tức thì.",
+      "lines": [
+        {
+          "show": "máy bay bay thẳng với mũi tên vận tốc động cơ v1 màu xanh",
+          "at": "mũi tên v1",
+          "text": "$\\vec{v}_1 = (800; 0; 0)$",
+          "speak": "Một chiếc máy bay đang bay đều với vận tốc tám trăm ki-lô-mét mỗi giờ.",
+          "caption": "Một chiếc máy bay đang bay đều với vận tốc 800 km/h."
+        },
+        {
+          "show": "mũi tên gió v2 màu cam tạt chéo vào thân máy bay",
+          "at": "mũi tên v2",
+          "text": "$\\vec{v}_2 = (-40; 60; 10)$",
+          "speak": "Bất ngờ gặp luồng gió mạnh thổi tạt chéo theo cả ba chiều không gian.",
+          "caption": "Bất ngờ gặp luồng gió mạnh thổi tạt chéo theo cả 3 chiều không gian."
+        },
+        {
+          "show": "bảng điện tử buồng lái nhấp nháy hiện kết quả vận tốc tổng",
+          "at": "bảng điện tử",
+          "text": "$\\vec{v} = (760; 60; 10)$",
+          "speak": "Chỉ trong một phần triệu giây, máy tính buồng lái đã tính xong vận tốc thực tế."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Không dùng thước đo góc hay compa, hệ thống chỉ thực hiện đúng ba phép cộng."
+        }
+      ]
+    },
+    {
+      "id": "b02",
+      "scene": 1,
+      "section": "CÂU HỎI",
+      "keyword": "Cộng hình bằng cộng số?",
+      "visual": "Giữ CẢNH 1. Mũi tên v1 và v2 được giữ nguyên vị trí, một khung nét đứt của hình bình hành trong không gian hiện mờ xung quanh, làm nổi bật sự phức tạp nếu phải vẽ hình trong không gian 3 chiều.",
+      "lines": [
+        {
+          "show": "khung hình bình hành không gian nét đứt hiện mờ nối hai mũi tên",
+          "at": "khung nét đứt",
+          "text": "quy tắc hình bình hành?",
+          "speak": "Về bản chất hình học, muốn cộng hai véc-tơ phải dựng quy tắc hình bình hành.",
+          "caption": "Về bản chất hình học, muốn cộng hai vectơ phải dựng quy tắc hình bình hành."
+        },
+        {
+          "show": "ba phép tính cộng số học đơn giản hiện sáng cạnh mũi tên",
+          "at": "ba phép cộng",
+          "text": "$800 + (-40) = 760$",
+          "speak": "Thế nhưng trong tọa độ, ta chỉ việc cộng từng con số tương ứng với nhau."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Vì sao hình học ba chiều lại biến thành các phép tính số học đơn giản?"
+        }
+      ]
+    },
+    {
+      "id": "b03",
+      "scene": 2,
+      "section": "TRỰC GIÁC",
+      "keyword": "3 bước đi độc lập",
+      "visual": "CẢNH 2 — HỆ TỤC TOẠ ĐỘ Oxyz. Trục Ox hướng ra phía trước bên trái, trục Oy hướng sang phải, trục Oz hướng thẳng đứng lên trên. Ba vectơ đơn vị i, j, k nằm trên ba trục với màu sắc tương ứng. Một vectơ u bất kỳ từ gốc O vươn vào không gian.",
+      "lines": [
+        {
+          "show": "hệ trục Oxyz hiện rõ với ba véc-tơ đơn vị i, di, ca",
+          "at": "gốc O",
+          "text": "$\\vec{i}, \\vec{j}, \\vec{k}$",
+          "speak": "Nhắc lại bài trước, không gian được xây dựng từ ba véc-tơ đơn vị đôi một vuông góc.",
+          "caption": "Nhắc lại bài trước, không gian được xây dựng từ 3 vectơ đơn vị đôi một vuông góc."
+        },
+        {
+          "show": "véc-tơ u xuất hiện cùng ba bước đi dọc theo ba trục",
+          "at": "véc-tơ u",
+          "text": "$\\vec{u} = x\\vec{i} + y\\vec{j} + z\\vec{k}$",
+          "speak": "Mỗi véc-tơ u là một hành trình ghép từ ba bước đi dọc theo ba trục.",
+          "caption": "Mỗi vectơ u là một hành trình ghép từ 3 bước đi dọc theo 3 trục."
+        },
+        {
+          "show": "ba đoạn đường đi dọc theo ba trục lần lượt sáng màu",
+          "at": "ba đoạn đường",
+          "text": "$(x; y; z)$",
+          "speak": "Ba hướng này hoàn toàn độc lập, bước trên trục này không ảnh hưởng tới hai trục kia."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Sự độc lập này chính là chìa khóa của mọi phép toán."
+        }
+      ]
+    },
+    {
+      "id": "b04",
+      "scene": 2,
+      "section": "BẢN CHẤT",
+      "keyword": "Cùng trục thì cộng dồn",
+      "visual": "Giữ CẢNH 2. Vectơ u màu xanh và vectơ v màu cam được nối đầu đuôi nhau trong không gian: gốc v gắn vào ngọn u. Dưới sàn và trên các trục, các bước đi thành phần của u và v chiếu xuống và nằm nối tiếp nhau trên cùng một trục.",
+      "lines": [
+        {
+          "show": "véc-tơ v màu cam nối tiếp vào ngọn của véc-tơ u",
+          "at": "ngọn véc-tơ u",
+          "text": "$\\vec{u} + \\vec{v}$",
+          "speak": "Muốn cộng hai véc-tơ u và vê, ta nối tiếp hai hành trình lại với nhau.",
+          "caption": "Muốn cộng hai vectơ u và v, ta nối tiếp hai hành trình lại với nhau."
+        },
+        {
+          "show": "hai đoạn x1 và x2 trên trục Ox nối tiếp nhau và sáng cùng màu",
+          "at": "trục Ox",
+          "text": "$(x_1 + x_2)\\vec{i}$",
+          "speak": "Trên trục hoành, ta đi quãng đường ích một rồi đi tiếp quãng đường ích hai.",
+          "caption": "Trên trục Ox, ta đi quãng đường x₁ rồi đi tiếp quãng đường x₂."
+        },
+        {
+          "show": "công thức véc-tơ tổng hiện to rõ ràng",
+          "at": "không gian",
+          "text": "$\\vec{u} + \\vec{v} = (x_1+x_2; y_1+y_2; z_1+z_2)$",
+          "speak": "Tương tự trên hai trục còn lại, các bước đi cùng phương được cộng dồn độc lập."
+        },
+        {
+          "show": "véc-tơ tổng hoàn chỉnh nối từ gốc u đến ngọn v",
+          "text": "",
+          "speak": "Véc-tơ tổng đơn giản là bộ ba con số cộng dồn theo từng trục tương ứng.",
+          "caption": "Vectơ tổng đơn giản là bộ ba con số cộng dồn theo từng trục tương ứng."
+        }
+      ]
+    },
+    {
+      "id": "b05",
+      "scene": 2,
+      "section": "BẢN CHẤT",
+      "keyword": "Trừ và nhân số k",
+      "visual": "Giữ CẢNH 2. Vectơ v đảo chiều thành -v để minh họa phép trừ. Sau đó một vectơ u được kéo giãn gấp đôi độ dài (k = 2) cùng các hình chiếu trên 3 trục dãn gấp đôi.",
+      "lines": [
+        {
+          "show": "véc-tơ v đảo ngược hướng thành trừ v",
+          "at": "véc-tơ v",
+          "text": "$\\vec{u} - \\vec{v} = \\vec{u} + (-\\vec{v})$",
+          "speak": "Phép trừ chính là cộng với véc-tơ đối, nên từng tọa độ chỉ việc trừ cho nhau.",
+          "caption": "Phép trừ chính là cộng với vectơ đối, nên từng tọa độ chỉ việc trừ cho nhau."
+        },
+        {
+          "show": "công thức phép trừ hiện ra cạnh véc-tơ",
+          "at": "không gian",
+          "text": "$\\vec{u} - \\vec{v} = (x_1-x_2; y_1-y_2; z_1-z_2)$",
+          "speak": "Hiệu của hai véc-tơ có tọa độ là hiệu của các tọa độ thành phần.",
+          "caption": "Hiệu của hai vectơ có tọa độ là hiệu của các tọa độ thành phần."
+        },
+        {
+          "show": "véc-tơ u dãn dài gấp đôi cùng ba đoạn chiếu trên ba trục dãn gấp đôi",
+          "at": "véc-tơ u",
+          "text": "$k\\vec{u} = (kx; ky; kz)$",
+          "speak": "Còn khi nhân với một số ca, toàn bộ hành trình co giãn ca lần trên mọi trục.",
+          "caption": "Còn khi nhân với một số k, toàn bộ hành trình co giãn k lần trên mọi trục."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Ba phép toán cộng, trừ và nhân với một số đều giữ nguyên tính chất theo từng trục."
+        }
+      ]
+    },
+    {
+      "id": "b06",
+      "scene": 2,
+      "section": "CÂU HỎI",
+      "keyword": "Tích vô hướng thế nào?",
+      "visual": "Giữ CẢNH 2. Hai vectơ u và v cùng xuất phát từ gốc O. Biểu thức tích vô hướng khai triển dưới dạng tích của hai tổng (x1 i + y1 j + z1 k) nhân với (x2 i + y2 j + z2 k) hiện ra với 9 mũi tên ghép cặp phân phối.",
+      "lines": [
+        {
+          "show": "biểu thức tích vô hướng dạng khai triển hiện lên với chín cặp ghép",
+          "at": "không gian",
+          "text": "$\\vec{u} \\cdot \\vec{v} = (x_1\\vec{i} + y_1\\vec{j} + z_1\\vec{k}) \\cdot (x_2\\vec{i} + y_2\\vec{j} + z_2\\vec{k})$",
+          "speak": "Nhưng phép nhân hai véc-tơ, tức là tích vô hướng, thì tính theo tọa độ ra sao?",
+          "caption": "Nhưng phép nhân hai vectơ, tức là tích vô hướng, thì tính theo tọa độ ra sao?"
+        },
+        {
+          "show": "các mũi tên nối chéo giữa các trục khác nhau nhấp nháy nghi vấn",
+          "at": "biểu thức",
+          "text": "có tích chéo $x_1 y_2$ không?",
+          "speak": "Khai triển phân phối có chín số hạng, liệu có xuất hiện các tích chéo hay không?",
+          "pauseAfter": 1.5
+        },
+        {
+          "show": "hai véc-tơ đơn vị i và di vuông góc trên mặt phẳng Oxy sáng lên",
+          "text": "",
+          "speak": "Hãy nhìn vào góc vuông giữa hai trục tọa độ."
+        }
+      ]
+    },
+    {
+      "id": "b07",
+      "scene": 2,
+      "section": "BẢN CHẤT",
+      "keyword": "Vuông góc triệt tiêu tích chéo",
+      "visual": "Giữ CẢNH 2. BƯỚC KHÓ: Trong 9 số hạng của biểu thức khai triển, 6 số hạng có tích của hai vectơ vuông góc (i.j, j.k, k.i) đổi sang màu đỏ mờ dần rồi tan biến thành số 0. Ba số hạng cùng trục (i.i, j.j, k.k) biến thành 1.",
+      "lines": [
+        {
+          "show": "sáu số hạng chéo chứa tích véc-tơ vuông góc biến thành số không",
+          "at": "biểu thức",
+          "text": "$\\vec{i} \\cdot \\vec{j} = \\vec{j} \\cdot \\vec{k} = \\vec{k} \\cdot \\vec{i} = 0$",
+          "speak": "Vì ba trục đôi một vuông góc, nên tích vô hướng giữa hai véc-tơ khác trục đều bằng không.",
+          "caption": "Vì ba trục đôi một vuông góc, nên tích vô hướng giữa hai vectơ khác trục đều bằng 0."
+        },
+        {
+          "show": "ba số hạng cùng trục đổi thành bình phương độ dài bằng một",
+          "at": "biểu thức",
+          "text": "$\\vec{i}^2 = \\vec{j}^2 = \\vec{k}^2 = 1$",
+          "speak": "Trong khi đó, véc-tơ đơn vị tự nhân với chính nó thì bằng một.",
+          "caption": "Trong khi đó, vectơ đơn vị tự nhân với chính nó thì bằng 1."
+        },
+        {
+          "show": "sáu số hạng chéo biến mất hoàn toàn, chỉ còn lại ba tích thẳng hàng",
+          "at": "không gian",
+          "text": "$\\vec{u} \\cdot \\vec{v} = x_1 x_2 + y_1 y_2 + z_1 z_2$",
+          "speak": "Sáu số hạng chéo biến mất sạch, chỉ còn lại tích hoành độ, tung độ và cao độ cộng lại.",
+          "caption": "Sáu số hạng chéo biến mất sạch, chỉ còn lại x₁x₂ + y₁y₂ + z₁z₂."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Hệ trục vuông góc được sinh ra chính là để triệt tiêu mọi phép tính phức tạp."
+        }
+      ]
+    },
+    {
+      "id": "b08",
+      "scene": 2,
+      "section": "BẢN CHẤT",
+      "keyword": "Độ dài và góc vuông",
+      "visual": "Giữ CẢNH 2. Một vectơ u sáng rõ. Khung hình hộp chữ nhật bao quanh u với đường chéo chính là u. Công thức độ dài xuất hiện, tiếp theo là hai vectơ u và v vuông góc với góc 90 độ phát sáng.",
+      "lines": [
+        {
+          "show": "hình hộp chữ nhật hiện rõ với véc-tơ u là đường chéo chính",
+          "at": "véc-tơ u",
+          "text": "$|\\vec{u}| = \\sqrt{x^2 + y^2 + z^2}$",
+          "speak": "Tự nhân vô hướng với chính nó, ta rút ra ngay công thức tính độ dài của véc-tơ.",
+          "caption": "Tự nhân vô hướng với chính nó, ta rút ra ngay công thức tính độ dài của vectơ."
+        },
+        {
+          "show": "hai véc-tơ u và v vuông góc với ký hiệu góc vuông phát sáng",
+          "at": "góc giữa u và v",
+          "text": "$\\vec{u} \\perp \\vec{v} \\Leftrightarrow x_1 x_2 + y_1 y_2 + z_1 z_2 = 0$",
+          "speak": "Đặc biệt, hai véc-tơ vuông góc khi và chỉ khi tích vô hướng của chúng bằng không.",
+          "caption": "Đặc biệt, hai vectơ vuông góc khi và chỉ khi tích vô hướng của chúng bằng 0."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Một điều kiện hình học phức tạp đã chuyển hoàn toàn thành một phương trình đại số."
+        }
+      ]
+    },
+    {
+      "id": "b09",
+      "scene": 2,
+      "section": "BẪY THƯỜNG GẶP",
+      "keyword": "Vectơ hay con số?",
+      "visual": "Giữ CẢNH 2. Thẻ so sánh trực quan chia làm hai bên: bên trái là ba phép toán cộng trừ nhân số (kết quả là bộ ba số có ngoặc, một vectơ), bên phải là tích vô hướng (kết quả là một con số vô hướng, không có ngoặc). Một dấu gạch chéo đỏ hiện lên trên cách ghi sai.",
+      "lines": [
+        {
+          "show": "thẻ so sánh hiện hai nhóm phép toán",
+          "at": "thẻ so sánh",
+          "text": "$+,-,\\times k \\to$ véc-tơ",
+          "speak": "Cộng, trừ và nhân với một số luôn cho ra kết quả là một véc-tơ mới.",
+          "caption": "Cộng, trừ và nhân với một số luôn cho ra kết quả là một vectơ mới."
+        },
+        {
+          "show": "phép tính sai ghi tích vô hướng thành bộ ba số bị gạch chéo đỏ",
+          "at": "thẻ so sánh",
+          "text": "$(x_1 x_2; y_1 y_2; z_1 z_2)$ sai",
+          "speak": "Nhiều người nhầm lẫn đem nhân từng tọa độ rồi đóng ngoặc như một véc-tơ.",
+          "caption": "Nhiều người nhầm lẫn đem nhân từng tọa độ rồi đóng ngoặc như một vectơ."
+        },
+        {
+          "show": "kết quả đúng là một con số đơn lẻ sáng màu xanh lá",
+          "at": "thẻ so sánh",
+          "text": "$\\vec{u} \\cdot \\vec{v} \\in \\mathbb{R}$",
+          "speak": "Tích vô hướng phải là một con số, không có dấu ngoặc và không có dấu chấm phẩy.",
+          "caption": "Tích vô hướng phải là một con số thực, không có dấu ngoặc."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Nhớ kỹ sự khác biệt này để không bao giờ mất điểm đáng tiếc."
+        }
+      ]
+    },
+    {
+      "id": "b10",
+      "scene": 1,
+      "section": "GIẢI ĐÁP",
+      "keyword": "An toàn trên đường bay",
+      "visual": "CẢNH 1 — Quay lại chiếc máy bay đang bay trong gió. Bảng tính toán hiển thị cụ thể phép cộng từng tọa độ: 800 cộng âm 40 thành 760, 0 cộng 60 thành 60, 0 cộng 10 thành 10. Mũi tên vận tốc thực tế màu xanh ngọc xuất hiện hướng thẳng tới điểm hạ cánh an toàn.",
+      "lines": [
+        {
+          "show": "bảng tính toán hiện chi tiết phép cộng ba trục tọa độ của máy bay",
+          "at": "bảng tính toán",
+          "text": "$800 + (-40) = 760$",
+          "speak": "Quay lại chiếc máy bay ban đầu, máy tính chỉ cần lấy tám trăm cộng âm bốn mươi.",
+          "caption": "Quay lại chiếc máy bay ban đầu, máy tính chỉ cần lấy 800 + (-40)."
+        },
+        {
+          "show": "hai trục còn lại tính ra 60 và 10 cực nhanh",
+          "at": "bảng tính toán",
+          "text": "$\\vec{v} = (760; 60; 10)$ km/h",
+          "speak": "Hai trục còn lại là sáu mươi và mười, cho ra ngay véc-tơ vận tốc thực tế.",
+          "caption": "Hai trục còn lại là 60 và 10, cho ra ngay vectơ vận tốc thực tế."
+        },
+        {
+          "show": "máy bay điều chỉnh góc lái nhẹ nhàng và bay êm ái trên bầu trời",
+          "at": "máy bay",
+          "text": "hạ cánh chuẩn xác",
+          "speak": "Hệ thống tự động chỉnh góc lái để bù gió, đưa chuyến bay về đích an toàn tuyệt đối."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Tất cả diễn ra tự động trong tích tắc nhờ sức mạnh của tọa độ."
+        }
+      ]
+    },
+    {
+      "id": "b11",
+      "scene": 2,
+      "section": "TỔNG KẾT",
+      "keyword": "Hình học hóa số học",
+      "visual": "Giữ CẢNH 2. Toàn cảnh hệ tọa độ Oxyz với các vectơ rực rỡ và công thức bốn phép toán cốt lõi tỏa sáng cân đối trên màn hình. Logo 9Study trang trọng góc trên.",
+      "lines": [
+        {
+          "show": "bốn công thức cốt lõi của bốn phép toán hiện tỏa sáng trang trọng",
+          "at": "không gian",
+          "text": "$+,-,\\times k, \\cdot$",
+          "speak": "Từ nay, các phép toán véc-tơ trong không gian không còn cần tới hình vẽ rườm rà.",
+          "caption": "Từ nay, các phép toán vectơ trong không gian không còn cần tới hình vẽ rườm rà."
+        },
+        {
+          "show": "hệ trục Oxyz phát sáng hài hòa làm bệ đỡ cho các phép tính",
+          "at": "gốc O",
+          "text": "hệ trục $Oxyz$",
+          "speak": "Ba trục đôi một vuông góc đã chuyển hóa toàn bộ hình học không gian thành số học nhẹ nhàng."
+        },
+        {
+          "show": "giữ nguyên",
+          "text": "",
+          "speak": "Đó là lý do tọa độ chuyển hóa trọn vẹn hình học không gian."
+        }
+      ]
+    }
+  ]
+}
