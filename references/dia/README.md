@@ -1,16 +1,18 @@
 # Thư viện Tài liệu Tham khảo Chuẩn — Môn Địa lí (GDPT 2018)
 
-Thư mục này chứa hệ thống tài liệu kiến thức cốt lõi chuẩn SGK (Chương trình GDPT 2018 - Kết nối tri thức, Cánh diều, Chân trời sáng tạo) và định hướng kỳ thi Tốt nghiệp THPT mới, phục vụ việc viết kịch bản video AI giải thích bản chất cơ chế không gian và quy luật địa lí.
+Thư mục này chứa hệ thống tài liệu kiến thức cốt lõi chuẩn SGK (Chương trình GDPT 2018 - Bộ SGK Thống nhất từ năm 2026, Kết nối tri thức, Cánh diều, Chân trời sáng tạo) và Đề thi Tốt nghiệp THPT 2026 của Bộ GD&ĐT, phục vụ việc viết kịch bản video AI giải thích bản chất cơ chế không gian và quy luật địa lí.
 
 ---
 
-## 1. Tổng quan Cấu trúc 3 Khối Lớp THPT
+## 1. Đề thi & Tổng quan Chương trình Chuẩn (Mới Cập nhật)
 
-| Khối lớp | Phân môn & Trọng tâm | Bản chất cần khai thác trong Video AI |
+| Tài liệu | Loại | Mô tả & Trọng tâm |
 | :--- | :--- | :--- |
-| **Lớp 10** | **Địa lí Đại cương** (Tự nhiên & KT-XH đại cương) | Cơ chế thiên văn, lực Coriolis, hoàn lưu khí quyển, kiến tạo mảng, vòng tuần hoàn nước, quy luật địa đới/phi địa đới. |
-| **Lớp 11** | **Địa lí Khu vực & Quốc gia** (KT-XH thế giới) | Toàn cầu hóa, các trung tâm kinh tế lớn (Hoa Kỳ, Trung Quốc, EU, Nhật Bản, Đông Nam Á), địa chính trị & tài nguyên chiến lược. |
-| **Lớp 12** | **Địa lí Việt Nam** (Trọng tâm đề thi THPT) | Tự nhiên nhiệt đới ẩm gió mùa, cấu trúc địa hình đồi núi, phân hóa thiên nhiên đa dạng, chủ quyền biển đảo (Hoàng Sa, Trường Sa), 7 vùng kinh tế trọng điểm. |
+| **[`de-thi-chinh-thuc-tot-nghiep-thpt-2026.md`](./de-thi-chinh-thuc-tot-nghiep-thpt-2026.md)** | Đề thi chuẩn 2026 | Đề thi chính thức Bộ GD&ĐT (Mã đề 0901): 18 câu trắc nghiệm nhiều lựa chọn + 4 câu trắc nghiệm Đúng/Sai + 6 câu trả lời ngắn / tính toán bản chất (hiệu ứng Phơn, gia tăng dân số, biến đổi khí hậu ĐBSCL...). |
+| **[`lop-10/tong-quan-chuong-trinh-10.md`](./lop-10/tong-quan-chuong-trinh-10.md)** | Khung SGK 10 | Tổng quan 10 chương Địa lí đại cương: Hệ quả chuyển động Trái Đất, lực Coriolis, hoàn lưu khí quyển, kiến tạo mảng, thủy quyển, quy luật địa đới/phi địa đới. |
+| **[`lop-11/tong-quan-chuong-trinh-11.md`](./lop-11/tong-quan-chuong-trinh-11.md)** | Khung SGK 11 | Địa lí khu vực & quốc gia: Toàn cầu hóa, các trung tâm kinh tế lớn (Hoa Kỳ, EU, Đông Nam Á, Trung Quốc), địa chính trị dầu mỏ Tây Nam Á. |
+| **[`lop-12/tong-quan-chuong-trinh-12.md`](./lop-12/tong-quan-chuong-trinh-12.md)** | Khung SGK 12 | Trọng tâm kỳ thi THPT: Thiên nhiên nhiệt đới ẩm gió mùa, cấu trúc 4 vùng đồi núi, phân hóa thiên nhiên, chủ quyền biển đảo (Hoàng Sa, Trường Sa), chuyển dịch cơ cấu 7 vùng kinh tế. |
+| **[`lop-12/chuyen-de/chu-de-12.1.2-thien-nhien-nhiet-doi-am-gio-mua.md`](./lop-12/chuyen-de/chu-de-12.1.2-thien-nhien-nhiet-doi-am-gio-mua.md)** | Chuyên đề mẫu | Bóc tách cơ chế gió mùa Đông Bắc, gió Tây Nam đầu hạ & hiệu ứng Phơn miền Trung. |
 
 ---
 
@@ -19,12 +21,16 @@ Thư mục này chứa hệ thống tài liệu kiến thức cốt lõi chuẩn
 ```text
 references/dia/
 ├── README.md
+├── de-thi-chinh-thuc-tot-nghiep-thpt-2026.md          # Đề thi tốt nghiệp THPT 2026 (Bộ GD&ĐT, Mã đề 0901)
+├── raw_pdf/                                         # (Bị .gitignore) Chứa 4 file gốc scan
+│   ├── thuvienhoclieu.com-De-thi-TN-THPT-2026-mon-Dia-Li-Bo-GD-ma-de-0901.docx
+│   ├── SGK-Dia-Li-10-chuong-trinh-moi.pdf
+│   ├── SGK-Dia-Li-11-KNTT.pdf
+│   └── thuvienhoclieu.com-SGK-Dia-Li-12-thong-nhat-tu-nam-2026.pdf
 ├── lop-10/
-│   ├── tong-quan-chuong-trinh-10.md                  # Khung chương trình Địa lí 10 & Bản đồ tư duy cơ chế
-│   └── chuyen-de/                                    # Các chuyên đề bản chất (Hệ quả chuyển động TĐ, Khí áp & Gió...)
+│   └── tong-quan-chuong-trinh-10.md                  # Khung chương trình Địa lí 10 & Bản đồ tư duy cơ chế
 ├── lop-11/
-│   ├── tong-quan-chuong-trinh-11.md                  # Khung chương trình Địa lí 11 & Bản đồ kinh tế thế giới
-│   └── chuyen-de/                                    # Hoa Kỳ, EU, Đông Nam Á, Trung Quốc...
+│   └── tong-quan-chuong-trinh-11.md                  # Khung chương trình Địa lí 11 & Bản đồ kinh tế thế giới
 └── lop-12/
     ├── tong-quan-chuong-trinh-12.md                  # Khung trọng tâm Địa lí Việt Nam ôn thi THPT
     └── chuyen-de/
