@@ -96,3 +96,7 @@ Chi tiết từng video: `src/videos/<slug>/FEEDBACK.md`. Thêm mục mới mỗ
    - $M'$ viết là "mờ-phẩy" (tránh đọc thành "êm phẩy").
    - Chữ cái cuối câu (như điểm M) phải viết thành "điểm mờ" để tránh nuốt âm.
 7. **Ẩn bớt chữ cũ lúc chuyển ý (ICAO)**: Sang b09 giải thích 300m và chuẩn an toàn, phải ẩn ngay toạ độ chi tiết và độ cao cũ của b08 để tránh tích lũy một "rừng chữ" đè lên nhau quanh 2 máy bay.
+
+### 07/11/2026 — Quy chuẩn Quản lý Asset & Phối hợp Môn Sử (Local-first & User-in-the-loop)
+- **Triết lý**: Repo là framework công cụ; video và assets cụ thể mang tính local-first. Người dùng tự quản lý và thêm các components/assets vào branch (gửi ngoài xong add lên), không để AI tự ý tải file nặng hoặc asset chưa kiểm duyệt vào repo.
+- **Quy tắc phối hợp bắt buộc**: Trong quá trình làm video (B1 kịch bản hoặc B3 chuẩn bị dựng), AI phát hiện cần asset chuyên biệt (sa bàn trận đánh, SVG địa hình, ảnh tư liệu tách nền) thì BẮT BUỘC PHẢI NHẮN RÕ CHO USER: tên asset, định dạng, vai trò ở beat nào, và gợi ý props để user chủ động cung cấp hoặc add lên branch.

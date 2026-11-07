@@ -128,15 +128,27 @@ Giọng đọc AI (Vivibe) cần được kiểm soát chặt chẽ khi đọc t
 
 ---
 
-## 6. Dựng hình Remotion (B3)
+## 6. Dựng hình Remotion & Cơ chế Phối hợp Asset (B3)
 
-- **Bộ Core Components chuyên dụng môn Sử** đặt tại `src/components/su/`:
-  - `TacticalMap.tsx`: Khung bản đồ chiến sự vector SVG tối giản hỗ trợ vẽ mũi tên hành quân động.
-  - `DynamicTimeline.tsx`: Trục thời gian mượt mà, zoom vào mốc sự kiện theo frame.
-  - `DossierCard.tsx`: Thẻ hồ sơ tư liệu lịch sử, chân dung lãnh tụ, trích dẫn chuẩn SGK.
-  - `PowerGauge.tsx`: Cán cân so sánh tương quan lực lượng hai bên.
-  - `ReformDiagram.tsx`: Sơ đồ chuyển dịch thể chế Before $\to$ After.
-- **Màu sắc & Mood hình ảnh**:
-  - Không dùng màu mè sặc sỡ kiểu hoạt hình trẻ con.
-  - Sử dụng bảng màu lịch sử trang trọng, hiện đại: Màu nền xanh than đậm (`#0F172A`) hoặc giấy dó cổ điển; màu nhấn quân ta dùng Đỏ son (`#DC2626`) / Vàng đồng (`#D97706`), phe đối phương dùng Xanh lam đậm / Xám thép (`#475569`).
-  - Font chữ: Plus Jakarta Sans làm chủ đạo; các tiêu đề chiến dịch hay trích dẫn có thể dùng font Serif hoặc nét dày uy nghiêm.
+### 6.1. Nguyên tắc Quản lý Asset & Phân quyền Creator (Local-First)
+> [!IMPORTANT]
+> **Người dùng tự quản lý và thêm các components/assets vào branch khung**:
+> - AI tuyệt đối **KHÔNG tự ý tải asset bừa bãi** hay nhồi nhét file nặng không kiểm duyệt vào repository.
+> - **Quy tắc phối hợp bắt buộc trong quá trình làm video**:
+>   - Khi viết kịch bản (B1) hoặc chuẩn bị dựng (B3), nếu phát hiện bài học cần một asset chuyên biệt (ví dụ: Bản đồ sa bàn lòng chảo Điện Biên, SVG bãi cọc sông Bạch Đằng, ảnh chân dung tư liệu tách nền của lãnh tụ/tướng lĩnh):
+>   - **AI BẮT BUỘC PHẢI NHẮN RÕ CHO USER**:
+>     1. *Asset cần là gì?* (Tên, định dạng: SVG hay PNG tách nền, kích thước đề xuất).
+>     2. *Xuất hiện ở beat nào, giữ vai trò gì trên màn hình?*
+>     3. *Gợi ý cấu trúc props/interface* để khi user gửi hoặc add component từ ngoài vào branch, hệ thống sẽ kết nối ăn khớp 100%.
+
+### 6.2. Bộ Core Components chuyên dụng môn Sử (Đặt tại `src/components/su/`)
+- `TacticalMap.tsx`: Khung bản đồ chiến sự vector SVG tối giản hỗ trợ vẽ mũi tên hành quân động.
+- `DynamicTimeline.tsx`: Trục thời gian mượt mà, zoom vào mốc sự kiện theo frame.
+- `DossierCard.tsx`: Thẻ hồ sơ tư liệu lịch sử, chân dung lãnh tụ, trích dẫn chuẩn SGK.
+- `PowerGauge.tsx`: Cán cân so sánh tương quan lực lượng hai bên.
+- `ReformDiagram.tsx`: Sơ đồ chuyển dịch thể chế Before $\to$ After.
+
+### 6.3. Màu sắc & Mood hình ảnh
+- Không dùng màu mè sặc sỡ kiểu hoạt hình trẻ con.
+- Sử dụng bảng màu lịch sử trang trọng, hiện đại: Màu nền xanh than đậm (`#0F172A`) hoặc giấy dó cổ điển; màu nhấn quân ta dùng Đỏ son (`#DC2626`) / Vàng đồng (`#D97706`), phe đối phương dùng Xanh lam đậm / Xám thép (`#475569`).
+- Font chữ: Plus Jakarta Sans làm chủ đạo; các tiêu đề chiến dịch hay trích dẫn có thể dùng font Serif hoặc nét dày uy nghiêm.
