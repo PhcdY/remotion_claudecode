@@ -31,6 +31,15 @@ Tùy vào tính chất bài học (Địa lí Tự nhiên đại cương 10, Kin
 3. **Một Hiện tượng Xuyên suốt — Không nhảy bước**:
    - Dùng một địa bàn / hiện tượng cụ thể làm ví dụ dẫn dắt (ví dụ: giải thích gió mùa thì bám sát lãnh thổ Việt Nam; giải thích nội lực thì bám sát ranh giới mảng Thái Bình Dương hoặc sự hình thành dãy Himalaya).
 
+### 1.3. Khung 4 Tầng Dẫn Chuyện: Từ Thực trạng Nóng tới Bản chất SGK (Lời khuyên từ HSGQG Địa)
+> [!TIP]
+> Người xem và học sinh không muốn nghe lý thuyết hàn lâm hay học vẹt bài học trong SGK.
+> Hãy lấy **THỰC TRẠNG THỜI SỰ / HIỆN TƯỢNG CÓ THẬT** làm "mồi dẫn" để học sinh thấy kiến thức SGK chính là lời giải mã thế giới xung quanh:
+> 1. **Tầng 1: Hiện trạng Thời sự (Hook)**: Nêu hiện tượng thực tế đang diễn ra (*El Niño làm mùa đông đến muộn, nắng nóng kỷ lục, hạn mặn miền Tây, bão dồn dập cuối năm*).
+> 2. **Tầng 2: Cơ chế Địa lí Ngầm (Mechanism)**: Bóc tách quy luật tự nhiên chi phối (*chênh lệch khí áp, gió mùa, hoàn lưu Walker, dòng biển ấm/lạnh, chắn địa hình*).
+> 3. **Tầng 3: Hệ quả Không gian & Đời sống (Impact)**: Trực quan hóa tác động trên bản đồ (*vùng chịu hạn, vệt bão đổ bộ, sụt giảm sản lượng cây công nghiệp*).
+> 4. **Tầng 4: Chốt hạ Bản chất SGK & Đề thi (Payoff)**: Neo lại vào bài học SGK/đề thi tốt nghiệp THPT để học sinh hiểu sâu và không bao giờ quên.
+
 ---
 
 ## 2. Phạm vi kiến thức & Lằn ranh đỏ "Sai là hỏng luôn" (B1)
