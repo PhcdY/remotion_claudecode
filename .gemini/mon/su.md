@@ -130,16 +130,16 @@ Giọng đọc AI (Vivibe) cần được kiểm soát chặt chẽ khi đọc t
 
 ## 6. Dựng hình Remotion & Cơ chế Phối hợp Asset (B3)
 
-### 6.1. Nguyên tắc Quản lý Asset & Phân quyền Creator (Local-First)
+### 6.1. Workflow Đóng góp & Đồng bộ Asset/Component (Request User → Maintainer Push)
 > [!IMPORTANT]
-> **Người dùng tự quản lý và thêm các components/assets vào branch khung**:
-> - AI tuyệt đối **KHÔNG tự ý tải asset bừa bãi** hay nhồi nhét file nặng không kiểm duyệt vào repository.
-> - **Quy tắc phối hợp bắt buộc trong quá trình làm video**:
->   - Khi viết kịch bản (B1) hoặc chuẩn bị dựng (B3), nếu phát hiện bài học cần một asset chuyên biệt (ví dụ: Bản đồ sa bàn lòng chảo Điện Biên, SVG bãi cọc sông Bạch Đằng, ảnh chân dung tư liệu tách nền của lãnh tụ/tướng lĩnh):
->   - **AI BẮT BUỘC PHẢI NHẮN RÕ CHO USER**:
->     1. *Asset cần là gì?* (Tên, định dạng: SVG hay PNG tách nền, kích thước đề xuất).
->     2. *Xuất hiện ở beat nào, giữ vai trò gì trên màn hình?*
->     3. *Gợi ý cấu trúc props/interface* để khi user gửi hoặc add component từ ngoài vào branch, hệ thống sẽ kết nối ăn khớp 100%.
+> **Cơ chế Request từ User và Đóng góp vào Nhánh Default (`gemini`)**:
+> 1. **Khi User đang làm video ở Local mà thiếu Asset/Component**:
+>    - AI chủ động **Request trực tiếp từ User hiện tại**: Yêu cầu User gửi ảnh tư liệu, bản đồ gốc hoặc phác thảo địa hình vào chat (*"Bạn gửi cho tôi ảnh/tài liệu của trận địa này để tôi code component nhé"*).
+>    - Nhận được ảnh từ User $\to$ AI phân tích và dựng thành code SVG/React component hoàn chỉnh trong `src/components/su/`.
+> 2. **Cơ chế Đóng góp & Đồng bộ Framework (Maintainer Workflow)**:
+>    - Sau khi hoàn thành, component mới sẽ được gửi cho Maintainer (Người quản trị Framework).
+>    - Maintainer kiểm duyệt chất lượng và **tự tay push lên nhánh default (`gemini`)**.
+>    - Mọi Creator khác lần sau chỉ cần chạy `git pull origin gemini` là tự động có sẵn toàn bộ component mới trong `src/` để tái sử dụng ngay lập tức mà không phải dựng lại!
 
 ### 6.2. Bộ Core Components chuyên dụng môn Sử (Đặt tại `src/components/su/`)
 - `TacticalMap.tsx`: Khung bản đồ chiến sự vector SVG tối giản hỗ trợ vẽ mũi tên hành quân động.
