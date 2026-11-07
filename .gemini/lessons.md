@@ -116,3 +116,10 @@ Chi tiết từng video: `src/videos/<slug>/FEEDBACK.md`. Thêm mục mới mỗ
   1. Khi User ở local thiếu asset/component: AI **Request trực tiếp từ User** (yêu cầu gửi ảnh tư liệu, phác thảo địa hình) $\to$ AI đọc ảnh và code thành component SVG/React trong `src/components/su/`.
   2. Người dùng sau đó nhắn gửi component cho Maintainer $\to$ Maintainer kiểm duyệt và tự tay push lên nhánh default (`gemini`).
   3. Tất cả các Creators khác chỉ cần `git pull origin gemini` là tự động có toàn bộ kho components dùng chung mới nhất để tái sử dụng ngay.
+
+### 07/11/2026 — Khởi tạo môn Địa lí: Khung 4 tầng dẫn chuyện từ HSGQG và cơ chế bản đồ tối ưu
+- **Góp ý từ HSGQG môn Địa**: Video Địa lí không được dạy lý thuyết hay đọc số liệu chay SGK; người xem muốn thấy gắn liền với **thực trạng thời sự hiện tại** (*El Niño/La Niña, thời tiết cực đoan, mùa đông đến muộn, hạn mặn miền Tây...*). Từ một hiện tượng có thật bóc tách ra các video giải thích nguyên nhân và hậu quả.
+- **Quy tắc bắt buộc môn Địa**:
+  1. *Khung 4 tầng Storytelling*: Thực trạng thời sự nóng (Hook) $\to$ Cơ chế địa lí ngầm (Mechanism: khí áp, gió mùa, dòng biển, địa hình) $\to$ Hệ quả không gian & đời sống (Impact) $\to$ Chốt hạ SGK & Đề thi (Payoff).
+  2. *Lằn ranh chủ quyền*: Mọi bản đồ Việt Nam bắt buộc có đầy đủ Hoàng Sa, Trường Sa và chuẩn 5 vùng biển UNCLOS 1982.
+  3. *Hiệu năng bản đồ*: Vector map phải tối giản số điểm neo (< 1.000 điểm) để tránh nghẽn render Remotion.
