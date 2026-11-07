@@ -1,0 +1,19 @@
+node_modules
+dist
+.DS_Store
+.env
+
+# Ignore the output video from Git but not videos you import into src/.
+out
+
+# Audio sinh tự động ở B2 (scripts/vivibe_tts.py) — tạo lại được
+public/audio/
+__pycache__/
+
+# Worktrees tạm của agents
+.gemini/worktrees/
+.claude/
+
+# Sách giáo khoa gốc dạng PDF (rất nặng, chỉ commit markdown trích xuất)
+references/**/raw_pdf/
+*.pdf
