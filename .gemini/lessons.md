@@ -96,3 +96,10 @@ Chi tiết từng video: `src/videos/<slug>/FEEDBACK.md`. Thêm mục mới mỗ
    - $M'$ viết là "mờ-phẩy" (tránh đọc thành "êm phẩy").
    - Chữ cái cuối câu (như điểm M) phải viết thành "điểm mờ" để tránh nuốt âm.
 7. **Ẩn bớt chữ cũ lúc chuyển ý (ICAO)**: Sang b09 giải thích 300m và chuẩn an toàn, phải ẩn ngay toạ độ chi tiết và độ cao cũ của b08 để tránh tích lũy một "rừng chữ" đè lên nhau quanh 2 máy bay.
+
+### 07/11/2026 — Quy chuẩn Quản lý Asset & Phối hợp Môn Sử (Request User → Maintainer Push Nhánh Default)
+- **Triết lý**: Repo là framework công cụ; video và assets cụ thể mang tính local-first.
+- **Workflow tạo và đồng bộ Component**:
+  1. Khi User ở local thiếu asset/component: AI **Request trực tiếp từ User** (yêu cầu gửi ảnh tư liệu, phác thảo địa hình) $\to$ AI đọc ảnh và code thành component SVG/React trong `src/components/su/`.
+  2. Người dùng sau đó nhắn gửi component cho Maintainer $\to$ Maintainer kiểm duyệt và tự tay push lên nhánh default (`gemini`).
+  3. Tất cả các Creators khác chỉ cần `git pull origin gemini` là tự động có toàn bộ kho components dùng chung mới nhất để tái sử dụng ngay.
