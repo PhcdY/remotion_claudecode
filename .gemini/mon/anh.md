@@ -62,86 +62,74 @@ graph LR
 
 ---
 
-## 3. Tư duy Thị giác: Nguyên lý Nền (5 Primitives) & Quy trình Sáng tạo Ẩn dụ Độc bản (B1 + B3)
+## 3. Tư duy Thị giác: Theme Môn Học, Quy Trình Thẩm Định & Kho 8 Mô Hình (B1 + B3)
 
-> [!CAUTION]
-> **5 ARCHETYPES LÀ NGUYÊN LÝ CƠ HỌC NỀN — TUYỆT ĐỐI KHÔNG BIẾN THÀNH KHUÔN ĐÚC RẬP KHUÔN!**  
-> Nếu video nào về thì cũng chỉ vẽ một trục ngang, video nào về giới từ cũng chỉ vẽ một cái hộp, kênh sẽ rơi vào bẫy **nhàm chán và lặp lại motif**.  
-> **Mục tiêu tối thượng là trải nghiệm người xem: Mỗi video phải mang một "linh hồn hình ảnh" bất ngờ, độc nhất vô nhị.**
+### 3.1. Theme Cốt Lõi & Mood Của Môn Tiếng Anh
+* **Theme cốt lõi**: **LĂNG KÍNH TƯ DUY BẢN XỨ (The Native Lens / Perspective)**.
+* **Cảm giác mang lại cho người xem**: **"À, hóa ra người bản xứ họ NHÌN sự việc như thế này!"** — Gỡ bỏ hoàn toàn cảm giác dịch bồi từng chữ từ tiếng Việt, giúp người học nhìn thấy *logic ngầm* cách người bản xứ cảm nhận và đóng gói thông tin.
+* **Mood hình ảnh**: Tối giản, hiện đại, sắc sảo (Clean, Editorial, Typographic, chuyển động SVG 60fps mượt mà theo nhịp nhả chữ). Cả màn hình 16:9 là một chiếc kính hiển vi ngôn ngữ học, nhìn xuyên qua mặt chữ để thấy cấu trúc nhận thức bên trong.
 
-### 3.0. Quy trình Bắt buộc: Bước Động não Ẩn dụ Độc bản (Bespoke Metaphor Ideation — Bước 0 trước khi viết kịch bản)
+### 3.2. Quy Trình 3 Bước Thẩm Định Thiết Kế (Design Decision Framework)
 
-Trước khi viết `script.json`, Biên kịch / AI **BẮT BUỘC PHẢI ĐỘNG NÃO ÍT NHẤT 2–3 HÌNH TƯỢNG ĐỘC BẢN** gắn liền với chủ đề bài học và đưa người dùng chọn:
-* **Hỏi**: *"Bài học này có hiện tượng đời thực, đồ vật, bối cảnh điện ảnh hay tình huống va chạm nào làm vật mang ẩn dụ (Visual Vehicle) đắt giá nhất?"*
-* **Ví dụ chuyển hóa từ "Nguyên lý Nền" sang "Sáng tạo Độc bản"**:
-  - *Hiện tại hoàn thành*: Thay vì chỉ vẽ trục timeline khô khan $\to$ Dùng hình tượng **"Chiếc ghế ướt sơn và vết sơn đỏ trên quần"** (Hành động sơn ghế đã xong ở quá khứ, nhưng vệt sơn trên quần ở hiện tại là lý do người ta hét lên *"I have painted the chair!"*); hoặc **"Tấm phim chụp X-quang của bác sĩ"** (Tai nạn xảy ra tuần trước, nhưng tấm phim X-quang đang rọi sáng trên bàn khám lúc này là hệ quả bắt bạn phải bó bột ngay bây giờ); hoặc **"Cuốn hộ chiếu đóng đầy dấu mộc thị thực"** (Trải nghiệm tích lũy theo năm tháng mang theo bên mình).
-  - *Câu bị động (Passive Voice)*: Thay vì đổi chỗ $S \leftrightarrow O$ $\to$ Dùng hình tượng **"Ống kính máy quay tại hiện trường vụ án"** (Hiện trường chiếc két sắt bị phá `The safe was broken` — tên trộm đã tẩu thoát, camera zoom cận cảnh két sắt, không ai quan tâm tên trộm là ai nữa); hoặc **"Dây chuyền lắp ráp robot trong nhà máy xe điện"** (Tập trung hoàn toàn vào sản phẩm được tạo ra).
-  - *Phrasal Verbs với UP*: Thay vì chỉ vẽ cột đo dâng lên $\to$ Dùng hình tượng **"Trò chơi Pac-Man ăn sạch bong các hạt thức ăn trên bản đồ"** (`Eat up`); hoặc **"Quả pin sạc đến 100% bốc sáng rực rỡ"** (`Fill up`).
-  - *Câu điều kiện Loại 2 & 3*: Thay vì chỉ dùng thước đo $\to$ Dùng hình tượng **"Cỗ máy Đa vũ trụ (Multiverse Branches)"** — Mỗi bước lùi thì tách ra một nhánh thực tại song song mờ ảo; hoặc **"Chiếc gương ảo ảnh (Mirror of Erised)"**.
-  - *Đảo ngữ (Inversion)*: Dùng hình tượng **"Đèn pha rọi sân khấu (Stage Spotlight Switch)"** — Toàn bộ rạp hát tối om, công tắc bật lên rọi thẳng vào một nhân vật phụ khiến trật tự thông thường bị đảo lộn hoàn toàn.
+Trước khi viết kịch bản và dựng hình cho bất kỳ bài học nào, Biên kịch/AI **BẮT BUỘC ĐI QUA 3 BƯỚC THẨM ĐỊNH**:
+
+```mermaid
+flowchart TD
+    Q1["<b>BƯỚC 1: XÁC ĐỊNH LĂNG KÍNH BẢN XỨ (The Native Mindset)</b><br/><i>Người bản xứ dùng cấu trúc này để thể hiện cảm giác / thái độ gì?</i>"] --> Q2["<b>BƯỚC 2: CHỌN MÔ HÌNH THỊ GIÁC PHÙ HỢP NHẤT</b><br/><i>Trong kho mô hình, cái nào phản ánh tự nhiên nhất? Có cái nào hợp hơn không?</i>"]
+    Q2 --> Q3["<b>BƯỚC 3: TINH CHỈNH NHỎ THEO NGỮ CẢNH BÀI HỌC (Micro-Adjustment)</b><br/><i>Với chủ đề SGK cụ thể này (môi trường, công nghệ, gia đình), điều chỉnh chi tiết gì?</i>"]
+```
+
+1. **Bước 1 — Xác định Lăng kính bản xứ**: Tìm ra động cơ nhận thức sâu xa (Tại sao người ta dùng thì này? Tại sao họ đổi sang bị động? Họ muốn nhấn mạnh điều gì?).
+2. **Bước 2 — Chọn Mô hình thị giác tự nhiên nhất**: Không gò bó cứng nhắc; đối chiếu với kho 8 mô hình bên dưới xem mô hình nào phản ánh tự nhiên nhất; nếu có mô hình khác hợp lý hơn thì tự do đề xuất.
+3. **Bước 3 — Tinh chỉnh nhỏ theo ngữ cảnh bài học (Micro-adjustment)**: Gắn mô hình vào chủ đề bài học cụ thể (thay đổi màu sắc, nhãn chỉ số, ví dụ sát thực tế) để mỗi video mang một sắc thái riêng biệt, không bao giờ lặp lại nhàm chán.
 
 ---
 
-### 3.1. Hệ thống 5 Nguyên lý Cơ học Nền (5 Visual Primitives)
-Khi đã chọn được Hình tượng Độc bản cho bài học, hệ thống Remotion SVG sẽ sử dụng 5 Nguyên lý Cơ học Nền dưới đây làm khung xương logic để vận hành chuyển động toán học chính xác:
+### 3.3. Kho 8 Mô Hình Thị Giác Bản Xứ (8 Native Visual Models)
 
 ```mermaid
 graph TD
-    A1["<b>Primitive 1: Dòng Thời Gian & Thấu Kính</b><br/><i>(Timeline & Viewpoint Lens: 12 Thì & Thể)</i>"]
-    A2["<b>Primitive 2: Bản Đồ Không Gian & Phóng Xạ</b><br/><i>(Spatial Schema & Metaphor: In/On/At & Phrasal Verbs)</i>"]
-    A3["<b>Primitive 3: Khối Câu Tầng Bậc & Dòng Phụ Thuộc</b><br/><i>(Sentence Block & Dependency Flow: Cấu trúc câu & Mệnh đề)</i>"]
-    A4["<b>Primitive 4: Thước Đo Khoảng Cách Thực Tại</b><br/><i>(Epistemic Reality Distance: Điều kiện & Giả định)</i>"]
-    A5["<b>Primitive 5: Trường Nhận Thức Chung</b><br/><i>(Common Ground: Mạo từ A/An/The & Xác định)</i>"]
+    M1["<b>1. Timeline & Viewpoint Lens</b><br/>(Thì & Khía cạnh thời gian)"]
+    M2["<b>2. Spatial Geometry (Point/Surface/Container)</b><br/>(Giới từ không gian & thời gian)"]
+    M3["<b>3. Directional Force & Particle Axis</b><br/>(Hướng lực tiểu từ Phrasal Verbs)"]
+    M4["<b>4. Focus Spotlight / Camera Zoom</b><br/>(Thể bị động & Câu chẻ Cleft Sentence)"]
+    M5["<b>5. Sentence Blocks & Dependency Arcs</b><br/>(Trật tự từ & Rút gọn mệnh đề)"]
+    M6["<b>6. Epistemic Reality Ladder</b><br/>(Thước đo thực tại: Điều kiện & Giả định)"]
+    M7["<b>7. Information Flow & Common Ground</b><br/>(Dòng chảy thông tin & Mạo từ A/The)"]
+    M8["<b>8. Parallel Balance Scale</b><br/>(Cán cân song hành: So sánh kép The more...)"]
 ```
 
-#### Primitive 1: Dòng Thời Gian & Thấu Kính Góc Nhìn (Timeline & Viewpoint Lens)
+#### Model 1: Dòng Thời Gian & Thấu Kính Góc Nhìn (Timeline & Viewpoint Lens)
 - **Áp dụng cho**: 12 thì, Sự phối hợp thì (*Past Simple vs Present Perfect, Past Continuous vs Past Simple*).
-- **Thành phần hình ảnh**:
-  * **Trục thời gian nằm ngang**: Trục thẳng có mũi tên hướng về tương lai bên phải.
-  * **Mốc NOW (Hiện tại)**: Vạch đứng phát sáng trung tâm (`#3D4AEF`), phân chia vùng Quá khứ (Past - bên trái) và Tương lai (Future - bên phải).
-  * **Thấu kính quan sát (Lens / Focus)**:
-    - *Past Simple*: Một khối chấm tròn cố định nằm trọn vẹn trong vùng quá khứ, hoàn toàn tách rời khỏi vạch NOW. Có nhãn thời gian đóng khung: `in 2020`, `yesterday`.
-    - *Present Perfect*: Một cây cầu ánh sáng (Glowing Bridge / Stream) bắt đầu từ quá khứ và chạm đỉnh vào vạch NOW. Đầu mũi tên chạm mốc NOW sáng bừng lên, hiện nhãn: `Current Result / Relevance` (Hệ quả hiện tại).
-    - *Continuous Aspect*: Khung kính lúp phóng to vào giữa khoảng thời gian, bên trong là các đường sóng chuyển động lượn sóng (`sine wave`), hai đầu mở, nhãn: `In Progress (Chưa hoàn tất)`.
-- **Chuyển động (Animation)**: Dùng `interpolate` cho vệt sáng chạy dọc trục thời gian, khi nói đến "hệ quả", vệt sáng chạm vào vạch `NOW` kích hoạt nhãn kết quả bật lên sống động bằng `spring`.
+- **Thành phần hình ảnh**: Trục hoành thời gian vô tận, vạch mốc `NOW` phát sáng trung tâm (`#3D4AEF`). Quá khứ đơn là chiếc hộp thời gian đóng nắp tách rời; Hiện tại hoàn thành là cây cầu ánh sáng (Bridge / Stream) nối từ quá khứ chạm đỉnh vào `NOW` mang nhãn *Current Relevance*.
 
-#### Primitive 2: Bản Đồ Không Gian & Phóng Xạ Ẩn Dụ (Spatial Schema & Metaphor Projection)
-- **Áp dụng cho**: Giới từ (*IN, ON, AT*); Cụm động từ (*Phrasal Verbs với UP, DOWN, OUT, OFF*).
-- **Thành phần hình ảnh**:
-  * **Bộ ba hình học cơ bản**:
-    - `AT`: Chấm tiêu điểm màu đỏ (`#EF4444`) với các vòng tròn đồng tâm thu nhỏ (Target radar).
-    - `ON`: Mặt phẳng tiếp xúc nằm ngang màu xanh lá (`#10B981`) với bóng tiếp xúc vật thể.
-    - `IN`: Khối hộp 3 chiều màu xanh dương (`#3B82F6`) trong suốt với vật thể nằm an toàn bên trong.
-  * **Cột hướng lực (Vertical Force Axis) cho Phrasal Verbs**:
-    - `UP`: Trục thẳng đứng hướng lên, mức năng lượng đổ đầy từ đáy lên miệng bình $\to$ Nhãn: `MAX / COMPLETE` (*eat up, clean up*).
-    - `OUT`: Hộp kín mở nắp, quả cầu sáng từ đáy bay vút ra không gian ngoài $\to$ Nhãn: `VISIBLE / REVEALED` (*find out, figure out*).
-- **Chuyển động (Animation)**: Vật thể chuyển động tương tác với hình học không gian (rơi vào hộp, chạm lên mặt phẳng, bay ra ngoài).
+#### Model 2: Hình Học Không Gian (Point / Surface / Container)
+- **Áp dụng cho**: Giới từ chỉ vị trí và thời gian (*IN, ON, AT*).
+- **Thành phần hình ảnh**: Bộ ba hình học nhận thức: `AT` (Chấm tiêu điểm 0D radar `#EF4444`), `ON` (Mặt phẳng tiếp xúc 2D `#10B981`), `IN` (Chiếc hộp không gian bao bọc 3D trong suốt `#3B82F6`).
 
-#### Primitive 3: Khối Câu Tầng Bậc & Dòng Phụ Thuộc (Sentence Block & Dependency Flow)
-- **Áp dụng cho**: Trật tự câu tiếng Anh, Cụm danh từ (*Noun Phrase*), Mệnh đề quan hệ (*Relative Clauses*), Rút gọn mệnh đề (*V-ing / V-ed*).
-- **Thành phần hình ảnh**:
-  * Chuỗi từ nằm ngang tự nhiên của câu. Mỗi từ/cụm từ là một Card chữ bo góc (`Sentence Block`):
-    - Chủ ngữ (Subject): Màu tím than `#1E293B`.
-    - Động từ chính (Main Verb): Màu xanh dương đậm `#3D4AEF` (có vương miện hoặc viền phát sáng biểu thị "Trái tim của câu").
-    - Tân ngữ (Object): Màu ngọc bích `#0D9488`.
-    - Cụm bổ nghĩa (Modifier / Relative Clause): Màu xám nhạt `#64748B`.
-  * **Cung tên phụ thuộc (Dependency Arc)**: Mũi tên cong vút phía trên liên kết khối bổ nghĩa với từ trung tâm mà nó miêu tả.
-- **Chuyển động (Animation)**:
-  * Khi rút gọn mệnh đề: Hai khối chữ đại từ quan hệ (*which / who*) và trợ động từ (*is / was*) co nhỏ dần và tan biến (`opacity: 0`, `scale: 0.8`), khối động từ chính chuyển thành dạng `V-ing` (chủ động) hoặc `V-ed` (bị động) rồi trượt nhẹ vào áp sát danh từ phía trước.
+#### Model 3: Hướng Lực & Trục Tiểu Từ (Directional Force & Particle Axis)
+- **Áp dụng cho**: Cụm động từ (*Phrasal Verbs với UP, DOWN, OUT, OFF, AWAY*).
+- **Thành phần hình ảnh**: Trục hướng lực mang ý niệm: `UP` (mức năng lượng dâng đầy đỉnh điểm $\to$ hoàn tất / tăng tốc), `OUT` (hạt sáng bay ra khỏi hộp kín $\to$ lộ diện / sáng tỏ sự thật), `OFF` (ngắt tiếp xúc / rời bệ phóng).
 
-#### Primitive 4: Thước Đo Khoảng Cách Thực Tại (Epistemic Reality Distance)
-- **Áp dụng cho**: Câu điều kiện Loại 0, 1, 2, 3; Câu điều kiện hỗn hợp; Thức giả định (*Wishes / As if*).
-- **Thành phần hình ảnh**:
-  * **Mặt phẳng Thực tại (Reality Ground)**: Đường nền vững chắc màu xanh đậm, đại diện cho những gì có thật ở hiện tại và sự thật hiển nhiên.
-  * **Tầng mây Giả định (Hypothetical Sky / Alternate Universe)**: Tầng không gian lơ lửng phía trên vẽ bằng nét đứt mờ ảo.
-  * **Thước đo khoảng cách (Distance Marker)**: Mỗi bậc lùi thì tương ứng với một nấc thang rời xa thực tại:
-    - Hiện tại đơn $\to$ Thực tại 100% (Loại 0 & 1).
-    - Quá khứ đơn $\to$ Lùi 1 bước: Giả định trái ngược hiện tại (Loại 2).
-    - Quá khứ hoàn thành $\to$ Lùi 2 bước: Giả định trái ngược quá khứ hoàn toàn không thể cứu vãn (Loại 3).
-- **Chuyển động (Animation)**: Nhân vật hoặc tình huống bước lên các nấc thang khoảng cách. Càng lên cao, màu sắc càng chuyển sang tông tím pastel mờ ảo, làm bật lên bản chất: "Lùi thì = Lùi xa khỏi hiện thực".
+#### Model 4: Tiêu Cự Chú Ý & Đèn Rọi Sân Khấu (Focus Spotlight / Camera Zoom)
+- **Áp dụng cho**: Thể bị động (*Passive Voice*), Câu chẻ nhấn mạnh (*Cleft Sentences: It is/was... that...*).
+- **Thành phần hình ảnh**: Ống kính máy quay zoom cận cảnh vào kết quả hoặc đối tượng chịu tác động; chủ thể thực hiện hành động bị làm mờ nhẹ (`blur: 3px`) ở hậu cảnh hoặc ẩn hoàn toàn. Đèn rọi spotlight bật sáng đúng phần thông tin quan trọng nhất.
 
-#### Primitive 5: Trường Nhận Thức Chung (Common Ground Scope)
-- **Áp dụng cho**: Mạo từ (*A / AN, THE, ZERO ARTICLE*).
+#### Model 5: Khối Câu Tầng Bậc & Dòng Phụ Thuộc (Sentence Blocks & Dependency Arcs)
+- **Áp dụng cho**: Trật tự câu tiếng Anh, Cụm danh từ (*Noun Phrase*), Mệnh đề quan hệ & Rút gọn mệnh đề (*V-ing / V-ed / To-V*).
+- **Thành phần hình ảnh**: Chuỗi từ nằm ngang đóng trong các khối thẻ màu bo góc (*Sentence Block*); Cung tên phụ thuộc (*Dependency Arc*) uốn lượn phía trên nối từ bổ nghĩa về từ trung tâm; hiệu ứng thu nhỏ và tan biến khi rút gọn mệnh đề.
+
+#### Model 6: Thang Bậc Khoảng Cách Thực Tại (Epistemic Reality Ladder)
+- **Áp dụng cho**: Câu điều kiện Loại 0, 1, 2, 3; Câu điều kiện hỗn hợp; Thức giả định (*Wishes / Subjunctive*).
+- **Thành phần hình ảnh**: Mặt phẳng Thực tại vững chắc bên dưới; Tầng không gian Giả định nét đứt mờ ảo phía trên. Mỗi bậc lùi thì là một bước lùi rời xa Thực tại.
+
+#### Model 7: Dòng Chảy Thông Tin & Trường Nhận Thức (Information Flow & Common Ground)
+- **Áp dụng cho**: Mạo từ (*A/An/The/Zero Article*), Kỹ năng sắp xếp trật tự câu/đoạn văn tạo tính mạch lạc.
+- **Thành phần hình ảnh**: Hai vòng tròn tâm trí giao thoa (Người nói vs Người nghe); dòng thông tin trôi từ Trọng tâm đã biết (*Theme / Given Info*) sang Thông tin mới phát sinh (*Rheme / New Info*).
+
+#### Model 8: Cán Cân Song Hành (Parallel Balance Scale)
+- **Áp dụng cho**: So sánh kép (*The more..., the more...*), Cấu trúc song hành (*Not only... but also...*).
+- **Thành phần hình ảnh**: Mô hình cân đĩa vật lý hai bên dao động nhịp nhàng theo hàm `spring`; đĩa bên trái chịu tác động kéo đĩa bên phải dịch chuyển đồng pha.
 - **Thành phần hình ảnh**:
   * Hai vòng tròn giao thoa (Venn diagram): Vòng tròn A (Tâm trí người nói - Speaker's Mind), Vòng tròn B (Tâm trí người nghe - Listener's Mind).
   * `A / AN`: Một chấm sáng ngẫu nhiên nằm lơ lửng chỉ trong vòng tròn A (Người nói biết một vật thể bất kỳ, người nghe chưa từng thấy $\to$ *Indefinite*).
