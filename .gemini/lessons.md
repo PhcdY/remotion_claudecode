@@ -103,3 +103,10 @@ Chi tiết từng video: `src/videos/<slug>/FEEDBACK.md`. Thêm mục mới mỗ
   1. Khi User ở local thiếu asset/component: AI **Request trực tiếp từ User** (yêu cầu gửi ảnh tư liệu, phác thảo địa hình) $\to$ AI đọc ảnh và code thành component SVG/React trong `src/components/su/`.
   2. Người dùng sau đó nhắn gửi component cho Maintainer $\to$ Maintainer kiểm duyệt và tự tay push lên nhánh default (`gemini`).
   3. Tất cả các Creators khác chỉ cần `git pull origin gemini` là tự động có toàn bộ kho components dùng chung mới nhất để tái sử dụng ngay.
+
+
+### 08/11/2026 — Khởi tạo Gói môn Tiếng Anh: Ngữ pháp Nhận thức (Cognitive Grammar) & Xử lý Âm thanh Song ngữ
+- **Triết lý**: Xóa bỏ hội chứng học vẹt công thức toán học rời rạc ($S + V + O$, 12 thì, bảng 200 phrasal verbs). Ngôn ngữ là sự ý niệm hóa không gian (*Spatial Conceptualization*). Dùng 5 Archetypes Remotion SVG để người học "nhìn thấy" tư duy bản xứ: *Timeline Lens* (Thì & Thể), *Spatial Schema* (In/On/At & Up/Down/Out), *Hierarchical Sentence Block* (Cấu trúc câu & Rút gọn), *Epistemic Distance* (Điều kiện & Lùi thì), *Common Ground* (Mạo từ).
+- **Cơ chế Xử lý Giọng đọc Vivibe TTS cho Tiếng Anh**:
+  1. Vivibe TTS là giọng clone tiếng Việt, dễ bị nuốt âm đuôi (*final sounds: /s/, /t/, /d/*) hoặc phát âm bẹt nếu đưa câu tiếng Anh dài vào `speak`.
+  2. Giải pháp 3 lớp: Lời dẫn tiếng Việt 100% tự nhiên; Mẫu câu tiếng Anh hiển thị sắc nét bằng Typography trên màn hình; Từ vựng tiếng Anh ngắn trong `speak` viết kèm dấu ngắt `...`, bắt buộc có `caption` và đưa vào danh sách kiểm duyệt `CẦN NGHE THỬ` của `check_script.py`.
