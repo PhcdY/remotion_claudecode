@@ -21,6 +21,28 @@ ROOT = Path(__file__).resolve().parent.parent
 MON_DIR = ROOT / ".gemini" / "mon"
 if not MON_DIR.exists():
     MON_DIR = ROOT / ".claude" / "mon"
+PHONETIC_DICT_PATH = ROOT / "scripts" / "phonetic_dict.json"
+
+# Nạp từ điển phiên âm chuẩn
+PHONETIC_DICT = {}
+if PHONETIC_DICT_PATH.exists():
+    try:
+        PHONETIC_DICT = json.loads(PHONETIC_DICT_PATH.read_text(encoding="utf-8"))
+    except Exception:
+        pass
+
+# Đề xuất giọng theo phân loại môn học
+SUBJECT_VOICE_ROSTER = {
+    "toan": ("nam - c Bình", "Môn Tự nhiên — giọng dứt khoát, logic"),
+    "ly": ("nam - c Bình", "Môn Tự nhiên — giọng dứt khoát, khoa học"),
+    "hoa": ("nam - c Bình", "Môn Tự nhiên — phát âm chuẩn thuật ngữ IUPAC"),
+    "tin": ("nam - c Bình", "Môn Tự nhiên — tư duy thuật toán"),
+    "su": ("nữ - c Nhi", "Môn Xã hội — truyền cảm, giàu cảm xúc"),
+    "dia": ("nữ - c Nhi", "Môn Xã hội — biểu cảm, gần gũi"),
+    "van": ("nữ - c Nhi", "Môn Xã hội — ngân vang, lắng đọng"),
+    "ktpl": ("nữ - c Nhi", "Môn Xã hội — rõ ràng, đĩnh đạc"),
+    "anh": ("anh-male", "Môn Ngoại ngữ — mô hình đa ngôn ngữ chuẩn ngữ âm IPA"),
+}
 
 # Ước lượng thời lượng (khớp src/components/timeline.ts và đo giọng Vivibe ≈ 20 ký tự/giây)
 CHARS_PER_SEC = 20
@@ -46,6 +68,11 @@ PHONETIC = re.compile(r"(?<![\wÀ-ỹ-])[a-xzA-XZ](?![\wÀ-ỹ-])|[\wÀ-ỹ]+-(k
 CLOSERS = ("Vậy", "Nói gọn", "Đó là lý do", "Tóm lại", "Nói cách khác")
 # dấu hiệu một dòng `show` gói nhiều thay đổi
 MULTI_CHANGE = re.compile(r"\b(rồi|sau đó|tiếp theo|đồng thời|cùng lúc)\b|;|\+|→.*→")
+
+# Ký hiệu / Công thức Hóa học thô cấm xuất hiện trong speak
+RAW_CHEM = re.compile(r"\b(CH3COOH|C2H5OH|CH3COOC2H5|H2SO4|HCl|HNO3|NaOH|KOH|Fe2O3|FeO|Fe3O4|Al2O3|NaCl|CaCO3|CO2|SO2|CH4|C2H6|C2H4|C2H2|C6H6)\b", re.IGNORECASE)
+# Chữ viết tắt môn Sử/Địa/Khoa học cần phiên âm có gạch nối
+RAW_ABBR = re.compile(r"\b(ASEAN|NATO|UNESCO|WTO|DNA|RNA|APEC|TCN|SCN)\b")
 
 
 def tokens_in(phrase: str, speak: str) -> bool:
@@ -114,6 +141,10 @@ def main() -> int:
         errors.append(f"không có gói môn {MON_DIR.relative_to(ROOT)}/{subject}.md — tạo từ _mau.md cùng người dùng")
     if s.get("lop") is None or not s.get("chuong") or not s.get("bai"):
         warns.append("thiếu lop/chuong/bai (theo SGK) → video render vào out/_lam-viec/ thay vì thư mục bài")
+
+    # Gợi ý voice theo môn học
+    rec_voice = SUBJECT_VOICE_ROSTER.get(subject)
+    voice_hint = f"Môn '{subject}' — Đề xuất giọng: '{rec_voice[0]}' ({rec_voice[1]})" if rec_voice else ""
 
     beats = s.get("beats") or []
     if not beats:
@@ -202,7 +233,7 @@ def main() -> int:
             if m:
                 warns.append(f"{w}: xưng hô '{m.group(0)}' — giọng trung tính")
 
-            # --- Kiểm tra phiên âm Vivibe bắt buộc (tránh đọc sai O me, giây, êm phẩy...) ---
+            # --- Kiểm tra phiên âm Toán học bắt buộc ---
             hit_vec = re.search(r"\b(vectơ|véc tơ|véc-tơ)\s+[A-Z]\s+[A-Z]\b", speak)
             if hit_vec:
                 errors.append(f"{w}: vectơ tên ghép viết rời ('{hit_vec.group(0)}') — Vivibe sẽ đọc sai kiểu tiếng Anh ('O me'); phải viết gạch nối phiên âm như 'véc-tơ ô-mờ', 'véc-tơ a-mờ'")
@@ -215,6 +246,32 @@ def main() -> int:
             hit_end_point = re.search(r"\bđiểm\s+[A-Z][.?!]", speak)
             if hit_end_point:
                 warns.append(f"{w}: điểm đứng cuối câu ('{hit_end_point.group(0)}') — Vivibe dễ nuốt âm; nên viết phiên âm như 'điểm mờ.'")
+
+            # --- Kiểm tra Hóa học & Công thức phân tử / cấu tạo (GDPT 2018) ---
+            hit_chem = RAW_CHEM.search(speak)
+            if hit_chem:
+                errors.append(f"{w}: speak chứa công thức hóa học thô ('{hit_chem.group(0)}') — Vivibe sẽ đọc vẹt từng chữ; phải viết phiên âm tên chất (xem scripts/phonetic_dict.json)")
+
+            # Kiểm tra danh pháp IUPAC Hóa học viết nguyên tiếng Anh chưa phiên âm
+            if PHONETIC_DICT and "hoa" in PHONETIC_DICT:
+                iupac_map = PHONETIC_DICT["hoa"].get("iupac_terms", {})
+                for term, info in iupac_map.items():
+                    if re.search(rf"\b{re.escape(term)}\b", speak, re.IGNORECASE):
+                        warns.append(f"{w}: speak chứa danh pháp tiếng Anh '{term}' — nên viết phiên âm gạch nối '{info['speak']}' để giọng đọc mượt mà")
+                        listen.append(f"{w} (thuật ngữ IUPAC): {speak}")
+
+            # --- Kiểm tra chữ viết tắt Lịch sử/Địa lý/Khoa học ---
+            hit_abbr = RAW_ABBR.search(speak)
+            if hit_abbr:
+                errors.append(f"{w}: chữ viết tắt '{hit_abbr.group(0)}' trong speak — phải viết phiên âm gạch nối (vd. 'A-xê-an', 'Na-tô') để AI không đọc đánh vần")
+
+            # --- Kiểm tra tên danh nhân nước ngoài môn Sử/Địa ---
+            if PHONETIC_DICT and "su_dia" in PHONETIC_DICT:
+                names_map = PHONETIC_DICT["su_dia"].get("names", {})
+                for nm, info in names_map.items():
+                    if re.search(rf"\b{re.escape(nm)}\b", speak, re.IGNORECASE):
+                        warns.append(f"{w}: tên nước ngoài '{nm}' — nên viết phiên âm SGK '{info['speak']}' trong speak")
+                        listen.append(f"{w} (tên riêng nước ngoài): {speak}")
 
             if PHONETIC.search(speak):
                 listen.append(f"{w} (đọc ký hiệu): {speak}")
@@ -308,6 +365,9 @@ def main() -> int:
     rel = path.relative_to(ROOT) if path.is_relative_to(ROOT) else path
     n_lines = sum(len(b.get("lines") or []) for b in beats)
     print(f"{rel}: {len(beats)} beat, {n_lines} dòng, {total_chars} ký tự speak, ước tính {total_sec // 60:.0f}:{total_sec % 60:02.0f}")
+    if voice_hint:
+        print(f"👉 Gợi ý Voice: {voice_hint}")
+
     for title, items in (("LỖI", errors), ("CẢNH BÁO", warns), ("CẦN NGHE THỬ", listen)):
         if items:
             print(f"\n{title} ({len(items)})")

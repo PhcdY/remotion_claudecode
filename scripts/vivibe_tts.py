@@ -9,6 +9,7 @@ Dùng:
 
 API key: biến môi trường VIVIBE_API_KEY, hoặc dòng `VIVIBE_API_KEY=...` trong .env ở gốc project.
 Giọng: chọn mỗi lần chạy bằng --voice (người dùng báo). Tốc độ: scripts/tts_config.json (speed); beat có trường "speed" thì dùng tốc độ riêng của beat đó.
+Hỗ trợ Multi-Voice: beat hoặc line có trường "voice" riêng thì sẽ dùng giọng riêng đó (hỗ trợ phân vai đối thoại, câu mẫu tiếng Anh).
 
 Đầu ra: public/audio/<slug>/<beatId>-lNN.mp3 (mỗi dòng 1 file) + manifest.json.
 
@@ -43,9 +44,12 @@ POLL_EVERY = 2.5  # giây, theo khuyến nghị của Vivibe (2–3s)
 POLL_TIMEOUT = 300  # giây cho mỗi dòng
 BUSY_TIMEOUT = 120  # giây chờ khi tài khoản còn job khác đang chạy
 # Cắt lặng thừa ở đầu và cuối file (giữ KEEP_EDGE giây) để nghỉ giữa các dòng do B3 quyết định.
-SILENCE_DB, KEEP_EDGE = -45, 0.05
+SILENCE_DB, KEEP_EDGE = -45, 0.08
 SAFE_ID = re.compile(r"^[A-Za-z0-9_-]+$")
 LATEX_HINT = re.compile(r"[$\\^_{}]")
+
+_VOICES_CACHE: list[dict] | None = None
+_RESOLVED_CACHE: dict[str, tuple[str, str]] = {}
 
 
 class ApiError(RuntimeError):
@@ -160,8 +164,19 @@ def synthesize(key: str, ffmpeg: str, speak: str, voice: str, speed: float, out:
     wav = out.with_suffix(".tmp.wav")
     tmp = out.with_suffix(".tmp.mp3")
     try:
-        with urllib.request.urlopen(status["url"], timeout=120) as r:
-            wav.write_bytes(r.read())
+        download_err = None
+        for attempt in range(1, 4):
+            try:
+                with urllib.request.urlopen(status["url"], timeout=120) as r:
+                    wav.write_bytes(r.read())
+                if wav.stat().st_size >= 1000:
+                    download_err = None
+                    break
+            except Exception as e:
+                download_err = e
+                time.sleep(2 * attempt)
+        if download_err:
+            raise ApiError(f"Không thể tải audio từ URL sau 3 lần thử: {download_err}")
         if wav.stat().st_size < 1000:
             raise ApiError(f"File tải về quá nhỏ ({wav.stat().st_size} byte)")
         res = subprocess.run(
@@ -198,15 +213,22 @@ def load_script(path: Path) -> dict:
 
 
 def fetch_voices(key: str) -> list[dict]:
-    return rpc(key, "getUserVoices", {"limit": 100, "page": 1}, retries=3).get("items", [])
+    global _VOICES_CACHE
+    if _VOICES_CACHE is None:
+        _VOICES_CACHE = rpc(key, "getUserVoices", {"limit": 100, "page": 1}, retries=3).get("items", [])
+    return _VOICES_CACHE
 
 
 def resolve_voice(key: str, wanted: str) -> tuple[str, str]:
     """--voice nhận id hoặc tên giọng (không phân biệt hoa thường) → (id, tên)."""
+    if wanted in _RESOLVED_CACHE:
+        return _RESOLVED_CACHE[wanted]
     voices = fetch_voices(key)
     for v in voices:
         if wanted == v.get("id") or wanted.casefold() == str(v.get("name", "")).casefold():
-            return v["id"], v.get("name", v["id"])
+            res = (v["id"], v.get("name", v["id"]))
+            _RESOLVED_CACHE[wanted] = res
+            return res
     names = ", ".join(f"{v.get('name')} ({v.get('id')})" for v in voices) or "không có"
     sys.exit(f"Không thấy giọng {wanted!r}. Giọng hiện có: {names}")
 
@@ -217,7 +239,8 @@ def list_voices(key: str) -> int:
         print("Tài khoản chưa có giọng nào.")
         return 1
     for v in items:
-        print(f"{v.get('id')}  {'✓' if v.get('isActive') else '✗'}  {v.get('name')}")
+        lang = v.get("modelInfo", {}).get("apiParams", {}).get("language", "vi")
+        print(f"{v.get('id')}  {'✓' if v.get('isActive') else '✗'}  [{lang}]  {v.get('name')}")
     return 0
 
 
@@ -226,7 +249,7 @@ def main() -> int:
         stream.reconfigure(encoding="utf-8")  # console Windows mặc định cp1252
     ap = argparse.ArgumentParser(description="Tạo audio từng dòng cho script.json bằng Vivibe")
     ap.add_argument("script", type=Path, nargs="?")
-    ap.add_argument("--voice", help="id hoặc tên giọng Vivibe cho lần chạy này (bắt buộc khi tạo)")
+    ap.add_argument("--voice", help="id hoặc tên giọng Vivibe mặc định cho lần chạy này (bắt buộc khi tạo)")
     ap.add_argument("--list-voices", action="store_true", help="in danh sách giọng của tài khoản rồi thoát")
     ap.add_argument("--only", nargs="+", default=[], help="chỉ tạo các beat (b01) hoặc dòng (b01-l02) này")
     ap.add_argument("--estimate", action="store_true", help="chỉ đếm ký tự sẽ gửi, không gọi API")
@@ -234,8 +257,9 @@ def main() -> int:
     ap.add_argument("--audio-dir", help="thư mục trong public/audio/ (mặc định = slug); dùng cho bản giọng khác, vd. <slug>-nu")
     args = ap.parse_args()
 
+    key_api = load_api_key()
     if args.list_voices:
-        return list_voices(load_api_key())
+        return list_voices(key_api)
     if not args.script:
         ap.error("cần đường dẫn script.json")
 
@@ -243,8 +267,7 @@ def main() -> int:
         ap.error("cần --voice <id hoặc tên giọng> (xem --list-voices)")
     config = json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
     speed = float(config.get("speed", 1.0))
-    key_api = load_api_key()
-    voice, voice_name = resolve_voice(key_api, args.voice)
+    default_voice, default_voice_name = resolve_voice(key_api, args.voice)
 
     data = load_script(args.script)
     out_dir = ROOT / "public" / "audio" / (args.audio_dir or data["slug"])
@@ -259,6 +282,11 @@ def main() -> int:
     # Duyệt toàn bộ trước khi gọi API: lỗi kịch bản thì dừng, không tốn credit.
     rows, problems = [], []
     for beat in data["beats"]:
+        # Beat có thể chỉ định voice riêng
+        b_voice, b_voice_name = default_voice, default_voice_name
+        if beat.get("voice"):
+            b_voice, b_voice_name = resolve_voice(key_api, str(beat["voice"]))
+
         for i, line in enumerate(beat["lines"], start=1):
             key = f"{beat['id']}-l{i:02d}"
             speak = (line.get("speak") or "").strip()
@@ -266,8 +294,15 @@ def main() -> int:
                 problems.append(f"{key}: thiếu 'speak'")
             elif LATEX_HINT.search(speak):
                 problems.append(f"{key}: 'speak' còn ký hiệu toán: {speak!r}")
-            # tốc độ riêng của beat (vd. đoạn giải thích khó cần đọc chậm), mặc định theo tts_config.json
-            rows.append((beat["id"], i, key, speak, line.get("text", speak), float(beat.get("speed", speed))))
+
+            # Dòng có thể chỉ định voice riêng (ưu tiên hơn beat)
+            l_voice, l_voice_name = b_voice, b_voice_name
+            if line.get("voice"):
+                l_voice, l_voice_name = resolve_voice(key_api, str(line["voice"]))
+
+            # tốc độ riêng của beat, mặc định theo tts_config.json
+            sp = float(beat.get("speed", speed))
+            rows.append((beat["id"], i, key, speak, line.get("text", speak), sp, l_voice, l_voice_name))
     if problems:
         print("Kịch bản chưa sẵn sàng — sửa ở B1 rồi chạy lại:")
         for p in problems:
@@ -278,14 +313,17 @@ def main() -> int:
         return not args.only or beat_id in args.only or key in args.only
 
     todo = []
-    for beat_id, _, key, speak, _, sp in rows:
+    voice_counts: dict[str, int] = {}
+    for beat_id, _, key, speak, _, sp, line_voice, line_voice_name in rows:
         target = out_dir / f"{key}.mp3"
-        cached = old.get(target.name) == line_hash(voice, sp, speak) and target.exists()
+        cached = old.get(target.name) == line_hash(line_voice, sp, speak) and target.exists()
         if selected(beat_id, key) and (args.force or not cached):
-            todo.append((key, speak, target, sp))
+            todo.append((key, speak, target, sp, line_voice, line_voice_name))
+            voice_counts[line_voice_name] = voice_counts.get(line_voice_name, 0) + len(speak)
 
-    chars = sum(len(s) for _, s, _, _ in todo)
-    print(f"Giọng {voice_name} · tốc độ {speed} · {len(todo)} dòng cần tạo · {chars} ký tự (≈ {chars} credit)")
+    chars = sum(len(s) for _, s, _, _, _, _ in todo)
+    summary_voices = ", ".join(f"{v}: {c} ký tự" for v, c in voice_counts.items()) or f"{default_voice_name}: 0 ký tự"
+    print(f"Giọng chính: {default_voice_name} · tốc độ: {speed} · {len(todo)} dòng cần tạo · tổng {chars} ký tự ({summary_voices})")
     if args.estimate or not todo:
         return 0
 
@@ -293,27 +331,42 @@ def main() -> int:
     out_dir.mkdir(parents=True, exist_ok=True)
     failed: list[tuple[str, str]] = []
 
-    for key, speak, target, sp in todo:
+    for key, speak, target, sp, line_voice, line_voice_name in todo:
         try:
-            synthesize(key_api, ffmpeg, speak, voice, sp, target)
-            print(f"✓ {key}.mp3", flush=True)
+            synthesize(key_api, ffmpeg, speak, line_voice, sp, target)
+            print(f"✓ {key}.mp3 [{line_voice_name}]", flush=True)
         except Exception as e:
             failed.append((key, str(e)))
 
     failed_keys = {k for k, _ in failed}
     entries, missing = [], []
-    for beat_id, i, key, speak, text, sp in rows:
+    for beat_id, i, key, speak, text, sp, line_voice, line_voice_name in rows:
         target = out_dir / f"{key}.mp3"
-        h = line_hash(voice, sp, speak)
-        fresh = any(k == key for k, _, _, _ in todo) and key not in failed_keys
+        h = line_hash(line_voice, sp, speak)
+        fresh = any(k == key for k, _, _, _, _, _ in todo) and key not in failed_keys
         if not target.exists():
             missing.append((beat_id, key, key))
             continue
         if not fresh and old.get(target.name) != h:
             missing.append((beat_id, key, f"{key} (audio cũ, lệch kịch bản/giọng)"))
-        entries.append({"beat": beat_id, "line": i, "file": target.name, "hash": h if fresh else old.get(target.name), "text": text})
+        entries.append({
+            "beat": beat_id,
+            "line": i,
+            "file": target.name,
+            "hash": h if fresh else old.get(target.name),
+            "voice": line_voice,
+            "voice_name": line_voice_name,
+            "text": text,
+        })
 
-    manifest = {"slug": data["slug"], "engine": "vivibe", "voice": voice, "voice_name": voice_name, "speed": speed, "lines": entries}
+    manifest = {
+        "slug": data["slug"],
+        "engine": "vivibe",
+        "voice": default_voice,
+        "voice_name": default_voice_name,
+        "speed": speed,
+        "lines": entries,
+    }
     manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     print(f"\nTạo mới {len(todo) - len(failed)}, lỗi {len(failed)} → {out_dir.relative_to(ROOT)}")
