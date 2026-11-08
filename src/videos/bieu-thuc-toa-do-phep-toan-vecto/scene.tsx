@@ -1,8 +1,10 @@
 import React from "react";
-import { AutoLabelItem, AutoLabels, Rect } from "../../components/labels";
+import { Card } from "../../components/Card";
+import { AutoLabelItem, AutoLabels, Rect, segmentObstacles, textObstacle } from "../../components/labels";
 import { MathText } from "../../components/MathText";
 import { role } from "../../components/roles";
-import { colors, fontText, tint } from "../../components/theme";
+import { Arrow, Dot, Plane, Pt, RightMark, Seg } from "../../components/space";
+import { colors, tint } from "../../components/theme";
 
 // ==========================================
 // 1. HỆ TỌA ĐỘ VÀ CHIẾU PHỐI CẢNH 3D CHUẨN SGK
@@ -18,15 +20,24 @@ const SIN30 = Math.sin(Math.PI / 6);
 
 // Chiếu Cavalier chuẩn SGK:
 // Ox xiên trước-trái 30°, Oy ngang sang phải, Oz thẳng đứng lên
-export const P3D = (v: V3): [number, number] => [
+export const P3D = (v: V3): Pt => [
   OX - v[0] * K * COS30 + v[1] * K,
   OY + v[0] * K * SIN30 - v[2] * K,
 ];
 
+const add3 = (a: V3, b: V3, k = 1): V3 => [a[0] + b[0] * k, a[1] + b[1] * k, a[2] + b[2] * k];
+const lerp3 = (a: V3, b: V3, t: number): V3 => [
+  a[0] + (b[0] - a[0]) * t,
+  a[1] + (b[1] - a[1]) * t,
+  a[2] + (b[2] - a[2]) * t,
+];
+const mid = (a: Pt, b: Pt): Pt => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+const sub = (a: Pt, b: Pt): Pt => [a[0] - b[0], a[1] - b[1]];
+
 // Helper nhãn AutoLabels
 const lab = (
   id: string,
-  at: [number, number],
+  at: Pt,
   text: string,
   o: number,
   color: string = colors.text,
@@ -43,145 +54,21 @@ const lab = (
 });
 
 // ==========================================
-// 2. CÁC ĐỐI TƯỢNG ĐỒ HỌA 3D (SVG)
-// ==========================================
-
-const Line3D: React.FC<{
-  a: V3;
-  b: V3;
-  color: string;
-  w?: number;
-  o?: number;
-  dash?: boolean;
-}> = ({ a, b, color, w = 3.5, o = 1, dash }) => {
-  if (o <= 0) return null;
-  const [x1, y1] = P3D(a);
-  const [x2, y2] = P3D(b);
-  return (
-    <line
-      x1={x1}
-      y1={y1}
-      x2={x2}
-      y2={y2}
-      stroke={color}
-      strokeWidth={w}
-      opacity={o}
-      strokeDasharray={dash ? "8 6" : undefined}
-      strokeLinecap="round"
-    />
-  );
-};
-
-export const Arrow3D: React.FC<{
-  a: V3;
-  b: V3;
-  color: string;
-  w?: number;
-  o?: number;
-  arrowSize?: number;
-}> = ({ a, b, color, w = 4.5, o = 1, arrowSize = 14 }) => {
-  if (o <= 0) return null;
-  const [x1, y1] = P3D(a);
-  const [x2, y2] = P3D(b);
-  const dx = x2 - x1;
-  const dy = y2 - y1;
-  const len = Math.hypot(dx, dy);
-  if (len < 5) return null;
-  const ux = dx / len;
-  const uy = dy / len;
-  const px = -uy;
-  const py = ux;
-
-  const tipX = x2;
-  const tipY = y2;
-  const baseLen = arrowSize * 1.5;
-  const baseW = arrowSize * 0.75;
-  const baseX = tipX - ux * baseLen;
-  const baseY = tipY - uy * baseLen;
-  const leftX = baseX + px * baseW;
-  const leftY = baseY + py * baseW;
-  const rightX = baseX - px * baseW;
-  const rightY = baseY - py * baseW;
-
-  return (
-    <g opacity={o}>
-      <line
-        x1={x1}
-        y1={y1}
-        x2={baseX}
-        y2={baseY}
-        stroke={color}
-        strokeWidth={w}
-        strokeLinecap="round"
-      />
-      <polygon
-        points={`${tipX},${tipY} ${leftX},${leftY} ${rightX},${rightY}`}
-        fill={color}
-      />
-    </g>
-  );
-};
-
-const Dot3D: React.FC<{
-  pos: V3;
-  r?: number;
-  color?: string;
-  o?: number;
-}> = ({ pos, r = 7, color = role.focus, o = 1 }) => {
-  if (o <= 0) return null;
-  const [px, py] = P3D(pos);
-  return (
-    <g opacity={o}>
-      <circle cx={px} cy={py} r={r + 3} fill={colors.bg} />
-      <circle cx={px} cy={py} r={r} fill={color} />
-    </g>
-  );
-};
-
-// Icon máy bay tinh tế
-const AirplaneIcon: React.FC<{
-  x: number;
-  y: number;
-  angleDeg: number;
-  scale?: number;
-  o?: number;
-  color?: string;
-}> = ({ x, y, angleDeg, scale = 1, o = 1, color = role.focus }) => {
-  if (o <= 0) return null;
-  return (
-    <g
-      transform={`translate(${x}, ${y}) rotate(${angleDeg}) scale(${scale})`}
-      opacity={o}
-      pointerEvents="none"
-    >
-      <circle cx={0} cy={0} r={28} fill={color} opacity={0.15} />
-      <path
-        d="M 0 -22 L 6 -6 L 24 2 L 24 7 L 6 4 L 4 18 L 10 22 L 10 25 L 0 23 L -10 25 L -10 22 L -4 18 L -6 4 L -24 7 L -24 2 L -6 -6 Z"
-        fill={color}
-        stroke="#ffffff"
-        strokeWidth={2}
-        strokeLinejoin="round"
-      />
-    </g>
-  );
-};
-
-// ==========================================
-// 3. TRẠNG THÁI CẢNH 1 (BUỒNG LÁI / RADAR)
+// 2. TRẠNG THÁI CẢNH 1 (BUỒNG LÁI / RADAR)
 // ==========================================
 
 export interface StScene1 {
   radarOp: number;
   planeX: number; // Tọa độ máy bay
   planeY: number;
-  planeAngle: number;
+  planeAngle: number; // Góc xoay máy bay (deg)
   engineVecOp: number; // Mũi tên vận tốc động cơ v1
   windVecOp: number;   // Mũi tên gió tạt v2
   actualVecOp: number; // Mũi tên vận tốc thực tế v
   flightDisplayOp: number; // Bảng điện tử buồng lái
   parallelogramOp: number; // Khung hình bình hành nét đứt
-  calcStepsOp: number; // Chi tiết 3 phép tính cộng
-  safeStatusOp: number; // Nhãn hạ cánh an toàn
+  calcStepsOp: number;     // 3 bước cộng hiển thị trên bảng
+  safeStatusOp: number;    // Trạng thái an toàn kết thúc
 }
 
 export const ZERO1: StScene1 = {
@@ -204,56 +91,53 @@ export const Scene1: React.FC<{ st: StScene1 }> = ({ st }) => {
   const px = st.planeX;
   const py = st.planeY;
 
-  // Điểm đầu mũi tên v1 (800 km/h: dài 260px sang phải)
-  const v1TipX = px + 260;
-  const v1TipY = py;
-
-  // Vectơ gió v2 (-40; 60; 10): lệch trái 20px, xuống 70px
+  // Đầu mút vector trên màn hình radar
+  const v1Tip: Pt = [px + 240, py];
   const v2Dx = -20;
   const v2Dy = 70;
-  const v2TipX = px + v2Dx;
-  const v2TipY = py + v2Dy;
-
-  // Vectơ tổng hợp v = v1 + v2
-  const vActualTipX = v1TipX + v2Dx;
-  const vActualTipY = v1TipY + v2Dy;
+  const v2Tip: Pt = [px + v2Dx, py + v2Dy];
+  const vActualTip: Pt = [v1Tip[0] + v2Dx, v1Tip[1] + v2Dy];
 
   const obstacles: Rect[] = [
-    { x: px - 80, y: py - 60, w: 160, h: 120 },
-    { x: 1200, y: 180, w: 600, h: 480 },
+    { x: px - 80, y: py - 60, w: 160, h: 120 }, // Vùng an toàn quanh máy bay
+    { x: 1200, y: 150, w: 660, h: 620 }, // Bảng điều khiển góc phải
   ];
 
   const labels: AutoLabelItem[] = [
-    lab("v1", [px + 140, py - 40], "$\\vec{v}_1 = (800; 0; 0)$", st.engineVecOp, role.focus, {
-      prefer: ["n"],
+    lab("v1", [px + 200, py - 40], "$\\vec{v}_1 = (800;\\, 0;\\, 0)$", st.engineVecOp, role.focus, {
+      prefer: ["ne", "n"],
       size: 38,
+      phases: ["b01", "b02", "b10"],
     }),
-    lab("v2", [px - 60, py + 50], "$\\vec{v}_2 = (-40; 60; 10)$", st.windVecOp, role.warn, {
+    lab("v2", [px - 60, py + 50], "$\\vec{v}_2 = (-40;\\, 60;\\, 10)$", st.windVecOp, role.warn, {
       prefer: ["sw"],
       size: 36,
+      phases: ["b01", "b02", "b10"],
     }),
-    lab("v_actual", [vActualTipX + 20, vActualTipY + 20], "$\\vec{v} = (760; 60; 10)$", st.actualVecOp, role.up, {
-      prefer: ["se"],
+    lab("v_actual", [vActualTip[0] + 30, vActualTip[1] + 25], "$\\vec{v} = (760;\\, 60;\\, 10)$", st.actualVecOp, role.up, {
+      prefer: ["se", "e"],
       size: 40,
+      phases: ["b01", "b02", "b10"],
     }),
   ];
 
   return (
     <div style={{ position: "absolute", inset: 0, opacity: st.radarOp }}>
       <svg width={1920} height={1080} style={{ position: "absolute", inset: 0 }}>
-        {/* Nền radar và vạch tọa độ định hướng buồng lái mờ */}
-        <g opacity={0.35}>
-          <circle cx={960} cy={540} r={280} fill="none" stroke={role.main} strokeWidth={1.5} strokeDasharray="6 6" />
-          <circle cx={960} cy={540} r={480} fill="none" stroke={role.main} strokeWidth={1.5} strokeDasharray="8 8" />
-          <line x1={200} y1={540} x2={1720} y2={540} stroke={role.main} strokeWidth={1.5} />
-          <line x1={960} y1={120} x2={960} y2={960} stroke={role.main} strokeWidth={1.5} />
+        {/* Nền màn hình định vị Radar */}
+        <g opacity={st.radarOp}>
+          <circle cx={960} cy={540} r={460} fill="none" stroke={role.main} strokeWidth={1.5} strokeDasharray="6 6" opacity={0.3} />
+          <circle cx={960} cy={540} r={320} fill="none" stroke={role.main} strokeWidth={1.5} strokeDasharray="6 6" opacity={0.4} />
+          <circle cx={960} cy={540} r={180} fill="none" stroke={role.main} strokeWidth={1.5} opacity={0.35} />
+          <line x1={500} y1={540} x2={1420} y2={540} stroke={role.main} strokeWidth={1.5} opacity={0.3} />
+          <line x1={960} y1={120} x2={960} y2={960} stroke={role.main} strokeWidth={1.5} opacity={0.3} />
         </g>
 
-        {/* Khung hình bình hành nét đứt (quy tắc hình học 3D) */}
+        {/* Khung hình bình hành nét đứt */}
         {st.parallelogramOp > 0 && (
           <g opacity={st.parallelogramOp}>
             <polygon
-              points={`${px},${py} ${v1TipX},${v1TipY} ${vActualTipX},${vActualTipY} ${v2TipX},${v2TipY}`}
+              points={`${px},${py} ${v1Tip[0]},${v1Tip[1]} ${vActualTip[0]},${vActualTip[1]} ${v2Tip[0]},${v2Tip[1]}`}
               fill={tint(role.warn, 0.08)}
               stroke={role.warn}
               strokeWidth={2.5}
@@ -262,65 +146,17 @@ export const Scene1: React.FC<{ st: StScene1 }> = ({ st }) => {
           </g>
         )}
 
-        {/* Mũi tên vận tốc động cơ v1 */}
-        {st.engineVecOp > 0 && (
-          <g opacity={st.engineVecOp}>
-            <line
-              x1={px}
-              y1={py}
-              x2={v1TipX}
-              y2={v1TipY}
-              stroke={role.focus}
-              strokeWidth={5}
-              strokeLinecap="round"
-            />
-            <polygon
-              points={`${v1TipX},${v1TipY} ${v1TipX - 16},${v1TipY - 8} ${v1TipX - 16},${v1TipY + 8}`}
-              fill={role.focus}
-            />
-          </g>
-        )}
+        {/* Mũi tên vận tốc động cơ v1 (dùng component Arrow chuẩn) */}
+        <Arrow a={[px, py]} b={v1Tip} color={role.focus} w={5} o={st.engineVecOp} arrowSize={15} />
 
         {/* Mũi tên gió v2 */}
-        {st.windVecOp > 0 && (
-          <g opacity={st.windVecOp}>
-            <line
-              x1={px}
-              y1={py}
-              x2={v2TipX}
-              y2={v2TipY}
-              stroke={role.warn}
-              strokeWidth={4.5}
-              strokeLinecap="round"
-            />
-            <polygon
-              points={`${v2TipX},${v2TipY} ${v2TipX + 16},${v2TipY - 5} ${v2TipX + 8},${v2TipY - 16}`}
-              fill={role.warn}
-            />
-          </g>
-        )}
+        <Arrow a={[px, py]} b={v2Tip} color={role.warn} w={4.5} o={st.windVecOp} arrowSize={14} />
 
         {/* Mũi tên vận tốc thực tế v */}
-        {st.actualVecOp > 0 && (
-          <g opacity={st.actualVecOp}>
-            <line
-              x1={px}
-              y1={py}
-              x2={vActualTipX}
-              y2={vActualTipY}
-              stroke={role.up}
-              strokeWidth={6}
-              strokeLinecap="round"
-            />
-            <polygon
-              points={`${vActualTipX},${vActualTipY} ${vActualTipX - 18},${vActualTipY - 8} ${vActualTipX - 14},${vActualTipY + 10}`}
-              fill={role.up}
-            />
-          </g>
-        )}
+        <Arrow a={[px, py]} b={vActualTip} color={role.up} w={6} o={st.actualVecOp} arrowSize={18} />
 
-        {/* Biểu tượng máy bay */}
-        <AirplaneIcon x={px} y={py} angleDeg={st.planeAngle} scale={1.2} />
+        {/* Biểu tượng máy bay xoay đúng hướng vận tốc tức thời */}
+        <Plane x={px} y={py} deg={st.planeAngle} s={0.72} color={role.focus} o={st.radarOp} />
       </svg>
 
       {/* Nhãn tự động tránh nhau */}
@@ -328,135 +164,122 @@ export const Scene1: React.FC<{ st: StScene1 }> = ({ st }) => {
 
       {/* Bảng điện tử buồng lái (Flight Display) bên phải */}
       {st.flightDisplayOp > 0 && (
-        <div
-          data-box="flight-display"
+        <Card
+          group="flight-display"
           style={{
-            position: "absolute",
-            right: 100,
-            top: 140,
-            width: 580,
-            padding: "24px 32px",
-            backgroundColor: "rgba(255, 255, 255, 0.95)",
-            borderRadius: 20,
-            boxShadow: "0 18px 48px rgba(15, 23, 42, 0.12)",
+            right: 80,
+            top: 200,
+            width: 640,
+            padding: "32px 36px",
             border: `2px solid ${role.focus}`,
-            opacity: st.flightDisplayOp,
             boxSizing: "border-box",
+            opacity: st.flightDisplayOp,
           }}
         >
-          <div
-            style={{
-              fontFamily: fontText,
-              fontSize: 26,
-              fontWeight: 800,
-              color: role.focus,
-              letterSpacing: "0.06em",
-              marginBottom: 16,
-              textTransform: "uppercase",
-            }}
-          >
-            Hệ thống lái tự động (FMS)
+          <div style={{ fontSize: 22, fontWeight: 800, color: role.focus, letterSpacing: 1.5, marginBottom: 16 }}>
+            FLIGHT COMPUTER — VECTOR SUM
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-            <div style={{ fontSize: 32, fontWeight: 700, color: colors.text }}>
-              Động cơ: <MathText text="$\vec{v}_1 = (800; 0; 0)$" />
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 26, fontWeight: 700 }}>
+              <span style={{ color: role.focus }}><MathText text="$\\vec{v}_1$ (động cơ):" /></span>
+              <span style={{ color: colors.text, whiteSpace: "nowrap" }}><MathText text="$(800;\\, 0;\\, 0)$" /></span>
             </div>
-            <div style={{ fontSize: 32, fontWeight: 700, color: role.warn }}>
-              Gió tạt: <MathText text="$\vec{v}_2 = (-40; 60; 10)$" />
+
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 26, fontWeight: 700 }}>
+              <span style={{ color: role.warn }}><MathText text="$\\vec{v}_2$ (gió tạt):" /></span>
+              <span style={{ color: colors.text, whiteSpace: "nowrap" }}><MathText text="$(-40;\\, 60;\\, 10)$" /></span>
+            </div>
+
+            <div
+              style={{
+                marginTop: 8,
+                padding: "16px 20px",
+                backgroundColor: tint(role.up, 0.12),
+                borderRadius: 16,
+                border: `2px solid ${role.up}`,
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                fontSize: 28,
+                fontWeight: 800,
+                color: role.up,
+                whiteSpace: "nowrap",
+              }}
+            >
+              <span><MathText text="$\\vec{v} = \\vec{v}_1 + \\vec{v}_2$:" /></span>
+              <span><MathText text="$(760;\\, 60;\\, 10)$" /></span>
             </div>
 
             {st.calcStepsOp > 0 && (
               <div
                 style={{
-                  marginTop: 12,
-                  paddingTop: 16,
-                  borderTop: `2px dashed ${colors.panelBorder}`,
+                  marginTop: 6,
+                  padding: "12px 18px",
+                  backgroundColor: colors.bg,
+                  borderRadius: 12,
+                  fontSize: 22,
+                  fontWeight: 600,
+                  color: colors.muted,
                   opacity: st.calcStepsOp,
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 10,
                 }}
               >
-                <div style={{ fontSize: 30, color: colors.muted }}>
-                  Trục x: <MathText text="$800 + (-40) = 760$" />
-                </div>
-                <div style={{ fontSize: 30, color: colors.muted }}>
-                  Trục y: <MathText text="$0 + 60 = 60$" />
-                </div>
-                <div style={{ fontSize: 30, color: colors.muted }}>
-                  Trục z: <MathText text="$0 + 10 = 10$" />
-                </div>
+                <div>• Trục Ox: 800 + (-40) = 760</div>
+                <div>• Trục Oy: 0 + 60 = 60</div>
+                <div>• Trục Oz: 0 + 10 = 10</div>
               </div>
             )}
-
-            <div
-              style={{
-                marginTop: 14,
-                padding: "16px 20px",
-                backgroundColor: tint(role.up, 0.12),
-                borderRadius: 14,
-                border: `1.5px solid ${role.up}`,
-                fontSize: 34,
-                fontWeight: 800,
-                color: role.up,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
-            >
-              <span>Vận tốc thực:</span>
-              <MathText text="$\vec{v} = (760; 60; 10)$" />
-            </div>
 
             {st.safeStatusOp > 0 && (
               <div
                 style={{
-                  marginTop: 6,
-                  fontSize: 28,
-                  fontWeight: 700,
+                  marginTop: 8,
+                  padding: "12px 18px",
+                  backgroundColor: tint(role.up, 0.16),
+                  borderRadius: 12,
                   color: role.up,
+                  fontSize: 24,
+                  fontWeight: 800,
                   textAlign: "center",
                   opacity: st.safeStatusOp,
                 }}
               >
-                ✓ Bù gió tự động — Hạ cánh chuẩn xác
+                ✓ TÍNH TOÁN TỨC THÌ — HẠ CÁNH AN TOÀN
               </div>
             )}
           </div>
-        </div>
+        </Card>
       )}
     </div>
   );
 };
 
 // ==========================================
-// 4. TRẠNG THÁI CẢNH 2 (HỆ TOẠ ĐỘ Oxyz & CÁC PHÉP TOÁN)
+// 3. TRẠNG THÁI CẢNH 2 (KHÔNG GIAN Oxyz & PHÉP TOÁN)
 // ==========================================
 
 export interface StScene2 {
   stageOp: number;
-  axesOp: number;
-  unitVectorsOp: number; // i, j, k
-  vectorUOp: number;     // u = (x, y, z)
-  uWalkStepsOp: number;  // 3 bước đi dọc 3 trục
-  // Phép cộng u + v
-  vectorVOp: number;     // v nối tiếp ngọn u
-  vWalkStepsOp: number;  // các bước đi của v
-  sumFormulaOp: number;  // u + v = (x1+x2; ...)
-  sumVectorOp: number;   // Vectơ tổng nối từ O đến ngọn v
-  // Phép trừ và phép nhân số k
-  negVectorVOp: number;  // -v nối tiếp ngọn u cho phép trừ
-  diffVectorOp: number;  // u - v = (x1-x2; ...)
-  scalarKOp: number;     // k u = (kx; ky; kz)
+  axesOp: number;          // Hệ trục Oxyz
+  unitVectorsOp: number;   // Vectơ đơn vị i, j, k
+  vectorUOp: number;       // Vectơ u = (3; 4; 4)
+  uStep: number;           // 0: u(x; y; z), 1: u ngắn gọn
+  uDashedOp: number;       // Nét dóng toạ độ bám sát u
+  vSlide: number;          // 0: ở gốc O, 1: tịnh tiến trượt sang ngọn u
+  vectorVOp: number;       // Vectơ v = (2; 3; -1)
+  vWalkStepsOp: number;    // Nét dóng bước đi của v
+  sumFormulaOp: number;    // Thẻ công thức cộng
+  sumVectorOp: number;     // Vectơ tổng u + v
+  negVectorVOp: number;    // Vectơ đối -v
+  diffVectorOp: number;    // Thẻ công thức trừ
+  scalarKOp: number;       // Nhân số k: k*u
   // Tích vô hướng
-  dotProductFormulaOp: number; // Biểu thức khai triển 9 số hạng
-  dotCrossTermsFadeOp: number; // 6 số hạng chéo triệt tiêu về 0
-  dotSquareTermsOp: number;    // 3 số hạng bình phương = 1
+  dotProductFormulaOp: number; // Khai triển 9 số hạng
+  dotCrossTermsFadeOp: number; // 6 số hạng tích chéo = 0
+  dotSquareTermsOp: number;    // 3 số hạng cùng trục = 1
   dotResultFormulaOp: number;  // u . v = x1x2 + y1y2 + z1z2
   // Độ dài & vuông góc
   lengthFormulaOp: number;     // |u| = sqrt(...)
-  boxContainerOp: number;      // Hình hộp chữ nhật
   perpendicularOp: number;     // u vuông góc v <=> u.v = 0
   // Thẻ so sánh Đúng/Sai (Bẫy thường gặp)
   trapCompareCardOp: number;
@@ -469,7 +292,9 @@ export const ZERO2: StScene2 = {
   axesOp: 0,
   unitVectorsOp: 0,
   vectorUOp: 0,
-  uWalkStepsOp: 0,
+  uStep: 0,
+  uDashedOp: 0,
+  vSlide: 0,
   vectorVOp: 0,
   vWalkStepsOp: 0,
   sumFormulaOp: 0,
@@ -482,7 +307,6 @@ export const ZERO2: StScene2 = {
   dotSquareTermsOp: 0,
   dotResultFormulaOp: 0,
   lengthFormulaOp: 0,
-  boxContainerOp: 0,
   perpendicularOp: 0,
   trapCompareCardOp: 0,
   summaryCardOp: 0,
@@ -492,34 +316,181 @@ export const Scene2: React.FC<{ st: StScene2 }> = ({ st }) => {
   if (st.stageOp <= 0) return null;
 
   // Tọa độ vector mẫu chuẩn hình học:
-  // u = (3; 4; 4)
   const uPos: V3 = [3, 4, 4];
-  // v = (2; 3; -1)
   const vPos: V3 = [2, 3, -1];
-  // u + v = (5; 7; 3)
-  const sumPos: V3 = [uPos[0] + vPos[0], uPos[1] + vPos[1], uPos[2] + vPos[2]];
-  // Trung điểm của v để neo nhãn chính xác
-  const vMid: V3 = [uPos[0] + vPos[0] / 2, uPos[1] + vPos[1] / 2, uPos[2] + vPos[2] / 2];
-  // k*u với k = 1.5
+  const sumPos: V3 = [uPos[0] + vPos[0], uPos[1] + vPos[1], uPos[2] + vPos[2]]; // [5, 7, 3]
   const kuPos: V3 = [uPos[0] * 1.5, uPos[1] * 1.5, uPos[2] * 1.5];
 
+  const PO = P3D([0, 0, 0]);
+  const uTip = P3D(uPos);
+  const uFloor = P3D([uPos[0], uPos[1], 0]);
+  const uOnX = P3D([uPos[0], 0, 0]);
+  const uOnY = P3D([0, uPos[1], 0]);
+
+  // Hoạt hoạ tịnh tiến mượt mà của v: trượt từ gốc O sang ngọn u
+  const vBase3 = lerp3([0, 0, 0], uPos, st.vSlide);
+  const vBase = P3D(vBase3);
+  const vTip = P3D(add3(vBase3, vPos));
+  const vMid = mid(vBase, vTip);
+
+  // Vectơ đối -v
+  const negVTip = P3D(add3(uPos, [-vPos[0], -vPos[1], -vPos[2]]));
+  const negVMid = mid(uTip, negVTip);
+
+  // Đăng ký trục toạ độ và các đường nét chính làm vật cản để nhãn không bao giờ cắt qua
   const obstacles: Rect[] = [
-    { x: OX - 100, y: OY - 60, w: 140, h: 100 }, // Gốc O
-    { x: 1220, y: 120, w: 620, h: 680 }, // Khu vực thẻ công thức góc phải
+    ...segmentObstacles(PO[0] - 40, PO[1] + 20, P3D([5.8, 0, 0])[0], P3D([5.8, 0, 0])[1], 6), // Trục Ox
+    ...segmentObstacles(PO[0] + 20, PO[1], P3D([0, 7.6, 0])[0], P3D([0, 7.6, 0])[1], 6), // Trục Oy
+    ...segmentObstacles(PO[0], PO[1] - 20, P3D([0, 0, 6.4])[0], P3D([0, 0, 6.4])[1], 6), // Trục Oz
   ];
 
+  if (st.sumFormulaOp > 0 || st.dotProductFormulaOp > 0) {
+    obstacles.push(textObstacle(1180, 120, 680, 720)); // Khu vực thẻ công thức góc phải
+  }
+
   const labels: AutoLabelItem[] = [
-    lab("axis_x", P3D([5.5, 0, 0]), "$x$", st.axesOp, role.main, { prefer: ["sw"] }),
-    lab("axis_y", P3D([0, 7.3, 0]), "$y$", st.axesOp, role.main, { prefer: ["n"] }),
-    lab("axis_z", P3D([0, 0, 6.2]), "$z$", st.axesOp, role.main, { prefer: ["n"] }),
-    lab("vec_i", P3D([1.2, 0, 0]), "$\\vec{i}$", st.unitVectorsOp, role.focus, { prefer: ["sw"] }),
-    lab("vec_j", P3D([0, 1.2, 0]), "$\\vec{j}$", st.unitVectorsOp, role.focus, { prefer: ["n"] }),
-    lab("vec_k", P3D([0, 0, 1.2]), "$\\vec{k}$", st.unitVectorsOp, role.focus, { prefer: ["w"] }),
-    lab("vec_u", P3D(uPos), "$\\vec{u}(x; y; z)$", st.vectorUOp, role.focus, { prefer: ["ne"], size: 38 }),
-    lab("vec_v", P3D(vMid), "$\\vec{v}$", st.vectorVOp, role.warn, { prefer: ["e"], size: 36 }),
-    lab("vec_sum", P3D(sumPos), "$\\vec{u} + \\vec{v}$", st.sumVectorOp, role.up, { prefer: ["ne"], size: 38 }),
-    lab("vec_ku", P3D(kuPos), "$k\\vec{u}$", st.scalarKOp, role.focus, { prefer: ["ne"], size: 38 }),
+    {
+      id: "axis_x",
+      phases: ["b03", "b04", "b05", "b06", "b07", "b08"],
+      x: P3D([5.5, 0, 0])[0],
+      y: P3D([5.5, 0, 0])[1],
+      text: "$x$",
+      color: role.main,
+      opacity: st.axesOp,
+      prefer: ["sw"],
+    },
+    {
+      id: "axis_y",
+      phases: ["b03", "b04", "b05", "b06", "b07", "b08"],
+      x: P3D([0, 7.3, 0])[0],
+      y: P3D([0, 7.3, 0])[1],
+      text: "$y$",
+      color: role.main,
+      opacity: st.axesOp,
+      prefer: ["n"],
+    },
+    {
+      id: "axis_z",
+      phases: ["b03", "b04", "b05", "b06", "b07", "b08"],
+      x: P3D([0, 0, 6.2])[0],
+      y: P3D([0, 0, 6.2])[1],
+      text: "$z$",
+      color: role.main,
+      opacity: st.axesOp,
+      prefer: ["n"],
+    },
+    {
+      id: "origin_O",
+      phases: ["b03", "b04", "b05", "b06", "b07", "b08"],
+      x: PO[0] - 26,
+      y: PO[1] - 18,
+      text: "$O$",
+      color: colors.muted,
+      opacity: st.axesOp,
+      prefer: ["nw"],
+      size: 38,
+    },
+    {
+      id: "vec_i",
+      phases: ["b03"],
+      x: P3D([1.2, 0, 0])[0],
+      y: P3D([1.2, 0, 0])[1],
+      text: "$\\vec{i}$",
+      color: role.focus,
+      opacity: st.unitVectorsOp,
+      prefer: ["sw"],
+    },
+    {
+      id: "vec_j",
+      phases: ["b03", "b06", "b07"],
+      x: P3D([0, 1.2, 0])[0],
+      y: P3D([0, 1.2, 0])[1],
+      text: "$\\vec{j}$",
+      color: role.focus,
+      opacity: st.unitVectorsOp,
+      prefer: ["n"],
+    },
+    {
+      id: "vec_k",
+      phases: ["b03"],
+      x: P3D([0, 0, 1.2])[0],
+      y: P3D([0, 0, 1.2])[1],
+      text: "$\\vec{k}$",
+      color: role.focus,
+      opacity: st.unitVectorsOp,
+      prefer: ["e"],
+    },
+    {
+      id: "vec_u_coords",
+      phases: ["b03"],
+      x: uTip[0],
+      y: uTip[1],
+      text: "$\\vec{u}(x;\\,y;\\,z)$",
+      color: role.focus,
+      opacity: st.vectorUOp * (1 - st.uStep),
+      prefer: ["ne", "n"],
+      size: 40,
+    },
+    {
+      id: "vec_u",
+      phases: ["b04", "b05", "b06", "b07", "b08"],
+      x: uTip[0],
+      y: uTip[1],
+      text: "$\\vec{u}$",
+      color: role.focus,
+      opacity: st.vectorUOp * st.uStep,
+      prefer: ["nw", "n"],
+      size: 40,
+    },
+    {
+      id: "vec_v",
+      phases: ["b04"],
+      x: vMid[0],
+      y: vMid[1],
+      text: "$\\vec{v}$",
+      color: role.warn,
+      opacity: st.vectorVOp,
+      prefer: ["e", "ne"],
+      size: 38,
+    },
+    {
+      id: "vec_sum",
+      phases: ["b04"],
+      x: P3D(sumPos)[0],
+      y: P3D(sumPos)[1],
+      text: "$\\vec{u} + \\vec{v}$",
+      color: role.up,
+      opacity: st.sumVectorOp,
+      prefer: ["ne", "e"],
+      size: 40,
+    },
+    {
+      id: "vec_neg_v",
+      phases: ["b05"],
+      x: negVMid[0],
+      y: negVMid[1],
+      text: "$-\\vec{v}$",
+      color: role.warn,
+      opacity: st.negVectorVOp,
+      prefer: ["w", "sw"],
+      size: 38,
+    },
+    {
+      id: "vec_ku",
+      phases: ["b05"],
+      x: P3D(kuPos)[0],
+      y: P3D(kuPos)[1],
+      text: "$k\\vec{u}$",
+      color: role.focus,
+      opacity: st.scalarKOp,
+      prefer: ["ne", "e"],
+      size: 40,
+    },
   ];
+
+  // Vectơ vuông góc b08
+  const pU = P3D([3.5, 0, 0]);
+  const pV = P3D([0, 4.5, 0]);
 
   return (
     <div style={{ position: "absolute", inset: 0, opacity: st.stageOp }}>
@@ -527,133 +498,75 @@ export const Scene2: React.FC<{ st: StScene2 }> = ({ st }) => {
         {/* Hệ trục tọa độ Oxyz */}
         {st.axesOp > 0 && (
           <g opacity={st.axesOp}>
-            {/* Trục Ox */}
-            <Arrow3D a={[0, 0, 0]} b={[5.8, 0, 0]} color={role.main} w={3.5} />
-            {/* Trục Oy */}
-            <Arrow3D a={[0, 0, 0]} b={[0, 7.6, 0]} color={role.main} w={3.5} />
-            {/* Trục Oz */}
-            <Arrow3D a={[0, 0, 0]} b={[0, 0, 6.4]} color={role.main} w={3.5} />
+            {/* Trục Ox, Oy, Oz chuẩn Arrow */}
+            <Arrow a={PO} b={P3D([5.8, 0, 0])} color={role.main} w={3.5} arrowSize={13} />
+            <Arrow a={PO} b={P3D([0, 7.6, 0])} color={role.main} w={3.5} arrowSize={13} />
+            <Arrow a={PO} b={P3D([0, 0, 6.4])} color={role.main} w={3.5} arrowSize={13} />
 
             {/* Gốc O */}
-            <Dot3D pos={[0, 0, 0]} r={6} color={role.main} />
-            <text
-              x={OX - 32}
-              y={OY + 24}
-              fontFamily={fontText}
-              fontWeight={800}
-              fontSize={32}
-              fill={role.main}
-            >
-              O
-            </text>
+            <Dot p={PO} r={6} color={role.main} />
           </g>
         )}
 
-        {/* Ba vectơ đơn vị i, j, k */}
+        {/* Vectơ đơn vị i, j, k */}
         {st.unitVectorsOp > 0 && (
           <g opacity={st.unitVectorsOp}>
-            <Arrow3D a={[0, 0, 0]} b={[1, 0, 0]} color={role.focus} w={5.5} arrowSize={16} />
-            <Arrow3D a={[0, 0, 0]} b={[0, 1, 0]} color={role.focus} w={5.5} arrowSize={16} />
-            <Arrow3D a={[0, 0, 0]} b={[0, 0, 1]} color={role.focus} w={5.5} arrowSize={16} />
+            <Arrow a={PO} b={P3D([1, 0, 0])} color={role.focus} w={4.5} arrowSize={12} />
+            <Arrow a={PO} b={P3D([0, 1, 0])} color={role.focus} w={4.5} arrowSize={12} />
+            <Arrow a={PO} b={P3D([0, 0, 1])} color={role.focus} w={4.5} arrowSize={12} />
           </g>
         )}
 
-        {/* Các bước đi dời tọa độ của vectơ u: O -> (x,0,0) -> (x,y,0) -> (x,y,z) */}
-        {st.uWalkStepsOp > 0 && (
-          <g opacity={st.uWalkStepsOp}>
-            <Line3D a={[0, 0, 0]} b={[uPos[0], 0, 0]} color={role.focus} w={4} dash />
-            <Line3D a={[uPos[0], 0, 0]} b={[uPos[0], uPos[1], 0]} color={role.focus} w={4} dash />
-            <Line3D a={[uPos[0], uPos[1], 0]} b={uPos} color={role.focus} w={4} dash />
-            <Dot3D pos={[uPos[0], uPos[1], 0]} r={5} color={role.focus} />
+        {/* Nét dóng toạ độ 3D bám sát đỉnh vectơ u (không vẽ khung hộp thừa) */}
+        {st.uDashedOp > 0 && (
+          <g opacity={st.uDashedOp}>
+            <Seg a={uTip} b={uFloor} color={role.focus} w={2.5} dash="6 4" />
+            <Seg a={uFloor} b={uOnX} color={role.main} w={2} dash="6 4" />
+            <Seg a={uFloor} b={uOnY} color={role.main} w={2} dash="6 4" />
+            <Dot p={uFloor} r={5} color={role.focus} />
           </g>
         )}
 
         {/* Vectơ u */}
         {st.vectorUOp > 0 && (
-          <g opacity={st.vectorUOp}>
-            <Arrow3D a={[0, 0, 0]} b={uPos} color={role.focus} w={6} arrowSize={18} />
-            <Dot3D pos={uPos} r={8} color={role.focus} />
-          </g>
+          <Arrow a={PO} b={uTip} color={role.focus} w={5.5} o={st.vectorUOp} arrowSize={16} />
         )}
 
-        {/* Vectơ v nối tiếp từ ngọn của u */}
+        {/* Hoạt hoạ tịnh tiến vectơ v (trượt từ gốc O sang ngọn u) */}
         {st.vectorVOp > 0 && (
           <g opacity={st.vectorVOp}>
-            <Arrow3D a={uPos} b={sumPos} color={role.warn} w={5} arrowSize={16} />
-            <Dot3D pos={sumPos} r={7} color={role.warn} />
+            {/* Vệt dời nét đứt mờ nối từ gốc O */}
+            <Seg a={PO} b={vBase} color={role.warn} w={2.5} dash="6 4" o={st.vSlide * 0.75} />
+            {/* Vectơ v đang trượt */}
+            <Arrow a={vBase} b={vTip} color={role.warn} w={5} arrowSize={15} />
+            <Dot p={vBase} r={5} color={role.warn} />
           </g>
         )}
 
-        {/* Các bước đi của v nối tiếp trên 3 trục */}
-        {st.vWalkStepsOp > 0 && (
-          <g opacity={st.vWalkStepsOp}>
-            <Line3D a={[uPos[0], 0, 0]} b={[sumPos[0], 0, 0]} color={role.warn} w={3.5} dash />
-            <Line3D a={[uPos[0], uPos[1], 0]} b={[sumPos[0], sumPos[1], 0]} color={role.warn} w={3.5} dash />
-            <Line3D a={uPos} b={sumPos} color={role.warn} w={3.5} dash />
-          </g>
-        )}
-
-        {/* Vectơ tổng u + v nối từ gốc O đến ngọn v */}
+        {/* Vectơ tổng u + v */}
         {st.sumVectorOp > 0 && (
-          <g opacity={st.sumVectorOp}>
-            <Arrow3D a={[0, 0, 0]} b={sumPos} color={role.up} w={6.5} arrowSize={20} />
-          </g>
+          <Arrow a={PO} b={P3D(sumPos)} color={role.up} w={6} o={st.sumVectorOp} arrowSize={18} />
         )}
 
-        {/* Vectơ đối -v nối từ ngọn u cho phép trừ u - v */}
+        {/* Vectơ đối -v */}
         {st.negVectorVOp > 0 && (
           <g opacity={st.negVectorVOp}>
-            <Arrow3D
-              a={uPos}
-              b={[uPos[0] - vPos[0], uPos[1] - vPos[1], uPos[2] - vPos[2]]}
-              color={role.warn}
-              w={5}
-              arrowSize={16}
-            />
-            <Arrow3D
-              a={[0, 0, 0]}
-              b={[uPos[0] - vPos[0], uPos[1] - vPos[1], uPos[2] - vPos[2]]}
-              color={role.main}
-              w={5}
-            />
+            <Arrow a={uTip} b={negVTip} color={role.warn} w={5} arrowSize={15} />
+            <Dot p={negVTip} r={5} color={role.warn} />
           </g>
         )}
 
-        {/* Vectơ co giãn k*u */}
+        {/* Vectơ kéo dài k*u */}
         {st.scalarKOp > 0 && (
-          <g opacity={st.scalarKOp}>
-            <Arrow3D a={[0, 0, 0]} b={kuPos} color={role.focus} w={7} arrowSize={20} />
-            <Dot3D pos={kuPos} r={9} color={role.focus} />
-            <Line3D a={uPos} b={kuPos} color={role.focus} w={3} dash />
-          </g>
+          <Arrow a={PO} b={P3D(kuPos)} color={role.focus} w={6} o={st.scalarKOp} arrowSize={18} />
         )}
 
-        {/* Khung hình hộp chữ nhật bao quanh u để minh họa độ dài */}
-        {st.boxContainerOp > 0 && (
-          <g opacity={st.boxContainerOp}>
-            <Line3D a={[uPos[0], 0, 0]} b={[uPos[0], uPos[1], 0]} color={role.main} w={2} dash />
-            <Line3D a={[0, uPos[1], 0]} b={[uPos[0], uPos[1], 0]} color={role.main} w={2} dash />
-            <Line3D a={[0, 0, uPos[2]]} b={[uPos[0], 0, uPos[2]]} color={role.main} w={2} dash />
-            <Line3D a={[0, 0, uPos[2]]} b={[0, uPos[1], uPos[2]]} color={role.main} w={2} dash />
-            <Line3D a={[uPos[0], 0, uPos[2]]} b={uPos} color={role.main} w={2} dash />
-            <Line3D a={[0, uPos[1], uPos[2]]} b={uPos} color={role.main} w={2} dash />
-            <Line3D a={[uPos[0], uPos[1], 0]} b={uPos} color={role.main} w={2} dash />
-          </g>
-        )}
-
-        {/* Hai vectơ u và v vuông góc */}
+        {/* Hai vectơ vuông góc minh hoạ b08 (sạch sẽ, không dính khung hộp cũ) */}
         {st.perpendicularOp > 0 && (
           <g opacity={st.perpendicularOp}>
-            {/* Vectơ vuông góc mẫu: u = (3; 0; 0) và w = (0; 4; 0) */}
-            <Arrow3D a={[0, 0, 0]} b={[3.5, 0, 0]} color={role.focus} w={6} />
-            <Arrow3D a={[0, 0, 0]} b={[0, 4.5, 0]} color={role.up} w={6} />
-            {/* Ký hiệu góc vuông */}
-            <path
-              d={`M ${P3D([0.6, 0, 0])[0]} ${P3D([0.6, 0, 0])[1]} L ${P3D([0.6, 0.6, 0])[0]} ${P3D([0.6, 0.6, 0])[1]} L ${P3D([0, 0.6, 0])[0]} ${P3D([0, 0.6, 0])[1]}`}
-              fill="none"
-              stroke={role.up}
-              strokeWidth={3}
-            />
+            <Arrow a={PO} b={pU} color={role.focus} w={5.5} arrowSize={16} />
+            <Arrow a={PO} b={pV} color={role.up} w={5.5} arrowSize={16} />
+            <RightMark v={PO} d1={sub(pU, PO)} d2={sub(pV, PO)} s={28} color={role.up} />
           </g>
         )}
       </svg>
@@ -663,72 +576,68 @@ export const Scene2: React.FC<{ st: StScene2 }> = ({ st }) => {
 
       {/* BẢNG CÔNG THỨC PHÉP CỘNG / TRỪ / NHÂN SỐ K */}
       {st.sumFormulaOp > 0 && (
-        <div
-          data-box="sum-card"
+        <Card
+          group="sum-card"
           style={{
-            position: "absolute",
-            right: 70,
-            top: 120,
-            width: 610,
-            padding: "18px 24px",
-            backgroundColor: "rgba(255, 255, 255, 0.95)",
-            borderRadius: 18,
-            boxShadow: "0 18px 48px rgba(15, 23, 42, 0.14)",
+            right: 80,
+            top: 180,
+            width: 660,
+            padding: "32px 36px",
             border: `2px solid ${role.focus}`,
             opacity: st.sumFormulaOp,
             boxSizing: "border-box",
           }}
         >
-          <div style={{ fontSize: 24, fontWeight: 800, color: role.focus, marginBottom: 10 }}>
+          <div style={{ fontSize: 24, fontWeight: 800, color: role.focus, marginBottom: 14 }}>
             QUY TẮC CỘNG DỒN TỪNG TRỤC
           </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-            <div style={{ fontSize: 28, fontWeight: 700, color: colors.text }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+            <div style={{ fontSize: 28, fontWeight: 700, color: colors.text, whiteSpace: "nowrap" }}>
               <MathText text="$\\vec{u} = x_1\\vec{i} + y_1\\vec{j} + z_1\\vec{k}$" />
             </div>
-            <div style={{ fontSize: 28, fontWeight: 700, color: colors.text }}>
+            <div style={{ fontSize: 28, fontWeight: 700, color: colors.text, whiteSpace: "nowrap" }}>
               <MathText text="$\\vec{v} = x_2\\vec{i} + y_2\\vec{j} + z_2\\vec{k}$" />
             </div>
             <div
               style={{
-                marginTop: 2,
-                padding: "10px 14px",
+                marginTop: 4,
+                padding: "12px 16px",
                 backgroundColor: tint(role.up, 0.12),
-                borderRadius: 12,
+                borderRadius: 14,
                 border: `1.5px solid ${role.up}`,
-                fontSize: 29,
+                fontSize: 28,
                 fontWeight: 800,
                 color: role.up,
                 whiteSpace: "nowrap",
               }}
             >
-              <MathText text="$\\vec{u} + \\vec{v} = (x_1+x_2; y_1+y_2; z_1+z_2)$" />
+              <MathText text="$\\vec{u} + \\vec{v} = (x_1+x_2;\\, y_1+y_2;\\, z_1+z_2)$" />
             </div>
 
             {st.diffVectorOp > 0 && (
               <div
                 style={{
-                  padding: "10px 14px",
+                  padding: "12px 16px",
                   backgroundColor: tint(role.main, 0.08),
-                  borderRadius: 12,
+                  borderRadius: 14,
                   border: `1.5px solid ${role.main}`,
-                  fontSize: 28,
+                  fontSize: 27,
                   fontWeight: 800,
                   color: colors.text,
                   whiteSpace: "nowrap",
                   opacity: st.diffVectorOp,
                 }}
               >
-                <MathText text="$\\vec{u} - \\vec{v} = (x_1-x_2; y_1-y_2; z_1-z_2)$" />
+                <MathText text="$\\vec{u} - \\vec{v} = (x_1-x_2;\\, y_1-y_2;\\, z_1-z_2)$" />
               </div>
             )}
 
             {st.scalarKOp > 0 && (
               <div
                 style={{
-                  padding: "10px 14px",
+                  padding: "12px 16px",
                   backgroundColor: tint(role.focus, 0.1),
-                  borderRadius: 12,
+                  borderRadius: 14,
                   border: `1.5px solid ${role.focus}`,
                   fontSize: 28,
                   fontWeight: 800,
@@ -737,200 +646,160 @@ export const Scene2: React.FC<{ st: StScene2 }> = ({ st }) => {
                   opacity: st.scalarKOp,
                 }}
               >
-                <MathText text="$k\\vec{u} = (kx; ky; kz)$" />
+                <MathText text="$k\\vec{u} = (kx;\\, ky;\\, kz)$" />
               </div>
             )}
           </div>
-        </div>
+        </Card>
       )}
 
-      {/* BẢNG GIẢI PHẪU TÍCH VÔ HƯỚNG (9 SỐ HẠNG & TRIỆT TIÊU 6 TÍCH CHÉO) */}
+      {/* BẢNG CÔNG THỨC TÍCH VÔ HƯỚNG */}
       {st.dotProductFormulaOp > 0 && (
-        <div
-          data-box="dot-card"
+        <Card
+          group="dot-card"
           style={{
-            position: "absolute",
-            right: 60,
-            top: 90,
-            width: 610,
-            maxHeight: 640,
-            overflow: "hidden",
-            padding: "16px 20px",
-            backgroundColor: "rgba(255, 255, 255, 0.96)",
-            borderRadius: 18,
-            boxShadow: "0 20px 50px rgba(15, 23, 42, 0.16)",
+            right: 80,
+            top: 180,
+            width: 700,
+            padding: "32px 36px",
             border: `2px solid ${role.focus}`,
             opacity: st.dotProductFormulaOp,
             boxSizing: "border-box",
           }}
         >
-          <div style={{ fontSize: 22, fontWeight: 800, color: role.focus, marginBottom: 6 }}>
+          <div style={{ fontSize: 24, fontWeight: 800, color: role.focus, marginBottom: 14 }}>
             BẢN CHẤT TÍCH VÔ HƯỚNG
           </div>
 
-          <div style={{ fontSize: 22, color: colors.text, marginBottom: 6 }}>
-            Khai triển phân phối 9 số hạng:
-          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+            <div style={{ fontSize: 26, fontWeight: 700, color: colors.text, whiteSpace: "nowrap" }}>
+              <MathText text="$\\vec{u} \\cdot \\vec{v} = (x_1\\vec{i} + y_1\\vec{j} + z_1\\vec{k}) \\cdot (x_2\\vec{i} + y_2\\vec{j} + z_2\\vec{k})$" />
+            </div>
 
-          {/* Công thức phân phối */}
-          <div
-            style={{
-              padding: "6px 10px",
-              backgroundColor: colors.bg,
-              borderRadius: 8,
-              fontSize: 20,
-              fontWeight: 700,
-              color: colors.text,
-              whiteSpace: "nowrap",
-              marginBottom: 6,
-            }}
-          >
-            <MathText text="$(x_1\\vec{i} + y_1\\vec{j} + z_1\\vec{k}) \\cdot (x_2\\vec{i} + y_2\\vec{j} + z_2\\vec{k})$" />
-          </div>
+            {st.dotCrossTermsFadeOp > 0 && (
+              <div
+                style={{
+                  padding: "12px 16px",
+                  backgroundColor: tint(role.warn, 0.08),
+                  borderRadius: 12,
+                  border: `1.5px solid ${role.warn}`,
+                  fontSize: 25,
+                  fontWeight: 700,
+                  color: role.warn,
+                  opacity: st.dotCrossTermsFadeOp,
+                  whiteSpace: "nowrap",
+                }}
+              >
+                <span>6 cặp vuông góc: </span>
+                <MathText text="$\\vec{i}\\cdot\\vec{j} = \\vec{j}\\cdot\\vec{k} = \\vec{k}\\cdot\\vec{i} = 0$" />
+              </div>
+            )}
 
-          {/* Khối triệt tiêu 6 tích chéo */}
-          <div
-            style={{
-              padding: "6px 10px",
-              backgroundColor: st.dotCrossTermsFadeOp > 0 ? tint(role.warn, 0.12) : colors.bg,
-              borderRadius: 8,
-              border: `1.5px solid ${st.dotCrossTermsFadeOp > 0 ? role.warn : colors.panelBorder}`,
-              marginBottom: 6,
-            }}
-          >
-            <div style={{ fontSize: 20, fontWeight: 700, color: role.warn, marginBottom: 2 }}>
-              6 cặp khác trục vuông góc:
-            </div>
-            <div style={{ fontSize: 23, fontWeight: 800, color: role.warn }}>
-              <MathText text="$\\vec{i} \\cdot \\vec{j} = \\vec{j} \\cdot \\vec{k} = \\vec{k} \\cdot \\vec{i} = 0$" />
-            </div>
-          </div>
+            {st.dotSquareTermsOp > 0 && (
+              <div
+                style={{
+                  padding: "12px 16px",
+                  backgroundColor: tint(role.main, 0.08),
+                  borderRadius: 12,
+                  border: `1.5px solid ${role.main}`,
+                  fontSize: 25,
+                  fontWeight: 700,
+                  color: colors.text,
+                  opacity: st.dotSquareTermsOp,
+                  whiteSpace: "nowrap",
+                }}
+              >
+                <span>3 cặp cùng trục: </span>
+                <MathText text="$\\vec{i}^2 = \\vec{j}^2 = \\vec{k}^2 = 1$" />
+              </div>
+            )}
 
-          {/* Khối 3 cặp cùng trục = 1 */}
-          <div
-            style={{
-              padding: "6px 10px",
-              backgroundColor: st.dotSquareTermsOp > 0 ? tint(role.focus, 0.1) : colors.bg,
-              borderRadius: 8,
-              border: `1.5px solid ${st.dotSquareTermsOp > 0 ? role.focus : colors.panelBorder}`,
-              marginBottom: 6,
-            }}
-          >
-            <div style={{ fontSize: 20, fontWeight: 700, color: role.focus, marginBottom: 2 }}>
-              3 cặp cùng trục:
-            </div>
-            <div style={{ fontSize: 23, fontWeight: 800, color: role.focus }}>
-              <MathText text="$\\vec{i}^2 = \\vec{j}^2 = \\vec{k}^2 = 1$" />
-            </div>
+            {st.dotResultFormulaOp > 0 && (
+              <div
+                style={{
+                  marginTop: 6,
+                  padding: "14px 20px",
+                  backgroundColor: tint(role.up, 0.12),
+                  borderRadius: 14,
+                  border: `2px solid ${role.up}`,
+                  fontSize: 29,
+                  fontWeight: 800,
+                  color: role.up,
+                  opacity: st.dotResultFormulaOp,
+                  whiteSpace: "nowrap",
+                }}
+              >
+                <MathText text="$\\vec{u} \\cdot \\vec{v} = x_1 x_2 + y_1 y_2 + z_1 z_2$" />
+              </div>
+            )}
           </div>
-
-          {/* Kết quả tinh giản */}
-          {st.dotResultFormulaOp > 0 && (
-            <div
-              style={{
-                padding: "8px 12px",
-                backgroundColor: tint(role.up, 0.14),
-                borderRadius: 8,
-                border: `2px solid ${role.up}`,
-                fontSize: 27,
-                fontWeight: 800,
-                color: role.up,
-                textAlign: "center",
-                opacity: st.dotResultFormulaOp,
-              }}
-            >
-              <MathText text="$\\vec{u} \\cdot \\vec{v} = x_1 x_2 + y_1 y_2 + z_1 z_2$" />
-            </div>
-          )}
-        </div>
+        </Card>
       )}
 
-      {/* BẢNG ĐỘ DÀI & VUÔNG GÓC */}
+      {/* THẺ HỆ QUẢ ĐỘ DÀI & VUÔNG GÓC (b08) */}
       {st.lengthFormulaOp > 0 && (
-        <div
-          data-box="len-card"
+        <Card
+          group="length-card"
           style={{
-            position: "absolute",
-            right: 100,
+            right: 80,
             top: 220,
             width: 660,
-            padding: "28px 34px",
-            backgroundColor: "rgba(255, 255, 255, 0.95)",
-            borderRadius: 20,
-            boxShadow: "0 18px 48px rgba(15, 23, 42, 0.14)",
-            border: `2px solid ${role.focus}`,
+            padding: "32px 36px",
+            border: `2px solid ${role.up}`,
             opacity: st.lengthFormulaOp,
             boxSizing: "border-box",
           }}
         >
-          <div style={{ fontSize: 26, fontWeight: 800, color: role.focus, marginBottom: 16 }}>
-            HỆ QUẢ CỐT LÕI
+          <div style={{ fontSize: 24, fontWeight: 800, color: role.up, marginBottom: 14 }}>
+            HỆ QUẢ TÍCH VÔ HƯỚNG
           </div>
-
-          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-            <div
-              style={{
-                padding: "16px 20px",
-                backgroundColor: tint(role.focus, 0.1),
-                borderRadius: 14,
-                border: `1.5px solid ${role.focus}`,
-                fontSize: 34,
-                fontWeight: 800,
-                color: role.focus,
-              }}
-            >
+          <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+            <div style={{ fontSize: 28, fontWeight: 800, color: colors.text, whiteSpace: "nowrap" }}>
               <MathText text="$|\\vec{u}| = \\sqrt{x^2 + y^2 + z^2}$" />
             </div>
 
             {st.perpendicularOp > 0 && (
               <div
                 style={{
-                  padding: "16px 20px",
+                  marginTop: 6,
+                  padding: "14px 18px",
                   backgroundColor: tint(role.up, 0.12),
                   borderRadius: 14,
-                  border: `1.5px solid ${role.up}`,
-                  fontSize: 32,
+                  border: `2px solid ${role.up}`,
+                  fontSize: 27,
                   fontWeight: 800,
                   color: role.up,
                   opacity: st.perpendicularOp,
+                  whiteSpace: "nowrap",
                 }}
               >
                 <MathText text="$\\vec{u} \\perp \\vec{v} \\Leftrightarrow x_1 x_2 + y_1 y_2 + z_1 z_2 = 0$" />
               </div>
             )}
           </div>
-        </div>
+        </Card>
       )}
 
-      {/* THẺ SO SÁNH ĐÚNG/SAI (BẪY THƯỜNG GẶP) */}
+      {/* THẺ BẪY THƯỜNG GẶP (ĐÚNG / SAI) */}
       {st.trapCompareCardOp > 0 && (
         <div
           data-box="trap-card"
           style={{
             position: "absolute",
             left: "50%",
-            top: 200,
+            top: 220,
             transform: "translateX(-50%)",
-            width: 1040,
-            padding: "32px 40px",
-            backgroundColor: "rgba(255, 255, 255, 0.98)",
+            width: 860,
+            padding: "36px 44px",
+            backgroundColor: "#FFFFFF",
             borderRadius: 24,
-            boxShadow: "0 24px 60px rgba(15, 23, 42, 0.2)",
+            boxShadow: "0 24px 60px rgba(15, 23, 42, 0.18)",
             border: `2.5px solid ${role.warn}`,
             opacity: st.trapCompareCardOp,
             boxSizing: "border-box",
           }}
         >
-          <div
-            style={{
-              fontSize: 30,
-              fontWeight: 800,
-              color: role.warn,
-              textAlign: "center",
-              marginBottom: 24,
-              letterSpacing: "0.04em",
-            }}
-          >
+          <div style={{ fontSize: 28, fontWeight: 800, color: role.warn, textAlign: "center", marginBottom: 24 }}>
             BẪY THƯỜNG GẶP: KẾT QUẢ LÀ VECTƠ HAY CON SỐ?
           </div>
 
@@ -948,13 +817,13 @@ export const Scene2: React.FC<{ st: StScene2 }> = ({ st }) => {
                 boxSizing: "border-box",
               }}
             >
-              <div style={{ fontSize: 25, fontWeight: 800, color: role.warn }}>
+              <div style={{ fontSize: 24, fontWeight: 800, color: role.warn }}>
                 SAI ✗ (Nhầm sang Vectơ)
               </div>
-              <div style={{ fontSize: 28, fontWeight: 700, color: colors.text, whiteSpace: "nowrap" }}>
-                <MathText text="$\\vec{u} \\cdot \\vec{v} = (x_1 x_2; y_1 y_2; z_1 z_2)$" />
+              <div style={{ fontSize: 26, fontWeight: 700, color: colors.text, whiteSpace: "nowrap" }}>
+                <MathText text="$\\vec{u} \\cdot \\vec{v} = (x_1 x_2;\\, y_1 y_2;\\, z_1 z_2)$" />
               </div>
-              <div style={{ fontSize: 23, color: colors.muted }}>
+              <div style={{ fontSize: 21, color: colors.muted }}>
                 Đóng ngoặc tròn tọa độ là sai bản chất!
               </div>
             </div>
@@ -972,13 +841,13 @@ export const Scene2: React.FC<{ st: StScene2 }> = ({ st }) => {
                 boxSizing: "border-box",
               }}
             >
-              <div style={{ fontSize: 25, fontWeight: 800, color: role.up }}>
+              <div style={{ fontSize: 24, fontWeight: 800, color: role.up }}>
                 ĐÚNG ✓ (Một con số thực)
               </div>
-              <div style={{ fontSize: 28, fontWeight: 800, color: role.up, whiteSpace: "nowrap" }}>
+              <div style={{ fontSize: 26, fontWeight: 800, color: role.up, whiteSpace: "nowrap" }}>
                 <MathText text="$\\vec{u} \\cdot \\vec{v} = x_1 x_2 + y_1 y_2 + z_1 z_2$" />
               </div>
-              <div style={{ fontSize: 23, color: colors.muted }}>
+              <div style={{ fontSize: 21, color: colors.muted }}>
                 Kết quả là một số <MathText text="$\\in \\mathbb{R}$" />, không có ngoặc!
               </div>
             </div>
@@ -988,103 +857,45 @@ export const Scene2: React.FC<{ st: StScene2 }> = ({ st }) => {
 
       {/* THẺ TỔNG KẾT 4 PHÉP TOÁN */}
       {st.summaryCardOp > 0 && (
-        <div
-          data-box="summary-card"
+        <Card
+          group="summary-card"
           style={{
-            position: "absolute",
             left: "50%",
             top: 200,
             transform: "translateX(-50%)",
-            width: 960,
-            padding: "36px 48px",
-            backgroundColor: "rgba(255, 255, 255, 0.98)",
-            borderRadius: 24,
-            boxShadow: "0 24px 60px rgba(15, 23, 42, 0.2)",
+            width: 920,
+            padding: "36px 44px",
             border: `2.5px solid ${role.focus}`,
             opacity: st.summaryCardOp,
             boxSizing: "border-box",
           }}
         >
-          <div
-            style={{
-              fontSize: 32,
-              fontWeight: 800,
-              color: role.focus,
-              textAlign: "center",
-              marginBottom: 24,
-            }}
-          >
+          <div style={{ fontSize: 30, fontWeight: 800, color: role.focus, textAlign: "center", marginBottom: 24 }}>
             BỐN PHÉP TOÁN VECTƠ BẰNG TOẠ ĐỘ
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                padding: "12px 20px",
-                backgroundColor: colors.bg,
-                borderRadius: 12,
-                fontSize: 28,
-                fontWeight: 700,
-              }}
-            >
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 20px", backgroundColor: colors.bg, borderRadius: 12, fontSize: 28, fontWeight: 700 }}>
               <span>Phép cộng:</span>
-              <MathText text="$\\vec{u} + \\vec{v} = (x+x'; y+y'; z+z')$" />
+              <MathText text="$\\vec{u} + \\vec{v} = (x+x';\\, y+y';\\, z+z')$" />
             </div>
 
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                padding: "12px 20px",
-                backgroundColor: colors.bg,
-                borderRadius: 12,
-                fontSize: 28,
-                fontWeight: 700,
-              }}
-            >
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 20px", backgroundColor: colors.bg, borderRadius: 12, fontSize: 28, fontWeight: 700 }}>
               <span>Phép trừ:</span>
-              <MathText text="$\\vec{u} - \\vec{v} = (x-x'; y-y'; z-z')$" />
+              <MathText text="$\\vec{u} - \\vec{v} = (x-x';\\, y-y';\\, z-z')$" />
             </div>
 
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                padding: "12px 20px",
-                backgroundColor: colors.bg,
-                borderRadius: 12,
-                fontSize: 28,
-                fontWeight: 700,
-              }}
-            >
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 20px", backgroundColor: colors.bg, borderRadius: 12, fontSize: 28, fontWeight: 700 }}>
               <span>Nhân số k:</span>
-              <MathText text="$k\\vec{u} = (kx; ky; kz)$" />
+              <MathText text="$k\\vec{u} = (kx;\\, ky;\\, kz)$" />
             </div>
 
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                padding: "14px 20px",
-                backgroundColor: tint(role.up, 0.14),
-                borderRadius: 12,
-                fontSize: 30,
-                fontWeight: 800,
-                color: role.up,
-                border: `1.5px solid ${role.up}`,
-              }}
-            >
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "14px 20px", backgroundColor: tint(role.up, 0.14), borderRadius: 12, fontSize: 29, fontWeight: 800, color: role.up, border: `1.5px solid ${role.up}` }}>
               <span>Tích vô hướng:</span>
               <MathText text="$\\vec{u} \\cdot \\vec{v} = x x' + y y' + z z'$" />
             </div>
           </div>
-        </div>
+        </Card>
       )}
     </div>
   );

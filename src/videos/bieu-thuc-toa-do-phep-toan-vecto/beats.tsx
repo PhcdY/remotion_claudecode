@@ -48,7 +48,7 @@ const s01: Fn<StScene1> = (fr, L) => {
     radarOp: In(fr, 0, 12),
     planeX: 420 + planeProgress * 60,
     planeY: 540,
-    planeAngle: 0,
+    planeAngle: lin(fr, L[2], 25) * 17.65, // Xoay đồng bộ theo vectơ vận tốc thực tế v
     engineVecOp: In(fr, L[0], 15),
     windVecOp: In(fr, L[1], 15),
     flightDisplayOp: In(fr, L[2], 18),
@@ -77,15 +77,20 @@ const s03: Fn<StScene2> = (fr, L) => ({
   axesOp: In(fr, L[0], 15),
   unitVectorsOp: In(fr, L[0], 20),
   vectorUOp: In(fr, L[1], 18),
-  uWalkStepsOp: In(fr, L[2], 18),
+  uStep: 0,
+  uDashedOp: In(fr, L[2], 18),
 });
 
-// b04: Bản chất phép cộng (nối tiếp và cộng dồn)
+// b04: Bản chất phép cộng (nối tiếp mượt mà và cộng dồn)
 const s04: Fn<StScene2> = (fr, L) => {
   const p = last(s03);
   return {
     ...p,
-    vectorVOp: In(fr, L[0], 18) * Out(fr, L[3], 12),
+    unitVectorsOp: Out(fr, 0, 10), // Dọn sạch ba vectơ đơn vị để nhường chỗ cho u và v
+    uStep: 1, // Thu gọn nhãn u để không tranh chỗ
+    uDashedOp: Out(fr, L[0], 10), // Dọn sạch nét dóng khi cộng vectơ
+    vSlide: lin(fr, L[0], 25), // Tịnh tiến trượt từ gốc O sang ngọn u
+    vectorVOp: In(fr, L[0], 15) * Out(fr, L[3], 12),
     vWalkStepsOp: In(fr, L[1], 18),
     sumFormulaOp: In(fr, L[2], 20),
     sumVectorOp: In(fr, L[3], 20),
@@ -114,6 +119,7 @@ const s06: Fn<StScene2> = (fr, L) => ({
   axesOp: 1,
   unitVectorsOp: 1,
   vectorUOp: 1,
+  uStep: 1,
   dotProductFormulaOp: In(fr, L[0], 18),
 });
 
@@ -124,20 +130,23 @@ const s07: Fn<StScene2> = (fr, L) => ({
   axesOp: 1,
   unitVectorsOp: 1,
   vectorUOp: 1,
+  uStep: 1,
   dotProductFormulaOp: 1,
   dotCrossTermsFadeOp: In(fr, L[0], 18),
   dotSquareTermsOp: In(fr, L[1], 18),
   dotResultFormulaOp: In(fr, L[2], 20),
 });
 
-// b08: Hệ quả: Độ dài và hai vectơ vuông góc
+// b08: Hệ quả: Độ dài và hai vectơ vuông góc (Clean State Transition)
 const s08: Fn<StScene2> = (fr, L) => ({
   ...ZERO2,
   stageOp: 1,
   axesOp: 1,
-  vectorUOp: In(fr, 0, 12),
-  boxContainerOp: In(fr, L[0], 18),
+  // Khi giải thích độ dài (L[0]): hiện u và nét dóng
+  vectorUOp: Out(fr, L[1], 10),
+  uDashedOp: In(fr, L[0], 18) * Out(fr, L[1], 10),
   lengthFormulaOp: In(fr, L[0], 18),
+  // Khi sang vuông góc (L[1]): dọn sạch nét dóng cũ, hiện 2 vectơ vuông góc
   perpendicularOp: In(fr, L[1], 20),
 });
 
@@ -160,7 +169,7 @@ const s10: Fn<StScene1> = (fr, L) => ({
   radarOp: 1,
   planeX: 480 + lin(fr, L[2], 40) * 120,
   planeY: 540,
-  planeAngle: lin(fr, L[2], 25) * 5, // Chỉnh góc nhẹ
+  planeAngle: 17.65, // Bay theo hướng vectơ v
   engineVecOp: 1,
   windVecOp: 1,
   actualVecOp: 1,

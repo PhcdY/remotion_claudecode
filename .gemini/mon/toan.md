@@ -102,8 +102,24 @@ Công thức dài: diễn giải bằng lời ("tử là phần độ cao thay �
 - Bảng xét dấu, bảng biến thiên không dựng; dấu của $f'$ thể hiện bằng tô màu trên đồ thị.
 - **Hình không gian** (hình chiếu song song kiểu SGK, mẫu: `vecto-khong-gian/scene.tsx`, hàm `P` 3D → px): chọn góc trục sâu sao cho mọi vectơ/đoạn chính trên hình **lệch hướng cạnh xiên ≥ 20° và cách đỉnh khác ≥ 40px**. Đã gặp 26/10: trục sâu 45°, vectơ dời nghiêng 53° → mũi tên AM gần chồng lên cạnh AD, người xem đọc thành "bay vào sâu", thước đo và nhãn đè tên đỉnh D; đổi trục sâu 30° thì hết. Tên đỉnh đặt phía không có cạnh/giá nào đi qua (tính cả giá kéo dài).
 - **Hệ trục toạ độ không gian Oxyz**:
-  - Gốc $O$ BẮT BUỘC đặt ở góc Tây Bắc (`x < ox`), vectơ đơn vị $\vec{k}$ đặt ở BÊN PHẢI trục $Oz$ (`x > ox`); trục $Oz$ ngăn giữa, cấm đặt $\vec{k}$ đè $O$.
-  - Mọi đoạn đi bộ/dời vị trí trong không gian BẮT BUỘC dùng `Arrow3D` có đầu mũi tên chỉ hướng ($O \to P_x \to M_{floor} \to M$), CẤM dùng `Line3D` trơn.
+  - Gốc $O$ BẮT BUỘC đặt ở góc Tây Bắc (`prefer: ["sw", "w"]`), vectơ đơn vị $\vec{k}$ đặt ở BÊN PHẢI trục $Oz$ (`x > ox`); trục $Oz$ ngăn giữa, cấm đặt $\vec{k}$ đè $O$.
+  - Ba trục toạ độ $Ox, Oy, Oz$ BẮT BUỘC phải đăng ký vào danh sách vật cản bằng `segmentObstacles(PO, P(axisEnd))` để thuật toán `AutoLabels` không bao giờ đẩy nhãn hoặc đường dóng cắt ngang qua trục chính.
+  - Khi điểm/vectơ nằm ở phía Đông của $Oz$ (`x > ox`), nhãn tên và toạ độ BẮT BUỘC neo về hướng Đông/Đông Bắc, cấm để `AutoLabels` đẩy nhãn cắt ngang qua trục $Oz$ sang bên trái.
+  - **Tách nhãn toạ độ dài và tên ngắn**: Toạ độ chi tiết $\vec{u}_1 = (x_1; y_1; z_1)$ chỉ hiện ở beat giới thiệu toạ độ (`phases: ["b03"]`), sau đó thu gọn thành nhãn tên ngắn $\vec{u}_1$ qua `steps` hoặc `phases` riêng để không chiếm chỗ của các đối tượng khác.
+  - Mọi đoạn đi bộ/dời vị trí trong không gian BẮT BUỘC dùng `Arrow` có đầu mũi tên chỉ hướng ($O \to P_x \to M_{floor} \to M$), CẤM dùng đoạn thẳng trơn.
   - Công thức liên hệ $\vec{OM} = x\vec{i} + y\vec{j} + z\vec{k}$ đặt ở góc Đông Bắc của điểm đích (hướng ra ngoài), tránh để trục $Oz$ cắt ngang qua công thức.
   - Khi chuyển từ mô phỏng 2D (Radar Oxy) sang không gian 3D: làm mờ icon máy bay/vật thể lớn, chỉ giữ lại chấm giao điểm toạ độ tinh tế (bán kính 6–7px); nhãn toạ độ $(x; y)$ đặt ở góc Đông Bắc cách điểm $\ge 40\text{px}$ có viền halo.
+- **Chuẩn hoá vẽ vectơ (2D & 3D)**:
+  - Mọi vectơ trong môn Toán BẮT BUỘC dùng component chuẩn `<Arrow a={start} b={end} t={progress} color={role} />` từ `src/components/space.tsx`. Đầu mũi tên được tính tự động theo vector chỉ phương đơn vị và vector pháp tuyến. TUYỆT ĐỐI CẤM tự vẽ polygon mũi tên hardcode bằng tay (`points={`${tipX},${tipY} ...`}`).
+  - Tại một thời điểm **tối đa 2 vectơ sáng cùng lúc** trên màn hình; vectơ cũ mờ dần (≤ 0.3) khi vectơ mới hiện ra.
+  - Ký hiệu góc vuông giữa hai vectơ dùng `<RightMark v={p} d1={dir1} d2={dir2} />` từ `space.tsx`.
+- **Hoạt hoạ tịnh tiến khi cộng vectơ (Translation Animation)**:
+  - Minh hoạ quy tắc tam giác / cộng vectơ / dời vectơ chỉ phương: BẮT BUỘC dùng chuyển động trượt tịnh tiến từ gốc $O$ sang ngọn vectơ thứ nhất bằng `lerp3(origin, target, progress)` (hoặc `lerp`), kèm vệt nét đứt mờ dời vectơ. CẤM làm vectơ hiện đùng một cái tại ngọn với chấm tròn to.
+- **Hình chiếu toạ độ 3D bám sát vectơ & không vẽ thừa**:
+  - Toạ độ các đoạn gióng nét đứt bắt buộc nội suy trực tiếp từ toạ độ đỉnh vectơ đang xét (`P([x, y, 0])`, `P([x, 0, 0])`...).
+  - Chỉ vẽ hình chiếu vuông góc xuống sàn $Oxy$ và đường gióng lên trục tương ứng. CẤM vẽ trọn 12 cạnh khung hộp nếu bài học không nói về thể tích/đường chéo hộp để tránh gây rối mắt.
+- **Đồng bộ hướng vật thể chuyển động với vectơ vận tốc**:
+  - Máy bay / phi cơ dùng `<Plane>` từ `space.tsx` (hoặc icon SVG chuẩn), góc xoay `deg` BẮT BUỘC phải tính theo hướng của vectơ vận tốc tức thời $\vec{v}$ (`Math.atan2(vy, vx) * 180 / Math.PI`). CẤM để máy bay chúc mũi lên trong khi vectơ vận tốc bay sang phải.
+- **Quy chuẩn KaTeX cho Toán trong code TSX**:
+  - Mọi chuỗi công thức trong code TSX bắt buộc escape đúng `$\vec{u}$`, `$\overrightarrow{AB}$` (double backslash). Tránh viết `\vec` trong string thường làm rụng thành Vertical Tab `\v` khiến KaTeX hiển thị lỗi `vecu`.
 - Vectơ: viết `$\vec{AM}$` trong kịch bản; `Tex` tự đổi tên nhiều chữ sang `\overrightarrow` (mũi tên phủ hết tên như SGK — `\vec` của KaTeX chỉ vẽ mũi tên nhỏ giữa hai chữ).

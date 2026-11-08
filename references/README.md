@@ -4,6 +4,19 @@ Thư mục này chứa toàn bộ tài liệu tóm tắt kiến thức, định 
 
 ---
 
+## Danh mục Môn học Hiện có
+
+| Môn học | Thư mục Tham khảo | Phạm vi & Nội dung Cung cấp |
+| :--- | :--- | :--- |
+| **Toán học** | [**`references/toan/`**](./toan/README.md) | Tổng quan Lớp 10, 11, 12; Trọn bộ 19 bài SGK Toán 12 KNTT (Tập 1 & Tập 2). |
+| **Vật lí** | [**`references/ly/`**](./ly/README.md) | Tổng quan Lớp 10, 11, 12; Bảng ánh xạ video AI 9Study ⟷ SGK KNTT & TSA/HSA. |
+| **Hóa học** | [**`references/hoa/`**](./hoa/README.md) | Đề thi THPT 2026; Tổng quan Lớp 10, 11, 12; Bảng ánh xạ video AI ⟷ SGK GDPT 2018. |
+| **Địa lí** | [**`references/dia/`**](./dia/README.md) | Đề thi THPT 2026; Tổng quan Lớp 10, 11, 12; Các chuyên đề Địa lí 12. |
+| **Lịch sử** | [**`references/su/`**](./su/README.md) | Đề thi THPT 2026; Tổng quan Lớp 10, 11, 12; Các chuyên đề Lịch sử 11, 12. |
+| **Ngữ văn** | [**`references/van/`**](./van/README.md) | Đề thi THPT 2026; Tổng quan Lớp 10, 11, 12; Các bài học Ngữ văn 11. |
+
+---
+
 ## Cấu trúc Thư mục
 
 Tài liệu được phân cấp theo mô hình:
