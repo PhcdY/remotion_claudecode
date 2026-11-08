@@ -18,6 +18,7 @@ import { BieuThucToaDoPhepToanVectoComposition } from "./videos/bieu-thuc-toa-do
 import { PhysicsShowcaseComposition } from "./videos/physics-showcase/Video";
 import { PhysicsShowcase2Composition } from "./videos/physics-showcase-2/Video";
 import { ChemistryShowcaseComposition } from "./videos/chemistry-showcase/Video";
+import { BiologyShowcaseComposition } from "./videos/biology-showcase/Video";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -41,6 +42,7 @@ export const RemotionRoot: React.FC = () => {
       <PhysicsShowcaseComposition />
       <PhysicsShowcase2Composition />
       <ChemistryShowcaseComposition />
+      <BiologyShowcaseComposition />
     </>
   );
 };

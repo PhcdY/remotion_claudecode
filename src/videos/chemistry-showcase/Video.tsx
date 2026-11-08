@@ -685,7 +685,7 @@ export const ChemistryShowcase: React.FC = () => {
       <BrandBackground />
 
       {/* Cảnh 1: Frames 0 - 59 (0.0s - 2.0s) */}
-      <Sequence from={0} durationInFrames={60}>
+      <Sequence durationInFrames={60}>
         <Scene1Johnstone />
       </Sequence>
 
