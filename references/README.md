@@ -15,6 +15,8 @@ Thư mục này chứa toàn bộ tài liệu tóm tắt kiến thức, định 
 | **Địa lí** | [**`references/dia/`**](./dia/README.md) | Đề thi THPT 2026; Tổng quan Lớp 10, 11, 12; Các chuyên đề Địa lí 12. |
 | **Lịch sử** | [**`references/su/`**](./su/README.md) | Đề thi THPT 2026; Tổng quan Lớp 10, 11, 12; Các chuyên đề Lịch sử 11, 12. |
 | **Ngữ văn** | [**`references/van/`**](./van/README.md) | Đề thi THPT 2026; Tổng quan Lớp 10, 11, 12; Các bài học Ngữ văn 11. |
+| **GD Kinh tế & Pháp luật** | [**`references/ktpl/`**](./ktpl/README.md) | Đề thi THPT 2026; Bảng ma trận chuyên đề Kinh tế & Pháp luật, Micro Case Studies. |
+| **Tiếng Anh** | [**`references/anh/`**](./anh/README.md) | Đề thi THPT 2026; 5 Archetypes Ngữ pháp nhận thức & Danh mục chủ điểm cốt lõi. |
 
 ---
 
