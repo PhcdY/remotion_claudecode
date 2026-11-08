@@ -10,51 +10,80 @@
 
 ---
 
-## 1. Bắt đầu & Chuẩn bị Môi trường (Chỉ làm 1 lần duy nhất)
+## 1. Chuẩn bị Môi trường & Hướng dẫn Antigravity (Chỉ làm 1 lần duy nhất)
 
-### Yêu cầu Công cụ trên máy (Prerequisites)
-Trước khi bắt đầu, hãy đảm bảo máy tính của bạn đã cài đặt các công cụ sau:
-1. [**Node.js**](https://nodejs.org/) (Phiên bản LTS 18 trở lên) — Dùng để chạy engine đồ hoạ Remotion.
-2. [**Git**](https://git-scm.com/) — Dùng để tải mã nguồn dự án về máy.
-3. [**Python 3**](https://www.python.org/) (Bản 3.10 trở lên) — Dùng để chạy các script kiểm tra kịch bản và âm thanh. *(Trên Windows, lệnh chuẩn là `py scripts/...`)*.
-4. **Trình soạn thảo / Trợ lý AI**: Bạn có thể dùng [VS Code](https://code.visualstudio.com/), [Antigravity IDE](https://antigravity.google/) hoặc [Cursor](https://www.cursor.com/).
+### 1.1. Tải & Cài đặt 4 Công cụ Cần thiết
+Trước khi bắt đầu, hãy cài đặt 4 công cụ chuẩn sau trên máy tính của bạn:
+
+1. **[Node.js](https://nodejs.org/) (Bắt buộc chọn bản LTS)**:
+   - **Tác dụng**: Bộ máy thực thi JavaScript/TypeScript để render video đồ hoạ Remotion.
+   - **Cách tải & cài**: Vào [nodejs.org](https://nodejs.org/), bấm vào ô màu xanh **LTS** (phiên bản ổn định lâu dài, ví dụ v20 hoặc v22). Tải file cài đặt về (`.msi` trên Windows), mở lên và bấm *Next* liên tục với các tuỳ chọn mặc định cho đến khi hoàn tất.
+   - **Kiểm tra**: Mở Terminal/PowerShell gõ `node -v` và `npm -v` thấy hiện phiên bản là đã xong.
+
+2. **[Git](https://git-scm.com/)**:
+   - **Tác dụng**: Dùng để tải mã nguồn dự án về máy và cập nhật tính năng mới từ hệ thống.
+   - **Cách tải & cài**: Vào [git-scm.com/download/win](https://git-scm.com/download/win), tải bản *64-bit Git for Windows Setup*. Chạy file cài đặt, giữ nguyên toàn bộ tuỳ chọn mặc định và bấm *Next* đến hết.
+   - **Kiểm tra**: Mở Terminal gõ `git --version` thấy hiện `git version 2.x.x` là thành công.
+
+3. **[Python 3](https://www.python.org/) (Bản 3.10 trở lên)**:
+   - **Tác dụng**: Chạy các script tự động kiểm tra kịch bản (`check_script.py`), đối soát phát âm danh pháp và kết nối giọng đọc Vivibe TTS.
+   - **Cách tải**: Vào [python.org/downloads](https://www.python.org/downloads/), bấm nút tải bản Python mới nhất.
+   - ⚠️ **LƯU Ý CỰC KỲ QUAN TRỌNG KHI CÀI TRÊN WINDOWS**:  
+     Ngay tại màn hình đầu tiên khi vừa mở file cài đặt Python, bạn **BẮT BUỘC PHẢI TÍCH CHỌN** vào ô vuông:  
+     `☑ Add python.exe to PATH` (nằm ở mép dưới cùng cửa sổ). Sau đó mới bấm *Install Now*. *(Nếu quên tích ô này, máy tính sẽ báo lỗi không nhận diện được lệnh `py` hay `python` trong Terminal)*.
+   - **Kiểm tra**: Mở Terminal gõ `py --version` (hoặc `python --version`) thấy hiện phiên bản Python là chuẩn.
+
+4. **[Antigravity IDE](https://antigravity.google/)**:
+   - **Tác dụng**: Môi trường làm việc chính và trợ lý AI cặp đôi (Pair-Programming). Bạn sẽ dành 99% thời gian làm việc trực tiếp bên trong Antigravity để giao tiếp với AI, xem storyboard và render video.
 
 ---
 
-### Bước 1: Chọn thư mục lưu dự án & Clone về máy
+### 1.2. Chọn Thư mục Lưu & Tải Dự án về Máy (Clone Repo)
 
-Bạn có thể lưu dự án tại bất kỳ ổ đĩa nào bạn muốn (ví dụ ổ `D:`, `E:` hoặc thư mục cá nhân):
+Bạn hoàn toàn chủ động chọn lưu dự án ở bất kỳ ổ đĩa nào bạn muốn (ví dụ ổ `D:`, `E:` hoặc thư mục làm việc riêng để không chiếm dung lượng ổ hệ thống `C:`):
 
-1. Mở **Terminal** (PowerShell trên Windows, Terminal trên macOS/Linux, hoặc Terminal tích hợp trong VS Code / Antigravity).
-2. Điều hướng (`cd`) đến thư mục bạn muốn chứa dự án:
+1. Mở **Terminal** (hoặc **PowerShell** trên Windows).
+2. Điều hướng (`cd`) đến thư mục bạn muốn lưu dự án:
    ```bash
-   # Ví dụ: Bạn muốn lưu vào ổ D: trong thư mục Projects
+   # Ví dụ: Bạn muốn lưu dự án trong thư mục Projects ở ổ D:
    cd D:\
-   mkdir "Projects"      # (Tùy chọn) Tạo thư mục nếu chưa có
+   mkdir "Projects"      # (Tùy chọn) Tạo thư mục Projects nếu chưa có
    cd "Projects"
    ```
-3. Chạy lệnh clone mã nguồn từ GitHub:
+3. Chạy lệnh clone toàn bộ dự án từ GitHub:
    ```bash
    git clone https://github.com/PhcdY/remotion_claudecode.git "Video AI"
    cd "Video AI"
    ```
-4. Mở thư mục dự án bằng trình soạn thảo / trợ lý AI của bạn:
+4. Cài đặt các thư viện đồ họa và công cụ toán học:
    ```bash
-   code .   # Mở bằng VS Code (hoặc mở folder Video AI trong IDE bạn dùng)
+   npm install
    ```
 
 ---
 
-### Bước 2: Cài đặt thư viện
-Trong Terminal tại thư mục `Video AI`, chạy lệnh:
-```bash
-npm install
-```
-*(Quá trình này tải các thư viện đồ họa Remotion, React, KaTeX và các công cụ toán học).*
+### 1.3. Hướng dẫn Làm việc với Antigravity IDE (Không gian Làm việc Chính)
+
+Vì phần lớn thời gian bạn sẽ làm việc với trợ lý AI ngay trong **Antigravity**, hãy thực hiện các bước sau để bắt đầu:
+
+1. **Mở dự án trong Antigravity**:
+   - Khởi động **Antigravity IDE**.
+   - Chọn menu `File` $\to$ `Open Folder...` (hoặc phím tắt `Ctrl + K Ctrl + O` / `Ctrl + O`).
+   - Điều hướng và chọn đúng thư mục `Video AI` bạn vừa clone về.
+2. **Mở Khung Chat với Trợ lý AI**:
+   - Nhìn sang thanh công cụ bên cạnh hoặc nhấn `Ctrl + L` (trên Mac: `Cmd + L`) để mở khung chat.
+   - Tại đây, bạn chỉ việc gõ tiếng Việt tự nhiên để đưa đề bài bài học cho AI.
+3. **Các Tiện ích Độc quyền khi Dùng Antigravity**:
+   - **Không cần tự gõ lệnh Terminal**: Bạn không cần nhớ cú pháp câu lệnh phức tạp. Khi muốn xem trước video, bạn chỉ cần nhắn AI trong khung chat:  
+     > *"Mở preview Remotion Studio hộ tôi"*  
+     AI sẽ tự động khởi chạy tiến trình `npm run dev` ở chế độ nền và gửi link `http://localhost:3000` để bạn nhấn vào xem video chuyển động ngay lập tức.
+   - **Duyệt Storyboard trực quan**: Nhắn *"Chụp ảnh storyboard gửi tôi xem"* $\\to$ AI sẽ xuất ảnh toàn cảnh và hiển thị trực tiếp.
+   - **Tự động thẩm định 3 cổng**: AI tự động đọc tài liệu SGK trong `references/`, tự kiểm tra cú pháp kịch bản bằng `check_script.py`, và gọi kỹ năng "Học sinh ảo" (`hoc-sinh-ao`) để phản biện trước khi bạn tạo audio.
+   - **Thu gọn bộ nhớ nhanh**: Gõ `/compact` vào khung chat sau mỗi bước để AI làm việc nhanh và mượt mà hơn.
 
 ---
 
-### Bước 3: Cấu hình file `.env` (API Key & Thư mục xuất Video)
+### 1.4. Cấu hình file `.env` (API Key & Thư mục xuất Video)
 
 Tạo một file tên là `.env` ở ngay thư mục gốc của dự án (`Video AI/.env`) với nội dung:
 ```env
