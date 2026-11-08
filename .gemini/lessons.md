@@ -124,6 +124,15 @@ Chi tiết từng video: `src/videos/<slug>/FEEDBACK.md`. Thêm mục mới mỗ
   2. *Lằn ranh chủ quyền*: Mọi bản đồ Việt Nam bắt buộc có đầy đủ Hoàng Sa, Trường Sa và chuẩn 5 vùng biển UNCLOS 1982.
   3. *Hiệu năng bản đồ*: Vector map phải tối giản số điểm neo (< 1.000 điểm) để tránh nghẽn render Remotion.
 
+### 07/11/2026 — Khởi tạo môn Giáo dục Kinh tế và Pháp luật (KTPL / GTKTPL)
+- **Bản chất môn học**: Môn GDKT&PL theo GDPT 2018 là môn học thực chiến (kỹ năng công dân thế kỷ 21), thay thế môn GDCD cũ. Tuyệt đối không biến video thành giờ đọc luật khô khan hay bài giảng kinh tế vĩ mô hàn lâm.
+- **Quy tắc Storytelling**: Sử dụng phương pháp **Micro Case Study đời thường** (Nghịch lý giá cả, tranh chấp hợp đồng online, bẫy tín dụng "0%", vi phạm đời thường). Dõi theo dòng tiền (ai trả tiền, ai hưởng lợi) và xác lập ranh giới pháp lý khách quan.
+- **3 Lằn ranh đỏ bắt buộc**:
+  1. *Thượng tôn pháp luật*: Nghiêm cấm hướng dẫn trốn thuế, lách luật; bám sát Hiến pháp 2013 và các Luật sửa đổi hiện hành.
+  2. *Chuẩn xác thuật ngữ*: Phân biệt rành mạch 4 loại vi phạm pháp luật (Hình sự vs Hành chính vs Dân sự vs Kỷ luật), không nhầm lẫn giữa quyền và nghĩa vụ.
+  3. *Thời hiệu*: Chỉ dẫn luật đang có hiệu lực, số liệu kinh tế có nguồn và năm cụ thể.
+- **Trọng tâm đề thi TN THPT từ 2025**: Giải quyết câu hỏi trắc nghiệm Đúng/Sai (Phần II) bằng cách chia nhỏ chủ thể thành các thẻ UI, soi sáng từng mệnh đề qua Cây quyết định pháp lý (Decision Tree).
+
 ### 08/11/2026 — Khởi tạo Gói môn Tiếng Anh: Ngữ pháp Nhận thức (Cognitive Grammar) & Xử lý Âm thanh Song ngữ
 - **Triết lý**: Xóa bỏ hội chứng học vẹt công thức toán học rời rạc ($S + V + O$, 12 thì, bảng 200 phrasal verbs). Ngôn ngữ là sự ý niệm hóa không gian (*Spatial Conceptualization*). Dùng 5 Archetypes Remotion SVG để người học "nhìn thấy" tư duy bản xứ: *Timeline Lens* (Thì & Thể), *Spatial Schema* (In/On/At & Up/Down/Out), *Hierarchical Sentence Block* (Cấu trúc câu & Rút gọn), *Epistemic Distance* (Điều kiện & Lùi thì), *Common Ground* (Mạo từ).
 - **Cơ chế Xử lý Giọng đọc Vivibe TTS cho Tiếng Anh**:
