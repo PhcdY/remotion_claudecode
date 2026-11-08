@@ -158,3 +158,5 @@ am - c Bình: Dành cho các môn Tự nhiên (Toán, Lý, Hóa, Tin) — dứt 
 - **Hiện tượng**: AI nhầm lẫn giữa quy tắc giao tiếp trong khung chat (dùng `file:///` để người dùng click mở file trong IDE) và tài liệu markdown lưu trữ trong repo Git, dẫn đến việc chèn các link tuyệt đối dạng `file:///d:/Video%20AI/...` vào các file markdown.
 - **Hậu quả**: Link chết trên GitHub và hỏng khi clone về máy khác (khác ổ đĩa hoặc trên hệ điều hành khác).
 - **Quy chuẩn**: Toàn bộ đường dẫn liên kết giữa các tài liệu trong repo Git (`.gemini/`, `docs/`, `references/`) bắt buộc dùng đường dẫn tương đối (relative path, ví dụ `./ktpl.md` hoặc `../.gitignore`).
+
+- **Quy chuẩn Giao tiếp khi Push Git**: Mỗi khi tạo nhánh và push lên GitHub, AI BẮT BUỘC soạn sẵn mẫu Title và Description chuẩn format GitHub PR (kèm emoji, mục tiêu, thay đổi chính, checklist kiểm tra) trong khung chat để người dùng chỉ việc copy-paste vào giao diện tạo Pull Request.
