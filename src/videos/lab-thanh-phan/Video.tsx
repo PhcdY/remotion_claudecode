@@ -2,7 +2,12 @@ import React from "react";
 import { Composition, Sequence } from "remotion";
 import { BrandFrame } from "../../components/BrandFrame";
 import { KeyTakeaway } from "../../components/KeyTakeaway";
-import { TacticalMap, ReformDiagram } from "../../components/su";
+import {
+  TacticalMap,
+  TacticalFortress,
+  TacticalRiver,
+  ReformDiagram,
+} from "../../components/su";
 
 // Composition phòng lab thử nghiệm chuẩn Hero Stage Canvas, AutoLabels và Text Pipeline
 export const LabVideo: React.FC = () => {
@@ -14,41 +19,40 @@ export const LabVideo: React.FC = () => {
           title="Phòng tuyến Đa Bang"
           timeTag="Tháng 11/1406"
           hasTakeaway={true}
+          forces={[
+            {
+              id: "fc-truong-phu",
+              x: 850, // Căn giữa hoàn hảo trên trục đối xứng giữa 2 mũi tên
+              y: 175,
+              title: "20 vạn quân Minh (Trương Phụ)",
+              color: "#EF4444",
+            },
+          ]}
           arrows={[
             {
               id: "arr-truong-phu-1",
               x1: 760,
-              y1: 170,
+              y1: 205,
               x2: 800,
-              y2: 290,
-              label: "20 vạn quân Minh (Trương Phụ)",
+              y2: 300,
               color: "#EF4444",
               progress: 1,
             },
             {
               id: "arr-truong-phu-2",
               x1: 940,
-              y1: 170,
+              y1: 205,
               x2: 900,
-              y2: 290,
+              y2: 300,
               color: "#EF4444",
               progress: 1,
             },
           ]}
           points={[
             {
-              id: "pt-da-bang",
-              x: 850,
-              y: 405,
-              label: "Chiến lũy Đa Bang",
-              sublabel: "Phòng tuyến trung tâm",
-              color: "#F59E0B",
-              anchor: "bottom", // Nhãn dạt xuống dưới thanh thành luỹ, không đè nét
-            },
-            {
               id: "pt-dong-do",
               x: 1460,
-              y: 640,
+              y: 620,
               label: "Đông Đô (Thăng Long)",
               sublabel: "Kinh đô Đại Ngu",
               color: "#F59E0B",
@@ -56,62 +60,21 @@ export const LabVideo: React.FC = () => {
             },
           ]}
         >
-          {/* Nét vẽ Sông Hồng (Nhị Hà) uốn lượn chéo góc bản đồ */}
-          <path
-            d="M 160 130 C 580 340, 1080 520, 1680 750"
-            fill="none"
-            stroke="#1E40AF"
-            strokeWidth={36}
-            strokeLinecap="round"
-            opacity={0.8}
+          {/* Dòng Sông Hồng (Nhị Hà) uốn lượn tự nhiên mềm mại */}
+          <TacticalRiver
+            d="M 120 140 C 560 340, 1060 510, 1660 720"
+            name="Sông Hồng (Nhị Hà)"
+            nameX={1120}
+            nameY={565}
           />
-          <path
-            d="M 160 130 C 580 340, 1080 520, 1680 750"
-            fill="none"
-            stroke="#60A5FA"
-            strokeWidth={6}
-            strokeDasharray="16 12"
-            strokeLinecap="round"
-            opacity={0.7}
-          />
-          <text
-            x={1160}
-            y={590}
-            fill="#93C5FD"
-            fontSize={22}
-            fontWeight={700}
-            fontFamily="Plus Jakarta Sans"
-            style={{ textShadow: "0 2px 8px rgba(0,0,0,0.9)" }}
-          >
-            Sông Hồng (Nhị Hà)
-          </text>
 
-          {/* Công trình Phòng tuyến Chiến lũy Đa Bang */}
-          <g transform="translate(850, 340)">
-            <rect
-              x={-150}
-              y={-14}
-              width={300}
-              height={28}
-              rx={6}
-              fill="#D97706"
-              stroke="#FDE68A"
-              strokeWidth={3}
-            />
-            {/* Hàng chông gỗ phòng ngự mặt bắc */}
-            {[-130, -90, -50, -10, 30, 70, 110, 130].map((cx, i) => (
-              <line
-                key={i}
-                x1={cx}
-                y1={-14}
-                x2={cx}
-                y2={-28}
-                stroke="#DC2626"
-                strokeWidth={4}
-                strokeLinecap="round"
-              />
-            ))}
-          </g>
+          {/* Công trình phòng ngự Chiến lũy Đa Bang kiên cố có chông gỗ */}
+          <TacticalFortress
+            x={850}
+            y={340}
+            width={340}
+            label="Chiến lũy Đa Bang"
+          />
         </TacticalMap>
 
         {/* Câu chốt của beat sa bàn */}
