@@ -193,7 +193,7 @@ Không có dải phụ đề ghi chú; chữ nằm **trong cảnh, cạnh thứ 
 - **Có `text` khi dòng chốt một kết quả nhìn được** (số, dấu, ký hiệu, kết luận); **`""`** khi dòng chỉ dẫn dắt, chuyển ý, hỏi, hoặc hình đã nói đủ. Dòng cuối beat: `keyword` hiện → `text` để `""`.
 - Ưu tiên ký hiệu, số, mũi tên: "0,81 s → 44 km/h", "$\Delta t \to 0$". Không viết lại câu của `speak`. ≤ ~35 ký tự (dòng chỉ có công thức được dài hơn), không dấu chấm.
 - **Một thông tin chỉ nằm một chỗ**: nhãn/trục đã có số thì `text` không ghi lại.
-- **Mũi tên → chỉ đúng nghĩa** (dồn về, suy ra, đổi thành), không dùng cho "để dành bài sau", "tức là".
+- **Mũi tên → chỉ đúng nghĩa & Chuẩn hóa Unicode (Chống lỗi `$ o$)**: Trong các môn Xã hội (Sử, Địa, Văn, KTPL) hoặc khi diễn giải bằng văn bản, BẮT BUỘC dùng trực tiếp ký tự Unicode `→` (hoặc `->`). TUYỆT ĐỐI CẤM gõ `$\to$` trong văn bản thường vì JSON parser sẽ nuốt `\t` thành TAB và hiển thị lỗi dị dạng `$ o$`. Trong các môn Tự nhiên (Toán, Lý, Hóa), nếu dùng LaTeX thì bắt buộc escape đúng double backslash `"$\\to$"` trong file JSON.
 - Chữ hết vai trò thì gỡ (`visual` ghi lúc nào mờ đi). Mỗi frame, chữ mới ngoài câu chốt ≤ ~8 từ.
 - Tên đại lượng chú thích **một lần** ở chỗ cố định (tên trục, tiêu đề cột, chú giải ký hiệu), sau đó chỉ dùng ký hiệu. Chú giải đọc lên có nghĩa ("quãng đường $s$ (m)"), không viết tắt kiểu "$s$: m · $t$: s".
 
@@ -232,6 +232,8 @@ Phụ đề đầy đủ xuất thành file riêng (`.srt`/`.vtt`) từ `speak`.
 
 - **`scene`**: số cảnh (1, 2, 3; ≤ ~3 cả video). Các beat liền nhau cùng cảnh được dựng như một sân khấu liền: vật ở lại và biến đổi, không xoá vẽ lại.
 - **`visual`** (beat): mở bằng tên cảnh ("CẢNH 2 — …" lần đầu, "Giữ CẢNH 2." sau đó), rồi tả **trạng thái lúc beat bắt đầu**: bố cục, trục, hàm, thành phần, thứ gì từ beat trước còn ở lại / mờ đi. Đánh dấu "BƯỚC KHÓ". Thay đổi theo từng dòng **không** viết ở đây.
+  * **Quy chuẩn Sân khấu Toàn cảnh (Hero Stage Canvas)**: Luôn thiết kế bối cảnh trải rộng trên toàn bộ màn hình 1920×1080 (phân bổ thoáng đãng sang trái, phải, trung tâm). CẤM TUYỆT ĐỐI mô tả dạng "đặt trong một thẻ/hộp nhỏ ở giữa" khiến hình bị co cụm bé tí giữa màn hình.
+  * **An toàn mép biên**: Các địa danh, công thức hoặc nhãn ở phía biên phải ($x > 1400$px) phải ghi rõ "nhãn dạt sang trái điểm neo" để chống tràn viền cắt cụt chữ.
 - **`show`** (dòng): **đúng một thay đổi** trên hình, viết ngắn, động từ + vật + vai trò màu ("điểm (2; 4) sáng màu tăng", "khung soi co về quanh đỉnh", "giữ nguyên"); thay đổi đó là *nguyên nhân* nhìn thấy được của con số/kết luận dòng đó nói. Có chữ "rồi", "đồng thời", ";" là đang gói hai thay đổi → tách dòng (`check_script.py` cảnh báo). Bảng/nhãn đổi số thì hình đổi tương ứng trong cùng `show`.
 - **`cue`** (dòng, tuỳ chọn): cụm **nguyên văn** trong `speak` mà thay đổi của `show` phải vào đúng lúc giọng nói tới (vd. dòng "Vậy ba là điểm cực đại, còn sáu là giá trị cực đại." + `cue: "giá trị cực đại"` → nhãn đổi khi giọng nói cụm đó, không phải ngay đầu câu). Dùng khi chữ/hình quan trọng nằm ở **nửa sau** câu, hoặc câu nhắc tới hai thứ lần lượt; thiếu `cue` thì thay đổi vào đầu dòng. Hình và lời phải tới cùng lúc: hình vào trước lời thì người xem nhìn mà chưa biết nhìn gì, vào sau thì nghe mà chưa thấy.
 - **`at`** (dòng): vật mà `text` gắn vào ("đỉnh (3; 6)", "cột $f(x_0)$", "công thức, dưới mẫu số"); bắt buộc khi có `text`.
