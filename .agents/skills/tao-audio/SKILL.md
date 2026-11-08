@@ -21,14 +21,22 @@ Vivibe không có thẻ chỉnh tông; tông giọng đến từ mẫu clone, nh
 ## Cấu hình
 
 1. API key: người dùng tự tạo ở vivibe.app/docs/api-keys và tự thêm `VIVIBE_API_KEY=...` vào `.env` ở gốc project (đã gitignore). **Không** hỏi, đọc, in hay ghi key ở bất kỳ đâu khác. Thiếu key thì script báo, nhắc người dùng.
-2. **Giọng không cố định — hỏi người dùng mỗi lần chạy B2.** Chạy `python scripts/vivibe_tts.py --list-voices`, đưa danh sách tên giọng cho người dùng chọn. Không tự chọn, không lấy lại giọng của lần trước khi chưa hỏi. Giọng đã chọn truyền vào mọi lệnh của lần chạy đó bằng `--voice "<tên hoặc id>"`.
-3. `speed` trong `scripts/tts_config.json` (0.5–2.0, mặc định 1.0) là tốc độ chung. Chỉ đổi khi người dùng nghe xong thấy cả bài nhanh/chậm.
+2. **Roster 3 Giọng đọc Chuẩn hóa Vivibe (Hỏi người dùng hoặc đề xuất theo môn)**:
+   - `nam - c Bình`: Dứt khoát, logic, chuẩn mực — dành cho các môn Tự nhiên (Toán, Lý, Hóa, Sinh, Tin).
+   - `nữ - c Nhi`: Ấm áp, truyền cảm, nhịp nhàng — dành cho các môn Xã hội (Sử, Địa, Văn, KTPL).
+   - `anh-male`: Giọng bản xứ chuẩn IPA song ngữ — dành cho môn Tiếng Anh.
+   Chạy `py scripts/vivibe_tts.py --list-voices` nếu cần xem toàn bộ danh sách giọng. Khi chạy lệnh, truyền giọng bằng `--voice "<tên hoặc id>"`.
+3. **Multi-Voice (Hỗ trợ đa giọng trong một bài)**:
+   - Kịch bản hỗ trợ trường `"voice"` ở cấp độ từng beat hoặc từng dòng `lines[i]`.
+   - Script tự động chèn khoảng lặng 0.3s khi đổi giọng giữa các nhân vật/cảnh và tự động làm mềm mào đầu âm thanh (80ms).
+4. **Từ điển Phiên âm Tập trung (`scripts/phonetic_dict.json`)**:
+   - `scripts/check_script.py` và `scripts/vivibe_tts.py` tự động tra cứu từ điển để phát hiện và phiên âm chuẩn: danh pháp IUPAC (*acetic acid* $\to$ *a-xê-tích a-xít*), nhóm chức hóa học, ký hiệu toán học, chữ viết tắt quốc tế (*ASEAN*, *NATO*), thuật ngữ địa lí (*El Niño* $\to$ *En Ni-nô*).
+5. `speed` trong `scripts/tts_config.json` (0.5–2.0, mặc định 1.0) là tốc độ chung. Chỉ đổi khi người dùng nghe xong thấy cả bài nhanh/chậm.
    Beat có trường `"speed"` trong `script.json` thì đọc theo tốc độ đó (cache tính theo tốc độ từng dòng). **Không dùng để làm chậm đoạn giải thích**: đã thử 0.85 (22/10) → người dùng: "đừng thay đổi tốc độ nói thuần, cần thay đổi nhịp". Đoạn nào nhanh quá → quay lại B1 chia nhỏ thành nhiều câu ngắn (skill `viet-kich-ban` › câu trả lời "vì sao").
-4. Đổi giọng hay `speed` làm cache mất hiệu lực → cả bài tạo lại (báo người dùng số ký tự trước). Cả bài một video phải cùng một giọng.
 
 ## Các bước
 
-1. **Kiểm tra + báo chi phí:** `python scripts/check_script.py <slug>` (lỗi phải bằng 0; script in sẵn **danh sách dòng cần nghe thử**), rồi `python scripts/vivibe_tts.py src/videos/<slug>/script.json --voice "<giọng>" --estimate`.
+1. **Kiểm tra + báo chi phí:** `py scripts/check_script.py <slug>` (lỗi phải bằng 0; script in sẵn **danh sách dòng cần nghe thử**), rồi `py scripts/vivibe_tts.py src/videos/<slug>/script.json --voice "<giọng>" --estimate`.
    Script duyệt cả kịch bản trước: dòng thiếu `speak` hay `speak` còn ký hiệu toán → dừng, báo người dùng sửa ở B1 (**không tự viết `speak`**).
    Hợp lệ thì in số dòng cần tạo và số ký tự (1 ký tự ≈ 1 credit). Báo người dùng con số này, chờ đồng ý.
 2. **Nghe thử beat đầu + các dòng cần nghe thử:** `... --voice "<giọng>" --only b01`, và thêm `--only <beatId>-lNN` cho mỗi dòng trong danh sách của `check_script.py`: dòng đọc ký hiệu/tên riêng (cách đọc theo gói môn `.gemini/mon/<subject>.md`) và **dòng câu hỏi đoán** (giọng phải lên ở cuối câu; nghe ngang → B1 đổi thành câu dẫn khẳng định). Người dùng nghe ổn mới tạo phần còn lại. Ngắt sai hoặc đọc tách ký hiệu → quay lại B1 sửa `speak`.
@@ -37,7 +45,7 @@ Vivibe không có thẻ chỉnh tông; tông giọng đến từ mẫu clone, nh
 3. **Tạo cả bài:** cùng `--voice`, không có `--only`. Dòng nào đã có file khớp (cùng giọng, tốc độ, `speak`) thì bỏ qua.
    **Nghe lại sau khi tạo cả bài**: gửi lại (SendUserFile) đúng các file trong bài có đọc chữ cái/ký hiệu, kể cả dòng đã nghe thử ổn — mỗi lần tạo một khác. Đã gặp (22/10/2026): nghe thử ổn, nhưng bản trong bài đọc "f(x)" thừa âm cuối. Dòng lỗi → B1 đổi sang nói theo nghĩa, rồi `--only` dòng đó.
 4. Lỗi một dòng: đọc thông báo, báo người dùng. **Không chạy lại ngay để thử** — mỗi lần gửi là một lần trừ credit. Người dùng đồng ý thì `--only <beatId>-lNN`.
-5. **Mốc từng từ**: `python scripts/align_words.py <slug>` (bản giọng khác thêm `--audio-dir <slug>-<hậu tố>`) → `words.json` cạnh `manifest.json`, cho `cue` ở B3. Chạy lại mỗi khi tạo lại dòng nào.
+5. **Mốc từng từ**: `py scripts/align_words.py <slug>` (bản giọng khác thêm `--audio-dir <slug>-<hậu tố>`) → `words.json` cạnh `manifest.json`, cho `cue` ở B3. Chạy lại mỗi khi tạo lại dòng nào.
 6. Báo cáo: số dòng đã tạo / lỗi, số ký tự đã gửi, tổng thời lượng audio (đo bằng `ffprobe` đi kèm Remotion, `node_modules/@remotion/compositor-win32-x64-msvc/ffprobe.exe`).
    Ước lượng thời lượng video = tổng audio + khoảng nghỉ của B3 (≈ 0,25s mỗi dòng, 0,6s mỗi beat, ~5s intro/outro). Ngoài khung 2:30 – 4:00 → báo người dùng trước khi sang B3; sửa bằng cách quay lại B1, không đổi `speed` để bù.
 
@@ -53,7 +61,7 @@ Vivibe không có thẻ chỉnh tông; tông giọng đến từ mẫu clone, nh
 ## Bản giọng khác (không thay bản cũ)
 
 Người dùng muốn thêm một bản đọc giọng khác bên cạnh bản đã có (vd. "làm thêm bản giọng nữ"):
-- Tạo vào thư mục riêng: `python scripts/vivibe_tts.py src/videos/<slug>/script.json --voice "<giọng>" --audio-dir <slug>-<hậu tố>` (hậu tố ngắn: `nu`, `nam`…). Không sửa `script.json`, không chép kịch bản ra bản khác.
+- Tạo vào thư mục riêng: `py scripts/vivibe_tts.py src/videos/<slug>/script.json --voice "<giọng>" --audio-dir <slug>-<hậu tố>` (hậu tố ngắn: `nu`, `nam`…). Không sửa `script.json`, không chép kịch bản ra bản khác.
 - Báo số ký tự (`--estimate` cùng `--audio-dir`) trước khi tạo; cả bài một giọng.
 - B3 thêm một composition `<slug>-<hậu tố>` đọc audio từ thư mục đó (skill `dung-video` › Bản giọng khác). Thời lượng đo lại theo audio mới, không dùng lại timeline bản cũ.
 
