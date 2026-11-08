@@ -9,7 +9,7 @@ Tài liệu này giải thích chi tiết cho các thành viên trong nhóm và 
 
 ## 1. Bảng Đối chiếu: Bản Git Clone vs Bản Local Đầy đủ
 
-Khi bạn clone dự án từ GitHub về, Git chỉ tải về **mã nguồn và bộ quy chuẩn**. Các file nặng, file bí mật cá nhân và file sinh tự động đều đã được chặn lại bởi file [.gitignore](file:///d:/Video%20AI/.gitignore).
+Khi bạn clone dự án từ GitHub về, Git chỉ tải về **mã nguồn và bộ quy chuẩn**. Các file nặng, file bí mật cá nhân và file sinh tự động đều đã được chặn lại bởi file [.gitignore](../.gitignore).
 
 | Thành phần bị thiếu trên Git | Lý do bị chặn (`.gitignore`) | Cách xử lý / Khôi phục ở máy Local |
 | :--- | :--- | :--- |

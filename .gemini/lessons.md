@@ -152,3 +152,9 @@ am - c Bình: Dành cho các môn Tự nhiên (Toán, Lý, Hóa, Tin) — dứt 
   2. **Multi-Voice theo Beat & Dòng**: scripts/vivibe_tts.py hỗ trợ trường oice ở từng beat và từng dòng, tự động chèn khoảng lặng 0.3s khi chuyển đổi giọng, và làm mềm mào đầu âm thanh (80ms).
   3. **Từ điển phiên âm tập trung scripts/phonetic_dict.json**: Chuẩn hóa cách đọc CTCT, nhóm chức ($-OH$, $-COOH$, liên kết đôi =C$), danh pháp IUPAC (*acetic acid* $	o$ *a-xê-tích a-xít*), chữ viết tắt (*ASEAN*, *NATO*), thuật ngữ Địa lý (*El Niño* $	o$ *En Ni-nô*) và ký hiệu toán học.
   4. **Chốt chặn tự động scripts/check_script.py**: Tự động bắt lỗi công thức hóa học dính chưa phiên âm, danh pháp tiếng Anh thô, gợi ý cách đọc và đề xuất voice chuẩn theo từng môn.
+
+
+### 08/11/2026 — Quy chuẩn Link Tài liệu trong Repo Git: Cấm Tuyệt đối Link Tuyệt đối `file:///` Local
+- **Hiện tượng**: AI nhầm lẫn giữa quy tắc giao tiếp trong khung chat (dùng `file:///` để người dùng click mở file trong IDE) và tài liệu markdown lưu trữ trong repo Git, dẫn đến việc chèn các link tuyệt đối dạng `file:///d:/Video%20AI/...` vào các file markdown.
+- **Hậu quả**: Link chết trên GitHub và hỏng khi clone về máy khác (khác ổ đĩa hoặc trên hệ điều hành khác).
+- **Quy chuẩn**: Toàn bộ đường dẫn liên kết giữa các tài liệu trong repo Git (`.gemini/`, `docs/`, `references/`) bắt buộc dùng đường dẫn tương đối (relative path, ví dụ `./ktpl.md` hoặc `../.gitignore`).
