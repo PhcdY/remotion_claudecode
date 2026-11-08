@@ -60,7 +60,7 @@ export const estimateLabel = (text: string, size = 36) => {
     }
   }
   const tall = /\\d?frac/.test(text);
-  return { w: Math.ceil(w) + 12, h: Math.ceil(size * (tall ? 2.4 : 1.3)) + 4 };
+  return { w: Math.ceil(w) + 16, h: Math.ceil(size * (tall ? 2.4 : 1.3)) + 4 };
 };
 
 const rectAt = (s: LabelSpec, dir: Dir, dist: number, slide = 0): Rect => {
@@ -105,21 +105,36 @@ export const placeLabels = (specs: LabelSpec[], obstacles: Rect[], bounds: Rect)
     const others = specs.filter((o) => o.id !== s.id && together(s, o));
     const points = others.filter((o) => (o.anchor ?? "point") === "point");
     const mates = placed.filter((p) => together(s, p.s));
-    const order = [...(s.prefer ?? []), ...DEFAULT_ORDER.filter((d) => !(s.prefer ?? []).includes(d))];
+
+    // Nhạy bén với biên: nếu điểm neo sát mép phải bounds, ưu tiên dạt sang Tây (w, nw, sw)
+    const biasedDirs: Dir[] = [];
+    if (s.ax > bounds.x + bounds.w - s.w - 50) biasedDirs.push("w", "nw", "sw");
+    if (s.ax < bounds.x + s.w + 50) biasedDirs.push("e", "ne", "se");
+    if (s.ay > bounds.y + bounds.h - s.h - 40) biasedDirs.push("n", "nw", "ne");
+    if (s.ay < bounds.y + s.h + 40) biasedDirs.push("s", "sw", "se");
+
+    const orderSet = new Set<Dir>([
+      ...(s.prefer ?? []),
+      ...biasedDirs,
+      ...DEFAULT_ORDER,
+    ]);
+    const order = Array.from(orderSet);
+
     let best = null as { r: Rect; dir: Dir; dist: number; hard: number; soft: number } | null;
     search: for (const dist of DISTANCES) {
       for (const [di, dir] of order.entries()) {
         const diagonal = VEC[dir][0] !== 0 && VEC[dir][1] !== 0;
         for (const slide of diagonal ? [0] : SLIDES) {
           const r = rectAt(s, dir, dist, slide);
-          let hard = outside(r, bounds);
+          const outArea = outside(r, bounds);
+          // Phạt cực nặng nếu tràn khỏi bounds: đảm bảo không bao giờ chọn vị trí out of frame
+          let hard = outArea > 0 ? 25000 + outArea * 25 : 0;
           for (const o of obstacles) hard += overlap(r, o, o.pad ?? PAD_STROKE);
           for (const o of points) hard += overlap(r, { x: o.ax - 10, y: o.ay - 10, w: 20, h: 20 }, 2);
           for (const p of mates) hard += overlap(r, p.r, PAD_LABEL);
           const leader = dist >= LEADER_FROM;
           if (!leader && (s.anchor ?? "point") === "point") {
             // nhãn của một chấm: phải gần chấm của mình hơn mọi chấm khác cùng hiện, kẻo gán nhầm
-            // (nhãn của vùng gắn bằng màu với đoạn tô, không cần luật này)
             const own = distTo(r, s.ax, s.ay);
             for (const o of points) if (distTo(r, o.ax, o.ay) < own + 24) hard += 5000;
           } else if (leader) {
@@ -137,8 +152,33 @@ export const placeLabels = (specs: LabelSpec[], obstacles: Rect[], bounds: Rect)
       if (best && best.hard === 0) break search;
     }
     const b = best as { r: Rect; dir: Dir; dist: number; hard: number; soft: number };
-    placed.push({ r: b.r, s });
-    out[s.id] = { cx: b.r.x + b.r.w / 2, cy: b.r.y + b.r.h / 2, w: b.r.w, h: b.r.h, dir: b.dir, dist: b.dist, leader: b.dist >= LEADER_FROM, violation: Math.round(b.hard) };
+
+    // Kẹp chặt toạ độ trung tâm nhãn vào trong bounds để chống out-of-frame tuyệt đối
+    const minCx = bounds.x + s.w / 2 + 8;
+    const maxCx = Math.max(minCx, bounds.x + bounds.w - s.w / 2 - 8);
+    const minCy = bounds.y + s.h / 2 + 8;
+    const maxCy = Math.max(minCy, bounds.y + bounds.h - s.h / 2 - 8);
+    const finalCx = Math.max(minCx, Math.min(b.r.x + b.r.w / 2, maxCx));
+    const finalCy = Math.max(minCy, Math.min(b.r.y + b.r.h / 2, maxCy));
+
+    const finalRect: Rect = {
+      x: finalCx - s.w / 2,
+      y: finalCy - s.h / 2,
+      w: s.w,
+      h: s.h,
+    };
+
+    placed.push({ r: finalRect, s });
+    out[s.id] = {
+      cx: finalCx,
+      cy: finalCy,
+      w: b.r.w,
+      h: b.r.h,
+      dir: b.dir,
+      dist: b.dist,
+      leader: b.dist >= LEADER_FROM,
+      violation: Math.round(b.hard),
+    };
   }
   return out;
 };

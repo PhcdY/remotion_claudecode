@@ -141,12 +141,12 @@ Giọng đọc AI (Vivibe) cần được kiểm soát chặt chẽ khi đọc t
 >    - Maintainer kiểm duyệt chất lượng và **tự tay push lên nhánh default (`gemini`)**.
 >    - Mọi Creator khác lần sau chỉ cần chạy `git pull origin gemini` là tự động có sẵn toàn bộ component mới trong `src/` để tái sử dụng ngay lập tức mà không phải dựng lại!
 
-### 6.2. Bộ Core Components chuyên dụng môn Sử (Đặt tại `src/components/su/`)
-- `TacticalMap.tsx`: Khung bản đồ chiến sự vector SVG tối giản hỗ trợ vẽ mũi tên hành quân động.
-- `DynamicTimeline.tsx`: Trục thời gian mượt mà, zoom vào mốc sự kiện theo frame.
-- `DossierCard.tsx`: Thẻ hồ sơ tư liệu lịch sử, chân dung lãnh tụ, trích dẫn chuẩn SGK.
-- `PowerGauge.tsx`: Cán cân so sánh tương quan lực lượng hai bên.
-- `ReformDiagram.tsx`: Sơ đồ chuyển dịch thể chế Before $\to$ After.
+### 6.2. Bộ Core Components chuyên dụng môn Sử (Đã tích hợp tại `src/components/su/`)
+Bộ component chuẩn hóa đã được kiểm thử, giải quyết triệt để 4 lỗi thị giác (hình bé tí, đè nét, out frame, lỗi LaTeX):
+- `TacticalMap.tsx` (`<TacticalMap>`): Khung sa bàn chiến sự Hero Stage (1740x800px), tự động căn tỷ lệ, vẽ mũi tên quân sự động (có góc quay tiếp tuyến, nhãn lực lượng đặt tại gốc mũi tên chống đè mục tiêu), địa danh có halo chống đè nét và tự động bẻ hướng chống tràn viền.
+- `ReformDiagram.tsx` (`<ReformDiagram>`): Sơ đồ so sánh chính sách cải cách 2 cột (Before vs After, Kinh tế vs Xã hội) chiếm trọn 1740px, 100% bọc `MathText`, chống lỗi escape `\to` thành `$ o$`, bố cục rộng rãi thoáng đãng.
+- `DossierCard.tsx` (`<DossierCard>`): Thẻ hồ sơ tư liệu lịch sử, chân dung lãnh tụ, trích dẫn SGK trang trọng.
+- `StagePanel` (từ `src/components/Card.tsx`): Khung bao sân khấu Dark/Light Mode chiếm toàn bộ màn hình 1920x1080.
 
 ### 6.3. Màu sắc & Mood hình ảnh
 - Không dùng màu mè sặc sỡ kiểu hoạt hình trẻ con.

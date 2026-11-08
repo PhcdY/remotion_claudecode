@@ -309,6 +309,12 @@ def main() -> int:
 
             # --- text ---
             if text:
+                if '\t' in text or '\x0b' in text or '\x0c' in text:
+                    errors.append(f"{w}: text chứa ký tự điều khiển ẩn (tab/vtab) do gõ thiếu escape lệnh LaTeX (ví dụ '\\to' thành '\\t' + 'o') — sửa thành '\\\\to' hoặc dùng ký tự Unicode '→': {repr(text)}")
+                if re.search(r'\$\s*o\s*\$', text):
+                    errors.append(f"{w}: text có lỗi rụng lệnh LaTeX '$ o$' — sửa thành ký tự Unicode '→' hoặc '\\\\to': {text}")
+                if subject in ('su', 'dia', 'van', 'ktpl', 'gtktpl') and re.search(r'\$\\to\$|\$\\rightarrow\$', text):
+                    warns.append(f"{w}: môn xã hội nên dùng trực tiếp ký tự Unicode '→' thay vì LaTeX '$\\to$' để typography mượt mà: {text}")
                 if not is_pure_math(text) and visible_len(text) > 40:
                     warns.append(f"{w}: text dài {visible_len(text)} ký tự (≤ ~35): {text}")
                 if text.rstrip().endswith("."):
