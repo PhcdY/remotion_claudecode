@@ -4,7 +4,17 @@
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 
-const MON = { toan: "Toán", ly: "Vật lý", hoa: "Hóa học", sinh: "Sinh học", su: "Lịch sử", dia: "Địa lý" };
+const MON = {
+  toan: "Toán",
+  ly: "Vật lý",
+  hoa: "Hóa học",
+  sinh: "Sinh học",
+  su: "Lịch sử",
+  dia: "Địa lý",
+  van: "Ngữ văn",
+  ktpl: "GDKT & PL",
+  gtktpl: "GDKT & PL",
+};
 const safe = (s) => String(s).normalize("NFC").replace(/[<>:"/\\|?*]/g, "-").replace(/[. ]+$/, "").trim();
 
 export function getBaseOutputDir(root) {
