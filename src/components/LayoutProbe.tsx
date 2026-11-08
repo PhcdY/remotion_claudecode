@@ -56,7 +56,10 @@ const measure = () => {
   const sceneMode = document.querySelector('[data-layout="scene"]') !== null;
   const bottomLimit = sceneMode ? layout.sceneBottom : layout.subtitleTop - 20;
   items.forEach((a) => {
-    if (a.r.left < 0 || a.r.right > layout.width || a.r.top < 0) issues.push(`tràn khung — ${a.label}`);
+    // Chặn nghiêm ngặt việc chữ thò ra ngoài hoặc dính sát mép video (< 24px)
+    if (a.r.left < 24 || a.r.right > layout.width - 24 || a.r.top < 24) {
+      issues.push(`tràn mép khung (${Math.round(a.r.left)}px..${Math.round(a.r.right)}px) — ${a.label}`);
+    }
     // chữ phải nằm gọn trong khung chứa (thẻ, ô bảng) gắn data-box
     const box = a.el.closest("[data-box]");
     if (box && a.kind === "text") {
@@ -129,7 +132,7 @@ const wordsOf = (el: Element) => {
 const MIN_FONT: Record<string, number> = { tick: 28, axis: 28, takeaway: 56, subtitle: 48, default: 36 };
 const NOT_CONTENT = ["takeaway", "subtitle", "title", "url"];
 
-/** Cảnh báo (không chặn): khung lệch, nửa khung trống. Trả thêm danh sách chữ đang hiện để đếm chữ mới. */
+/** Cảnh báo (không chặn): khung lệch, nửa khung trống, nội dung co cụm quá nhỏ. */
 const composition = () => {
   const warns: string[] = [];
   const boxes: DOMRect[] = [];
@@ -149,15 +152,22 @@ const composition = () => {
       if (n) texts.push({ k: el.getAttribute("data-label-id") ?? (el.textContent ?? "").trim().slice(0, 60), n });
     }
   });
-  // bỏ SVG bên trong công thức KaTeX: mũi tên \overrightarrow là một path rộng ~400000 đơn vị bị cắt khung, đo ra x âm hàng chục nghìn
+  // bỏ SVG bên trong công thức KaTeX
   document.querySelectorAll("svg path, svg line, svg circle, svg polygon, svg polyline, svg rect").forEach((el) => {
     if (!el.closest(".katex")) add(el);
   });
   if (boxes.length) {
     const left = Math.min(...boxes.map((b) => b.left));
     const right = Math.max(...boxes.map((b) => b.right));
+    const contentWidth = right - left;
     const cx = (left + right) / 2;
     const mid = layout.width / 2;
+
+    // Phát hiện lỗi hình bé tí lọt thỏm giữa khung 1920x1080
+    if (boxes.length >= 4 && contentWidth < 1100) {
+      warns.push(`nội dung co cụm quá nhỏ (rộng ${Math.round(contentWidth)}px < 1100px trên khung 1920) — cần mở rộng sân khấu toàn khung`);
+    }
+
     if (right < mid + 60) warns.push(`nửa phải khung trống (nội dung tới x = ${Math.round(right)})`);
     else if (left > mid - 60) warns.push(`nửa trái khung trống (nội dung từ x = ${Math.round(left)})`);
     else if (Math.abs(cx - mid) > 280) warns.push(`khung lệch ${cx < mid ? "trái" : "phải"} (tâm nội dung x = ${Math.round(cx)})`);

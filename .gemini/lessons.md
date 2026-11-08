@@ -160,3 +160,21 @@ am - c Bình: Dành cho các môn Tự nhiên (Toán, Lý, Hóa, Tin) — dứt 
 - **Quy chuẩn**: Toàn bộ đường dẫn liên kết giữa các tài liệu trong repo Git (`.gemini/`, `docs/`, `references/`) bắt buộc dùng đường dẫn tương đối (relative path, ví dụ `./ktpl.md` hoặc `../.gitignore`).
 
 - **Quy chuẩn Giao tiếp khi Push Git**: Mỗi khi tạo nhánh và push lên GitHub, AI BẮT BUỘC soạn sẵn mẫu Title và Description chuẩn format GitHub PR (kèm emoji, mục tiêu, thay đổi chính, checklist kiểm tra) trong khung chat để người dùng chỉ việc copy-paste vào giao diện tạo Pull Request.
+
+### 08/11/2026 — Khắc phục 4 Lỗi Hệ thống: Sân khấu Bé tí, Mũi tên Chồng chéo, Chữ Out Frame và Rụng Lệnh LaTeX `$ o$`
+- **Hiện tượng (Từ thử nghiệm video Lịch sử)**:
+  1. *Bố cục lộn xộn, hình bé tí*: Cả khung hình 1920x1080 mà sa bàn chiến sự bị co cụm trong một chiếc hộp nhỏ ở giữa màn hình (lãng phí 70% diện tích, khiến các chi tiết bị nhồi nhét chật chội).
+  2. *Hình ảnh chồng chéo*: Hai mũi tên tấn công của quân Minh đè thẳng lên chông của chiến lũy Đa Bang, nhãn quân đoàn đè lên thân mũi tên.
+  3. *Chữ bị out frame*: Điểm Đông Đô (Thăng Long) nằm sát mép phải, nhãn chữ bị đẩy ra ngoài biên và chém cụt thành `Đông Đô (Thăng L...`.
+  4. *Lỗi LaTeX `$ o$`*: Thẻ cải cách hiện nguyên văn `Giải phóng nô tì $ o$ dân tự do` và `...ngân khố $ o$ Quý tộc...` do lệnh `\to` bị JSON parse nuốt `\t` thành ký tự TAB và component render text thô không qua `MathText`.
+- **Nguyên nhân kỹ thuật & Giải pháp Framework**:
+  1. *Hero Stage Canvas*: Cung cấp component chuẩn `StagePanel` (`src/components/Card.tsx`) chiếm trọn 1740x800–930px. Cấm tuyệt đối việc tạo hộp 800–1000px đặt giữa màn hình làm sân khấu chính.
+  2. *Chống Chồng chéo Mũi tên & Nhãn*: Trong `TacticalMap.tsx`, nhãn lực lượng được neo tại gốc mũi tên (đầu xuất phát); mũi tên có góc quay xoay đúng tiếp tuyến và dừng lại trước mục tiêu với khoảng hở an toàn; các điểm đồn lũy có hào quang và halo chống đè nét.
+  3. *Thuật toán Chống Tràn Khung (Zero Cut-Off)*:
+     - Trong `labelLayout.ts`, tăng trọng số phạt tràn khung `outside` lên 25,000 điểm (ưu tiên tuyệt đối số 1 là không bao giờ được chọn vị trí ngoài biên).
+     - Tự động phát hiện điểm neo sát mép biên để ưu tiên các hướng quay ngược vào lòng sân khấu (`"w"`, `"nw"`, `"sw"` cho mép phải).
+     - Kẹp chặt (clamp) `cx, cy` vào trong bounds với safe padding 8px; `labels.tsx` mặc định dùng bounds an toàn 1800x930px.
+  4. *Khôi phục Lệnh LaTeX & Bọc MathText Toàn diện*:
+     - `MathText.tsx`: Bổ sung cơ chế auto-sanitize tự động phục hồi `\t([a-zA-Z]+)` thành `\t$1` (đặc biệt `[\t]o` $\to$ `\to`), sửa `$ o$` thành `$\to$`, chuyển đổi các biến thể `->`, `-->`, `=>`, `→` thành lệnh KaTeX tương ứng; gắn `data-text="math"` cho mọi công thức.
+     - `scripts/check_script.py`: Bổ sung chốt chặn phát hiện ký tự điều khiển ẩn (`\t`, `\v`, `\f`) và lỗi `$ o$` trong `script.json`; khuyến nghị môn KHXH dùng Unicode `→` trực tiếp.
+     - Khởi tạo bộ Core Components môn Sử `src/components/su/` (`TacticalMap`, `ReformDiagram`, `DossierCard`) bọc 100% `MathText`.

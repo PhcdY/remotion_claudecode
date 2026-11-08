@@ -2,7 +2,7 @@ import React from "react";
 import { MathText } from "./MathText";
 import { Dir, LabelSpec, Rect, placeLabels, estimateLabel } from "./labelLayout";
 import { Scale } from "./plot";
-import { colors, fontSize as FS, fontText, halo } from "./theme";
+import { colors, fontSize as FS, fontText, halo, layout } from "./theme";
 
 // Nhãn neo vào vật, tự tránh nhau (skill dung-video › quy tắc 1, 12). Phần tính vị trí: labelLayout.ts.
 // Vị trí tính trên TẤT CẢ nhãn của cảnh (kể cả nhãn chưa hiện) nên nhãn không nhảy chỗ khi nhãn khác hiện ra.
@@ -42,7 +42,7 @@ export const AutoLabels: React.FC<{
   items: AutoLabelItem[];
   scale?: Scale;
   obstacles?: Rect[];
-  /** vùng nhãn được phép nằm (px trong khung); mặc định khung Plot nới 80px mỗi phía */
+  /** vùng nhãn được phép nằm (px trong khung); mặc định tôn trọng lề an toàn của khung hình */
   bounds?: Rect;
 }> = ({ items, scale, obstacles = [], bounds }) => {
   const px = (it: AutoLabelItem) => (scale ? { ax: scale.x(it.x), ay: scale.y(it.y) } : { ax: it.x, ay: it.y });
@@ -59,7 +59,11 @@ export const AutoLabels: React.FC<{
     const lo = Math.floor(st);
     return ts.map((t, i) => [t, i === lo ? 1 - (st - lo) : i === lo + 1 ? st - lo : 0] as const);
   };
-  const b = bounds ?? (scale ? { x: -80, y: -80, w: scale.width + 160, h: scale.height + 160 } : { x: 0, y: 0, w: 1920, h: 1040 });
+  // Bounds an toàn chống tràn khung hình
+  const defaultBounds: Rect = scale
+    ? { x: -80, y: -80, w: scale.width + 160, h: scale.height + 160 }
+    : { x: layout.side, y: layout.visualTop, w: layout.width - layout.side * 2, h: layout.sceneBottom - layout.visualTop };
+  const b = bounds ?? defaultBounds;
   const pos = placeLabels(specs, obstacles, b);
   return (
     <>

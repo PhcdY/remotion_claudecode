@@ -1,3 +1,4 @@
+/* eslint-disable no-control-regex */
 import "katex/dist/katex.min.css";
 import "./katex-fix.css";
 import katex from "katex";
@@ -33,8 +34,18 @@ export const Tex: React.FC<{
   style?: React.CSSProperties;
 }> = ({ tex, display = false, style }) => {
   const html = useMemo(() => {
-    // Chuẩn hoá: nếu chuỗi bị double backslash (từ JSX attribute), sửa lại thành single backslash cho lệnh KaTeX
+    // Chuẩn hoá: phục hồi các ký tự escape bị nuốt và lệnh KaTeX
     const sanitized = tex
+      // Khôi phục \t, \v, \f, \r bị JSON parse nuốt thành control characters
+      .replace(/\t([a-zA-Z]+)/g, "\\t$1")
+      .replace(/\x0b([a-zA-Z]+)/g, "\\v$1")
+      .replace(/\x0c([a-zA-Z]+)/g, "\\f$1")
+      .replace(/\r([a-zA-Z]+)/g, "\\r$1")
+      // Nếu chuỗi chỉ có chữ 'o' sau khi bị mất dấu gạch chéo của \to
+      .replace(/^\s*o\s*$/, "\\to")
+      .replace(/(?:->|-->)/g, "\\rightarrow ")
+      .replace(/=>/g, "\\Rightarrow ")
+      .replace(/→/g, "\\rightarrow ")
       .replace(/\\{2,}([a-zA-Z,;!]+)/g, (_, cmd) => "\\" + cmd)
       .replace(/\\vec\{([^{}]{2,})\}/g, "\\overrightarrow{$1}");
     return katex.renderToString(sanitized, {
@@ -44,22 +55,35 @@ export const Tex: React.FC<{
       trust: false,
     });
   }, [tex, display]);
-  return <span style={style} dangerouslySetInnerHTML={{ __html: html }} />;
+  return <span data-text="math" style={style} dangerouslySetInnerHTML={{ __html: html }} />;
 };
 
 type Part = { math: boolean; value: string };
 
+/** Tiền xử lý chuỗi văn bản chứa LaTeX chống nuốt backslash và escape lỗi */
+export const sanitizeTextWithMath = (text: string): string => {
+  if (!text) return "";
+  return text
+    // Phục hồi escape tab / vtab / formfeed trong JSON string
+    .replace(/\t([a-zA-Z]+)/g, "\\t$1")
+    .replace(/\x0b([a-zA-Z]+)/g, "\\v$1")
+    .replace(/\x0c([a-zA-Z]+)/g, "\\f$1")
+    // Trường hợp kinh điển: "\to" bị parse thành "$ o$" hoặc "$	o$"
+    .replace(/\$\s*o\s*\$/g, "$\\to$");
+};
+
 export const splitMath = (text: string): Part[] => {
+  const clean = sanitizeTextWithMath(text);
   const parts: Part[] = [];
   const re = /\$([^$]+)\$/g;
   let last = 0;
   let m: RegExpExecArray | null;
-  while ((m = re.exec(text)) !== null) {
-    if (m.index > last) parts.push({ math: false, value: text.slice(last, m.index) });
+  while ((m = re.exec(clean)) !== null) {
+    if (m.index > last) parts.push({ math: false, value: clean.slice(last, m.index) });
     parts.push({ math: true, value: m[1] });
     last = m.index + m[0].length;
   }
-  if (last < text.length) parts.push({ math: false, value: text.slice(last) });
+  if (last < clean.length) parts.push({ math: false, value: clean.slice(last) });
   return parts;
 };
 
