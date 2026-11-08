@@ -132,3 +132,10 @@ Chi tiết từng video: `src/videos/<slug>/FEEDBACK.md`. Thêm mục mới mỗ
   2. *Chuẩn xác thuật ngữ*: Phân biệt rành mạch 4 loại vi phạm pháp luật (Hình sự vs Hành chính vs Dân sự vs Kỷ luật), không nhầm lẫn giữa quyền và nghĩa vụ.
   3. *Thời hiệu*: Chỉ dẫn luật đang có hiệu lực, số liệu kinh tế có nguồn và năm cụ thể.
 - **Trọng tâm đề thi TN THPT từ 2025**: Giải quyết câu hỏi trắc nghiệm Đúng/Sai (Phần II) bằng cách chia nhỏ chủ thể thành các thẻ UI, soi sáng từng mệnh đề qua Cây quyết định pháp lý (Decision Tree).
+
+### 08/11/2026 — Khởi tạo Gói môn Tiếng Anh: Ngữ pháp Nhận thức (Cognitive Grammar) & Xử lý Âm thanh Song ngữ
+- **Triết lý**: Xóa bỏ hội chứng học vẹt công thức toán học rời rạc ($S + V + O$, 12 thì, bảng 200 phrasal verbs). Ngôn ngữ là sự ý niệm hóa không gian (*Spatial Conceptualization*). Dùng 5 Archetypes Remotion SVG để người học "nhìn thấy" tư duy bản xứ: *Timeline Lens* (Thì & Thể), *Spatial Schema* (In/On/At & Up/Down/Out), *Hierarchical Sentence Block* (Cấu trúc câu & Rút gọn), *Epistemic Distance* (Điều kiện & Lùi thì), *Common Ground* (Mạo từ).
+- **Cơ chế Xử lý Giọng đọc Vivibe TTS cho Tiếng Anh**:
+  1. Vivibe TTS là giọng clone tiếng Việt, dễ bị nuốt âm đuôi (*final sounds: /s/, /t/, /d/*) hoặc phát âm bẹt nếu đưa câu tiếng Anh dài vào `speak`.
+  2. Giải pháp 3 lớp: Lời dẫn tiếng Việt 100% tự nhiên; Mẫu câu tiếng Anh hiển thị sắc nét bằng Typography trên màn hình; Từ vựng tiếng Anh ngắn trong `speak` viết kèm dấu ngắt `...`, bắt buộc có `caption` và đưa vào danh sách kiểm duyệt `CẦN NGHE THỬ` của `check_script.py`.
+- **Phản biện Nguyên tắc Thị giác (Chống rập khuôn)**: 5 Archetypes KHÔNG PHẢI là khuôn đúc cố định (bài nào cũng chỉ vẽ trục timeline hay hộp kín). Chúng chỉ là 5 Nguyên lý Cơ học Nền (Primitives). BẮT BUỘC có **Bước Động não Ẩn dụ Độc bản (Bespoke Metaphor Ideation)** trước khi viết kịch bản: Tìm một hình tượng đời thực độc nhất vô nhị (vết sơn ướt, hiện trường vụ án, cỗ máy đa vũ trụ...) để mỗi video mang một linh hồn thị giác riêng biệt, không bao giờ lặp lại nhàm chán.

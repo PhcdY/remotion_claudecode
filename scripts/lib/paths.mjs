@@ -14,6 +14,8 @@ const MON = {
   van: "Ngữ văn",
   ktpl: "GDKT & PL",
   gtktpl: "GDKT & PL",
+  anh: "Tiếng Anh",
+  tienganh: "Tiếng Anh",
 };
 const safe = (s) => String(s).normalize("NFC").replace(/[<>:"/\\|?*]/g, "-").replace(/[. ]+$/, "").trim();
 
