@@ -1,0 +1,367 @@
+{
+  "slug": "quang-duong-van-toc",
+  "title": "Kiến sa mạc đi lòng vòng, sao vẫn về thẳng tổ?",
+  "subject": "ly",
+  "lop": 10,
+  "chuong": "Chương I. Động học",
+  "bai": "Bài 1. Các đại lượng trong chuyển động",
+  "exams": [
+    "THPTQG",
+    "TSA",
+    "HSA"
+  ],
+  "beats": [
+    {
+      "id": "b01",
+      "scene": 1,
+      "section": "HIỆN TƯỢNG",
+      "keyword": "Sao nó biết đường về?",
+      "visual": "CẢNH 1 — Sa mạc nhìn nghiêng 3/4: mặt cát trải ra tới đường chân trời (khoảng y = 330), bầu trời nhạt phía trên, vài gợn cát. Tổ kiến (miệng hang trên một gò cát nhỏ) ở phía trước bên trái — mốc đứng yên suốt cảnh. Con kiến giản lược (ba đốt thân, sáu chân, hai râu, dài ≈ 140px, màu `main`) đứng ở miệng tổ. Camera đứng yên, thấy toàn bộ vùng kiến đi. Đường đi của kiến là MỘT quỹ đạo cố định trên mặt cát (toạ độ thế giới → màn hình qua một hàm chiếu nghiêng chung): lòng vòng, có một khúc vòng lại gần tổ, rồi tới chỗ mồi ở xa bên phải.",
+      "lines": [
+        {
+          "show": "kiến bò ra khỏi miệng tổ",
+          "at": "miệng tổ",
+          "text": "tổ",
+          "speak": "Ở sa mạc, một con kiến rời tổ đi kiếm mồi."
+        },
+        {
+          "show": "kiến đi lòng vòng trên cát theo quỹ đạo, chậm",
+          "text": "",
+          "speak": "Nó đi lòng vòng, rẽ trái rẽ phải, chẳng theo đường nào."
+        },
+        {
+          "show": "gió thổi qua, các vết chân mờ trên cát bị xoá sạch",
+          "text": "",
+          "speak": "Cát nóng và gió xoá sạch dấu vết, nên nó không lần theo mùi được."
+        },
+        {
+          "show": "mẩu mồi hiện ở cuối quỹ đạo, kiến tới gắp lấy",
+          "at": "mẩu mồi",
+          "text": "mồi",
+          "speak": "Tới khi gặp mồi, nó quay đầu."
+        },
+        {
+          "show": "kiến ngậm mồi bò một đường thẳng tắp về đúng miệng tổ",
+          "text": "",
+          "speak": "Rồi bò một đường thẳng tắp... về đúng cửa tổ."
+        },
+        {
+          "show": "dấu hỏi lớn hiện trên cát, giữa tổ và chỗ mồi",
+          "text": "",
+          "speak": "Đi lòng vòng như thế, sao nó biết đường thẳng về nhà?"
+        }
+      ]
+    },
+    {
+      "id": "b02",
+      "scene": 1,
+      "section": "TRỰC GIÁC",
+      "keyword": "Sợi chỉ chỉ có dài thêm",
+      "visual": "Giữ CẢNH 1. Dấu hỏi đã tắt. Tổ và mặt cát giữ nguyên. Hình thể của QUÃNG ĐƯỜNG: sợi chỉ (màu `pairA`) nhả ra từ một cuộn chỉ đặt cạnh miệng tổ, nằm đúng trên quỹ đạo kiến đã đi (độ dài sợi chỉ = tổng quãng đường tính từ quỹ đạo). Dòng 5–6: bản 'kéo thẳng' của sợi chỉ là một đoạn thẳng nằm ngang dọc mép dưới vùng hình (y ≈ 880), độ dài đúng bằng sợi chỉ theo cùng tỉ lệ.",
+      "lines": [
+        {
+          "show": "tua lại: kiến và mồi mờ đi, kiến hiện lại ở miệng tổ, mồi về chỗ cũ",
+          "text": "",
+          "speak": "Tua lại chuyến đi từ đầu."
+        },
+        {
+          "show": "cuộn chỉ hiện cạnh miệng tổ, đầu chỉ buộc vào kiến",
+          "at": "cuộn chỉ",
+          "text": "cuộn chỉ",
+          "speak": "Buộc vào kiến một sợi chỉ, cuộn chỉ đặt ở cửa tổ."
+        },
+        {
+          "show": "kiến đi lòng vòng tới chỗ mồi, sợi chỉ nhả ra nằm đúng trên đường đi",
+          "text": "",
+          "speak": "Kiến đi tới đâu, sợi chỉ nhả ra tới đó, uốn theo từng khúc quanh."
+        },
+        {
+          "show": "sợi chỉ sáng đậm màu `pairA`",
+          "at": "sợi chỉ, giữa đường đi",
+          "text": "quãng đường = chiều dài sợi chỉ",
+          "speak": "Chiều dài sợi chỉ chính là quãng đường kiến đã đi."
+        },
+        {
+          "show": "một bản sao sợi chỉ được kéo thẳng ra, nằm ngang dọc mép dưới",
+          "at": "sợi chỉ kéo thẳng",
+          "text": "kéo thẳng ra",
+          "speak": "Kéo thẳng sợi chỉ ra mới thấy, kiến đã đi một quãng rất dài."
+        },
+        {
+          "show": "kiến bò tiếp một đoạn ngắn, sợi chỉ trên cát và bản kéo thẳng cùng dài thêm",
+          "text": "",
+          "speak": "Đi thêm bước nào, sợi chỉ dài thêm bước đó, không bao giờ ngắn lại."
+        }
+      ]
+    },
+    {
+      "id": "b03",
+      "scene": 1,
+      "section": "ĐỊNH NGHĨA",
+      "keyword": "Dây chun: nối tổ với kiến",
+      "lineGap": 0.4,
+      "visual": "Giữ CẢNH 1. BƯỚC KHÓ (khái niệm mới). Hình thể của ĐỘ DỊCH CHUYỂN: dây chun (màu `focus`) một đầu ghim ở miệng tổ, đầu kia buộc vào kiến, luôn là đoạn thẳng từ tổ tới kiến — xoay, giãn, co theo kiến. Sợi chỉ (màu `pairA`) vẫn nhả theo quỹ đạo như b02. Bản kéo thẳng ở mép dưới: dòng 7 có thêm bản kéo thẳng của dây chun nằm ngay dưới bản sợi chỉ, cùng tỉ lệ, để so.",
+      "lines": [
+        {
+          "show": "tua lại: sợi chỉ cuộn về, bản kéo thẳng tắt, kiến hiện lại ở miệng tổ",
+          "text": "",
+          "speak": "Tua lại thêm một lần nữa."
+        },
+        {
+          "show": "dây chun hiện: một đầu ghim ở miệng tổ, đầu kia buộc vào kiến",
+          "at": "dây chun",
+          "text": "dây chun",
+          "speak": "Lần này thêm một dây chun, một đầu ghim ở cửa tổ, một đầu buộc vào kiến."
+        },
+        {
+          "show": "kiến đi lòng vòng, sợi chỉ nhả theo đường đi, dây chun luôn căng thẳng từ tổ tới kiến",
+          "text": "",
+          "speak": "Kiến đi đâu, dây chun cũng căng thẳng từ tổ tới chỗ nó đang đứng."
+        },
+        {
+          "show": "dây chun sáng đậm màu `focus`",
+          "at": "dây chun",
+          "text": "độ dịch chuyển = dây chun",
+          "speak": "Dây chun đó chính là độ dịch chuyển, có cả độ dài lẫn hướng."
+        },
+        {
+          "show": "hai đầu dây chun nhấp sáng, đầu ở tổ và đầu ở kiến",
+          "text": "",
+          "speak": "Nó không quan tâm đường đi, chỉ nối chỗ xuất phát với chỗ đang đứng."
+        },
+        {
+          "show": "kiến đi tiếp tới khúc vòng lại sát tổ và dừng ở đó, dây chun co ngắn lại",
+          "text": "",
+          "speak": "Lúc kiến vòng lại gần tổ, sợi chỉ hay dây chun dài hơn?",
+          "pauseAfter": 1.5
+        },
+        {
+          "show": "bản kéo thẳng của sợi chỉ và của dây chun hiện cạnh nhau ở mép dưới: sợi chỉ dài hơn hẳn",
+          "text": "",
+          "speak": "Sợi chỉ dài hơn hẳn, còn dây chun ngắn lại vì kiến đang ở gần tổ."
+        },
+        {
+          "show": "kiến đi tiếp tới chỗ mồi, dây chun giãn dài ra theo",
+          "text": "",
+          "speak": "Kiến càng xa tổ, dây chun càng dài."
+        }
+      ]
+    },
+    {
+      "id": "b04",
+      "scene": 1,
+      "section": "BẢN CHẤT",
+      "keyword": "Đi ngược dây chun về tổ",
+      "visual": "Giữ CẢNH 1. Khoảnh khắc 'à ra thế'. Kiến ở chỗ mồi; sợi chỉ rối trên cát (mờ bớt) và dây chun căng từ tổ tới kiến. Hai bản kéo thẳng ở mép dưới đã gỡ.",
+      "lines": [
+        {
+          "show": "kiến gắp mồi",
+          "text": "",
+          "speak": "Giờ kiến đã có mồi."
+        },
+        {
+          "show": "trên dây chun hiện mũi tên ngược lại, từ kiến chỉ thẳng về tổ",
+          "at": "mũi tên ngược",
+          "text": "đường về",
+          "speak": "Lật ngược dây chun lại, ta được đúng hướng về tổ."
+        },
+        {
+          "show": "kiến bò thẳng dọc dây chun về tổ, dây chun co dần theo",
+          "text": "",
+          "speak": "Kiến chỉ việc bò dọc theo nó... dây chun co dần."
+        },
+        {
+          "show": "đầu sợi chỉ đi theo kiến, sợi chỉ dài thêm một đoạn thẳng về tổ",
+          "text": "",
+          "speak": "Sợi chỉ thì vẫn dài thêm, vì kiến vẫn đang đi."
+        },
+        {
+          "show": "dây chun co lại thành một chấm ở miệng tổ",
+          "at": "chấm ở miệng tổ",
+          "text": "co thành một chấm",
+          "speak": "Về tới tổ, dây chun co lại thành một chấm."
+        },
+        {
+          "show": "sợi chỉ rối mờ hẳn đi",
+          "text": "",
+          "speak": "Còn sợi chỉ rối kia, kiến không cần dùng tới."
+        }
+      ]
+    },
+    {
+      "id": "b05",
+      "scene": 1,
+      "section": "TRỰC GIÁC",
+      "keyword": "Vận tốc: nhanh chậm và hướng",
+      "visual": "Giữ CẢNH 1. Sợi chỉ, dây chun và mồi đã gỡ. Tổ giữ nguyên làm mốc. Hai con kiến giống hệt nhau (màu `main`). Mũi tên vận tốc (màu `focus`): gốc ở thân kiến, cùng hướng bò, độ dài định tính, hai mũi tên dài bằng nhau.",
+      "lines": [
+        {
+          "show": "dây chun, sợi chỉ và mồi mờ hẳn đi",
+          "text": "",
+          "speak": "Dây chun có hướng, nên chuyện nhanh chậm cũng cần thêm hướng."
+        },
+        {
+          "show": "hai con kiến hiện ở miệng tổ",
+          "text": "",
+          "speak": "Thả hai con kiến cùng lúc từ cửa tổ."
+        },
+        {
+          "show": "hai kiến cùng bò thẳng, nhanh như nhau, một sang trái một sang phải, để lại ảnh mờ cách đều",
+          "text": "",
+          "speak": "Hai con bò nhanh như nhau, nhưng về hai hướng khác nhau."
+        },
+        {
+          "show": "trên lưng mỗi kiến hiện một mũi tên theo hướng bò, dài bằng nhau",
+          "at": "mũi tên trên lưng kiến bên phải",
+          "text": "vận tốc",
+          "speak": "Gắn lên lưng mỗi con một mũi tên, đó là vận tốc."
+        },
+        {
+          "show": "thân hai mũi tên nhấp sáng, đặt cạnh nhau thấy dài bằng nhau",
+          "at": "thân mũi tên bên trái",
+          "text": "tốc độ: độ dài mũi tên",
+          "speak": "Độ dài mũi tên cho biết nhanh hay chậm, gọi là tốc độ."
+        },
+        {
+          "show": "đầu nhọn hai mũi tên nhấp sáng, chỉ hai hướng khác nhau",
+          "text": "",
+          "speak": "Tốc độ như nhau, nhưng hướng khác nhau, nên vận tốc khác nhau."
+        }
+      ]
+    },
+    {
+      "id": "b06",
+      "scene": 1,
+      "section": "CÔNG THỨC",
+      "keyword": "Vận tốc theo hướng dây chun",
+      "visual": "Giữ CẢNH 1. Hai kiến của b05 đã gỡ. Một kiến ở chỗ mồi với nguyên chuyến đi đầu: sợi chỉ (`pairA`) rối trên cát, dây chun (`focus`) từ tổ tới kiến. Bầu trời phía trên bên phải trống, dành cho hai công thức (thu gọn, không che cảnh). Đồng hồ kim (không ghi số, màu `pairB`) đặt trên cát cạnh tổ.",
+      "lines": [
+        {
+          "show": "kiến, sợi chỉ, dây chun hiện lại như cuối chuyến đi đầu tiên",
+          "text": "",
+          "speak": "Quay lại chuyến đi đầu tiên, lúc kiến vừa tới chỗ mồi."
+        },
+        {
+          "show": "đồng hồ kim hiện cạnh tổ",
+          "at": "đồng hồ",
+          "text": "thời gian đi",
+          "speak": "Đặt thêm một đồng hồ, đo thời gian kiến đã đi."
+        },
+        {
+          "show": "công thức tốc độ trung bình hiện trên trời, chữ s sáng cùng màu sợi chỉ, nhãn s hiện cạnh sợi chỉ",
+          "at": "bầu trời, phía trên bên phải",
+          "text": "tốc độ trung bình: $v = \\dfrac{s}{t}$",
+          "speak": "Tính cho cả chuyến đi, chiều dài sợi chỉ chia cho thời gian là tốc độ trung bình."
+        },
+        {
+          "show": "công thức vận tốc trung bình hiện ngay dưới, chữ d sáng cùng màu dây chun, nhãn d hiện cạnh dây chun",
+          "at": "dưới công thức tốc độ",
+          "text": "vận tốc trung bình: $\\vec v = \\dfrac{\\vec d}{t}$",
+          "speak": "Còn dây chun chia cho thời gian là vận tốc trung bình."
+        },
+        {
+          "show": "chữ t ở cả hai mẫu số và đồng hồ cùng sáng màu `pairB`",
+          "text": "",
+          "speak": "Mẫu số của cả hai là thời gian, đọc trên đồng hồ."
+        },
+        {
+          "show": "sợi chỉ kéo thẳng và dây chun kéo thẳng hiện cạnh nhau ở mép dưới",
+          "text": "",
+          "speak": "Đi lòng vòng thì sợi chỉ dài, mà dây chun ngắn."
+        },
+        {
+          "show": "chữ s và chữ d trên hai công thức nhấp sáng cùng màu hai bản kéo thẳng",
+          "text": "",
+          "speak": "Cùng chia một thời gian, nên tốc độ trung bình lớn hơn hẳn độ lớn vận tốc trung bình."
+        },
+        {
+          "show": "mũi tên nhỏ trên chữ v, chữ d và dây chun cùng sáng màu `focus`",
+          "text": "",
+          "speak": "Mũi tên trên chữ nhắc rằng vận tốc có hướng, đúng hướng dây chun."
+        }
+      ]
+    },
+    {
+      "id": "b07",
+      "scene": 2,
+      "section": "VÍ DỤ",
+      "keyword": "Về chỗ cũ: vận tốc 0",
+      "visual": "CẢNH 2 — Đời sống. Ba khung đặt ngang, cân giữa vùng hình. Trái: điện thoại mở app chạy bộ, bản đồ có đường chạy ngoằn ngoèo (màu `pairA` như sợi chỉ). Giữa: điện thoại mở bản đồ, chấm 'nhà' và chấm 'bạn' nối bằng đoạn thẳng (màu `focus` như dây chun). Phải: bể bơi nhỏ nhìn từ trên, người bơi (chấm + thân, màu `main`), dây chun từ chỗ xuất phát tới người bơi. Các khung hiện lần lượt theo dòng.",
+      "lines": [
+        {
+          "show": "điện thoại trái hiện, đường chạy ngoằn ngoèo vẽ dần trên bản đồ",
+          "at": "màn hình app chạy bộ",
+          "text": "đã chạy 5 km",
+          "speak": "Ngoài đời, app chạy bộ báo đã chạy năm ki-lô-mét."
+        },
+        {
+          "show": "đường chạy sáng màu `pairA`",
+          "text": "",
+          "speak": "Con số đó là sợi chỉ, cộng hết mọi đoạn đường."
+        },
+        {
+          "show": "điện thoại giữa hiện, đoạn thẳng nối nhà với vị trí của bạn",
+          "at": "màn hình bản đồ",
+          "text": "cách nhà 2 km",
+          "speak": "Còn bản đồ báo cách nhà hai ki-lô-mét."
+        },
+        {
+          "show": "đoạn thẳng trên bản đồ sáng màu `focus`",
+          "text": "",
+          "speak": "Con số này là dây chun, chỉ nối nhà với chỗ đang đứng."
+        },
+        {
+          "show": "bể bơi hiện, người bơi bơi một vòng về chỗ cũ, kéo theo dây chun giãn ra và co lại thành chấm",
+          "at": "bể bơi",
+          "text": "bơi 100 m",
+          "speak": "Bơi một trăm mét rồi về đúng chỗ cũ, dây chun co thành một chấm."
+        },
+        {
+          "show": "chấm ở chỗ xuất phát sáng màu `focus`",
+          "text": "",
+          "speak": "Vậy vận tốc trung bình bằng không, dù bơi rất nhanh."
+        }
+      ]
+    },
+    {
+      "id": "b08",
+      "scene": 3,
+      "section": "GIẢI ĐÁP",
+      "keyword": "Kiến nhớ dây chun",
+      "visual": "CẢNH 3 — Quay lại đúng cảnh sa mạc của b01 (cùng tổ, cùng quỹ đạo, cùng chỗ mồi). Kiến ngậm mồi ở chỗ mồi; sợi chỉ rối trên cát mờ, dây chun căng từ tổ tới kiến.",
+      "lines": [
+        {
+          "show": "dây chun sáng đậm, sợi chỉ mờ đi",
+          "text": "",
+          "speak": "Quay lại con kiến sa mạc."
+        },
+        {
+          "show": "dây chun co giãn, xoay theo một lượt tua nhanh của chuyến đi lòng vòng",
+          "text": "",
+          "speak": "Suốt chuyến đi, nó liên tục ghi nhớ dây chun nối tổ với chỗ nó đang đứng."
+        },
+        {
+          "show": "mũi tên ngược hiện trên dây chun, kiến bò thẳng theo nó về tổ",
+          "text": "",
+          "speak": "Có mồi rồi, chỉ cần đi ngược dây chun là về tới tổ."
+        },
+        {
+          "show": "kiến ngậm mồi được nhấc sang một chỗ trống bên cạnh, dây chun cũ đi theo",
+          "text": "",
+          "speak": "Các nhà khoa học đã thử nhấc kiến sang chỗ khác."
+        },
+        {
+          "show": "kiến bò theo đúng mũi tên cũ, tới nơi không có tổ thì đi loanh quanh",
+          "at": "chỗ kiến dừng lại",
+          "text": "tổ không ở đây",
+          "speak": "Nó vẫn bò theo đúng dây chun cũ, tới nơi thì loay hoay tìm tổ."
+        },
+        {
+          "show": "chấm ở miệng tổ thật sáng lên",
+          "text": "",
+          "speak": "Vậy kiến về được nhà nhờ nhớ độ dịch chuyển, không nhờ quãng đường."
+        }
+      ]
+    }
+  ]
+}
