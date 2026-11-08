@@ -6,7 +6,7 @@ Hệ thống tự động hoá sản xuất video giáo dục giải thích bả
 
 ## 📚 Tài liệu Hướng dẫn
 
-- **Dành cho Creator / User (Chỉ cần prompt)**: [docs/HUONG_DAN_CHO_USER.md](docs/HUONG_DAN_CHO_USER.md) — Quy trình 3 trạm từ kịch bản đến video thành phẩm.
+- **Dành cho Cộng tác viên (Chỉ cần duyệt từng bước)**: [docs/HUONG_DAN_CHO_USER.md](docs/HUONG_DAN_CHO_USER.md) — Hướng dẫn bắt đầu và quy trình 3 bước từ kịch bản đến video thành phẩm.
 - **Đối chiếu bản Git vs Local & Xử lý Output**: [docs/LOCAL_VS_GIT_VA_OUTPUT.md](docs/LOCAL_VS_GIT_VA_OUTPUT.md) — Giải thích các file bị `.gitignore` và vị trí video xuất ra.
 - **Quy định đặt tên nhánh Git & Quản lý Engine**: [docs/git-branching.md](docs/git-branching.md) — Chuẩn đặt tên nhánh và quy chuẩn Pull Request cho người phát triển framework.
 - **Thư viện tài liệu SGK tham khảo**: [references/README.md](references/README.md) — Cấu trúc tài liệu SGK chuẩn theo môn/lớp.
@@ -27,7 +27,7 @@ Hệ thống tự động hoá sản xuất video giáo dục giải thích bả
 3. **Từ điển Phiên âm Khoa học Tập trung (`scripts/phonetic_dict.json`)**:
    - Tự động chuẩn hóa cách phát âm danh pháp IUPAC, công thức cấu tạo hóa học, ký hiệu toán học, chữ viết tắt quốc tế (*ASEAN*, *UNCLOS*, *NATO*) và thuật ngữ khoa học đời thực.
 4. **Quy trình 3 Trạm Tinh gọn (Local-First)**:
-   - Trạm 1 (Kịch bản) $\to$ Trạm 2 (Duyệt hình Storyboard miễn phí) $\to$ Trạm 3 (Tạo Audio TTS & Xuất MP4).
+   - Bước 1 (Kịch bản) $\to$ Bước 2 (Duyệt hình Storyboard miễn phí) $\to$ Bước 3 (Tạo Audio TTS & Xuất MP4).
 
 ---
 
