@@ -72,10 +72,12 @@ export const ProgressBar: React.FC = () => {
 export const BrandFrame: React.FC<{ children: React.ReactNode; logoFrom?: number; logoUntil?: number }> = ({
   children,
   logoFrom = 0,
-  logoUntil = Infinity,
+  logoUntil,
 }) => {
   const frame = useCurrentFrame();
-  const logo = interpolate(frame, [logoFrom, logoFrom + 10, logoUntil - 10, logoUntil], [0, 1, 1, 0], {
+  const { durationInFrames } = useVideoConfig();
+  const effectiveUntil = logoUntil ?? durationInFrames;
+  const logo = interpolate(frame, [logoFrom, logoFrom + 10, effectiveUntil - 10, effectiveUntil], [0, 1, 1, 0], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });

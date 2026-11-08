@@ -154,12 +154,22 @@ export const TacticalMap: React.FC<{
 
           // Tính vị trí text để không tràn viền màn hình
           let textX = pt.x + 24;
+          let textY = pt.y + 8;
+          let subY = pt.y + 32;
           let textAnchor: "start" | "end" | "middle" = "start";
+
           if (anchor === "left") {
             textX = pt.x - 24;
             textAnchor = "end";
           } else if (anchor === "top") {
             textX = pt.x;
+            textY = pt.y - 24;
+            subY = pt.y - 48;
+            textAnchor = "middle";
+          } else if (anchor === "bottom") {
+            textX = pt.x;
+            textY = pt.y + 32;
+            subY = pt.y + 56;
             textAnchor = "middle";
           }
 
@@ -172,7 +182,7 @@ export const TacticalMap: React.FC<{
               {/* Nhãn địa danh có halo bảo vệ */}
               <text
                 x={textX}
-                y={anchor === "top" ? pt.y - 22 : pt.y + 6}
+                y={textY}
                 textAnchor={textAnchor}
                 fill="#FFFFFF"
                 fontSize={24}
@@ -187,7 +197,7 @@ export const TacticalMap: React.FC<{
               {pt.sublabel && (
                 <text
                   x={textX}
-                  y={anchor === "top" ? pt.y - 46 : pt.y + 28}
+                  y={subY}
                   textAnchor={textAnchor}
                   fill="#94A3B8"
                   fontSize={17}

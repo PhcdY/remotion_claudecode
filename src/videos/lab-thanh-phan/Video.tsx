@@ -1,107 +1,191 @@
 import React from "react";
-import { Composition, useCurrentFrame } from "remotion";
-import { BeatProps } from "../../components/BeatShell";
-import { ExplainerProps, ExplainerVideo, explainerMetadata } from "../../components/ExplainerVideo";
-import { AutoLabels, AutoLabelItem, axesObstacles, curveObstacles } from "../../components/labels";
-import { fadeIn } from "../../components/parts";
-import { Axes, FunctionPlot, Plot, Point, makeScale } from "../../components/plot";
-import { role } from "../../components/roles";
-import { colors, fontText } from "../../components/theme";
-import { FPS, Script } from "../../components/timeline";
-import scriptJson from "./script.json";
+import { Composition, Sequence } from "remotion";
+import { BrandFrame } from "../../components/BrandFrame";
+import { KeyTakeaway } from "../../components/KeyTakeaway";
+import { TacticalMap, ReformDiagram } from "../../components/su";
 
-// Composition thử thành phần dùng chung (nhãn tự đặt, cảnh liền mạch, chế độ nháp). Không phải video đăng.
-
-const script = scriptJson as Script;
-const f = (x: number) => -(x ** 3) + 6 * x ** 2 - 9 * x + 6;
-const S = makeScale({ xMin: -1.2, xMax: 4.2, yMin: 0, yMax: 24, width: 1100, height: 640 });
-const XT = [-1, 1, 2, 3, 4];
-const YT = [4, 8, 12, 16, 20, 24];
-const OBST = [...curveObstacles(S, f, -1, 4), ...axesObstacles(S, XT, YT)];
-
-/** Cảnh 1 dùng chung cho b01, b02: cùng một trạng thái ở ranh giới hai beat. */
-const Scene1: React.FC<{ draw: number; labels: AutoLabelItem[]; points: { x: number; color: string; o: number }[] }> = ({ draw, labels, points }) => (
-  <Plot
-    scale={S}
-    left={410}
-    top={200}
-    overlay={<AutoLabels scale={S} items={labels} obstacles={OBST} />}
-  >
-    <Axes scale={S} xTicks={XT} yTicks={YT} xLabel="x" yLabel="f(x)" />
-    <FunctionPlot scale={S} f={f} from={-1} to={4} progress={draw} />
-    {points.map((p) => (
-      <Point key={p.x} scale={S} x={p.x} y={f(p.x)} color={p.color} opacity={p.o} />
-    ))}
-  </Plot>
-);
-
-const b01Labels = (fr: number, L: number[]): AutoLabelItem[] => [
-  { id: "max", x: 3, y: 6, text: "cực đại: $6$", color: role.focus, opacity: fadeIn(fr, L[1]) },
-  { id: "min", x: 1, y: 2, text: "cực tiểu: $2$", color: role.focus, opacity: fadeIn(fr, L[2]) },
-];
-
-const Beat01: React.FC<BeatProps> = ({ L }) => {
-  const fr = useCurrentFrame();
+// Composition phòng lab thử nghiệm chuẩn Hero Stage Canvas, AutoLabels và Text Pipeline
+export const LabVideo: React.FC = () => {
   return (
-    <Scene1
-      draw={fadeIn(fr, L[0], 50)}
-      labels={[...b01Labels(fr, L), ...b02Labels(-1, [1e9, 1e9, 1e9])]}
-      points={[
-        { x: 3, color: role.focus, o: fadeIn(fr, L[1]) },
-        { x: 1, color: role.focus, o: fadeIn(fr, L[2]) },
-      ]}
-    />
+    <BrandFrame>
+      {/* Cảnh 1 (Frame 0 - 60): Sa bàn Chiến sự Phòng tuyến Đa Bang chuẩn Hero Stage */}
+      <Sequence durationInFrames={60}>
+        <TacticalMap
+          title="Phòng tuyến Đa Bang"
+          timeTag="Tháng 11/1406"
+          hasTakeaway={true}
+          arrows={[
+            {
+              id: "arr-truong-phu-1",
+              x1: 760,
+              y1: 170,
+              x2: 800,
+              y2: 290,
+              label: "20 vạn quân Minh (Trương Phụ)",
+              color: "#EF4444",
+              progress: 1,
+            },
+            {
+              id: "arr-truong-phu-2",
+              x1: 940,
+              y1: 170,
+              x2: 900,
+              y2: 290,
+              color: "#EF4444",
+              progress: 1,
+            },
+          ]}
+          points={[
+            {
+              id: "pt-da-bang",
+              x: 850,
+              y: 405,
+              label: "Chiến lũy Đa Bang",
+              sublabel: "Phòng tuyến trung tâm",
+              color: "#F59E0B",
+              anchor: "bottom", // Nhãn dạt xuống dưới thanh thành luỹ, không đè nét
+            },
+            {
+              id: "pt-dong-do",
+              x: 1460,
+              y: 640,
+              label: "Đông Đô (Thăng Long)",
+              sublabel: "Kinh đô Đại Ngu",
+              color: "#F59E0B",
+              anchor: "left", // Chống tràn mép: nhãn dạt sang Tây (trái), cách xa mép phải
+            },
+          ]}
+        >
+          {/* Nét vẽ Sông Hồng (Nhị Hà) uốn lượn chéo góc bản đồ */}
+          <path
+            d="M 160 130 C 580 340, 1080 520, 1680 750"
+            fill="none"
+            stroke="#1E40AF"
+            strokeWidth={36}
+            strokeLinecap="round"
+            opacity={0.8}
+          />
+          <path
+            d="M 160 130 C 580 340, 1080 520, 1680 750"
+            fill="none"
+            stroke="#60A5FA"
+            strokeWidth={6}
+            strokeDasharray="16 12"
+            strokeLinecap="round"
+            opacity={0.7}
+          />
+          <text
+            x={1160}
+            y={590}
+            fill="#93C5FD"
+            fontSize={22}
+            fontWeight={700}
+            fontFamily="Plus Jakarta Sans"
+            style={{ textShadow: "0 2px 8px rgba(0,0,0,0.9)" }}
+          >
+            Sông Hồng (Nhị Hà)
+          </text>
+
+          {/* Công trình Phòng tuyến Chiến lũy Đa Bang */}
+          <g transform="translate(850, 340)">
+            <rect
+              x={-150}
+              y={-14}
+              width={300}
+              height={28}
+              rx={6}
+              fill="#D97706"
+              stroke="#FDE68A"
+              strokeWidth={3}
+            />
+            {/* Hàng chông gỗ phòng ngự mặt bắc */}
+            {[-130, -90, -50, -10, 30, 70, 110, 130].map((cx, i) => (
+              <line
+                key={i}
+                x1={cx}
+                y1={-14}
+                x2={cx}
+                y2={-28}
+                stroke="#DC2626"
+                strokeWidth={4}
+                strokeLinecap="round"
+              />
+            ))}
+          </g>
+        </TacticalMap>
+
+        {/* Câu chốt của beat sa bàn */}
+        <KeyTakeaway
+          text="Thành cao lũy sâu, nhưng then chốt là lòng dân"
+          from={0}
+          top={930}
+          bottom={1030}
+        />
+      </Sequence>
+
+      {/* Cảnh 2 (Frame 61 - 120): Sơ đồ Cải cách 2 cột sạch bóng lỗi LaTeX $ o$ */}
+      <Sequence from={61} durationInFrames={60}>
+        <ReformDiagram
+          hasTakeaway={true}
+          leftCard={{
+            tag: "Kinh tế",
+            tagColor: "#3B82F6",
+            year: "1397",
+            title: "Chính sách Hạn điền",
+            items: [
+              {
+                highlight: "Hạn chế sở hữu: Tối đa 10 mẫu/người",
+                detail: "Trừ đại vương và công chúa tôn thất triều Trần",
+              },
+              {
+                highlight: "Ruộng thừa sung công",
+                detail: "Nhà nước tịch thu ruộng đất vượt hạn mức làm ruộng công",
+              },
+            ],
+            conclusion: {
+              type: "impact",
+              text: "Đánh thẳng vào đặc quyền kinh tế quý tộc Trần, nhưng ruộng chưa kịp chia cho dân cày nghèo",
+            },
+          }}
+          rightCard={{
+            tag: "Xã hội",
+            tagColor: "#10B981",
+            year: "1401",
+            title: "Chính sách Hạn nô",
+            items: [
+              {
+                highlight: "Hạn chế số lượng gia nô quý tộc",
+                detail: "Số nô tì dư thừa phải nộp thuế cho triều đình nhà Hồ",
+              },
+              {
+                highlight: "Giải phóng nô tì → dân tự do",
+                detail: "Biến nô tì thành nông dân đóng thuế trực tiếp cho nhà nước",
+              },
+            ],
+            conclusion: {
+              type: "limitation",
+              text: "Tăng nguồn thuế cho ngân khố → Khiến tầng lớp quý tộc căm thù triều đình sâu sắc",
+            },
+          }}
+        />
+        <KeyTakeaway
+          text="Đổi mới quyết liệt nhưng mất đi khối đại đoàn kết"
+          from={61}
+          top={930}
+          bottom={1030}
+        />
+      </Sequence>
+    </BrandFrame>
   );
 };
-
-const b02Labels = (fr: number, L: number[]): AutoLabelItem[] => [
-  { id: "d2", x: 2, y: 4, text: "$f'(2) = 3$", color: role.up, opacity: fadeIn(fr, L[0]) },
-  { id: "d35", x: 3.5, y: f(3.5), text: "$f'(3{,}5) < 0$", color: role.down, opacity: fadeIn(fr, L[1]) },
-  { id: "top", x: -1, y: 22, text: "lớn nhất: $22$", color: role.focus, opacity: fadeIn(fr, L[2]) },
-];
-
-const Beat02: React.FC<BeatProps> = ({ L }) => {
-  const fr = useCurrentFrame();
-  // frame đầu b02 = frame cuối b01: đồ thị vẽ xong, hai nhãn cực trị đã hiện
-  return (
-    <Scene1
-      draw={1}
-      labels={[...b01Labels(1e9, [0, 0, 0]), ...b02Labels(fr, L)]}
-      points={[
-        { x: 3, color: role.focus, o: 1 },
-        { x: 1, color: role.focus, o: 1 },
-        { x: 2, color: role.up, o: fadeIn(fr, L[0]) },
-        { x: 3.5, color: role.down, o: fadeIn(fr, L[1]) },
-        { x: -1, color: role.focus, o: fadeIn(fr, L[2]) },
-      ]}
-    />
-  );
-};
-
-const Beat03: React.FC<BeatProps> = () => (
-  <div
-    data-text="label"
-    style={{ position: "absolute", left: 0, right: 0, top: 480, textAlign: "center", fontFamily: fontText, fontSize: 56, fontWeight: 700, color: colors.text }}
-  >
-    Cảnh 2
-  </div>
-);
-
-const BEATS: Record<string, React.FC<BeatProps>> = { b01: Beat01, b02: Beat02, b03: Beat03 };
-
-const Lab: React.FC<ExplainerProps> = ({ timeline, draft }) => (
-  <ExplainerVideo script={script} timeline={timeline} beats={BEATS} draft={draft} />
-);
 
 export const LabComposition: React.FC = () => (
   <Composition
     id="lab-thanh-phan"
-    component={Lab}
-    durationInFrames={300}
-    fps={FPS}
+    component={LabVideo}
+    durationInFrames={120}
+    fps={30}
     width={1920}
     height={1080}
-    defaultProps={{ timeline: null, draft: true } as ExplainerProps}
-    calculateMetadata={explainerMetadata(script)}
   />
 );
