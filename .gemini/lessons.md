@@ -139,3 +139,16 @@ Chi tiết từng video: `src/videos/<slug>/FEEDBACK.md`. Thêm mục mới mỗ
   1. Vivibe TTS là giọng clone tiếng Việt, dễ bị nuốt âm đuôi (*final sounds: /s/, /t/, /d/*) hoặc phát âm bẹt nếu đưa câu tiếng Anh dài vào `speak`.
   2. Giải pháp 3 lớp: Lời dẫn tiếng Việt 100% tự nhiên; Mẫu câu tiếng Anh hiển thị sắc nét bằng Typography trên màn hình; Từ vựng tiếng Anh ngắn trong `speak` viết kèm dấu ngắt `...`, bắt buộc có `caption` và đưa vào danh sách kiểm duyệt `CẦN NGHE THỬ` của `check_script.py`.
 - **Phản biện Nguyên tắc Thị giác (Chống rập khuôn)**: 5 Archetypes KHÔNG PHẢI là khuôn đúc cố định (bài nào cũng chỉ vẽ trục timeline hay hộp kín). Chúng chỉ là 5 Nguyên lý Cơ học Nền (Primitives). BẮT BUỘC có **Bước Động não Ẩn dụ Độc bản (Bespoke Metaphor Ideation)** trước khi viết kịch bản: Tìm một hình tượng đời thực độc nhất vô nhị (vết sơn ướt, hiện trường vụ án, cỗ máy đa vũ trụ...) để mỗi video mang một linh hồn thị giác riêng biệt, không bao giờ lặp lại nhàm chán.
+
+### 08/11/2026 — Roster 3 Giọng Vivibe, Khắc phục Đơn điệu & Chuẩn hóa Phiên âm IUPAC / CTCT / Ngoại ngữ
+- **Hiện tượng**: Xem video toán người xem thấy nghe hơi chán, thiếu cảm xúc; mở rộng sang các môn khác (Sử, Địa, Văn, Tiếng Anh, Hóa học) phát sinh lỗi phát âm ngoại ngữ, danh pháp IUPAC, CTCT, chữ viết tắt và lệch mood môn học.
+- **Giải pháp & Quy chuẩn**:
+  1. **Roster 3 Voice Personas Vivibe**:
+     - 
+am - c Bình: Dành cho các môn Tự nhiên (Toán, Lý, Hóa, Tin) — dứt khoát, logic.
+     - 
+ữ - c Nhi: Dành cho các môn Xã hội (Sử, Địa, Văn, KTPL) — truyền cảm, gần gũi, giàu cảm xúc.
+     - nh-male: Dành cho môn Tiếng Anh (Mô hình đa ngôn ngữ của Vivibe, chuẩn IPA).
+  2. **Multi-Voice theo Beat & Dòng**: scripts/vivibe_tts.py hỗ trợ trường oice ở từng beat và từng dòng, tự động chèn khoảng lặng 0.3s khi chuyển đổi giọng, và làm mềm mào đầu âm thanh (80ms).
+  3. **Từ điển phiên âm tập trung scripts/phonetic_dict.json**: Chuẩn hóa cách đọc CTCT, nhóm chức ($-OH$, $-COOH$, liên kết đôi =C$), danh pháp IUPAC (*acetic acid* $	o$ *a-xê-tích a-xít*), chữ viết tắt (*ASEAN*, *NATO*), thuật ngữ Địa lý (*El Niño* $	o$ *En Ni-nô*) và ký hiệu toán học.
+  4. **Chốt chặn tự động scripts/check_script.py**: Tự động bắt lỗi công thức hóa học dính chưa phiên âm, danh pháp tiếng Anh thô, gợi ý cách đọc và đề xuất voice chuẩn theo từng môn.

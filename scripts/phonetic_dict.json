@@ -1,0 +1,189 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Từ điển phiên âm chuẩn cho AI Voice (Vivibe TTS & Video AI Pipeline)",
+  "description": "Chuẩn hóa cách phát âm ký hiệu, danh pháp IUPAC Hóa học, CTCT, Sinh học, Vật lý, Tin học, Lịch sử, Địa lý theo chuẩn ngữ âm sư phạm Việt Nam.",
+  "toan": {
+    "symbols": {
+      "x_0": { "speak": "ích-không", "caption": "x₀", "desc": "Điểm x không" },
+      "x_1": { "speak": "ích-một", "caption": "x₁", "desc": "Điểm x một" },
+      "x_2": { "speak": "ích-hai", "caption": "x₂", "desc": "Điểm x hai" },
+      "y_0": { "speak": "y-không", "caption": "y₀", "desc": "Điểm y không" },
+      "Delta_x": { "speak": "đen-ta ích", "caption": "Δx", "desc": "Số gia đen-ta x" },
+      "Delta_y": { "speak": "đen-ta y", "caption": "Δy", "desc": "Số gia đen-ta y" },
+      "f'(x)": { "speak": "ép-phẩy của ích", "caption": "f'(x)", "desc": "Đạo hàm f'(x)" },
+      "f'(x_0)": { "speak": "ép-phẩy tại ích-không", "caption": "f'(x₀)", "desc": "Đạo hàm tại x₀" },
+      "vec_i": { "speak": "véc-tơ i", "caption": "véc-tơ i", "desc": "Vectơ đơn vị trục hoành" },
+      "vec_j": { "speak": "véc-tơ di", "caption": "véc-tơ j", "desc": "Vectơ đơn vị trục tung (CẤM đọc gi/giây)" },
+      "vec_k": { "speak": "véc-tơ ca", "caption": "véc-tơ k", "desc": "Vectơ đơn vị trục cao" },
+      "vec_u": { "speak": "véc-tơ u", "caption": "véc-tơ u", "desc": "Vectơ u" },
+      "vec_v": { "speak": "véc-tơ vê", "caption": "véc-tơ v", "desc": "Vectơ v" },
+      "vec_OM": { "speak": "véc-tơ ô-mờ", "caption": "véc-tơ OM", "desc": "Vectơ nối gốc O và M" },
+      "vec_AB": { "speak": "véc-tơ a-bê", "caption": "véc-tơ AB", "desc": "Vectơ AB" },
+      "M'": { "speak": "mờ-phẩy", "caption": "M'", "desc": "Điểm M phẩy (CẤM đọc êm phẩy)" },
+      "A'": { "speak": "a-phẩy", "caption": "A'", "desc": "Điểm A phẩy" },
+      "lim": { "speak": "li-mít", "caption": "lim", "desc": "Giới hạn lim" },
+      "log": { "speak": "lô-ga-rít", "caption": "log", "desc": "Logarit cơ số 10" },
+      "ln": { "speak": "lô-ga tự nhiên", "caption": "ln", "desc": "Logarit tự nhiên (CẤM đọc lờ nờ)" }
+    }
+  },
+  "hoa": {
+    "iupac_terms": {
+      "acetic acid": { "speak": "a-xê-tích a-xít", "caption": "acetic acid", "alt": "axit axetic" },
+      "methanoic acid": { "speak": "mê-tha-nô-ích a-xít", "caption": "methanoic acid", "alt": "axit fomic" },
+      "formic acid": { "speak": "pho-mích a-xít", "caption": "formic acid", "alt": "axit fomic" },
+      "benzoic acid": { "speak": "ben-zô-ích a-xít", "caption": "benzoic acid", "alt": "axit benzoic" },
+      "carboxylic acid": { "speak": "các-bốc-xi-lích a-xít", "caption": "carboxylic acid", "alt": "axit cacboxylic" },
+      "methanol": { "speak": "mê-tha-non", "caption": "methanol", "note": "Đọc thuần Việt -non thay vì -nol" },
+      "ethanol": { "speak": "ê-tha-non", "caption": "ethanol", "note": "Đọc thuần Việt -non thay vì -nol" },
+      "propan-1-ol": { "speak": "prô-pan một on", "caption": "propan-1-ol", "alt": "propyl alcohol" },
+      "propan-2-ol": { "speak": "prô-pan hai on", "caption": "propan-2-ol", "alt": "isopropyl alcohol" },
+      "glycerol": { "speak": "gly-xê-ron", "caption": "glycerol", "alt": "glixerin" },
+      "methane": { "speak": "mê-tan", "caption": "methane", "alt": "khí metan" },
+      "ethane": { "speak": "ê-tan", "caption": "ethane", "alt": "etan" },
+      "propane": { "speak": "prô-pan", "caption": "propane", "alt": "propan" },
+      "butane": { "speak": "bu-tan", "caption": "butane", "alt": "butan" },
+      "ethene": { "speak": "ê-then", "caption": "ethene", "alt": "etilen" },
+      "propene": { "speak": "prô-pen", "caption": "propene", "alt": "propilen" },
+      "ethyne": { "speak": "ê-thin", "caption": "ethyne", "alt": "axetilen" },
+      "benzene": { "speak": "ben-zen", "caption": "benzene", "alt": "benzen" },
+      "ethyl acetate": { "speak": "ê-tin a-xê-tát", "caption": "ethyl acetate", "note": "Đọc thuần Việt ê-tin thay vì ê-thyl" },
+      "methyl formate": { "speak": "mê-tin pho-mát", "caption": "methyl formate", "note": "Đọc thuần Việt mê-tin thay vì mê-thyl" },
+      "ethyl": { "speak": "ê-tin", "caption": "ethyl", "desc": "Gốc etyl" },
+      "methyl": { "speak": "mê-tin", "caption": "methyl", "desc": "Gốc metyl" },
+      "formaldehyde": { "speak": "pho-man-đê-hít", "caption": "formaldehyde", "alt": "anđehit fomic" },
+      "acetaldehyde": { "speak": "a-xê-tan-đê-hít", "caption": "acetaldehyde", "alt": "anđehit axetic" },
+      "acetone": { "speak": "a-xê-tôn", "caption": "acetone", "alt": "axeton" },
+      "glucose": { "speak": "glu-cô-zơ", "caption": "glucose", "alt": "glucozơ" },
+      "fructose": { "speak": "phrúc-tô-zơ", "caption": "fructose", "alt": "fructozơ" },
+      "sucrose": { "speak": "su-crô-zơ", "caption": "sucrose", "alt": "saccarozơ" },
+      "amino acid": { "speak": "a-mi-nô a-xít", "caption": "amino acid", "alt": "amino axit" },
+      "alanine": { "speak": "a-la-nin", "caption": "alanine", "alt": "alanin" },
+      "glycine": { "speak": "gly-xin", "caption": "glycine", "alt": "glyxin" },
+      "valine": { "speak": "va-lin", "caption": "valine", "alt": "valin" },
+      "lysine": { "speak": "ly-sin", "caption": "lysine", "alt": "lysin" },
+      "copper(II) sulfate": { "speak": "đồng hai sun-phát", "caption": "copper(II) sulfate", "alt": "CuSO₄" },
+      "iron(III) oxide": { "speak": "sắt ba oxit", "caption": "iron(III) oxide", "alt": "Fe₂O₃" },
+      "aluminum chloride": { "speak": "nhôm clo-rua", "caption": "aluminum chloride", "alt": "AlCl₃" },
+      "sodium chloride": { "speak": "natri clo-rua", "caption": "sodium chloride", "alt": "muối ăn NaCl" }
+    },
+    "functional_groups": {
+      "-OH": { "speak": "nhóm ô-hát", "caption": "-OH", "desc": "Nhóm hydroxy / hydroxyl" },
+      "-COOH": { "speak": "nhóm các-bô-xin", "caption": "-COOH", "desc": "Nhóm carboxyl" },
+      "-CHO": { "speak": "nhóm an-đê-hít", "caption": "-CHO", "desc": "Nhóm aldehyde" },
+      "-COO-": { "speak": "nhóm este", "caption": "-COO-", "desc": "Nhóm ester" },
+      "-NH2": { "speak": "nhóm a-mi-nô", "caption": "-NH₂", "desc": "Nhóm amino" },
+      "-NO2": { "speak": "nhóm ni-trô", "caption": "-NO₂", "desc": "Nhóm nitro" },
+      "C=C": { "speak": "liên kết đôi", "caption": "C=C", "desc": "Liên kết đôi carbon-carbon" },
+      "C≡C": { "speak": "liên kết ba", "caption": "C≡C", "desc": "Liên kết ba carbon-carbon" }
+    },
+    "formulas_reading_rule": {
+      "CH3COOH": { "speak": "a-xê-tích a-xít", "caption": "CH₃COOH", "note": "Tuyệt đối không đọc xê hát ba cờ o o hát" },
+      "C2H5OH": { "speak": "ê-tha-non", "caption": "C₂H₅OH", "note": "Đọc ê-tha-non chuẩn âm sư phạm" },
+      "CH3COOC2H5": { "speak": "ê-tin a-xê-tát", "caption": "CH₃COOC₂H₅", "note": "Este etyl axetat thuần Việt" },
+      "H2SO4": { "speak": "hát-hai-ét-ô-bốn", "caption": "H₂SO₄", "note": "Axit sunfuric" },
+      "HCl": { "speak": "hát-cờ-lờ", "caption": "HCl", "note": "Axit clohiđric" },
+      "NaOH": { "speak": "na-tri hi-đrô-xít", "caption": "NaOH", "note": "Xút ăn da" },
+      "Fe2O3": { "speak": "sắt ba oxit", "caption": "Fe₂O₃", "note": "Gỉ sắt" },
+      "CO2": { "speak": "khí các-bô-níc", "caption": "CO₂", "alt": "khí cờ-ô-hai" }
+    }
+  },
+  "sinh": {
+    "terms": {
+      "ADN": { "speak": "A-Đê-En", "caption": "ADN", "note": "Chữ giữa là Đê (tiếng Pháp Acide désoxyribonucléique)" },
+      "ARN": { "speak": "A-Rờ-En", "caption": "ARN", "note": "Chữ giữa là Rờ (Acide ribonucléique), CẤM đọc lai tiếng Anh A-Er-En" },
+      "mARN": { "speak": "mờ-A-Rờ-En", "caption": "mARN", "alt": "A-Rờ-En thông tin" },
+      "mRNA": { "speak": "mờ-A-Rờ-En", "caption": "mRNA", "alt": "A-Rờ-En thông tin" },
+      "tARN": { "speak": "tê-A-Rờ-En", "caption": "tARN", "alt": "A-Rờ-En vận chuyển" },
+      "tRNA": { "speak": "tê-A-Rờ-En", "caption": "tRNA", "alt": "A-Rờ-En vận chuyển" },
+      "rARN": { "speak": "rờ-A-Rờ-En", "caption": "rARN", "alt": "A-Rờ-En ribôxôm" },
+      "rRNA": { "speak": "rờ-A-Rờ-En", "caption": "rRNA", "alt": "A-Rờ-En ribôxôm" },
+      "ribosome": { "speak": "ri-bô-xôm", "caption": "ribosome", "desc": "Bào quan tổng hợp protein" },
+      "mitochondria": { "speak": "ti thể", "caption": "mitochondria", "desc": "Nhà máy năng lượng tế bào" },
+      "chromosome": { "speak": "nhiễm sắc thể", "caption": "nhiễm sắc thể", "desc": "Vật chất di truyền cấp tế bào" },
+      "allele": { "speak": "a-len", "caption": "alen", "desc": "Trạng thái khác nhau của cùng một gen" },
+      "operon": { "speak": "ô-pê-ron", "caption": "operon", "desc": "Cụm gen cấu trúc" },
+      "codon": { "speak": "cô-đon", "caption": "codon", "desc": "Bộ ba mã sao" },
+      "anticodon": { "speak": "an-ti-cô-đon", "caption": "anticodon", "desc": "Bộ ba đối mã" },
+      "polypeptide": { "speak": "pô-ly-pép-tít", "caption": "polypeptide", "desc": "Chuỗi axit amin" },
+      "nucleotide": { "speak": "nu-clê-ô-tít", "caption": "nucleotide", "desc": "Đơn vị cấu tạo axit nucleic" }
+    }
+  },
+  "vat_ly": {
+    "units_and_symbols": {
+      "ohm": { "speak": "ôm", "caption": "Ω", "desc": "Đơn vị điện trở" },
+      "volt": { "speak": "vôn", "caption": "V", "desc": "Đơn vị điện thế" },
+      "ampere": { "speak": "am-pê", "caption": "A", "note": "Viết am-pê tránh AI đọc nhầm thành am-pia" },
+      "watt": { "speak": "oát", "caption": "W", "desc": "Đơn vị công suất" },
+      "joule": { "speak": "jun", "caption": "J", "desc": "Đơn vị công, năng lượng" },
+      "newton": { "speak": "niu-tơn", "caption": "N", "desc": "Đơn vị lực" },
+      "lambda": { "speak": "lam-đa", "caption": "λ", "desc": "Bước sóng" },
+      "omega": { "speak": "ô-mê-ga", "caption": "ω", "desc": "Tần số góc" },
+      "phi": { "speak": "phi", "caption": "φ / Φ", "desc": "Pha dao động hoặc từ thông" },
+      "vec_B": { "speak": "véc-tơ cảm ứng từ bê", "caption": "véc-tơ B", "desc": "Cảm ứng từ" },
+      "vec_E": { "speak": "véc-tơ cường độ điện trường e", "caption": "véc-tơ E", "desc": "Điện trường" }
+    }
+  },
+  "tin_hoc": {
+    "terms": {
+      "array": { "speak": "mảng", "caption": "mảng (array)", "desc": "Cấu trúc dữ liệu mảng" },
+      "string": { "speak": "chuỗi", "caption": "chuỗi (string)", "desc": "Chuỗi ký tự" },
+      "variable": { "speak": "biến", "caption": "biến (variable)", "desc": "Biến nhớ" },
+      "recursion": { "speak": "đệ quy", "caption": "đệ quy (recursion)", "desc": "Hàm gọi lại chính nó" },
+      "binary tree": { "speak": "cây nhị phân", "caption": "cây nhị phân", "desc": "Cây nhị phân tìm kiếm" },
+      "OOP": { "speak": "lập trình hướng đối tượng", "caption": "OOP", "desc": "Object-Oriented Programming" },
+      "boolean": { "speak": "kiểu đúng sai bu-lin", "caption": "boolean", "desc": "Giá trị true/false" }
+    }
+  },
+  "anh": {
+    "grammar_terms": {
+      "S + V + O": { "speak": "chủ ngữ, động từ, tân ngữ", "caption": "S + V + O" },
+      "V-ing": { "speak": "vê-ing", "caption": "V-ing" },
+      "V-ed": { "speak": "vê-ê-đê", "caption": "V-ed" },
+      "V3": { "speak": "vê-ba", "caption": "V₃ / Past Participle" },
+      "Past Simple": { "speak": "quá khứ đơn", "caption": "Past Simple" },
+      "Present Perfect": { "speak": "hiện tại hoàn thành", "caption": "Present Perfect" },
+      "Past Continuous": { "speak": "quá khứ tiếp diễn", "caption": "Past Continuous" },
+      "Passive Voice": { "speak": "câu bị động", "caption": "Passive Voice" },
+      "Relative Clause": { "speak": "mệnh đề quan hệ", "caption": "Relative Clause" },
+      "Conditionals": { "speak": "câu điều kiện", "caption": "Conditionals" },
+      "Subjunctive": { "speak": "thức giả định", "caption": "Subjunctive" }
+    },
+    "spatial_particles": {
+      "in": { "speak": "in", "caption": "in" },
+      "on": { "speak": "on", "caption": "on" },
+      "at": { "speak": "át", "caption": "at" },
+      "up": { "speak": "ắp", "caption": "up" },
+      "down": { "speak": "đao", "caption": "down" },
+      "out": { "speak": "ao", "caption": "out" },
+      "off": { "speak": "ọp", "caption": "off" }
+    }
+  },
+  "su_dia_ktpl": {
+    "names": {
+      "Navarre": { "speak": "Na-va", "caption": "Navarre" },
+      "De Castries": { "speak": "Đờ Cát", "caption": "De Castries" },
+      "MacArthur": { "speak": "Mác-Ác-thơ", "caption": "MacArthur" },
+      "Eisenhower": { "speak": "Ai-xen-hao-ơ", "caption": "Eisenhower" },
+      "Geneva": { "speak": "Giơ-ne-vơ", "caption": "Geneva" },
+      "Versailles": { "speak": "Véc-xai", "caption": "Versailles" },
+      "Himalaya": { "speak": "Hi-ma-lay-a", "caption": "Himalaya" },
+      "Mekong": { "speak": "Mê Kông", "caption": "Mekong" },
+      "El Nino": { "speak": "En Ni-nô", "caption": "El Niño", "note": "Đọc En Ni-nô theo chuẩn truyền hình VTV và SGK Địa lý, không đọc En Ni-nhô" },
+      "El Niño": { "speak": "En Ni-nô", "caption": "El Niño", "note": "Đọc En Ni-nô theo chuẩn truyền hình VTV và SGK Địa lý, không đọc En Ni-nhô" },
+      "La Nina": { "speak": "La Ni-na", "caption": "La Niña", "note": "Đọc La Ni-na theo chuẩn SGK Địa lý" },
+      "La Niña": { "speak": "La Ni-na", "caption": "La Niña", "note": "Đọc La Ni-na theo chuẩn SGK Địa lý" }
+    },
+    "abbreviations": {
+      "ASEAN": { "speak": "A-xê-an", "caption": "ASEAN" },
+      "NATO": { "speak": "Na-tô", "caption": "NATO" },
+      "UNESCO": { "speak": "U-nét-x-cô", "caption": "UNESCO" },
+      "WTO": { "speak": "Đúp-lơ-vê-tê-ô", "caption": "WTO" },
+      "EU": { "speak": "Liên minh châu Âu", "caption": "EU" },
+      "APEC": { "speak": "A-pếch", "caption": "APEC" },
+      "GDP": { "speak": "Gê-Đê-Pê", "caption": "GDP" },
+      "CPI": { "speak": "Xê-Pê-I", "caption": "CPI" },
+      "TCN": { "speak": "trước Công nguyên", "caption": "TCN" },
+      "SCN": { "speak": "sau Công nguyên", "caption": "SCN" }
+    }
+  }
+}
