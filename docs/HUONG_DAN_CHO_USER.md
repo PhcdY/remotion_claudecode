@@ -95,10 +95,16 @@ Bạn chỉ cần đưa chủ đề, môn học và ý cốt lõi bạn muốn g
 
 ### 🔴 Trạm 3: Tạo giọng đọc (TTS) & Render video thành phẩm
 
-Khi hình ảnh đã vừa mắt, bạn tiến hành tạo âm thanh thật và xuất file video.
+Khi hình ảnh đã vừa mắt, bạn tiến hành tạo âm thanh thật và xuất file video. Hệ thống tích hợp Roster 3 giọng đọc Vivibe chuẩn hóa theo từng bộ môn:
+- **`nam - c Bình`**: Giọng nam dứt khoát, logic, chuẩn mực — Khuyên dùng cho môn Tự nhiên (Toán, Lý, Hóa, Sinh).
+- **`nữ - c Nhi`**: Giọng nữ truyền cảm, ấm áp, nhịp nhàng — Khuyên dùng cho môn Xã hội (Sử, Địa, Văn, KTPL).
+- **`anh-male`**: Giọng bản xứ chuẩn IPA song ngữ — Khuyên dùng cho môn Tiếng Anh.
+
+> [!TIP]
+> **Đa giọng (Multi-Voice)**: Bạn có thể yêu cầu kịch bản đổi giọng đọc linh hoạt theo từng cảnh/dòng (ví dụ: cảnh dẫn chuyện dùng giọng nữ, cảnh giải thích công thức dùng giọng nam, câu hội thoại tiếng Anh dùng giọng bản xứ). Hệ thống tự động xử lý chuyển giọng mượt mà!
 
 **Prompt mẫu gửi AI:**
-> *"Hình ảnh và kịch bản đã duyệt hoàn toàn. Hãy tạo giọng đọc audio qua Vivibe TTS (dùng giọng [Tên giọng, ví dụ: Quỳnh Anh / Nam Khánh]) và render video thành phẩm."*
+> *"Hình ảnh và kịch bản đã duyệt hoàn toàn. Hãy tạo giọng đọc audio qua Vivibe TTS (dùng giọng [nam - c Bình / nữ - c Nhi / anh-male]) và render video thành phẩm."*
 
 **Kết quả nhận được:**
 Video MP4 độ phân giải cao 1080p kèm phụ đề tự động sẽ được xuất vào thư mục:
@@ -125,10 +131,24 @@ Nếu video đang render ở chế độ nền:
 
 ## 4. Bảng Tra cứu Mã Môn & Quy tắc Chung
 
-- **Mã môn**: `toan` (Toán học), `ly` (Vật lý), `hoa` (Hoá học), `sinh` (Sinh học), `su` (Lịch sử), `dia` (Địa lý)...
-- **Tài liệu tham khảo SGK**: Nằm tại `references/<môn>/lop-<lop>/tap-<tap>/`.
+- **Bảng mã môn chuẩn**:
+  - `toan`: Toán học (Đồ thị hàm số, hình không gian Oxyz, vector, giải tích)
+  - `ly`: Vật lí (Cơ học, điện từ, sóng, quang học, nhiệt động lực)
+  - `hoa`: Hóa học (Cơ chế phản ứng, liên kết, danh pháp IUPAC, công thức cấu tạo)
+  - `sinh`: Sinh học (Di truyền học, tế bào, tiến hóa, sinh thái)
+  - `su`: Lịch sử (Dòng chảy sự kiện, bản đồ chiến dịch, tư liệu lịch sử)
+  - `dia`: Địa lí (Khung 4 tầng thời sự nóng, cơ chế địa lí, bản đồ chủ quyền chuẩn UNCLOS 1982)
+  - `van`: Ngữ văn (Cấu trúc văn bản nghệ thuật, thi pháp, phong cách ngôn ngữ)
+  - `ktpl` (hoặc `gtktpl`): Giáo dục Kinh tế và Pháp luật (Micro Case Study đời thường, cây quyết định pháp lý)
+  - `anh` (hoặc `tienganh`): Tiếng Anh (5 Archetypes Ngữ pháp nhận thức Cognitive Grammar)
+- **Roster giọng đọc Vivibe**:
+  - `nam - c Bình`: Dành cho các môn Tự nhiên.
+  - `nữ - c Nhi`: Dành cho các môn Xã hội.
+  - `anh-male`: Dành cho Tiếng Anh (chuẩn IPA).
+- **Từ điển phát âm tự động**: `scripts/phonetic_dict.json` tự động chuẩn hoá cách đọc danh pháp IUPAC, công thức cấu tạo, từ viết tắt và ký hiệu khoa học.
+- **Tài liệu tham khảo SGK**: Nằm tại `references/<môn>/...` (đã trích xuất sẵn nội dung cốt lõi).
 - **Tỷ lệ khung hình chuẩn**: 16:9 (1920 × 1080), 30 fps.
-- **Thời lượng tối ưu**: Từ 2 phút 30 giây đến 4 phút (giải thích sâu bản chất, không vội vàng).
+- **Thời lượng tối ưu**: Từ 2 phút 30 giây đến 4 phút (giải thích sâu bản chất, không nhảy cóc).
 - **Bộ màu chuẩn 9Study**: Xanh chủ đạo `#4B87F4`, Chàm `#3D4AEF`, Chữ xanh đen Navy, Nền sáng hiện đại.
 - **Chi tiết về Output & Khác biệt bản Git**: Xem [LOCAL_VS_GIT_VA_OUTPUT.md](LOCAL_VS_GIT_VA_OUTPUT.md).
 

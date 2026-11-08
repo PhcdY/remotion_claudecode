@@ -21,10 +21,18 @@ Vivibe không có thẻ chỉnh tông; tông giọng đến từ mẫu clone, nh
 ## Cấu hình
 
 1. API key: người dùng tự tạo ở vivibe.app/docs/api-keys và tự thêm `VIVIBE_API_KEY=...` vào `.env` ở gốc project (đã gitignore). **Không** hỏi, đọc, in hay ghi key ở bất kỳ đâu khác. Thiếu key thì script báo, nhắc người dùng.
-2. **Giọng không cố định — hỏi người dùng mỗi lần chạy B2.** Chạy `python scripts/vivibe_tts.py --list-voices`, đưa danh sách tên giọng cho người dùng chọn. Không tự chọn, không lấy lại giọng của lần trước khi chưa hỏi. Giọng đã chọn truyền vào mọi lệnh của lần chạy đó bằng `--voice "<tên hoặc id>"`.
-3. `speed` trong `scripts/tts_config.json` (0.5–2.0, mặc định 1.0) là tốc độ chung. Chỉ đổi khi người dùng nghe xong thấy cả bài nhanh/chậm.
+2. **Roster 3 Giọng đọc Chuẩn hóa Vivibe (Hỏi người dùng hoặc đề xuất theo môn)**:
+   - `nam - c Bình`: Dứt khoát, logic, chuẩn mực — dành cho các môn Tự nhiên (Toán, Lý, Hóa, Tin).
+   - `nữ - c Nhi`: Ấm áp, truyền cảm, nhịp nhàng — dành cho các môn Xã hội (Sử, Địa, Văn, KTPL).
+   - `anh-male`: Giọng bản xứ chuẩn IPA song ngữ — dành cho môn Tiếng Anh.
+   Chạy `py scripts/vivibe_tts.py --list-voices` nếu cần xem toàn bộ danh sách giọng. Khi chạy lệnh, truyền giọng bằng `--voice "<tên hoặc id>"`.
+3. **Multi-Voice (Hỗ trợ đa giọng trong một bài)**:
+   - Kịch bản hỗ trợ trường `"voice"` ở cấp độ từng beat hoặc từng dòng `lines[i]`.
+   - Script tự động chèn khoảng lặng 0.3s khi đổi giọng giữa các nhân vật/cảnh và tự động làm mềm mào đầu âm thanh (80ms).
+4. **Từ điển Phiên âm Tập trung (`scripts/phonetic_dict.json`)**:
+   - `scripts/check_script.py` và `scripts/vivibe_tts.py` tự động tra cứu từ điển để phát hiện và phiên âm chuẩn: danh pháp IUPAC (*acetic acid* $\to$ *a-xê-tích a-xít*), nhóm chức hóa học, ký hiệu toán học, chữ viết tắt quốc tế (*ASEAN*, *NATO*), thuật ngữ địa lí (*El Niño* $\to$ *En Ni-nô*).
+5. `speed` trong `scripts/tts_config.json` (0.5–2.0, mặc định 1.0) là tốc độ chung. Chỉ đổi khi người dùng nghe xong thấy cả bài nhanh/chậm.
    Beat có trường `"speed"` trong `script.json` thì đọc theo tốc độ đó (cache tính theo tốc độ từng dòng). **Không dùng để làm chậm đoạn giải thích**: đã thử 0.85 (22/10) → người dùng: "đừng thay đổi tốc độ nói thuần, cần thay đổi nhịp". Đoạn nào nhanh quá → quay lại B1 chia nhỏ thành nhiều câu ngắn (skill `viet-kich-ban` › câu trả lời "vì sao").
-4. Đổi giọng hay `speed` làm cache mất hiệu lực → cả bài tạo lại (báo người dùng số ký tự trước). Cả bài một video phải cùng một giọng.
 
 ## Các bước
 
