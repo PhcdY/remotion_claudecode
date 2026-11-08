@@ -62,20 +62,39 @@ graph LR
 
 ---
 
-## 3. Mẫu dựng khái niệm — 5 Archetypes Trực quan Remotion SVG (B1 + B3)
+## 3. Tư duy Thị giác: Nguyên lý Nền (5 Primitives) & Quy trình Sáng tạo Ẩn dụ Độc bản (B1 + B3)
 
-Toàn bộ các hiện tượng ngữ pháp tiếng Anh được chuyển hóa thành 5 Archetypes hình học động trên Remotion:
+> [!CAUTION]
+> **5 ARCHETYPES LÀ NGUYÊN LÝ CƠ HỌC NỀN — TUYỆT ĐỐI KHÔNG BIẾN THÀNH KHUÔN ĐÚC RẬP KHUÔN!**  
+> Nếu video nào về thì cũng chỉ vẽ một trục ngang, video nào về giới từ cũng chỉ vẽ một cái hộp, kênh sẽ rơi vào bẫy **nhàm chán và lặp lại motif**.  
+> **Mục tiêu tối thượng là trải nghiệm người xem: Mỗi video phải mang một "linh hồn hình ảnh" bất ngờ, độc nhất vô nhị.**
+
+### 3.0. Quy trình Bắt buộc: Bước Động não Ẩn dụ Độc bản (Bespoke Metaphor Ideation — Bước 0 trước khi viết kịch bản)
+
+Trước khi viết `script.json`, Biên kịch / AI **BẮT BUỘC PHẢI ĐỘNG NÃO ÍT NHẤT 2–3 HÌNH TƯỢNG ĐỘC BẢN** gắn liền với chủ đề bài học và đưa người dùng chọn:
+* **Hỏi**: *"Bài học này có hiện tượng đời thực, đồ vật, bối cảnh điện ảnh hay tình huống va chạm nào làm vật mang ẩn dụ (Visual Vehicle) đắt giá nhất?"*
+* **Ví dụ chuyển hóa từ "Nguyên lý Nền" sang "Sáng tạo Độc bản"**:
+  - *Hiện tại hoàn thành*: Thay vì chỉ vẽ trục timeline khô khan $\to$ Dùng hình tượng **"Chiếc ghế ướt sơn và vết sơn đỏ trên quần"** (Hành động sơn ghế đã xong ở quá khứ, nhưng vệt sơn trên quần ở hiện tại là lý do người ta hét lên *"I have painted the chair!"*); hoặc **"Tấm phim chụp X-quang của bác sĩ"** (Tai nạn xảy ra tuần trước, nhưng tấm phim X-quang đang rọi sáng trên bàn khám lúc này là hệ quả bắt bạn phải bó bột ngay bây giờ); hoặc **"Cuốn hộ chiếu đóng đầy dấu mộc thị thực"** (Trải nghiệm tích lũy theo năm tháng mang theo bên mình).
+  - *Câu bị động (Passive Voice)*: Thay vì đổi chỗ $S \leftrightarrow O$ $\to$ Dùng hình tượng **"Ống kính máy quay tại hiện trường vụ án"** (Hiện trường chiếc két sắt bị phá `The safe was broken` — tên trộm đã tẩu thoát, camera zoom cận cảnh két sắt, không ai quan tâm tên trộm là ai nữa); hoặc **"Dây chuyền lắp ráp robot trong nhà máy xe điện"** (Tập trung hoàn toàn vào sản phẩm được tạo ra).
+  - *Phrasal Verbs với UP*: Thay vì chỉ vẽ cột đo dâng lên $\to$ Dùng hình tượng **"Trò chơi Pac-Man ăn sạch bong các hạt thức ăn trên bản đồ"** (`Eat up`); hoặc **"Quả pin sạc đến 100% bốc sáng rực rỡ"** (`Fill up`).
+  - *Câu điều kiện Loại 2 & 3*: Thay vì chỉ dùng thước đo $\to$ Dùng hình tượng **"Cỗ máy Đa vũ trụ (Multiverse Branches)"** — Mỗi bước lùi thì tách ra một nhánh thực tại song song mờ ảo; hoặc **"Chiếc gương ảo ảnh (Mirror of Erised)"**.
+  - *Đảo ngữ (Inversion)*: Dùng hình tượng **"Đèn pha rọi sân khấu (Stage Spotlight Switch)"** — Toàn bộ rạp hát tối om, công tắc bật lên rọi thẳng vào một nhân vật phụ khiến trật tự thông thường bị đảo lộn hoàn toàn.
+
+---
+
+### 3.1. Hệ thống 5 Nguyên lý Cơ học Nền (5 Visual Primitives)
+Khi đã chọn được Hình tượng Độc bản cho bài học, hệ thống Remotion SVG sẽ sử dụng 5 Nguyên lý Cơ học Nền dưới đây làm khung xương logic để vận hành chuyển động toán học chính xác:
 
 ```mermaid
 graph TD
-    A1["<b>Archetype 1: Dòng Thời Gian & Thấu Kính Góc Nhìn</b><br/><i>(Timeline & Viewpoint Lens: 12 Thì & Thể)</i>"]
-    A2["<b>Archetype 2: Bản Đồ Không Gian & Phóng Xạ Ẩn Dụ</b><br/><i>(Spatial Schema & Metaphor: In/On/At & Phrasal Verbs)</i>"]
-    A3["<b>Archetype 3: Khối Câu Tầng Bậc & Dòng Phụ Thuộc</b><br/><i>(Sentence Block & Dependency Flow: Cấu trúc câu & Mệnh đề)</i>"]
-    A4["<b>Archetype 4: Thước Đo Khoảng Cách Thực Tại</b><br/><i>(Epistemic Reality Distance: Điều kiện & Giả định)</i>"]
-    A5["<b>Archetype 5: Trường Nhận Thức Chung</b><br/><i>(Common Ground: Mạo từ A/An/The & Xác định)</i>"]
+    A1["<b>Primitive 1: Dòng Thời Gian & Thấu Kính</b><br/><i>(Timeline & Viewpoint Lens: 12 Thì & Thể)</i>"]
+    A2["<b>Primitive 2: Bản Đồ Không Gian & Phóng Xạ</b><br/><i>(Spatial Schema & Metaphor: In/On/At & Phrasal Verbs)</i>"]
+    A3["<b>Primitive 3: Khối Câu Tầng Bậc & Dòng Phụ Thuộc</b><br/><i>(Sentence Block & Dependency Flow: Cấu trúc câu & Mệnh đề)</i>"]
+    A4["<b>Primitive 4: Thước Đo Khoảng Cách Thực Tại</b><br/><i>(Epistemic Reality Distance: Điều kiện & Giả định)</i>"]
+    A5["<b>Primitive 5: Trường Nhận Thức Chung</b><br/><i>(Common Ground: Mạo từ A/An/The & Xác định)</i>"]
 ```
 
-### 3.1. Archetype 1: Dòng Thời Gian & Thấu Kính Góc Nhìn (Timeline & Viewpoint Lens)
+#### Primitive 1: Dòng Thời Gian & Thấu Kính Góc Nhìn (Timeline & Viewpoint Lens)
 - **Áp dụng cho**: 12 thì, Sự phối hợp thì (*Past Simple vs Present Perfect, Past Continuous vs Past Simple*).
 - **Thành phần hình ảnh**:
   * **Trục thời gian nằm ngang**: Trục thẳng có mũi tên hướng về tương lai bên phải.
@@ -86,7 +105,7 @@ graph TD
     - *Continuous Aspect*: Khung kính lúp phóng to vào giữa khoảng thời gian, bên trong là các đường sóng chuyển động lượn sóng (`sine wave`), hai đầu mở, nhãn: `In Progress (Chưa hoàn tất)`.
 - **Chuyển động (Animation)**: Dùng `interpolate` cho vệt sáng chạy dọc trục thời gian, khi nói đến "hệ quả", vệt sáng chạm vào vạch `NOW` kích hoạt nhãn kết quả bật lên sống động bằng `spring`.
 
-### 3.2. Archetype 2: Bản Đồ Không Gian & Phóng Xạ Ẩn Dụ (Spatial Schema & Metaphor Projection)
+#### Primitive 2: Bản Đồ Không Gian & Phóng Xạ Ẩn Dụ (Spatial Schema & Metaphor Projection)
 - **Áp dụng cho**: Giới từ (*IN, ON, AT*); Cụm động từ (*Phrasal Verbs với UP, DOWN, OUT, OFF*).
 - **Thành phần hình ảnh**:
   * **Bộ ba hình học cơ bản**:
@@ -98,7 +117,7 @@ graph TD
     - `OUT`: Hộp kín mở nắp, quả cầu sáng từ đáy bay vút ra không gian ngoài $\to$ Nhãn: `VISIBLE / REVEALED` (*find out, figure out*).
 - **Chuyển động (Animation)**: Vật thể chuyển động tương tác với hình học không gian (rơi vào hộp, chạm lên mặt phẳng, bay ra ngoài).
 
-### 3.3. Archetype 3: Khối Câu Tầng Bậc & Dòng Phụ Thuộc (Sentence Block & Dependency Flow)
+#### Primitive 3: Khối Câu Tầng Bậc & Dòng Phụ Thuộc (Sentence Block & Dependency Flow)
 - **Áp dụng cho**: Trật tự câu tiếng Anh, Cụm danh từ (*Noun Phrase*), Mệnh đề quan hệ (*Relative Clauses*), Rút gọn mệnh đề (*V-ing / V-ed*).
 - **Thành phần hình ảnh**:
   * Chuỗi từ nằm ngang tự nhiên của câu. Mỗi từ/cụm từ là một Card chữ bo góc (`Sentence Block`):
@@ -110,7 +129,7 @@ graph TD
 - **Chuyển động (Animation)**:
   * Khi rút gọn mệnh đề: Hai khối chữ đại từ quan hệ (*which / who*) và trợ động từ (*is / was*) co nhỏ dần và tan biến (`opacity: 0`, `scale: 0.8`), khối động từ chính chuyển thành dạng `V-ing` (chủ động) hoặc `V-ed` (bị động) rồi trượt nhẹ vào áp sát danh từ phía trước.
 
-### 3.4. Archetype 4: Thước Đo Khoảng Cách Thực Tại (Epistemic Reality Distance)
+#### Primitive 4: Thước Đo Khoảng Cách Thực Tại (Epistemic Reality Distance)
 - **Áp dụng cho**: Câu điều kiện Loại 0, 1, 2, 3; Câu điều kiện hỗn hợp; Thức giả định (*Wishes / As if*).
 - **Thành phần hình ảnh**:
   * **Mặt phẳng Thực tại (Reality Ground)**: Đường nền vững chắc màu xanh đậm, đại diện cho những gì có thật ở hiện tại và sự thật hiển nhiên.
@@ -121,7 +140,7 @@ graph TD
     - Quá khứ hoàn thành $\to$ Lùi 2 bước: Giả định trái ngược quá khứ hoàn toàn không thể cứu vãn (Loại 3).
 - **Chuyển động (Animation)**: Nhân vật hoặc tình huống bước lên các nấc thang khoảng cách. Càng lên cao, màu sắc càng chuyển sang tông tím pastel mờ ảo, làm bật lên bản chất: "Lùi thì = Lùi xa khỏi hiện thực".
 
-### 3.5. Archetype 5: Trường Nhận Thức Chung (Common Ground Scope)
+#### Primitive 5: Trường Nhận Thức Chung (Common Ground Scope)
 - **Áp dụng cho**: Mạo từ (*A / AN, THE, ZERO ARTICLE*).
 - **Thành phần hình ảnh**:
   * Hai vòng tròn giao thoa (Venn diagram): Vòng tròn A (Tâm trí người nói - Speaker's Mind), Vòng tròn B (Tâm trí người nghe - Listener's Mind).
