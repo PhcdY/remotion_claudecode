@@ -41,7 +41,10 @@ SUBJECT_VOICE_ROSTER = {
     "dia": ("nữ - c Nhi", "Môn Xã hội — biểu cảm, gần gũi"),
     "van": ("nữ - c Nhi", "Môn Xã hội — ngân vang, lắng đọng"),
     "ktpl": ("nữ - c Nhi", "Môn Xã hội — rõ ràng, đĩnh đạc"),
+    "sinh": ("nam - c Bình", "Môn Tự nhiên — giọng dứt khoát, logic"),
     "anh": ("anh-male", "Môn Ngoại ngữ — mô hình đa ngôn ngữ chuẩn ngữ âm IPA"),
+    "gtktpl": ("nữ - c Nhi", "Môn Xã hội — rõ ràng, đĩnh đạc (alias của ktpl)"),
+    "tienganh": ("anh-male", "Môn Ngoại ngữ — mô hình đa ngôn ngữ chuẩn ngữ âm IPA (alias của anh)"),
 }
 
 # Ước lượng thời lượng (khớp src/components/timeline.ts và đo giọng Vivibe ≈ 20 ký tự/giây)
