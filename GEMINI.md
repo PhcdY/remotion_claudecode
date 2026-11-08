@@ -103,7 +103,14 @@ Cấu trúc: `[môn]_[tag]_[describe]`
   - `fix`: Sửa lỗi hệ thống, component dùng chung, layout core hoặc script tự động.
   - `refactor`: Tái cấu trúc mã nguồn, dọn dẹp hoặc tối ưu component cốt lõi.
   - `test`: Nhánh thử nghiệm kỹ thuật (thử thư viện mới, benchmark render).
-- **`[describe]`**: Mô tả ngắn gọn bằng tiếng Việt không dấu hoặc tiếng Anh, dùng dấu gạch ngang `-` (kebab-case). Ví dụ: `all_fix_de-nhan-autolabels`, `toan_feature_truc-khong-gian-3d`.
+  - `release`: Đóng gói và chuẩn bị phát hành phiên bản ổn định cho toàn bộ framework (VD: `all_release_v1.0.0`).
+  - `docs`: Tài liệu, quy định, hướng dẫn và cập nhật tài liệu tham khảo SGK.
+- **`[describe]`**: Mô tả ngắn gọn bằng tiếng Việt không dấu hoặc tiếng Anh, dùng dấu gạch ngang `-` (kebab-case). Ví dụ: `all_fix_de-nhan-autolabels`, `toan_feature_truc-khong-gian-3d`, `all_release_v1.0.0`.
+
+### Quy trình Phát hành (Release) & Thử nghiệm Tính năng
+- **Bản ổn định (Git Tag)**: Đánh số theo chuẩn Semantic Versioning `vMAJOR.MINOR.PATCH` (VD: `v1.0.0`) gắn trực tiếp trên commit ổn định của nhánh chính. Người làm video checkout về tag release để yên tâm sản xuất mà không sợ lỗi vặt dở dang.
+- **Thử nghiệm tính năng**: Khi muốn thử nghiệm tính năng mới, kéo trực tiếp nhánh `feature` hoặc `test` về local (`git checkout <nhanh>` rồi `npm run dev`), thử nghiệm độc lập trong phòng lab `src/videos/lab-thanh-phan/` mà không ảnh hưởng nhánh chính.
+- **Quy trình Release**: Tạo nhánh `all_release_vX.Y.Z` → Thẩm định 3 cổng (lint, check_script, render thử) → Gắn Git Tag `vX.Y.Z` → Push tag và merge PR vào nhánh chính.
 
 ## Chiến lược Chất lượng & Tiết kiệm Token (AI Pair-Programming)
 1. **Chất lượng là số một**:

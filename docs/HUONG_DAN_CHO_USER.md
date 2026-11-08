@@ -60,6 +60,14 @@ Bạn hoàn toàn chủ động chọn lưu dự án ở bất kỳ ổ đĩa n�
    npm install
    ```
 
+> [!TIP]
+> **Khuyến nghị sử dụng bản Release ổn định (`v1.0.0`)**:
+> Để quy trình làm video không bị gián đoạn hay phát sinh lỗi do các tính năng mới đang được phát triển trên Git, bạn nên chuyển sang phiên bản đóng gói ổn định nhất:
+> ```bash
+> git checkout v1.0.0
+> ```
+> Khi đội ngũ thông báo phát hành phiên bản mới, bạn chỉ cần gõ `git fetch --tags && git checkout v1.x.x` để cập nhật nhanh chóng.
+
 ---
 
 ### 1.3. Hướng dẫn Làm việc với Antigravity IDE (Không gian Làm việc Chính)
