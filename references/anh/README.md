@@ -65,4 +65,4 @@ references/anh/
 2. **Không biến video thành tiết luyện mẹo học vẹt**:
    - Bám sát cơ sở Ngữ pháp Nhận thức (Cognitive Grammar): Mỗi cấu trúc phải gắn liền với một mô hình thị giác trực quan (Timeline, Chiếc hộp Container, Thước đo khoảng cách...).
 3. **Tuân thủ chuẩn phiên âm TTS**:
-   - Mọi từ tiếng Anh trong kịch bản phải tuân thủ bảng quy chuẩn phát âm trong `.gemini/mon/anh.md` để đảm bảo giọng clone Vivibe không bị đọc lỗi.
+   - Mọi từ tiếng Anh trong kịch bản phải tuân thủ bảng quy chuẩn phát âm trong `.agents/mon/anh.md` để đảm bảo giọng clone Vivibe không bị đọc lỗi.
