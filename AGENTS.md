@@ -1,7 +1,7 @@
 # Video AI — video giải thích bản chất (Remotion, nhiều môn)
 
 Video 2:30–4:00 (ưu tiên số một là dễ hiểu, không nhảy bước: bước khó được thêm thời gian, thiếu nữa thì cắt ý phụ), mở bằng một hiện tượng thật và kết bằng lời giải cho nó, **ngang 16:9 (1920×1080, 30fps)**, giọng đọc tiếng Việt, giải thích *vì sao* chứ không chỉ *cái gì*.
-Dùng cho Toán, Lý, Hóa, Sinh, Sử, Địa…: luật riêng từng môn ở **gói môn** `.gemini/mon/<mon>.md` (Toán: `toan.md`; môn mới tạo từ `_mau.md` cùng người dùng).
+Dùng cho Toán, Lý, Hóa, Sinh, Sử, Địa…: luật riêng từng môn ở **gói môn** `.agents/mon/<mon>.md` (Toán: `toan.md`; môn mới tạo từ `_mau.md` cùng người dùng).
 **Mục tiêu duy nhất là trải nghiệm người xem.** Trước khi đề xuất hướng thiết kế mới: xem video mẫu được khen và nghiên cứu liên quan, tự phản biện.
 Dùng skill `remotion-best-practices` (đã cài trong `.agents/skills/`) cho mọi việc liên quan Remotion.
 
@@ -25,7 +25,7 @@ B1 `viet-kich-ban` → B3 nháp + storyboard (`dung-video` › Bước 2b) → B
 3. **Dựng video** → `src/videos/<slug>/` (Video.tsx dùng `ExplainerVideo`, beats.tsx, scene.tsx), đăng ký trong `src/Root.tsx`. `src/videos/lab-thanh-phan/` là composition thử thành phần dùng chung, không phải video đăng.
 4. **Duyệt** → `npm run dev` (Remotion Studio).
    Góp ý của người dùng ghi vào `src/videos/<slug>/FEEDBACK.md` (cột "đã sửa skill" / "đã sửa video"): sửa skill ngay cho từng mục
-   (và thêm một dòng vào `.gemini/lessons.md`), gom sửa video một lần khi người dùng bảo. Lỗi cấu trúc kịch bản → quay lại B1 (duyệt dàn ý), không vá trên video cũ.
+   (và thêm một dòng vào `.agents/lessons.md`), gom sửa video một lần khi người dùng bảo. Lỗi cấu trúc kịch bản → quay lại B1 (duyệt dàn ý), không vá trên video cũ.
 5. **Render** → `npx remotion render <compositionId> "$(node scripts/out-path.mjs <slug> --id <compositionId>)"`; phụ đề riêng + mốc từng dòng: `node scripts/export-captions.mjs <slug>`.
    `out/<Môn>/Lớp <lop>/<chuong>/<bai>/`: video + phụ đề (người dùng xem). `out/_lam-viec/<id>/`: stills, storyboard (agent dùng). Không để file nào khác ở gốc `out/`.
 6. **Người xem thật** → học sinh xem thử, số liệu giữ chân người xem; thời điểm → câu: `py scripts/beat_at.py <id> 1:23`. Soát kịch bản/storyboard bằng agent/skill `hoc-sinh-ao`.
@@ -36,7 +36,7 @@ B1 `viet-kich-ban` → B3 nháp + storyboard (`dung-video` › Bước 2b) → B
 {
   "slug": "don-dieu",                  // chỉ chữ thường, số, '-'
   "title": "...",
-  "subject": "toan",                   // gói môn trong .gemini/mon/ (thiếu = toan)
+  "subject": "toan",                   // gói môn trong .agents/mon/ (thiếu = toan)
   "lop": 12, "chuong": "Chương I. …", "bai": "Bài 1. …",  // theo SGK → thư mục video trong out/
   "beats": [
     {

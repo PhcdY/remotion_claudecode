@@ -1,6 +1,6 @@
 ---
 name: viet-kich-ban
-description: Viết kịch bản video giải thích bản chất (Toán, Lý, Hóa, Sinh, Sử, Địa… — B1 của pipeline) thành src/videos/<slug>/script.json. Dùng khi người dùng đưa một chủ đề + ý bản chất muốn nói và cần kịch bản video, hoặc gõ /viet-kich-ban.
+description: Viết kịch bản video giải thích bản chất (Toán, Lý, Hóa, Sinh, Sử, Địa… — B1 của pipeline) thành src/videos/<slug>/script.json. Dùng khi người dùng đưa một chủ đề + ý bản chất muốn nói và cần kịch bản video, hoặc gõ $viet-kich-ban.
 ---
 
 # B1 — Viết kịch bản video giải thích bản chất
@@ -10,8 +10,8 @@ Output duy nhất: `src/videos/<slug>/script.json`. Không tạo audio, không v
 
 **Mục tiêu duy nhất là trải nghiệm người xem**: xem một lần là hiểu, không lạc, thấy hay. Mọi luật dưới đây phục vụ điều đó; luật nào làm video sượng hơn trong một trường hợp cụ thể thì báo người dùng thay vì cố theo.
 
-**Gói môn**: đọc `.gemini/mon/<mon>.md` (Toán: `toan.md`) trước khi làm — phạm vi kiến thức, mẫu dựng khái niệm, đơn vị, cách đọc ký hiệu của môn đó. Chưa có gói → tạo từ `.gemini/mon/_mau.md` cùng người dùng.
-Lý do và lời góp ý gốc của từng luật: `.gemini/lessons.md`.
+**Gói môn**: đọc `.agents/mon/<mon>.md` (Toán: `toan.md`) trước khi làm — phạm vi kiến thức, mẫu dựng khái niệm, đơn vị, cách đọc ký hiệu của môn đó. Chưa có gói → tạo từ `.agents/mon/_mau.md` cùng người dùng.
+Lý do và lời góp ý gốc của từng luật: `.agents/lessons.md`.
 
 ## Bối cảnh
 
@@ -67,7 +67,7 @@ Theo schema và quy tắc bên dưới. File đã tồn tại → hỏi trước
 2. **Đọc mạch**: đọc liên tiếp câu đầu của mọi beat — phải nghe thành một mạch nhân quả.
 3. **Theo dõi người xem**: đi từng dòng, ghi "lúc này người xem đang nhìn gì, đã hiểu gì, đang thắc mắc gì, hình trả lời thế nào". Dòng nào dùng thứ chưa giải thích → chèn bước thiếu.
 4. `python scripts/check_script.py <slug>` — **lỗi phải bằng 0**; từng cảnh báo hoặc sửa, hoặc ghi lý do giữ.
-4b. **Học sinh ảo**: gọi agent `hoc-sinh-ao` (Agent tool, `subagent_type: "hoc-sinh-ao"`), đưa đường dẫn `script.json` và **tiền đề** (học sinh đã học gì, bài trước dạy gì, chưa học gì). Agent đọc độc lập, không thấy dàn ý. Sửa mọi chỗ mức *nặng* và *vừa*; chỗ giữ nguyên thì ghi lý do trong báo cáo. Đoạn "giải thích lại ý chính" của agent mà lệch ý bản chất → video chưa dạy được ý đó, quay lại chuỗi "vì sao". Sửa nhiều thì gọi lại một lần nữa.
+4b. **Học sinh ảo**: giao cho agent con `hoc-sinh-ao` (định nghĩa ở `.codex/agents/hoc-sinh-ao.toml`), đưa đường dẫn `script.json` và **tiền đề** (học sinh đã học gì, bài trước dạy gì, chưa học gì). Agent đọc độc lập, không thấy dàn ý. Sửa mọi chỗ mức *nặng* và *vừa*; chỗ giữ nguyên thì ghi lý do trong báo cáo. Đoạn "giải thích lại ý chính" của agent mà lệch ý bản chất → video chưa dạy được ý đó, quay lại chuỗi "vì sao". Sửa nhiều thì gọi lại một lần nữa.
 5. Chạy checklist cuối file (phần máy không kiểm được).
 6. Báo: số beat, số ký tự `speak`, thời lượng ước tính, **danh sách dòng cần nghe thử** (script in sẵn) và **mọi chỗ còn nghi ngờ**.
 
@@ -79,7 +79,7 @@ Người dùng chốt kịch bản → sang **B3 bản nháp + storyboard** (ski
 {
   "slug": "don-dieu",                    // chữ thường, số, '-'
   "title": "…",
-  "subject": "toan",                     // tên gói môn trong .gemini/mon/ (thiếu = "toan")
+  "subject": "toan",                     // tên gói môn trong .agents/mon/ (thiếu = "toan")
   "lop": 12,                             // lớp, chương, bài theo SGK → video ra out/<Môn>/Lớp 12/<chuong>/<bai>/
   "chuong": "Chương I. Ứng dụng đạo hàm để khảo sát và vẽ đồ thị của hàm số",
   "bai": "Bài 1. Tính đơn điệu và cực trị của hàm số",
@@ -210,7 +210,7 @@ Luật chung cho mọi môn; gói môn có thể thay (vd. Toán: mô hình tr�
 
 ### `speak` — lời cho TTS đọc
 
-Nội dung tương đương ý của dòng, đọc tự nhiên. **Không chứa ký hiệu** (`$ \ ^ _ { } = + / ' √ < >`) — script B2 chặn. Cách đọc ký hiệu, công thức, tên riêng: **xem gói môn `.gemini/mon/<mon>.md`** (mặc định nói theo nghĩa, không đọc chữ cái; các quy tắc phiên âm bắt buộc để Vivibe không đọc sai được script `check_script.py` kiểm tra tự động).
+Nội dung tương đương ý của dòng, đọc tự nhiên. **Không chứa ký hiệu** (`$ \ ^ _ { } = + / ' √ < >`) — script B2 chặn. Cách đọc ký hiệu, công thức, tên riêng: **xem gói môn `.agents/mon/<mon>.md`** (mặc định nói theo nghĩa, không đọc chữ cái; các quy tắc phiên âm bắt buộc để Vivibe không đọc sai được script `check_script.py` kiểm tra tự động).
 
 **Viết cho tai nghe**:
 - **Ít chỗ ngắt**: mỗi `,` `.` `:` `?` `...` giữa dòng làm giọng dừng ≈ 0,3–0,4 s. Mỗi dòng **≤ 2 chỗ ngắt, nên là 1**; câu ≤ ~20 từ; mỗi dòng thường là một câu.
@@ -273,4 +273,4 @@ Phụ đề đầy đủ xuất thành file riêng (`.srt`/`.vtt`) từ `speak`.
 **Lời đọc**
 - [ ] Đọc liền câu đầu các beat thành một mạch nhân quả; không câu đùa; giọng tài liệu, không xưng hô.
 - [ ] Câu hỏi đoán (nếu có) cụ thể, trả lời được bằng mắt, có `pauseAfter`, đáp án ở dòng sau, đã đưa vào danh sách nghe thử.
-- [ ] Ký hiệu môn học, danh pháp, quy tắc phiên âm: đã đối chiếu chính xác theo gói môn `.gemini/mon/<mon>.md`.
+- [ ] Ký hiệu môn học, danh pháp, quy tắc phiên âm: đã đối chiếu chính xác theo gói môn `.agents/mon/<mon>.md`.

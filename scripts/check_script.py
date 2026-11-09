@@ -18,9 +18,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-MON_DIR = ROOT / ".gemini" / "mon"
-if not MON_DIR.exists():
-    MON_DIR = ROOT / ".claude" / "mon"
+MON_DIR = ROOT / ".agents" / "mon"
 PHONETIC_DICT_PATH = ROOT / "scripts" / "phonetic_dict.json"
 
 # Nạp từ điển phiên âm chuẩn

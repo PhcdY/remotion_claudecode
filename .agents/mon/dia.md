@@ -1,7 +1,7 @@
 # Gói môn — Địa lí (GDPT 2018 THPT)
 
 Đọc kèm skill `viet-kich-ban` (B1), `tao-audio` (B2), `dung-video` (B3). Tài liệu này là **quy chuẩn cốt lõi** kết nối giữa **Biên kịch Địa lí (Storyteller)** và **Hệ thống Dựng Video Remotion (Tech Builder)**.
-Bài học kinh nghiệm thực tế ghi tại: `.gemini/lessons.md`.
+Bài học kinh nghiệm thực tế ghi tại: `.agents/lessons.md`.
 
 ---
 
@@ -162,8 +162,8 @@ Giọng đọc AI (Vivibe) cần được phiên âm chính xác các thuật ng
 >    - AI chủ động **Request trực tiếp từ User**: Yêu cầu User gửi ảnh bản đồ phân vùng, lát cắt địa hình hoặc file SVG bản đồ (*"Bạn gửi cho tôi hình ảnh bản đồ hoặc lược đồ vùng này từ SGK/Atlas nhé"*).
 >    - AI trích xuất toạ độ vector và code thành component React/SVG dùng chung trong `src/components/dia/`.
 > 2. **Cơ chế Đóng góp & Đồng bộ Framework (Maintainer Push)**:
->    - Sau khi hoàn thành và kiểm tra chất lượng hiển thị, component mới được bàn giao cho Maintainer để **push lên nhánh default (`gemini`)**.
->    - Mọi Creator khác chỉ cần `git pull origin gemini` là có sẵn bộ component bản đồ/khí hậu chuẩn xác để dùng ngay!
+>    - Sau khi hoàn thành và kiểm tra chất lượng hiển thị, component mới được bàn giao cho Maintainer để **push lên nhánh default (`main-codex`)**.
+>    - Mọi Creator khác chỉ cần `git pull origin main-codex` là có sẵn bộ component bản đồ/khí hậu chuẩn xác để dùng ngay!
 
 ### 6.2. Bộ Core Components chuyên dụng môn Địa (Đặt tại `src/components/dia/`)
 - `VietnamBorderMap.tsx`: Khung bản đồ Việt Nam chuẩn SVG có đầy đủ Hoàng Sa, Trường Sa và ranh giới các vùng kinh tế/sinh thái.

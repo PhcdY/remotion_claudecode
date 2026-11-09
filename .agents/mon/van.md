@@ -1,7 +1,7 @@
 # Gói môn — Ngữ văn (ĐGNL & GDPT 2018)
 
 Đọc kèm skill `viet-kich-ban` (B1), `tao-audio` (B2), `dung-video` (B3). Tài liệu này là **quy chuẩn cốt lõi** kết nối giữa **Biên kịch Văn (Non-tech)** và **Hệ thống Dựng Video (Tech Builder)**.
-Bài học kinh nghiệm thực tế ghi tại: `.gemini/lessons.md`.
+Bài học kinh nghiệm thực tế ghi tại: `.agents/lessons.md`.
 
 ---
 

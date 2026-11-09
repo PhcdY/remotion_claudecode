@@ -1,7 +1,7 @@
 # Gói môn — Lịch sử (GDPT 2018 THPT)
 
 Đọc kèm skill `viet-kich-ban` (B1), `tao-audio` (B2), `dung-video` (B3). Tài liệu này là **quy chuẩn cốt lõi** kết nối giữa **Biên kịch Sử (Storyteller)** và **Hệ thống Dựng Video Remotion (Tech Builder)**.
-Bài học kinh nghiệm thực tế ghi tại: `.gemini/lessons.md`.
+Bài học kinh nghiệm thực tế ghi tại: `.agents/lessons.md`.
 
 ---
 
@@ -132,14 +132,14 @@ Giọng đọc AI (Vivibe) cần được kiểm soát chặt chẽ khi đọc t
 
 ### 6.1. Workflow Đóng góp & Đồng bộ Asset/Component (Request User → Maintainer Push)
 > [!IMPORTANT]
-> **Cơ chế Request từ User và Đóng góp vào Nhánh Default (`gemini`)**:
+> **Cơ chế Request từ User và Đóng góp vào Nhánh Default (`main-codex`)**:
 > 1. **Khi User đang làm video ở Local mà thiếu Asset/Component**:
 >    - AI chủ động **Request trực tiếp từ User hiện tại**: Yêu cầu User gửi ảnh tư liệu, bản đồ gốc hoặc phác thảo địa hình vào chat (*"Bạn gửi cho tôi ảnh/tài liệu của trận địa này để tôi code component nhé"*).
 >    - Nhận được ảnh từ User $\to$ AI phân tích và dựng thành code SVG/React component hoàn chỉnh trong `src/components/su/`.
 > 2. **Cơ chế Đóng góp & Đồng bộ Framework (Maintainer Workflow)**:
 >    - Sau khi hoàn thành, component mới sẽ được gửi cho Maintainer (Người quản trị Framework).
->    - Maintainer kiểm duyệt chất lượng và **tự tay push lên nhánh default (`gemini`)**.
->    - Mọi Creator khác lần sau chỉ cần chạy `git pull origin gemini` là tự động có sẵn toàn bộ component mới trong `src/` để tái sử dụng ngay lập tức mà không phải dựng lại!
+>    - Maintainer kiểm duyệt chất lượng và **tự tay push lên nhánh default (`main-codex`)**.
+>    - Mọi Creator khác lần sau chỉ cần chạy `git pull origin main-codex` là tự động có sẵn toàn bộ component mới trong `src/` để tái sử dụng ngay lập tức mà không phải dựng lại!
 
 ### 6.2. Bộ Core Components chuyên dụng môn Sử (Đặt tại `src/components/su/`)
 - `TacticalMap.tsx`: Khung bản đồ chiến sự vector SVG tối giản hỗ trợ vẽ mũi tên hành quân động.

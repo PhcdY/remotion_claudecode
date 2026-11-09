@@ -1,7 +1,7 @@
 # Gói môn — Sinh học
 
 Đọc kèm skill `viet-kich-ban` (B1), `tao-audio` (B2), `dung-video` (B3). Luật ở đây **thêm vào hoặc thay** luật chung cho video Sinh học (`"subject": "sinh"`).
-Bài học kinh nghiệm đã gặp kèm ngày: `.gemini/lessons.md`.
+Bài học kinh nghiệm đã gặp kèm ngày: `.agents/lessons.md`.
 
 ---
 

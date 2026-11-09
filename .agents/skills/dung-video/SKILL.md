@@ -1,13 +1,13 @@
 ---
 name: dung-video
-description: B3 của pipeline video giải thích bản chất (mọi môn) — dựng video Remotion từ script.json (B1) — bản nháp + storyboard trước khi có audio, rồi hoàn thiện theo audio trong public/audio/<slug>/ (B2). Dùng khi kịch bản đã chốt và cần dựng/storyboard/sửa/render video, hoặc gõ /dung-video <slug>.
+description: B3 của pipeline video giải thích bản chất (mọi môn) — dựng video Remotion từ script.json (B1) — bản nháp + storyboard trước khi có audio, rồi hoàn thiện theo audio trong public/audio/<slug>/ (B2). Dùng khi kịch bản đã chốt và cần dựng/storyboard/sửa/render video, hoặc gõ $dung-video <slug>.
 ---
 
 # B3 — Dựng video Remotion
 
 Luôn dùng kèm skill `remotion-best-practices` cho mọi chi tiết API Remotion (đo audio, font, Sequence, render…).
-Đọc gói môn `.gemini/mon/<subject>.md` (trường `subject` của `script.json`, thiếu = `toan`), mục "Mẫu dựng khái niệm" và "Dựng hình": hình chuẩn và component có sẵn của môn đó.
-Mục tiêu duy nhất là trải nghiệm người xem; lý do của từng luật ở `.gemini/lessons.md`.
+Đọc gói môn `.agents/mon/<subject>.md` (trường `subject` của `script.json`, thiếu = `toan`), mục "Mẫu dựng khái niệm" và "Dựng hình": hình chuẩn và component có sẵn của môn đó.
+Mục tiêu duy nhất là trải nghiệm người xem; lý do của từng luật ở `.agents/lessons.md`.
 
 **Thứ tự (video mới):** B1 chốt kịch bản → **B3 nháp**: dựng hình với thời gian ước tính, xuất storyboard, người dùng duyệt hình (Bước 2b) → B2 tạo audio → **B3 hoàn thiện**: thời gian thật, `check-layout`, render. Sửa hình hoặc chữ ở storyboard thì chưa tốn credit giọng đọc; sửa sau B2 thì phải tạo lại audio dòng đó.
 
@@ -43,7 +43,7 @@ Trước khi viết bất kỳ dòng code JSX/SVG nào, agent BẮT BUỘC phả
 6. **Đối chiếu Đúng/Sai rõ ràng (Semantic Contrast)**:
    - TUYỆT ĐỐI CẤM dùng `textDecoration: line-through` gạch ngang qua một ký tự/con số đơn lẻ (`2 ✗`) vì đường gạch cắt ngang thân số tạo thành ký tự biến dạng kỳ dị, học sinh không hiểu.
    - Luôn chia thành 2 khối so sánh độc lập: Khối Sai (nhãn "SAI ✗", nền đỏ nhạt) và Khối Đúng (nhãn "ĐÚNG ✓", nền xanh lá).
-7. **Tuân thủ quy chuẩn riêng của Gói môn (`.gemini/mon/<subject>.md`)**:
+7. **Tuân thủ quy chuẩn riêng của Gói môn (`.agents/mon/<subject>.md`)**:
    - BẮT BUỘC đọc gói môn trước khi dựng. Mọi quy ước biểu diễn đặc thù của môn (Toán: Oxyz, tiếp tuyến, hai tầng đồ thị; Lý: vector lực, mạch điện; Hoá: liên kết phân tử; Sinh: chuỗi ADN...) phải tuân thủ nghiêm ngặt theo gói môn đó.
 
 **Cổng kiểm duyệt 3 bước trước khi báo xong (Three-Gate Quality Verification)**:
@@ -224,7 +224,7 @@ Phép thử: **tắt tiếng, chỉ nhìn khung hình**, người xem vẫn bi�
 
 1. Dựng đủ các beat với `draft: true` (mặc định của composition cho tới khi có audio).
 2. `node scripts/check-layout.mjs <id> --draft` → sửa hết lỗi.
-3. `node scripts/storyboard.mjs <id>` → `out/_lam-viec/<id>/storyboard/index.html`: mỗi dòng một ảnh (cuối dòng, lúc thay đổi đã hiện đủ) kèm `show`, `text`, lời đọc. Tự soát từng ảnh theo Bước 4, rồi `node scripts/storyboard.mjs <id> --review` → `out/_lam-viec/<id>/storyboard/review/`: **mỗi beat một ảnh nhỏ** (cuối beat, scale 0,3) + `review.md` (lời đọc, thay đổi hình, chữ của từng dòng). Gọi agent `hoc-sinh-ao` với **đúng thư mục `review/`** + tiền đề, dặn **mỗi ảnh đọc đúng một lần**, theo thứ tự; không đưa thư mục ảnh đầy đủ. Agent dừng giữa chừng (lỗi, hết lượt) thì **không** cho chạy tiếp ngay: xem nó đã đọc bao nhiêu ảnh, có mở lại ảnh không, rồi mới quyết (24/10: agent xem 67 ảnh cỡ 0,5, mở lại mỗi ảnh ~20 lần, tốn 68% token cả phiên và chạm giới hạn hai lần). Sửa chỗ *nặng*/*vừa* về hình ở đây, chỗ về lời/chữ báo người dùng. Xong mới gửi trang cho người dùng (SendUserFile), kèm tóm tắt những gì học sinh ảo đã bắt và đã sửa.
+3. `node scripts/storyboard.mjs <id>` → `out/_lam-viec/<id>/storyboard/index.html`: mỗi dòng một ảnh (cuối dòng, lúc thay đổi đã hiện đủ) kèm `show`, `text`, lời đọc. Tự soát từng ảnh theo Bước 4, rồi `node scripts/storyboard.mjs <id> --review` → `out/_lam-viec/<id>/storyboard/review/`: **mỗi beat một ảnh nhỏ** (cuối beat, scale 0,3) + `review.md` (lời đọc, thay đổi hình, chữ của từng dòng). Giao cho agent con `hoc-sinh-ao` (`.codex/agents/hoc-sinh-ao.toml`) với **đúng thư mục `review/`** + tiền đề, dặn **mỗi ảnh đọc đúng một lần**, theo thứ tự; không đưa thư mục ảnh đầy đủ. Agent dừng giữa chừng (lỗi, hết lượt) thì **không** cho chạy tiếp ngay: xem nó đã đọc bao nhiêu ảnh, có mở lại ảnh không, rồi mới quyết (24/10: agent xem 67 ảnh cỡ 0,5, mở lại mỗi ảnh ~20 lần, tốn 68% token cả phiên và chạm giới hạn hai lần). Sửa chỗ *nặng*/*vừa* về hình ở đây, chỗ về lời/chữ báo người dùng. Xong mới đưa người dùng đường dẫn trang `index.html` để mở xem, kèm tóm tắt những gì học sinh ảo đã bắt và đã sửa.
 4. Người dùng duyệt. Góp ý về hình → sửa code; về chữ/lời/nhịp → sửa ở B1 (chưa tốn audio). Duyệt xong mới sang B2.
 5. Sau B2: `python scripts/align_words.py <slug>` (mốc từng từ cho `cue`), bỏ `draft` khỏi `defaultProps`, chạy lại Bước 0 đầy đủ + Bước 4 với thời gian thật.
 
@@ -266,10 +266,10 @@ src/Root.tsx             đăng ký <Composition id="<slug>" ...> 1920×1080, 30
 
 ## Bước 5 — Xem trước, rồi render
 
-- Người dùng muốn xem nhanh ("demo", "chưa cần render") → mở Remotion Studio (`preview_start` với cấu hình `remotion-studio` trong `.gemini/launch.json`) ở trang composition, không render.
+- Người dùng muốn xem nhanh ("demo", "chưa cần render") → mở Remotion Studio (chạy nền `npx remotion studio --no-open`, rồi đưa người dùng link `http://localhost:3000/<compositionId>`) ở trang composition, không render.
 - Render khi người dùng bảo, **chạy nền và ghi tiến độ ra file** để trả lời được "đến đâu rồi":
   ```
-  npx remotion render <id> "$(node scripts/out-path.mjs <slug> --id <id>)" > <scratchpad>/render-<id>.log 2>&1
+  npx remotion render <id> "$(node scripts/out-path.mjs <slug> --id <id>)" > out/_lam-viec/<id>/render.log 2>&1
   ```
   `out-path.mjs` in đường dẫn `out/<Môn>/Lớp <lop>/<chuong>/<bai>/<id>.mp4` theo `lop`/`chuong`/`bai` trong `script.json` (thiếu thì ra `out/_lam-viec/<id>/`: điền cho đủ trước khi render bản đăng). Không ghi gì khác ra gốc `out/`: thứ người dùng xem nằm ở thư mục bài, thứ chỉ agent dùng ở `out/_lam-viec/<id>/`, log ở scratchpad; file nháp/thử cũ thì xóa.
   Không dùng `--log=error` (mất dòng tiến độ). Hỏi tiến độ → đọc dòng cuối của log (frame đã render / tổng), báo phần trăm và thời gian còn lại ước tính.
@@ -283,7 +283,7 @@ Học sinh ảo chỉ là bước lọc; thước đo thật là người xem. G
 - **Trước khi đăng (nếu được)**: 2–3 học sinh xem **một lần, không tua**, rồi trả lời 3 câu: (1) chỗ nào muốn tua lại / bị lạc — nói thời điểm; (2) kể lại ý chính bằng lời của mình; (3) giải câu hỏi mở đầu hoặc một câu áp dụng. Kể lại lệch ý bản chất → video chưa dạy được ý đó.
 - **Sau khi đăng**: xem biểu đồ giữ chân người xem (YouTube Studio › Analytics › Giữ chân người xem, hoặc số liệu web 9Study): tìm chỗ tụt dốc đột ngột và chỗ người xem tua lại (đỉnh nhô lên).
 
-Người dùng báo thời điểm ("1:23 khó hiểu", "tụt ở 0:40") → `python scripts/beat_at.py <id> 1:23 0:40` (cần `<id>.timeline.json` cạnh video, từ `export-captions.mjs` của đúng bản đã render) để biết beat, dòng, lời, hình ở đó; ghi vào `FEEDBACK.md` kèm beat/dòng, sửa theo quy trình góp ý như mọi lần, và thêm bài học vào `.gemini/lessons.md`.
+Người dùng báo thời điểm ("1:23 khó hiểu", "tụt ở 0:40") → `python scripts/beat_at.py <id> 1:23 0:40` (cần `<id>.timeline.json` cạnh video, từ `export-captions.mjs` của đúng bản đã render) để biết beat, dòng, lời, hình ở đó; ghi vào `FEEDBACK.md` kèm beat/dòng, sửa theo quy trình góp ý như mọi lần, và thêm bài học vào `.agents/lessons.md`.
 
 ## Bản giọng khác (không thay bản cũ)
 

@@ -1,6 +1,6 @@
 # Gói môn — mẫu cho môn mới
 
-Lần đầu làm video một môn chưa có gói (`.gemini/mon/<mon>.md`): chép file này thành gói mới, điền các mục dưới đây
+Lần đầu làm video một môn chưa có gói (`.agents/mon/<mon>.md`): chép file này thành gói mới, điền các mục dưới đây
 **cùng người dùng** (hỏi ở bước dàn ý những điểm chưa rõ), rồi bổ sung sau mỗi video. Không tự đặt luật khi chưa có căn cứ;
 chỗ chưa chắc ghi "chưa xác nhận".
 

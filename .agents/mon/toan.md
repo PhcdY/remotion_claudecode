@@ -1,7 +1,7 @@
 # Gói môn — Toán
 
 Đọc kèm skill `viet-kich-ban` (B1), `tao-audio` (B2), `dung-video` (B3). Luật ở đây **thêm vào hoặc thay** luật chung cho video Toán.
-Bài học đã gặp kèm ngày: `.gemini/lessons.md`.
+Bài học đã gặp kèm ngày: `.agents/lessons.md`.
 
 ## Tư duy kể chuyện & Trải nghiệm người xem (B1)
 

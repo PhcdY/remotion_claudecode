@@ -1,6 +1,6 @@
 ---
 name: tao-audio
-description: B2 của pipeline video giải thích bản chất (mọi môn) — tạo giọng đọc từ src/videos/<slug>/script.json bằng Vivibe API (giọng clone của người dùng). Dùng khi kịch bản đã chốt và cần audio, hoặc gõ /tao-audio <slug>.
+description: B2 của pipeline video giải thích bản chất (mọi môn) — tạo giọng đọc từ src/videos/<slug>/script.json bằng Vivibe API (giọng clone của người dùng). Dùng khi kịch bản đã chốt và cần audio, hoặc gõ $tao-audio <slug>.
 ---
 
 # B2 — Tạo audio từ kịch bản
@@ -39,11 +39,11 @@ Vivibe không có thẻ chỉnh tông; tông giọng đến từ mẫu clone, nh
 1. **Kiểm tra + báo chi phí:** `py scripts/check_script.py <slug>` (lỗi phải bằng 0; script in sẵn **danh sách dòng cần nghe thử**), rồi `py scripts/vivibe_tts.py src/videos/<slug>/script.json --voice "<giọng>" --estimate`.
    Script duyệt cả kịch bản trước: dòng thiếu `speak` hay `speak` còn ký hiệu toán → dừng, báo người dùng sửa ở B1 (**không tự viết `speak`**).
    Hợp lệ thì in số dòng cần tạo và số ký tự (1 ký tự ≈ 1 credit). Báo người dùng con số này, chờ đồng ý.
-2. **Nghe thử beat đầu + các dòng cần nghe thử:** `... --voice "<giọng>" --only b01`, và thêm `--only <beatId>-lNN` cho mỗi dòng trong danh sách của `check_script.py`: dòng đọc ký hiệu/tên riêng (cách đọc theo gói môn `.gemini/mon/<subject>.md`) và **dòng câu hỏi đoán** (giọng phải lên ở cuối câu; nghe ngang → B1 đổi thành câu dẫn khẳng định). Người dùng nghe ổn mới tạo phần còn lại. Ngắt sai hoặc đọc tách ký hiệu → quay lại B1 sửa `speak`.
-   **Không bỏ bước này, kể cả khi người dùng bảo làm liền tới lúc xem thử.** Tạo b01 + các dòng ký hiệu, gửi file cho người dùng nghe (SendUserFile) rồi mới tạo cả bài; có thể dựng hình B3 song song trong lúc chờ. Đã gặp (22/10/2026, giọng nữ - c Nhi, video đơn điệu): bỏ nghe thử, tạo thẳng 58 dòng → nhiều dòng bị trùng, ríu; "h" đọc thành "hắc", "h của hai" dính; "x" nghe không hay → phải tạo lại. Đo tốc độ đọc (ký tự/giây) không bắt được lỗi trùng/ríu, chỉ tai người mới bắt được.
+2. **Nghe thử beat đầu + các dòng cần nghe thử:** `... --voice "<giọng>" --only b01`, và thêm `--only <beatId>-lNN` cho mỗi dòng trong danh sách của `check_script.py`: dòng đọc ký hiệu/tên riêng (cách đọc theo gói môn `.agents/mon/<subject>.md`) và **dòng câu hỏi đoán** (giọng phải lên ở cuối câu; nghe ngang → B1 đổi thành câu dẫn khẳng định). Người dùng nghe ổn mới tạo phần còn lại. Ngắt sai hoặc đọc tách ký hiệu → quay lại B1 sửa `speak`.
+   **Không bỏ bước này, kể cả khi người dùng bảo làm liền tới lúc xem thử.** Tạo b01 + các dòng ký hiệu, đưa người dùng đường dẫn các file mp3 để nghe rồi mới tạo cả bài; có thể dựng hình B3 song song trong lúc chờ. Đã gặp (22/10/2026, giọng nữ - c Nhi, video đơn điệu): bỏ nghe thử, tạo thẳng 58 dòng → nhiều dòng bị trùng, ríu; "h" đọc thành "hắc", "h của hai" dính; "x" nghe không hay → phải tạo lại. Đo tốc độ đọc (ký tự/giây) không bắt được lỗi trùng/ríu, chỉ tai người mới bắt được.
    Đã nghe thử (20/10/2026, giọng nam - c Bình): "x không" ($x_0$) bị đọc tách "x" … "không"; viết "ích-không" thì liền, **nhưng** "không" dính sang động từ phía sau ("ích-không ứng với" nghe thành "không ứng") → B1 phải đặt cụm có "không" ở cuối vế (quy tắc ở `viet-kich-ban`). Nghe lại sau khi đảo câu ("Tại ích-không, đạo hàm bằng mười.") → **đúng**, người dùng xác nhận. Khi nghe thử, vẫn để ý riêng chỗ này.
 3. **Tạo cả bài:** cùng `--voice`, không có `--only`. Dòng nào đã có file khớp (cùng giọng, tốc độ, `speak`) thì bỏ qua.
-   **Nghe lại sau khi tạo cả bài**: gửi lại (SendUserFile) đúng các file trong bài có đọc chữ cái/ký hiệu, kể cả dòng đã nghe thử ổn — mỗi lần tạo một khác. Đã gặp (22/10/2026): nghe thử ổn, nhưng bản trong bài đọc "f(x)" thừa âm cuối. Dòng lỗi → B1 đổi sang nói theo nghĩa, rồi `--only` dòng đó.
+   **Nghe lại sau khi tạo cả bài**: đưa lại đường dẫn đúng các file trong bài có đọc chữ cái/ký hiệu, kể cả dòng đã nghe thử ổn — mỗi lần tạo một khác. Đã gặp (22/10/2026): nghe thử ổn, nhưng bản trong bài đọc "f(x)" thừa âm cuối. Dòng lỗi → B1 đổi sang nói theo nghĩa, rồi `--only` dòng đó.
 4. Lỗi một dòng: đọc thông báo, báo người dùng. **Không chạy lại ngay để thử** — mỗi lần gửi là một lần trừ credit. Người dùng đồng ý thì `--only <beatId>-lNN`.
 5. **Mốc từng từ**: `py scripts/align_words.py <slug>` (bản giọng khác thêm `--audio-dir <slug>-<hậu tố>`) → `words.json` cạnh `manifest.json`, cho `cue` ở B3. Chạy lại mỗi khi tạo lại dòng nào.
 6. Báo cáo: số dòng đã tạo / lỗi, số ký tự đã gửi, tổng thời lượng audio (đo bằng `ffprobe` đi kèm Remotion, `node_modules/@remotion/compositor-win32-x64-msvc/ffprobe.exe`).
@@ -69,7 +69,7 @@ Người dùng muốn thêm một bản đọc giọng khác bên cạnh bản �
 
 - Không sửa file trong `public/audio/` bằng tay.
 - `--force` tạo lại dòng được chọn dù cache khớp; chỉ dùng khi người dùng muốn một bản đọc khác.
-- Vivibe chỉ cho một job mỗi tài khoản tại một thời điểm, nên script tạo lần lượt từng dòng (mỗi dòng vài giây). Cả bài nên chạy nền (`run_in_background`).
+- Vivibe chỉ cho một job mỗi tài khoản tại một thời điểm, nên script tạo lần lượt từng dòng (mỗi dòng vài giây). Cả bài nên chạy nền, ghi log ra file trong `out/_lam-viec/` để xem tiến độ.
 
 
 ### Bảng phiên âm Vivibe bắt buộc (Tránh lỗi đọc sai toán học)
