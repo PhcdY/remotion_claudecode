@@ -18,7 +18,6 @@ Khi bạn clone dự án từ GitHub về, Git chỉ tải về **mã nguồn v�
 | **`public/audio/`** | Chứa hàng trăm file `.mp3` giọng đọc AI sinh tự động từ Vivibe TTS. | Không cần commit lên Git. Khi làm bài nào, AI hoặc bạn chỉ cần chạy script `py scripts/vivibe_tts.py ...` (Bước 3) là tự sinh lại file audio chuẩn. |
 | **`out/`** | Chứa video `.mp4` đã render và ảnh storyboard (dung lượng hàng GB). | Xuất hiện tự động khi bạn chạy lệnh xuất ảnh storyboard (`scripts/storyboard.mjs`) hoặc render video (`remotion render`). **Mẹo**: Cấu hình `OUTPUT_DIR="D:/Thư_mục_ngoài"` trong `.env` để video tự lưu ra ổ riêng/Google Drive. |
 | **`references/**/raw_pdf/` & `*.pdf`** | Sách giáo khoa gốc dạng PDF rất nặng (hàng trăm MB). | Chỉ lưu file PDF ở máy cá nhân để tham khảo khi cần. Toàn bộ nội dung cốt lõi đã được trích xuất thành các file `.md` siêu nhẹ và có sẵn trên Git trong thư mục `references/<môn>/...`. |
-| **`.gemini/worktrees/`** | Thư mục không gian làm việc tạm thời khi AI chạy song song. | Là thư mục rác tạm thời, không cần khôi phục. |
 | **`dist/`, `__pycache__/`** | File build tạm thời của JavaScript và bộ đệm Python. | Tự sinh khi thực thi lệnh. |
 
 ---
@@ -32,7 +31,7 @@ Toàn bộ sản phẩm kết xuất trong quá trình sản xuất video đều
 out/
 ├── _lam-viec/                           # Thư mục dành cho quá trình kiểm tra & duyệt hình
 │   └── <slug>/                          # Tên bài học (ví dụ: bieu-thuc-toa-do-phep-toan-vecto)
-│       ├── storyboard.png               # Ảnh ghép toàn bộ các cảnh trong video từ đầu đến cuối
+│       ├── storyboard/index.html        # Storyboard: mỗi dòng lời đọc một ảnh, mở bằng trình duyệt
 │       └── stills/                      # Các ảnh chụp frame quan trọng để kiểm tra chữ/layout
 │
 └── <Môn>/                               # Thư mục chứa VIDEO THÀNH PHẨM (Ví dụ: Toan)
@@ -47,7 +46,7 @@ out/
 ### 2.2. Người dùng cần xử lý Output thế nào?
 
 1. **Giai đoạn duyệt (Bước 2)**:
-   - Bạn xem video trực tiếp qua **Remotion Studio** (chỉ cần bảo AI mở giúp: *"Mở preview Remotion Studio hộ tôi"*) hoặc mở file ảnh storyboard tại `out/_lam-viec/<slug>/storyboard.png` để kiểm tra toàn bộ màu sắc, vị trí đồ thị, vector và chữ.
+   - Bạn xem video trực tiếp qua **Remotion Studio** (chạy `npm run dev` trong một Terminal riêng rồi mở `http://localhost:3000`) hoặc mở storyboard tại `out/_lam-viec/<id>/storyboard/index.html` để kiểm tra toàn bộ màu sắc, vị trí đồ thị, vector và chữ.
    - Nếu phát hiện chỗ nào chưa ưng ý (chữ che hình, màu nhạt), bạn yêu cầu AI sửa trực tiếp trên code trước khi tốn credit tạo giọng đọc.
 
 2. **Giai đoạn nhận video thành phẩm (Bước 3)**:
@@ -72,4 +71,4 @@ out/
 
 - **Không xóa thư mục để clone lại**: Bạn chỉ cần clone dự án về máy đúng 1 lần duy nhất.
 - **Không lo conflict hay mất bài**: Các bài video mới bạn làm cứ để nguyên trong `src/videos/<slug>/` trên máy cá nhân.
-- **Cập nhật tính năng mới**: Khi hệ thống có component mới hoặc sửa lỗi, bạn chỉ cần gõ `git pull origin gemini`. Git sẽ tự động hợp nhất công cụ mới mà không đụng chạm hay làm mất bất kỳ bài video nào của bạn!
+- **Cập nhật tính năng mới**: Khi hệ thống có component mới hoặc sửa lỗi, bạn chỉ cần gõ `git pull origin main-codex`. Git sẽ tự động hợp nhất công cụ mới mà không đụng chạm hay làm mất bất kỳ bài video nào của bạn!

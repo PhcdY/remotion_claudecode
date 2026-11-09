@@ -10,7 +10,7 @@
 
 ---
 
-## 1. Chuẩn bị Môi trường & Hướng dẫn Antigravity (Chỉ làm 1 lần duy nhất)
+## 1. Chuẩn bị Môi trường & Codex (Chỉ làm 1 lần duy nhất)
 
 ### 1.1. Tải & Cài đặt 4 Công cụ Cần thiết
 Trước khi bắt đầu, hãy cài đặt 4 công cụ chuẩn sau trên máy tính của bạn:
@@ -33,8 +33,10 @@ Trước khi bắt đầu, hãy cài đặt 4 công cụ chuẩn sau trên máy 
      `☑ Add python.exe to PATH` (nằm ở mép dưới cùng cửa sổ). Sau đó mới bấm *Install Now*. *(Nếu quên tích ô này, máy tính sẽ báo lỗi không nhận diện được lệnh `py` hay `python` trong Terminal)*.
    - **Kiểm tra**: Mở Terminal gõ `py --version` (hoặc `python --version`) thấy hiện phiên bản Python là chuẩn.
 
-4. **[Antigravity IDE](https://antigravity.google/)**:
-   - **Tác dụng**: Môi trường làm việc chính và trợ lý AI cặp đôi (Pair-Programming). Bạn sẽ dành 99% thời gian làm việc trực tiếp bên trong Antigravity để giao tiếp với AI, xem storyboard và render video.
+4. **[Codex](https://developers.openai.com/codex)** (khuyên dùng extension Codex trong [VS Code](https://code.visualstudio.com/)):
+   - **Tác dụng**: Trợ lý AI bạn trò chuyện cùng để viết kịch bản, dựng hình, tạo giọng đọc và render video.
+   - **Cách cài**: VS Code → Extensions (`Ctrl + Shift + X`) → tìm **Codex** (OpenAI) → Install → đăng nhập tài khoản ChatGPT. Hoặc dùng bản dòng lệnh: `npm install -g @openai/codex`.
+   - Chi tiết: [Hướng dẫn dùng Codex](HUONG_DAN_CODEX.md).
 
 ---
 
@@ -52,7 +54,7 @@ Bạn hoàn toàn chủ động chọn lưu dự án ở bất kỳ ổ đĩa n�
    ```
 3. Chạy lệnh clone toàn bộ dự án từ GitHub:
    ```bash
-   git clone https://github.com/PhcdY/remotion_claudecode.git "Video AI"
+   git clone -b main-codex https://github.com/PhcdY/remotion_claudecode.git "Video AI"
    cd "Video AI"
    ```
 4. Cài đặt các thư viện đồ họa và công cụ toán học:
@@ -60,37 +62,30 @@ Bạn hoàn toàn chủ động chọn lưu dự án ở bất kỳ ổ đĩa n�
    npm install
    ```
 
-> [!TIP]
-> **Khuyến nghị sử dụng bản Release ổn định (`v1.0.0`)**:
-> Để quy trình làm video không bị gián đoạn hay phát sinh lỗi do các tính năng mới đang được phát triển trên Git, bạn nên chuyển sang phiên bản đóng gói ổn định nhất:
-> ```bash
-> git checkout v1.0.0
-> ```
-> Khi đội ngũ thông báo phát hành phiên bản mới, bạn chỉ cần gõ `git fetch --tags && git checkout v1.x.x` để cập nhật nhanh chóng.
+> [!IMPORTANT]
+> **Dùng nhánh chính `main-codex`** (lệnh clone ở trên đã chọn sẵn nhánh này).
+> Tag `v1.0.0` là bản cũ dùng với Gemini/Antigravity: không có `AGENTS.md` nên Codex không đọc được quy chuẩn dự án. **Không checkout `v1.0.0` khi làm với Codex.**
+> Khi đội ngũ phát hành bản ổn định mới cho Codex, bạn cập nhật bằng `git fetch --tags && git checkout <tag-mới>`.
 
 ---
 
-### 1.3. Hướng dẫn Làm việc với Antigravity IDE (Không gian Làm việc Chính)
+### 1.3. Làm việc với Codex (Không gian Làm việc Chính)
 
 > [!TIP]
-> **Xem cẩm nang chi tiết**: [Hướng dẫn Đầy đủ về Giao diện, Phím tắt & Mẹo Dùng Antigravity IDE](./HUONG_DAN_ANTIGRAVITY.md).
+> **Xem hướng dẫn chi tiết**: [Hướng dẫn dùng Codex](HUONG_DAN_CODEX.md) (cài đặt, gọi skill, lệnh `/`, agent con, quyền chạy lệnh).
 
-Vì phần lớn thời gian bạn sẽ làm việc với trợ lý AI ngay trong **Antigravity**, hãy thực hiện các bước sau để bắt đầu:
-
-1. **Mở dự án trong Antigravity**:
-   - Khởi động **Antigravity IDE**.
-   - Chọn menu `File` $\to$ `Open Folder...` (hoặc phím tắt `Ctrl + K Ctrl + O` / `Ctrl + O`).
-   - Điều hướng và chọn đúng thư mục `Video AI` bạn vừa clone về.
-2. **Mở Khung Chat với Trợ lý AI**:
-   - Nhìn sang thanh công cụ bên cạnh hoặc nhấn `Ctrl + L` (trên Mac: `Cmd + L`) để mở khung chat.
-   - Tại đây, bạn chỉ việc gõ tiếng Việt tự nhiên để đưa đề bài bài học cho AI.
-3. **Các Tiện ích Độc quyền khi Dùng Antigravity**:
-   - **Không cần tự gõ lệnh Terminal**: Bạn không cần nhớ cú pháp câu lệnh phức tạp. Khi muốn xem trước video, bạn chỉ cần nhắn AI trong khung chat:  
-     > *"Mở preview Remotion Studio hộ tôi"*  
-     AI sẽ tự động khởi chạy tiến trình `npm run dev` ở chế độ nền và gửi link `http://localhost:3000` để bạn nhấn vào xem video chuyển động ngay lập tức.
-   - **Duyệt Storyboard trực quan**: Nhắn *"Chụp ảnh storyboard gửi tôi xem"* $\\to$ AI sẽ xuất ảnh toàn cảnh và hiển thị trực tiếp.
-   - **Tự động thẩm định 3 cổng**: AI tự động đọc tài liệu SGK trong `references/`, tự kiểm tra cú pháp kịch bản bằng `check_script.py`, và gọi kỹ năng "Học sinh ảo" (`hoc-sinh-ao`) để phản biện trước khi bạn tạo audio.
-   - **Thu gọn bộ nhớ nhanh**: Gõ `/compact` vào khung chat sau mỗi bước để AI làm việc nhanh và mượt mà hơn.
+1. **Mở dự án trong Codex**:
+   - **VS Code**: `File` $	o$ `Open Folder...` $	o$ chọn đúng thư mục `Video AI` vừa clone $	o$ mở khung Codex ở thanh bên.
+   - **Dòng lệnh**: `cd` vào thư mục `Video AI` rồi gõ `codex`.
+   - Phải mở đúng thư mục gốc (nơi có `AGENTS.md`) thì Codex mới đọc được quy chuẩn và skill.
+2. **Trò chuyện bằng tiếng Việt**: đưa đề bài bài học, Codex làm từng trạm và dừng chờ bạn duyệt.
+3. **Gọi skill bằng `$ten-skill`** (không bắt buộc, Codex thường tự chọn đúng):
+   - `$viet-kich-ban`: Bước 1, viết kịch bản.
+   - `$dung-video <slug>`: dựng nháp, storyboard, hoàn thiện video.
+   - `$tao-audio <slug>`: tạo giọng đọc Vivibe.
+4. **Thẩm định 3 cổng tự động**: Codex đọc SGK trong `references/`, kiểm tra kịch bản bằng `check_script.py`, rồi giao cho agent con "Học sinh ảo" (`hoc-sinh-ao`, định nghĩa ở `.codex/agents/hoc-sinh-ao.toml`) phản biện trước khi bạn tạo audio.
+5. **Gõ `/compact` sau mỗi trạm** (chốt kịch bản, duyệt storyboard, có audio) để Codex làm nhanh và đỡ tốn lượt dùng.
+6. **Xem video chuyển động**: mở một Terminal riêng tại thư mục dự án, chạy `npm run dev`, rồi mở `http://localhost:3000`.
 
 ---
 
@@ -158,15 +153,13 @@ flowchart LR
 
 - **Bắt buộc**:
   - Duyệt tổng thể hình ảnh, nhãn chữ, công thức xem có bị đè nét, lệch toạ độ hay tràn thẻ hay không trước khi tốn credit tạo giọng đọc thật.
-- **Cách bạn xem sản phẩm (Linh hoạt, không cần gõ lệnh tay)**:
-  1. **Bảo AI mở Studio xem trực tiếp (Khuyên dùng)**:  
-     Bạn chỉ cần nhắn AI:  
-     > *"Mở hộ tôi Remotion Studio để preview trực tiếp nhé."*  
-     *(AI sẽ tự chạy lệnh `npm run dev` trong nền. Bạn chỉ việc nhấn vào link `http://localhost:3000` trên trình duyệt để bấm Play xem video chuyển động như thật).*
-  2. **Bảo AI chụp ảnh Storyboard xem tổng thể**:  
-     Bạn nhắn AI:  
-     > *"Chụp ảnh storyboard toàn bộ các cảnh gửi cho tôi xem."*  
-     *(AI sẽ xuất file ảnh ghép toàn bộ các cảnh tại `out/_lam-viec/<slug>/storyboard.png` để bạn lướt nhanh từ đầu đến cuối).*
+- **Cách bạn xem sản phẩm**:
+  1. **Storyboard (xem nhanh mọi cảnh)**:  
+     Ở bước nháp, skill `dung-video` tự xuất storyboard và gửi bạn đường dẫn. Muốn xuất lại thì nhắn:  
+     > *"Xuất lại storyboard các cảnh cho tôi xem."*  
+     *(Mở file `out/_lam-viec/<id>/storyboard/index.html` bằng trình duyệt: mỗi dòng lời đọc một ảnh, kèm chữ và thay đổi trên hình).*
+  2. **Remotion Studio (xem chuyển động)**:  
+     Mở một Terminal riêng tại thư mục dự án (trong VS Code: `Ctrl + J`), chạy `npm run dev`, rồi mở `http://localhost:3000` và bấm Play. Để Terminal đó chạy suốt lúc làm; Codex sửa code thì Studio tự cập nhật.
 - **Tùy chọn (Yêu cầu chỉnh sửa giao diện nếu chưa ưng ý)**:
   > *"Ở cảnh 2, hãy đổi màu vector sang màu xanh chàm và tăng cỡ chữ nhãn to lên một chút."*
 
@@ -197,7 +190,9 @@ Khi kịch bản và hình ảnh đã được bạn duyệt hoàn toàn, tiến
 
 ### 1. Nhờ "Học sinh ảo" phản biện kịch bản
 Muốn biết kịch bản của bạn có bị quá khó hiểu, hàn lâm hoặc nhảy cóc kiến thức không:
-> *"Hãy đóng vai học sinh ảo (skill hoc-sinh-ao) đọc kịch bản bài này và chỉ ra các điểm nhảy bước đối với học sinh trung bình."*
+> *"Giao cho agent con `hoc-sinh-ao` đọc kịch bản bài này và chỉ ra các điểm nhảy bước. Tiền đề: học sinh đã học [...], chưa học [...]."*
+
+*(Agent con này định nghĩa ở `.codex/agents/hoc-sinh-ao.toml`. Các skill `viet-kich-ban` và `dung-video` đã tự gọi nó; chỉ nhắn thêm khi bạn muốn soát lại một lượt.)*
 
 ### 2. Thu gọn bộ nhớ AI (Tiết kiệm Token & tránh lag)
 Sau khi kết thúc mỗi bước (ví dụ xong Bước 1 chốt kịch bản), bạn có thể gõ lệnh:
@@ -241,7 +236,7 @@ Khi hệ sinh thái cập nhật thêm component đồ hoạ mới, sửa lỗi 
 
 Chỉ cần mở Terminal tại thư mục `Video AI` và chạy:
 ```bash
-git pull origin gemini   # hoặc git pull origin main
+git pull origin main-codex
 ```
 - **Không bao giờ mất bài cũ**: Toàn bộ kịch bản và video bạn đã làm trong máy vẫn còn nguyên vẹn 100%.
 - **Nhận công cụ mới**: Máy bạn sẽ tự động có thêm các component và tính năng mới nhất từ hệ thống!

@@ -31,7 +31,7 @@ Chỉ sử dụng các tag chuẩn sau (viết thường):
 | `refactor` | Tái cấu trúc mã nguồn | Gom component trùng lặp vào `src/components/`, tối ưu code SVG, dọn dẹp import (không đổi giao diện) |
 | `test` | Thử nghiệm kỹ thuật | Thử nghiệm hiệu ứng Remotion mới, benchmark tốc độ render, test model TTS mới |
 | `release` | Chuẩn bị phát hành phiên bản mới | Đóng gói một mốc phiên bản ổn định (v1.0.0), kiểm thử toàn diện toàn bộ pipeline trước khi gắn Git Tag chính thức |
-| `docs` | Tài liệu & Quy định | Cập nhật hướng dẫn sử dụng, sửa quy chuẩn gói môn `.gemini/mon/`, bổ sung tài liệu SGK |
+| `docs` | Tài liệu & Quy định | Cập nhật hướng dẫn sử dụng, sửa quy chuẩn gói môn `.agents/mon/`, bổ sung tài liệu SGK |
 
 > [!NOTE]
 > Lưu ý chính tả: Luôn dùng `refactor` (không dùng *refractor*).
@@ -64,7 +64,7 @@ Chỉ sử dụng các tag chuẩn sau (viết thường):
 
 ## 3. Vòng đời Nhánh & Quản lý Nhánh (Branch Lifecycle)
 
-### 3.1. Nhánh chính (`gemini` / `main`)
+### 3.1. Nhánh chính (`main-codex`)
 - Là nguồn chân lý (Source of Truth) và nhánh tích hợp liên tục (CI) của toàn bộ dự án.
 - Code trên nhánh chính luôn phải qua kiểm tra:
   - `py scripts/check_script.py <slug>`: 0 lỗi.
@@ -86,9 +86,9 @@ Chỉ sử dụng các tag chuẩn sau (viết thường):
 
 ## 4. Quy trình Phát hành Phiên bản & Thử nghiệm Tính năng (Release & Testing Guide)
 
-### 4.1. Phân biệt Nhánh Tích hợp (`gemini`/`main`) vs Bản Phát hành (`release` / Git Tag)
+### 4.1. Phân biệt Nhánh Tích hợp (`main-codex`) vs Bản Phát hành (`release` / Git Tag)
 
-| Tiêu chí | Nhánh Chính (`gemini` / `main`) | Bản Phát hành (`release` / Git Tag) |
+| Tiêu chí | Nhánh Chính (`main-codex`) | Bản Phát hành (`release` / Git Tag) |
 | :--- | :--- | :--- |
 | **Bản chất** | Nhánh làm việc liên tục (Living branch), nơi tích hợp các PR tính năng và sửa lỗi mới nhất. | Cột mốc đóng băng (Snapshot) được đánh số cụ thể (VD: `v1.0.0`), không thay đổi mã nguồn. |
 | **Mục đích** | Phục vụ lập trình viên tiếp tục phát triển framework. | Phục vụ người làm video, cộng tác viên sản xuất nội dung với độ ổn định tuyệt đối. |
@@ -105,7 +105,7 @@ Chỉ sử dụng các tag chuẩn sau (viết thường):
 Khi bạn muốn thêm một tính năng hoặc thử nghiệm kỹ thuật mới:
 
 1. **Người phát triển**: Tạo nhánh theo quy ước (VD: `toan_feature_truc-khong-gian-3d` hoặc `all_test_remotion-three`), commit code và push lên GitHub.
-2. **Người muốn trải nghiệm**: Không cần đợi merge vào `gemini`/`main`, chỉ cần kéo nhánh đó về máy:
+2. **Người muốn trải nghiệm**: Không cần đợi merge vào `main-codex`, chỉ cần kéo nhánh đó về máy:
    ```bash
    git fetch origin
    git checkout toan_feature_truc-khong-gian-3d
@@ -113,17 +113,17 @@ Khi bạn muốn thêm một tính năng hoặc thử nghiệm kỹ thuật mớ
    ```
 3. **Thử nghiệm an toàn tại Phòng Lab**:
    - Mở composition `LabThanhPhan` (`src/videos/lab-thanh-phan/`) trên Remotion Studio để xem tương tác đồ hoạ và chuyển động.
-   - Góp ý hoặc báo lỗi trực tiếp cho người phát triển. Nhánh chính (`gemini`) hoàn toàn không bị ảnh hưởng.
+   - Góp ý hoặc báo lỗi trực tiếp cho người phát triển. Nhánh chính (`main-codex`) hoàn toàn không bị ảnh hưởng.
 4. **Sau khi hoàn thiện & kiểm thử đạt chuẩn**: Tạo Pull Request để merge vào nhánh chính.
 
 ### 4.4. Quy trình 3 Bước Đóng gói & Phát hành Release
-Mỗi khi hệ thống tích lũy đủ các tính năng quan trọng và đạt mốc ổn định cao:
+Mỗi khi hệ thống tích lũy đủ các tính năng quan trọng và đạt mốc ổn định cao (ví dụ dưới dùng `v2.0.0`: bản ổn định đầu tiên cho Codex, vì `v1.0.0` đã là bản thời Gemini):
 
 * **Bước 1: Tạo nhánh phát hành**
   ```bash
-  git checkout gemini
-  git pull origin gemini
-  git checkout -b all_release_v1.0.0
+  git checkout main-codex
+  git pull origin main-codex
+  git checkout -b all_release_v2.0.0
   ```
 * **Bước 2: Thẩm định toàn diện (Verification Gate)**
   - Chạy `npm run lint`: Phải đạt 0 lỗi.
@@ -131,21 +131,18 @@ Mỗi khi hệ thống tích lũy đủ các tính năng quan trọng và đạt
   - Render thử nghiệm 1 video hoàn chỉnh để đảm bảo âm thanh Vivibe, subtitle và font chữ KaTeX render trơn tru.
 * **Bước 3: Gắn Git Tag & Đẩy lên GitHub**
   ```bash
-  git tag -a v1.0.0 -m "Release v1.0.0: Phien ban on dinh dau tien cua Engine Video AI"
-  git push origin v1.0.0
-  git push -u origin all_release_v1.0.0
+  git tag -a v2.0.0 -m "Release v2.0.0: Phien ban on dinh dau tien chay voi Codex"
+  git push origin v2.0.0
+  git push -u origin all_release_v2.0.0
   ```
-  Tạo Pull Request merge nhánh `all_release_v1.0.0` vào `gemini` để hoàn tất chu trình.
+  Tạo Pull Request merge nhánh `all_release_v2.0.0` vào `main-codex` để hoàn tất chu trình.
 
 ### 4.5. Hướng dẫn Dành cho Người làm Video (Creator)
-- **Để có môi trường làm việc ổn định nhất**:
-  ```bash
-  git checkout v1.0.0
-  ```
-- **Khi đội ngũ thông báo có bản release mới**:
+- **Hiện tại**: làm việc trên nhánh `main-codex` (`git pull origin main-codex` để cập nhật). Tag `v1.0.0` là bản thời Gemini/Antigravity, không có `AGENTS.md`, **không dùng được với Codex**.
+- **Khi đội ngũ thông báo có bản release mới cho Codex** (ví dụ `v2.0.0`):
   ```bash
   git fetch --tags
-  git checkout v1.1.0
+  git checkout v2.0.0
   ```
 
 ---
@@ -165,7 +162,7 @@ Mỗi khi hệ thống tích lũy đủ các tính năng quan trọng và đạt
 ## 🛠️ Thay đổi Chính (Key Changes)
 - **Core / Scripts / Docs**: [Liệt kê các module hoặc component được tạo mới / chỉnh sửa]
 - **Tính năng / Cải tiến**: [Mô tả chi tiết những điểm nổi bật]
-- **Quy chuẩn mới**: [Bổ sung vào .gemini/lessons.md hoặc gói môn nếu có]
+- **Quy chuẩn mới**: [Bổ sung vào .agents/lessons.md hoặc gói môn nếu có]
 
 ## 🧪 Kiểm tra Thực tế (Verification)
 - [x] `py scripts/check_script.py <slug>`: 0 lỗi (nếu có chỉnh sửa kịch bản)
@@ -184,8 +181,8 @@ Mỗi khi hệ thống tích lũy đủ các tính năng quan trọng và đạt
 ```bash
 # --- Làm việc với Tính năng & Nhánh ---
 # 1. Tạo nhánh mới từ nhánh chính và chuyển sang nhánh đó
-git checkout gemini   # hoặc main
-git pull origin gemini
+git checkout main-codex
+git pull origin main-codex
 git checkout -b toan_feature_bai-moi
 
 # 2. Kiểm tra trạng thái code trước khi commit
@@ -205,12 +202,12 @@ npm run dev
 
 # --- Phát hành Phiên bản (Release Tag) ---
 # Tạo và đẩy tag release lên GitHub
-git tag -a v1.0.0 -m "Release v1.0.0: Phien ban on dinh dau tien"
-git push origin v1.0.0
+git tag -a v2.0.0 -m "Release v2.0.0: Phien ban on dinh dau tien chay voi Codex"
+git push origin v2.0.0
 
 # Kéo tag mới nhất về và checkout
 git fetch --tags
-git checkout v1.0.0
+git checkout v2.0.0
 
 # --- Lưu trữ Nhánh cũ ---
 git tag archive/ten-nhanh-cu ten-nhanh-cu
