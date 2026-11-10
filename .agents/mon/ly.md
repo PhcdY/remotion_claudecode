@@ -79,7 +79,7 @@ Mỗi đại lượng vật lý trừu tượng cần được gán cho một **
   - Màu `up`/`down` chỉ dùng với ý nghĩa trạng thái: đang tăng lên (`up`) hoặc đang giảm đi (`down`).
 
 ### Vật thể đời thường vẽ đủ chi tiết
-- Các vật thể đời sống (người bơi, người chạy, xe hơi, quả bóng, máy bay...) phải vẽ **đủ chi tiết đặc trưng để nhận diện ngay lập tức** và có chuyển động sinh động (người bơi có sải tay, đập chân, bọt nước; xe có bánh xe quay; quả bóng méo nhẹ khi va chạm). Không dùng các khối tượng trưng sơ sài (hình elip + vài gạch) (bài học 05/11).
+- Các vật thể đời sống (người bơi, người chạy, xe hơi, quả bóng, máy bay...) phải vẽ **đủ chi tiết đặc trưng để nhận diện ngay lập tức** và có chuyển động sinh động (người bơi có sải tay, đập chân, bọt nước; xe có bánh xe quay; quả bóng méo nhẹ khi va chạm). Không dùng các khối tượng trưng sơ sài (hình elip + vài gạch) (bài học 05/11). Luật này áp cho **vật chính** của cảnh; vật phụ dạng nhóm (đám đông, dãy xe nhỏ ở xa) được phép vẽ đơn giản như icon (skill `viet-kich-ban` › Hình và số tượng trưng).
 
 ### Cố định nhãn (`AutoLabels`) chống rung giật
 - Mọi nhãn gắn với vật đang chuyển động (con kiến bò, xe chạy, đoạn thẳng đang dài ra) hoặc nhãn xuất hiện trong lúc camera đang zoom/pan: **bắt buộc ghim vị trí cố định theo offset an toàn**, không để thuật toán tự động chọn lại vị trí mỗi frame gây rung giật chữ (bài học 05/11).

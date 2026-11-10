@@ -44,7 +44,7 @@ Phần lớn lỗi người dùng bắt được là lỗi dàn ý; viết xong 
 2. **Vị trí trong chuỗi**: bài trước đã dạy gì (chỉ nhắc một dòng) · khái niệm mới · ý để dành bài sau.
 3. **Hiện tượng**: bảng chấm 3 ý tốt nhất ở Bước 0 (ý chọn + 2 dự phòng), nguồn kiểm chứng, đáp án sẽ đưa ở `GIẢI ĐÁP`, kết quả ba phép thử (mỗi phép một câu).
 4. **Hình trung tâm + khoảnh khắc "à ra thế"** (beat nào).
-5. **Ví dụ xuyên suốt** và danh sách **cảnh** (≤ ~3): cảnh sau nối từ cảnh trước bằng bước nào; có đổi sang mô hình không.
+5. **Ví dụ xuyên suốt** và danh sách **cảnh** (≤ ~3): cảnh sau nối từ cảnh trước bằng bước nào; số nào là số thật (kèm nguồn), số nào là số minh hoạ (mục "Hình và số tượng trưng").
 6. **Đường hiểu**: tiền đề → các bậc hiểu lần lượt → sau video làm được gì (một câu, gắn với dạng bài nào). Đánh dấu **bước khó**.
 7. **Chuỗi "vì sao"**: từng mắt xích, mỗi mắt xích một dòng, xuất phát từ thứ học sinh nhớ.
 8. **Giải phẫu định nghĩa/công thức trên hình**: cụm nào ↔ thứ gì trên hình.
@@ -121,7 +121,7 @@ Thứ tự và số phần tuỳ chủ đề, nhưng **bắt buộc có** (số 
 2. **Trực giác trước, định nghĩa/công thức sau** (trừ công thức bài trước, hiện ngay làm mốc — yêu cầu 5).
 3. **Một ví dụ xuyên suốt**:
    - **một** nhân vật/vật mang được hiện tượng, số liệu, định nghĩa, đề thi và giải đáp; cả video ≤ ~3 cảnh; không nhân vật trang trí;
-   - hiện tượng thật không có công thức → dùng **mô hình của chính vật đó**. **Đổi sang mô hình là bước khó, có beat riêng**: nói vì sao cần mô hình; nói thẳng "đây không phải số liệu thật", đổi hình nhân vật, giữ nhãn "mô hình"; cho vài con số trước rồi mới tới công thức; có một dòng "thở";
+   - hiện tượng thật không có công thức → dùng **mô hình của chính vật đó**, theo mục "Hình và số tượng trưng": không nói "đây là mô hình", không nhãn "mô hình"; nếu cùng nhân vật vừa có số thật vừa có số minh hoạ thì đổi hình/cảnh rõ ràng + nhãn nhỏ "Số liệu minh họa"; cho vài con số trước rồi mới tới công thức;
    - hình biểu diễn mới nối với hình cũ bằng bước người xem tự hiểu (lấy số từ hình cũ → bảng nhỏ → chấm điểm → nối đồ thị);
    - **không phép biến hình lạ mắt** (xoay, gập, cuộn hình); trục, nhân vật luôn ở tư thế quen thuộc.
 4. **Cầu nối ví dụ → ký hiệu/thuật ngữ**, mỗi khi chuyển từ đời thường sang ngôn ngữ môn học: tương ứng tường minh trên màn hình ("quãng đường ↔ $f(x)$"); mỗi ký hiệu mới giải thích bằng chính ví dụ; thay số của ví dụ vào, ra đúng kết quả người xem đã thấy, **rồi** mới phát biểu tổng quát. Mỗi dòng ≤ một ký hiệu mới; mỗi beat ≤ một khái niệm mới.
@@ -133,7 +133,7 @@ Thứ tự và số phần tuỳ chủ đề, nhưng **bắt buộc có** (số 
 7. **Khái niệm mới định nghĩa bằng hình trước khi dùng**: dòng riêng nói *nó là gì* và hình chỉ đúng nó, rồi mới nói nó *bằng gì / dùng làm gì*. Mọi câu "A chính là B" phải được **cho thấy** trên hình.
 8. **Người xem luôn biết đang xem gì**: hình, bảng, công thức hay bước mới → câu đầu của beat nói rõ đó là gì, để làm gì. Không để hình mới hiện mà lời chưa giới thiệu.
 9. **Nhịp hình: mỗi dòng tối đa một thay đổi trên hình**, và thay đổi đó là *nguyên nhân* nhìn thấy được của con số/kết luận dòng đó nói. Không để số, điểm, hàng bảng tự hiện liên tiếp mà hình không làm gì.
-10. **Chữ sống trong cảnh** — xem quy tắc `text`. Phép thử tắt tiếng: chỉ nhìn màn hình vẫn biết mỗi con số, ký hiệu, hình là gì.
+10. **Chữ sống trong cảnh** — xem quy tắc `text`. Phép thử tắt tiếng: chỉ nhìn màn hình vẫn biết mỗi con số, ký hiệu, hình là gì (hình tượng trưng loại 1 — mục "Hình và số tượng trưng" — được miễn chú thích).
 11. **Liên hệ đề thi bằng một ví dụ cụ thể — chỉ khi dạng bài dùng đúng khái niệm của video.** Video chỉ nêu bản chất một khái niệm → không có phần đề thi, không mượn dạng bài của bài khác. Nếu có:
     - vẫn trong ví dụ xuyên suốt (dạng bài kể lại bằng chính nhân vật của video);
     - **chuyển sang đề thi là bước khó**: thứ phần trước chưa dạy (một số → một hàm, đổi ví dụ, giá trị âm…) cần dòng riêng trước khi dùng — mẫu ở gói môn;
@@ -145,7 +145,7 @@ Thứ tự và số phần tuỳ chủ đề, nhưng **bắt buộc có** (số 
 
 ### Bước khó và chuỗi "vì sao"
 
-**Bước khó** (đổi mô hình, khái niệm mới, giải phẫu định nghĩa, chuyển ví dụ → ký hiệu, chuyển sang đề thi): tách nhiều dòng, mỗi dòng một ý, sau ý nặng nhất một dòng ngắn để kịp nạp. Đánh dấu "BƯỚC KHÓ" trong dàn ý và `visual`.
+**Bước khó** (khái niệm mới, giải phẫu định nghĩa, chuyển ví dụ → ký hiệu, chuyển sang đề thi): tách nhiều dòng, mỗi dòng một ý, sau ý nặng nhất một dòng ngắn để kịp nạp. Đánh dấu "BƯỚC KHÓ" trong dàn ý và `visual`.
 
 **Chuỗi "vì sao" là bước khó nhất, chậm nhất**:
 - **mỗi mắt xích một dòng** (≤ ~12 từ, 0–1 chỗ ngắt), có con số hoặc dấu cụ thể nhìn thấy trên hình, rồi một dòng nói lại bằng lời thường;
@@ -208,6 +208,24 @@ Luật chung cho mọi môn; gói môn có thể thay (vd. Toán: mô hình tr�
 - Một khung hình giữ tối đa ~3 con số có nghĩa cùng lúc.
 - `speak` đọc đơn vị đầy đủ theo cách nói: "bốn mươi ki-lô-mét một giờ", "mười hai phẩy ba mét mỗi giây".
 
+### Hình và số tượng trưng
+
+**Người xem đủ thông minh**: hình/số dùng để tượng trưng **không cần giải thích**. `speak` không nói "đây là mô hình", "để dễ hình dung", "đây không phải số liệu thật"; không có beat riêng cho việc này. Lý do và demo so sánh: `.agents/lessons.md` (10/11/2026).
+
+| Loại | Ví dụ | Nhãn trên hình | `speak` |
+|---|---|---|---|
+| **1. Hình tượng trưng** | ruộng đất, lưới 10×10 người mini cho "rất nhiều người", đồn lũy, đoàn quân, máy bay đặt lên trục toạ độ | **không** nhãn "mô hình", **không** chú giải tỉ lệ ("1 hình = …") | không nhắc |
+| **2. Ảnh minh hoạ người/vật/sự việc có thật** | chân dung nhân vật lịch sử vẽ lại, tờ tiền có thật, cảnh dựng lại một sự kiện có thật | nhãn nhỏ "Ảnh minh họa" ở góc ảnh hoặc góc video | không nhắc |
+| **3. Số liệu minh hoạ** | số rõ ràng trừu tượng: toạ độ (40; 60), giá trị $f(x)$ | không gì cả, cứ lấy số đẹp | đọc số bình thường |
+| | số dễ bị tưởng là số thật: dân số, giá cả, GDP, quân số, tỉ lệ % | nhãn nhỏ "Số liệu minh họa" ở góc video (khi cần kỹ hơn) | không nhắc |
+
+- **Điều kiện của loại 1**: hình gợi ngay ra sự vật, hoặc lời đọc đã gọi tên nó. Không thoả (hình lạ, người xem không đoán được là gì) → chú thích tên vật như mọi thành phần khác, vẫn không gọi là "mô hình".
+- **Nhãn nhỏ** (loại 2, 3): chữ thường 22–24px, Regular 400, màu chữ phụ, độ mờ ~0,75; góc dưới phải video (ngang dải câu chốt) hoặc góc ảnh minh hoạ; tối đa **1 nhãn mỗi cảnh**, hiện từ lúc số/ảnh xuất hiện tới hết cảnh. Ghi trong `visual` ("nhãn nhỏ 'Số liệu minh họa' góc dưới phải, từ dòng 2"), không phải `text`.
+- **Vẫn giữ**:
+  - số liệu thật (hiện tượng mở đầu, giải đáp) đúng, có nguồn — yêu cầu 1, 12; số minh hoạ không được nói như số thật ("theo thống kê…", ghi năm/nguồn);
+  - **không bội số tự chế** để quy đổi: toạ độ dùng số trơn đẹp; cần độ cao/khoảng cách thật thì nói thẳng bằng đơn vị thật ("cao 10.000 m"), không dựng "(đơn vị: 100 m)";
+  - **cùng một nhân vật vừa có số thật vừa có số minh hoạ** (vd. Bolt thật → $s=t^2$): đổi hình/cảnh rõ ràng để người xem không gán số minh hoạ cho nhân vật thật, kèm nhãn nhỏ "Số liệu minh họa"; không cần beat giải thích.
+
 ### `speak` — lời cho TTS đọc
 
 Nội dung tương đương ý của dòng, đọc tự nhiên. **Không chứa ký hiệu** (`$ \ ^ _ { } = + / ' √ < >`) — script B2 chặn. Cách đọc ký hiệu, công thức, tên riêng: **xem gói môn `.agents/mon/<mon>.md`** (mặc định nói theo nghĩa, không đọc chữ cái; các quy tắc phiên âm bắt buộc để Vivibe không đọc sai được script `check_script.py` kiểm tra tự động).
@@ -263,12 +281,12 @@ Phụ đề đầy đủ xuất thành file riêng (`.srt`/`.vtt`) từ `speak`.
 - [ ] Đã theo dõi người xem từng dòng; không dòng nào dùng thứ chưa giải thích.
 - [ ] Chuỗi "vì sao" ≥ 2 beat, mỗi mắt xích một dòng, đi từ thứ học sinh nhớ, có dòng nói lại bằng lời thường.
 - [ ] Mọi thành phần giải thích riêng trước khi ghép; mỗi khái niệm mới định nghĩa bằng hình; "A chính là B" được cho thấy.
-- [ ] Đổi sang mô hình có beat riêng; phần đề thi (nếu có) có đủ bước cầu và hình so sánh.
+- [ ] Hình/số tượng trưng: `speak` không giải thích "mô hình", không nói số minh hoạ như số thật; nhãn nhỏ đúng loại (ảnh minh hoạ, số dễ tưởng là thật); cùng nhân vật có cả số thật lẫn số minh hoạ thì có đổi hình. Phần đề thi (nếu có) có đủ bước cầu và hình so sánh.
 
 **Hình và chữ**
 - [ ] Một ví dụ xuyên suốt, ≤ ~3 cảnh, không nhân vật trang trí, không phép biến hình lạ mắt.
 - [ ] `show`: đúng một thay đổi mỗi dòng, số mới nào cũng có thay đổi trên hình làm nguyên nhân; `text` nào cũng có `at`; beat cùng cảnh nối liền nhau.
-- [ ] Phép thử tắt tiếng: mỗi con số có tên đại lượng/đơn vị đọc được ở đâu đó trên màn hình, đúng một lần.
+- [ ] Phép thử tắt tiếng: mỗi con số có tên đại lượng/đơn vị đọc được ở đâu đó trên màn hình, đúng một lần (số trừu tượng trên trục, hình tượng trưng loại 1 được miễn).
 
 **Lời đọc**
 - [ ] Đọc liền câu đầu các beat thành một mạch nhân quả; không câu đùa; giọng tài liệu, không xưng hô.

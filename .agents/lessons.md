@@ -11,7 +11,7 @@ Chi tiết từng video: `src/videos/<slug>/FEEDBACK.md`. Thêm mục mới mỗ
 
 ## Không nhảy bước
 - 20/10 · đạo hàm · Chỉ đoạn $f(x)-f(x_0)$ khi người xem chưa hiểu $f(x)$, $f(x_0)$ → mất dấu. → từng thành phần trước, rồi mới ghép.
-- 20/10 · đạo hàm · Đổi sang mô hình $s=t^2$ ngay sau Bolt → người xem tưởng là Bolt. → đổi mô hình là bước khó, có beat riêng.
+- 20/10 · đạo hàm · Đổi sang mô hình $s=t^2$ ngay sau Bolt → người xem tưởng là Bolt. → đổi mô hình là bước khó, có beat riêng. *(10/11: thay bằng luật "Hình và số tượng trưng" — chỉ giữ đổi hình rõ ràng + nhãn nhỏ.)*
 - 20/10 · đạo hàm · Cát tuyến, tiếp tuyến không được định nghĩa. → khái niệm mới định nghĩa bằng hình; tiếp tuyến bằng kính lúp.
 - 20/10 · đạo hàm · Viết lại b03–b13 nhưng giữ phần đề thi cũ, phần này dùng thứ phần mới chưa dạy. → sửa một phần thì rà cả bài.
 - 22/10 · đơn điệu · Kính lúp + độ dốc gói trong 3 dòng → "nói nhanh quá, chỉ nêu ra chứ giải thích chả hiểu gì, đấy là phần quan trọng nhất". → chuỗi "vì sao" ≥ 2 beat, mỗi mắt xích một dòng.
@@ -178,3 +178,8 @@ am - c Bình: Dành cho các môn Tự nhiên (Toán, Lý, Hóa, Tin) — dứt 
      - `MathText.tsx`: Bổ sung cơ chế auto-sanitize tự động phục hồi `\t([a-zA-Z]+)` thành `\t$1` (đặc biệt `[\t]o` $\to$ `\to`), sửa `$ o$` thành `$\to$`, chuyển đổi các biến thể `->`, `-->`, `=>`, `→` thành lệnh KaTeX tương ứng; gắn `data-text="math"` cho mọi công thức.
      - `scripts/check_script.py`: Bổ sung chốt chặn phát hiện ký tự điều khiển ẩn (`\t`, `\v`, `\f`) và lỗi `$ o$` trong `script.json`; khuyến nghị môn KHXH dùng Unicode `→` trực tiếp.
      - Khởi tạo bộ Core Components môn Sử `src/components/su/` (`TacticalMap`, `ReformDiagram`, `DossierCard`) bọc 100% `MathText`.
+
+### 10/11/2026 — Hình và số tượng trưng: người xem đủ thông minh, không giải thích "mô hình"
+- **Góp ý người dùng**: hình gợi ra sự vật hoặc lời đọc đã nhắc (ruộng đất, 100 người mini, máy bay áp lên trục toạ độ) thì không cần ghi hay nhắc là mô hình; người xem tự hiểu 10×10 người là "rất nhiều người", tự hiểu toạ độ máy bay là số đẹp. Nhãn chỉ cần cho **ảnh minh hoạ** (nhân vật lịch sử, tờ tiền thật, sự việc có thật); số liệu minh hoạ chỉ cần một nhãn nhỏ, mờ ở góc, kịch bản không nhắc.
+- **Kiểm chứng**: demo `demo-tuong-trung-cu` (luật cũ: beat riêng "đây là mô hình", nhãn MÔ HÌNH đậm, chú giải tỉ lệ, ≈ 42 s) so với `demo-tuong-trung-moi` (luật mới: chỉ nhãn nhỏ "Số liệu minh họa" góc dưới phải, ≈ 26 s) cùng chủ đề Phép hạn điền → người dùng chốt luật mới.
+- **Luật**: skill `viet-kich-ban` › Hình và số tượng trưng (3 loại: hình tượng trưng / ảnh minh hoạ / số minh hoạ); `dung-video` quy tắc 4, 7, 10 + cỡ nhóm icon; gói Toán (toạ độ đẹp, không "(đơn vị: 100 m)"), gói Lý (luật "không khối sơ sài" chỉ cho vật chính); `LayoutProbe` thêm loại chữ `note` 22px. Thay luật "đổi sang mô hình có beat riêng" (20/10); bài học Bolt → $s=t^2$ chỉ còn giữ phần đổi hình rõ ràng + nhãn nhỏ.

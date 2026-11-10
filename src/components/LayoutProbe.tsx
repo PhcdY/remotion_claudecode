@@ -129,8 +129,9 @@ const wordsOf = (el: Element) => {
   return n;
 };
 
-const MIN_FONT: Record<string, number> = { tick: 28, axis: 28, takeaway: 56, subtitle: 48, default: 36 };
-const NOT_CONTENT = ["takeaway", "subtitle", "title", "url"];
+// note: nhãn nhỏ "Ảnh minh họa" / "Số liệu minh họa" ở góc (cố ý nhỏ, mờ; không tính là nội dung)
+const MIN_FONT: Record<string, number> = { tick: 28, axis: 28, takeaway: 56, subtitle: 48, note: 22, default: 36 };
+const NOT_CONTENT = ["takeaway", "subtitle", "title", "url", "note"];
 
 /** Cảnh báo (không chặn): khung lệch, nửa khung trống, nội dung co cụm quá nhỏ. */
 const composition = () => {

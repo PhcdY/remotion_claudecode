@@ -55,6 +55,7 @@ Video `don-dieu` b06–b07 (`lineGap` 0,5) — vì sao $f'>0$ thì đi lên. M�
 - **Mô hình trừu tượng** (đồ thị $f(x) = -x^3 + 6x^2 - \dots$ không gắn vật thật) → **số trơn**, trục chỉ ghi ký hiệu/tên đại lượng ("$x$", "độ cao $f(x)$").
 - **Mô hình của một vật thật** (người chạy, flycam) → được gắn đơn vị **khi số của mô hình hợp lý với đơn vị thật** (flycam cao 22 m, người chạy 10 m trong 2 s). Ghi đơn vị **một lần, kiểu SGK**: "($t$ tính bằng giây, $s$ tính bằng mét)" cạnh công thức, hoặc ở tên trục "$t$ (s)". Số của mô hình không hợp với đơn vị nào quen thuộc → số trơn, không bịa đơn vị.
 - **Không bao giờ** dùng bội số tự chế ("trăm m", "chục mét") hay đổi đơn vị chỉ để số đẹp. Đã gặp (22/10): "$x$ (km), $f(x)$ (trăm m)" → người dùng: ngoài đời không ai dùng thế.
+- **Vật thật áp lên hệ trục** (máy bay, tàu, vệ tinh trên Oxy/Oxyz): cứ lấy **toạ độ đẹp, số trơn** (vd. $A(40; 60; 100)$), không giải thích, không nhãn "mô hình". Cần nói độ cao/khoảng cách thật thì nói thẳng bằng đơn vị thật ("cao 10.000 m") ở dòng riêng, **không** dựng quy đổi "(đơn vị: 100 m)" (đã gặp ở `he-truc-toa-do-khong-gian` b08). Luật chung: skill `viet-kich-ban` › Hình và số tượng trưng.
 
 ## Đọc ký hiệu (B1 viết `speak`, B2 nghe thử)
 
