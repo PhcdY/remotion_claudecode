@@ -2,7 +2,8 @@
 // Dùng: node scripts/check-layout.mjs <slug> [--frames 120,450] [--draft] [--browser <đường-dẫn-chrome>]
 // Mặc định kiểm 2 frame mỗi dòng: giữa dòng và ngay trước khi dòng kết thúc. --draft: timeline nháp (chưa có audio).
 // LỖI (chặn): chồng lấn, sát, tràn khung, lấn vùng, chữ nhỏ, nhãn xa vật.
-// CẢNH BÁO (không chặn): khung lệch / nửa khung trống, quá nhiều chữ mới trong một dòng (> 8 từ).
+// CẢNH BÁO (không chặn): khung lệch / nửa khung trống, quá nhiều chữ mới trong một dòng (> 8 từ),
+//   "lướt qua" (vật gắn data-moving chồng thoáng qua thứ khác — soát bằng ảnh tĩnh rằng lần chồng ≤ ~0,5 s).
 import { bundleProject } from "./lib/bundle.mjs";
 import { openBrowser, renderStill, selectComposition } from "@remotion/renderer";
 import { existsSync } from "node:fs";
@@ -66,7 +67,10 @@ for (const { frame, where } of frames) {
     total++;
     continue;
   }
-  const issues = Array.isArray(result) ? result : result.issues;
+  const all = Array.isArray(result) ? result : result.issues;
+  // "lướt qua": vật đang chạy (data-moving) chồng thoáng qua — chỉ cảnh báo, soát bằng ảnh tĩnh rằng nó ngắn (≤ ~0,5 s)
+  for (const r of all.filter((r) => r.startsWith("lướt qua"))) warnings.push(`${where} [${frame}]: ${r}`);
+  const issues = all.filter((r) => !r.startsWith("lướt qua"));
   if (issues.length) {
     total += issues.length;
     console.log(`✗ ${where} [${frame}]`);

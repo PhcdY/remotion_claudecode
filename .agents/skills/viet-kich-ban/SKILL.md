@@ -175,6 +175,7 @@ Chỉ `TRONG ĐỀ THI`, `BẪY THƯỜNG GẶP`, `GIẢI ĐÁP` hiện cho ngư
 Ưu tiên khi xung đột:
 1. **Bản chất**: trả lời được "vì sao"; câu chốt là *lý do*, không phải công thức lặp lại.
 2. **Dễ hiểu**: học sinh trung bình xem một lần là hiểu; mỗi beat một ý mới; thuật ngữ giải thích ngay lần đầu.
+   - **Lời định nghĩa** (câu nói *X là gì*, câu giải thích lần đầu một khái niệm): dùng từ học sinh THPT dùng hằng ngày. Thuật ngữ SGK là thứ cần dạy: nói nghĩa bằng lời thường **trước**, rồi mới gọi tên. Từ hiếm, từ chuyên ngành ngoài bài, từ văn chương bay bổng (Văn: "dư ba", "chằn chặn", "hàm súc"; Sử: "thiết chế", "tập quyền hóa"…) **không đứng trong câu định nghĩa**; được dùng sau đó khi phân tích, nếu cần. Phép thử: một học sinh trung bình nghe một lần có nói lại được bằng lời của mình không. Người xem thật chê (10/11/2026): từ hay nhưng khó hiểu khi đặt vào định nghĩa.
 3. **Minh hoạ để giải thích, không để trưng**: beat nào cũng có hình; ưu tiên hình chuyển động/biến đổi nhưng ít thay đổi, mỗi thay đổi chậm và có nghĩa. Hình nói, chữ chỉ ghi chú.
 4. **Thực tế**: mở và kết bằng hiện tượng thật; giữa video neo vào chính ví dụ xuyên suốt.
 5. **Không cố gây cười**: ví dụ đơn giản, nói thẳng; không câu đùa, so sánh bất ngờ, tình huống hài.
@@ -290,5 +291,6 @@ Phụ đề đầy đủ xuất thành file riêng (`.srt`/`.vtt`) từ `speak`.
 
 **Lời đọc**
 - [ ] Đọc liền câu đầu các beat thành một mạch nhân quả; không câu đùa; giọng tài liệu, không xưng hô.
+- [ ] Câu định nghĩa và câu giải thích lần đầu một khái niệm chỉ dùng từ thường; không từ hiếm, từ chuyên ngành ngoài bài, từ văn chương bay bổng (Style › Lời định nghĩa).
 - [ ] Câu hỏi đoán (nếu có) cụ thể, trả lời được bằng mắt, có `pauseAfter`, đáp án ở dòng sau, đã đưa vào danh sách nghe thử.
 - [ ] Ký hiệu môn học, danh pháp, quy tắc phiên âm: đã đối chiếu chính xác theo gói môn `.agents/mon/<mon>.md`.
