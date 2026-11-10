@@ -89,7 +89,9 @@ export const BrandFrame: React.FC<{ children: React.ReactNode; logoFrom?: number
       style={{
         fontFamily: fontText,
         color: colors.text,
-        scale: 0.987
+        // không thu khung (trước 10/11/2026 có scale 0.987 → lộ viền đen ~12px quanh video)
+        // nền phủ kín, phòng khi trình phát làm tròn kích thước
+        background: colors.bg,
       }}
     >
       <BrandBackground />
