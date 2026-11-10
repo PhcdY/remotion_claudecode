@@ -22,6 +22,7 @@ import { ChemistryShowcaseComposition } from "./videos/chemistry-showcase/Video"
 import { BiologyShowcaseComposition } from "./videos/biology-showcase/Video";
 import { DemoTuongTrungCuComposition } from "./videos/demo-tuong-trung-cu/Video";
 import { DemoTuongTrungMoiComposition } from "./videos/demo-tuong-trung-moi/Video";
+import { DemoVanAnDuComposition } from "./videos/demo-van-an-du/Video";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -49,6 +50,7 @@ export const RemotionRoot: React.FC = () => {
       <BiologyShowcaseComposition />
       <DemoTuongTrungCuComposition />
       <DemoTuongTrungMoiComposition />
+      <DemoVanAnDuComposition />
     </>
   );
 };

@@ -127,8 +127,10 @@ export const placeLabels = (specs: LabelSpec[], obstacles: Rect[], bounds: Rect)
         for (const slide of diagonal ? [0] : SLIDES) {
           const r = rectAt(s, dir, dist, slide);
           const outArea = outside(r, bounds);
-          // Phạt cực nặng nếu tràn khỏi bounds: đảm bảo không bao giờ chọn vị trí out of frame
-          let hard = outArea > 0 ? 25000 + outArea * 25 : 0;
+          // Phạt cực nặng nếu tràn khỏi bounds: đảm bảo không bao giờ chọn vị trí out of frame.
+          // Ngưỡng 0,5 px² chứ không phải 0: toạ độ lẻ (vật đang chạy) cho sai số số thực ~1e-13,
+          // từng làm nhãn bám vật chuyển động nhảy hướng 1 frame rồi nhảy về (giật) — lessons 10/11/2026.
+          let hard = outArea > 0.5 ? 25000 + outArea * 25 : 0;
           for (const o of obstacles) hard += overlap(r, o, o.pad ?? PAD_STROKE);
           for (const o of points) hard += overlap(r, { x: o.ax - 10, y: o.ay - 10, w: 20, h: 20 }, 2);
           for (const p of mates) hard += overlap(r, p.r, PAD_LABEL);

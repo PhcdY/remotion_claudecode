@@ -46,12 +46,31 @@ const measure = () => {
     const r = el.getBoundingClientRect();
     if (r.width >= 1 && r.height >= 1 && effectiveOpacity(el) >= 0.05) boxes.push({ el, r });
   });
+  // vật đang di chuyển (gắn data-moving lúc chạy): lướt ngang qua thứ khác là chấp nhận được nếu ngắn
+  // (skill dung-video › quy tắc 1, ngoại lệ "lướt qua") → ghi tiền tố "lướt qua", check-layout hạ thành cảnh báo.
+  const moving = (x: Element) => x.closest("[data-moving]") !== null;
+  const tag = (a: Element, b: Element, msg: string) => (moving(a) || moving(b) ? `lướt qua — ${msg}` : msg);
   items.forEach((a) => {
     boxes.forEach((b) => {
       if (b.el.contains(a.el) || a.el.contains(b.el)) return;
-      if (gap(a.r, b.r) < 0) issues.push(`chạm khung chứa — ${a.label}`);
+      if (gap(a.r, b.r) < 0) issues.push(tag(a.el, b.el, `chạm khung chứa — ${a.label}`));
     });
   });
+  // khối chồng khối (thẻ ý liệt kê hiện đè lên nhau). Bỏ qua: khối lồng nhau, sân khấu nền (data-box="stage"),
+  // khối đang mờ làm nền (< 0,5, vd. sân khấu sau thẻ bài thi), các ô sát nhau trong cùng data-group.
+  const boxLabel = (el: Element) => `${el.getAttribute("data-box") || "khối"}: ${(el.textContent ?? "").trim().slice(0, 30)}`;
+  const solid = boxes.filter((b) => b.el.getAttribute("data-box") !== "stage" && effectiveOpacity(b.el) >= 0.5);
+  for (let i = 0; i < solid.length; i++) {
+    for (let j = i + 1; j < solid.length; j++) {
+      const a = solid[i];
+      const b = solid[j];
+      if (a.el.contains(b.el) || b.el.contains(a.el)) continue;
+      const g = gap(a.r, b.r);
+      const ga = a.el.closest("[data-group]");
+      if (ga && ga === b.el.closest("[data-group]") && g >= 0) continue;
+      if (g < 0) issues.push(`khối chồng khối (${Math.round(g)}px) — [${boxLabel(a.el)}] × [${boxLabel(b.el)}]`);
+    }
+  }
   // chế độ chữ trong cảnh (BeatShell subtitle={false}): không có dải phụ đề, chỉ cấm lấn xuống dưới sceneBottom
   const sceneMode = document.querySelector('[data-layout="scene"]') !== null;
   const bottomLimit = sceneMode ? layout.sceneBottom : layout.subtitleTop - 20;
@@ -82,12 +101,12 @@ const measure = () => {
       // hai điểm trên đồ thị được phép sát nhau; vật minh hoạ (bóng, người, xe) thì không được chồng
       if (a.kind === "mark" && b.kind === "mark") {
         const isPoint = (x: Item) => x.el.getAttribute("data-mark") === "point";
-        if (!isPoint(a) && !isPoint(b) && gap(a.r, b.r) < 0) issues.push(`chồng — [${a.label}] × [${b.label}]`);
+        if (!isPoint(a) && !isPoint(b) && gap(a.r, b.r) < 0) issues.push(tag(a.el, b.el, `chồng — [${a.label}] × [${b.label}]`));
         continue;
       }
       const g = gap(a.r, b.r);
       const limit = a.kind === "text" && b.kind === "text" ? 12 : 0;
-      if (g < limit) issues.push(`${g < 0 ? "chồng" : "sát"} (${Math.round(g)}px) — [${a.label}] × [${b.label}]`);
+      if (g < limit) issues.push(tag(a.el, b.el, `${g < 0 ? "chồng" : "sát"} (${Math.round(g)}px) — [${a.label}] × [${b.label}]`));
     }
   }
 

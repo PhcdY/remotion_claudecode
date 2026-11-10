@@ -15,6 +15,14 @@ Mỗi bản phát hành có một mục, bản mới nhất ở trên cùng. Ng�
 - Tài liệu cho cộng tác viên viết lại theo Codex.
 - Luật mới về **hình và số tượng trưng**: hình chỉ để minh hoạ thì không cần nhãn, số liệu minh hoạ có ghi chú nhỏ ở góc. Bỏ kiểu dừng lại giải thích "đây là mô hình".
 - Hỏi và đổi phiên bản ngay trong khung chat Codex: "đang dùng bản nào", "bản này cập nhật gì", "có bản mới chưa", "cập nhật bản mới nhất", "cập nhật lên bản 3", "quay lại bản cũ". Bài đang làm được cất giữ tự động khi đổi bản.
+- Video **Văn** sinh động hơn: mỗi video có một hình trung tâm để các ý gắn vào (kiểu "ngôi đền ba trụ cột"), có minh họa hình ảnh trong tác phẩm bằng nét vẽ đơn giản, không còn toàn thẻ chữ như slide.
+- Văn và Sử dùng nền sáng như các môn khác.
+- Câu định nghĩa được viết bằng từ dễ hiểu; từ hay, từ hiếm chỉ dùng sau khi đã giải thích xong.
+- Minh họa Văn theo kiểu tranh phẳng nhiều chi tiết (đò mui tre, áo dài, nón lá…), có video mẫu "Thuyền về có nhớ bến chăng".
+
+### Sửa lỗi
+- Các ý liệt kê không còn hiện chồng lên nhau: chỗ của từng ý được chia sẵn, và bước soát bố cục tự báo khi hai khối đè nhau.
+- Nhãn gắn vào vật đang chuyển động (thuyền, xe, người) không còn giật hay nhảy chỗ.
 
 ### Cần làm sau khi cập nhật
 - Dùng Codex thay cho Gemini/Antigravity (xem `docs/HUONG_DAN_CODEX.md`).

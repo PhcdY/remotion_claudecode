@@ -139,9 +139,11 @@ Giọng đọc AI (Vivibe) cần được kiểm soát chặt chẽ khi đọc t
 > 2. **Cơ chế Đóng góp & Đồng bộ Framework (Maintainer Workflow)**:
 >    - Sau khi hoàn thành, component mới sẽ được gửi cho Maintainer (Người quản trị Framework).
 >    - Maintainer kiểm duyệt chất lượng và **tự tay push lên nhánh default (`main-codex`)**.
->    - Mọi Creator khác lần sau chỉ cần chạy `git pull origin main-codex` là tự động có sẵn toàn bộ component mới trong `src/` để tái sử dụng ngay lập tức mà không phải dựng lại!
+>    - Khi component đã nằm trong một bản phát hành, mọi Creator khác chỉ cần nói "cập nhật bản mới nhất" (skill `phien-ban`) là có sẵn trong `src/components/` để dùng lại, không phải dựng lại.
 
 ### 6.2. Bộ Core Components chuyên dụng môn Sử (Đặt tại `src/components/su/`)
+> **Chưa có trong bản chính (10/11/2026).** Bản nháp `TacticalMap`, `DossierCard`, `ReformDiagram`, `PowerBalance` mới nằm ở một nhánh lưu trữ trên máy người quản trị, chưa đưa lên GitHub. Trước khi dùng, kiểm `src/components/su/` có tồn tại không; chưa có thì dựng trong thư mục video.
+
 - `TacticalMap.tsx`: Khung bản đồ chiến sự vector SVG tối giản hỗ trợ vẽ mũi tên hành quân động.
 - `DynamicTimeline.tsx`: Trục thời gian mượt mà, zoom vào mốc sự kiện theo frame.
 - `DossierCard.tsx`: Thẻ hồ sơ tư liệu lịch sử, chân dung lãnh tụ, trích dẫn chuẩn SGK.
@@ -150,5 +152,6 @@ Giọng đọc AI (Vivibe) cần được kiểm soát chặt chẽ khi đọc t
 
 ### 6.3. Màu sắc & Mood hình ảnh
 - Không dùng màu mè sặc sỡ kiểu hoạt hình trẻ con.
-- Sử dụng bảng màu lịch sử trang trọng, hiện đại: Màu nền xanh than đậm (`#0F172A`) hoặc giấy dó cổ điển; màu nhấn quân ta dùng Đỏ son (`#DC2626`) / Vàng đồng (`#D97706`), phe đối phương dùng Xanh lam đậm / Xám thép (`#475569`).
+- Nền theo brand như mọi môn (`style.md`): nền sáng, chữ navy. Không dùng nền tối hay nền giấy dó toàn khung. Không khí trang trọng đến từ màu nhấn, bản đồ và tư liệu, không đến từ màu nền.
+- Màu nhấn lịch sử trang trọng, hiện đại: quân ta dùng Đỏ son (`#DC2626`) / Vàng đồng (`#D97706`), phe đối phương dùng Xanh lam đậm / Xám thép (`#475569`). Bản đồ/sa bàn có thể tô nền đất, nước nhạt bên trong `StagePanel`.
 - Font chữ: Plus Jakarta Sans làm chủ đạo; các tiêu đề chiến dịch hay trích dẫn có thể dùng font Serif hoặc nét dày uy nghiêm.
