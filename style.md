@@ -49,8 +49,9 @@ Tint thương hiệu (80/60/40/20%) dùng cho nền khối và mảng trang trí
 
 ## Thẻ, Khối & Sân khấu Toàn khung (Stage Guidelines)
 
-- **Sân khấu Toàn khung (Hero Stage Canvas)**: Toàn bộ khung 1920×1080 là sân khấu. Sân khấu hình ảnh chính (đồ thị, sa bàn, sơ đồ thể chế, mô hình tế bào, phòng thí nghiệm) BẮT BUỘC chiếm tối thiểu 75% diện tích khả dụng (rộng ≥ 1500px, cao ≥ 750px; dùng `StagePanel` trong `src/components/Card.tsx`). CẤM TUYỆT ĐỐI co cụm nội dung chính vào một chiếc Card/Box con nhỏ (800–1000px) lọt thỏm ở giữa màn hình.
-- **Thẻ thông tin phụ (SideCard, Bẫy, Tổng kết)**: Đặt ở góc phải hoặc xuất hiện tạm thời, nền trắng hoặc dark slate, viền bo 24px, bóng `0 8px 24px rgba(61,74,239,0.08)`. Bắt buộc có `boxSizing: "border-box"` và chiều rộng ≥ 620px.
+- **Sân khấu toàn khung, không phải slide** (`.agents/chuan-thi-giac.md`): hình chính (đồ thị, sa bàn, sơ đồ, tế bào, thí nghiệm, câu thơ được mổ xẻ) đặt thẳng lên nền, trải rộng khung, phủ ≥ 45% vùng hình. Không co vào hộp nhỏ giữa khung; không hộp trắng + badge + tiêu đề bao cả khung (`StagePanel` giờ chỉ là hệ toạ độ vô hình).
+- **Thẻ (Bẫy, Tổng kết, tờ đề)**: chỉ cho vật dạng tờ, tối đa 2 cùng lúc, đặt cạnh nhau, không đè lên khối khác. Nền trắng, bo 24px, bóng `0 8px 24px rgba(61,74,239,0.08)`, `boxSizing: "border-box"`. Chữ trong thẻ 40–56px, 1 tiêu đề + tối đa 2 cụm ≤ 6 từ.
+- **Ảnh** (`Photo`): lớn (≥ 40% vùng hình hoặc tràn nửa khung), bo 20px, trôi phóng rất chậm, nhãn nguồn hoặc "Ảnh minh họa" 22px ở góc ảnh.
 - **Câu chốt (KeyTakeaway)**: nền tint chàm 8%, vạch trái chàm 8px, chữ chàm ExtraBold ở dải đáy 930–1040.
 - **Thẻ mở beat**: nền trắng, viền chàm (hoặc cam với `BẪY THƯỜNG GẶP`), chữ Bold.
 - **An toàn biên (Zero Cut-Off)**: Mọi chữ phải cách mép video ≥ 30px. Khi điểm neo ở $x > 1400$px, chữ bắt buộc neo hướng Tây (anchor left) phát triển ngược vào trong lòng màn hình.

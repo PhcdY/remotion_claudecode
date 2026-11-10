@@ -14,9 +14,15 @@ Mỗi bản phát hành có một mục, bản mới nhất ở trên cùng. Ng�
 - Chuyển sang làm việc với **Codex**: Codex tự đọc quy chuẩn dự án và các skill, gọi skill bằng `$ten-skill`.
 - Tài liệu cho cộng tác viên viết lại theo Codex.
 - Luật mới về **hình và số tượng trưng**: hình chỉ để minh hoạ thì không cần nhãn, số liệu minh hoạ có ghi chú nhỏ ở góc. Bỏ kiểu dừng lại giải thích "đây là mô hình".
+- Video bớt giống slide: bỏ khung trắng có tiêu đề bao cả màn hình; thẻ mới không còn đè lên thẻ cũ; chữ to hơn (chữ trong thẻ tối thiểu 36px, chữ chính 72px trở lên).
+- Kịch bản nhắc tới ảnh thì phải có danh sách ảnh; thiếu ảnh thì video hiện ô đỏ "THIẾU ẢNH" và bộ kiểm báo lỗi, không còn lặng lẽ mất ảnh.
+- Phong cách hình mới **Minh hoạ chiều sâu** (mặc định cho video mới): nền cảnh nhiều lớp có ánh sáng, máy quay đẩy/kéo/lia, vật lơ lửng, highlight và gạch vẽ tay. Mỗi video chọn một phong cách.
+- Bước viết kịch bản thêm phần tìm ý tưởng hình (ba hướng rồi chọn), khoảnh khắc ấn tượng và đường máy, để video bớt rập khuôn và đỡ nhàm.
+- Thêm các gói hiệu ứng chính thức của Remotion: nhoè khi máy quay lia nhanh, vật trôi tự nhiên, highlight/gạch/khoanh kiểu vẽ tay, hình biến dần, hoạt hình Lottie làm sẵn.
 - Hỏi và đổi phiên bản ngay trong khung chat Codex: "đang dùng bản nào", "bản này cập nhật gì", "có bản mới chưa", "cập nhật bản mới nhất", "cập nhật lên bản 3", "quay lại bản cũ". Bài đang làm được cất giữ tự động khi đổi bản.
 
 ### Cần làm sau khi cập nhật
+- Chạy `npm install` một lần (có gói mới của Remotion).
 - Dùng Codex thay cho Gemini/Antigravity (xem `docs/HUONG_DAN_CODEX.md`).
 
 ## Bản 1 — 2026-11-08

@@ -101,6 +101,7 @@ export const ExplainerVideo: React.FC<{
 /** Góc trên phải khi dựng nháp: nhắc thời gian đang là ước tính. */
 const DraftBadge: React.FC = () => (
   <div
+    data-deco
     style={{
       position: "absolute",
       right: 40,

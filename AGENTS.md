@@ -3,6 +3,8 @@
 Video 2:30–4:00 (ưu tiên số một là dễ hiểu, không nhảy bước: bước khó được thêm thời gian, thiếu nữa thì cắt ý phụ), mở bằng một hiện tượng thật và kết bằng lời giải cho nó, **ngang 16:9 (1920×1080, 30fps)**, giọng đọc tiếng Việt, giải thích *vì sao* chứ không chỉ *cái gì*.
 Dùng cho Toán, Lý, Hóa, Sinh, Sử, Địa…: luật riêng từng môn ở **gói môn** `.agents/mon/<mon>.md` (Toán: `toan.md`; môn mới tạo từ `_mau.md` cùng người dùng).
 **Mục tiêu duy nhất là trải nghiệm người xem.** Trước khi đề xuất hướng thiết kế mới: xem video mẫu được khen và nghiên cứu liên quan, tự phản biện.
+**Chuẩn thị giác chung cho mọi môn**: `.agents/chuan-thi-giac.md` (video không ra slide: sân khấu toàn khung, không chồng khối, chữ to ít chữ, ảnh có quy trình; đạo diễn chống nhàm: mẫu tham chiếu, ba hướng hình, ≥ 4 kiểu máy, nhịp đổi). Thắng gói môn khi nói khác về bố cục, cỡ chữ, thẻ, ảnh.
+**Gói phong cách** `.agents/phong-cach/<ten>.md` (luật *nhìn*: chất liệu, màu, chuyển động, máy), chọn ở trường `style`; mặc định `minh-hoa-chieu-sau`. Gói môn là luật *nội dung*.
 Dùng skill `remotion-best-practices` (đã cài trong `.agents/skills/`) cho mọi việc liên quan Remotion.
 
 ## Môi trường thực thi & Lưu ý Windows
@@ -37,6 +39,7 @@ B1 `viet-kich-ban` → B3 nháp + storyboard (`dung-video` › Bước 2b) → B
   "slug": "don-dieu",                  // chỉ chữ thường, số, '-'
   "title": "...",
   "subject": "toan",                   // gói môn trong .agents/mon/ (thiếu = toan)
+  "style": "minh-hoa-chieu-sau",       // gói phong cách trong .agents/phong-cach/ (luật nhìn)
   "lop": 12, "chuong": "Chương I. …", "bai": "Bài 1. …",  // theo SGK → thư mục video trong out/
   "beats": [
     {
@@ -46,6 +49,7 @@ B1 `viet-kich-ban` → B3 nháp + storyboard (`dung-video` › Bước 2b) → B
       "keyword": "Nhưng TẠI SAO?",      // câu chốt của beat, hiện lúc đọc dòng cuối, được dùng $...$
       "visual": "cảnh, bố cục, thành phần lúc beat bắt đầu",
       "lineGap": 0.5,                   // (tuỳ chọn) nghỉ giữa các dòng, chỉ cho chuỗi "vì sao"
+      "images": [{ "file": "x.jpg", "mo_ta": "…", "nguon": "…", "loai": "that" }], // bắt buộc khi visual nhắc ảnh; file ở public/images/<slug>/
       "lines": [
         {
           "show": "MỘT thay đổi trên hình ở dòng này ('giữ nguyên' nếu không đổi)",
@@ -69,7 +73,7 @@ B1 `viet-kich-ban` → B3 nháp + storyboard (`dung-video` › Bước 2b) → B
   Tổng thời lượng composition = tổng audio + khoảng nghỉ.
 - Khoảng nghỉ: 0.25s giữa các dòng, 0.6s giữa các beat (hằng số ở `src/components/timeline.ts`). Beat có `lineGap` thì dùng giá trị đó giữa các dòng; dòng có `pauseAfter` thì nghỉ thêm.
 - **Chữ sống trong cảnh**: video mới không có dải phụ đề; `text` đặt cạnh vật ghi ở `at` bằng `AutoLabels` (nhãn neo tự tránh nhau). Video cũ (trước 23/10/2026) giữ `Subtitle`.
-- **Một sân khấu toàn khung (Hero Stage Canvas — Chống lỗi hình bé tí)**: Toàn bộ khung 1920×1080 là sân khấu. Sân khấu hình ảnh chính (đồ thị, sa bàn, sơ đồ thể chế, mô hình tế bào, thí nghiệm hóa học) BẮT BUỘC chiếm tối thiểu 75% diện tích khả dụng (rộng ≥ 1500px, cao ≥ 750px). CẤM TUYỆT ĐỐI co cụm nội dung chính vào một chiếc Card/Box con nhỏ (800–1000px) lọt thỏm ở giữa màn hình. Beat cùng `scene` nối liền (không mờ ở ranh giới); màu theo vai trò `role` (`src/components/roles.ts`), ≤ 5 màu nhấn mỗi cảnh.
+- **Sân khấu toàn khung, không phải slide** (`.agents/chuan-thi-giac.md`): hình chính đặt thẳng lên nền, trải rộng khung (phủ ≥ 45% vùng hình); không co vào hộp nhỏ giữa khung, không hộp trắng + badge + tiêu đề bao cả khung, không thẻ gạch đầu dòng chép lời đọc. Thứ mới vào thì thứ cũ nhường chỗ / ra hẳn / camera đẩy sang — **không bao giờ đè khối lên khối**. Chữ chính 72–120px, chữ thường 40–56px, sàn 36px. Ảnh khai báo ở `images`, dựng bằng `Photo`, thiếu file thì dừng xin người dùng. Beat cùng `scene` nối liền (không mờ ở ranh giới); màu theo vai trò `role` (`src/components/roles.ts`), ≤ 5 màu nhấn mỗi cảnh.
 - **An toàn biên & Chống cắt cụt chữ (Zero Cut-Off Guarantee)**: Mọi điểm mốc/nhãn neo nằm ở phía bên phải ($x > 1400$px hoặc sát mép panel) BẮT BUỘC đặt chữ dạt sang Tây (anchor left / textAnchor end) để thân chữ phát triển vào trong lòng sân khấu. Cấm để bất kỳ ký tự nào thò ra sát mép khung (< 30px).
 - **Chống chồng chéo & Khoảng dừng mũi tên**: Mọi mũi tên chỉ dẫn / tác động (Toán, Lý, Hóa, Sinh, Sử, Địa) phải dừng cách mục tiêu tối thiểu 24px; nhãn lực lượng/chú thích của mũi tên bắt buộc đặt tại gốc hoặc giữa thân mũi tên, TUYỆT ĐỐI CẤM đè lên ngọn nơi mục tiêu đang đứng.
 - **Universal MathText Pipeline & Chống lỗi LaTeX**: Trong JSX của Remotion, CẤM TUYỆT ĐỐI render text thô `<span>{text}</span>` hoặc `<div>{item}</div>`. 100% văn bản hiển thị phải được bọc qua `<MathText text={...} />`. Trong kịch bản môn xã hội, dùng trực tiếp ký tự Unicode `→` (hoặc `->`), cấm gõ `$\to$` để tránh rụng lệnh thành `$ o$`.

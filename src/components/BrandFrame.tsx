@@ -16,7 +16,10 @@ export const BrandBackground: React.FC = () => {
   const frame = useCurrentFrame();
   const drift = (speed: number, amp: number, phase = 0) => Math.sin(frame * speed + phase) * amp;
   return (
-    <AbsoluteFill style={{ background: `linear-gradient(135deg, ${colors.bgEnd} 0%, ${colors.bg} 55%, #EEF3FE 100%)`, overflow: "hidden" }}>
+    <AbsoluteFill
+      data-chrome
+      style={{ background: `linear-gradient(135deg, ${colors.bgEnd} 0%, ${colors.bg} 55%, #EEF3FE 100%)`, overflow: "hidden" }}
+    >
       <div
         style={{
           position: "absolute",
@@ -56,7 +59,7 @@ export const ProgressBar: React.FC = () => {
   const frame = useCurrentFrame();
   const { durationInFrames } = useVideoConfig();
   return (
-    <div style={{ position: "absolute", left: 0, bottom: 0, height: 6, width: "100%", background: tint(colors.brandBlue, 0.12) }}>
+    <div data-chrome style={{ position: "absolute", left: 0, bottom: 0, height: 6, width: "100%", background: tint(colors.brandBlue, 0.12) }}>
       <div
         style={{
           height: "100%",

@@ -2,7 +2,8 @@
 // Dùng: node scripts/check-layout.mjs <slug> [--frames 120,450] [--draft] [--browser <đường-dẫn-chrome>]
 // Mặc định kiểm 2 frame mỗi dòng: giữa dòng và ngay trước khi dòng kết thúc. --draft: timeline nháp (chưa có audio).
 // LỖI (chặn): chồng lấn, sát, tràn khung, lấn vùng, chữ nhỏ, nhãn xa vật.
-// CẢNH BÁO (không chặn): khung lệch / nửa khung trống, quá nhiều chữ mới trong một dòng (> 8 từ).
+// CẢNH BÁO (không chặn): khung lệch / nửa khung trống, phủ ít, thiếu trọng tâm, quá nhiều chữ mới trong một dòng (> 8 từ),
+// khung đứng yên > 4 s (các frame mẫu liên tiếp giống hệt nhau).
 import { bundleProject } from "./lib/bundle.mjs";
 import { openBrowser, renderStill, selectComposition } from "@remotion/renderer";
 import { existsSync } from "node:fs";
@@ -44,9 +45,20 @@ if (opt("--frames")) {
 }
 
 const NEW_WORDS_MAX = 8;
+// khung đứng yên: các frame mẫu liên tiếp có cùng "dấu vân" hình (không vật nào nhúc nhích) kéo dài quá chừng này
+const STATIC_MAX_SEC = 4;
+const fps = composition.fps;
 let total = 0;
 const warnings = [];
 let prevTexts = null;
+let still = null; // { sig, from, fromWhere, to }
+const flushStill = () => {
+  if (still && (still.to - still.from) / fps > STATIC_MAX_SEC) {
+    warnings.push(
+      `${still.fromWhere} [${still.from}–${still.to}]: khung đứng yên ~${((still.to - still.from) / fps).toFixed(1)} s — thêm chuyển động phụ (máy thở, vật trôi) hoặc đổi nhịp`,
+    );
+  }
+};
 for (const { frame, where } of frames) {
   let result = null;
   await renderStill({
@@ -74,6 +86,13 @@ for (const { frame, where } of frames) {
   }
   if (!Array.isArray(result)) {
     for (const w of result.warns) warnings.push(`${where} [${frame}]: ${w}`);
+    if (result.sig !== undefined) {
+      if (still && still.sig === result.sig && frame > still.to) still.to = frame;
+      else {
+        flushStill();
+        still = { sig: result.sig, from: frame, fromWhere: where, to: frame };
+      }
+    }
     // chữ mới so với cuối dòng trước (chỉ so ở frame cuối dòng)
     if (where.endsWith("(cuối)")) {
       if (prevTexts) {
@@ -86,6 +105,7 @@ for (const { frame, where } of frames) {
     }
   }
 }
+flushStill();
 await browser.close({ silent: true });
 if (warnings.length) {
   console.log(`

@@ -11,6 +11,7 @@ Output duy nhất: `src/videos/<slug>/script.json`. Không tạo audio, không v
 **Mục tiêu duy nhất là trải nghiệm người xem**: xem một lần là hiểu, không lạc, thấy hay. Mọi luật dưới đây phục vụ điều đó; luật nào làm video sượng hơn trong một trường hợp cụ thể thì báo người dùng thay vì cố theo.
 
 **Gói môn**: đọc `.agents/mon/<mon>.md` (Toán: `toan.md`) trước khi làm — phạm vi kiến thức, mẫu dựng khái niệm, đơn vị, cách đọc ký hiệu của môn đó. Chưa có gói → tạo từ `.agents/mon/_mau.md` cùng người dùng.
+**Chuẩn thị giác chung** `.agents/chuan-thi-giac.md`: đọc trước khi viết `visual` (sân khấu toàn khung, không chồng khối, chữ to ít chữ, ảnh có danh sách `images`).
 Lý do và lời góp ý gốc của từng luật: `.agents/lessons.md`.
 
 ## Bối cảnh
@@ -35,6 +36,9 @@ Người dùng đưa: **chủ đề** + **ý bản chất muốn nói** (+ kỳ 
 1. **Nghĩ 6–8 hiện tượng mở đầu**, chấm từng cái (0–2 mỗi tiêu chí): đúng thật, có nguồn · gây tò mò, nêu được thành câu hỏi trong 15–20 s · qua ba phép thử của yêu cầu 1 · có hình cụ thể để dựng · kết được bằng một đáp án cụ thể (con số, kết luận nhìn thấy) · khớp lời hứa của tiêu đề. Chọn cái cao điểm nhất; giữ 2 phương án dự phòng.
 2. **Chốt hình trung tâm và khoảnh khắc "à ra thế"**: một hình mang được ý bản chất (vd. kính lúp quanh điểm, dấu của tử và mẫu) và khoảnh khắc người xem *thấy* ra lý do. Thiết kế ngược từ khoảnh khắc này: mọi beat trước nó chuẩn bị đủ thứ để nó "nổ".
 3. **Cách hiểu sai phổ biến** của chủ đề (nếu có): học sinh hay nghĩ gì, đề thi hay bẫy gì.
+4. **Phong cách + mẫu tham chiếu** (`.agents/chuan-thi-giac.md` › 8, 9): chọn gói phong cách trong `.agents/phong-cach/` (mặc định `minh-hoa-chieu-sau`); chọn 1–2 video giải thích được khen hợp chủ đề, ghi *học gì* / *không lấy gì*.
+5. **Ba hướng hình**: cho hình trung tâm và cho mỗi cảnh, nghĩ 3 ẩn dụ hình khác hẳn nhau, chấm (thấy ngay ý bản chất · dựng được bằng đồ nghề có sẵn · khác video trước), chọn một. "Thẻ + chữ" không phải một hướng hình.
+6. **Khoảnh khắc riêng + đường máy**: khoảnh khắc "à ra thế" được dựng bằng một khoảnh khắc chỉ hoạt hình làm được (gói phong cách › 7); liệt kê cú máy của từng cảnh (≥ 4 kiểu cả video), đánh dấu một cảnh đinh; ghi chỗ nhịp nhanh, chỗ chậm, chỗ thở.
 
 ### Bước 1 — Dàn ý (dừng lại chờ duyệt)
 
@@ -43,8 +47,8 @@ Phần lớn lỗi người dùng bắt được là lỗi dàn ý; viết xong 
 1. **slug**, **tiêu đề**, **môn** (`subject`), **lớp / chương / bài** theo SGK (`lop`, `chuong`, `bai`: quyết định thư mục chứa video trong `out/`).
 2. **Vị trí trong chuỗi**: bài trước đã dạy gì (chỉ nhắc một dòng) · khái niệm mới · ý để dành bài sau.
 3. **Hiện tượng**: bảng chấm 3 ý tốt nhất ở Bước 0 (ý chọn + 2 dự phòng), nguồn kiểm chứng, đáp án sẽ đưa ở `GIẢI ĐÁP`, kết quả ba phép thử (mỗi phép một câu).
-4. **Hình trung tâm + khoảnh khắc "à ra thế"** (beat nào).
-5. **Ví dụ xuyên suốt** và danh sách **cảnh** (≤ ~3): cảnh sau nối từ cảnh trước bằng bước nào; số nào là số thật (kèm nguồn), số nào là số minh hoạ (mục "Hình và số tượng trưng").
+4. **Hình trung tâm + khoảnh khắc "à ra thế"** (beat nào), **phong cách** (`style`) và **mẫu tham chiếu** (học gì / không lấy gì); bảng **ba hướng hình** của hình trung tâm (hướng chọn + 2 hướng bỏ, lý do).
+5. **Ví dụ xuyên suốt** và danh sách **cảnh** (≤ ~3): mỗi cảnh một nơi chốn/ẩn dụ hình, bảng màu cảnh, cú máy chính; cảnh sau nối từ cảnh trước bằng bước nào (chuyển cảnh dựng bằng chính hình); đường máy cả video (≥ 4 kiểu, cảnh đinh) và đường nhịp (nhanh / chậm / thở); số nào là số thật (kèm nguồn), số nào là số minh hoạ (mục "Hình và số tượng trưng").
 6. **Đường hiểu**: tiền đề → các bậc hiểu lần lượt → sau video làm được gì (một câu, gắn với dạng bài nào). Đánh dấu **bước khó**.
 7. **Chuỗi "vì sao"**: từng mắt xích, mỗi mắt xích một dòng, xuất phát từ thứ học sinh nhớ.
 8. **Giải phẫu định nghĩa/công thức trên hình**: cụm nào ↔ thứ gì trên hình.
@@ -80,6 +84,7 @@ Người dùng chốt kịch bản → sang **B3 bản nháp + storyboard** (ski
   "slug": "don-dieu",                    // chữ thường, số, '-'
   "title": "…",
   "subject": "toan",                     // tên gói môn trong .agents/mon/ (thiếu = "toan")
+  "style": "minh-hoa-chieu-sau",         // gói phong cách trong .agents/phong-cach/ (luật nhìn: chất liệu, màu, máy)
   "lop": 12,                             // lớp, chương, bài theo SGK → video ra out/<Môn>/Lớp 12/<chuong>/<bai>/
   "chuong": "Chương I. Ứng dụng đạo hàm để khảo sát và vẽ đồ thị của hàm số",
   "bai": "Bài 1. Tính đơn điệu và cực trị của hàm số",
@@ -92,6 +97,14 @@ Người dùng chốt kịch bản → sang **B3 bản nháp + storyboard** (ski
       "keyword": "Nhưng vì sao?",        // câu chốt của beat, ≤ 6 từ, được dùng $...$
       "visual": "cảnh, bố cục, thành phần lúc beat bắt đầu", // quy tắc `visual`
       "lineGap": 0.5,                    // TUỲ CHỌN: nghỉ giữa các dòng (giây, ≤ 0,5), chỉ cho chuỗi "vì sao"
+      "images": [                        // BẮT BUỘC khi visual nhắc ảnh chụp, chân dung, ảnh tư liệu, bức tranh
+        {
+          "file": "bac-ho-1969.jpg",       // tên file trong public/images/<slug>/ (chữ thường không dấu)
+          "mo_ta": "Bác Hồ ngồi làm việc ở nhà sàn, 1969", // ảnh gì, đủ để xin hoặc tìm đúng ảnh
+          "nguon": "Bảo tàng Hồ Chí Minh",  // nơi lấy ảnh / giấy phép (ảnh thật)
+          "loai": "that"                   // "that" (ảnh thật) | "minh-hoa" (ảnh minh hoạ)
+        }
+      ],
       "lines": [
         {
           "show": "MỘT thay đổi trên hình ở dòng này, vd. 'tô đoạn (1; 3) màu tăng'; không đổi: 'giữ nguyên'",
@@ -249,8 +262,11 @@ Phụ đề đầy đủ xuất thành file riêng (`.srt`/`.vtt`) từ `speak`.
 ### `scene`, `visual`, `show`, `at` — đủ cụ thể để dựng mà không phải đoán
 
 - **`scene`**: số cảnh (1, 2, 3; ≤ ~3 cả video). Các beat liền nhau cùng cảnh được dựng như một sân khấu liền: vật ở lại và biến đổi, không xoá vẽ lại.
-- **`visual`** (beat): mở bằng tên cảnh ("CẢNH 2 — …" lần đầu, "Giữ CẢNH 2." sau đó), rồi tả **trạng thái lúc beat bắt đầu**: bố cục, trục, hàm, thành phần, thứ gì từ beat trước còn ở lại / mờ đi. Đánh dấu "BƯỚC KHÓ". Thay đổi theo từng dòng **không** viết ở đây.
-  * **Quy chuẩn Sân khấu Toàn cảnh (Hero Stage Canvas)**: Luôn thiết kế bối cảnh trải rộng trên toàn bộ màn hình 1920×1080 (phân bổ thoáng đãng sang trái, phải, trung tâm). CẤM TUYỆT ĐỐI mô tả dạng "đặt trong một thẻ/hộp nhỏ ở giữa" khiến hình bị co cụm bé tí giữa màn hình.
+- **`visual`** (beat): mở bằng tên cảnh ("CẢNH 2 — …" lần đầu, "Giữ CẢNH 2." sau đó), rồi tả **trạng thái lúc beat bắt đầu**: bố cục, trục, hàm, thành phần, thứ gì từ beat trước còn ở lại / mờ đi, **máy đang ở đâu** (toàn cảnh / cận vào …). Đánh dấu "BƯỚC KHÓ". Thay đổi theo từng dòng **không** viết ở đây.
+  * **Máy là một thay đổi**: một cú máy (đẩy vào, kéo ra, lia sang) được tính là thay đổi của một dòng, viết trong `show` ("máy đẩy vào chữ 'đi'").
+  * **Sân khấu toàn khung, không phải slide** (`.agents/chuan-thi-giac.md` › 1–4): tả **một hình hoặc vật lớn** đang kể chuyện, trải rộng khung 1920×1080. Không tả "đặt trong một thẻ/hộp nhỏ ở giữa", không "khung lớn có tiêu đề/nhãn phần ở trên", không thẻ gạch đầu dòng chép lời đọc.
+  * **Thứ mới vào thì thứ cũ đi đâu**: mỗi lần thêm thẻ, ảnh, hình mới, ghi rõ khối cũ *nhường chỗ* (thu nhỏ, dịch sang bên), *ra hẳn*, hay *camera đẩy sang* vùng mới. Không để hai khối chồng lên nhau.
+  * **Ảnh**: nhắc ảnh chụp, chân dung, ảnh tư liệu, bức tranh → khai báo trong `images` của beat (schema), ghi ảnh chiếm chỗ nào và lớn cỡ nào ("ảnh tràn nửa trái khung"). Ảnh phải là đúng người, vật, sự việc đang nói; không ảnh trang trí. `check_script.py` báo lỗi khi `visual` nhắc ảnh mà thiếu `images`, và liệt kê ảnh chưa có file.
   * **An toàn mép biên**: Các địa danh, công thức hoặc nhãn ở phía biên phải ($x > 1400$px) phải ghi rõ "nhãn dạt sang trái điểm neo" để chống tràn viền cắt cụt chữ.
 - **`show`** (dòng): **đúng một thay đổi** trên hình, viết ngắn, động từ + vật + vai trò màu ("điểm (2; 4) sáng màu tăng", "khung soi co về quanh đỉnh", "giữ nguyên"); thay đổi đó là *nguyên nhân* nhìn thấy được của con số/kết luận dòng đó nói. Có chữ "rồi", "đồng thời", ";" là đang gói hai thay đổi → tách dòng (`check_script.py` cảnh báo). Bảng/nhãn đổi số thì hình đổi tương ứng trong cùng `show`.
 - **`cue`** (dòng, tuỳ chọn): cụm **nguyên văn** trong `speak` mà thay đổi của `show` phải vào đúng lúc giọng nói tới (vd. dòng "Vậy ba là điểm cực đại, còn sáu là giá trị cực đại." + `cue: "giá trị cực đại"` → nhãn đổi khi giọng nói cụm đó, không phải ngay đầu câu). Dùng khi chữ/hình quan trọng nằm ở **nửa sau** câu, hoặc câu nhắc tới hai thứ lần lượt; thiếu `cue` thì thay đổi vào đầu dòng. Hình và lời phải tới cùng lúc: hình vào trước lời thì người xem nhìn mà chưa biết nhìn gì, vào sau thì nghe mà chưa thấy.
@@ -287,6 +303,8 @@ Phụ đề đầy đủ xuất thành file riêng (`.srt`/`.vtt`) từ `speak`.
 - [ ] Một ví dụ xuyên suốt, ≤ ~3 cảnh, không nhân vật trang trí, không phép biến hình lạ mắt.
 - [ ] `show`: đúng một thay đổi mỗi dòng, số mới nào cũng có thay đổi trên hình làm nguyên nhân; `text` nào cũng có `at`; beat cùng cảnh nối liền nhau.
 - [ ] Phép thử tắt tiếng: mỗi con số có tên đại lượng/đơn vị đọc được ở đâu đó trên màn hình, đúng một lần (số trừu tượng trên trục, hình tượng trưng loại 1 được miễn).
+- [ ] Có phong cách, mẫu tham chiếu, ba hướng hình cho hình trung tâm; khoảnh khắc "à ra thế" là khoảnh khắc chỉ hoạt hình làm được; ≥ 4 kiểu máy, một cảnh đinh, nhịp có nhanh có chậm có chỗ thở.
+- [ ] Không beat nào là "slide": beat nào cũng có hình/vật lớn, không thẻ gạch đầu dòng chép lời; mỗi lần thêm khối mới đã ghi khối cũ đi đâu; ảnh nhắc trong `visual` đều có trong `images`.
 
 **Lời đọc**
 - [ ] Đọc liền câu đầu các beat thành một mạch nhân quả; không câu đùa; giọng tài liệu, không xưng hô.

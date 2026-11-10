@@ -19,6 +19,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 MON_DIR = ROOT / ".agents" / "mon"
+STYLE_DIR = ROOT / ".agents" / "phong-cach"
 PHONETIC_DICT_PATH = ROOT / "scripts" / "phonetic_dict.json"
 
 # Nạp từ điển phiên âm chuẩn
@@ -72,6 +73,14 @@ MULTI_CHANGE = re.compile(r"\b(rồi|sau đó|tiếp theo|đồng thời|cùng l
 
 # Ký hiệu / Công thức Hóa học thô cấm xuất hiện trong speak
 RAW_CHEM = re.compile(r"\b(CH3COOH|C2H5OH|CH3COOC2H5|H2SO4|HCl|HNO3|NaOH|KOH|Fe2O3|FeO|Fe3O4|Al2O3|NaCl|CaCO3|CO2|SO2|CH4|C2H6|C2H4|C2H2|C6H6)\b", re.IGNORECASE)
+# `visual` nhắc tới ảnh thật → beat phải khai báo `images` (.agents/chuan-thi-giac.md › 5).
+# Không bắt "hình ảnh" (hình tượng trong văn học) và "ảnh hưởng".
+IMAGE_WORDS = re.compile(
+    r"(?<![\wÀ-ỹ])(?<!hình )(ảnh(?! hưởng)|chân dung|bức tranh|tranh vẽ|tranh cổ động|tranh minh họa|tranh minh hoạ)(?![\wÀ-ỹ])",
+    re.IGNORECASE,
+)
+IMAGE_FILE = re.compile(r"^[a-z0-9][a-z0-9._-]*\.(jpg|jpeg|png|webp)$")
+IMAGE_KINDS = {"that", "minh-hoa"}
 # Chữ viết tắt môn Sử/Địa/Khoa học cần phiên âm có gạch nối
 RAW_ABBR = re.compile(r"\b(ASEAN|NATO|UNESCO|WTO|DNA|RNA|APEC|TCN|SCN)\b")
 
@@ -128,6 +137,7 @@ def main() -> int:
     errors: list[str] = []
     warns: list[str] = []
     listen: list[str] = []
+    need_images: list[str] = []
 
     slug = s.get("slug", "")
     if not SAFE_ID.match(slug):
@@ -140,6 +150,11 @@ def main() -> int:
         subject = "toan"
     if not (MON_DIR / f"{subject}.md").exists():
         errors.append(f"không có gói môn {MON_DIR.relative_to(ROOT)}/{subject}.md — tạo từ _mau.md cùng người dùng")
+    style = s.get("style")
+    if style is None:
+        warns.append("thiếu 'style' — chọn gói phong cách trong .agents/phong-cach/ (mặc định minh-hoa-chieu-sau)")
+    elif str(style).startswith("_") or not (STYLE_DIR / f"{style}.md").exists():
+        errors.append(f"không có gói phong cách {STYLE_DIR.relative_to(ROOT)}/{style}.md — tạo từ _mau.md cùng người dùng")
     if s.get("lop") is None or not s.get("chuong") or not s.get("bai"):
         warns.append("thiếu lop/chuong/bai (theo SGK) → video render vào out/_lam-viec/ thay vì thư mục bài")
 
@@ -196,6 +211,37 @@ def main() -> int:
                     warns.append(f"{where}: scene {sc} nhưng visual ghi CẢNH {m.group(1)}")
         if FAKE_UNITS.search(visual):
             errors.append(f"{where}: visual dùng đơn vị tự chế ('{FAKE_UNITS.search(visual).group(0)}')")
+
+        # ảnh: kịch bản nhắc ảnh thì phải có danh sách ảnh, để B3 không lặng lẽ bỏ
+        images = b.get("images")
+        hit_img = IMAGE_WORDS.search(visual)
+        if images is None and hit_img:
+            errors.append(
+                f"{where}: visual nhắc '{hit_img.group(0)}' nhưng beat thiếu trường images "
+                "(danh sách ảnh cần có: file, mo_ta, nguon, loai) — xem skill viet-kich-ban › images"
+            )
+        elif images is not None:
+            if not isinstance(images, list):
+                errors.append(f"{where}: images phải là danh sách")
+                images = []
+            elif not images and hit_img:
+                warns.append(f"{where}: visual nhắc '{hit_img.group(0)}' nhưng images rỗng — chắc chắn không cần ảnh?")
+            for ii, img in enumerate(images):
+                wi = f"{where} images[{ii}]"
+                if not isinstance(img, dict):
+                    errors.append(f"{wi}: phải là object {{file, mo_ta, nguon, loai}}")
+                    continue
+                f = str(img.get("file", ""))
+                if not IMAGE_FILE.match(f):
+                    errors.append(f"{wi}: file '{f}' phải là tên chữ thường không dấu, đuôi .jpg/.png/.webp")
+                if not img.get("mo_ta"):
+                    errors.append(f"{wi}: thiếu mo_ta (ảnh gì, để xin hoặc tìm ảnh)")
+                if img.get("loai") not in IMAGE_KINDS:
+                    errors.append(f"{wi}: loai phải là 'that' (ảnh thật, có nguồn) hoặc 'minh-hoa'")
+                elif img.get("loai") == "that" and not img.get("nguon"):
+                    warns.append(f"{wi}: ảnh thật nên ghi nguon (nơi lấy ảnh, giấy phép)")
+                if f and IMAGE_FILE.match(f) and not (ROOT / "public" / "images" / slug / f).exists():
+                    need_images.append(f"public/images/{slug}/{f} — {img.get('mo_ta', '')} ({where})")
 
         lines = b.get("lines") or []
         if not lines:
@@ -375,7 +421,12 @@ def main() -> int:
     if voice_hint:
         print(f"👉 Gợi ý Voice: {voice_hint}")
 
-    for title, items in (("LỖI", errors), ("CẢNH BÁO", warns), ("CẦN NGHE THỬ", listen)):
+    for title, items in (
+        ("LỖI", errors),
+        ("CẢNH BÁO", warns),
+        ("CẦN NGHE THỬ", listen),
+        ("ẢNH CẦN CÓ trước B3 (xin người dùng hoặc đề xuất ảnh tự do bản quyền)", need_images),
+    ):
         if items:
             print(f"\n{title} ({len(items)})")
             for it in items:
