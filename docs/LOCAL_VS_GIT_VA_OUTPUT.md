@@ -71,4 +71,4 @@ out/
 
 - **Không xóa thư mục để clone lại**: Bạn chỉ cần clone dự án về máy đúng 1 lần duy nhất.
 - **Không lo conflict hay mất bài**: Các bài video mới bạn làm cứ để nguyên trong `src/videos/<slug>/` trên máy cá nhân.
-- **Cập nhật tính năng mới**: Khi hệ thống có component mới hoặc sửa lỗi, bạn chỉ cần gõ `git pull origin main-codex`. Git sẽ tự động hợp nhất công cụ mới mà không đụng chạm hay làm mất bất kỳ bài video nào của bạn!
+- **Cập nhật tính năng mới**: Khi hệ thống có component mới hoặc sửa lỗi, bạn chỉ cần nói với Codex "Cập nhật bản mới nhất". Codex tự cất bài đang làm rồi đặt lại vào bản mới, không mất bài nào (xem mục 5 của [Hướng dẫn cho cộng tác viên](HUONG_DAN_CHO_USER.md)).
