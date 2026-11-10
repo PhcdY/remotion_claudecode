@@ -57,7 +57,7 @@ Những gì Codex tự nạp khi mở dự án:
 | Thành phần | Vị trí | Vai trò |
 | :--- | :--- | :--- |
 | Quy chuẩn chung | `AGENTS.md` | Quy trình, schema `script.json`, quy tắc dựng video |
-| Skill | `.agents/skills/` | `viet-kich-ban`, `dung-video`, `tao-audio`, `hoc-sinh-ao`, `remotion-best-practices` |
+| Skill | `.agents/skills/` | `viet-kich-ban`, `dung-video`, `tao-audio`, `hoc-sinh-ao`, `phien-ban`, `remotion-best-practices` |
 | Gói môn | `.agents/mon/<môn>.md` | Luật riêng từng môn (skill tự đọc khi cần) |
 | Sổ tay kinh nghiệm | `.agents/lessons.md` | Bài học rút ra từ các video trước |
 | Agent con | `.codex/agents/hoc-sinh-ao.toml` | "Học sinh ảo" soát kịch bản/storyboard |
@@ -73,6 +73,7 @@ Mỗi trạm của quy trình có một skill. Gõ `$` trong ô chat để hiệ
 | `$viet-kich-ban` | Bước 1: lên ý, dàn ý, viết `script.json` |
 | `$dung-video <slug>` | Dựng bản nháp + storyboard, rồi hoàn thiện video sau khi có audio |
 | `$tao-audio <slug>` | Tạo giọng đọc Vivibe (tốn credit) |
+| `$phien-ban` | Xem bản đang dùng, bản đó có gì mới, cập nhật hoặc quay lại bản cũ (câu mẫu ở mục 5 của [Hướng dẫn cho cộng tác viên](HUONG_DAN_CHO_USER.md)) |
 
 Ví dụ:
 > `$viet-kich-ban` Bài "Đạo hàm và tiếp tuyến", Toán 12. Hiện tượng: xe đang chạy, đồng hồ tốc độ chỉ gì ở đúng một thời điểm?

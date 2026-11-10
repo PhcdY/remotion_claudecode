@@ -62,10 +62,8 @@ Bạn hoàn toàn chủ động chọn lưu dự án ở bất kỳ ổ đĩa n�
    npm install
    ```
 
-> [!IMPORTANT]
-> **Dùng nhánh chính `main-codex`** (lệnh clone ở trên đã chọn sẵn nhánh này).
-> Tag `v1.0.0` là bản cũ dùng với Gemini/Antigravity: không có `AGENTS.md` nên Codex không đọc được quy chuẩn dự án. **Không checkout `v1.0.0` khi làm với Codex.**
-> Khi đội ngũ phát hành bản ổn định mới cho Codex, bạn cập nhật bằng `git fetch --tags && git checkout <tag-mới>`.
+> [!TIP]
+> Clone xong, mở Codex và nói **"Cập nhật bản mới nhất"** để chuyển sang bản phát hành ổn định. Sau này muốn xem hay đổi phiên bản, bạn chỉ cần nói với Codex (mục 5), không cần gõ lệnh Git.
 
 ---
 
@@ -232,11 +230,23 @@ Nếu video đang render ở chế độ nền:
 
 ## 5. Cập nhật Hệ thống (Không sợ mất bài cũ)
 
-Khi hệ sinh thái cập nhật thêm component đồ hoạ mới, sửa lỗi script hoặc bổ sung gói môn mới, bạn **không cần cài lại hay xoá thư mục đi clone lại**.
+Khi hệ thống có bản mới (thêm hình vẽ, sửa lỗi, thêm môn…), bạn **không cần cài lại, không cần lên GitHub, không cần gõ lệnh**. Chỉ cần nói với Codex trong khung chat:
 
-Chỉ cần mở Terminal tại thư mục `Video AI` và chạy:
-```bash
-git pull origin main-codex
-```
-- **Không bao giờ mất bài cũ**: Toàn bộ kịch bản và video bạn đã làm trong máy vẫn còn nguyên vẹn 100%.
-- **Nhận công cụ mới**: Máy bạn sẽ tự động có thêm các component và tính năng mới nhất từ hệ thống!
+| Bạn muốn | Gõ vào Codex |
+| :--- | :--- |
+| Biết mình đang dùng bản nào | `Mình đang dùng bản nào?` |
+| Biết bản đang dùng có gì mới | `Bản này cập nhật gì?` |
+| Xem có bản mới chưa (chưa đổi gì) | `Có bản mới chưa?` |
+| Lên bản mới nhất | `Cập nhật bản mới nhất` |
+| Lên một bản cụ thể | `Cập nhật lên bản 3` |
+| Thử một tính năng đang làm dở | `Chuyển sang bản toan_feature_truc-khong-gian-3d` (tên do đội ngũ gửi) |
+| Bản mới bị lỗi, muốn về như cũ | `Quay lại bản cũ` |
+
+- Bản phát hành được đánh số `1`, `2`, `3`…, số lớn nhất là bản mới nhất.
+- **Không mất bài cũ**: trước khi đổi bản, Codex tự cất bài đang làm (kịch bản, danh sách video trong Studio, các bài học bạn đã dạy Codex) rồi đặt lại vào bản mới. Video đã xuất (`out/` hoặc thư mục trong `.env`) nằm ngoài, không bị ảnh hưởng.
+- **Đang mở Remotion Studio?** Nếu Codex nhờ tắt, bấm vào cửa sổ đang chạy `npm run dev` rồi nhấn `Ctrl + C`, đổi bản xong thì mở lại.
+
+> [!NOTE]
+> Nếu Codex trả lời không biết cách đổi phiên bản (máy bạn đang ở bản cũ, chưa có tính năng này), copy nguyên câu sau gửi cho Codex, một lần duy nhất:
+> `Chạy git fetch origin, đọc hướng dẫn bằng lệnh git show origin/main-codex:.agents/skills/phien-ban/SKILL.md rồi làm đúng theo đó để cập nhật bản mới nhất.`
+> Từ lần sau dùng các câu ở bảng trên.

@@ -110,10 +110,12 @@ Cấu trúc: `[môn]_[tag]_[describe]`
   - `docs`: Tài liệu, quy định, hướng dẫn và cập nhật tài liệu tham khảo SGK.
 - **`[describe]`**: Mô tả ngắn gọn bằng tiếng Việt không dấu hoặc tiếng Anh, dùng dấu gạch ngang `-` (kebab-case). Ví dụ: `all_fix_de-nhan-autolabels`, `toan_feature_truc-khong-gian-3d`, `all_release_v1.0.0`.
 
-### Quy trình Phát hành (Release) & Thử nghiệm Tính năng
-- **Bản ổn định (Git Tag)**: Đánh số theo chuẩn Semantic Versioning `vMAJOR.MINOR.PATCH` (VD: `v1.0.0`) gắn trực tiếp trên commit ổn định của nhánh chính. Người làm video checkout về tag release để yên tâm sản xuất mà không sợ lỗi vặt dở dang.
-- **Thử nghiệm tính năng**: Khi muốn thử nghiệm tính năng mới, kéo trực tiếp nhánh `feature` hoặc `test` về local (`git checkout <nhanh>` rồi `npm run dev`), thử nghiệm độc lập trong phòng lab `src/videos/lab-thanh-phan/` mà không ảnh hưởng nhánh chính.
-- **Quy trình Release**: Tạo nhánh `all_release_vX.Y.Z` → Thẩm định 3 cổng (lint, check_script, render thử) → Gắn Git Tag `vX.Y.Z` → Push tag và merge PR vào nhánh chính.
+### Phiên bản, Phát hành (Release) & Thử nghiệm Tính năng
+- **Người làm video hỏi hoặc đổi phiên bản** ("đang dùng bản nào", "bản này cập nhật gì", "có bản mới chưa", "cập nhật bản mới nhất", "cập nhật lên bản <tên>", "quay lại bản cũ"): **luôn dùng skill `phien-ban`**. Không tự chạy `git pull`/`checkout`/`reset`, vì bài của họ nằm trong `src/videos/`, `src/Root.tsx` và sổ tay `.agents/`.
+- **Bản ổn định (Git Tag)**: tag chỉ là số (`1`, `2`, `3`…, `v1.0.0` tính là bản 1), gắn trên commit của `main-codex`. Bản mới nhất là số lớn nhất.
+- **`CHANGELOG.md`**: thay đổi người dùng cảm nhận được thì thêm một dòng vào mục `## Chưa phát hành` khi merge vào `main-codex`, viết bằng lời thường.
+- **Quy trình Release** (chỉ làm khi chủ dự án bảo "push release"): nhánh `all_release_<số>` → thẩm định (lint, check_script, render thử) → đổi `## Chưa phát hành` thành `## Bản <số> — <ngày>` → merge vào `main-codex` → gắn tag `<số>` trên `main-codex` và push. Chi tiết ở `docs/git-branching.md` mục 4.4.
+- **Thử nghiệm tính năng**: người dùng nói "chuyển sang bản <tên nhánh>" (skill `phien-ban`), thử trong phòng lab `src/videos/lab-thanh-phan/`, xong thì "quay lại bản cũ".
 
 ## Chiến lược Chất lượng & Tiết kiệm Token (AI Pair-Programming)
 1. **Chất lượng là số một**:
