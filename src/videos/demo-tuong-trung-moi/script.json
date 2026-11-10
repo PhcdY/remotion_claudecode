@@ -1,0 +1,55 @@
+{
+  "slug": "demo-tuong-trung-moi",
+  "title": "Phép hạn điền — luật mới",
+  "subject": "su",
+  "exams": [
+    "THPTQG"
+  ],
+  "beats": [
+    {
+      "id": "b01",
+      "scene": 1,
+      "section": "HIỆN TƯỢNG",
+      "keyword": "Ruộng dồn về quý tộc",
+      "visual": "CẢNH 1 — Sân khấu toàn khung. Trái: lưới 10×10 người mini (5 người đầu hàng trên có mũ quý tộc). Phải: 10 thửa ruộng lúa xếp 5×2. Không nhãn 'mô hình', không chú giải tỉ lệ. Từ dòng 2: nhãn nhỏ mờ 'Số liệu minh họa' ở góc trên phải video, giữ suốt cảnh.",
+      "lines": [
+        {
+          "show": "lưới người và các thửa ruộng hiện ra",
+          "text": "",
+          "speak": "Cuối thế kỷ mười bốn, ruộng đất Đại Việt dồn dần về tay quý tộc."
+        },
+        {
+          "show": "5 quý tộc và 7 thửa ruộng sáng màu quý tộc",
+          "text": "5% dân → 70% ruộng",
+          "at": "dưới cụm ruộng",
+          "speak": "Một nhóm nhỏ quý tộc nắm phần lớn ruộng đất."
+        },
+        {
+          "show": "95 nông dân và 3 thửa còn lại sáng màu nông dân",
+          "text": "",
+          "speak": "Số đông nông dân chỉ còn lại rất ít ruộng."
+        }
+      ]
+    },
+    {
+      "id": "b02",
+      "scene": 1,
+      "section": "BẢN CHẤT",
+      "keyword": "Ruộng thừa bị sung công",
+      "visual": "Giữ CẢNH 1. Nhãn '5% dân → 70% ruộng' mờ đi khi dòng 1 bắt đầu.",
+      "lines": [
+        {
+          "show": "nhãn năm ban hành hiện dưới cụm ruộng",
+          "text": "1397: phép hạn điền",
+          "at": "dưới cụm ruộng",
+          "speak": "Năm một nghìn ba trăm chín mươi bảy, Hồ Quý Ly ban hành phép hạn điền."
+        },
+        {
+          "show": "4 thửa của quý tộc đổi sang màu nhà nước",
+          "text": "",
+          "speak": "Ruộng vượt hạn mức của quý tộc bị sung công."
+        }
+      ]
+    }
+  ]
+}

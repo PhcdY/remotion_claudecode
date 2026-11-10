@@ -1,0 +1,95 @@
+{
+  "slug": "demo-tuong-trung-cu",
+  "title": "Phép hạn điền — luật cũ",
+  "subject": "su",
+  "exams": [
+    "THPTQG"
+  ],
+  "beats": [
+    {
+      "id": "b01",
+      "scene": 1,
+      "section": "HIỆN TƯỢNG",
+      "keyword": "Ruộng dồn về đâu?",
+      "visual": "CẢNH 1 — Sân khấu toàn khung. Trái: lưới 10×10 người mini (5 người đầu hàng trên có mũ quý tộc), nhãn 'dân cư'. Phải: 10 thửa ruộng lúa xếp 5×2, nhãn 'ruộng đất'.",
+      "lines": [
+        {
+          "show": "lưới người và các thửa ruộng hiện ra, kèm nhãn",
+          "text": "",
+          "speak": "Cuối thế kỷ mười bốn, ruộng đất Đại Việt dồn dần về tay quý tộc."
+        }
+      ]
+    },
+    {
+      "id": "b02",
+      "scene": 1,
+      "section": "TRỰC GIÁC",
+      "keyword": "Đây là mô hình",
+      "visual": "Giữ CẢNH 1. BƯỚC KHÓ — đổi sang mô hình: nhãn 'MÔ HÌNH' đậm ở giữa mép trên sân khấu, chú giải tỉ lệ dưới từng cụm.",
+      "lines": [
+        {
+          "show": "nhãn MÔ HÌNH hiện ở mép trên sân khấu",
+          "text": "",
+          "speak": "Để dễ hình dung, hãy dùng một mô hình."
+        },
+        {
+          "show": "chú giải tỉ lệ hiện dưới lưới người",
+          "text": "1 hình = 1% dân số",
+          "at": "dưới lưới người",
+          "speak": "Mỗi hình người ứng với một phần trăm dân số."
+        },
+        {
+          "show": "chú giải tỉ lệ hiện dưới cụm ruộng",
+          "text": "1 thửa = 10% ruộng đất",
+          "at": "dưới cụm ruộng",
+          "speak": "Mỗi thửa ruộng ứng với một phần mười ruộng đất."
+        },
+        {
+          "show": "nhãn MÔ HÌNH thêm dòng 'không phải số liệu thật'",
+          "text": "",
+          "speak": "Các con số sau đây chỉ là mô hình, không phải số liệu thật."
+        }
+      ]
+    },
+    {
+      "id": "b03",
+      "scene": 1,
+      "section": "BẢN CHẤT",
+      "keyword": "Ruộng dồn về quý tộc",
+      "visual": "Giữ CẢNH 1. Chú giải ruộng mờ đi ở dòng 1, chú giải người mờ đi ở dòng 2.",
+      "lines": [
+        {
+          "show": "5 quý tộc và 7 thửa ruộng sáng màu quý tộc",
+          "text": "5% dân → 70% ruộng",
+          "at": "dưới cụm ruộng",
+          "speak": "Một nhóm nhỏ quý tộc nắm phần lớn ruộng đất."
+        },
+        {
+          "show": "95 nông dân và 3 thửa còn lại sáng màu nông dân",
+          "text": "",
+          "speak": "Số đông nông dân chỉ còn lại rất ít ruộng."
+        }
+      ]
+    },
+    {
+      "id": "b04",
+      "scene": 1,
+      "section": "BẢN CHẤT",
+      "keyword": "Ruộng thừa bị sung công",
+      "visual": "Giữ CẢNH 1. Nhãn '5% dân → 70% ruộng' mờ đi khi dòng 1 bắt đầu.",
+      "lines": [
+        {
+          "show": "nhãn năm ban hành hiện dưới cụm ruộng",
+          "text": "1397: phép hạn điền",
+          "at": "dưới cụm ruộng",
+          "speak": "Năm một nghìn ba trăm chín mươi bảy, Hồ Quý Ly ban hành phép hạn điền."
+        },
+        {
+          "show": "4 thửa của quý tộc đổi sang màu nhà nước",
+          "text": "",
+          "speak": "Ruộng vượt hạn mức của quý tộc bị sung công."
+        }
+      ]
+    }
+  ]
+}
