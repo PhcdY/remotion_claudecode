@@ -1,6 +1,7 @@
 import "./mhchem";
 import React from "react";
 import { interpolate, interpolateColors, useCurrentFrame, useVideoConfig } from "remotion";
+import { TEXT_GAP, blockHeight, fitFont } from "../fit";
 import { MathText } from "../MathText";
 import { colors, fontText } from "../theme";
 import { element } from "./elements";
@@ -44,21 +45,39 @@ const metalAt = (metal: AlkaliMetal, t: number, W: number, surfaceY: number) => 
   return { x, y };
 };
 
+
+/**
+ * Thẻ tên trên cốc + chữ dưới cốc — cỡ chữ theo HAI giới hạn (skill dung-video › quy tắc 4): vừa bề ngang cốc
+ * VÀ không dưới MIN_FONT.label (36px); dài quá thì xuống 2 dòng và cốc chừa đủ chỗ. Dùng chung cho mọi cốc thí nghiệm.
+ */
+export const labText = (text: string, w: number, max: number, weight: number) => {
+  const f = fitFont(text, w, 999, { kind: "label", max, maxLines: 2, weight });
+  return { ...f, h: blockHeight(f.size, f.lines, 1.15) };
+};
+
+const tagOf = (metal: AlkaliMetal, W: number) => labText(`${element(metal).name} (${metal})`, W * 0.8 - 28, 40, 800);
+/** Chiều cao vùng thẻ tên (thẻ + khoảng hở tới miệng cốc). */
+const tagHeight = (metal: AlkaliMetal, W: number) => Math.max(60, tagOf(metal, W).h + 20) + 16;
+
 /** Toạ độ tuyệt đối của miếng kim loại (để neo nhãn/mũi tên). */
 export const metalInWaterAnchor = (p: { metal: AlkaliMetal; left: number; top: number; width?: number; start: number }, frame: number, fps: number) => {
   const W = p.width ?? 420;
   const surfaceY = 0.42 * W;
   const m = metalAt(p.metal, (frame - p.start) / fps, W, surfaceY);
-  return { x: p.left + m.x, y: p.top + TAG_H + m.y };
+  return { x: p.left + m.x, y: p.top + tagHeight(p.metal, W) + m.y };
 };
 
-const TAG_H = 76;
+/** Tổng cao của component (để chia bố cục): thẻ tên + cốc + chữ dưới cốc. */
+export const metalInWaterHeight = (p: { metal: AlkaliMetal; width?: number; liquidLabel?: string }) => {
+  const W = p.width ?? 420;
+  return tagHeight(p.metal, W) + W + (p.liquidLabel ? TEXT_GAP + labText(p.liquidLabel, W, 36, 600).h : 0) + 8;
+};
 
 export const MetalInWater: React.FC<{
   metal: AlkaliMetal;
   left: number;
   top: number;
-  /** bề rộng cốc (px), nên 360–520. Tổng cao ≈ 1,25 × width + 130 */
+  /** bề rộng cốc (px), nên 360–520. Tổng cao: metalInWaterHeight(...) */
   width?: number;
   start: number;
   /** có nhỏ phenolphthalein: dung dịch chuyển hồng khi base tạo thành */
@@ -87,6 +106,9 @@ export const MetalInWater: React.FC<{
   const liquid = interpolateColors(pink, [0, 1], [WATER, PINK]);
   const active = r > 0;
   const symFont = Math.max(28, Math.min(mh * 0.62, mw * 0.42));
+  const TAG_H = tagHeight(metal, W);
+  const tag = tagOf(metal, W);
+  const bottom = liquidLabel ? labText(liquidLabel, W, 36, 600) : null;
 
   // bọt khí H2 quanh miếng kim loại: số bọt và tốc độ theo mức độ phản ứng
   const bubbles = active
@@ -103,7 +125,7 @@ export const MetalInWater: React.FC<{
   const flick = Math.sin(frame * 0.9) * 0.08 + Math.sin(frame * 1.7) * 0.05;
 
   return (
-    <div data-box="lab" style={{ position: "absolute", left, top, width: W, height: TAG_H + H + 60, opacity, fontFamily: fontText }}>
+    <div data-box="lab" style={{ position: "absolute", left, top, width: W, height: TAG_H + H + (bottom ? TEXT_GAP + bottom.h : 0) + 8, opacity, fontFamily: fontText }}>
       <div
         data-box="tag"
         style={{
@@ -120,7 +142,7 @@ export const MetalInWater: React.FC<{
           justifyContent: "center",
         }}
       >
-        <div data-text="label" style={{ fontSize: 36, fontWeight: 800, color }}>
+        <div data-text="label" style={{ fontSize: tag.size, lineHeight: 1.15, fontWeight: 800, color, textAlign: "center", whiteSpace: tag.lines === 1 ? "nowrap" : "normal" }}>
           <MathText text={`${element(metal).name} (${metal})`} />
         </div>
       </div>
@@ -195,8 +217,11 @@ export const MetalInWater: React.FC<{
       >
         <MathText text={metal} />
       </div>
-      {liquidLabel && (
-        <div data-text="label" style={{ position: "absolute", left: 0, right: 0, top: TAG_H + H + 12, textAlign: "center", fontSize: 30, fontWeight: 600, color: colors.muted }}>
+      {liquidLabel && bottom && (
+        <div
+          data-text="label"
+          style={{ position: "absolute", left: 0, right: 0, top: TAG_H + H + TEXT_GAP, textAlign: "center", fontSize: bottom.size, lineHeight: 1.15, fontWeight: 600, color: colors.muted, whiteSpace: bottom.lines === 1 ? "nowrap" : "normal" }}
+        >
           <MathText text={liquidLabel} />
         </div>
       )}

@@ -1,8 +1,10 @@
 import React from "react";
 import { interpolate, interpolateColors } from "remotion";
+import { TEXT_GAP, blockHeight } from "../fit";
 import { MathText } from "../MathText";
 import { colors, fontText } from "../theme";
 import "./mhchem";
+import { labText } from "./MetalInWater";
 
 /**
  * Đinh iron nhúng trong dung dịch copper(II) sulfate — hiện tượng thật của phản ứng oxi hoá – khử (Hóa 10 Bài 13).
@@ -15,11 +17,29 @@ const BLUE = "#4F94E8";
 const PALE_GREEN = "#D9EDCF";
 const IRON = "#8A94A6";
 const COPPER = "#B4532A";
+const FORMULA_FONT = 40; // công thức KaTeX dưới cốc (KaTeX vẽ ~1,2 em → tính chiều cao theo FORMULA_KATEX)
+const FORMULA_KATEX = 1.3;
+
+/** Bố cục dọc theo chiều cao chữ thật: thẻ tên → cốc → chữ dưới cốc → công thức, cách nhau ≥ TEXT_GAP. */
+const nailLayout = (W: number, nailLabel: string, liquidLabel: string, liquidFormula?: string) => {
+  const tag = labText(nailLabel, W * 0.9 - 28, 40, 800);
+  const tagBox = Math.max(64, tag.h + 20);
+  const top = tagBox + 46;
+  const label = labText(liquidLabel, W, 36, 600);
+  const labelTop = top + W + TEXT_GAP;
+  const formulaTop = labelTop + label.h + TEXT_GAP;
+  const total = (liquidFormula ? formulaTop + blockHeight(FORMULA_FONT * FORMULA_KATEX) : labelTop + label.h) + 8;
+  return { tag, tagBox, top, label, labelTop, formulaTop, total };
+};
+
+/** Tổng cao của component (để chia bố cục). */
+export const nailInCopperSulfateHeight = (p: { width?: number; nailLabel?: string; liquidLabel?: string; liquidFormula?: string }) =>
+  nailLayout(p.width ?? 480, p.nailLabel ?? "đinh iron ($\\ce{Fe}$)", p.liquidLabel ?? "dung dịch copper(II) sulfate", p.liquidFormula ?? "$\\ce{CuSO4}$").total;
 
 export const NailInCopperSulfate: React.FC<{
   left: number;
   top: number;
-  /** bề rộng cốc, nên 400–560. Tổng cao ≈ 1,3 × width + 120 */
+  /** bề rộng cốc, nên 400–560. Tổng cao: nailInCopperSulfateHeight(...) */
   width?: number;
   /** 0 = vừa nhúng, 1 = đã phủ dày lớp copper, dung dịch nhạt màu */
   progress: number;
@@ -33,7 +53,8 @@ export const NailInCopperSulfate: React.FC<{
 }> = ({ left, top, width: W = 480, progress, nailLabel = "đinh iron ($\\ce{Fe}$)", liquidLabel = "dung dịch copper(II) sulfate", liquidFormula = "$\\ce{CuSO4}$", color = colors.accent, opacity = 1 }) => {
   const p = Math.max(0, Math.min(1, progress));
   const H = W * 1.0;
-  const TOP = 110; // chỗ cho thẻ tên
+  const L = nailLayout(W, nailLabel, liquidLabel, liquidFormula);
+  const TOP = L.top; // chỗ cho thẻ tên (cao theo chữ thật)
   const surface = H * 0.3;
   const liquid = interpolateColors(p, [0, 1], [BLUE, PALE_GREEN]);
   const nailX = W * 0.5;
@@ -43,7 +64,7 @@ export const NailInCopperSulfate: React.FC<{
   const coat = interpolate(p, [0, 1], [0, nailW * 0.28]);
   const coatO = interpolate(p, [0, 0.15, 1], [0, 0.6, 1]);
   return (
-    <div data-box="lab" style={{ position: "absolute", left, top, width: W, height: TOP + H + 110, fontFamily: fontText, opacity }}>
+    <div data-box="lab" style={{ position: "absolute", left, top, width: W, height: L.total, fontFamily: fontText, opacity }}>
       <div
         data-box="tag"
         style={{
@@ -51,7 +72,7 @@ export const NailInCopperSulfate: React.FC<{
           left: W * 0.05,
           right: W * 0.05,
           top: 0,
-          height: 64,
+          height: L.tagBox,
           borderRadius: 14,
           border: `3px solid ${color}`,
           background: "#FFFFFF",
@@ -60,7 +81,7 @@ export const NailInCopperSulfate: React.FC<{
           justifyContent: "center",
         }}
       >
-        <div data-text="label" style={{ fontSize: 36, fontWeight: 800, color }}>
+        <div data-text="label" style={{ fontSize: L.tag.size, lineHeight: 1.15, fontWeight: 800, color, textAlign: "center", whiteSpace: L.tag.lines === 1 ? "nowrap" : "normal" }}>
           <MathText text={nailLabel} />
         </div>
       </div>
@@ -90,11 +111,14 @@ export const NailInCopperSulfate: React.FC<{
         />
         <line x1={W * 0.8} y1={H * 0.35} x2={W * 0.8} y2={H - 40} stroke="#FFFFFF" strokeWidth={5} opacity={0.6} strokeLinecap="round" />
       </svg>
-      <div data-text="label" style={{ position: "absolute", left: 0, right: 0, top: TOP + H + 14, textAlign: "center", fontSize: 30, fontWeight: 600, color: colors.muted }}>
+      <div
+        data-text="label"
+        style={{ position: "absolute", left: 0, right: 0, top: L.labelTop, textAlign: "center", fontSize: L.label.size, lineHeight: 1.15, fontWeight: 600, color: colors.muted, whiteSpace: L.label.lines === 1 ? "nowrap" : "normal" }}
+      >
         <MathText text={liquidLabel} />
       </div>
       {liquidFormula && (
-        <div data-text="label" style={{ position: "absolute", left: 0, right: 0, top: TOP + H + 56, textAlign: "center", fontSize: 36, color: colors.text }}>
+        <div data-text="label" style={{ position: "absolute", left: 0, right: 0, top: L.formulaTop, textAlign: "center", fontSize: FORMULA_FONT, lineHeight: 1.15, color: colors.text }}>
           <MathText text={liquidFormula} />
         </div>
       )}

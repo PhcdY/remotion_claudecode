@@ -29,6 +29,7 @@ Mỗi bản phát hành có một mục, bản mới nhất ở trên cùng. Ng�
 ### Sửa lỗi
 - Các ý liệt kê không còn hiện chồng lên nhau: chỗ của từng ý được chia sẵn, và bước soát bố cục tự báo khi hai khối đè nhau.
 - Nhãn gắn vào vật đang chuyển động (thuyền, xe, người) không còn giật hay nhảy chỗ.
+- Hóa: chữ trong bảng tuần hoàn, ô nguyên tố, cốc thí nghiệm luôn đủ to để đọc mà không tràn ô; bảng nhỏ tự ghi tên ô được tô ngay cạnh ô.
 - Bước soát bố cục tự bắt thêm: công thức bị lỗi hiện chữ đỏ, công thức chưa hiện thành công thức, nhãn "mô hình" thừa, chữ to hơn ô/khung chứa nó.
 
 ### Cần làm sau khi cập nhật
