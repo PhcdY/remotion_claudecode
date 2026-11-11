@@ -109,6 +109,26 @@ MAX_WAIVERS = 2
 MODEL_LABEL = re.compile(r"mô hình\s+(giản lược|minh ho[ạa]|đơn giản)|không phải số liệu thật|^\s*mô hình\s*(:|$)|mô hình\s*[,:]?\s*không phải", re.IGNORECASE)
 MODEL_SPEAK = re.compile(r"(đây là|chỉ là|dùng) (một )?mô hình|tình huống giả định|không phải số liệu (thật|của)|để dễ hình dung", re.IGNORECASE)
 MODEL_HINT = "bỏ nhãn; số dễ tưởng là thật thì nhãn nhỏ 'Số liệu minh họa' ghi trong visual (viet-kich-ban › Hình và số tượng trưng)"
+# Nhãn được nhắc trong visual/show (chữ trong ngoặc kép/đơn): bắt nhãn "mô hình" ngay ở B1, trước khi dựng.
+QUOTED = re.compile(r"[\"'“‘]([^\"'“”‘’]{1,60})[\"'”’]")
+NOTE_OK = ("số liệu minh họa", "ảnh minh họa")
+
+
+# câu đang BỎ nhãn ("không nhãn 'mô hình'", "nhãn 'mô hình' tắt") thì không phải thêm nhãn
+NEG_BEFORE = re.compile(r"(không|bỏ|gỡ|cấm|tránh|xoá|xóa)[^.;,]{0,20}$", re.IGNORECASE)
+NEG_AFTER = re.compile(r"^\s*(tắt|mờ đi|mờ hẳn|biến mất|được gỡ|bị gỡ|gỡ đi|bỏ đi)", re.IGNORECASE)
+
+
+def label_issues(where: str, field: str, value: str, errors: list[str], warns: list[str]) -> None:
+    for m in QUOTED.finditer(value or ""):
+        q = m.group(1)
+        if NEG_BEFORE.search(value[: m.start()]) or NEG_AFTER.search(value[m.end():]):
+            continue
+        if MODEL_LABEL.search(q):
+            errors.append(f"{where}: {field} định ghi nhãn \"{q}\" — {MODEL_HINT} [mo-hinh]")
+        elif re.search(r"minh ho[ạa]\s*$", q, re.IGNORECASE) and norm_vi(q.strip()) not in NOTE_OK:
+            warns.append(f"{where}: {field} có nhãn nhỏ \"{q}\" — nhãn nhỏ chỉ dùng 'Số liệu minh họa' hoặc 'Ảnh minh họa' (viet-kich-ban › Hình và số tượng trưng)")
+
 
 
 def norm_vi(t: str) -> str:
@@ -416,6 +436,7 @@ def main() -> int:
                 m = re.search(r"CẢNH\s*(\d+)", visual)
                 if m and int(m.group(1)) != sc:
                     warns.append(f"{where}: scene {sc} nhưng visual ghi CẢNH {m.group(1)}")
+        label_issues(where, "visual", visual, errors, warns)
         if FAKE_UNITS.search(visual):
             errors.append(f"{where}: visual dùng đơn vị tự chế ('{FAKE_UNITS.search(visual).group(0)}')")
 
@@ -524,6 +545,7 @@ def main() -> int:
             # --- show / at (định dạng mới) ---
             if v2:
                 show = (line.get("show") or "").strip()
+                label_issues(w, "show", show, errors, warns)
                 if not show:
                     errors.append(f"{w}: thiếu show (thay đổi trên hình ở dòng này; không đổi thì ghi 'giữ nguyên')")
                 elif MULTI_CHANGE.search(re.sub(r"\([^)]*\)|\[[^\]]*\]", "", show)):
