@@ -295,6 +295,8 @@ Luật chung cho mọi môn; gói môn có thể thay (vd. Toán: mô hình tr�
 | | số dễ bị tưởng là số thật: dân số, giá cả, GDP, quân số, tỉ lệ % | nhãn nhỏ "Số liệu minh họa" ở góc video (khi cần kỹ hơn) | không nhắc |
 
 - **Điều kiện của loại 1**: hình gợi ngay ra sự vật, hoặc lời đọc đã gọi tên nó. Không thoả (hình lạ, người xem không đoán được là gì) → chú thích tên vật như mọi thành phần khác, vẫn không gọi là "mô hình".
+- **Máy chặn**: `check_script` báo lỗi `[mo-hinh]` khi `keyword`/`text`/`caption` là nhãn "mô hình" ("mô hình", "Mô hình: …", "… mô hình, không phải …"), cảnh báo khi `speak` giải thích "đây là mô hình", "tình huống giả định"; `check-layout` báo lỗi khi nhãn đó hiện trên hình.
+- **Video dựng trước 10/11/2026** (vd. `ban-chat-dao-ham`, `don-dieu`, `tich-vo-huong`, `toi-uu-lon-nhom`, `vecto-khong-gian`, `cuc-tri-gtln-gtnn`) còn nhãn kiểu cũ: **không tự sửa** video đó. Chỉ render lại nguyên bản → khi người dùng đồng ý, ghi `"ngoaiLeDaDuyet": {"mo-hinh": "video trước 10/11, giữ nguyên"}`. Người dùng bảo dựng lại → sửa ở B1 theo luật này (lời đọc đổi thì tạo lại audio dòng đó).
 - **Nhãn nhỏ** (loại 2, 3): chữ thường 22–24px, Regular 400, màu chữ phụ, độ mờ ~0,75; góc dưới phải video (ngang dải câu chốt) hoặc góc ảnh minh hoạ; tối đa **1 nhãn mỗi cảnh**, hiện từ lúc số/ảnh xuất hiện tới hết cảnh. Ghi trong `visual` ("nhãn nhỏ 'Số liệu minh họa' góc dưới phải, từ dòng 2"), không phải `text`.
 - **Vẫn giữ**:
   - số liệu thật (hiện tượng mở đầu, giải đáp) đúng, có nguồn — yêu cầu 1, 12; số minh hoạ không được nói như số thật ("theo thống kê…", ghi năm/nguồn);
