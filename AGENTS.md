@@ -1,8 +1,15 @@
 # Video AI — video giải thích bản chất (Remotion, nhiều môn)
 
-Video 2:30–4:00 (ưu tiên số một là dễ hiểu, không nhảy bước: bước khó được thêm thời gian, thiếu nữa thì cắt ý phụ), mở bằng một hiện tượng thật và kết bằng lời giải cho nó, **ngang 16:9 (1920×1080, 30fps)**, giọng đọc tiếng Việt, giải thích *vì sao* chứ không chỉ *cái gì*.
+Video 2:30–4:00 (ưu tiên số một là dễ hiểu, không nhảy bước: bước khó được thêm thời gian, thiếu nữa thì cắt ý phụ), mở bằng một hook và kết bằng lời giải cho nó, **ngang 16:9 (1920×1080, 30fps)**, giọng đọc tiếng Việt, giải thích *vì sao* chứ không chỉ *cái gì*.
+Hai loại video (`"loai"` trong `script.json`, không chắc thì hỏi): **video bài học** — dạy đủ một bài SGK theo *thẻ bài học* `references/<môn>/lop-<lớp>/bai-<NN>-….md`, tiêu đề chứa tên bài, hook ≤ 20 s chỉ là cửa vào; **video hiện tượng** — trả lời một câu "vì sao".
 Dùng cho Toán, Lý, Hóa, Sinh, Sử, Địa…: luật riêng từng môn ở **gói môn** `.agents/mon/<mon>.md` (Toán: `toan.md`; môn mới tạo từ `_mau.md` cùng người dùng).
 **Mục tiêu duy nhất là trải nghiệm người xem.** Trước khi đề xuất hướng thiết kế mới: xem video mẫu được khen và nghiên cứu liên quan, tự phản biện.
+
+**Ba tầng luật** (chi tiết: skill `viet-kich-ban` › mục 0):
+- **Tầng 1 — sáu phép thử, CỨNG**: P0 đúng và đủ nội dung đã duyệt · P1 không nhảy bước · P2 lúc nào cũng biết đang xem gì · P3 tắt tiếng vẫn hiểu đúng điều lời đọc khẳng định (khái niệm mới → hình mới) · P4 một khái niệm một tên · P5 chữ đọc được. Không gói môn, không ngoại lệ nào tắt được.
+- **Tầng 2 — mặc định**: mọi luật khác (số cảnh, thời lượng, bố cục…). Gói môn chỉ thay được trong mục **"Thay luật chung"** của gói; không ghi ở đó thì luật chung thắng.
+- **Tầng 3 — gợi ý**: thực đơn hình, component, mẫu câu.
+- **Lối thoát**: thấy cách hay hơn mà luật chặn, hoặc công cụ báo nhầm → đề xuất ở điểm duyệt (Bảng nội dung, storyboard). Không im lặng làm khác, không đoán.
 Dùng skill `remotion-best-practices` (đã cài trong `.agents/skills/`) cho mọi việc liên quan Remotion.
 
 ## Môi trường thực thi & Lưu ý Windows
@@ -14,7 +21,7 @@ Dùng skill `remotion-best-practices` (đã cài trong `.agents/skills/`) cho m�
 Mỗi bước có một skill riêng trong `.agents/skills/`, đọc skill (và gói môn) trước khi làm bước đó:
 B1 `viet-kich-ban` → B3 nháp + storyboard (`dung-video` › Bước 2b) → B2 `tao-audio` → B3 hoàn thiện (`dung-video`).
 
-1. **Kịch bản** → skill `viet-kich-ban`: chủ đề + ý bản chất → tìm ý (hook, hình trung tâm) → dàn ý (người dùng duyệt)
+1. **Kịch bản** → skill `viet-kich-ban`: chủ đề + ý bản chất → loại video + thẻ bài học (chưa có thì soạn, người dùng duyệt) → tìm ý (hook, hình trung tâm) → dàn ý mở đầu bằng *Bảng nội dung* (người dùng duyệt)
    → `src/videos/<slug>/script.json` → `py scripts/check_script.py <slug>` (0 lỗi). Người dùng chốt trước khi sang B2.
    (`src/videos/dao-ham-tiep-tuyen/` chỉ là dữ liệu mẫu để test B2/B3.)
 2. **Audio** → skill `tao-audio`: giọng clone trên Vivibe qua API, chạy `scripts/vivibe_tts.py`
@@ -80,14 +87,14 @@ B1 `viet-kich-ban` → B3 nháp + storyboard (`dung-video` › Bước 2b) → B
   Xem cả thư mục các video trước; thứ cần lại lần hai thì chuyển vào `src/components/`, không chép.
   Ưu tiên dùng lại, chỉ tạo mới khi thật cần.
 - Đồ thị vẽ bằng SVG, toạ độ → pixel qua một hàm scale chung, không hardcode pixel.
-- Một ví dụ xuyên suốt cả video; ít chữ trên hình; mỗi dòng tối đa một thay đổi trên hình và số đổi thì hình đổi theo (chi tiết: skill `viet-kich-ban` yêu cầu 3, 6, 7, 9, 10; skill `dung-video` quy tắc 6, 8–10).
+- Một ví dụ xuyên suốt cả video (video bài học: hook mở–kết xuyên suốt, quy tắc nhiều trường hợp dùng nhiều ví dụ của thẻ); khái niệm mới → hình mới; ít chữ trên hình; mỗi dòng tối đa một thay đổi trên hình và số đổi thì hình đổi theo (chi tiết: skill `viet-kich-ban` yêu cầu 3, 6, 7, 9, 10; skill `dung-video` quy tắc 6, 8–10).
 - Không nhảy bước: ký hiệu/khái niệm nào cũng được giải thích riêng (nghĩa + chỗ trên hình) trước khi đem ghép; không dùng phép biến hình lạ mắt để chuyển cảnh.
 - Mọi animation dựa trên `useCurrentFrame()` + `interpolate`/`spring`. Không dùng CSS transition hay `setTimeout`.
 - Không sửa file trong `public/audio/` bằng tay — tạo lại theo skill `tao-audio`.
 
 ## Kiểm tra trước khi báo xong
 
-- `py scripts/check_script.py <slug>` không lỗi; `npm run lint` không lỗi.
+- `py scripts/check_script.py <slug>` không lỗi; `npm run lint` không lỗi. Dán checklist P0–P5 (mục 0 của `viet-kich-ban` / `dung-video`, có/không + frame) vào báo cáo.
 - Đối chiếu toán/khoa học trên hình (toạ độ điểm, hệ số góc, công thức, số liệu) với kịch bản. Sai nội dung là lỗi nghiêm trọng nhất.
 - `node scripts/check-layout.mjs <slug>` (bản nháp thêm `--draft`) không có lỗi, cảnh báo đã soát; xuất ảnh tĩnh bằng `node scripts/stills.mjs <id> <frame...>` ở các mốc quan trọng để soát bố cục.
 

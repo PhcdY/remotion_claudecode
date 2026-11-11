@@ -1,6 +1,6 @@
 # Gói môn — Sinh học
 
-Đọc kèm skill `viet-kich-ban` (B1), `tao-audio` (B2), `dung-video` (B3). Luật ở đây **thêm vào hoặc thay** luật chung cho video Sinh học (`"subject": "sinh"`).
+Đọc kèm skill `viet-kich-ban` (B1), `tao-audio` (B2), `dung-video` (B3). Luật ở đây **thêm vào** luật chung cho video Sinh học (`"subject": "sinh"`). Chỉ dòng nào trong mục **"Thay luật chung"** mới thay luật chung (skill `viet-kich-ban` › mục 0 › Ba tầng luật).
 Bài học kinh nghiệm đã gặp kèm ngày: `.agents/lessons.md`.
 
 ---

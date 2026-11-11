@@ -46,6 +46,11 @@ references/
    - Khi nhận đề bài viết kịch bản một bài học (ví dụ: Toán 12 Bài 8), AI phải tự động tìm và đọc file `references/toan/lop-12/tap-1/bai-08-bieu-thuc-toa-do-cac-phep-toan-vecto.md`.
    - Bám sát: Thuật ngữ chính thống, hoạt động khởi động, câu hỏi khám phá, ví dụ tiêu biểu và ký hiệu chuẩn SGK.
 
-2. **Quy định về file PDF gốc (`raw_pdf/`)**:
+2. **Thẻ bài học — "bài này phải có gì"** (video bài học, mọi môn):
+   - File `bai-<NN>-….md` của một bài có mục `## Từ khóa kiểm tra` là **thẻ bài học**: kiến thức lõi K1…, bẫy thi T1…, ví dụ đã kiểm số, hook gợi ý, gợi ý chia video. `scripts/check_script.py` đọc thẻ và báo **lỗi** khi kịch bản thiếu mục nào (trừ mục người dùng đã duyệt bỏ).
+   - Mẫu: [`_mau-the-bai-hoc.md`](./_mau-the-bai-hoc.md). Đã có: Hóa 10 Bài 5, Bài 13.
+   - Bài chưa có thẻ → agent soạn theo mẫu (thêm các mục của mẫu vào file tóm tắt SGK nếu đã có), ghi "Trạng thái: chờ duyệt", đưa người dùng duyệt trước khi viết kịch bản.
+
+3. **Quy định về file PDF gốc (`raw_pdf/`)**:
    - File PDF gốc (hàng chục đến hàng trăm MB) được lưu trong thư mục `raw_pdf/` ở máy cá nhân và được `.gitignore` để không làm nặng kho Git.
    - Chỉ các file `.md` đã trích xuất nội dung tinh gọn mới được commit lên Git.

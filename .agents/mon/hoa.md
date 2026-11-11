@@ -1,14 +1,20 @@
 # Gói môn — Hóa học
 
-Đọc kèm skill `viet-kich-ban` (B1), `tao-audio` (B2), `dung-video` (B3). Luật ở đây **thêm vào hoặc thay** luật chung cho video Hóa học (`"subject": "hoa"`).
+Đọc kèm skill `viet-kich-ban` (B1), `tao-audio` (B2), `dung-video` (B3). Luật ở đây **thêm vào** luật chung cho video Hóa học (`"subject": "hoa"`): siết thêm, ví dụ và component riêng của Hóa. Chỉ dòng nào trong mục **"Thay luật chung"** dưới đây mới thay luật chung (skill `viet-kich-ban` › mục 0 › Ba tầng luật).
 Bài học kinh nghiệm đã gặp kèm ngày: `.agents/lessons.md`. Component Hóa: `src/components/chemistry/` (xem chạy thử: composition `hoa-thanh-phan`).
+File máy đọc của gói: `.agents/mon/hoa.json` (bảng thuật ngữ chốt mục 2.2–2.3 cho `check_script`). Sửa bảng thuật ngữ → sửa cả hai, rồi chạy `py scripts/check_script.py --goi hoa`.
 
-> **Cách đọc file này**: đọc **mục 0** trước mỗi bước (B1, B3). Mỗi luật ở mục 0 có ví dụ SAI/ĐÚNG và chỉ tới mục chi tiết.
+> **Cách đọc file này**: đọc sáu phép thử chung (`viet-kich-ban` › mục 0) rồi **mục 0** dưới đây trước mỗi bước (B1, B3). Mỗi luật ở mục 0 có ví dụ SAI/ĐÚNG và chỉ tới mục chi tiết.
 > Gặp tình huống file này không nói tới → **hỏi người dùng**, không tự đặt luật. Sai kiến thức là lỗi nặng nhất.
+
+## Thay luật chung
+Không có — gói Hóa chỉ thêm vào luật chung, không thay luật nào.
 
 ---
 
 ## 0. 16 luật bắt buộc (đọc trước B1 và B3)
+
+Luật 3, 4, 5, 12, 13, 14, 15 nay là phép thử chung (P2, P3, P0) và luật chung của hai skill; giữ ở đây vì có ví dụ Hóa.
 
 | # | Luật | SAI (đã gặp) | ĐÚNG | Chi tiết |
 |---|---|---|---|---|
@@ -21,12 +27,12 @@ Bài học kinh nghiệm đã gặp kèm ngày: `.agents/lessons.md`. Component 
 | 7 | **Một hệ tên duy nhất: IUPAC tiếng Anh** cho mọi nguyên tố, chất | Lúc "Sodium", lúc "natri"; "axit" | sodium, potassium, iron, acid, base, oxide… (cả trên hình và lời đọc) | 2.2 |
 | 8 | **Gọi nhóm theo SGK THPT: IA…VIIIA, IB…VIIIB** | Trục ghi 1–18, rồi lại giải thích "1 ↔ IA" | Trục ghi IA, IIA, IIIB…; lời đọc "nhóm một A". Không bao giờ "nhóm 1" | 2.3 |
 | 9 | **Số liệu lấy từ `elements.ts`**, không gõ theo trí nhớ | Tự gõ khối lượng, Z | `ElementTile symbol="Na"` tự lấy 11, Sodium, 22,99 | 2.5 |
-| 10 | **Macro → Micro → Symbolic**: hiện tượng và hạt trước, công thức sau | Phương trình hiện từ đầu | Video hiện tượng: phương trình ở ~20% cuối. Video bài học: ký hiệu được chiếm phần lớn, nhưng sau hiện tượng + hạt | 1.1 |
+| 10 | **Hạt trước, ký hiệu sau — cho từng khái niệm** (P1): ký hiệu/quy tắc chỉ hiện sau khi đã thấy thứ nó gọi tên | Phương trình hiện từ đầu, chưa thấy hạt nào đổi | Electron chạy từ Fe sang $\ce{Cu^2+}$ → rồi mới "số oxi hoá". Không hạn mức thời lượng cho phần ký hiệu | 1.1 |
 | 11 | **Sân khấu ≥ 75% khung**: hình chính rộng ≥ 1500 px | Bảng tuần hoàn 450 px trong một thẻ trắng | `PeriodicTable width={1560}` | 6.3 + `AGENTS.md` |
 | 12 | **Soát bằng mắt trước khi báo xong**: chạy `check_script`, xuất stills, làm *phép thử tắt tiếng*, điền checklist mục 7 | Báo xong khi lint sạch | Dán checklist mục 7 (có/không + frame) vào báo cáo | 7 |
 | 13 | **Nội dung do người dùng duyệt**: agent không tự thu hẹp hay bỏ ý; trình *Bảng nội dung* (thẻ bài học → beat → hình) ở bước dàn ý | Prompt "phản ứng oxi hoá – khử" → video thành "Đồng từ đâu ra?", thiếu quy tắc số oxi hoá, thiếu ion | Bảng K1–K10 ↔ beat; mục nào bỏ là do người dùng chọn, ghi `boQuaDaDuyet` | 1.6, 2.6 |
 | 14 | **Video bài học: tiêu đề là tên bài**, hook chỉ là cửa vào ≤ 20 s | Tiêu đề = câu hỏi của hook | `kicker` "Phản ứng oxi hoá – khử", `title` câu hỏi ngắn | 1.6 |
-| 15 | **Khái niệm mới → hình mới** (không thêm chữ lên hình cũ); một kiểu hình ≤ ~40% thời lượng | 70 s chỉ hai quả cầu Fe, Cu²⁺; khái niệm sau chỉ thêm dòng chữ | Số oxi hoá → `OxidationFormula`; tên gọi chéo → `RedoxRoleTable`; electron nhường = nhận → `ElectronBalance` | 6.7 |
+| 15 | **Khái niệm mới → hình mới** (không chỉ thêm chữ lên hình cũ) — P3 | 70 s chỉ hai quả cầu Fe, Cu²⁺; khái niệm sau chỉ thêm dòng chữ | Số oxi hoá → `OxidationFormula`; tên gọi chéo → `RedoxRoleTable`; electron nhường = nhận → `ElectronBalance` | 6.7 |
 | 16 | **Không đổi font; ion/công thức viết `$\ce{...}$`, không dùng ký tự mũ Unicode** | "Cu²⁺" gõ tay hiện vỡ thành "Cu²·" | `$\ce{Cu^2+}$` | 6.9 |
 
 ---
@@ -40,9 +46,9 @@ Hóa học là khoa học về **sự biến đổi của vật chất**; đừn
 3. **Tượng trưng (Symbolic)**: công thức, phương trình $\ce{A + B -> C}$, cấu hình electron.
 
 > [!IMPORTANT]
-> **Thứ tự hiển thị**: không đưa công thức/phương trình ra trước khi người xem đã thấy hiện tượng và bản chất hạt. Công thức chỉ xuất hiện ở ~20% cuối để "đặt tên khoa học" cho thứ vừa thấy.
-> Ngoại lệ duy nhất: **thứ ghi trong tiêu đề** (bảng tuần hoàn, pin, phân tử…) được và phải hiện ngay đầu — xem 1.4.
-> **Video bài học** (1.6) có phần ký hiệu là kiến thức chính (số oxi hoá, cân bằng phương trình…): vẫn hiện tượng + hạt trước, nhưng phần ký hiệu được chiếm phần lớn thời lượng. "~20% cuối" chỉ áp cho *video hiện tượng*. Không vì luật này mà rút gọn phần đề thi.
+> **Hạt trước, ký hiệu sau — áp cho từng khái niệm, không cho cả video** (phép thử chung P1). Ký hiệu hay quy tắc mới chỉ hiện sau khi người xem đã thấy thứ nó gọi tên (hiện tượng, hạt, hoặc ví dụ đang có trên hình). Không có hạn mức thời lượng cho phần ký hiệu: thời lượng mỗi phần lấy theo Bảng nội dung đã duyệt. Phần ký hiệu vẫn dựng bằng hình (`OxidationFormula`, `ElectronBalance`…), không thành slide công thức.
+> Ví dụ bài oxi hoá – khử: hook đinh iron (~20 s) → hạt: electron chạy từ Fe sang $\ce{Cu^2+}$ → K1 số oxi hoá, định nghĩa trên chính cú chuyển electron vừa thấy → K2–K5 dựng bằng `OxidationFormula`.
+> **Thứ ghi trong tiêu đề** (bảng tuần hoàn, pin, phân tử…) được và phải hiện ngay đầu — xem 1.4 (P2).
 
 ### 1.2. Hình thể hạt & cơ chế trực quan
 Mỗi quá trình trừu tượng gán cho một **chuyển động thị giác cụ thể của hạt**:
@@ -67,44 +73,15 @@ Người xem bấm vào video vì tiêu đề. **3–6 giây đầu phải cho h
 - SAI: mở bằng 2 cốc nước không tên, 15 giây sau mới thấy bảng → người xem không biết đang xem cái gì.
 
 ### 1.5. Lời nói so sánh → hình so sánh (luật 0.5)
-Mỗi khi `speak` có **giống / khác / mạnh hơn / nhanh hơn / tương tự / cùng / khác nhau**, viết rõ trong `visual`/`show`:
-1. **Giống ở điểm nào** → hình giống đúng điểm đó (vd. cùng sủi bọt khí, cùng hóa hồng với phenolphthalein).
-2. **Khác ở điểm nào** → ít nhất **2 dấu hiệu thị giác khác nhau** (tốc độ, kích thước, màu, hình dạng, ngọn lửa).
-3. Không bao giờ dùng **cùng một hình y hệt** cho hai chất khác nhau. Nếu chưa biết thực tế chúng khác ra sao → tra bảng 6.2 hoặc hỏi người dùng, không đoán.
-4. Lời đọc không được ngầm nói "giống hệt": viết "**cùng kiểu** phản ứng, nhưng sodium phản ứng **mạnh hơn**".
+Luật chung: phép thử P3 (`viet-kich-ban` › mục 0, `dung-video` › mục 0) — giống ở đâu thì hình giống đúng ở đó, khác ở đâu thì nhìn thấy khác ở đó; `check_script` liệt kê các dòng có lời so sánh để soát. Riêng Hóa:
+- Ví dụ: Li và Na **cùng** sủi bọt khí, **cùng** hóa hồng với phenolphthalein (giống: cùng kiểu phản ứng); Na chảy tròn, chạy nhanh, sủi mạnh (khác: mức độ).
+- Chưa biết thực tế hai chất khác nhau ra sao → tra bảng 6.2 hoặc hỏi người dùng, không đoán.
+- Lời đọc không được ngầm nói "giống hệt": viết "**cùng kiểu** phản ứng, nhưng sodium phản ứng **mạnh hơn**".
 
 ### 1.6. Nội dung video: agent đề xuất, người dùng duyệt (luật 0.13, 0.14)
-Agent **không tự quyết** video nói gì, bỏ gì. Agent **nêu rõ** để người dùng duyệt, rồi làm đúng cái đã duyệt.
-
-**Bước 1 — Xác định loại video** (không chắc → hỏi):
-- *Video bài học*: prompt nêu tên một bài/chủ đề SGK ("phản ứng oxi hoá – khử", "cấu tạo bảng tuần hoàn"). Nội dung = thẻ bài học (2.6).
-- *Video hiện tượng*: prompt nêu một câu hỏi/hiện tượng cụ thể ("vì sao đinh iron đổi màu trong dung dịch xanh?"). Nội dung = phần kiến thức đủ để trả lời câu hỏi đó — vẫn trình Bảng nội dung.
-
-**Bước 2 — Trình *Bảng nội dung*** ngay đầu bước dàn ý, trước mọi thứ khác, đúng mẫu:
-```
-Loại video: bài học — Hóa 10, Bài 13 (thẻ: references/hoa/lop-10/bai-13-phan-ung-oxi-hoa-khu.md)
-Xoay quanh: <một câu — ý bản chất, vd. "phản ứng oxi hoá – khử là sự chuyển electron, theo dõi bằng số oxi hoá">
-Hook: <hiện tượng mở đầu, ≤ 20 s>
-
-| Mục thẻ | Sẽ nói gì (1 câu) | Beat | Hình (component) | ~giây |
-|---|---|---|---|---|
-| K1 | Số oxi hoá là … | b03 | OxidationFormula H2O | 15 |
-| …  | … | … | … | … |
-| Bẫy: tên gọi chéo | … | b09 | RedoxRoleTable, tô cam | 20 |
-
-Không có trong video (cần bạn duyệt): K10 — lý do …
-Ví dụ dùng (thẻ mục 3): …
-Ước tính tổng: 3:45
-Chỗ còn nghi ngờ: …
-```
-- **Mọi mục** ở *Kiến thức lõi* và *Bẫy thi* của thẻ phải có một dòng trong bảng — hoặc nằm ở "Không có trong video" kèm lý do. Không âm thầm bỏ.
-- Ước tính > 4:00 → không tự cắt; đề xuất cách tách ở thẻ mục 5 (thẻ chưa có thì tự đề xuất), người dùng chọn.
-- Người dùng duyệt xong mới viết `script.json`. Mục được duyệt bỏ → ghi tên mục vào `"boQuaDaDuyet": ["K10"]` (chỉ ghi khi người dùng đã đồng ý). `check_script` báo lỗi mục thiếu mà không có trong danh sách này.
-
-**Bước 3 — Viết theo bảng đã duyệt**:
-- Video bài học: thumb `kicker` = tên bài, `title` = câu hỏi ngắn; `script.json` › `title` bắt đầu bằng tên bài. Hook ≤ 20 s rồi vào bài — hook không thay chủ đề.
-- Mỗi mục *Bẫy thi* = một beat riêng (`TRONG ĐỀ THI` hoặc `BẪY THƯỜNG GẶP`) có hình riêng; không gộp thành một dòng chữ nhỏ.
-- Thời lượng video bài học: tới 4:00.
+Luật chung (mọi môn): loại video `"loai"`, *Bảng nội dung* theo mẫu cố định, thẻ bài học, `boQuaDaDuyet`/`daPhuDaDuyet` — skill `viet-kich-ban` › Đầu vào, Thẻ bài học, Bước 1. Riêng Hóa:
+- Cột "Hình" của Bảng nội dung ghi component Hóa (mục 6.7), vd. `| K1 | Số oxi hoá là … | b03 | OxidationFormula H2O | 15 |`, `| Bẫy: tên gọi chéo | … | b09 | RedoxRoleTable, tô cam | 20 |`.
+- Video bài học: thumb `ChemIntro` có `kicker` = tên bài, `title` = câu hỏi ngắn (6.1).
 
 ---
 
@@ -157,10 +134,9 @@ Chỗ còn nghi ngờ: …
 - Cấu hình electron, số electron từng lớp: tự tính lại một lần (điền theo thứ tự 1s 2s 2p 3s 3p 4s 3d…), ghi phép tính vào báo cáo.
 
 ### 2.6. Thẻ bài học — nguồn nội dung của video bài học
-- Vị trí: `references/hoa/lop-<lớp>/bai-<NN>-<ten>.md` (NN hai chữ số, khớp `"bai": "Bài 13. …"` trong `script.json`). Đã có: Hóa 10 Bài 5 (cấu tạo bảng tuần hoàn), Bài 13 (phản ứng oxi hoá – khử).
-- Mỗi thẻ gồm: (1) Kiến thức lõi K1, K2…; (2) Bẫy thi; (3) Ví dụ đã kiểm số; (4) Hiện tượng mở đầu gợi ý; (5) Gợi ý chia video; mục cuối "Từ khóa kiểm tra" cho `check_script`.
-- **Chưa có thẻ cho bài cần làm** → agent soạn thẻ mới theo đúng cấu trúc hai thẻ có sẵn, dựa trên SGK, ghi "Trạng thái: chờ duyệt", **đưa người dùng duyệt trước** rồi mới làm Bảng nội dung. Số liệu trong ví dụ phải tự kiểm (cộng số oxi hoá, đếm electron) và ghi phép kiểm.
-- Thẻ là chuẩn chung của dự án: agent không sửa thẻ khi đang làm một video; thấy thẻ sai → báo người dùng.
+- Luật chung và mẫu: skill `viet-kich-ban` › Thẻ bài học, `references/_mau-the-bai-hoc.md`.
+- Thẻ Hóa đã có: `references/hoa/lop-10/` Bài 5 (cấu tạo bảng tuần hoàn), Bài 13 (phản ứng oxi hoá – khử).
+- Soạn thẻ Hóa mới: số liệu trong ví dụ tự kiểm (cộng số oxi hoá, đếm electron, lấy Z/khối lượng từ `elements.ts`) và ghi phép kiểm.
 
 ---
 
@@ -326,8 +302,8 @@ H trắng `#FFFFFF` (viền `#CBD5E1`) · C xám than `#334155` · O đỏ san h
 ### 6.6. Vai trò màu (`role`)
 `main` chất chính · `focus` liên kết đang đổi / $e^-$ / thứ đang nói tới · `pairA`–`pairB` chất oxi hoá–chất khử, acid–base · `warn` bẫy, năng lượng hoạt hoá cản trở · `dim` dung môi, khung nền. ≤ 5 màu nhấn mỗi cảnh.
 
-### 6.7. Loại khái niệm → hình bắt buộc (luật 0.15)
-Hình nghèo không phải do thiếu "sáng tạo" mà do dùng một hình cho mọi khái niệm. Mỗi khái niệm mới có **hình của chính nó**:
+### 6.7. Loại khái niệm → hình (luật 0.15)
+Luật chung: P3 "khái niệm mới → hình mới" và thực đơn hình (`dung-video` › mục 0). Hình nghèo không phải do thiếu "sáng tạo" mà do dùng một hình cho mọi khái niệm. Component Hóa cho từng loại (dùng, hoặc đề xuất cách khác ở storyboard):
 
 | Loại khái niệm | Hình | Component |
 |---|---|---|
@@ -338,8 +314,8 @@ Hình nghèo không phải do thiếu "sáng tạo" mà do dùng một hình cho
 | Vị trí nguyên tố | bảng tuần hoàn / ô phóng to | `PeriodicTable`, `ElementTile` |
 | Cơ chế hạt (electron chuyển) | hạt + mũi tên electron (1.2) | `Atom`, `ChemicalBond` |
 
-- **Một kiểu hình ≤ ~40% thời lượng video.** Khái niệm mới mà hình chỉ thêm một dòng chữ → sai luật.
-- Không ghi nhãn kiểu "Mô hình giản lược", "Mô hình minh hoạ" lên sân khấu (người xem tự hiểu — `lessons.md` 10/11/2026).
+- Khái niệm mới mà hình chỉ thêm một dòng chữ → trượt phép thử P3.
+- Không ghi nhãn kiểu "Mô hình giản lược", "Mô hình minh hoạ" lên sân khấu (người xem tự hiểu — `lessons.md` 10/11/2026; `check-layout` báo lỗi).
 
 ```tsx
 // Số oxi hoá — component tự cộng, sai tổng là báo lỗi ngay
@@ -401,7 +377,7 @@ node scripts/stills.mjs <compositionId> 0 <frame giữa mỗi beat...>
 11. Công thức/phương trình chỉ xuất hiện sau khi đã thấy hiện tượng và hạt?
 12. Bảng nội dung đã được người dùng duyệt; mọi mục của thẻ bài học có trong video hoặc trong `boQuaDaDuyet`?
 13. Mỗi bẫy thi của thẻ có beat riêng + hình riêng (không chỉ là một dòng chữ)?
-14. Không kiểu hình nào chiếm > ~40% thời lượng; mỗi khái niệm mới có hình mới?
+14. Mỗi khái niệm mới có hình mới (không chỉ thêm chữ)?
 15. Không ký tự mũ Unicode; mọi `\ce` hiển thị đúng (không có chữ đỏ)?
 
 ---
@@ -423,7 +399,7 @@ node scripts/stills.mjs <compositionId> 0 <frame giữa mỗi beat...>
 | 11/11/2026 | phan-ung-oxi-hoa-khu | 70 s hai quả cầu; chỉ ví dụ Fe/Cu; không có hình số oxi hoá trong hợp chất | Một hình cho mọi khái niệm | Mục 6.7, `OxidationFormula` |
 | 11/11/2026 | phan-ung-oxi-hoa-khu | "Cu²⁺" gõ ký tự mũ bị vỡ; `\ce` thiếu mhchem nên hiện chữ đỏ | Ký hiệu viết tay | Mục 6.9, `check_script`, chemistry tự nạp mhchem |
 
-**Năm câu hỏi tổng quát** — tự hỏi ở mọi bài, kể cả bài chưa có trong bảng trên:
+**Năm câu hỏi tổng quát** — tự hỏi ở mọi bài, kể cả bài chưa có trong bảng trên (nay là phép thử chung P0–P5, `viet-kich-ban` › mục 0):
 0. **Video có dạy đúng và đủ thứ người dùng yêu cầu không?** (Bảng nội dung đã duyệt; không tự thu hẹp theo hook)
 1. **Người xem có biết mình đang xem cái gì không?** (thumb + 6 giây đầu cho thấy đúng chủ đề; mỗi vật có tên)
 2. **Hình có nói đúng điều lời nói không?** (giống ↔ giống, khác ↔ khác, mạnh ↔ mạnh; tắt tiếng vẫn hiểu)
