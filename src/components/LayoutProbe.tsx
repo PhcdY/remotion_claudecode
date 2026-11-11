@@ -266,6 +266,8 @@ const composition = () => {
       if (n) texts.push({ k: el.getAttribute("data-label-id") ?? (el.textContent ?? "").trim().slice(0, 60), n });
     }
   });
+  // vật vẽ bằng div không chữ (bảng, sơ đồ ô) gắn data-extent: chỉ tính vào độ cân khung, không tính chồng lấn
+  document.querySelectorAll("[data-extent]").forEach(add);
   // bỏ SVG bên trong công thức KaTeX
   document.querySelectorAll("svg path, svg line, svg circle, svg polygon, svg polyline, svg rect").forEach((el) => {
     if (!el.closest(".katex")) add(el);
