@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { continueRender, delayRender, getInputProps } from "remotion";
-import { layout } from "./theme";
+import { MIN_FONT as MIN_THEME, layout } from "./theme";
 
 // Chỉ chạy khi render với inputProps { layoutCheck: true } (scripts/check-layout.mjs).
 // Đo khung bao mọi [data-text] / [data-mark], in kết quả ra console để script đọc.
@@ -243,7 +243,7 @@ const wordsOf = (el: Element) => {
 };
 
 // note: nhãn nhỏ "Ảnh minh họa" / "Số liệu minh họa" ở góc (cố ý nhỏ, mờ; không tính là nội dung)
-const MIN_FONT: Record<string, number> = { tick: 28, axis: 28, takeaway: 56, subtitle: 48, note: 22, default: 36 };
+const MIN_FONT: Record<string, number> = MIN_THEME; // nguồn duy nhất: theme.ts
 const NOT_CONTENT = ["takeaway", "subtitle", "title", "url", "note"];
 
 /** Cảnh báo (không chặn): khung lệch, nửa khung trống, nội dung co cụm quá nhỏ. */

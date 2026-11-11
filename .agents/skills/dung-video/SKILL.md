@@ -184,6 +184,14 @@ Lề trái/phải tối thiểu 90px. Ngoài logo, không có tag/nhãn/cột ch
 
 Thiếu chỗ thì bớt chữ hoặc bớt thành phần, không thu nhỏ chữ dưới mức này.
 
+Các mức trên có **một nguồn duy nhất**: `MIN_FONT` trong `src/components/theme.ts` (check-layout đọc từ đó). Không gõ số px nhỏ hơn ở bất cứ đâu.
+
+**Chữ trong hộp — luôn hai giới hạn cùng lúc** (đã gặp 11/11: sửa "chữ to hơn ô" bằng giới hạn trên, chữ thành 15–23px):
+- Cỡ chữ tính bằng `fitFont` (`src/components/fit.ts`): vừa hộp **và** không dưới `MIN_FONT` của loại chữ. Không viết `fontSize: size * 0.42` trơn.
+- `fitFont` trả `fits: false` (hộp quá nhỏ để thoả cả hai) → xử lý **rõ ràng**: đưa chữ ra ngoài có đường dẫn, xuống dòng, bỏ dòng phụ, hoặc nới hộp. Không lặng lẽ thu nhỏ chữ, không để chữ tràn.
+- Nhiều dòng chữ trong một khối (ô nguyên tố, thẻ, nhãn dưới cốc): xếp theo **chiều cao chữ thật** (`blockHeight`) cách nhau ≥ `TEXT_GAP`, không đặt `top` theo % cố định.
+- **Component dùng chung** (trong `src/components/`): phòng lab của nó có frame dựng component ở **cỡ nhỏ nhất và lớn nhất** tài liệu cho phép (và chữ dài nhất có thể); `check-layout <lab> --frames …` 0 lỗi ở các frame đó mới được dùng. Sửa component → chạy lại.
+
 Vật minh hoạ cũng có cỡ tối thiểu: vật chính (người chạy, quả bóng…) cao ≥ 140px, vật phụ (xe đạp, biểu tượng) ≥ 100px, đủ để nhận ra trong một cái liếc. Không đủ chỗ cho cỡ đó → bỏ vật phụ, không vẽ bé.
 Ngoại lệ: **nhóm vật tượng trưng** (đám đông, lưới 10×10 người mini, dãy thửa ruộng) tính cả cụm là một vật (≥ 140px); từng icon trong cụm ≥ 40px.
 
@@ -219,7 +227,7 @@ Phép thử: **tắt tiếng, chỉ nhìn khung hình**, người xem vẫn bi�
 - **Không lặp thứ đã nhìn thấy**: vạch chia đã ghi 60, 70 thì nhãn đoạn tô không ghi lại "60 → 70 m"; `text` của dòng đã ghi số thì nhãn khác không ghi lại số đó. Một thông tin — một chỗ.
 - **Gỡ thông tin hết vai trò**: badge/nhãn lời đọc không còn nói tới (vd. "vận tốc trung bình cả bài" khi đã sang đoạn 60–70 m) mờ đi trong ~0,5 s. Chỉ giữ thứ đang nói tới và mốc tham chiếu cần thiết.
 - **Chữ nằm gọn trong khung chứa** của nó (thẻ, ô bảng, khung hình bên trái…), không tràn ra ngoài viền. Nhãn dài hơn khung → rút chữ hoặc đặt nhãn ra ngoài khung hẳn, có đường dẫn.
-- **Mọi khung chứa chữ gắn `data-box`** (chữ bên trong gắn `data-text`) để `check-layout` đo được tràn. Khung tự vẽ (ô bảng, thẻ tên, ô sơ đồ) dùng `TextBox` (`src/components/TextBox.tsx`): cỡ chữ tự tính theo cỡ hộp (`fitFontSize`), không gõ `fontSize` tay. Khung chưa gắn `data-box` mà chữ tràn → `check-layout` vẫn cảnh báo (cả `<text>` SVG nằm trên `<rect>`).
+- **Mọi khung chứa chữ gắn `data-box`** (chữ bên trong gắn `data-text`) để `check-layout` đo được tràn. Khung tự vẽ (ô bảng, thẻ tên, ô sơ đồ) dùng `TextBox` (`src/components/TextBox.tsx`): cỡ chữ tự tính theo cỡ hộp (`fitFont`), không gõ `fontSize` tay. Khung chưa gắn `data-box` mà chữ tràn → `check-layout` vẫn cảnh báo (cả `<text>` SVG nằm trên `<rect>`).
 - **Thẻ (Card, SideCard, Bẫy, Tổng kết)**: dùng `Card.tsx` (bo góc 24px, viền panel, shadow nhẹ) hoặc `TextBox`; `boxSizing: "border-box"`; rộng đủ bao trọn công thức dài nhất (thường ≥ 620–680px), dòng quan trọng `whiteSpace: "nowrap"`. Cỡ chữ theo quy tắc 4 (≥ 36px): dòng không vừa → rút chữ hoặc nới thẻ, không thu nhỏ chữ, không để một từ lẻ rớt xuống dòng.
 - Đếm nhanh mỗi frame: ngoài câu chốt, chữ mới xuất hiện trong dòng đang đọc ≤ ~8 từ.
 
@@ -276,6 +284,7 @@ src/components/          dùng chung (ưu tiên dùng lại):
   timeline.ts            buildTimeline (thật / nháp), hằng số nhịp
   plot.tsx               makeScale, Plot, Axes, FunctionPlot, Point, Segment, TangentLine, PlotLabel
   ZoomInset.tsx          kính lúp; MathText.tsx: MathText, Tex, useKatexFonts
+  fit.ts, TextBox.tsx    fitFont/textWidth/blockHeight (cỡ chữ theo hai giới hạn), ô chữ tự tính cỡ
   Card, KeyTakeaway, SectionCard, Subtitle, Speedometer, theme.ts (màu, cỡ chữ, halo)
 src/videos/<slug>/
   script.json            (B1 — không sửa)
