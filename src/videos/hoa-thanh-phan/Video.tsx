@@ -10,6 +10,7 @@ import { ChemIntro, HERO_STACK } from "../../components/chemistry/ChemIntro";
 import { ElementTile } from "../../components/chemistry/ElementTile";
 import { MetalInWater } from "../../components/chemistry/MetalInWater";
 import { PeriodicTable, periodicCell } from "../../components/chemistry/PeriodicTable";
+import { LayoutProbe } from "../../components/LayoutProbe";
 import { fadeIn } from "../../components/parts";
 import { role } from "../../components/roles";
 import { colors } from "../../components/theme";
@@ -166,6 +167,9 @@ const Lab: React.FC = () => {
       <Sequence from={960} durationInFrames={120}>
         <Balance />
       </Sequence>
+      {/* đo bố cục khi chạy check-layout --frames … (không ảnh hưởng render thường); chế độ chữ trong cảnh */}
+      <div data-layout="scene" style={{ display: "none" }} />
+      <LayoutProbe />
     </AbsoluteFill>
   );
 };

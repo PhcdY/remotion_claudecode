@@ -9,6 +9,47 @@ Luôn dùng kèm skill `remotion-best-practices` cho mọi chi tiết API Remoti
 Đọc gói môn `.agents/mon/<subject>.md` (trường `subject` của `script.json`, thiếu = `toan`), mục "Mẫu dựng khái niệm" và "Dựng hình": hình chuẩn và component có sẵn của môn đó.
 Mục tiêu duy nhất là trải nghiệm người xem; lý do của từng luật ở `.agents/lessons.md`.
 
+## 0. Sáu phép thử — phần hình (đọc trước mỗi lần dựng)
+
+Ba tầng luật và sáu phép thử P0–P5 là **chung** với skill `viet-kich-ban` › mục 0 (đọc ở đó). Tầng 1 = sáu phép thử, CỨNG. Mọi quy tắc khác trong file này là **mặc định** (tầng 2) hoặc **gợi ý** (tầng 3): cách thường đạt phép thử; làm khác thì đề xuất ở storyboard.
+
+| # | Ở B3 nghĩa là | SAI đã gặp | ĐÚNG | Kiểm bằng |
+|---|---|---|---|---|
+| **P0** | Dựng **đủ** những gì `visual`/`show` ghi; không tự bỏ, không thêm ý | "phép cộng vectơ" trong `visual` bị quên (Toán 26/10) | Đọc lướt `visual` cả bài trước khi dựng (Bước 0); thiếu gì báo trước | đối chiếu `script.json` từng dòng |
+| **P1** | **Thấy trước, gọi tên sau**: ký hiệu/công thức/nhãn tên chỉ hiện khi thứ nó gọi tên đã ở trên hình và đã được thấy hoạt động; kết quả của phép ghép hiện ra *từ* các thành phần đã có | Đoạn tô hiện lơ lửng, không biết từ đâu ra (quy tắc 10). Phương trình hiện trước khi thấy hạt nào đổi (Hóa) | Lò xo dãn trước → $F = k\Delta l$ hiện sau, từng ký hiệu sáng cùng màu với vật nó gọi tên | stills từng dòng: chỉ vào từng ký hiệu, nó đã có trên hình chưa |
+| **P2** | Lúc nào cũng biết đang xem gì: vật thật có **tên trên vật**, hình mới có lời giới thiệu, thứ trong tiêu đề hiện ở dòng đầu | Hai cốc nước không tên; 15 s đầu chưa thấy bảng tuần hoàn (Hóa 11/11) | Thẻ tên "Sodium (Na)" trên miếng kim loại; b01-l01 là bảng tuần hoàn cỡ lớn | checklist dưới đây |
+| **P3** | **Tắt tiếng vẫn hiểu đúng điều lời đọc khẳng định**: giống ↔ hình giống đúng chỗ đó, khác ↔ nhìn thấy khác; **khái niệm mới → hình mới** (vật, bộ phận, lớp mới — không chỉ thêm chữ); số đổi ↔ hình đổi | Li và Na vẽ y hệt; 70 s chỉ hai quả cầu (Hóa). Văn toàn thẻ chữ (10/11) | Na chảy tròn, chạy nhanh, sủi mạnh; Li giữ miếng, sủi chậm. Số oxi hoá → công thức có số trên từng nguyên tố | dòng "CẦN SOÁT HÌNH" của `check_script` + stills không tiếng |
+| **P4** | Một khái niệm một tên **trên hình** (nhãn trục, tên nhóm, chú thích) | Trục ghi 1–18 trong khi lời đọc "nhóm IA" (Hóa) | Theo bảng thuật ngữ của gói môn | `check_script`, soát nhãn trong code |
+| **P5** | **Chữ đọc được**: không tràn hộp, không đè, đủ cỡ (quy tắc 4), công thức hiện đúng, không cụt mép | Chữ "Na" to hơn ô; công thức lỗi hiện chữ đỏ; "$ o$"; "Thăng L…" | Khung chứa chữ dùng `TextBox` (tự tính cỡ chữ theo hộp, gắn sẵn `data-box`) hoặc component của môn; chữ qua `MathText` | `check-layout` (lỗi: tràn, đè, chữ nhỏ, KaTeX lỗi, công thức chưa dựng, nhãn "mô hình" thừa, gạch ngang trên số; cảnh báo: chữ tràn khung chưa gắn `data-box`) |
+
+**Lối thoát ở B3** (như `viet-kich-ban` › mục 0 › Lối thoát, gồm cả khi người dùng yêu cầu điều trái luật: nêu luật + lý do, đề xuất, hỏi — không làm theo im lặng): `check-layout` báo lỗi mà phép thử vẫn đạt (vd. hai ô bảng cố ý sát nhau), hoặc thấy cách dựng hay hơn quy tắc tầng 2 → ghi vào báo cáo kèm frame + lý do, đề xuất ở storyboard; người dùng duyệt mới giữ. Gặp hình không quy tắc nào nói tới → đề xuất ở storyboard, không đoán.
+
+**Thực đơn hình (tầng 3 — gợi ý, hoặc tự đề xuất ở storyboard)**: khái niệm mới cần một thay đổi nhìn thấy được của riêng nó. Hay dùng:
+
+| Loại khái niệm | Hình hay dùng |
+|---|---|
+| Quy tắc có nhiều trường hợp | mỗi trường hợp một ví dụ khác loại, đặt cạnh nhau, có dòng kiểm (phép cộng, phép thế) dưới mỗi ví dụ |
+| Cặp thuật ngữ dễ nhầm | bảng hai cột hiện từng hàng theo lời đọc, tô màu `warn` hàng dễ nhầm |
+| Bảo toàn / cân bằng | cái cân hoặc hai cột cao bằng nhau: bên trái hiện trước → lệch; bên phải hiện → cân |
+| Quá trình nhiều bước | sơ đồ cố định đủ các bước (khung chỗ hiện sẵn), từng bước sáng dần, bước đã qua mờ nhẹ |
+| So sánh hai vật/đại lượng | đặt cạnh nhau cùng tỉ lệ, cùng mốc; chỗ khác được tô và gọi tên |
+| "Trông giống nhưng khác bản chất" | hai hình giống bề ngoài; chỗ khác lộ ra ở lớp sâu hơn (kính lúp, hạt, nhãn) |
+| Vị trí / phân loại | bản đồ, bảng, trục — vật được đặt vào đúng chỗ |
+| Cơ chế bên trong | cửa sổ soi (kính lúp) từ vật thật ra lớp hạt/bộ phận |
+
+Gói môn bổ sung component cụ thể cho từng dòng (vd. Hóa › 6.7).
+
+**Báo cáo B3 phải dán** (mỗi dòng có/không + frame):
+```
+P0 Mọi thứ trong visual/show đã dựng: có/không · thiếu: …
+P1 Không vật/công thức nào hiện trước khi được giới thiệu: … (frame)
+P2 Frame đầu b01 có thứ trong tiêu đề: có/không (frame …) · vật thật nào chưa có tên: …
+P3 Từng dòng "CẦN SOÁT HÌNH": stills không tiếng thấy đúng chỗ giống/khác (frame …) · khái niệm mới nào chỉ thêm chữ: …
+P4 Nhãn trên hình khớp bảng thuật ngữ: có/không
+P5 check-layout: … lỗi · cảnh báo đã soát: …
+Ngoại lệ đề xuất: …
+```
+
 **Thứ tự (video mới):** B1 chốt kịch bản → **B3 nháp**: dựng hình với thời gian ước tính, xuất storyboard, người dùng duyệt hình (Bước 2b) → B2 tạo audio → **B3 hoàn thiện**: thời gian thật, `check-layout`, render. Sửa hình hoặc chữ ở storyboard thì chưa tốn credit giọng đọc; sửa sau B2 thì phải tạo lại audio dòng đó.
 
 ## Đầu vào (contract với B1, B2)
@@ -25,30 +66,15 @@ Mục tiêu duy nhất là trải nghiệm người xem; lý do của từng lu�
 
 ## Bước 0 — Kiểm tra đầu vào & Pre-flight Checklist (dừng nếu lỗi)
 
-Trước khi viết bất kỳ dòng code JSX/SVG nào, agent BẮT BUỘC phải thực hiện và đối chiếu **7 Nguyên Lý Bố Cục Thị Giác Cốt Lõi (Áp dụng cho mọi môn)**:
-1. **Khoảng hở an toàn & Không cắt ngang (Clear Separation & Safe Distance)**:
-   - Mọi nhãn chữ, công thức, badge phải cách vật thể và các nét vẽ tối thiểu **40px** (nhãn gắn điểm cách 16–30px).
-   - Nét vẽ, trục, đường gióng TUYỆT ĐỐI KHÔNG cắt ngang qua thân chữ hay dấu phép toán/ký hiệu.
-   - Mọi chữ nằm gần nét vẽ đều phải có viền nền (`halo`) dày 6–8px cùng màu nền để không lẫn vào hình.
-2. **Diễn tiến & Chuyển động phải có hướng (Directed Flow & Progressions)**:
-   - Khi biểu diễn một quy trình, một chuỗi biến đổi, đường đi tuần tự hoặc giải thuật: BẮT BUỘC dùng mũi tên có hướng rõ ràng (thay vì đoạn thẳng trơn không hướng) để người xem nhận biết được chiều diễn tiến từ đâu tới đâu.
-3. **Vệ sinh thị giác theo vòng đời (Visual Lifecycle & Garbage Collection)**:
-   - Khi kết thúc một ý giải thích hoặc chuyển sang beat mới trong cùng một cảnh (`scene`): BẮT BUỘC chủ động thu hồi/ẩn (`Out(fr, 0)`) các chi tiết trung gian, đường gióng phụ, nhãn tạm thời của beat trước.
-   - TUYỆT ĐỐI KHÔNG để tích lũy rác thị giác đè lên các đối tượng mới; không để dồn quá 2 cụm nhãn quanh một đối tượng gây ngợp mắt người xem.
-4. **Tinh giản khi chuyển sang mô hình trừu tượng (Abstraction Transition)**:
-   - Khi chuyển từ mô phỏng đời thực sang sơ đồ/hệ quy chiếu trừu tượng: BẮT BUỘC làm mờ/thu nhỏ icon đồ họa phức tạp, chỉ giữ lại điểm mốc tối giản để tập trung thị giác vào bản chất.
-   - Không gắn nhãn "mô hình" hay chú giải tỉ lệ cho hình tượng trưng; nhãn nhỏ "Ảnh minh họa" / "Số liệu minh họa" chỉ khi `visual` ghi (skill `viet-kich-ban` › Hình và số tượng trưng; cách dựng ở quy tắc 7).
-5. **Bao bọc thẻ và ngắt dòng tự nhiên (Card Containment & Natural Wrapping)**:
-   - Mọi thẻ thông tin (SideCard, Thẻ bài thi, Thẻ bẫy, Thẻ tổng kết) BẮT BUỘC phải có `boxSizing: "border-box"`. Chiều rộng thẻ phải đủ bao trọn công thức dài nhất (`whiteSpace: "nowrap"`).
-   - Cỡ chữ cân đối (danh sách $\le 23\text{px}$) để các câu chữ nằm trọn vẹn, TUYỆT ĐỐI CẤM ngắt rớt một từ lẻ loi cụt xuống dòng mới.
-6. **Đối chiếu Đúng/Sai rõ ràng (Semantic Contrast)**:
-   - TUYỆT ĐỐI CẤM dùng `textDecoration: line-through` gạch ngang qua một ký tự/con số đơn lẻ (`2 ✗`) vì đường gạch cắt ngang thân số tạo thành ký tự biến dạng kỳ dị, học sinh không hiểu.
-   - Luôn chia thành 2 khối so sánh độc lập: Khối Sai (nhãn "SAI ✗", nền đỏ nhạt) và Khối Đúng (nhãn "ĐÚNG ✓", nền xanh lá).
-7. **Tuân thủ quy chuẩn riêng của Gói môn (`.agents/mon/<subject>.md`)**:
-   - BẮT BUỘC đọc gói môn trước khi dựng. Mọi quy ước biểu diễn đặc thù của môn (Toán: Oxyz, tiếp tuyến, hai tầng đồ thị; Lý: vector lực, mạch điện; Hoá: liên kết phân tử; Sinh: chuỗi ADN...) phải tuân thủ nghiêm ngặt theo gói môn đó.
+Trước khi viết code: đọc **mục 0** (sáu phép thử) và gói môn `.agents/mon/<subject>.md` (mẫu dựng riêng của môn: Toán Oxyz, Lý vectơ lực, Hóa bảng tuần hoàn…). Rồi soát nhanh các điểm hay quên — mỗi điểm chỉ có **một** chỗ ghi chi tiết:
+1. Khoảng hở, nét không cắt chữ, halo, Đúng/Sai thành hai khối → quy tắc 1.
+2. Quá trình / chuỗi biến đổi / đường đi tuần tự: dùng **mũi tên có hướng**, không đoạn thẳng trơn, để thấy chiều diễn tiến.
+3. Sang beat mới cùng cảnh: dọn chi tiết tạm của beat trước; ≤ 2 cụm nhãn quanh một vật → quy tắc 1 (vòng đời trạng thái).
+4. Chuyển từ vật thật sang sơ đồ trừu tượng: làm mờ/thu nhỏ icon phức tạp, giữ điểm mốc; không nhãn "mô hình" → quy tắc 7.
+5. Thẻ chứa chữ: `Card` / `TextBox`, `border-box`, chữ ≥ 36px → quy tắc 4, 8.
 
 **Cổng kiểm duyệt 3 bước trước khi báo xong (Three-Gate Quality Verification)**:
-- **Gate 1 (Toán & Kịch bản)**: `python scripts/check_script.py <slug>` (0 lỗi).
+- **Gate 1 (Kịch bản)**: `py scripts/check_script.py <slug>` (0 lỗi).
 - **Gate 2 (Không gian & Bố cục)**: `node scripts/check-layout.mjs <id> --draft` (0 va chạm).
 - **Gate 3 (Trực quan hóa)**: `node scripts/stills.mjs <id> <frame...>` xuất ảnh tĩnh các mốc chuyển beat để tự soi bằng mắt trước khi render.
 
@@ -116,16 +142,14 @@ Lề trái/phải tối thiểu 90px. Ngoài logo, không có tag/nhãn/cột ch
 
 **1. Không chồng lấn, không dính sát & Sân khấu Toàn khung (Hero Stage).**
 - **Sân khấu Toàn khung (Hero Stage Canvas — Chống lỗi hình bé tí lọt thỏm)**: Tuyệt đối CẤM tạo một chiếc Card/Box nhỏ kích thước 800–1000px đặt ở giữa màn hình làm sa bàn hay sân khấu chính (gây lãng phí 70% diện tích và ép các thành phần hình ảnh chen chúc đè nhau). Sa bàn quân sự (Sử), bản đồ địa lý (Địa), sơ đồ thể chế/cải cách, phòng thí nghiệm (Hóa), mô hình tế bào (Sinh) BẮT BUỘC sử dụng `StagePanel` (`src/components/Card.tsx`) chiếm trọn không gian khả dụng rộng **1740px** (từ `x: 90` tới `x: 1830`) và cao **800–930px** (từ `y: 110` tới `y: 930/1040`).
-- **Chống Tràn Khung & Cắt Cụt Chữ (Zero Cut-off Guarantee)**: Mọi điểm mốc/nhãn neo nằm ở phía bên phải khung hình ($x > 1400	ext{px}$ hoặc sát mép panel) BẮT BUỘC đặt chữ dạt sang phía Tây (Tây Bắc/Tây Nam) hoặc dùng `anchor: "left"` / `textAnchor: "end"` để thân chữ phát triển ngược vào trong lòng sân khấu. TUYỆT ĐỐI KHÔNG để chữ thò ra ngoài mép bị chém cụt đuôi (như lỗi cụt chữ *Thăng Long*).
+- **Chống Tràn Khung & Cắt Cụt Chữ (Zero Cut-off Guarantee)**: Mọi điểm mốc/nhãn neo nằm ở phía bên phải khung hình (x > 1400px hoặc sát mép panel) BẮT BUỘC đặt chữ dạt sang phía Tây (Tây Bắc/Tây Nam) hoặc dùng `anchor: "left"` / `textAnchor: "end"` để thân chữ phát triển ngược vào trong lòng sân khấu. TUYỆT ĐỐI KHÔNG để chữ thò ra ngoài mép bị chém cụt đuôi (như lỗi cụt chữ *Thăng Long*).
 - **Mọi văn bản UI trong thẻ/danh sách BẮT BUỘC bọc `<MathText />`**: CẤM hiển thị chuỗi thô `{item.text}` trong JSX; luôn bọc qua `<MathText text={...} />` để tự động hóa giải lỗi escape `\to` thành `$ o$` và hiển thị công thức sắc nét. Trong các môn Xã hội, ưu tiên dùng trực tiếp ký tự Unicode `→` (hoặc `->`).
 - Hai thành phần bất kỳ (badge, nhãn, thẻ, dấu `?`, hình) không đè lên nhau và không chạm viền nhau. Khoảng hở tối thiểu **40px** giữa hai khối; nhãn gắn vào một điểm cách điểm đó 16–30px.
   - **Ngoại lệ "lướt qua"** (người dùng chốt 10/11/2026): vật **đang di chuyển** (thuyền trôi, xe chạy, mũi tên hành quân, người đi) lướt ngang qua chữ/vật khác thì chấp nhận được, nếu lướt nhanh (≤ ~0,5 s cho mỗi lần chồng) và **không dừng lại** ở chỗ chồng. Vật dừng hẳn, hoặc chồng lâu hơn, thì vẫn là lỗi.
   - Nhãn bám vật chuyển động giữ **một hướng cố định** suốt đường đi; không đổi hướng, không nhảy chỗ để né thứ chỉ bị lướt qua. Nhãn nhảy chỗ còn khó chịu hơn một lần lướt qua.
   - Vật đang chạy gắn `data-moving` **chỉ trong lúc chạy** (`data-moving={moving > 0 ? "" : undefined}`). `check-layout` khi đó hạ chồng lấn của nó thành cảnh báo "lướt qua"; soát bằng ảnh tĩnh vài frame liền nhau rằng lần chồng thật sự ngắn.
 - **Thẻ so sánh Đúng/Sai (Bẫy thường gặp)**: Tuyệt đối không dùng `textDecoration: line-through` gạch ngang qua số hay chữ đơn lẻ (ví dụ `2 ✗`) vì đường gạch cắt ngang thân tạo thành ký tự biến dạng kỳ dị, học sinh không hiểu. Luôn chia thành 2 khối so sánh rõ ràng: Khối Sai (nhãn "SAI ✗", nền đỏ nhạt) và Khối Đúng (nhãn "ĐÚNG ✓", nền xanh lá).
-- **Tách bạch vòng đời trạng thái giữa các beat (`State Leakage`)**: Khi chuyển beat trong cùng một cảnh (`scene`), beat mới phải chủ động tắt (`Out(fr, 0)` hoặc set `0`) các chi tiết trung gian của beat trước (nét đứt đi bộ, thước đo, hình hộp, các vector/đường gióng tạm) để tránh tích lũy rác thị giác đè lên các đối tượng mới. Khi có Thẻ bài thi/Bẫy, làm mờ sân khấu phía sau (`stageOp: 0.25`) để thẻ hiển thị trên lớp overlay độc lập, chống các nét vẽ đâm xuyên qua thẻ.
-- **Phân kỳ nhãn theo pha (`phases` trong `AutoLabels`)**: Mọi `AutoLabelItem` phải khai báo `phases: ["bXX"]` tương ứng với beat mà nó xuất hiện. Không bao giờ truyền hàng loạt nhãn vào `AutoLabels` mà không có `phases` khiến solver va chạm bị quá tải và đẩy nhãn dạt xa vật neo (> 140px).
-- **Chống tràn thẻ và ngắt dòng cụt (Card Text Overflow & Awkward Wrap)**: Mọi thẻ thông tin (SideCard, Thẻ bài thi, Thẻ bẫy, Thẻ tổng kết) BẮT BUỘC phải có `boxSizing: "border-box"`. Chiều rộng thẻ phải tính toán bao trọn công thức KaTeX dài nhất (tối thiểu 620–680px; cỡ chữ công thức trong thẻ giới hạn ở 26–28px, `whiteSpace: "nowrap"`). Các dòng danh sách / gạch đầu dòng trong thẻ phải cân đối cỡ chữ (20–23px) để nằm trọn trên 1 dòng, không bao giờ để ngắt rớt một từ lẻ loi xuống dòng tiếp theo.
+- **Tách bạch vòng đời trạng thái giữa các beat (`State Leakage`)**: Khi chuyển beat trong cùng một cảnh (`scene`), beat mới phải chủ động tắt (`Out(fr, 0)` hoặc set `0`) các chi tiết trung gian của beat trước (nét đứt đi bộ, thước đo, hình hộp, các vector/đường gióng tạm) để tránh tích lũy rác thị giác đè lên các đối tượng mới. Khi có Thẻ bài thi/Bẫy, làm mờ sân khấu phía sau (`stageOp: 0.25`) để thẻ hiển thị trên lớp overlay độc lập, chống các nét vẽ đâm xuyên qua thẻ. Ngoại lệ: vật làm nền liên tục cho beat sau thì giữ (mờ bớt nếu cần).
 - **Đường nét không cắt ngang thân chữ / ký hiệu**: Nét vẽ, trục, đường gióng TUYỆT ĐỐI KHÔNG cắt ngang qua thân chữ hay dấu phép toán/ký hiệu. Điểm neo và công thức phải được bố trí ở vùng trời thoáng đãng không có đường cắt ngang.
 - Badge/chú thích của một hình (vd. "đúng một khoảnh khắc" trên đồng hồ) đặt **ngoài viền** hình đó với khoảng hở, hoặc nằm hẳn bên trong ở vùng trống, không đặt vắt ngang viền.
 - Nhãn không được đè lên **số trên trục**. Điểm đánh dấu nằm trên trục (vd. nghiệm của $f'$) mà che số vạch chia → dời số đó sang phía bên kia trục hoặc ẩn số đó, không để điểm đè lên số.
@@ -159,6 +183,14 @@ Lề trái/phải tối thiểu 90px. Ngoài logo, không có tag/nhãn/cột ch
 | Số trên trục, vạch chia đồng hồ | 28px |
 
 Thiếu chỗ thì bớt chữ hoặc bớt thành phần, không thu nhỏ chữ dưới mức này.
+
+Các mức trên có **một nguồn duy nhất**: `MIN_FONT` trong `src/components/theme.ts` (check-layout đọc từ đó). Không gõ số px nhỏ hơn ở bất cứ đâu.
+
+**Chữ trong hộp — luôn hai giới hạn cùng lúc** (đã gặp 11/11: sửa "chữ to hơn ô" bằng giới hạn trên, chữ thành 15–23px):
+- Cỡ chữ tính bằng `fitFont` (`src/components/fit.ts`): vừa hộp **và** không dưới `MIN_FONT` của loại chữ. Không viết `fontSize: size * 0.42` trơn.
+- `fitFont` trả `fits: false` (hộp quá nhỏ để thoả cả hai) → xử lý **rõ ràng**: đưa chữ ra ngoài có đường dẫn, xuống dòng, bỏ dòng phụ, hoặc nới hộp. Không lặng lẽ thu nhỏ chữ, không để chữ tràn.
+- Nhiều dòng chữ trong một khối (ô nguyên tố, thẻ, nhãn dưới cốc): xếp theo **chiều cao chữ thật** (`blockHeight`) cách nhau ≥ `TEXT_GAP`, không đặt `top` theo % cố định.
+- **Component dùng chung** (trong `src/components/`): phòng lab của nó có frame dựng component ở **cỡ nhỏ nhất và lớn nhất** tài liệu cho phép (và chữ dài nhất có thể); `check-layout <lab> --frames …` 0 lỗi ở các frame đó mới được dùng. Sửa component → chạy lại.
 
 Vật minh hoạ cũng có cỡ tối thiểu: vật chính (người chạy, quả bóng…) cao ≥ 140px, vật phụ (xe đạp, biểu tượng) ≥ 100px, đủ để nhận ra trong một cái liếc. Không đủ chỗ cho cỡ đó → bỏ vật phụ, không vẽ bé.
 Ngoại lệ: **nhóm vật tượng trưng** (đám đông, lưới 10×10 người mini, dãy thửa ruộng) tính cả cụm là một vật (≥ 140px); từng icon trong cụm ≥ 40px.
@@ -195,7 +227,9 @@ Phép thử: **tắt tiếng, chỉ nhìn khung hình**, người xem vẫn bi�
 - **Không lặp thứ đã nhìn thấy**: vạch chia đã ghi 60, 70 thì nhãn đoạn tô không ghi lại "60 → 70 m"; `text` của dòng đã ghi số thì nhãn khác không ghi lại số đó. Một thông tin — một chỗ.
 - **Gỡ thông tin hết vai trò**: badge/nhãn lời đọc không còn nói tới (vd. "vận tốc trung bình cả bài" khi đã sang đoạn 60–70 m) mờ đi trong ~0,5 s. Chỉ giữ thứ đang nói tới và mốc tham chiếu cần thiết.
 - **Chữ nằm gọn trong khung chứa** của nó (thẻ, ô bảng, khung hình bên trái…), không tràn ra ngoài viền. Nhãn dài hơn khung → rút chữ hoặc đặt nhãn ra ngoài khung hẳn, có đường dẫn.
-- **Quy chuẩn thiết kế Thẻ UI (Card, SideCard, Bẫy, Tổng kết)**: Dùng component chuẩn `Card.tsx` (bo góc 24px, viền panel, shadow nhẹ). Bắt buộc có `boxSizing: "border-box"`, chiều rộng thẻ mở rộng đủ thoáng (≥ 620–680px), và các dòng nội dung quan trọng phải có `whiteSpace: "nowrap"` để câu chữ/công thức không bao giờ bị rớt dòng cụt.
+- Vật vẽ bằng `div` mà không có chữ (bảng ô, sơ đồ khối) gắn `data-extent` để `check-layout` tính nó vào độ cân khung (không tính chồng lấn).
+- **Mọi khung chứa chữ gắn `data-box`** (chữ bên trong gắn `data-text`) để `check-layout` đo được tràn. Khung tự vẽ (ô bảng, thẻ tên, ô sơ đồ) dùng `TextBox` (`src/components/TextBox.tsx`): cỡ chữ tự tính theo cỡ hộp (`fitFont`), không gõ `fontSize` tay. Khung chưa gắn `data-box` mà chữ tràn → `check-layout` vẫn cảnh báo (cả `<text>` SVG nằm trên `<rect>`).
+- **Thẻ (Card, SideCard, Bẫy, Tổng kết)**: dùng `Card.tsx` (bo góc 24px, viền panel, shadow nhẹ) hoặc `TextBox`; `boxSizing: "border-box"`; rộng đủ bao trọn công thức dài nhất (thường ≥ 620–680px), dòng quan trọng `whiteSpace: "nowrap"`. Cỡ chữ theo quy tắc 4 (≥ 36px): dòng không vừa → rút chữ hoặc nới thẻ, không thu nhỏ chữ, không để một từ lẻ rớt xuống dòng.
 - Đếm nhanh mỗi frame: ngoài câu chốt, chữ mới xuất hiện trong dòng đang đọc ≤ ~8 từ.
 
 **9. Nhịp hình: một thay đổi mỗi lần, và thay đổi là lời giải thích.**
@@ -203,7 +237,6 @@ Phép thử: **tắt tiếng, chỉ nhìn khung hình**, người xem vẫn bi�
 - **Số đổi ⇔ hình đổi, cùng lúc**: bảng nhảy sang hàng mới thì vạch/đoạn tô tương ứng trên hình co lại (hoặc giãn ra) đúng lúc đó, nhãn số đi theo vạch; con số mới phải trông như *sinh ra* từ chuyển động trên hình (đoạn co lại → giá trị chạy tới số mới), không tự hiện ở một chỗ khác.
 - Không mở một hình biểu diễn mới (trục số, bảng, đồ thị khác) khi hình đang có biểu diễn được điều đó. Cần hình mới thì nối với hình cũ bằng bước người xem tự hiểu (lấy số từ hình cũ → bảng nhỏ → chấm từng điểm → nối đồ thị), hình cũ vẫn thấy trong lúc nối.
 - **Không dùng phép biến hình lạ mắt** (xoay đường chạy thành trục, nhân vật nằm ngang, gập/cuộn hình). Đã thử 20/10/2026: người xem không hiểu. Trục, đồ thị, nhân vật luôn ở tư thế quen thuộc.
-- **Clean State Transition (Chống rò rỉ trạng thái giữa các beat)**: Khi chuyển sang beat mới, các đối tượng hình ảnh tạm thời của beat trước (khung viền, thước đo, nét phụ, mũi tên thử) bắt buộc phải được fade out về 0, trừ khi đối tượng đó làm nền liên tục cho beat sau. Tuyệt đối cấm để rò rỉ trạng thái cũ (State Leakage) đè lên hình ảnh mới gây nhiễu loạn thị giác.
 - **Đồng bộ hướng của vật thể chuyển động (Đa môn: Toán, Lý, Hóa, Sinh, Sử, Địa)**: Bất kỳ vật thể nào chuyển động có hướng (đoàn quân/mũi tên tiến công trong Sử, luồng gió/dòng hải lưu trong Địa, tế bào/máu chảy trong Sinh, hạt chuyển động trong Lý, máy bay/vật thể trong Toán): đầu mũi của vật thể bắt buộc phải quay đúng theo tiếp tuyến của quỹ đạo chuyển động (`Math.atan2(dy, dx) * 180 / Math.PI`). Cấm để vật thể trôi ngang hoặc lùi khi đang di chuyển tiến.
 
 **10. Nhân vật do quy luật điều khiển; công thức chỉ lên hình.**
@@ -222,8 +255,7 @@ Phép thử: **tắt tiếng, chỉ nhìn khung hình**, người xem vẫn bi�
 - Mọi nhãn gắn vào một điểm/vật (`text` của dòng, tên điểm, giá trị) đặt bằng `AutoLabels` (`src/components/labels.tsx`): truyền điểm neo (toạ độ toán với `scale`, hoặc px trong khung), chữ, màu, độ mờ; truyền vật cản bằng `curveObstacles` (đường cong), `axesObstacles` (trục + số vạch chia), `segmentObstacles` (đoạn, tiếp tuyến), khung thẻ. Component tự chọn hướng không đè vật cản và nhãn khác, **gần điểm của mình hơn mọi điểm khác**; xa quá thì tự vẽ đường dẫn.
 - Truyền **tất cả** nhãn của cảnh vào một `AutoLabels` (nhãn chưa hiện thì `opacity: 0`) để vị trí cố định suốt cảnh, không nhảy khi nhãn khác hiện. Nhãn quan trọng truyền trước; `prefer` để gợi hướng (vd. `["n"]` cho đỉnh).
 - **Một vật một nhãn**: nhãn của cùng một điểm qua các dòng (vd. "$f'(3) = 0$" → "đỉnh" → "giá trị cực đại: 6") là **một** nhãn có `steps` + `step`, đổi chữ tại chỗ; không đặt nhiều nhãn chen nhau quanh một điểm.
-- `phases` (vd. `["b02"]`): nhãn chỉ hiện trong các beat đó; hai nhãn không chung giai đoạn thì không giành chỗ của nhau.
-- `phases` (vd. `["b02"]`): **BẮT BUỘC** khai báo `phases` cho mọi `AutoLabelItem` trong cảnh có nhiều beat. Nếu thiếu `phases`, thuật toán `placeLabels` coi tất cả nhãn của mọi beat trong toàn bộ cảnh đều cùng tồn tại cùng lúc, dẫn tới nghẽn solver và đẩy nhãn văng xa hàng trăm pixel ra khỏi điểm neo.
+- `phases` (vd. `["b02"]`): nhãn chỉ hiện trong các beat đó; hai nhãn không chung giai đoạn thì không giành chỗ của nhau. **Cảnh nhiều beat: mọi `AutoLabelItem` phải có `phases`** — thiếu thì `placeLabels` coi mọi nhãn cùng tồn tại, solver nghẽn, nhãn bị đẩy xa hàng trăm px.
 - **Đăng ký trục toạ độ và đường nét làm vật cản (`segmentObstacles`)**: Các trục toạ độ chính, các đường di chuyển và đường gióng quan trọng phải được đăng ký vào mảng `obstacles` qua `segmentObstacles(start, end)` để thuật toán không bao giờ cho phép nhãn hoặc đường dóng cắt ngang qua nét vẽ chính.
 - `anchor: "region"` cho nhãn của một vùng (đoạn cong tô màu, khoảng trên trục): gắn bằng màu, không cần luật "gần điểm mình hơn"; mặc định `"point"` cho nhãn của một chấm.
 - Chữ cố định khác trong khung (công thức, tên trục, thẻ, nhãn nhỏ "Ảnh minh họa" đặt trong sân khấu) truyền làm vật cản bằng `textObstacle` (giữ khoảng hở như giữa hai nhãn). Đặt chúng ở chỗ **không tranh vùng nhãn**: vùng quanh đỉnh/đáy/điểm đang xét để cho nhãn; công thức để góc trống (đã gặp ở demo: công thức góc trên phải chiếm chỗ của nhãn quanh đỉnh).
@@ -253,6 +285,7 @@ src/components/          dùng chung (ưu tiên dùng lại):
   timeline.ts            buildTimeline (thật / nháp), hằng số nhịp
   plot.tsx               makeScale, Plot, Axes, FunctionPlot, Point, Segment, TangentLine, PlotLabel
   ZoomInset.tsx          kính lúp; MathText.tsx: MathText, Tex, useKatexFonts
+  fit.ts, TextBox.tsx    fitFont/textWidth/blockHeight (cỡ chữ theo hai giới hạn), ô chữ tự tính cỡ
   Card, KeyTakeaway, SectionCard, Subtitle, Speedometer, theme.ts (màu, cỡ chữ, halo)
 src/videos/<slug>/
   script.json            (B1 — không sửa)
@@ -270,7 +303,7 @@ src/Root.tsx             đăng ký <Composition id="<slug>" ...> 1920×1080, 30
 - `npm run lint` sạch.
 - Xuất ảnh tĩnh bằng `node scripts/stills.mjs <slug> <frame...>` (bundle một lần) → `out/_lam-viec/<id>/stills/`.
 - Xuất ảnh tĩnh **cho từng dòng** (frame ngay trước khi dòng kết thúc, lúc mọi thành phần của dòng đó đã hiện đủ), không chỉ giữa beat. Nhiều frame thì bundle một lần rồi gọi `renderStill` lặp lại, thay vì gọi `npx remotion still` từng frame.
-- **Kiểm bố cục bằng code trước, mắt sau.** `check-layout` báo LỖI (phải rỗng): chồng lấn/sát, tràn khung, lấn mép dưới, chữ dưới cỡ tối thiểu, nhãn neo cách vật > 130px; và CẢNH BÁO (soát bằng mắt): nửa khung trống, khung lệch, dòng nào thêm > 8 từ mới lên hình. Bản nháp thêm `--draft`.
+- **Kiểm bố cục bằng code trước, mắt sau.** `check-layout` báo LỖI (phải rỗng): chồng lấn/sát, tràn khung, lấn mép dưới, chữ dưới cỡ tối thiểu, nhãn neo cách vật > 130px, công thức KaTeX lỗi (chữ đỏ), công thức chưa dựng (còn `$…$` hoặc lệnh `bc` trong chữ thường), nhãn "mô hình giản lược / minh hoạ" thừa, gạch ngang đè lên số/ký tự đơn; và CẢNH BÁO (soát bằng mắt): nửa khung trống, khung lệch, dòng nào thêm > 8 từ mới lên hình, chữ tràn khung có viền/nền chưa gắn `data-box`. Bản nháp thêm `--draft`. Composition không dùng `ExplainerVideo` (phòng lab) muốn kiểm thì gắn `<LayoutProbe />` và chạy với `--frames`.
 - Chi tiết kiểm chồng lấn: Mọi khối chữ trên hình (nhãn, chú thích, số trục, câu chốt) gắn `data-text`, mọi điểm đánh dấu gắn `data-mark`. Chạy `node scripts/check-layout.mjs <slug>`: script mở từng frame kiểm tra, lấy khung bao (`getBoundingClientRect`) của các phần tử đó và báo mọi cặp chồng nhau hoặc cách nhau < 16px, kèm frame và nội dung chữ; khung chứa (thẻ, ô bảng, `Card`) gắn `data-box`, script báo mọi `data-text` nằm trong `data-box` mà tràn ra ngoài viền, và mọi chữ/điểm **bên ngoài** chạm vào khung đó (đã gặp: nhãn đồ thị chạm mép thẻ bảng mà không bị bắt); hai `data-box` đè lên nhau báo "khối chồng khối" (bỏ qua khối lồng nhau, `data-box="stage"`, khối mờ < 0,5 làm nền, ô sát nhau cùng `data-group`). Danh sách phải rỗng mới sang bước soát bằng mắt.
 - Soát từng ảnh theo **Quy tắc bố cục**: (1) có gì chồng lấn hay dính sát không; (2) kim/đường có đè lên chữ không; (3) cụm hình có cân không, có nửa khung trống không; (4) có chữ nào dưới cỡ tối thiểu không; (5) có gì lấn mép dưới (y > 1040) không; (6) có thành phần nào người xem không cần không; (7) phóng to hay dịch khung có mốc tham chiếu không; (8) **phép thử tắt tiếng**: mỗi con số, ký hiệu, màu, vật trên ảnh có chú thích nói nó là gì không (hình tượng trưng nhận ra được thì miễn; có nhãn "mô hình"/chú giải tỉ lệ thừa thì gỡ); (9) **ít chữ**: nhãn nào dài quá ~5 từ, lặp `text` khác hoặc lặp số trên trục, `text` nào đặt xa vật nó nói tới, chữ nào tràn khỏi khung chứa, thông tin nào đã hết vai trò mà còn; (10) **nhịp**: so ảnh giữa dòng với ảnh cuối dòng — có quá một thay đổi không, số đổi mà hình có đổi theo không; vật minh hoạ đủ lớn chưa; (11) nhân vật có chuyển động đúng quy luật không, cụm công thức đang giải thích có sáng cùng màu với thứ trên hình không. Sửa hết rồi xuất lại để kiểm.
 - **Soát toán trên hình**: điểm nằm đúng trên đồ thị, hệ số góc, nghiệm, nhãn trục. Sai toán là lỗi nghiêm trọng nhất.

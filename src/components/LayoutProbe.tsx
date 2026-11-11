@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { continueRender, delayRender, getInputProps } from "remotion";
-import { layout } from "./theme";
+import { MIN_FONT as MIN_THEME, layout } from "./theme";
 
 // Chỉ chạy khi render với inputProps { layoutCheck: true } (scripts/check-layout.mjs).
 // Đo khung bao mọi [data-text] / [data-mark], in kết quả ra console để script đọc.
@@ -131,7 +131,101 @@ const measure = () => {
     if (d > 130) issues.push(`nhãn xa vật ${Math.round(d)}px — ${(el.textContent ?? "").trim().slice(0, 40)}`);
   });
 
+  issues.push(...renderIssues());
   return issues;
+};
+
+// --- Lỗi hiển thị bắt được bằng máy (phép thử P5 "chữ đọc được"; skill dung-video › mục 0) ---
+// Nhãn "mô hình" người xem không cần (lessons.md 10/11/2026); không bắt "mô hình nguyên tử" là kiến thức thật.
+// Bắt: "mô hình" đứng riêng, "Mô hình: …", "… mô hình, không phải Bolt", "mô hình giản lược/minh hoạ", "không phải số liệu thật".
+// Thay bằng nhãn nhỏ "Số liệu minh họa" / "Ảnh minh họa" (data-text="note") khi cần — viet-kich-ban › Hình và số tượng trưng.
+const MODEL_LABEL = /mô hình\s+(giản lược|minh ho[ạa]|đơn giản)|không phải số liệu thật|^\s*mô hình\s*(:|$)|mô hình\s*[,:]?\s*không phải/i;
+// Công thức chưa được dựng: còn cặp $…$ hoặc lệnh \abc trong chữ thường (thiếu MathText)
+const RAW_MATH = /\$[^$\s][^$]*\$|\\[a-zA-Z]{2,}/;
+
+/** Các nút chữ đang hiện, bỏ phần bên trong KaTeX (MathML ẩn chứa TeX gốc). */
+const visibleTextNodes = () => {
+  const out: { node: Text; el: Element; text: string }[] = [];
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  while (walker.nextNode()) {
+    const node = walker.currentNode as Text;
+    const el = node.parentElement;
+    const text = (node.textContent ?? "").trim();
+    if (!el || !text || el.closest(".katex, .katex-error, script, style")) continue;
+    if (effectiveOpacity(el) < 0.05) continue;
+    out.push({ node, el, text });
+  }
+  return out;
+};
+
+const renderIssues = () => {
+  const issues: string[] = [];
+  document.querySelectorAll(".katex-error").forEach((el) => {
+    if (effectiveOpacity(el) < 0.05) return;
+    issues.push(`công thức KaTeX lỗi (hiện chữ đỏ) — "${(el.textContent ?? "").trim().slice(0, 60)}": ${(el.getAttribute("title") ?? "").slice(0, 120)}`);
+  });
+  for (const { text } of visibleTextNodes()) {
+    if (MODEL_LABEL.test(text)) issues.push(`nhãn "mô hình" thừa (người xem tự hiểu hình tượng trưng) — "${text.slice(0, 60)}"`);
+    if (RAW_MATH.test(text)) issues.push(`công thức chưa dựng, còn chữ thô (bọc bằng MathText) — "${text.slice(0, 60)}"`);
+  }
+  // gạch ngang đè lên số/ký tự đơn tạo ký tự méo (lessons.md 06/11/2026); gạch cả từ thì được
+  document.querySelectorAll("body *").forEach((el) => {
+    if (!getComputedStyle(el).textDecorationLine.includes("line-through")) return;
+    const t = (el.textContent ?? "").trim();
+    if (t && (t.length <= 2 || /^[\d\s.,+−-]+$/.test(t)) && effectiveOpacity(el) >= 0.05)
+      issues.push(`gạch ngang đè lên số/ký tự đơn "${t}" — dùng hai khối SAI ✗ / ĐÚNG ✓`);
+  });
+  return issues;
+};
+
+const isPainted = (cs: CSSStyleDeclaration) => {
+  const bg = cs.backgroundColor;
+  const hasBg = bg && bg !== "transparent" && !/rgba\([^)]*,\s*0\)$/.test(bg);
+  const hasBorder = ["Top", "Right", "Bottom", "Left"].some(
+    (s) => parseFloat(cs.getPropertyValue(`border-${s.toLowerCase()}-width`)) > 0 && cs.getPropertyValue(`border-${s.toLowerCase()}-style`) !== "none",
+  );
+  return hasBg || hasBorder;
+};
+const exceeds = (a: DOMRect, b: DOMRect) => a.left < b.left - 2 || a.right > b.right + 2 || a.top < b.top - 2 || a.bottom > b.bottom + 2;
+
+/** Cảnh báo: chữ tràn khỏi một khung có viền/nền mà khung chưa gắn data-box (check-layout không đo được khung đó). */
+const unboxedOverflow = () => {
+  const warns = new Set<string>();
+  for (const { node, el, text } of visibleTextNodes()) {
+    if (el.closest("[data-box]")) continue;
+    const range = document.createRange();
+    range.selectNodeContents(node);
+    const r = range.getBoundingClientRect();
+    if (r.width < 1 || r.height < 1) continue;
+    let p: Element | null = el;
+    for (let depth = 0; p && depth < 6; depth++, p = p.parentElement) {
+      if (p instanceof SVGElement) break;
+      const b = p.getBoundingClientRect();
+      if (b.width >= 1500 || p === document.body) break; // sân khấu, không phải hộp chứa
+      if (isPainted(getComputedStyle(p))) {
+        if (exceeds(r, b)) warns.add(`chữ tràn khỏi khung có viền/nền chưa gắn data-box — "${text.slice(0, 40)}"`);
+        break;
+      }
+    }
+  }
+  // SVG tự vẽ: <text> nằm trên một <rect> (ô bảng, thẻ) mà to hơn rect đó
+  document.querySelectorAll<SVGTextElement>("svg text").forEach((t) => {
+    if (t.closest(".katex") || effectiveOpacity(t) < 0.05) return;
+    const r = t.getBoundingClientRect();
+    if (r.width < 1) return;
+    const cx = (r.left + r.right) / 2;
+    const cy = (r.top + r.bottom) / 2;
+    let best: DOMRect | null = null;
+    for (const rect of Array.from(t.ownerSVGElement?.querySelectorAll<SVGRectElement>("rect") ?? [])) {
+      const cs = getComputedStyle(rect);
+      if ((cs.fill === "none" && cs.stroke === "none") || effectiveOpacity(rect) < 0.05) continue;
+      const b = rect.getBoundingClientRect();
+      if (b.width >= 1500 || cx < b.left || cx > b.right || cy < b.top || cy > b.bottom) continue;
+      if (!best || b.width * b.height < best.width * best.height) best = b;
+    }
+    if (best && exceeds(r, best)) warns.add(`chữ SVG to hơn ô/khung bên dưới — "${(t.textContent ?? "").trim().slice(0, 40)}" (dùng component tính cỡ chữ theo ô)`);
+  });
+  return [...warns];
 };
 
 /** Số từ nhìn thấy: mỗi công thức KaTeX tính một từ, bỏ phần MathML ẩn. */
@@ -149,7 +243,7 @@ const wordsOf = (el: Element) => {
 };
 
 // note: nhãn nhỏ "Ảnh minh họa" / "Số liệu minh họa" ở góc (cố ý nhỏ, mờ; không tính là nội dung)
-const MIN_FONT: Record<string, number> = { tick: 28, axis: 28, takeaway: 56, subtitle: 48, note: 22, default: 36 };
+const MIN_FONT: Record<string, number> = MIN_THEME; // nguồn duy nhất: theme.ts
 const NOT_CONTENT = ["takeaway", "subtitle", "title", "url", "note"];
 
 /** Cảnh báo (không chặn): khung lệch, nửa khung trống, nội dung co cụm quá nhỏ. */
@@ -172,6 +266,8 @@ const composition = () => {
       if (n) texts.push({ k: el.getAttribute("data-label-id") ?? (el.textContent ?? "").trim().slice(0, 60), n });
     }
   });
+  // vật vẽ bằng div không chữ (bảng, sơ đồ ô) gắn data-extent: chỉ tính vào độ cân khung, không tính chồng lấn
+  document.querySelectorAll("[data-extent]").forEach(add);
   // bỏ SVG bên trong công thức KaTeX
   document.querySelectorAll("svg path, svg line, svg circle, svg polygon, svg polyline, svg rect").forEach((el) => {
     if (!el.closest(".katex")) add(el);
@@ -192,6 +288,7 @@ const composition = () => {
     else if (left > mid - 60) warns.push(`nửa trái khung trống (nội dung từ x = ${Math.round(left)})`);
     else if (Math.abs(cx - mid) > 280) warns.push(`khung lệch ${cx < mid ? "trái" : "phải"} (tâm nội dung x = ${Math.round(cx)})`);
   }
+  warns.push(...unboxedOverflow());
   return { warns, texts };
 };
 

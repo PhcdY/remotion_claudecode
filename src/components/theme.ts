@@ -54,13 +54,29 @@ export const layout = {
   gap: 40, // khoảng hở tối thiểu giữa hai khối
 };
 
-// Cỡ chữ tối thiểu
+/**
+ * Cỡ chữ TỐI THIỂU theo loại chữ (giá trị `data-text`) — nguồn duy nhất, dùng chung cho
+ * LayoutProbe (check-layout), fitFont (src/components/fit.ts) và mọi component. Skill dung-video › quy tắc 4.
+ * Component KHÔNG tự gõ số px nhỏ hơn các mức này.
+ */
+export const MIN_FONT = {
+  takeaway: 56,
+  subtitle: 48, // phụ đề video cũ: 52, dòng chỉ có công thức 48
+  label: 36, // nhãn, chú thích, chữ trong thẻ, `text` của dòng (44 với text chính)
+  tick: 28, // số trên trục, vạch chia, ký hiệu/số trong ô bảng
+  axis: 28,
+  note: 22, // chỉ nhãn nhỏ "Ảnh minh họa" / "Số liệu minh họa"
+  default: 36,
+} as const;
+export type FontKind = keyof typeof MIN_FONT;
+
+// Cỡ chữ mặc định khi dựng (không nhỏ hơn MIN_FONT)
 export const fontSize = {
   subtitle: 52,
   subtitleMath: 48,
-  takeaway: 56,
-  label: 36,
-  tick: 28,
+  takeaway: MIN_FONT.takeaway,
+  label: MIN_FONT.label,
+  tick: MIN_FONT.tick,
 };
 
 /** Viền nền cho chữ HTML nằm gần nét vẽ. */

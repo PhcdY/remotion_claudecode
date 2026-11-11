@@ -1,7 +1,41 @@
 # Bài học đã gặp
 
 Góp ý thật của người dùng và luật nó sinh ra. Skill chỉ giữ luật; lý do và lời người dùng nằm ở đây.
-Chi tiết từng video: `src/videos/<slug>/FEEDBACK.md`. Thêm mục mới mỗi khi một góp ý đổi skill: ngày · video · chuyện gì · luật nào.
+Chi tiết từng video: `src/videos/<slug>/FEEDBACK.md`; video không có nguồn trong repo: `.agents/gop-y/<slug>.md`. Thêm mục mới mỗi khi một góp ý đổi skill: ngày · video · chuyện gì · họ lỗi · luật nào.
+
+## Mục lục theo phép thử và họ lỗi (11/11/2026)
+
+Mỗi bài học dưới đây gán vào một phép thử P0–P5 (`viet-kich-ban` › mục 0). Lỗi mới: tìm họ của nó ở đây trước. Không gán được vào họ nào → có thể thiếu phép thử, báo người bảo trì thay vì thêm luật lẻ.
+
+| Phép thử | Họ lỗi | Bài học (ngày · video) |
+|---|---|---|
+| **P0** đúng và đủ nội dung đã duyệt | tự thu hẹp chủ đề theo hook | 11/11 oxi hoá – khử ("đồng từ đâu ra") |
+| | thiếu kiến thức bắt buộc của bài | 11/11 oxi hoá – khử (quy tắc số oxi hoá, ion); 26/10 vectơ KG ("phép cộng vectơ" trong `visual` bị quên) |
+| | mở rộng ra ngoài bài (giảng lại bài trước, công cụ bài khác, ngoài chương trình) | 22/10 đơn điệu (4 beat dựng lại tỉ số; bảng xét dấu; Lagrange); 22/10 đạo hàm (b14–b15) |
+| | hook sai bậc / không cần kiến thức của video | 22/10 đơn điệu (dân số; pin cắm sạc) |
+| | số/đơn vị không có thật | 22/10 đơn điệu ("trăm m") |
+| **P1** không nhảy bước | dùng thứ chưa giải thích | 20/10 đạo hàm ($f(x)-f(x_0)$; cát tuyến, tiếp tuyến chưa định nghĩa; phần đề thi cũ dùng thứ chưa dạy); 22/10 đơn điệu ($P'$ = nạp − tiêu) |
+| | chuỗi "vì sao" quá nhanh / không nối công thức | 22/10 đơn điệu (kính lúp 3 dòng; "đạo hàm bằng 3 nên…") |
+| | từ khó trong câu định nghĩa | 10/11 Văn |
+| | ký hiệu trước thứ nó gọi tên | 11/11 oxi hoá – khử (bỏ luật "20% cuối", thay bằng thứ tự từng khái niệm) |
+| **P2** biết mình đang xem gì | không định hướng (chưa thấy thứ trong tiêu đề) | 11/11 bảng tuần hoàn |
+| | vật không tự nói / không tên / không chú thích | 11/11 bảng tuần hoàn (hai cốc); 20/10 đạo hàm ("$s$: m"); 26/10 vectơ KG (đường gióng không chú thích) |
+| | quá nhiều cảnh, nhân vật trang trí, phép biến hình lạ | 20/10 đạo hàm (Bolt → bóng → …; xoay đường chạy; Bolt → $s=t^2$); 17/10 (người leo núi, đèn giao thông, tag thường trực) |
+| | rác thị giác còn lại / khung trống đầu cảnh / cảnh nháy | 06–07/11 Oxyz (state leakage); 26/10 vectơ KG; 23/10 (BeatShell nháy) |
+| **P3** tắt tiếng hiểu đúng lời | lời khác – hình giống (so sánh) | 11/11 bảng tuần hoàn (Li = Na); 22/10 đơn điệu ("so sánh đi chứ") |
+| | một hình cho mọi khái niệm / chỉ thêm chữ | 11/11 oxi hoá – khử (70 s hai quả cầu); 10/11 Văn (slide chữ) |
+| | số đổi mà hình đứng yên; hình đổi lệch lúc lời nói | 20/10 đạo hàm (trục số tự hiện, bảng nhảy số); 23/10 (`cue`) |
+| | hình gợi sai điều muốn nói | 26/10 vectơ KG (trục sâu gần song song vectơ); 07/11 Oxyz (máy bay chúc mũi sai hướng) |
+| **P4** một khái niệm một tên | hai hệ thuật ngữ / ký hiệu | 11/11 bảng tuần hoàn (1–18 và IA; sodium và natri) |
+| | một màu hai nghĩa; mũi tên dùng sai nghĩa | 23/10 cực trị (màu); 22/10 đơn điệu ("Cực trị → bài sau") |
+| **P5** chữ đọc được | chữ không vừa hộp | 11/11 bảng tuần hoàn ("Na" to hơn ô); 06/11 (thẻ tràn, chữ rớt dòng) |
+| | chữ/nhãn đè nét, đè nhau, cụt mép, bị đẩy xa | 17/10 đạo hàm; 23/10 (nhãn tay, đệm, `phases`); 06–07/11 Oxyz; 08/11 Sử ("Thăng L…"); 10/11 (nhãn giật); 10/11 Văn (khối ý chồng) |
+| | ký hiệu viết tay hiện vỡ / công thức lỗi lặng lẽ | 08/11 (`$ o$`); 07/11 (`\v`); 26/10 (`\vec`); 11/11 (mũ Unicode, `\ce` chữ đỏ); 06/11 (gạch ngang trên số) |
+| | hình bé tí giữa khung | 08/11 Sử |
+| **Ngoài sáu phép thử** (tầng 2 — xem/nghe dễ chịu, quy trình) | nhịp và giọng đọc | 19–26/10 Vivibe (dấu ngắt, phiên âm); 22/10 (`speed`); 23/10 (câu hỏi đoán sượng) |
+| | kết không có cảm giác kết | 19–20/10 đạo hàm |
+| | thừa, gây cười, kém hấp dẫn | 10/11 (nhãn "mô hình" thừa); 22/10 (câu hài); 10/11 Văn (minh hoạ quá đơn giản) |
+| | quy trình, công cụ | 23/10 (storyboard trước audio; học sinh ảo); 24/10 (token); 08/11 (link `file:///`); 07/11 (asset) |
 
 ## Mở – kết
 - 22/10 · đơn điệu · Hook dân số VN "tốc độ tăng giảm dần mà vẫn tăng" → lẫn đạo hàm với đạo hàm bậc hai. → phép thử *đúng bậc khái niệm*.
@@ -210,3 +244,24 @@ am - c Bình: Dành cho các môn Tự nhiên (Toán, Lý, Hóa, Tin) — dứt 
 - **Luật**: gói `hoa.md` luật 0.13–0.16, 1.6 (loại video + *Bảng nội dung* để duyệt + `boQuaDaDuyet`), 1.1 (20% cuối chỉ cho video hiện tượng), 2.4 (tên gọi chéo, dấu trước/dấu sau), 2.6 (thẻ bài học), 6.7 (loại khái niệm → hình, một kiểu hình ≤ 40%), 6.9 (font, `\ce`, cấm mũ Unicode), checklist 12–15.
 - **Chặn bằng công cụ**: thẻ bài học `references/hoa/lop-10/bai-05-…`, `bai-13-…` (kiến thức lõi, bẫy thi, ví dụ đã kiểm số, từ khóa kiểm tra); `check_script` môn hoa: lỗi khi thiếu mục của thẻ (trừ mục trong `boQuaDaDuyet`), lỗi ký tự mũ Unicode, lỗi `\ce` khi video không import chemistry, cảnh báo "đồng" là tên nguyên tố; component `OxidationFormula` (tự cộng, sai tổng là báo lỗi), `RedoxRoleTable`, `ElectronBalance`, `NailInCopperSulfate`; mọi file chemistry tự nạp mhchem. Demo: `hoa-thanh-phan` frame 600–1080.
 - **Còn mở**: hai thẻ bài học chờ CTV Hóa soát với SGK; font chung chưa chốt (công thức `\ce` đang là font KaTeX, chữ thường là Plus Jakarta Sans).
+
+### 11/11/2026 — Nâng bài học Hóa thành luật chung: sáu phép thử thay cho luật vá từng lỗi
+- **Bối cảnh**: hai video Hóa bị CTV góp ý (`cau-tao-bang-tuan-hoan`, `phan-ung-oxi-hoa-khu`); nhánh Hóa đã vá riêng. Phiên này nâng phần dùng được cho mọi môn.
+- **Người dùng chốt**: (1) bỏ luật "một kiểu hình ≤ 40% thời lượng" — chỉ cần *khái niệm mới → hình mới*; (2) bỏ "ký hiệu được chiếm phần lớn thời lượng" (và "~20% cuối") — thay bằng thứ tự *hạt trước, ký hiệu sau cho từng khái niệm*, thời lượng theo Bảng nội dung; (3) luật viết theo **kết quả**, không theo cách làm: liệt kê ngoại lệ cho từng trường hợp là dấu hiệu luật sai.
+- **Gốc rễ**: luật cũ viết theo cách dựng ("≥ 2 dấu hiệu khác", "beat riêng", "≤ 6 s") nên mỗi lần cách dựng không hợp lại phải vá ngoại lệ; agent yếu làm đúng chữ của luật, không suy ra mục đích. Gói môn ghi "thêm vào hoặc thay luật chung" mà không nói câu nào là thay.
+- **Luật**: `viet-kich-ban` và `dung-video` mục 0 — ba tầng luật, sáu phép thử P0–P5 có SAI/ĐÚNG, lối thoát "đề xuất ngoại lệ" ở điểm duyệt, mẫu báo cáo có/không + frame; loại video `bai-hoc`/`hien-tuong`, Bảng nội dung, thẻ bài học chung (`references/_mau-the-bai-hoc.md`); thực đơn hình (tầng 3); gói môn có mục "Thay luật chung"; mục lục họ lỗi ở đầu file này; góp ý cho video ngoài repo ở `.agents/gop-y/`.
+- **Chặn bằng công cụ**: `check_script` — thẻ bài học cho mọi môn (`daPhuDaDuyet`, `boQuaDaDuyet`), bảng thuật ngữ đọc từ `.agents/mon/<mon>.json` (Hóa đã chuyển sang), `--goi <mon>` soát gói tự mâu thuẫn (bắt được "clo-rin" trong bảng phát âm Hóa trái với bảng thuật ngữ), `ngoaiLeDaDuyet`, danh sách "CẦN SOÁT HÌNH" cho lời so sánh. `LayoutProbe` — lỗi khi có công thức KaTeX lỗi, công thức chưa dựng, nhãn "mô hình giản lược/minh hoạ", gạch ngang trên số; cảnh báo chữ tràn khung chưa gắn `data-box` (cả SVG). Component `TextBox` + `fitFont` (cỡ chữ theo hộp).
+- **Nhãn "mô hình" (người dùng nhắc lại, 11/11)**: luật 10/11 đã có nhưng không có công cụ chặn nên 6 video cũ còn kiểu "Mô hình: …". Thêm chặn ở `check_script` (lỗi `[mo-hinh]`) và `check-layout`. Người dùng chốt: chỉ sửa luật/skill, **không sửa video cũ**; video cũ render lại nguyên bản dùng `ngoaiLeDaDuyet` khi người dùng đồng ý.
+- **Chốt thêm 12/11 (người dùng)**: Lý — video lý giải công thức đi từ hiện tượng rồi suy ra công thức, nhưng công thức không bó vào ~20% cuối (gói `ly.md` mục 1). P1 viết rõ thành "thấy trước, gọi tên sau" kèm phép thử "chỉ vào từng ký hiệu". "clo-rin", "clo-rai", "clo-rích" là phiên âm tên IUPAC → ngoại lệ trong `hoa.json` ("khí clo" vẫn lỗi). Gom luật lặp trong `dung-video` (Bước 0, thẻ, dọn trạng thái, `phases`); AGENTS.md ghi tầng cho luật bố cục thay cho "BẮT BUỘC/CẤM TUYỆT ĐỐI"; tài liệu CTV nói về Bảng nội dung và `.agents/gop-y/`.
+- **Còn mở**: (1) các bài học "ngoài sáu phép thử" (nhịp, giọng, cảm giác kết, hấp dẫn) — có cần phép thử P6 không.
+
+### 12/11/2026 — Cỡ chữ component: sửa một phía sinh lỗi phía kia
+- **Hiện tượng**: sau khi sửa "chữ Na to hơn ô bảng tuần hoàn" (11/11), `check-layout` (lần đầu chạy trên `hoa-thanh-phan`) báo chữ nhỏ dưới mức: số chu kì, tên nhóm 22–23px; ký hiệu trong bảng rộng 720 chỉ 15px; nhãn dưới cốc 30px; các dòng trong ô nguyên tố, dưới cốc đinh dính nhau 3–5px.
+- **Gốc rễ**: (1) lần sửa trước chỉ thêm giới hạn trên (≤ 42% cạnh ô), không có giới hạn dưới — ô quá nhỏ thì không cỡ nào vừa cả hai mà component vẫn vẽ; (2) cỡ tối thiểu ghi ở nhiều nơi lệch nhau (theme 52, LayoutProbe 48), component tự gõ số riêng (22, 30); (3) vị trí dòng theo % cố định; (4) component chỉ được soát bằng mắt ở một cỡ, phòng lab không gắn bộ đo.
+- **Người dùng**: "không được sai đâu sửa đấy, phải sửa dứt điểm".
+- **Luật**: `dung-video` quy tắc 4 — `MIN_FONT` một nguồn (`theme.ts`); `fitFont` hai giới hạn, `fits: false` thì xử lý rõ ràng; xếp dòng theo chiều cao chữ thật; component dùng chung phải qua `check-layout` ở cỡ nhỏ nhất và lớn nhất trong phòng lab. Họ lỗi: P5 "chữ không vừa hộp".
+
+### 12/11/2026 — Test skill mới bằng model yếu (3 bài nhẹ, dừng ở dàn ý)
+- **Đạt**: không tự thu hẹp theo hook, đủ K/T của thẻ, quá 4:00 thì đề xuất tách; chưa có thẻ thì tự soạn thẻ "chờ duyệt" và dừng; Lý để công thức giữa video sau phần quan sát; "thấy trước, gọi tên sau" làm đúng; Li/Na vẽ khác nhau.
+- **Lộ ra**: (1) model trình Bảng nội dung bằng lời thường, không theo mẫu có mã K/T, số giây — **người dùng chốt: bảng chỉ hiện thứ người dùng hiểu**; mã thẻ do agent tự soát, `check_script` chặn sau → nới mẫu, không thêm luật. (2) Thẻ Lý viết từ khóa bằng LaTeX (`ec F`) → `check_script` báo thiếu mãi dù kịch bản đúng — dễ đẩy agent tự ghi `boQuaDaDuyet`. → mẫu thẻ: từ khóa là cụm lời thường; `check_script` báo lỗi THẺ. (3) Người dùng bảo ghi "Mô hình minh hoạ" → model làm theo im lặng (lối thoát không nói trường hợp người dùng yêu cầu trái luật). → lối thoát 4: nêu luật + lý do, đề xuất, hỏi; vẫn muốn thì làm và ghi ngoại lệ. (4) Câu hỏi đoán đặt sau khi đã giải thích — luật có sẵn, chưa máy nào chặn; để `hoc-sinh-ao`/người duyệt soát.
+- Họ lỗi: P0 (công cụ kiểm độ phủ báo nhầm), tầng 2 (lối thoát thiếu trường hợp).

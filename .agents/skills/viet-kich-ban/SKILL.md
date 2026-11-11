@@ -13,6 +13,42 @@ Output duy nhất: `src/videos/<slug>/script.json`. Không tạo audio, không v
 **Gói môn**: đọc `.agents/mon/<mon>.md` (Toán: `toan.md`) trước khi làm — phạm vi kiến thức, mẫu dựng khái niệm, đơn vị, cách đọc ký hiệu của môn đó. Chưa có gói → tạo từ `.agents/mon/_mau.md` cùng người dùng.
 Lý do và lời góp ý gốc của từng luật: `.agents/lessons.md`.
 
+## 0. Sáu phép thử bắt buộc — đọc trước mỗi lần làm
+
+**Ba tầng luật** (chung cho `viet-kich-ban`, `dung-video` và mọi gói môn):
+- **Tầng 1 — sáu phép thử dưới đây**: kết quả người xem phải đạt. CỨNG: trượt là lỗi. Không gói môn, không ngoại lệ nào tắt được.
+- **Tầng 2 — mặc định**: mọi luật khác trong skill (≤ 3 cảnh, hook ≤ 20 s, 2:30–4:00, một ví dụ xuyên suốt, "Khung nội dung"…). Đây là *cách thường đạt* phép thử. Gói môn chỉ thay được khi ghi trong mục **"Thay luật chung"** của gói (ngưỡng số thì thêm ở `.agents/mon/<mon>.json › thayLuat`). Gói nói khác luật chung mà không có trong mục đó → làm theo luật chung, ghi vào "Chỗ còn nghi ngờ".
+- **Tầng 3 — gợi ý** (thực đơn hình, mẫu câu, component): dùng, hoặc tự đề xuất cách khác ở điểm duyệt.
+
+| # | Phép thử (CỨNG) | SAI đã gặp | ĐÚNG | Kiểm bằng |
+|---|---|---|---|---|
+| **P0** | **Đúng và đủ nội dung đã duyệt**: không sai kiến thức; không tự thu hẹp hay mở rộng | Prompt "phản ứng oxi hoá – khử" → video "Đồng từ đâu ra?", thiếu quy tắc số oxi hoá (Hóa 11/11). Hook dân số làm lẫn đạo hàm với đạo hàm bậc hai (Toán 22/10) | *Bảng nội dung* (Bước 1) được duyệt: mọi mục của thẻ bài học có beat, mục bỏ là do người dùng chọn | `check_script` (thẻ bài học), checklist Nội dung |
+| **P1** | **Không nhảy bước — thấy trước, gọi tên sau**: ký hiệu, thuật ngữ, công thức mới chỉ xuất hiện khi trên hình đã có thứ nó gọi tên và người xem đã thấy thứ đó hoạt động; phép ghép chỉ sau khi từng thành phần đã có nghĩa. Phép thử: chỉ vào từng ký hiệu trong công thức — người xem đã thấy cái này trên hình chưa? | Chỉ đoạn $f(x)-f(x_0)$ khi chưa hiểu $f(x_0)$ (Toán 20/10). Phương trình hiện khi chưa thấy hạt nào đổi (Hóa). Luật cũ "công thức chỉ ở ~20% cuối" ép cắt phần công thức của video bài học (Hóa, Lý) | Kéo lò xo, thấy lực gấp đôi thì dãn gấp đôi → rồi viết $F = k\Delta l$, $F$ gắn cạnh mũi tên lực, $\Delta l$ cạnh đoạn dãn. Cát tuyến quay dần → rồi mới gọi "tiếp tuyến". Công thức hiện ở đầu, giữa hay cuối video đều được — thứ tự tính **cho từng khái niệm**. Công thức bài trước và thứ ghi trong tiêu đề được hiện ngay | Bước 3 "theo dõi người xem", `hoc-sinh-ao` |
+| **P2** | **Lúc nào cũng biết mình đang xem gì**, và nó liên quan gì tới tiêu đề/câu hỏi | 15 s đầu là hai cốc nước không tên, chưa thấy bảng tuần hoàn (Hóa 11/11). Đổi Bolt → $s=t^2$, người xem tưởng vẫn là Bolt (Toán 20/10) | Thứ trong tiêu đề hiện trên sân khấu lớn ở dòng đầu; vật thật có tên trên vật; câu đầu beat nói hình mới là gì. Cố ý giấu tên để hỏi vẫn đạt, nếu lời đọc đang hỏi đúng điều đó | checklist có frame |
+| **P3** | **Tắt tiếng vẫn hiểu đúng điều lời đọc khẳng định**: xem stills không tiếng, nói lại được cái gì giống, khác, đổi, mới | Li và Na vẽ y hệt trong khi lời nói "Na mạnh hơn" (Hóa). 70 s chỉ hai quả cầu, khái niệm sau chỉ thêm chữ (Hóa). Bảng nhảy số mà vạch đứng yên (Toán 20/10). Video Văn toàn thẻ chữ (10/11) | Giống ở đâu → hình giống đúng ở đó; khác ở đâu → nhìn thấy khác ở đó. **Khái niệm mới → hình mới**: một thay đổi nhìn thấy được của riêng nó (vật, bộ phận, lớp mới trên cùng sân khấu), không chỉ thêm dòng chữ. Số đổi → hình đổi | mục "CẦN SOÁT HÌNH" của `check_script`, stills không tiếng |
+| **P4** | **Một khái niệm một tên** trong cả video (một danh pháp, một cách gọi, một ký hiệu cho một đại lượng) | Vừa "nhóm 1–18" vừa "IA…VIIIA"; lúc "sodium" lúc "natri" (Hóa 11/11) | Theo bảng thuật ngữ chốt của gói môn | `check_script` (đọc `.agents/mon/<mon>.json`) |
+| **P5** | **Chữ đọc được**: không tràn, không đè, đủ cỡ, công thức hiện đúng | Chữ "Na" to hơn ô bảng tuần hoàn (Hóa). "$ o$" thay cho mũi tên (Sử 08/11). "Thăng L…" bị cắt ở mép (Sử) | Ở B1: `text` ngắn, gắn vào vật. Ở B3: component tính cỡ chữ theo hộp, `MathText` | `check_script` (B1), `check-layout` (B3) |
+
+**Lối thoát — dùng thay vì đoán hay cố theo:**
+1. **Thấy cách hay hơn mà một luật tầng 2 hay một bộ kiểm chặn** → đề xuất ở điểm duyệt có sẵn (Bảng nội dung, storyboard) theo mẫu: *"Luật [mục] — muốn làm [cách khác] — vì [lý do] — phép thử vẫn đạt: [P nào, thế nào]"*. Tự làm khác mà không đề xuất = lỗi.
+2. **Người dùng đồng ý** → ghi vào `script.json` (chỉ ghi khi người dùng đã đồng ý, ≤ 2 mục mỗi video):
+   - `"boQuaDaDuyet": ["K10"]`: bỏ một mục của thẻ bài học;
+   - `"daPhuDaDuyet": {"K4": "b05, nói 'cộng hết lại bằng không'"}`: mục của thẻ có trong video nhưng nói bằng lời khác cụm từ khóa;
+   - `"ngoaiLeDaDuyet": {"b03-l02 thuat-ngu:clo": "lý do"}`: bộ kiểm báo lỗi mà phép thử vẫn đạt (khóa = `<nơi> <mã trong ngoặc vuông của lỗi>`).
+3. **Gặp tình huống không luật nào nói tới** → hỏi ở điểm duyệt. Không đứng hình, không đoán im lặng.
+4. **Người dùng yêu cầu điều trái một luật đã chốt** (vd. "ghi chú 'Mô hình minh hoạ' ở góc", "để công thức ở cuối", "dùng tên natri") → không làm theo im lặng, không từ chối: nêu luật trong một câu kèm lý do, đề xuất cách đạt đúng mục đích người dùng muốn, rồi hỏi. Người dùng vẫn muốn → làm theo, ghi vào `ngoaiLeDaDuyet` (nếu bộ kiểm báo lỗi) và vào báo cáo. Luật tầng 1 (sai kiến thức) thì nói rõ là sai, không làm theo.
+
+**Báo cáo B1 phải dán** (mỗi dòng có/không + chỗ):
+```
+P0 Bảng nội dung đã duyệt: có/không · mục bỏ/đã duyệt khác lời: … · check_script: … lỗi
+P1 Đã theo dõi người xem từng dòng; dòng dùng thứ chưa dạy: … (không có / đã sửa)
+P2 Dòng 1 của b01 cho thấy thứ trong tiêu đề: có/không · vật nào chưa có tên: …
+P3 Mỗi dòng trong "CẦN SOÁT HÌNH": show cho thấy đúng chỗ giống/khác? · khái niệm mới nào chỉ thêm chữ: …
+P4 check_script thuật ngữ: … lỗi / cảnh báo đã soát
+P5 text dài > 35 ký tự: …
+Đề xuất ngoại lệ (nếu có): …
+```
+
 ## Bối cảnh
 
 - Người xem: học sinh THPT ôn **THPTQG, TSA, HSA** (và các kỳ ĐGNL tương tự). Video đăng trên web 9Study.
@@ -24,21 +60,53 @@ Lý do và lời góp ý gốc của từng luật: `.agents/lessons.md`.
 ## Đầu vào
 
 Người dùng đưa: **chủ đề** + **ý bản chất muốn nói** (+ kỳ thi, độ dài, ghi chú nếu có).
+- **Xác định loại video** (`"loai"` trong `script.json`; không chắc → hỏi):
+  - **Video bài học** (`"bai-hoc"`): prompt nêu tên một bài/chủ đề SGK ("phản ứng oxi hoá – khử", "tính đơn điệu"). Nội dung = **thẻ bài học** của bài đó (mục "Thẻ bài học" dưới đây). Tiêu đề **chứa** tên bài; hook ≤ 20 s chỉ là cửa vào, không thay chủ đề.
+  - **Video hiện tượng** (`"hien-tuong"`): prompt nêu một câu hỏi/hiện tượng cụ thể ("vì sao đinh đổi màu?"). Nội dung = phần kiến thức đủ để trả lời câu đó. Vẫn trình Bảng nội dung.
 - Thiếu ý bản chất → đề xuất 2–3 góc bản chất, hỏi chọn.
 - Ý bản chất sai/thiếu chính xác → nói rõ chỗ sai, đề xuất phát biểu đúng trước khi làm tiếp.
 - Video nằm trong chuỗi → xác định **bài trước đã dạy gì** (đọc `script.json` video trước) và **ý để dành bài sau**.
 
 ## Quy trình
 
+### Thẻ bài học — "bài này phải có gì" (video bài học)
+
+- Vị trí: `references/<môn>/lop-<lớp>/bai-<NN>-<ten>.md` (được nằm trong `tap-1/`, `tap-2/`; `NN` hai chữ số, khớp `"bai": "Bài 13. …"`). File được tính là thẻ khi có mục `## Từ khóa kiểm tra`; file tóm tắt SGK chưa có mục đó thì *chưa có thẻ*.
+- Mẫu: `references/_mau-the-bai-hoc.md` — kiến thức lõi K1…, bẫy thi T1…, ví dụ đã kiểm số, hiện tượng gợi ý, gợi ý chia video, Từ khóa kiểm tra.
+- **Chưa có thẻ** → soạn thẻ theo mẫu, dựa trên SGK (`references/<môn>/…`), ghi "Trạng thái: chờ duyệt". Được trình thẻ cùng lúc với Bảng nội dung, nhưng nói rõ "thẻ chờ duyệt" — người dùng duyệt thẻ (phạm vi kiến thức) trước, rồi mới chốt Bảng nội dung. Số liệu trong ví dụ tự kiểm và ghi phép kiểm.
+- **Từ khóa kiểm tra** của thẻ là **cụm lời thường** sẽ có trong lời đọc hoặc chữ trên hình ("tổng số oxi hoá", "hợp lực"), không LaTeX, không ký hiệu (`\vec F`, `$...$` không bao giờ khớp — `check_script` báo lỗi thẻ). Ghi vài cách nói (`cụm1 | cụm2`).
+- Thẻ là chuẩn chung của dự án: đang làm một video thì không sửa thẻ; thấy thẻ sai → báo người dùng.
+
 ### Bước 0 — Tìm ý (trước dàn ý)
 
-1. **Nghĩ 6–8 hiện tượng mở đầu**, chấm từng cái (0–2 mỗi tiêu chí): đúng thật, có nguồn · gây tò mò, nêu được thành câu hỏi trong 15–20 s · qua ba phép thử của yêu cầu 1 · có hình cụ thể để dựng · kết được bằng một đáp án cụ thể (con số, kết luận nhìn thấy) · khớp lời hứa của tiêu đề. Chọn cái cao điểm nhất; giữ 2 phương án dự phòng.
+1. **Nghĩ 6–8 hiện tượng mở đầu** (video bài học: hook có thể là hiện tượng, một câu đề thi, hoặc một cách hiểu sai phổ biến — chọn cái cuốn nhất), chấm từng cái (0–2 mỗi tiêu chí): đúng thật, có nguồn · gây tò mò, nêu được thành câu hỏi trong 15–20 s · qua ba phép thử của yêu cầu 1 · có hình cụ thể để dựng · kết được bằng một đáp án cụ thể (con số, kết luận nhìn thấy) · khớp lời hứa của tiêu đề. Chọn cái cao điểm nhất; giữ 2 phương án dự phòng.
 2. **Chốt hình trung tâm và khoảnh khắc "à ra thế"**: một hình mang được ý bản chất (vd. kính lúp quanh điểm, dấu của tử và mẫu) và khoảnh khắc người xem *thấy* ra lý do. Thiết kế ngược từ khoảnh khắc này: mọi beat trước nó chuẩn bị đủ thứ để nó "nổ".
 3. **Cách hiểu sai phổ biến** của chủ đề (nếu có): học sinh hay nghĩ gì, đề thi hay bẫy gì.
 
 ### Bước 1 — Dàn ý (dừng lại chờ duyệt)
 
-Phần lớn lỗi người dùng bắt được là lỗi dàn ý; viết xong lời mới phát hiện thì phải làm lại B1–B3. Dàn ý bày đủ:
+Phần lớn lỗi người dùng bắt được là lỗi dàn ý; viết xong lời mới phát hiện thì phải làm lại B1–B3.
+
+**Mở đầu dàn ý bằng *Bảng nội dung*** (phép thử P0). Agent **không tự quyết** video nói gì, bỏ gì; agent **nêu rõ** để người dùng duyệt. Bảng viết **cho người dùng đọc**, bằng lời thường — không cần hiện mã thẻ, số beat, số giây từng phần. Cần có:
+- loại video (bài học theo bài nào / hiện tượng) và **ý xuyên suốt** (một câu);
+- các phần của video: *sẽ giải thích gì* · *người xem sẽ thấy gì*;
+- hook (hiện tượng / câu đề thi / cách hiểu sai) và nguồn kiểm chứng;
+- **cái gì không có trong video và vì sao** (bỏ trống nếu đủ); ước tính tổng thời lượng; đề xuất tách nếu > 4:00;
+- đề xuất ngoại lệ (mục 0 › Lối thoát) và chỗ còn nghi ngờ, nếu có.
+
+Ví dụ đã được người dùng khen (Hóa 10, Bài 13):
+```
+Video "Phản ứng oxi hoá – khử — Hóa 10" đi theo mạch: hiểu số oxi hoá → nhận ra ai nhường, ai nhận electron → dùng bảo toàn electron để cân bằng phương trình.
+| Phần | Sẽ giải thích gì? | Người xem sẽ thấy gì? |
+| 1. Câu hỏi mở đầu | Vì sao đinh iron trong dung dịch copper(II) sulfate có lớp copper bám lên? | Cốc có tên chất; lớp đỏ nâu xuất hiện trên đinh |
+| 3. Số oxi hoá là gì? | Quy ước electron để xác định số oxi hoá | Cặp electron chung trong nước được quy về nguyên tử hút mạnh hơn, rồi mới hiện số oxi hoá |
+| … | … | … |
+Ước tính 6–7 phút → đề xuất chia hai video: (1) Số oxi hoá; (2) Phản ứng oxi hoá – khử. Chưa chốt thay cho bạn.
+```
+**Agent tự soát trước khi trình** (không cần hiện ra): mọi mục K… và T… của thẻ đều nằm trong một phần của bảng, hoặc ở "không có trong video" kèm lý do — không âm thầm bỏ. `check_script` còn chặn lại ở bước kịch bản. Video hiện tượng không có thẻ: các phần chính là các ý kiến thức sẽ dạy.
+- Ước tính > 4:00 → **không tự cắt**; đề xuất cách tách (thẻ mục "Gợi ý chia video", chưa có thì tự đề xuất), người dùng chọn.
+
+Sau Bảng nội dung, dàn ý bày đủ:
 
 1. **slug**, **tiêu đề**, **môn** (`subject`), **lớp / chương / bài** theo SGK (`lop`, `chuong`, `bai`: quyết định thư mục chứa video trong `out/`).
 2. **Vị trí trong chuỗi**: bài trước đã dạy gì (chỉ nhắc một dòng) · khái niệm mới · ý để dành bài sau.
@@ -59,7 +127,7 @@ Phần lớn lỗi người dùng bắt được là lỗi dàn ý; viết xong 
 
 Theo schema và quy tắc bên dưới. File đã tồn tại → hỏi trước khi ghi đè.
 - **Sửa một phần kịch bản** → beat giữ nguyên cũng rà lại theo quy tắc hiện tại và theo những gì beat mới đã (hoặc chưa) dạy.
-- **Rút thời lượng** → cắt ý phụ; không cắt bước giải thích của ý chính, không cắt hình so sánh.
+- **Rút thời lượng** → cắt ý phụ; không cắt bước giải thích của ý chính, không cắt hình so sánh. Mục của thẻ bài học và bẫy thi **không phải ý phụ** (P0): vượt 4:00 thì đề xuất tách video, không tự cắt.
 
 ### Bước 3 — Gọt, kiểm, báo cáo
 
@@ -84,6 +152,10 @@ Người dùng chốt kịch bản → sang **B3 bản nháp + storyboard** (ski
   "chuong": "Chương I. Ứng dụng đạo hàm để khảo sát và vẽ đồ thị của hàm số",
   "bai": "Bài 1. Tính đơn điệu và cực trị của hàm số",
   "exams": ["THPTQG", "TSA", "HSA"],
+  "loai": "bai-hoc",                     // "bai-hoc" | "hien-tuong" (Đầu vào › Xác định loại video)
+  "boQuaDaDuyet": ["K10"],               // TUỲ CHỌN, CHỈ khi người dùng đã duyệt: mục thẻ bài học được bỏ
+  "daPhuDaDuyet": {"K4": "b05, nói 'cộng lại bằng không'"},  // TUỲ CHỌN, đã duyệt: mục có nhưng nói lời khác
+  "ngoaiLeDaDuyet": {"b03-l02 thuat-ngu:clo": "lý do"},        // TUỲ CHỌN, đã duyệt: bộ kiểm báo nhầm (mục 0 › Lối thoát)
   "beats": [
     {
       "id": "b01",                       // b01, b02, … liên tục
@@ -110,16 +182,18 @@ Người dùng chốt kịch bản → sang **B3 bản nháp + storyboard** (ski
 
 `speed` (tốc độ đọc riêng của beat) **không dùng**: làm chậm bằng cách chia nhỏ dòng, không bằng đọc rề rà.
 
-## Khung nội dung — bắt buộc
+## Khung nội dung — mặc định (tầng 2)
 
-Thứ tự và số phần tuỳ chủ đề, nhưng **bắt buộc có** (số thứ tự được skill khác dẫn tới, giữ nguyên):
+Đây là cách thường đạt sáu phép thử ở mục 0. Thứ tự và số phần tuỳ chủ đề; làm khác một yêu cầu dưới đây thì đề xuất theo mục 0 › Lối thoát. Số thứ tự được skill khác dẫn tới, giữ nguyên:
 
 1. **Mở bằng một hiện tượng thật chưa có lời giải** (beat `HIỆN TƯỢNG`, ≤ 20 s): hiện tượng, ứng dụng, fun fact trong đời sống/khoa học/lịch sử mà chính ý bản chất của video giải thích được ở mức THPT; nêu thành **câu hỏi**, giữ đáp án tới cuối.
    - **Đúng thật**: kiểm bằng nguồn tin cậy, ghi nguồn trong dàn ý. Không bịa, không phóng đại, không gán cho kiến thức vai trò nó không có ngoài thực tế. Không tìm được → báo người dùng.
    - **Ba phép thử**: *đúng bậc khái niệm* (lời giải không cần kiến thức bậc trên cái đang dạy) · *kiến thức cần thiết* (bỏ kiến thức của video đi, người xem không tự trả lời được bằng lẽ thường) · *đại lượng hiển nhiên* (thứ gán cho khái niệm đúng là nó một cách trực tiếp, không phải đi qua một định luật chưa dạy).
    - Lý do người xem cần quan tâm phải rõ trong **30 giây đầu**. Không mở bằng "Hôm nay chúng ta học…".
-2. **Trực giác trước, định nghĩa/công thức sau** (trừ công thức bài trước, hiện ngay làm mốc — yêu cầu 5).
-3. **Một ví dụ xuyên suốt**:
+   - **Định hướng trước (P2)**: thứ ghi trong tiêu đề (bảng tuần hoàn, đồ thị, sa bàn…) hiện trên sân khấu lớn ngay dòng đầu của b01, rồi mới vào thí nghiệm/câu chuyện làm bằng chứng.
+   - **Video bài học**: hook ≤ 20 s có thể là hiện tượng, câu đề thi hoặc cách hiểu sai; nó là cửa vào, chủ đề vẫn là bài. Vẫn quay lại khép hook ở cuối.
+2. **Trực giác trước, định nghĩa/công thức sau** = phép thử P1 "thấy trước, gọi tên sau", tính cho từng khái niệm, không bó công thức vào một đoạn cố định của video (trừ công thức bài trước, hiện ngay làm mốc — yêu cầu 5).
+3. **Một ví dụ xuyên suốt** (video bài học: hook mở–kết là mạch xuyên suốt; quy tắc có nhiều trường hợp dùng các ví dụ đã kiểm số của thẻ, mỗi trường hợp một ví dụ, đặt cạnh nhau):
    - **một** nhân vật/vật mang được hiện tượng, số liệu, định nghĩa, đề thi và giải đáp; cả video ≤ ~3 cảnh; không nhân vật trang trí;
    - hiện tượng thật không có công thức → dùng **mô hình của chính vật đó**, theo mục "Hình và số tượng trưng": không nói "đây là mô hình", không nhãn "mô hình"; nếu cùng nhân vật vừa có số thật vừa có số minh hoạ thì đổi hình/cảnh rõ ràng + nhãn nhỏ "Số liệu minh họa"; cho vài con số trước rồi mới tới công thức;
    - hình biểu diễn mới nối với hình cũ bằng bước người xem tự hiểu (lấy số từ hình cũ → bảng nhỏ → chấm điểm → nối đồ thị);
@@ -134,7 +208,8 @@ Thứ tự và số phần tuỳ chủ đề, nhưng **bắt buộc có** (số 
 8. **Người xem luôn biết đang xem gì**: hình, bảng, công thức hay bước mới → câu đầu của beat nói rõ đó là gì, để làm gì. Không để hình mới hiện mà lời chưa giới thiệu.
 9. **Nhịp hình: mỗi dòng tối đa một thay đổi trên hình**, và thay đổi đó là *nguyên nhân* nhìn thấy được của con số/kết luận dòng đó nói. Không để số, điểm, hàng bảng tự hiện liên tiếp mà hình không làm gì.
 10. **Chữ sống trong cảnh** — xem quy tắc `text`. Phép thử tắt tiếng: chỉ nhìn màn hình vẫn biết mỗi con số, ký hiệu, hình là gì (hình tượng trưng loại 1 — mục "Hình và số tượng trưng" — được miễn chú thích).
-11. **Liên hệ đề thi bằng một ví dụ cụ thể — chỉ khi dạng bài dùng đúng khái niệm của video.** Video chỉ nêu bản chất một khái niệm → không có phần đề thi, không mượn dạng bài của bài khác. Nếu có:
+11. **Liên hệ đề thi bằng một ví dụ cụ thể — chỉ khi dạng bài dùng đúng khái niệm của video.** Video chỉ nêu bản chất một khái niệm → không có phần đề thi, không mượn dạng bài của bài khác.
+    **Video bài học**: mỗi bẫy thi T… của thẻ là nội dung (P0) và có **hình riêng cho thấy cách sai và cách đúng** (P3), không gộp thành một dòng chữ. Mặc định là một beat `TRONG ĐỀ THI`/`BẪY THƯỜNG GẶP`; đặt ngay lúc khái niệm đó vừa dạy cũng được nếu hay hơn — ghi ở Bảng nội dung. Nếu có phần đề thi:
     - vẫn trong ví dụ xuyên suốt (dạng bài kể lại bằng chính nhân vật của video);
     - **chuyển sang đề thi là bước khó**: thứ phần trước chưa dạy (một số → một hàm, đổi ví dụ, giá trị âm…) cần dòng riêng trước khi dùng — mẫu ở gói môn;
     - kết luận rút ra phải có hình so sánh cụ thể, không chỉ đọc bằng lời; không liệt kê nhiều dạng bài; không bịa đề thật, không ghi năm/mã đề.
@@ -179,7 +254,7 @@ Chỉ `TRONG ĐỀ THI`, `BẪY THƯỜNG GẶP`, `GIẢI ĐÁP` hiện cho ngư
 3. **Minh hoạ để giải thích, không để trưng**: beat nào cũng có hình; ưu tiên hình chuyển động/biến đổi nhưng ít thay đổi, mỗi thay đổi chậm và có nghĩa. Hình nói, chữ chỉ ghi chú.
 4. **Thực tế**: mở và kết bằng hiện tượng thật; giữa video neo vào chính ví dụ xuyên suốt.
 5. **Không cố gây cười**: ví dụ đơn giản, nói thẳng; không câu đùa, so sánh bất ngờ, tình huống hài.
-6. **Không lan man, nhưng không vội**: beat nào bỏ đi mà người xem không hiểu kém đi → cắt; mọi bước suy luận nói thành lời; một video chỉ **một ý bản chất chính** + 1–2 hệ quả.
+6. **Không lan man, nhưng không vội**: beat nào bỏ đi mà người xem không hiểu kém đi → cắt; mọi bước suy luận nói thành lời; một video chỉ **một ý bản chất chính** + 1–2 hệ quả (video bài học: các mục của thẻ xoay quanh một ý ghi ở dòng "Xoay quanh" của Bảng nội dung).
 
 **Mạch nhân quả giữa các beat**: mỗi beat mở bằng lý do nó tồn tại so với beat trước — "nên…", "nhưng…", "vậy thì…", "còn… thì sao?" — không "tiếp theo", "bây giờ ta sẽ".
 
@@ -221,6 +296,8 @@ Luật chung cho mọi môn; gói môn có thể thay (vd. Toán: mô hình tr�
 | | số dễ bị tưởng là số thật: dân số, giá cả, GDP, quân số, tỉ lệ % | nhãn nhỏ "Số liệu minh họa" ở góc video (khi cần kỹ hơn) | không nhắc |
 
 - **Điều kiện của loại 1**: hình gợi ngay ra sự vật, hoặc lời đọc đã gọi tên nó. Không thoả (hình lạ, người xem không đoán được là gì) → chú thích tên vật như mọi thành phần khác, vẫn không gọi là "mô hình".
+- **Máy chặn**: `check_script` báo lỗi `[mo-hinh]` khi `keyword`/`text`/`caption` là nhãn "mô hình" ("mô hình", "Mô hình: …", "… mô hình, không phải …", "Mô hình minh hoạ"), và khi `visual`/`show` định ghi nhãn đó (chữ trong ngoặc; câu đang bỏ nhãn như "không nhãn 'mô hình'", "nhãn 'mô hình' tắt" thì không tính); cảnh báo khi nhãn nhỏ không phải "Số liệu minh họa"/"Ảnh minh họa", và khi `speak` giải thích "đây là mô hình", "tình huống giả định"; `check-layout` báo lỗi khi nhãn "mô hình" hiện trên hình.
+- **Video dựng trước 10/11/2026** (vd. `ban-chat-dao-ham`, `don-dieu`, `tich-vo-huong`, `toi-uu-lon-nhom`, `vecto-khong-gian`, `cuc-tri-gtln-gtnn`, `demo-giai-doan-2`) còn nhãn kiểu cũ: **không tự sửa** video đó. Chỉ render lại nguyên bản → khi người dùng đồng ý, ghi `"ngoaiLeDaDuyet": {"mo-hinh": "video trước 10/11, giữ nguyên"}`. Người dùng bảo dựng lại → sửa ở B1 theo luật này (lời đọc đổi thì tạo lại audio dòng đó).
 - **Nhãn nhỏ** (loại 2, 3): chữ thường 22–24px, Regular 400, màu chữ phụ, độ mờ ~0,75; góc dưới phải video (ngang dải câu chốt) hoặc góc ảnh minh hoạ; tối đa **1 nhãn mỗi cảnh**, hiện từ lúc số/ảnh xuất hiện tới hết cảnh. Ghi trong `visual` ("nhãn nhỏ 'Số liệu minh họa' góc dưới phải, từ dòng 2"), không phải `text`.
 - **Vẫn giữ**:
   - số liệu thật (hiện tượng mở đầu, giải đáp) đúng, có nguồn — yêu cầu 1, 12; số minh hoạ không được nói như số thật ("theo thống kê…", ghi năm/nguồn);
@@ -251,7 +328,7 @@ Phụ đề đầy đủ xuất thành file riêng (`.srt`/`.vtt`) từ `speak`.
 
 - **`scene`**: số cảnh (1, 2, 3; ≤ ~3 cả video). Các beat liền nhau cùng cảnh được dựng như một sân khấu liền: vật ở lại và biến đổi, không xoá vẽ lại.
 - **`visual`** (beat): mở bằng tên cảnh ("CẢNH 2 — …" lần đầu, "Giữ CẢNH 2." sau đó), rồi tả **trạng thái lúc beat bắt đầu**: bố cục, trục, hàm, thành phần, thứ gì từ beat trước còn ở lại / mờ đi. Đánh dấu "BƯỚC KHÓ". Thay đổi theo từng dòng **không** viết ở đây.
-  * **Quy chuẩn Sân khấu Toàn cảnh (Hero Stage Canvas)**: Luôn thiết kế bối cảnh trải rộng trên toàn bộ màn hình 1920×1080 (phân bổ thoáng đãng sang trái, phải, trung tâm). CẤM TUYỆT ĐỐI mô tả dạng "đặt trong một thẻ/hộp nhỏ ở giữa" khiến hình bị co cụm bé tí giữa màn hình.
+  * **Sân khấu toàn khung** (chi tiết `dung-video` quy tắc 1): tả bối cảnh trải rộng cả khung 1920×1080; không tả kiểu "đặt trong một thẻ/hộp nhỏ ở giữa".
   * **An toàn mép biên**: Các địa danh, công thức hoặc nhãn ở phía biên phải ($x > 1400$px) phải ghi rõ "nhãn dạt sang trái điểm neo" để chống tràn viền cắt cụt chữ.
 - **`show`** (dòng): **đúng một thay đổi** trên hình, viết ngắn, động từ + vật + vai trò màu ("điểm (2; 4) sáng màu tăng", "khung soi co về quanh đỉnh", "giữ nguyên"); thay đổi đó là *nguyên nhân* nhìn thấy được của con số/kết luận dòng đó nói. Có chữ "rồi", "đồng thời", ";" là đang gói hai thay đổi → tách dòng (`check_script.py` cảnh báo). Bảng/nhãn đổi số thì hình đổi tương ứng trong cùng `show`.
 - **`cue`** (dòng, tuỳ chọn): cụm **nguyên văn** trong `speak` mà thay đổi của `show` phải vào đúng lúc giọng nói tới (vd. dòng "Vậy ba là điểm cực đại, còn sáu là giá trị cực đại." + `cue: "giá trị cực đại"` → nhãn đổi khi giọng nói cụm đó, không phải ngay đầu câu). Dùng khi chữ/hình quan trọng nằm ở **nửa sau** câu, hoặc câu nhắc tới hai thứ lần lượt; thiếu `cue` thì thay đổi vào đầu dòng. Hình và lời phải tới cùng lúc: hình vào trước lời thì người xem nhìn mà chưa biết nhìn gì, vào sau thì nghe mà chưa thấy.
@@ -266,10 +343,12 @@ Phụ đề đầy đủ xuất thành file riêng (`.srt`/`.vtt`) từ `speak`.
 
 ## Độ dài
 
-- **2:30 – 4:00** (cả intro/outro). Vượt 4:00 → báo kèm đề xuất ý phụ có thể cắt. Người dùng yêu cầu khác → theo người dùng.
+- **2:30 – 4:00** (cả intro/outro). Vượt 4:00 → báo kèm đề xuất ý phụ có thể cắt; video bài học thì đề xuất **tách video** (không cắt mục của thẻ). Người dùng yêu cầu khác → theo người dùng. Gói môn được thay ngưỡng (mục "Thay luật chung" của gói).
 - Giọng Vivibe ≈ 20 ký tự/giây (đo 19–22/10/2026) → **≈ 2700–4300 ký tự `speak`**. 8–16 beat; `HIỆN TƯỢNG` ≤ 20 s, `GIẢI ĐÁP` 15–30 s, không beat nào > 40 s. `check_script.py` ước lượng sẵn.
 
 ## Checklist (phần `check_script.py` không kiểm được)
+
+Điền **mẫu báo cáo ở mục 0** trước; danh sách dưới đây là chi tiết từng phép thử.
 
 **Nội dung**
 - [ ] Mọi mệnh đề, công thức, số liệu trong `text` và `visual` đúng; có tính toán thì kiểm bằng Python/sympy, không tính nhẩm. Hình khớp số (điểm nằm trên đồ thị, dấu từng khoảng…).

@@ -2,6 +2,7 @@
 
 Đọc kèm skill `viet-kich-ban` (B1), `tao-audio` (B2), `dung-video` (B3). Tài liệu này là **quy chuẩn cốt lõi** kết nối giữa **Biên kịch KTPL (Storyteller / Legal & Economic Analyst)** và **Hệ thống Dựng Video Remotion (Tech Builder)**.
 Bài học kinh nghiệm thực tế ghi tại: `.agents/lessons.md`.
+Gói **thêm vào** luật chung; chỉ dòng nào trong mục **"Thay luật chung"** mới thay luật chung (skill `viet-kich-ban` › mục 0 › Ba tầng luật). Gói chưa có mục đó → luật chung thắng khi hai bên nói khác.
 
 ---
 

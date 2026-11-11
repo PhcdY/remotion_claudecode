@@ -1,7 +1,12 @@
 # Gói môn — Toán
 
-Đọc kèm skill `viet-kich-ban` (B1), `tao-audio` (B2), `dung-video` (B3). Luật ở đây **thêm vào hoặc thay** luật chung cho video Toán.
+Đọc kèm skill `viet-kich-ban` (B1), `tao-audio` (B2), `dung-video` (B3). Luật ở đây **thêm vào** luật chung cho video Toán. Chỉ dòng nào trong mục **"Thay luật chung"** mới thay luật chung (skill `viet-kich-ban` › mục 0 › Ba tầng luật).
 Bài học đã gặp kèm ngày: `.agents/lessons.md`.
+
+## Thay luật chung
+| Luật chung | Gói thay thành | Áp cho | Lý do · ai chốt · ngày |
+|---|---|---|---|
+| `viet-kich-ban` › Số và đơn vị | mục "Số và đơn vị" dưới đây (mô hình trừu tượng dùng số trơn…) | mọi video Toán | người dùng, 22–23/10/2026 |
 
 ## Tư duy kể chuyện & Trải nghiệm người xem (B1)
 

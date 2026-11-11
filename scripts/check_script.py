@@ -3,8 +3,12 @@
 Dùng:
     python scripts/check_script.py <slug>
     python scripts/check_script.py src/videos/<slug>/script.json
+    python scripts/check_script.py --goi <mon>     (người bảo trì: gói môn có tự dùng từ mình cấm không)
 
-LỖI: phải sửa trước khi sang B2/B3 (thoát mã 1).
+Luật chung theo sáu phép thử P0–P5 (skill viet-kich-ban › mục 0). Phần riêng từng môn đọc từ .agents/mon/<mon>.json
+(bảng thuật ngữ chốt, ngưỡng "thayLuat") và thẻ bài học references/<môn>/lop-<lớp>/**/bai-<NN>-*.md.
+LỖI: phải sửa trước khi sang B2/B3 (thoát mã 1). Lỗi có [mã] ở cuối được bỏ qua khi người dùng đã duyệt
+ngoại lệ ("ngoaiLeDaDuyet" trong script.json).
 CẢNH BÁO: luật style — sửa, hoặc ghi lý do giữ trong báo cáo.
 CẦN NGHE THỬ: dòng B2 phải gửi người dùng nghe trước khi tạo cả bài.
 Các luật cần đọc hiểu (không nhảy bước, đúng toán, nhịp hình…) vẫn kiểm bằng checklist trong skill.
@@ -76,38 +80,55 @@ RAW_CHEM = re.compile(r"\b(CH3COOH|C2H5OH|CH3COOC2H5|H2SO4|HCl|HNO3|NaOH|KOH|Fe2
 # Chữ viết tắt môn Sử/Địa/Khoa học cần phiên âm có gạch nối
 RAW_ABBR = re.compile(r"\b(ASEAN|NATO|UNESCO|WTO|DNA|RNA|APEC|TCN|SCN)\b")
 
-# --- Hóa: thuật ngữ & danh pháp theo SGK GDPT 2018 (gói môn hoa.md › mục 2) ---
-# Tên cũ/phiên âm Việt → tên IUPAC tiếng Anh. Áp cho title, keyword, text, caption, speak.
+# --- Bảng thuật ngữ chốt + ngưỡng của gói môn (file máy đọc .agents/mon/<mon>.json) ---
+# Phép thử P4 "một khái niệm một tên" (skill viet-kich-ban › mục 0). Cách viết file: .agents/mon/_mau.md › File máy đọc.
 W_ = r"(?<![\wÀ-ỹ])"
 _W = r"(?![\wÀ-ỹ])"
-HOA_OLD_NAMES = [
-    (r"natri", "sodium"), (r"kali", "potassium"), (r"liti", "lithium"), (r"magie", "magnesium"),
-    (r"canxi", "calcium"), (r"bari", "barium"), (r"nitơ", "nitrogen"), (r"hi[đd]ro|hy[đd]ro", "hydrogen"),
-    (r"oxi(?!\s+ho[áa]|\s+hoá|\s+hóa)", "oxygen (riêng 'oxi hoá' giữ nguyên)"), (r"cacbon", "carbon"),
-    (r"photpho", "phosphorus"), (r"silic", "silicon"), (r"clo", "chlorine"), (r"flo", "fluorine"),
-    (r"brom", "bromine"), (r"iot", "iodine"), (r"mangan", "manganese"), (r"crom", "chromium"),
-    (r"axit", "acid"), (r"bazơ", "base"), (r"oxit", "oxide"), (r"hi[đd]roxit", "hydroxide"),
-    (r"clorua", "chloride"), (r"sunfat", "sulfate"), (r"sunfua", "sulfide"), (r"nitrat", "nitrate"),
-    (r"cacbonat", "carbonate"), (r"ancol", "alcohol"), (r"an[đd]ehit", "aldehyde"), (r"xeton", "ketone"),
-    (r"etylic", "ethanol / ethyl"), (r"axetic", "acetic"), (r"metan", "methane"), (r"etilen|etylen", "ethylene"),
-]
-# Tên Việt quen của kim loại/phi kim: gói Hóa chốt dùng tên IUPAC tiếng Anh cho đồng nhất (cảnh báo, vì trùng từ thường)
-HOA_VI_COMMON = [
-    (r"sắt", "iron"), (r"nhôm", "aluminium"), (r"kẽm", "zinc"), (r"chì", "lead"), (r"thiếc", "tin"),
-    (r"lưu huỳnh", "sulfur"), (r"thu[ỷy] ngân", "mercury"),
-]
-HOA_GROUP_NUM = re.compile(r"nhóm\s+(1[0-8]|[1-9])" + _W, re.IGNORECASE)
-HOA_GROUP_SPOKEN = re.compile(r"nhóm\s+(một|hai|ba|bốn|năm|sáu|bảy|tám|mười[\wÀ-ỹ ]*?)(?!\s+[ab]" + _W + r")" + _W, re.IGNORECASE)
+TERM_FIELDS = ("title", "keyword", "text", "caption", "speak")
+_ACCENT = {"oá": "óa", "oà": "òa", "oả": "ỏa", "oã": "õa", "oạ": "ọa", "uý": "úy", "uỳ": "ùy", "uỷ": "ủy", "uỹ": "ũy", "uỵ": "ụy"}
 
-
-HOA_SUPERSCRIPT = re.compile(r"[⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻]")
-HOA_DONG = re.compile(W_ + r"đồng" + _W, re.IGNORECASE)
-HOA_DONG_OK = re.compile(
-    r"đồng\s+(thời|nhất|đều|ý|hồ|dạng|phân|vị|biến|bộ|loạt|nghĩa|chất|hành|tâm|môn|đội|cảm|lòng|thanh|minh|tình|bằng|ruộng|cỏ|xu)"
-    r"|(cộng|tương|hội|bất|hợp|ruộng|cánh|mười|nghìn|triệu)\s+đồng",
+# Ngưỡng mặc định (tầng 2 — gói môn được thay trong "thayLuat"; luật tầng 1 không có khóa ở đây nên không tắt được)
+DEFAULTS = {
+    "canhToiDa": 3, "hienTuongToiDaGiay": 20, "giaiDapGiay": [15, 30], "beatToiDaGiay": 40,
+    "tongGiay": [TOTAL_MIN, TOTAL_MAX], "kyTu": [CHARS_MIN, CHARS_MAX],
+}
+DEFAULTS_BY_LOAI = {"bai-hoc": {"canhToiDa": 5}}
+LOAI = ("bai-hoc", "hien-tuong")
+# video bài học được mở bằng hiện tượng, câu đề thi hoặc cách hiểu sai (viet-kich-ban › Video bài học)
+HOOK_SECTIONS_BAI_HOC = {"HIỆN TƯỢNG", "CÂU HỎI", "TRONG ĐỀ THI", "BẪY THƯỜNG GẶP", "GỐC RỄ"}
+EXAM_SECTIONS = {"TRONG ĐỀ THI", "BẪY THƯỜNG GẶP"}
+# P3: lời so sánh → hình phải cho thấy đúng chỗ giống/khác (danh sách để soát stills, không tính lỗi)
+COMPARE = re.compile(
+    W_ + r"(giống|khác nhau|khác hẳn|khác với|mạnh hơn|yếu hơn|nhanh hơn|chậm hơn|lớn hơn|nhỏ hơn|nhiều hơn|ít hơn"
+    r"|cao hơn|thấp hơn|tương tự|so với|cùng kiểu)" + _W,
     re.IGNORECASE,
 )
-_ACCENT = {"oá": "óa", "oà": "òa", "oả": "ỏa", "oã": "õa", "oạ": "ọa", "uý": "úy", "uỳ": "ùy", "uỷ": "ủy", "uỹ": "ũy", "uỵ": "ụy"}
+MAX_WAIVERS = 2
+# Hình/số tượng trưng: không nhãn "mô hình", lời đọc không giải thích "đây là mô hình" (viet-kich-ban › Hình và số tượng trưng,
+# người dùng chốt 10/11/2026). Cần ghi chú thì nhãn nhỏ "Số liệu minh họa" / "Ảnh minh họa" ghi trong visual.
+MODEL_LABEL = re.compile(r"mô hình\s+(giản lược|minh ho[ạa]|đơn giản)|không phải số liệu thật|^\s*mô hình\s*(:|$)|mô hình\s*[,:]?\s*không phải", re.IGNORECASE)
+MODEL_SPEAK = re.compile(r"(đây là|chỉ là|dùng) (một )?mô hình|tình huống giả định|không phải số liệu (thật|của)|để dễ hình dung", re.IGNORECASE)
+MODEL_HINT = "bỏ nhãn; số dễ tưởng là thật thì nhãn nhỏ 'Số liệu minh họa' ghi trong visual (viet-kich-ban › Hình và số tượng trưng)"
+# Nhãn được nhắc trong visual/show (chữ trong ngoặc kép/đơn): bắt nhãn "mô hình" ngay ở B1, trước khi dựng.
+QUOTED = re.compile(r"[\"'“‘]([^\"'“”‘’]{1,60})[\"'”’]")
+NOTE_OK = ("số liệu minh họa", "ảnh minh họa")
+
+
+# câu đang BỎ nhãn ("không nhãn 'mô hình'", "nhãn 'mô hình' tắt") thì không phải thêm nhãn
+NEG_BEFORE = re.compile(r"(không|bỏ|gỡ|cấm|tránh|xoá|xóa)[^.;,]{0,20}$", re.IGNORECASE)
+NEG_AFTER = re.compile(r"^\s*(tắt|mờ đi|mờ hẳn|biến mất|được gỡ|bị gỡ|gỡ đi|bỏ đi)", re.IGNORECASE)
+
+
+def label_issues(where: str, field: str, value: str, errors: list[str], warns: list[str]) -> None:
+    for m in QUOTED.finditer(value or ""):
+        q = m.group(1)
+        if NEG_BEFORE.search(value[: m.start()]) or NEG_AFTER.search(value[m.end():]):
+            continue
+        if MODEL_LABEL.search(q):
+            errors.append(f"{where}: {field} định ghi nhãn \"{q}\" — {MODEL_HINT} [mo-hinh]")
+        elif re.search(r"minh ho[ạa]\s*$", q, re.IGNORECASE) and norm_vi(q.strip()) not in NOTE_OK:
+            warns.append(f"{where}: {field} có nhãn nhỏ \"{q}\" — nhãn nhỏ chỉ dùng 'Số liệu minh họa' hoặc 'Ảnh minh họa' (viet-kich-ban › Hình và số tượng trưng)")
+
 
 
 def norm_vi(t: str) -> str:
@@ -118,54 +139,164 @@ def norm_vi(t: str) -> str:
     return re.sub(r"\s+", " ", t)
 
 
-def hoa_lesson_card(s: dict) -> tuple[Path | None, list[tuple[str, str, list[str]]]]:
-    """Tìm thẻ bài học references/hoa/lop-<lop>/bai-<NN>-*.md theo lop + bai; trả về các mục từ khóa kiểm tra."""
+def vi_pattern(phrase: str) -> str:
+    """Cụm chữ thường → regex: khoảng trắng co giãn, chấp nhận cả 'hoá'/'hóa', 'thuỷ'/'thủy'."""
+    p = re.escape(norm_vi(phrase.strip()))
+    p = p.replace(r"\ ", r"\s+")
+    for a, b in _ACCENT.items():
+        p = p.replace(b, f"(?:{a}|{b})")
+    return p
+
+
+def load_goi(subject: str) -> tuple[dict, list[str]]:
+    """Đọc .agents/mon/<mon>.json; trả về (dữ liệu, các lỗi định dạng)."""
+    f = MON_DIR / f"{subject}.json"
+    if not f.exists():
+        return {}, []
+    try:
+        data = json.loads(f.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as e:
+        return {}, [f"{f.relative_to(ROOT)} không phải JSON hợp lệ: {e}"]
+    probs = []
+    for k in (data.get("thayLuat") or {}):
+        if k in LOAI:
+            for kk in data["thayLuat"][k]:
+                if kk not in DEFAULTS:
+                    probs.append(f"{f.name} › thayLuat.{k}: khóa '{kk}' không có (chỉ thay được: {', '.join(DEFAULTS)})")
+        elif k not in DEFAULTS:
+            probs.append(f"{f.name} › thayLuat: khóa '{k}' không có (chỉ thay được: {', '.join(DEFAULTS)})")
+    rules = []
+    for i, r in enumerate(data.get("thuatNgu") or []):
+        if r.get("regex"):
+            try:
+                rx = re.compile(r["regex"], re.IGNORECASE)
+            except re.error as e:
+                probs.append(f"{f.name} › thuatNgu[{i}]: regex lỗi: {e}")
+                continue
+        elif r.get("khongDung"):
+            rx = re.compile(W_ + "(" + "|".join(vi_pattern(w) for w in r["khongDung"]) + ")" + _W, re.IGNORECASE)
+        else:
+            probs.append(f"{f.name} › thuatNgu[{i}]: cần 'khongDung' hoặc 'regex'")
+            continue
+        if r.get("muc", "loi") not in ("loi", "canh-bao"):
+            probs.append(f"{f.name} › thuatNgu[{i}]: muc phải là 'loi' hoặc 'canh-bao'")
+        ex = [re.compile(vi_pattern(e), re.IGNORECASE) for e in r.get("ngoaiLe") or []]
+        code = r.get("ma") or "thuat-ngu:" + (r.get("khongDung") or ["?"])[0].strip().lower().replace(" ", "-")
+        rules.append({**r, "_rx": rx, "_ex": ex, "_ma": code})
+    data["_rules"] = rules
+    return data, probs
+
+
+def limits(goi: dict, loai: str | None) -> dict:
+    lim = dict(DEFAULTS)
+    lim.update(DEFAULTS_BY_LOAI.get(loai or "", {}))
+    tl = goi.get("thayLuat") or {}
+    lim.update({k: v for k, v in tl.items() if k in DEFAULTS})
+    lim.update({k: v for k, v in (tl.get(loai or "") or {}).items() if k in DEFAULTS})
+    return lim
+
+
+def term_hits(rules: list[dict], field: str, value: str):
+    """Mỗi luật báo tối đa một lần cho một trường: (luật, chữ trúng)."""
+    if not value:
+        return
+    plain = MATH.sub(" ", value)
+    for r in rules:
+        if r.get("truong") and field not in r["truong"]:
+            continue
+        spans = [m.span() for e in r["_ex"] for m in e.finditer(plain)]
+        for m in r["_rx"].finditer(plain):
+            a, b = m.span(1) if r.get("khongDung") else m.span(0)
+            if any(s <= a and b <= e for s, e in spans):
+                continue
+            yield r, m.group(1) if r.get("khongDung") else m.group(0)
+            break
+
+
+def check_terms(rules: list[dict], where: str, field: str, value: str, errors: list[str], warns: list[str]) -> None:
+    for r, hit in term_hits(rules, field, value):
+        tpl = r.get("thongBao") or "{noi}: {truong} dùng '{tu}' — thuật ngữ chốt của môn: {dung}"
+        msg = tpl.format(noi=where, truong=field, tu=hit, dung=r.get("dung", "")) + f" [{r['_ma']}]"
+        (errors if r.get("muc", "loi") == "loi" else warns).append(msg)
+
+
+# --- Hóa: chỉ những gì gắn với font/thumb/mhchem (gói hoa.md › 6.1, 6.9) — thuật ngữ đã ở .agents/mon/hoa.json ---
+HOA_SUPERSCRIPT = re.compile(r"[⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻]")
+
+
+# --- Thẻ bài học (references/_mau-the-bai-hoc.md) — phép thử P0 "đúng và đủ nội dung đã duyệt" ---
+def subject_has_cards(subject: str) -> bool:
+    base = ROOT / "references" / subject
+    return base.exists() and any("## Từ khóa kiểm tra" in f.read_text(encoding="utf-8") for f in base.rglob("bai-*.md"))
+
+
+def lesson_card(subject: str, s: dict) -> tuple[Path | None, list[tuple[str, str, list[str]]]]:
+    """Thẻ = file references/<môn>/lop-<lop>/**/bai-<NN>-*.md có mục '## Từ khóa kiểm tra'. Trả về (thẻ, các mục)."""
     m = re.search(r"Bài\s*(\d+)", str(s.get("bai", "")))
     lop = s.get("lop")
     if not m or not lop:
         return None, []
-    hits = sorted((ROOT / "references" / "hoa" / f"lop-{lop}").glob(f"bai-{int(m.group(1)):02d}-*.md"))
-    if not hits:
+    base = ROOT / "references" / subject / f"lop-{lop}"
+    hits = sorted(base.rglob(f"bai-{int(m.group(1)):02d}-*.md")) if base.exists() else []
+    cards = [h for h in hits if "## Từ khóa kiểm tra" in h.read_text(encoding="utf-8")]
+    if not cards:
         return None, []
-    card = hits[0]
+    card = cards[0]
     items: list[tuple[str, str, list[str]]] = []
-    section = card.read_text(encoding="utf-8").split("## Từ khóa kiểm tra", 1)
-    if len(section) == 2:
-        for line in section[1].splitlines():
-            mm = re.match(r"\s*-\s*(K\d+)\s+([^:]+):\s*(.+)", line)
-            if mm:
-                items.append((mm.group(1), mm.group(2).strip(), [a.strip() for a in mm.group(3).split("|") if a.strip()]))
+    section = card.read_text(encoding="utf-8").split("## Từ khóa kiểm tra", 1)[1]
+    for line in section.splitlines():
+        mm = re.match(r"\s*-\s*([KT]\d+)\s+([^:]+):\s*(.+)", line)
+        if mm:
+            items.append((mm.group(1), mm.group(2).strip(), [a.strip() for a in mm.group(3).split("|") if a.strip()]))
     return card, items
 
 
-def hoa_terms(where: str, field: str, value: str, errors: list[str], warns: list[str]) -> None:
-    if not value:
-        return
-    plain = MATH.sub(" ", value)
-    for pat, good in HOA_OLD_NAMES:
-        m = re.search(W_ + "(" + pat + ")" + _W, plain, re.IGNORECASE)
-        if m:
-            errors.append(f"{where}: {field} dùng tên cũ '{m.group(1)}' — SGK 2018 dùng IUPAC: {good} (gói hoa.md › mục 2.2)")
-    for pat, good in HOA_VI_COMMON:
-        m = re.search(W_ + "(" + pat + ")" + _W, plain, re.IGNORECASE)
-        if m:
-            warns.append(f"{where}: {field} có '{m.group(1)}' — nếu là tên nguyên tố thì dùng {good} cho đồng nhất (hoa.md › mục 2.2)")
-    m = HOA_GROUP_NUM.search(plain)
-    if m:
-        errors.append(f"{where}: {field} gọi nhóm bằng số cột '{m.group(0)}' — chỉ dùng IA…VIIIA / IB…VIIIB (hoa.md › mục 2.3)")
-    if field == "speak":
-        m = HOA_GROUP_SPOKEN.search(plain)
-        if m:
-            errors.append(f"{where}: speak đọc '{m.group(0)}' thiếu A/B — đọc 'nhóm một A', 'nhóm tám B' (hoa.md › mục 2.3)")
-    if field != "speak" and HOA_SUPERSCRIPT.search(value):
-        errors.append(f"{where}: {field} dùng ký tự mũ Unicode ('{HOA_SUPERSCRIPT.search(value).group(0)}') — font không có glyph, hiện vỡ. Viết $\ce{{Cu^2+}}$ (hoa.md › 6.9)")
-    for mm in HOA_DONG.finditer(plain):
-        around = plain[max(0, mm.start() - 12): mm.end() + 12]
-        if not HOA_DONG_OK.search(around):
-            warns.append(f"{where}: {field} có 'đồng' — nếu là tên nguyên tố thì dùng copper (hoa.md › mục 2.2)")
-            break
-    if re.search(r"chu kỳ", plain, re.IGNORECASE):
-        warns.append(f"{where}: {field} viết 'chu kỳ' — SGK viết 'chu kì'")
+def card_traps(card: Path) -> list[str]:
+    """Mã bẫy thi T1, T2… trong mục '## 2. Bẫy thi' của thẻ."""
+    txt = card.read_text(encoding="utf-8")
+    m = re.search(r"^##\s*2\.\s*Bẫy thi(.*?)(?=^##\s)", txt, re.S | re.M)
+    return re.findall(r"^\s*[-|]\s*\**(T\d+)\b", m.group(1), re.M) if m else []
+
+
+# --- D2: gói môn tự soát theo chính bảng thuật ngữ của nó (py scripts/check_script.py --goi <mon>) ---
+GOI_COLS = re.compile(r"speak|lời đọc|trên hình|đúng|^dùng", re.IGNORECASE)
+
+
+def check_goi(subject: str) -> list[str]:
+    goi, probs = load_goi(subject)
+    md = MON_DIR / f"{subject}.md"
+    if not md.exists():
+        return probs + [f"không có {md.relative_to(ROOT)}"]
+    rules = goi.get("_rules") or []
+    out = list(probs)
+    header: list[str] | None = None
+    in_code = False
+    for n, line in enumerate(md.read_text(encoding="utf-8").splitlines(), 1):
+        st = line.strip()
+        if st.startswith("```"):
+            in_code = not in_code
+            continue
+        cells: list[tuple[str, str]] = []
+        if in_code:
+            cells = [("khối code", re.sub(r"\S*/\S*", " ", st))]  # bỏ đường dẫn file
+        elif st.startswith("|"):
+            row = [c.strip() for c in st.strip("|").split("|")]
+            if header is None:
+                header = row
+                continue
+            if all(re.fullmatch(r":?-+:?", c) for c in row if c):
+                continue
+            cells = [(h, c) for h, c in zip(header, row) if GOI_COLS.search(h.strip("*` ")) and "không" not in h.lower()]
+        else:
+            header = None
+        for col, val in cells:
+            field = "speak" if re.search(r"speak|lời đọc", col, re.IGNORECASE) else "text"
+            for r, hit in term_hits(rules, field, val):
+                before = norm_vi(val[: max(0, norm_vi(val).find(norm_vi(hit)))][-30:])
+                if re.search(r"không|cấm|tránh|sai", before):
+                    continue  # câu đang cấm chính từ đó ("Không bao giờ 'nhóm 1'")
+                out.append(f"{md.name} dòng {n}, cột '{col}': có '{hit}' — bảng thuật ngữ chốt của chính gói ghi {r.get('dung', '')} [{r['_ma']}]")
+    return out
 
 
 def tokens_in(phrase: str, speak: str) -> bool:
@@ -216,10 +347,20 @@ def load(arg: str) -> tuple[Path, dict]:
 def main() -> int:
     if len(sys.argv) < 2:
         sys.exit(__doc__)
+    if sys.argv[1] == "--goi":
+        if len(sys.argv) < 3:
+            sys.exit("Dùng: python scripts/check_script.py --goi <mon>")
+        probs = check_goi(sys.argv[2])
+        print(f"Gói {sys.argv[2]}: {len(probs)} chỗ cần soát (gói tự mâu thuẫn với bảng thuật ngữ / thayLuat lạ)")
+        for p in probs:
+            print(f"  - {p}")
+        return 1 if probs else 0
     path, s = load(sys.argv[1])
     errors: list[str] = []
     warns: list[str] = []
     listen: list[str] = []
+    compare: list[str] = []
+    approved: list[str] = []
 
     slug = s.get("slug", "")
     if not SAFE_ID.match(slug):
@@ -234,6 +375,13 @@ def main() -> int:
         errors.append(f"không có gói môn {MON_DIR.relative_to(ROOT)}/{subject}.md — tạo từ _mau.md cùng người dùng")
     if s.get("lop") is None or not s.get("chuong") or not s.get("bai"):
         warns.append("thiếu lop/chuong/bai (theo SGK) → video render vào out/_lam-viec/ thay vì thư mục bài")
+    loai = s.get("loai")
+    if loai is not None and loai not in LOAI:
+        errors.append(f"loai '{loai}' không hợp lệ — chỉ 'bai-hoc' hoặc 'hien-tuong' (viet-kich-ban › Loại video)")
+        loai = None
+    goi, goi_probs = load_goi(subject)
+    errors += [f"gói môn: {p}" for p in goi_probs]
+    lim = limits(goi, loai)
 
     # Gợi ý voice theo môn học
     rec_voice = SUBJECT_VOICE_ROSTER.get(subject)
@@ -267,6 +415,8 @@ def main() -> int:
         if sec and sec not in SECTIONS:
             errors.append(f"{where}: section '{sec}' không có trong danh sách nhãn")
         kw = b.get("keyword", "")
+        if MODEL_LABEL.search(MATH.sub(" ", kw)):
+            errors.append(f"{where}: keyword là nhãn \"mô hình\" ('{kw}') — {MODEL_HINT} [mo-hinh]")
         if len(words(kw)) > 6:
             warns.append(f"{where}: keyword {len(words(kw))} từ (> 6): {kw}")
         if "speed" in b:
@@ -286,6 +436,7 @@ def main() -> int:
                 m = re.search(r"CẢNH\s*(\d+)", visual)
                 if m and int(m.group(1)) != sc:
                     warns.append(f"{where}: scene {sc} nhưng visual ghi CẢNH {m.group(1)}")
+        label_issues(where, "visual", visual, errors, warns)
         if FAKE_UNITS.search(visual):
             errors.append(f"{where}: visual dùng đơn vị tự chế ('{FAKE_UNITS.search(visual).group(0)}')")
 
@@ -366,6 +517,17 @@ def main() -> int:
                         warns.append(f"{w}: tên nước ngoài '{nm}' — nên viết phiên âm SGK '{info['speak']}' trong speak")
                         listen.append(f"{w} (tên riêng nước ngoài): {speak}")
 
+            for k in ("text", "caption"):
+                if MODEL_LABEL.search(MATH.sub(" ", line.get(k) or "")):
+                    errors.append(f"{w}: {k} là nhãn \"mô hình\" ('{line.get(k)}') — {MODEL_HINT} [mo-hinh]")
+            mm_ = MODEL_SPEAK.search(speak)
+            if mm_:
+                warns.append(f"{w}: speak giải thích hình/số tượng trưng ('{mm_.group(0)}') — người xem tự hiểu, bỏ câu này: {speak}")
+
+            mc = COMPARE.search(speak)
+            if mc:
+                compare.append(f"{w} ('{mc.group(1)}'): {speak}  ← show: {line.get('show') or '—'}")
+
             if PHONETIC.search(speak):
                 listen.append(f"{w} (đọc ký hiệu): {speak}")
                 if not line.get("caption"):
@@ -383,6 +545,7 @@ def main() -> int:
             # --- show / at (định dạng mới) ---
             if v2:
                 show = (line.get("show") or "").strip()
+                label_issues(w, "show", show, errors, warns)
                 if not show:
                     errors.append(f"{w}: thiếu show (thay đổi trên hình ở dòng này; không đổi thì ghi 'giữ nguyên')")
                 elif MULTI_CHANGE.search(re.sub(r"\([^)]*\)|\[[^\]]*\]", "", show)):
@@ -432,16 +595,23 @@ def main() -> int:
         beat_secs.append((bid, sec, bsec))
         total_sec += bsec
 
-    # --- Hóa: thuật ngữ, danh pháp, thumb (gói hoa.md) ---
-    if subject == "hoa":
-        hoa_terms("title", "title", s.get("title", ""), errors, warns)
+    # --- P4 thuật ngữ chốt: mọi môn có .agents/mon/<mon>.json ---
+    rules = goi.get("_rules") or []
+    if rules:
+        def fields_of(where: str, pairs: list[tuple[str, str]]) -> None:
+            for field, value in pairs:
+                check_terms(rules, where, field, value, errors, warns)
+                if subject == "hoa" and field != "speak" and HOA_SUPERSCRIPT.search(value or ""):
+                    errors.append(f"{where}: {field} dùng ký tự mũ Unicode ('{HOA_SUPERSCRIPT.search(value).group(0)}') — font không có glyph, hiện vỡ. Viết $\\ce{{Cu^2+}}$ (hoa.md › 6.9)")
+        fields_of("title", [("title", s.get("title", ""))])
         for bi, b in enumerate(beats):
             bid = b.get("id", f"#{bi + 1}")
-            hoa_terms(bid, "keyword", b.get("keyword", ""), errors, warns)
+            fields_of(bid, [("keyword", b.get("keyword", ""))])
             for li, line in enumerate(b.get("lines") or []):
-                w = f"{bid}-l{li + 1:02d}"
-                for field in ("text", "caption", "speak"):
-                    hoa_terms(w, field, line.get(field) or "", errors, warns)
+                fields_of(f"{bid}-l{li + 1:02d}", [(f, line.get(f) or "") for f in ("text", "caption", "speak")])
+
+    # --- Hóa: thumb và mhchem (gói hoa.md › 6.1, 6.9) ---
+    if subject == "hoa":
         video_tsx = path.parent / "Video.tsx"
         if video_tsx.exists() and "ChemIntro" not in video_tsx.read_text(encoding="utf-8"):
             warns.append("Video.tsx chưa dùng ChemIntro (thumb có hình chính + từ khóa nổi bật) — hoa.md › mục 6.1")
@@ -449,33 +619,89 @@ def main() -> int:
         raw = json.dumps(s, ensure_ascii=False)
         tsx = "".join(f.read_text(encoding="utf-8") for f in path.parent.glob("*.tsx"))
         if "\\ce{" in raw and tsx and "components/chemistry" not in tsx:
-            errors.append("script dùng \ce{...} nhưng video chưa import gì từ components/chemistry → \ce hiện thành chữ lỗi đỏ (hoa.md › 6.9)")
-        # độ phủ kiến thức theo thẻ bài học (hoa.md › 1.6, 2.6)
-        card, items = hoa_lesson_card(s)
-        if card is None:
-            warns.append(f"chưa có thẻ bài học cho '{s.get('bai', '?')}' (references/hoa/lop-<lop>/bai-<NN>-*.md) — soạn theo hoa.md › 2.6 và cho người dùng duyệt trước khi viết kịch bản")
-        else:
-            corpus_parts = [s.get("title", "")]
-            for b in beats:
-                corpus_parts.append(b.get("keyword", ""))
-                for line in b.get("lines") or []:
-                    corpus_parts += [line.get(k) or "" for k in ("text", "caption", "speak")]
-            corpus = norm_vi(" ".join(corpus_parts))
-            skipped = {norm_vi(x) for x in s.get("boQuaDaDuyet", [])}
-            for kid, name, alts in items:
-                if norm_vi(kid) in skipped or norm_vi(f"{kid} {name}") in skipped:
-                    continue
-                if not any(norm_vi(a) in corpus for a in alts):
-                    errors.append(
-                        f"thiếu kiến thức của thẻ bài học {card.name}: {kid} {name} (kịch bản cần có một trong: {' | '.join(alts)}). "
-                        f"CHỈ KHI người dùng đã duyệt bỏ: thêm \"{kid} {name}\" (hoặc \"{kid}\" để bỏ cả mục) vào \"boQuaDaDuyet\" trong script.json"
-                    )
+            errors.append("script dùng \\ce{...} nhưng video chưa import gì từ components/chemistry → \\ce hiện thành chữ lỗi đỏ (hoa.md › 6.9)")
 
-    # --- cấu trúc cả bài ---
-    if len(set(scenes)) > 3:
-        warns.append(f"{len(set(scenes))} cảnh (nên ≤ 3): {sorted(set(scenes))}")
+    # --- P0 độ phủ theo thẻ bài học (mọi môn; viet-kich-ban › Bảng nội dung, references/_mau-the-bai-hoc.md) ---
+    card, items = lesson_card(subject, s)
+    if card is None:
+        if loai == "bai-hoc" or (loai is None and subject_has_cards(subject)):
+            warns.append(
+                f"chưa có thẻ bài học cho '{s.get('bai', '?')}' (references/{subject}/lop-<lop>/bai-<NN>-*.md có mục '## Từ khóa kiểm tra') — "
+                f"soạn theo references/_mau-the-bai-hoc.md, ghi 'chờ duyệt', cho người dùng duyệt trước khi làm Bảng nội dung"
+            )
+    else:
+        corpus_parts = [s.get("title", "")]
+        for b in beats:
+            corpus_parts.append(b.get("keyword", ""))
+            for line in b.get("lines") or []:
+                corpus_parts += [line.get(k) or "" for k in ("text", "caption", "speak")]
+        corpus = norm_vi(" ".join(corpus_parts))
+        skipped = {norm_vi(x) for x in s.get("boQuaDaDuyet", [])}
+        covered = {norm_vi(k): v for k, v in (s.get("daPhuDaDuyet") or {}).items()}
+        for kid, name, alts in items:
+            # từ khóa viết bằng LaTeX/ký hiệu không bao giờ khớp lời đọc → lỗi của THẺ, không phải của kịch bản
+            bad = [a for a in alts if "\\" in a or "$" in a]
+            if bad:
+                errors.append(
+                    f"thẻ {card.name}: từ khóa {kid} '{' | '.join(bad)}' là LaTeX/ký hiệu — không bao giờ khớp lời đọc. "
+                    f"Sửa THẺ thành cụm lời thường (references/_mau-the-bai-hoc.md); KHÔNG ghi boQuaDaDuyet hay ngoaiLeDaDuyet để né"
+                )
+                alts = [a for a in alts if a not in bad]
+                if not alts:
+                    continue
+            keys = (norm_vi(kid), norm_vi(f"{kid} {name}"))
+            if any(k in skipped for k in keys):
+                continue
+            hit = next((covered[k] for k in keys if k in covered), None)
+            if hit is not None:
+                approved.append(f"{kid} {name}: đã duyệt là có, nói bằng cách khác — {hit}")
+                continue
+            if not any(norm_vi(a) in corpus for a in alts):
+                msg = (
+                    f"thiếu kiến thức của thẻ bài học {card.name}: {kid} {name} (kịch bản cần có một trong: {' | '.join(alts)}). "
+                    f"CHỈ KHI người dùng đã duyệt: bỏ mục → thêm \"{kid} {name}\" (hoặc \"{kid}\") vào \"boQuaDaDuyet\"; "
+                    f"đã có nhưng nói bằng lời khác → \"daPhuDaDuyet\": {{\"{kid}\": \"beat nào, nói thế nào\"}}"
+                )
+                (warns if loai == "hien-tuong" else errors).append(msg)
+        if loai == "bai-hoc":
+            traps = [t for t in card_traps(card) if norm_vi(t) not in skipped]
+            n_exam = sum(1 for b in beats if b.get("section") in EXAM_SECTIONS)
+            if traps and n_exam < len(traps):
+                warns.append(
+                    f"thẻ có {len(traps)} bẫy thi ({', '.join(traps)}) mà chỉ {n_exam} beat TRONG ĐỀ THI/BẪY THƯỜNG GẶP — "
+                    f"bẫy nào gộp vào beat khác thì phải có hình riêng thấy rõ sai/đúng (P3), ghi ở Bảng nội dung"
+                )
+
+    # --- video bài học: tiêu đề chứa tên bài (viet-kich-ban › Video bài học) ---
+    if loai == "bai-hoc" and s.get("bai"):
+        ten_bai = re.sub(r"^\s*Bài\s*\d+\s*[.:]\s*", "", s["bai"])
+        if ten_bai and norm_vi(ten_bai) not in norm_vi(s.get("title", "")):
+            warns.append(f"video bài học: title nên chứa tên bài '{ten_bai}' (hook chỉ là cửa vào, không thay chủ đề)")
+
+    # --- lối thoát: ngoại lệ người dùng đã duyệt (viet-kich-ban › mục 0, Lối thoát) ---
+    waivers = {norm_vi(k): v for k, v in (s.get("ngoaiLeDaDuyet") or {}).items()}
+    if waivers:
+        kept = []
+        for e in errors:
+            mm = re.search(r"\[([^\]]+)\]$", e)
+            loc = e.split(":", 1)[0]
+            key = next((k for k in (norm_vi(f"{loc} {mm.group(1)}"), norm_vi(mm.group(1))) if k in waivers), None) if mm else None
+            if key is not None:
+                approved.append(f"{e} — ngoại lệ đã duyệt: {waivers[key]}")
+            else:
+                kept.append(e)
+        errors = kept
+        if len(waivers) > MAX_WAIVERS:
+            warns.append(f"{len(waivers)} ngoại lệ đã duyệt (> {MAX_WAIVERS}) — luật có thể đang sai: báo người bảo trì sửa luật thay vì duyệt tiếp")
+
+    # --- cấu trúc cả bài (ngưỡng: tầng 2, gói môn thay được trong thayLuat) ---
+    if len(set(scenes)) > lim["canhToiDa"]:
+        warns.append(f"{len(set(scenes))} cảnh (nên ≤ {lim['canhToiDa']}): {sorted(set(scenes))}")
     if beats:
-        if beats[0].get("section") != "HIỆN TƯỢNG":
+        first = beats[0].get("section")
+        if loai == "bai-hoc" and first not in HOOK_SECTIONS_BAI_HOC:
+            warns.append(f"beat đầu là {first} — video bài học mở bằng hiện tượng, câu đề thi hoặc cách hiểu sai")
+        elif loai != "bai-hoc" and first != "HIỆN TƯỢNG":
             warns.append("beat đầu không phải HIỆN TƯỢNG")
         if not any(b.get("section") == "GIẢI ĐÁP" for b in beats):
             warns.append("không có beat GIẢI ĐÁP")
@@ -487,26 +713,44 @@ def main() -> int:
                 warns.append(f"dòng cuối video {len(last.split())} từ (≤ ~15): {last}")
             if not last.replace("...", "").lstrip().startswith(CLOSERS):
                 warns.append(f"dòng cuối video nên mở bằng từ khép lại ({', '.join(CLOSERS)}): {last}")
+    g0, g1 = lim["giaiDapGiay"]
     for bid, sec, bsec in beat_secs:
-        if bsec > 40:
-            warns.append(f"{bid}: ước tính {bsec:.0f} s (> 40 s) — tách beat")
-        if sec == "HIỆN TƯỢNG" and bsec > 20:
-            warns.append(f"{bid}: HIỆN TƯỢNG ước tính {bsec:.0f} s (≤ 20 s)")
-        if sec == "GIẢI ĐÁP" and not 15 <= bsec <= 30:
-            warns.append(f"{bid}: GIẢI ĐÁP ước tính {bsec:.0f} s (15–30 s)")
-    if not CHARS_MIN <= total_chars <= CHARS_MAX:
-        warns.append(f"tổng {total_chars} ký tự speak (nên {CHARS_MIN}–{CHARS_MAX})")
-    if not TOTAL_MIN <= total_sec <= TOTAL_MAX:
-        warns.append(f"thời lượng ước tính {total_sec // 60:.0f}:{total_sec % 60:02.0f} (nên 2:30–4:00)")
+        if bsec > lim["beatToiDaGiay"]:
+            warns.append(f"{bid}: ước tính {bsec:.0f} s (> {lim['beatToiDaGiay']} s) — tách beat")
+        if sec == "HIỆN TƯỢNG" and bsec > lim["hienTuongToiDaGiay"]:
+            warns.append(f"{bid}: HIỆN TƯỢNG ước tính {bsec:.0f} s (≤ {lim['hienTuongToiDaGiay']} s)")
+        if sec == "GIẢI ĐÁP" and not g0 <= bsec <= g1:
+            warns.append(f"{bid}: GIẢI ĐÁP ước tính {bsec:.0f} s ({g0}–{g1} s)")
+    c0, c1 = lim["kyTu"]
+    t0, t1 = lim["tongGiay"]
+    split_hint = " — video bài học: không tự cắt mục của thẻ/bẫy thi; đề xuất tách video cho người dùng chọn" if loai == "bai-hoc" else ""
+    if not c0 <= total_chars <= c1:
+        warns.append(f"tổng {total_chars} ký tự speak (nên {c0}–{c1})" + (split_hint if total_chars > c1 else ""))
+    if not t0 <= total_sec <= t1:
+        warns.append(
+            f"thời lượng ước tính {total_sec // 60:.0f}:{total_sec % 60:02.0f} (nên {t0 // 60}:{t0 % 60:02d}–{t1 // 60}:{t1 % 60:02d})"
+            + (split_hint if total_sec > t1 else "")
+        )
 
     # --- in kết quả ---
     rel = path.relative_to(ROOT) if path.is_relative_to(ROOT) else path
     n_lines = sum(len(b.get("lines") or []) for b in beats)
     print(f"{rel}: {len(beats)} beat, {n_lines} dòng, {total_chars} ký tự speak, ước tính {total_sec // 60:.0f}:{total_sec % 60:02.0f}")
+    loai_txt = loai or '(chưa ghi "loai" — coi là hiện tượng; video bài học ghi "loai": "bai-hoc")'
+    card_txt = f" · thẻ bài học: {card.relative_to(ROOT)}" if card else ""
+    print(f"Loại video: {loai_txt}{card_txt}")
     if voice_hint:
         print(f"👉 Gợi ý Voice: {voice_hint}")
+    if rules:
+        n_goi = len(check_goi(subject))
+        if n_goi:
+            print(f"ℹ Gói {subject} có {n_goi} chỗ tự mâu thuẫn với bảng thuật ngữ của nó — người bảo trì chạy: py scripts/check_script.py --goi {subject}")
 
-    for title, items in (("LỖI", errors), ("CẢNH BÁO", warns), ("CẦN NGHE THỬ", listen)):
+    for title, items in (
+        ("LỖI", errors), ("CẢNH BÁO", warns), ("CẦN NGHE THỬ", listen),
+        ("CẦN SOÁT HÌNH — lời so sánh (P3: stills không tiếng phải thấy đúng chỗ giống/khác)", compare),
+        ("ĐÃ DUYỆT (không tính lỗi)", approved),
+    ):
         if items:
             print(f"\n{title} ({len(items)})")
             for it in items:

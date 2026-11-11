@@ -139,6 +139,10 @@ flowchart LR
   > *Bản chất cốt lõi: [Ý vì sao cần truyền tải].*  
   > *Hãy tham khảo SGK tương ứng trong references/ và lên kịch bản chi tiết."*  
   *(Hoặc bạn chỉ cần nói ngắn gọn: "Hãy viết kịch bản bài Khảo sát hàm số Toán 12 theo chuẩn bản chất giúp tôi").*
+- **Bạn sẽ được hỏi duyệt hai thứ trước khi AI viết kịch bản**:
+  - **Loại video**: *bài học* (dạy đủ một bài SGK, tiêu đề chứa tên bài) hay *hiện tượng* (trả lời một câu "vì sao"). AI không chắc thì sẽ hỏi.
+  - **Bảng nội dung**: AI liệt kê video sẽ dạy những kiến thức nào (theo *thẻ bài học* `references/<môn>/lop-<lớp>/bai-<NN>-….md`), ở đoạn nào, bằng hình gì, dài bao lâu, và **cái gì không có trong video, vì sao**. AI không tự thu hẹp hay bỏ ý; bạn gạch/thêm mục ở bảng này. Bài chưa có thẻ thì AI soạn thẻ trước để bạn duyệt.
+  - AI thấy cách làm hay hơn luật cho phép thì sẽ **đề xuất** ở đây để bạn chọn, không tự làm khác.
 - **Cách chốt Bước 1**:
   AI sẽ tạo file kịch bản `script.json`. Bạn đọc qua nội dung, bảo AI thêm bớt ý nếu muốn. Khi vừa ý, bạn chỉ cần nhắn: *"Kịch bản duyệt rồi, sang bước dựng nháp nhé!"*
 

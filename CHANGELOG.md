@@ -24,10 +24,12 @@ Mỗi bản phát hành có một mục, bản mới nhất ở trên cùng. Ng�
 - Video **Hóa** theo bài SGK: trước khi viết, Codex trình bảng nội dung (kiến thức nào, ở đoạn nào, hình gì) để bạn duyệt; không tự thu hẹp chủ đề hay bỏ ý. Có sẵn "thẻ bài học" cho Hóa 10 Bài 5 và Bài 13, kiểm tra kịch bản báo khi thiếu kiến thức của thẻ.
 - Hóa có thêm hình cho phản ứng oxi hoá – khử: công thức ghi số oxi hoá trên từng nguyên tố (tự kiểm tổng), bảng chất khử / chất oxi hoá dễ nhầm, cái cân electron nhường = nhận, đinh iron trong dung dịch copper(II) sulfate.
 - Minh họa Văn theo kiểu tranh phẳng nhiều chi tiết (đò mui tre, áo dài, nón lá…), có video mẫu "Thuyền về có nhớ bến chăng".
+- Mọi môn: làm video theo **bài SGK** thì Codex trình bảng nội dung (kiến thức nào, ở đoạn nào, hình gì) để bạn duyệt trước, không tự thu hẹp chủ đề; có mẫu "thẻ bài học" chung, kiểm tra kịch bản báo khi thiếu kiến thức của thẻ. Luật làm video gọn lại thành sáu phép thử dễ nhớ (đủ nội dung, không nhảy bước, biết đang xem gì, tắt tiếng vẫn hiểu, một khái niệm một tên, chữ đọc được). Thấy cách hay hơn luật thì Codex đề xuất để bạn duyệt, không im lặng làm khác.
 
 ### Sửa lỗi
 - Các ý liệt kê không còn hiện chồng lên nhau: chỗ của từng ý được chia sẵn, và bước soát bố cục tự báo khi hai khối đè nhau.
 - Nhãn gắn vào vật đang chuyển động (thuyền, xe, người) không còn giật hay nhảy chỗ.
+- Bước soát bố cục tự bắt thêm: công thức bị lỗi hiện chữ đỏ, công thức chưa hiện thành công thức, nhãn "mô hình" thừa, chữ to hơn ô/khung chứa nó.
 
 ### Cần làm sau khi cập nhật
 - Dùng Codex thay cho Gemini/Antigravity (xem `docs/HUONG_DAN_CODEX.md`).
