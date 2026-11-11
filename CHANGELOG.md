@@ -18,6 +18,11 @@ Mỗi bản phát hành có một mục, bản mới nhất ở trên cùng. Ng�
 - Video **Văn** sinh động hơn: mỗi video có một hình trung tâm để các ý gắn vào (kiểu "ngôi đền ba trụ cột"), có minh họa hình ảnh trong tác phẩm bằng nét vẽ đơn giản, không còn toàn thẻ chữ như slide.
 - Văn và Sử dùng nền sáng như các môn khác.
 - Câu định nghĩa được viết bằng từ dễ hiểu; từ hay, từ hiếm chỉ dùng sau khi đã giải thích xong.
+- Video **Hóa** có ảnh mở đầu mới: hình chính của chủ đề (vd. bảng tuần hoàn đang sáng một hàng, một cột) và 1–2 từ khóa đổi màu, to hơn.
+- Hóa có sẵn bảng tuần hoàn đúng hình SGK (chữ luôn nằm gọn trong ô), ô nguyên tố phóng to, và thí nghiệm kim loại kiềm thả vào nước (lithium, sodium, potassium phản ứng mạnh yếu khác nhau, có thẻ tên).
+- Kiểm tra kịch bản Hóa tự báo tên chất kiểu cũ (natri, axit…) và cách gọi nhóm "nhóm 1" — dùng tên IUPAC tiếng Anh và nhóm IA…VIIIA cho đồng nhất.
+- Video **Hóa** theo bài SGK: trước khi viết, Codex trình bảng nội dung (kiến thức nào, ở đoạn nào, hình gì) để bạn duyệt; không tự thu hẹp chủ đề hay bỏ ý. Có sẵn "thẻ bài học" cho Hóa 10 Bài 5 và Bài 13, kiểm tra kịch bản báo khi thiếu kiến thức của thẻ.
+- Hóa có thêm hình cho phản ứng oxi hoá – khử: công thức ghi số oxi hoá trên từng nguyên tố (tự kiểm tổng), bảng chất khử / chất oxi hoá dễ nhầm, cái cân electron nhường = nhận, đinh iron trong dung dịch copper(II) sulfate.
 - Minh họa Văn theo kiểu tranh phẳng nhiều chi tiết (đò mui tre, áo dài, nón lá…), có video mẫu "Thuyền về có nhớ bến chăng".
 
 ### Sửa lỗi
