@@ -22,7 +22,7 @@ Ba tầng luật và sáu phép thử P0–P5 là **chung** với skill `viet-ki
 | **P4** | Một khái niệm một tên **trên hình** (nhãn trục, tên nhóm, chú thích) | Trục ghi 1–18 trong khi lời đọc "nhóm IA" (Hóa) | Theo bảng thuật ngữ của gói môn | `check_script`, soát nhãn trong code |
 | **P5** | **Chữ đọc được**: không tràn hộp, không đè, đủ cỡ (quy tắc 4), công thức hiện đúng, không cụt mép | Chữ "Na" to hơn ô; công thức lỗi hiện chữ đỏ; "$ o$"; "Thăng L…" | Khung chứa chữ dùng `TextBox` (tự tính cỡ chữ theo hộp, gắn sẵn `data-box`) hoặc component của môn; chữ qua `MathText` | `check-layout` (lỗi: tràn, đè, chữ nhỏ, KaTeX lỗi, công thức chưa dựng, nhãn "mô hình" thừa, gạch ngang trên số; cảnh báo: chữ tràn khung chưa gắn `data-box`) |
 
-**Lối thoát ở B3**: `check-layout` báo lỗi mà phép thử vẫn đạt (vd. hai ô bảng cố ý sát nhau), hoặc thấy cách dựng hay hơn quy tắc tầng 2 → ghi vào báo cáo kèm frame + lý do, đề xuất ở storyboard; người dùng duyệt mới giữ. Gặp hình không quy tắc nào nói tới → đề xuất ở storyboard, không đoán.
+**Lối thoát ở B3** (như `viet-kich-ban` › mục 0 › Lối thoát, gồm cả khi người dùng yêu cầu điều trái luật: nêu luật + lý do, đề xuất, hỏi — không làm theo im lặng): `check-layout` báo lỗi mà phép thử vẫn đạt (vd. hai ô bảng cố ý sát nhau), hoặc thấy cách dựng hay hơn quy tắc tầng 2 → ghi vào báo cáo kèm frame + lý do, đề xuất ở storyboard; người dùng duyệt mới giữ. Gặp hình không quy tắc nào nói tới → đề xuất ở storyboard, không đoán.
 
 **Thực đơn hình (tầng 3 — gợi ý, hoặc tự đề xuất ở storyboard)**: khái niệm mới cần một thay đổi nhìn thấy được của riêng nó. Hay dùng:
 

@@ -617,6 +617,16 @@ def main() -> int:
         skipped = {norm_vi(x) for x in s.get("boQuaDaDuyet", [])}
         covered = {norm_vi(k): v for k, v in (s.get("daPhuDaDuyet") or {}).items()}
         for kid, name, alts in items:
+            # từ khóa viết bằng LaTeX/ký hiệu không bao giờ khớp lời đọc → lỗi của THẺ, không phải của kịch bản
+            bad = [a for a in alts if "\\" in a or "$" in a]
+            if bad:
+                errors.append(
+                    f"thẻ {card.name}: từ khóa {kid} '{' | '.join(bad)}' là LaTeX/ký hiệu — không bao giờ khớp lời đọc. "
+                    f"Sửa THẺ thành cụm lời thường (references/_mau-the-bai-hoc.md); KHÔNG ghi boQuaDaDuyet hay ngoaiLeDaDuyet để né"
+                )
+                alts = [a for a in alts if a not in bad]
+                if not alts:
+                    continue
             keys = (norm_vi(kid), norm_vi(f"{kid} {name}"))
             if any(k in skipped for k in keys):
                 continue

@@ -36,6 +36,7 @@ Lý do và lời góp ý gốc của từng luật: `.agents/lessons.md`.
    - `"daPhuDaDuyet": {"K4": "b05, nói 'cộng hết lại bằng không'"}`: mục của thẻ có trong video nhưng nói bằng lời khác cụm từ khóa;
    - `"ngoaiLeDaDuyet": {"b03-l02 thuat-ngu:clo": "lý do"}`: bộ kiểm báo lỗi mà phép thử vẫn đạt (khóa = `<nơi> <mã trong ngoặc vuông của lỗi>`).
 3. **Gặp tình huống không luật nào nói tới** → hỏi ở điểm duyệt. Không đứng hình, không đoán im lặng.
+4. **Người dùng yêu cầu điều trái một luật đã chốt** (vd. "ghi chú 'Mô hình minh hoạ' ở góc", "để công thức ở cuối", "dùng tên natri") → không làm theo im lặng, không từ chối: nêu luật trong một câu kèm lý do, đề xuất cách đạt đúng mục đích người dùng muốn, rồi hỏi. Người dùng vẫn muốn → làm theo, ghi vào `ngoaiLeDaDuyet` (nếu bộ kiểm báo lỗi) và vào báo cáo. Luật tầng 1 (sai kiến thức) thì nói rõ là sai, không làm theo.
 
 **Báo cáo B1 phải dán** (mỗi dòng có/không + chỗ):
 ```
@@ -72,7 +73,8 @@ Người dùng đưa: **chủ đề** + **ý bản chất muốn nói** (+ kỳ 
 
 - Vị trí: `references/<môn>/lop-<lớp>/bai-<NN>-<ten>.md` (được nằm trong `tap-1/`, `tap-2/`; `NN` hai chữ số, khớp `"bai": "Bài 13. …"`). File được tính là thẻ khi có mục `## Từ khóa kiểm tra`; file tóm tắt SGK chưa có mục đó thì *chưa có thẻ*.
 - Mẫu: `references/_mau-the-bai-hoc.md` — kiến thức lõi K1…, bẫy thi T1…, ví dụ đã kiểm số, hiện tượng gợi ý, gợi ý chia video, Từ khóa kiểm tra.
-- **Chưa có thẻ** → soạn thẻ theo mẫu, dựa trên SGK (`references/<môn>/…`), ghi "Trạng thái: chờ duyệt", **đưa người dùng duyệt thẻ trước**, rồi mới làm Bảng nội dung. Số liệu trong ví dụ tự kiểm và ghi phép kiểm.
+- **Chưa có thẻ** → soạn thẻ theo mẫu, dựa trên SGK (`references/<môn>/…`), ghi "Trạng thái: chờ duyệt". Được trình thẻ cùng lúc với Bảng nội dung, nhưng nói rõ "thẻ chờ duyệt" — người dùng duyệt thẻ (phạm vi kiến thức) trước, rồi mới chốt Bảng nội dung. Số liệu trong ví dụ tự kiểm và ghi phép kiểm.
+- **Từ khóa kiểm tra** của thẻ là **cụm lời thường** sẽ có trong lời đọc hoặc chữ trên hình ("tổng số oxi hoá", "hợp lực"), không LaTeX, không ký hiệu (`\vec F`, `$...$` không bao giờ khớp — `check_script` báo lỗi thẻ). Ghi vài cách nói (`cụm1 | cụm2`).
 - Thẻ là chuẩn chung của dự án: đang làm một video thì không sửa thẻ; thấy thẻ sai → báo người dùng.
 
 ### Bước 0 — Tìm ý (trước dàn ý)
@@ -85,24 +87,23 @@ Người dùng đưa: **chủ đề** + **ý bản chất muốn nói** (+ kỳ 
 
 Phần lớn lỗi người dùng bắt được là lỗi dàn ý; viết xong lời mới phát hiện thì phải làm lại B1–B3.
 
-**Mở đầu dàn ý bằng *Bảng nội dung*** (phép thử P0). Agent **không tự quyết** video nói gì, bỏ gì; agent **nêu rõ** để người dùng duyệt, đúng mẫu:
-```
-Loại video: bài học — <Môn> <lớp>, Bài <NN> (thẻ: references/<môn>/lop-<lớp>/bai-<NN>-….md)   | hoặc: hiện tượng — <câu hỏi>
-Xoay quanh: <một câu — ý bản chất>
-Hook: <hiện tượng / câu đề thi / cách hiểu sai, ≤ 20 s>
+**Mở đầu dàn ý bằng *Bảng nội dung*** (phép thử P0). Agent **không tự quyết** video nói gì, bỏ gì; agent **nêu rõ** để người dùng duyệt. Bảng viết **cho người dùng đọc**, bằng lời thường — không cần hiện mã thẻ, số beat, số giây từng phần. Cần có:
+- loại video (bài học theo bài nào / hiện tượng) và **ý xuyên suốt** (một câu);
+- các phần của video: *sẽ giải thích gì* · *người xem sẽ thấy gì*;
+- hook (hiện tượng / câu đề thi / cách hiểu sai) và nguồn kiểm chứng;
+- **cái gì không có trong video và vì sao** (bỏ trống nếu đủ); ước tính tổng thời lượng; đề xuất tách nếu > 4:00;
+- đề xuất ngoại lệ (mục 0 › Lối thoát) và chỗ còn nghi ngờ, nếu có.
 
-| Mục thẻ | Sẽ nói gì (1 câu) | Beat | Hình (thay đổi nhìn thấy, component nếu có) | ~giây |
-|---|---|---|---|---|
-| K1 | … | b03 | … | 15 |
-| T1 (bẫy) | … | b09 | … | 20 |
-
-Không có trong video (cần bạn duyệt): <mục> — lý do …
-Ví dụ dùng (thẻ mục 3): …
-Ước tính tổng: m:ss
-Đề xuất ngoại lệ (mục 0 › Lối thoát): …
-Chỗ còn nghi ngờ: …
+Ví dụ đã được người dùng khen (Hóa 10, Bài 13):
 ```
-- **Mọi mục** K… và T… của thẻ có một dòng trong bảng, hoặc nằm ở "Không có trong video" kèm lý do. Không âm thầm bỏ. Video hiện tượng không có thẻ: liệt kê các ý kiến thức sẽ dạy.
+Video "Phản ứng oxi hoá – khử — Hóa 10" đi theo mạch: hiểu số oxi hoá → nhận ra ai nhường, ai nhận electron → dùng bảo toàn electron để cân bằng phương trình.
+| Phần | Sẽ giải thích gì? | Người xem sẽ thấy gì? |
+| 1. Câu hỏi mở đầu | Vì sao đinh iron trong dung dịch copper(II) sulfate có lớp copper bám lên? | Cốc có tên chất; lớp đỏ nâu xuất hiện trên đinh |
+| 3. Số oxi hoá là gì? | Quy ước electron để xác định số oxi hoá | Cặp electron chung trong nước được quy về nguyên tử hút mạnh hơn, rồi mới hiện số oxi hoá |
+| … | … | … |
+Ước tính 6–7 phút → đề xuất chia hai video: (1) Số oxi hoá; (2) Phản ứng oxi hoá – khử. Chưa chốt thay cho bạn.
+```
+**Agent tự soát trước khi trình** (không cần hiện ra): mọi mục K… và T… của thẻ đều nằm trong một phần của bảng, hoặc ở "không có trong video" kèm lý do — không âm thầm bỏ. `check_script` còn chặn lại ở bước kịch bản. Video hiện tượng không có thẻ: các phần chính là các ý kiến thức sẽ dạy.
 - Ước tính > 4:00 → **không tự cắt**; đề xuất cách tách (thẻ mục "Gợi ý chia video", chưa có thì tự đề xuất), người dùng chọn.
 
 Sau Bảng nội dung, dàn ý bày đủ:

@@ -36,7 +36,8 @@ Mỗi trường hợp của một quy tắc nên có ít nhất một ví dụ (
 ## Từ khóa kiểm tra
 <!-- check_script.py đọc mục này: mỗi dòng "- <mã> <tên>: cụm1 | cụm2". Kịch bản (speak/text/caption/keyword/title) phải chứa ít nhất một cụm.
      Không phân biệt hoa/thường và "hoá"/"hóa". Mã là K… (kiến thức lõi) hoặc T… (bẫy thi).
-     Chọn cụm mà lời giảng tự nhiên sẽ nói ra; ghi vài cách nói (cụm1 | cụm2) để không ép câu đọc gượng.
+     Chọn cụm LỜI THƯỜNG mà lời giảng tự nhiên sẽ nói ra; ghi vài cách nói (cụm1 | cụm2) để không ép câu đọc gượng.
+     KHÔNG dùng LaTeX hay ký hiệu ($...$, \vec F, F = ma): không bao giờ khớp lời đọc → check_script báo lỗi thẻ.
      Mục đã duyệt bỏ: script.json › "boQuaDaDuyet"; có trong video nhưng nói bằng lời khác: "daPhuDaDuyet". -->
 - K1 <tên>: <cụm> | <cách nói khác>
 - K2 <tên>: <cụm>

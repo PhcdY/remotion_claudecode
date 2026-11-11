@@ -9,7 +9,7 @@ Dùng cho Toán, Lý, Hóa, Sinh, Sử, Địa…: luật riêng từng môn ở
 - **Tầng 1 — sáu phép thử, CỨNG**: P0 đúng và đủ nội dung đã duyệt · P1 không nhảy bước (thấy trước, gọi tên sau) · P2 lúc nào cũng biết đang xem gì · P3 tắt tiếng vẫn hiểu đúng điều lời đọc khẳng định (khái niệm mới → hình mới) · P4 một khái niệm một tên · P5 chữ đọc được. Không gói môn, không ngoại lệ nào tắt được.
 - **Tầng 2 — mặc định**: mọi luật khác (số cảnh, thời lượng, bố cục…). Gói môn chỉ thay được trong mục **"Thay luật chung"** của gói; không ghi ở đó thì luật chung thắng.
 - **Tầng 3 — gợi ý**: thực đơn hình, component, mẫu câu.
-- **Lối thoát**: thấy cách hay hơn mà luật chặn, hoặc công cụ báo nhầm → đề xuất ở điểm duyệt (Bảng nội dung, storyboard). Không im lặng làm khác, không đoán.
+- **Lối thoát**: thấy cách hay hơn mà luật chặn, công cụ báo nhầm, hoặc **người dùng yêu cầu điều trái luật** → nêu luật + lý do, đề xuất ở điểm duyệt (Bảng nội dung, storyboard), người dùng chọn. Không im lặng làm khác, không im lặng làm theo, không đoán.
 Dùng skill `remotion-best-practices` (đã cài trong `.agents/skills/`) cho mọi việc liên quan Remotion.
 
 ## Môi trường thực thi & Lưu ý Windows

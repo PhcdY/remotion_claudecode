@@ -80,7 +80,7 @@ Luật chung: phép thử P3 (`viet-kich-ban` › mục 0, `dung-video` › mụ
 
 ### 1.6. Nội dung video: agent đề xuất, người dùng duyệt (luật 0.13, 0.14)
 Luật chung (mọi môn): loại video `"loai"`, *Bảng nội dung* theo mẫu cố định, thẻ bài học, `boQuaDaDuyet`/`daPhuDaDuyet` — skill `viet-kich-ban` › Đầu vào, Thẻ bài học, Bước 1. Riêng Hóa:
-- Cột "Hình" của Bảng nội dung ghi component Hóa (mục 6.7), vd. `| K1 | Số oxi hoá là … | b03 | OxidationFormula H2O | 15 |`, `| Bẫy: tên gọi chéo | … | b09 | RedoxRoleTable, tô cam | 20 |`.
+- Phần "người xem sẽ thấy gì" của Bảng nội dung nêu hình Hóa tương ứng (mục 6.7: công thức ghi số oxi hoá, bảng hai cột chất khử/chất oxi hoá, cái cân electron…).
 - Video bài học: thumb `ChemIntro` có `kicker` = tên bài, `title` = câu hỏi ngắn (6.1).
 
 ---
