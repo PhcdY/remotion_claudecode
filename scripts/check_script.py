@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import json
 import re
+import unicodedata
 import sys
 from pathlib import Path
 
@@ -74,6 +75,97 @@ MULTI_CHANGE = re.compile(r"\b(rồi|sau đó|tiếp theo|đồng thời|cùng l
 RAW_CHEM = re.compile(r"\b(CH3COOH|C2H5OH|CH3COOC2H5|H2SO4|HCl|HNO3|NaOH|KOH|Fe2O3|FeO|Fe3O4|Al2O3|NaCl|CaCO3|CO2|SO2|CH4|C2H6|C2H4|C2H2|C6H6)\b", re.IGNORECASE)
 # Chữ viết tắt môn Sử/Địa/Khoa học cần phiên âm có gạch nối
 RAW_ABBR = re.compile(r"\b(ASEAN|NATO|UNESCO|WTO|DNA|RNA|APEC|TCN|SCN)\b")
+
+# --- Hóa: thuật ngữ & danh pháp theo SGK GDPT 2018 (gói môn hoa.md › mục 2) ---
+# Tên cũ/phiên âm Việt → tên IUPAC tiếng Anh. Áp cho title, keyword, text, caption, speak.
+W_ = r"(?<![\wÀ-ỹ])"
+_W = r"(?![\wÀ-ỹ])"
+HOA_OLD_NAMES = [
+    (r"natri", "sodium"), (r"kali", "potassium"), (r"liti", "lithium"), (r"magie", "magnesium"),
+    (r"canxi", "calcium"), (r"bari", "barium"), (r"nitơ", "nitrogen"), (r"hi[đd]ro|hy[đd]ro", "hydrogen"),
+    (r"oxi(?!\s+ho[áa]|\s+hoá|\s+hóa)", "oxygen (riêng 'oxi hoá' giữ nguyên)"), (r"cacbon", "carbon"),
+    (r"photpho", "phosphorus"), (r"silic", "silicon"), (r"clo", "chlorine"), (r"flo", "fluorine"),
+    (r"brom", "bromine"), (r"iot", "iodine"), (r"mangan", "manganese"), (r"crom", "chromium"),
+    (r"axit", "acid"), (r"bazơ", "base"), (r"oxit", "oxide"), (r"hi[đd]roxit", "hydroxide"),
+    (r"clorua", "chloride"), (r"sunfat", "sulfate"), (r"sunfua", "sulfide"), (r"nitrat", "nitrate"),
+    (r"cacbonat", "carbonate"), (r"ancol", "alcohol"), (r"an[đd]ehit", "aldehyde"), (r"xeton", "ketone"),
+    (r"etylic", "ethanol / ethyl"), (r"axetic", "acetic"), (r"metan", "methane"), (r"etilen|etylen", "ethylene"),
+]
+# Tên Việt quen của kim loại/phi kim: gói Hóa chốt dùng tên IUPAC tiếng Anh cho đồng nhất (cảnh báo, vì trùng từ thường)
+HOA_VI_COMMON = [
+    (r"sắt", "iron"), (r"nhôm", "aluminium"), (r"kẽm", "zinc"), (r"chì", "lead"), (r"thiếc", "tin"),
+    (r"lưu huỳnh", "sulfur"), (r"thu[ỷy] ngân", "mercury"),
+]
+HOA_GROUP_NUM = re.compile(r"nhóm\s+(1[0-8]|[1-9])" + _W, re.IGNORECASE)
+HOA_GROUP_SPOKEN = re.compile(r"nhóm\s+(một|hai|ba|bốn|năm|sáu|bảy|tám|mười[\wÀ-ỹ ]*?)(?!\s+[ab]" + _W + r")" + _W, re.IGNORECASE)
+
+
+HOA_SUPERSCRIPT = re.compile(r"[⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻]")
+HOA_DONG = re.compile(W_ + r"đồng" + _W, re.IGNORECASE)
+HOA_DONG_OK = re.compile(
+    r"đồng\s+(thời|nhất|đều|ý|hồ|dạng|phân|vị|biến|bộ|loạt|nghĩa|chất|hành|tâm|môn|đội|cảm|lòng|thanh|minh|tình|bằng|ruộng|cỏ|xu)"
+    r"|(cộng|tương|hội|bất|hợp|ruộng|cánh|mười|nghìn|triệu)\s+đồng",
+    re.IGNORECASE,
+)
+_ACCENT = {"oá": "óa", "oà": "òa", "oả": "ỏa", "oã": "õa", "oạ": "ọa", "uý": "úy", "uỳ": "ùy", "uỷ": "ủy", "uỹ": "ũy", "uỵ": "ụy"}
+
+
+def norm_vi(t: str) -> str:
+    """Chữ thường + đưa 'hoá'/'hóa' (hai kiểu bỏ dấu) về một dạng, để so cụm từ."""
+    t = unicodedata.normalize("NFC", t).lower()
+    for a, b in _ACCENT.items():
+        t = t.replace(a, b)
+    return re.sub(r"\s+", " ", t)
+
+
+def hoa_lesson_card(s: dict) -> tuple[Path | None, list[tuple[str, str, list[str]]]]:
+    """Tìm thẻ bài học references/hoa/lop-<lop>/bai-<NN>-*.md theo lop + bai; trả về các mục từ khóa kiểm tra."""
+    m = re.search(r"Bài\s*(\d+)", str(s.get("bai", "")))
+    lop = s.get("lop")
+    if not m or not lop:
+        return None, []
+    hits = sorted((ROOT / "references" / "hoa" / f"lop-{lop}").glob(f"bai-{int(m.group(1)):02d}-*.md"))
+    if not hits:
+        return None, []
+    card = hits[0]
+    items: list[tuple[str, str, list[str]]] = []
+    section = card.read_text(encoding="utf-8").split("## Từ khóa kiểm tra", 1)
+    if len(section) == 2:
+        for line in section[1].splitlines():
+            mm = re.match(r"\s*-\s*(K\d+)\s+([^:]+):\s*(.+)", line)
+            if mm:
+                items.append((mm.group(1), mm.group(2).strip(), [a.strip() for a in mm.group(3).split("|") if a.strip()]))
+    return card, items
+
+
+def hoa_terms(where: str, field: str, value: str, errors: list[str], warns: list[str]) -> None:
+    if not value:
+        return
+    plain = MATH.sub(" ", value)
+    for pat, good in HOA_OLD_NAMES:
+        m = re.search(W_ + "(" + pat + ")" + _W, plain, re.IGNORECASE)
+        if m:
+            errors.append(f"{where}: {field} dùng tên cũ '{m.group(1)}' — SGK 2018 dùng IUPAC: {good} (gói hoa.md › mục 2.2)")
+    for pat, good in HOA_VI_COMMON:
+        m = re.search(W_ + "(" + pat + ")" + _W, plain, re.IGNORECASE)
+        if m:
+            warns.append(f"{where}: {field} có '{m.group(1)}' — nếu là tên nguyên tố thì dùng {good} cho đồng nhất (hoa.md › mục 2.2)")
+    m = HOA_GROUP_NUM.search(plain)
+    if m:
+        errors.append(f"{where}: {field} gọi nhóm bằng số cột '{m.group(0)}' — chỉ dùng IA…VIIIA / IB…VIIIB (hoa.md › mục 2.3)")
+    if field == "speak":
+        m = HOA_GROUP_SPOKEN.search(plain)
+        if m:
+            errors.append(f"{where}: speak đọc '{m.group(0)}' thiếu A/B — đọc 'nhóm một A', 'nhóm tám B' (hoa.md › mục 2.3)")
+    if field != "speak" and HOA_SUPERSCRIPT.search(value):
+        errors.append(f"{where}: {field} dùng ký tự mũ Unicode ('{HOA_SUPERSCRIPT.search(value).group(0)}') — font không có glyph, hiện vỡ. Viết $\ce{{Cu^2+}}$ (hoa.md › 6.9)")
+    for mm in HOA_DONG.finditer(plain):
+        around = plain[max(0, mm.start() - 12): mm.end() + 12]
+        if not HOA_DONG_OK.search(around):
+            warns.append(f"{where}: {field} có 'đồng' — nếu là tên nguyên tố thì dùng copper (hoa.md › mục 2.2)")
+            break
+    if re.search(r"chu kỳ", plain, re.IGNORECASE):
+        warns.append(f"{where}: {field} viết 'chu kỳ' — SGK viết 'chu kì'")
 
 
 def tokens_in(phrase: str, speak: str) -> bool:
@@ -339,6 +431,45 @@ def main() -> int:
             warns.append(f"{bid}: dòng cuối có text trong khi keyword hiện cùng lúc — để text \"\"")
         beat_secs.append((bid, sec, bsec))
         total_sec += bsec
+
+    # --- Hóa: thuật ngữ, danh pháp, thumb (gói hoa.md) ---
+    if subject == "hoa":
+        hoa_terms("title", "title", s.get("title", ""), errors, warns)
+        for bi, b in enumerate(beats):
+            bid = b.get("id", f"#{bi + 1}")
+            hoa_terms(bid, "keyword", b.get("keyword", ""), errors, warns)
+            for li, line in enumerate(b.get("lines") or []):
+                w = f"{bid}-l{li + 1:02d}"
+                for field in ("text", "caption", "speak"):
+                    hoa_terms(w, field, line.get(field) or "", errors, warns)
+        video_tsx = path.parent / "Video.tsx"
+        if video_tsx.exists() and "ChemIntro" not in video_tsx.read_text(encoding="utf-8"):
+            warns.append("Video.tsx chưa dùng ChemIntro (thumb có hình chính + từ khóa nổi bật) — hoa.md › mục 6.1")
+        # \ce cần extension mhchem: nạp khi import bất kỳ thứ gì từ components/chemistry
+        raw = json.dumps(s, ensure_ascii=False)
+        tsx = "".join(f.read_text(encoding="utf-8") for f in path.parent.glob("*.tsx"))
+        if "\\ce{" in raw and tsx and "components/chemistry" not in tsx:
+            errors.append("script dùng \ce{...} nhưng video chưa import gì từ components/chemistry → \ce hiện thành chữ lỗi đỏ (hoa.md › 6.9)")
+        # độ phủ kiến thức theo thẻ bài học (hoa.md › 1.6, 2.6)
+        card, items = hoa_lesson_card(s)
+        if card is None:
+            warns.append(f"chưa có thẻ bài học cho '{s.get('bai', '?')}' (references/hoa/lop-<lop>/bai-<NN>-*.md) — soạn theo hoa.md › 2.6 và cho người dùng duyệt trước khi viết kịch bản")
+        else:
+            corpus_parts = [s.get("title", "")]
+            for b in beats:
+                corpus_parts.append(b.get("keyword", ""))
+                for line in b.get("lines") or []:
+                    corpus_parts += [line.get(k) or "" for k in ("text", "caption", "speak")]
+            corpus = norm_vi(" ".join(corpus_parts))
+            skipped = {norm_vi(x) for x in s.get("boQuaDaDuyet", [])}
+            for kid, name, alts in items:
+                if norm_vi(kid) in skipped or norm_vi(f"{kid} {name}") in skipped:
+                    continue
+                if not any(norm_vi(a) in corpus for a in alts):
+                    errors.append(
+                        f"thiếu kiến thức của thẻ bài học {card.name}: {kid} {name} (kịch bản cần có một trong: {' | '.join(alts)}). "
+                        f"CHỈ KHI người dùng đã duyệt bỏ: thêm \"{kid} {name}\" (hoặc \"{kid}\" để bỏ cả mục) vào \"boQuaDaDuyet\" trong script.json"
+                    )
 
     # --- cấu trúc cả bài ---
     if len(set(scenes)) > 3:

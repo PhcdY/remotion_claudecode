@@ -19,6 +19,7 @@ import { QuangDuongVanTocComposition } from "./videos/quang-duong-van-toc/Video"
 import { PhysicsShowcaseComposition } from "./videos/physics-showcase/Video";
 import { PhysicsShowcase2Composition } from "./videos/physics-showcase-2/Video";
 import { ChemistryShowcaseComposition } from "./videos/chemistry-showcase/Video";
+import { HoaThanhPhanComposition } from "./videos/hoa-thanh-phan/Video";
 import { BiologyShowcaseComposition } from "./videos/biology-showcase/Video";
 import { DemoTuongTrungCuComposition } from "./videos/demo-tuong-trung-cu/Video";
 import { DemoTuongTrungMoiComposition } from "./videos/demo-tuong-trung-moi/Video";
@@ -47,6 +48,7 @@ export const RemotionRoot: React.FC = () => {
       <PhysicsShowcaseComposition />
       <PhysicsShowcase2Composition />
       <ChemistryShowcaseComposition />
+      <HoaThanhPhanComposition />
       <BiologyShowcaseComposition />
       <DemoTuongTrungCuComposition />
       <DemoTuongTrungMoiComposition />
