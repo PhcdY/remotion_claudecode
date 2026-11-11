@@ -33,7 +33,7 @@ Mỗi đại lượng vật lý trừu tượng cần được gán cho một **
 - **Linh hoạt theo chủ đề**: Với những bài học mang tính chất định lượng hoặc biến đổi định luật (như mạch điện, định luật chất khí, bài toán va chạm, quang hình...) nếu hướng triển khai cần nhiều hơn 5 con số để giải thích rõ ràng thì **chỉ cần nêu rõ trong dàn ý (B1) và hỏi ý kiến người dùng** là được, không bị gò bó ép buộc.
 - **So sánh bằng hình ảnh**: Kéo thẳng sợi chỉ đặt song song cạnh dây chun, hoặc cho hai vật chạy song song.
 - **Vị trí bản so sánh**: Đặt ở **vùng trời hoặc khoảng trống phía trên**, tách biệt với mặt đất/vật thể bên dưới để tránh rối mắt. Nếu thiếu chỗ, **lùi camera** để giữ nguyên tỉ lệ kích thước thật, không thu nhỏ méo mó bản so sánh (bài học 05/11).
-- **Công thức chỉ xuất hiện ở ~20% cuối video**: Công thức là bước đặt tên cho thứ người xem đã thấy tận mắt (ví dụ: công thức $v = d / t$ hiện ra với tử số gắn cạnh dây chun, mẫu số gắn cạnh đồng hồ). Thay số tối đa 1 lần trong cả video.
+- **Thấy trước, gọi tên sau — cho từng công thức** (phép thử chung P1): công thức là bước đặt tên cho thứ người xem đã thấy tận mắt (ví dụ: công thức $v = d / t$ hiện ra với tử số gắn cạnh dây chun, mẫu số gắn cạnh đồng hồ). Video lý giải công thức: hiện tượng trước rồi suy ra công thức; công thức được hiện ở bất cứ đâu trong video (không bó vào ~20% cuối), miễn mọi đại lượng trong nó đã được thấy trên hình. Thay số tối đa 1 lần trong cả video. (Người dùng chốt 12/11/2026.)
 
 ### Cảnh sống, góc nhìn và di chuyển camera
 - Ưu tiên góc nhìn phối cảnh nghiêng 3/4 sinh động thay cho sơ đồ 2D nhìn thẳng khô khan khi bối cảnh cho phép.

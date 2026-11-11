@@ -13,7 +13,7 @@
     {"khongDung": ["cacbon"], "dung": "carbon", "muc": "loi", "thongBao": "{noi}: {truong} dùng tên cũ '{tu}' — SGK 2018 dùng IUPAC: {dung} (gói hoa.md › mục 2.2)"},
     {"khongDung": ["photpho"], "dung": "phosphorus", "muc": "loi", "thongBao": "{noi}: {truong} dùng tên cũ '{tu}' — SGK 2018 dùng IUPAC: {dung} (gói hoa.md › mục 2.2)"},
     {"khongDung": ["silic"], "dung": "silicon", "muc": "loi", "thongBao": "{noi}: {truong} dùng tên cũ '{tu}' — SGK 2018 dùng IUPAC: {dung} (gói hoa.md › mục 2.2)"},
-    {"khongDung": ["clo"], "dung": "chlorine", "muc": "loi", "thongBao": "{noi}: {truong} dùng tên cũ '{tu}' — SGK 2018 dùng IUPAC: {dung} (gói hoa.md › mục 2.2)"},
+    {"khongDung": ["clo"], "dung": "chlorine", "muc": "loi", "ngoaiLe": ["clo-rin", "clo-rai", "clo-rích", "clo-rát"], "_ghiChu": "phiên âm tên IUPAC (hoa.md › mục 5) không phải tên cũ", "thongBao": "{noi}: {truong} dùng tên cũ '{tu}' — SGK 2018 dùng IUPAC: {dung} (gói hoa.md › mục 2.2)"},
     {"khongDung": ["flo"], "dung": "fluorine", "muc": "loi", "thongBao": "{noi}: {truong} dùng tên cũ '{tu}' — SGK 2018 dùng IUPAC: {dung} (gói hoa.md › mục 2.2)"},
     {"khongDung": ["brom"], "dung": "bromine", "muc": "loi", "thongBao": "{noi}: {truong} dùng tên cũ '{tu}' — SGK 2018 dùng IUPAC: {dung} (gói hoa.md › mục 2.2)"},
     {"khongDung": ["iot"], "dung": "iodine", "muc": "loi", "thongBao": "{noi}: {truong} dùng tên cũ '{tu}' — SGK 2018 dùng IUPAC: {dung} (gói hoa.md › mục 2.2)"},

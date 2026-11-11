@@ -137,4 +137,5 @@ Codex sửa file và chạy lệnh trên máy bạn, nên có chế độ phê d
 2. **`/compact` sau mỗi trạm**: sau khi chốt kịch bản, sau khi duyệt storyboard, sau khi có audio.
 3. **Nói bằng hình, không cần nói bằng code**: thay vì "sửa beats.tsx dòng 45", hãy nói
    > Ở cảnh 2, đẩy nhãn "cực đại" sang phải một chút và đổi sang màu chàm.
-4. **Góp ý được ghi lại**: góp ý của bạn được ghi vào `src/videos/<slug>/FEEDBACK.md`; bài học chung vào `.agents/lessons.md` để các video sau không lặp lỗi.
+4. **Góp ý được ghi lại**: góp ý của bạn được ghi vào `src/videos/<slug>/FEEDBACK.md`; bài học chung vào `.agents/lessons.md` để các video sau không lặp lỗi. Video dựng trên máy riêng (không có nguồn trong repo): gửi góp ý cho người bảo trì để ghi vào `.agents/gop-y/<slug>.md`.
+5. **Duyệt nội dung trước, hình sau**: ở bước kịch bản, Codex trình *Bảng nội dung* (dạy gì, ở đâu, hình gì, cái gì bỏ và vì sao) — đây là lúc thêm/bớt ý rẻ nhất. Khi Codex báo xong một bước, nó dán bảng soát sáu phép thử (đủ nội dung, không nhảy bước, biết đang xem gì, tắt tiếng vẫn hiểu, một khái niệm một tên, chữ đọc được) kèm frame để bạn xem nhanh.
