@@ -23,7 +23,7 @@ Luật 3, 4, 5, 12, 13, 14, 15 nay là phép thử chung (P2, P3, P0) và luật
 | 3 | **Định hướng trước, thí nghiệm sau**: thứ ghi trong tiêu đề phải hiện ngay đầu video | Vào thẳng 2 cốc nước, 15 s sau mới thấy bảng | Dòng 1: bảng tuần hoàn, sáng 1 hàng rồi 1 cột → dòng 2: "vì sao Li và Na cùng cột?" → thí nghiệm | 1.4 |
 | 4 | **Vật thật phải tự nói**: tắt tiếng vẫn biết đây là chất gì | 2 hình chữ nhật xám trong 2 cốc, không tên | Thẻ tên "Lithium (Li)", ký hiệu trên miếng kim loại, cốc có thành/vạch | 6.2 |
 | 5 | **Lời nói khác → hình khác.** Lời nói "giống" ở điểm nào thì hình giống đúng điểm đó, còn lại phải khác | Li và Na vẽ y hệt nhau | Cùng sủi bọt + cùng hồng (giống: cùng kiểu phản ứng); Na chảy tròn, chạy nhanh, sủi mạnh (khác: mức độ) | 1.5, 6.2 |
-| 6 | **Không vẽ tay bảng tuần hoàn / ô nguyên tố** — dùng `PeriodicTable`, `ElementTile` | Ô 25 px, chữ "Na" to hơn ô, tràn viền | Component tự tính cỡ chữ ≤ 42% cạnh ô; nhấn bằng tô nền + viền | 6.3, 6.4 |
+| 6 | **Không vẽ tay bảng tuần hoàn / ô nguyên tố** — dùng `PeriodicTable`, `ElementTile` | Ô 25 px, chữ "Na" to hơn ô, tràn viền | Component tự tính cỡ chữ theo hai giới hạn: vừa ô và ≥ 28px; ô quá nhỏ thì tên đặt cạnh ô, ngoài lưới chữ. Nhấn bằng tô nền + viền | 6.3, 6.4 |
 | 7 | **Một hệ tên duy nhất: IUPAC tiếng Anh** cho mọi nguyên tố, chất | Lúc "Sodium", lúc "natri"; "axit" | sodium, potassium, iron, acid, base, oxide… (cả trên hình và lời đọc) | 2.2 |
 | 8 | **Gọi nhóm theo SGK THPT: IA…VIIIA, IB…VIIIB** | Trục ghi 1–18, rồi lại giải thích "1 ↔ IA" | Trục ghi IA, IIA, IIIB…; lời đọc "nhóm một A". Không bao giờ "nhóm 1" | 2.3 |
 | 9 | **Số liệu lấy từ `elements.ts`**, không gõ theo trí nhớ | Tự gõ khối lượng, Z | `ElementTile symbol="Na"` tự lấy 11, Sodium, 22,99 | 2.5 |
@@ -278,14 +278,14 @@ const na = periodicCell("Na", T);   // { x, y, size, cx, cy } để đặt vòng
 | Muốn | Đặt |
 |---|---|
 | Bảng là nhân vật chính của cảnh | `width` 1500–1600 (ô ≈ 75 px, ký hiệu 32 px) |
-| Bảng nhỏ chỉ để định vị, cạnh hình khác | `width` 700–1000, `symbols="highlighted"`, nhãn đặt ngoài bằng AutoLabels (tên nhóm tự ẩn khi ô < 56 px) |
-| Hiện số hiệu Z trong ô | `showZ` — chỉ có tác dụng khi ô ≥ 86 px (width ≥ ~1700); nhỏ hơn thì dùng `ElementTile` |
+| Bảng nhỏ chỉ để định vị, cạnh hình khác | `width` 700–1000, `symbols="highlighted"`. Ô quá nhỏ cho chữ 28px (bảng < ~1340) → component **tự** ghi ký hiệu của ô tô riêng (`cells`) cạnh ô, "nhóm IA" / "chu kì 3" cho nhóm/chu kì đang tô; không cần tự đặt nhãn. Chừa chỗ ~60px quanh bảng cho các tên này |
+| Hiện số hiệu Z trong ô | `showZ` — chỉ hiện khi ô chứa được cả Z và ký hiệu ở cỡ đọc được (width ≳ 1700); nhỏ hơn thì dùng `ElementTile` |
 | Dồn mắt vào ô được tô | `dimOthers={0.35–0.55}` |
 | Không cần hàng f | `showFBlock={false}` |
 
 Quy tắc:
 - **Nhấn mạnh bằng tô nền + viền**, không phóng to chữ, không đổi cỡ ô.
-- Chữ trong ô luôn ≤ 42% cạnh ô — đừng sửa `fontSize` trong component để "cho to".
+- Chữ theo hai giới hạn (`fitFont`, `MIN_FONT` — `dung-video` quy tắc 4): không sửa `fontSize` trong component để "cho to" hay "cho vừa". Kiểm tra trước khi chia bố cục: `periodicSymbolsFit(width)`.
 - Mỗi dòng lời đọc sáng **một** thứ (một chu kì, hoặc một nhóm, hoặc vài ô) — dùng `opacity: fadeIn(fr, L[i])`.
 - Bảng giữ **nguyên vị trí và kích thước** suốt các beat cùng cảnh; thông tin phụ (sơ đồ lớp electron, ô phóng to) đặt ở vùng trống phía trên khối d (giữa nhóm IIA và IIIA, chu kì 1–3) hoặc dưới hàng f — không co bảng lại để nhường chỗ.
 
@@ -294,7 +294,7 @@ Quy tắc:
 <ElementTile symbol="Na" left={160} top={250} size={320} show={{ name: fadeIn(fr, L[1]), mass: fadeIn(fr, L[2]) }} focus="z" />
 ```
 - Số liệu tự lấy từ `elements.ts`; `focus` tô phần đang được nói (`"z" | "symbol" | "name" | "mass"`).
-- `size` 220–340. Tên dài (Phosphorus) tự thu nhỏ; không sửa.
+- `size` 220–340. Các dòng xếp theo chiều cao chữ thật; tên dài (Praseodymium, Rutherfordium) cần ô to hơn → ô **tự nới** tới `elementTileMinSize(symbol)`, dùng hàm này khi chia bố cục. Không đủ chỗ cho 4 dòng → tự bỏ dòng khối lượng (hoặc `showMass={false}`).
 
 ### 6.5. Bảng màu nguyên tử CPK
 H trắng `#FFFFFF` (viền `#CBD5E1`) · C xám than `#334155` · O đỏ san hô `#EF4444` · N xanh lam `#3B82F6` · Cl xanh lục `#22C55E` · Na tím nhạt `#A855F7` · S vàng `#EAB308` (chữ tối) · Fe cam đất `#F97316` · Cu nâu đồng `#D97706` · Ag bạc `#94A3B8` (chữ tối). Dữ liệu ở `CPK.ts`.
@@ -334,7 +334,7 @@ Luật chung: P3 "khái niệm mới → hình mới" và thực đơn hình (`d
 // Hiện tượng: lớp copper bám dần, dung dịch nhạt dần
 <NailInCopperSulfate left={260} top={170} width={520} progress={interpolate(fr, [L[1], L[3]], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })} />
 ```
-Xem tất cả chạy thật: composition `hoa-thanh-phan` (frame 600–1080).
+Xem tất cả chạy thật: composition `hoa-thanh-phan` (frame 600–1080); thử cỡ nhỏ nhất / lớn nhất: frame 1080–1229.
 
 ### 6.8. Kích thước
 Các component trên đã có cỡ chữ ≥ 36 px; đặt chúng **to** (bảng vai trò rộng ≥ 1100, cân ≥ 900, công thức `fontSize` 100–130). Sân khấu ≥ 75% khung (luật 0.11).
@@ -397,6 +397,7 @@ node scripts/stills.mjs <compositionId> 0 <frame giữa mỗi beat...>
 | 11/11/2026 | phan-ung-oxi-hoa-khu | Thiếu quy tắc tổng số oxi hoá = 0, ion đa nguyên tử | Không có nguồn ghi bài SGK phải có gì | Thẻ bài học 2.6 + `check_script` |
 | 11/11/2026 | phan-ung-oxi-hoa-khu | Tên gọi chéo, electron nhường = nhận chỉ lướt qua | Bẫy thi không có beat/hình riêng | Mục 1.6 bước 3, `RedoxRoleTable`, `ElectronBalance` |
 | 11/11/2026 | phan-ung-oxi-hoa-khu | 70 s hai quả cầu; chỉ ví dụ Fe/Cu; không có hình số oxi hoá trong hợp chất | Một hình cho mọi khái niệm | Mục 6.7, `OxidationFormula` |
+| 12/11/2026 | hoa-thanh-phan | Sau khi chặn "chữ to hơn ô", số chu kì/tên nhóm còn 22px, ký hiệu bảng nhỏ 15px, nhãn cốc 30px, dòng trong ô nguyên tố dính nhau | Chữ không vừa hộp (chỉ chặn một phía) | `fitFont` hai giới hạn, tên ra cạnh ô khi ô nhỏ; đoạn thử cỡ nhỏ/lớn trong `hoa-thanh-phan` (frame 1080–1229) phải qua `check-layout` |
 | 11/11/2026 | phan-ung-oxi-hoa-khu | "Cu²⁺" gõ ký tự mũ bị vỡ; `\ce` thiếu mhchem nên hiện chữ đỏ | Ký hiệu viết tay | Mục 6.9, `check_script`, chemistry tự nạp mhchem |
 
 **Năm câu hỏi tổng quát** — tự hỏi ở mọi bài, kể cả bài chưa có trong bảng trên (nay là phép thử chung P0–P5, `viet-kich-ban` › mục 0):

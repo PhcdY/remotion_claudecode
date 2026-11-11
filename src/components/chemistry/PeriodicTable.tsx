@@ -1,12 +1,16 @@
 import "./mhchem";
 import React from "react";
+import { textWidth } from "../fit";
+import { AutoLabels, textObstacle, type AutoLabelItem, type Rect } from "../labels";
 import { MathText } from "../MathText";
-import { colors, fontText, tint } from "../theme";
+import { MIN_FONT, colors, fontText, tint } from "../theme";
 import { ELEMENTS, GROUP_OF_COLUMN, GroupName, PTElement, element } from "./elements";
 
 /**
  * Bảng tuần hoàn dạng dài, đúng hình dạng SGK (gói môn Hóa › mục 7).
- * - Kích thước ô tự tính từ `width`; chữ trong ô luôn nhỏ hơn ô (ký hiệu ≤ 42% cạnh ô) → không bao giờ tràn ô.
+ * - Kích thước ô tự tính từ `width`. Mọi chữ theo HAI giới hạn (skill dung-video › quy tắc 4): vừa ô/khung VÀ không dưới
+ *   MIN_FONT (ký hiệu, số chu kì, tên nhóm ≥ 28px). Ô quá nhỏ cho cỡ đọc được (bảng rộng < ~1340px) → ký hiệu KHÔNG vẽ trong ô;
+ *   ô được tô (hoặc `symbols` liệt kê) có tên đặt ngoài bảng, tự có đường dẫn. Tên nhóm/chu kì không vừa cũng vậy.
  * - Nhấn mạnh bằng TÔ NỀN + VIỀN ô, không phóng to chữ.
  * - Tên nhóm theo SGK: IA…VIIIA, IIIB…IIB (VIIIB gộp 3 cột). Không hiện số cột 1–18.
  *
@@ -37,11 +41,11 @@ export type PeriodicTableProps = {
    * "highlighted": chỉ ô được tô; "none": không chữ; hoặc danh sách ký hiệu cụ thể.
    */
   symbols?: "auto" | "all" | "highlighted" | "none" | string[];
-  /** hiện số hiệu Z nhỏ ở góc ô (chỉ khi ô ≥ 86px, nếu không sẽ quá nhỏ để đọc) */
+  /** hiện số hiệu Z ở góc ô — chỉ khi ô chứa được cả Z và ký hiệu ở cỡ đọc được (bảng rộng ≳ 1700px); nhỏ hơn dùng ElementTile */
   showZ?: boolean;
   /** hiện hai hàng lanthanide/actinide bên dưới (mặc định có) */
   showFBlock?: boolean;
-  /** hiện nhãn nhóm phía trên, số chu kì bên trái (mặc định có; tên nhóm tự ẩn khi ô < 56px) */
+  /** hiện nhãn nhóm phía trên, số chu kì bên trái (mặc định có). Không vừa ở 28px → chỉ nhóm/chu kì đang tô được ghi, đặt ngoài bảng */
   showAxes?: boolean;
   /** độ mờ các ô KHÔNG được tô (0–1). Mặc định 1; đặt 0.35 khi muốn dồn mắt vào ô được tô */
   dimOthers?: number;
@@ -92,19 +96,21 @@ export const PeriodicTable: React.FC<PeriodicTableProps> = ({
 }) => {
   const s = periodicTableSize(width, showFBlock, showAxes);
   const { cell, step } = s;
+  const gap = cell * GAP_RATIO;
+  // Ký hiệu trong ô: 42% cạnh ô, nhưng không dưới cỡ đọc được → ô nhỏ thì đưa tên ra ngoài
   const symFont = Math.round(cell * 0.42);
-  const zFont = Math.round(cell * 0.24);
-  const axisFont = Math.max(22, Math.round(cell * 0.3));
-  const zOn = showZ && cell >= 86;
-  // ô < 56px (bảng rộng < ~1100px): tên nhóm không đủ chỗ → ẩn; bảng nhỏ chỉ để định vị, nhãn đặt ngoài bằng AutoLabels
-  const headersOn = showAxes && cell >= 56;
+  const symInCell = symFont >= MIN_FONT.tick;
+  // Số chu kì, tên nhóm, số hiệu Z: không dưới MIN_FONT.tick
+  const axisFont = Math.max(MIN_FONT.tick, Math.round(cell * 0.32));
+  const zFont = MIN_FONT.tick;
+  const zOn = showZ && symInCell && zFont * 1.15 + symFont + 8 <= cell * 0.92;
 
   const shown = (e: PTElement, lit: boolean) => {
     if (symbols === "none") return false;
     if (symbols === "all") return true;
     if (symbols === "highlighted") return lit;
     if (Array.isArray(symbols)) return symbols.includes(e.symbol);
-    return cell >= 60 || lit;
+    return symInCell || lit;
   };
 
   // nhãn nhóm: VIIIB gộp cột 8–10
@@ -114,10 +120,73 @@ export const PeriodicTable: React.FC<PeriodicTableProps> = ({
     headers.push({ label: GROUP_OF_COLUMN[c], col: c, span: c === 8 ? 3 : 1 });
   }
   const groupLit = (g: string) => highlights.filter((h) => h.group === g);
+  const headerW = (span: number) => span * step - gap;
+  // tên nhóm hiện trong hàng đầu khi MỌI tên vừa ô ở cỡ đọc được; không thì ghi ngoài bảng cho nhóm đang tô
+  const headersFit =
+    showAxes && axisFont * 1.2 <= s.headerH + gap && headers.every((h) => textWidth(h.label, axisFont, 800) <= headerW(h.span));
+  const periodsFit = showAxes && axisFont * 1.2 <= cell && textWidth("7", axisFont, 800) <= s.axisW - cell * 0.15;
+
+  // Tên đặt NGOÀI bảng (có đường dẫn) cho thứ không vừa trong bảng — vật được tô luôn có tên (phép thử P2)
+  const outside: AutoLabelItem[] = [];
+  const litOf = (e: PTElement) => highlights.filter((h) => hits(e, h));
+  const opOf = (l: PTHighlight[]) => l.reduce((m, x) => Math.max(m, x.opacity ?? 1), 0);
+  if (!symInCell) {
+    for (const e of ELEMENTS) {
+      if (!showFBlock && e.row > 7) continue;
+      const lit = litOf(e);
+      const o = opOf(lit);
+      const listed = Array.isArray(symbols) && symbols.includes(e.symbol);
+      // chỉ ô được tô RIÊNG (`cells`) mới cần ký hiệu; ô sáng vì cả nhóm/chu kì được tô thì tên nhóm/chu kì đã nói nó là gì
+      const own = lit.filter((h) => h.cells?.includes(e.symbol));
+      const want = listed || (symbols !== "none" && !Array.isArray(symbols) && opOf(own) > 0.05);
+      if (!want) continue;
+      const c = periodicCell(e.symbol, { left, top, width, showFBlock, showAxes });
+      outside.push({
+        id: `pt-${e.symbol}`,
+        x: c.cx,
+        y: c.cy,
+        text: e.symbol,
+        color: lit.length ? lit[lit.length - 1].color : colors.text,
+        weight: 800,
+        opacity: (listed ? 1 : Math.max(opOf(own), 0) || o) * opacity,
+      });
+    }
+  }
+  if (showAxes && !headersFit) {
+    for (const h of headers) {
+      const lit = groupLit(h.label);
+      const o = opOf(lit);
+      if (o <= 0.05) continue;
+      const x = left + s.axisW + (h.col - 1) * step + headerW(h.span) / 2;
+      outside.push({ id: `pt-g-${h.label}`, x, y: top + s.headerH, text: `nhóm ${h.label}`, color: lit[0].color, weight: 800, opacity: o * opacity, prefer: ["n"], anchor: "region" });
+    }
+  }
+  if (showAxes && !periodsFit) {
+    for (let p = 1; p <= 7; p++) {
+      const lit = highlights.filter((h) => h.period === p);
+      const o = opOf(lit);
+      if (o <= 0.05) continue;
+      const y = top + s.headerH + (p - 1) * step + cell / 2;
+      outside.push({ id: `pt-p-${p}`, x: left + s.axisW, y, text: `chu kì ${p}`, color: lit[0].color, weight: 800, opacity: o * opacity, prefer: ["w"], anchor: "region" });
+    }
+  }
+
+  // Vật cản cho tên đặt ngoài: ô đang tô (để tên nằm cạnh, không che ô) + cột số chu kì / hàng tên nhóm nếu đang hiện.
+  // Tên được nằm đè lên các ô trống mờ — ở bảng nhỏ các ô đó không có chữ — nên luôn đặt sát ô của mình.
+  const obstacles: Rect[] = [];
+  for (const e of ELEMENTS) {
+    if (!showFBlock && e.row > 7) continue;
+    if (opOf(litOf(e)) <= 0.05 && !(Array.isArray(symbols) && symbols.includes(e.symbol))) continue;
+    const c = periodicCell(e.symbol, { left, top, width, showFBlock, showAxes });
+    obstacles.push({ x: c.x, y: c.y, w: c.size, h: c.size, pad: 4 });
+  }
+  if (periodsFit) obstacles.push(textObstacle(left, top + s.headerH, s.axisW, 7 * step));
+  if (headersFit) obstacles.push(textObstacle(left + s.axisW, top, width - s.axisW, s.headerH));
 
   return (
-    <div data-group="periodic-table" style={{ position: "absolute", left, top, width, height: s.height, opacity, fontFamily: fontText }}>
-      {headersOn &&
+    <>
+    <div data-group="periodic-table" data-extent style={{ position: "absolute", left, top, width, height: s.height, opacity, fontFamily: fontText }}>
+      {headersFit &&
         headers.map((h) => {
           const lit = groupLit(h.label);
           const o = lit.reduce((m, x) => Math.max(m, x.opacity ?? 1), 0);
@@ -128,7 +197,7 @@ export const PeriodicTable: React.FC<PeriodicTableProps> = ({
               style={{
                 position: "absolute",
                 left: s.axisW + (h.col - 1) * step,
-                width: h.span * step - cell * GAP_RATIO,
+                width: headerW(h.span),
                 top: 0,
                 height: s.headerH,
                 display: "flex",
@@ -144,7 +213,7 @@ export const PeriodicTable: React.FC<PeriodicTableProps> = ({
             </div>
           );
         })}
-      {showAxes &&
+      {periodsFit &&
         [1, 2, 3, 4, 5, 6, 7].map((p) => {
           const lit = highlights.find((h) => h.period === p && (h.opacity ?? 1) > 0.5);
           return (
@@ -192,11 +261,11 @@ export const PeriodicTable: React.FC<PeriodicTableProps> = ({
         const c = lit.length ? lit[lit.length - 1].color : colors.brandBlue;
         const x = s.axisW + (e.col - 1) * step;
         const y = e.row <= 7 ? s.headerH + (e.row - 1) * step : s.fTop + (e.row - 8) * step;
-        const showSym = shown(e, o > 0.05);
+        const showSym = symInCell && shown(e, o > 0.05);
         return (
           <div
             key={e.z}
-            data-box="cell"
+            data-box={showSym ? "cell" : undefined}
             style={{
               position: "absolute",
               left: x,
@@ -211,11 +280,10 @@ export const PeriodicTable: React.FC<PeriodicTableProps> = ({
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              overflow: "hidden",
             }}
           >
             {zOn && (
-              <div data-text="note" style={{ position: "absolute", left: cell * 0.1, top: cell * 0.04, fontSize: zFont, color: colors.muted }}>
+              <div data-text="tick" style={{ position: "absolute", left: cell * 0.08, top: cell * 0.03, fontSize: zFont, lineHeight: 1.15, color: colors.muted }}>
                 <MathText text={String(e.z)} />
               </div>
             )}
@@ -227,7 +295,7 @@ export const PeriodicTable: React.FC<PeriodicTableProps> = ({
                   lineHeight: 1,
                   fontWeight: o > 0.5 ? 800 : 600,
                   color: o > 0.5 ? c : colors.text,
-                  marginTop: zOn ? cell * 0.12 : 0,
+                  marginTop: zOn ? zFont * 1.15 : 0,
                 }}
               >
                 <MathText text={e.symbol} />
@@ -237,5 +305,11 @@ export const PeriodicTable: React.FC<PeriodicTableProps> = ({
         );
       })}
     </div>
+    {outside.length > 0 && <AutoLabels items={outside} obstacles={obstacles} />}
+    </>
   );
 };
+
+/** Kiểm nhanh khi chia bố cục: bảng rộng `width` có chứa được ký hiệu trong ô ở cỡ đọc được không. */
+export const periodicSymbolsFit = (width: number, showFBlock = true, showAxes = true) =>
+  Math.round(periodicTableSize(width, showFBlock, showAxes).cell * 0.42) >= MIN_FONT.tick;
