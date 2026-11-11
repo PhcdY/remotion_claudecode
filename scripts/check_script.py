@@ -104,6 +104,11 @@ COMPARE = re.compile(
     re.IGNORECASE,
 )
 MAX_WAIVERS = 2
+# Hình/số tượng trưng: không nhãn "mô hình", lời đọc không giải thích "đây là mô hình" (viet-kich-ban › Hình và số tượng trưng,
+# người dùng chốt 10/11/2026). Cần ghi chú thì nhãn nhỏ "Số liệu minh họa" / "Ảnh minh họa" ghi trong visual.
+MODEL_LABEL = re.compile(r"mô hình\s+(giản lược|minh ho[ạa]|đơn giản)|không phải số liệu thật|^\s*mô hình\s*(:|$)|mô hình\s*[,:]?\s*không phải", re.IGNORECASE)
+MODEL_SPEAK = re.compile(r"(đây là|chỉ là|dùng) (một )?mô hình|tình huống giả định|không phải số liệu (thật|của)|để dễ hình dung", re.IGNORECASE)
+MODEL_HINT = "bỏ nhãn; số dễ tưởng là thật thì nhãn nhỏ 'Số liệu minh họa' ghi trong visual (viet-kich-ban › Hình và số tượng trưng)"
 
 
 def norm_vi(t: str) -> str:
@@ -390,6 +395,8 @@ def main() -> int:
         if sec and sec not in SECTIONS:
             errors.append(f"{where}: section '{sec}' không có trong danh sách nhãn")
         kw = b.get("keyword", "")
+        if MODEL_LABEL.search(MATH.sub(" ", kw)):
+            errors.append(f"{where}: keyword là nhãn \"mô hình\" ('{kw}') — {MODEL_HINT} [mo-hinh]")
         if len(words(kw)) > 6:
             warns.append(f"{where}: keyword {len(words(kw))} từ (> 6): {kw}")
         if "speed" in b:
@@ -488,6 +495,13 @@ def main() -> int:
                     if re.search(rf"\b{re.escape(nm)}\b", speak, re.IGNORECASE):
                         warns.append(f"{w}: tên nước ngoài '{nm}' — nên viết phiên âm SGK '{info['speak']}' trong speak")
                         listen.append(f"{w} (tên riêng nước ngoài): {speak}")
+
+            for k in ("text", "caption"):
+                if MODEL_LABEL.search(MATH.sub(" ", line.get(k) or "")):
+                    errors.append(f"{w}: {k} là nhãn \"mô hình\" ('{line.get(k)}') — {MODEL_HINT} [mo-hinh]")
+            mm_ = MODEL_SPEAK.search(speak)
+            if mm_:
+                warns.append(f"{w}: speak giải thích hình/số tượng trưng ('{mm_.group(0)}') — người xem tự hiểu, bỏ câu này: {speak}")
 
             mc = COMPARE.search(speak)
             if mc:

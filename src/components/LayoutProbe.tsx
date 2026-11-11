@@ -137,7 +137,9 @@ const measure = () => {
 
 // --- Lỗi hiển thị bắt được bằng máy (phép thử P5 "chữ đọc được"; skill dung-video › mục 0) ---
 // Nhãn "mô hình" người xem không cần (lessons.md 10/11/2026); không bắt "mô hình nguyên tử" là kiến thức thật.
-const MODEL_LABEL = /mô hình\s+(giản lược|minh ho[ạa]|đơn giản)|không phải số liệu thật|^\s*mô hình\s*$/i;
+// Bắt: "mô hình" đứng riêng, "Mô hình: …", "… mô hình, không phải Bolt", "mô hình giản lược/minh hoạ", "không phải số liệu thật".
+// Thay bằng nhãn nhỏ "Số liệu minh họa" / "Ảnh minh họa" (data-text="note") khi cần — viet-kich-ban › Hình và số tượng trưng.
+const MODEL_LABEL = /mô hình\s+(giản lược|minh ho[ạa]|đơn giản)|không phải số liệu thật|^\s*mô hình\s*(:|$)|mô hình\s*[,:]?\s*không phải/i;
 // Công thức chưa được dựng: còn cặp $…$ hoặc lệnh \abc trong chữ thường (thiếu MathText)
 const RAW_MATH = /\$[^$\s][^$]*\$|\\[a-zA-Z]{2,}/;
 
