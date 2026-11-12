@@ -1,12 +1,13 @@
 import React from "react";
-import { Composition, useCurrentFrame } from "remotion";
+import { Composition, getInputProps, interpolate, useCurrentFrame } from "remotion";
 import { BeatProps } from "../../components/BeatShell";
 import { ExplainerProps, ExplainerVideo, explainerMetadata } from "../../components/ExplainerVideo";
 import { AutoLabels, AutoLabelItem, axesObstacles, curveObstacles } from "../../components/labels";
 import { fadeIn } from "../../components/parts";
 import { Axes, FunctionPlot, Plot, Point, makeScale } from "../../components/plot";
 import { role } from "../../components/roles";
-import { colors, fontText } from "../../components/theme";
+import { Region } from "../../components/region";
+import { colors, fontText, layout, tint } from "../../components/theme";
 import { FPS, Script } from "../../components/timeline";
 import scriptJson from "./script.json";
 
@@ -87,7 +88,51 @@ const Beat03: React.FC<BeatProps> = () => (
   </div>
 );
 
-const BEATS: Record<string, React.FC<BeatProps>> = { b01: Beat01, b02: Beat02, b03: Beat03 };
+// ---------- Cảnh 3: lớp ăn khớp (Region + data-inside) ----------
+// Bản đúng: sóng nằm trong Region (bị cắt theo lòng sông), cá gắn data-inside="song".
+// Bản cố ý lỗi (inputProps { labLoi: true }): sóng không cắt mà dao động lên tới bờ, cá bơi lên bờ —
+// để thử check-layout --motion và stills --onion có bắt được không.
+const RIVER_X0 = layout.side;
+const RIVER_X1 = layout.width - layout.side;
+const bankTop = (x: number) => 430 + 40 * Math.sin(x / 300);
+const bankBottom = (x: number) => 700 + 40 * Math.sin(x / 300 + 1);
+const riverPath = (() => {
+  const xs = Array.from({ length: 41 }, (_, i) => RIVER_X0 + ((RIVER_X1 - RIVER_X0) * i) / 40);
+  const top = xs.map((x, i) => `${i ? "L" : "M"} ${x.toFixed(1)} ${bankTop(x).toFixed(1)}`).join(" ");
+  const bottom = [...xs].reverse().map((x) => `L ${x.toFixed(1)} ${bankBottom(x).toFixed(1)}`).join(" ");
+  return `${top} ${bottom} Z`;
+})();
+
+const Beat04: React.FC<BeatProps> = () => {
+  const fr = useCurrentFrame();
+  const broken = Boolean((getInputProps() as { labLoi?: boolean }).labLoi);
+  const wave = (k: number) => {
+    // bản lỗi: cả dải sóng trôi lên xuống 90px, lên tới bờ đất
+    const drift = broken ? 90 * Math.sin(fr * 0.06) : 0;
+    let d = "";
+    for (let x = RIVER_X0; x <= RIVER_X1; x += 20) {
+      const mid = (bankTop(x) + bankBottom(x)) / 2 + (k - 1) * 80;
+      d += `${d ? " L" : "M"} ${x} ${(mid + drift + 8 * Math.sin(x / 60 + fr * 0.08 + k)).toFixed(1)}`;
+    }
+    return d;
+  };
+  const waves = [0, 1, 2].map((k) => <path key={k} d={wave(k)} fill="none" stroke={tint(colors.brandBlue, 0.45)} strokeWidth={4} strokeLinecap="round" />);
+  const fishX = interpolate(fr % 240, [0, 240], [300, 1600]);
+  const fishY = (bankTop(fishX) + bankBottom(fishX)) / 2 + (broken ? 150 * Math.sin(fr * 0.05) : 30 * Math.sin(fr * 0.05));
+  return (
+    <svg width={layout.width} height={layout.height} style={{ position: "absolute", inset: 0 }}>
+      {/* đất: nền của cả cảnh */}
+      <rect x={RIVER_X0} y={200} width={RIVER_X1 - RIVER_X0} height={760} rx={32} fill="#E3EED3" />
+      <Region id="song" d={riverPath} fill={tint(colors.brandBlue, 0.16)} edge={{ color: "#CDB98F", width: 10 }}>
+        {broken ? null : waves}
+      </Region>
+      {broken ? <g data-inside="song" data-name="sóng">{waves}</g> : null}
+      <ellipse cx={fishX} cy={fishY} rx={44} ry={20} fill={colors.brandIndigo} data-inside="song" data-name="cá" />
+    </svg>
+  );
+};
+
+const BEATS: Record<string, React.FC<BeatProps>> = { b01: Beat01, b02: Beat02, b03: Beat03, b04: Beat04 };
 
 const Lab: React.FC<ExplainerProps> = ({ timeline, draft }) => (
   <ExplainerVideo script={script} timeline={timeline} beats={BEATS} draft={draft} />

@@ -38,6 +38,17 @@
         { "text": "", "speak": "Sang cảnh khác thì hình mờ đi rồi hiện cảnh mới.", "show": "hiện chữ", "at": "" },
         { "text": "", "speak": "Vậy là xong phần thử.", "show": "giữ nguyên", "at": "" }
       ]
+    },
+    {
+      "id": "b04",
+      "scene": 3,
+      "section": "BẢN CHẤT",
+      "keyword": "Sóng luôn trong lòng sông",
+      "visual": "CẢNH 3 — bờ đất, lòng sông cong có sóng, một con cá bơi dọc sông (thử Region và data-inside).",
+      "lines": [
+        { "text": "", "speak": "Đây là cảnh thử các lớp hình ăn khớp với nhau.", "show": "hiện bờ đất, lòng sông, sóng và cá", "at": "" },
+        { "text": "", "speak": "Vậy sóng và con cá chuyển động mà vẫn luôn nằm trong lòng sông.", "show": "giữ nguyên", "at": "" }
+      ]
     }
   ]
 }

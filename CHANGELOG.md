@@ -30,6 +30,7 @@ Mỗi bản phát hành có một mục, bản mới nhất ở trên cùng. Ng�
 - Nhãn gắn vào vật đang chuyển động (thuyền, xe, người) không còn giật hay nhảy chỗ.
 - Hóa: chữ trong bảng tuần hoàn, ô nguyên tố, cốc thí nghiệm luôn đủ to để đọc mà không tràn ô; bảng nhỏ tự ghi tên ô được tô ngay cạnh ô.
 - Bước soát bố cục tự bắt thêm: công thức bị lỗi hiện chữ đỏ, công thức chưa hiện thành công thức, nhãn "mô hình" thừa, chữ to hơn ô/khung chứa nó.
+- Các lớp hình chuyển động (sóng trong lòng sông, bọt khí trong cốc, bào quan trong tế bào) không còn lệch ra ngoài lớp chứa: bước soát bố cục kiểm suốt cả đoạn chuyển động, và có ảnh chồng nhiều khung hình để thấy ngay vật đi tới đâu.
 - Phép thử "tắt tiếng vẫn hiểu" nói rõ là hiểu **nhờ hình**, không phải nhờ ghi thêm chữ lên màn hình; kiểm tra kịch bản báo khi một dòng chỉ thêm chữ mà hình đứng yên.
 
 ### Cần làm sau khi cập nhật

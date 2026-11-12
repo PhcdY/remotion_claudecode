@@ -25,7 +25,7 @@ Mỗi bài học dưới đây gán vào một phép thử P0–P5 (`viet-kich-b
 | **P3** tắt tiếng, che chữ vẫn hiểu nhờ hình | lời khác – hình giống (so sánh) | 11/11 bảng tuần hoàn (Li = Na); 22/10 đơn điệu ("so sánh đi chứ") |
 | | một hình cho mọi khái niệm / chỉ thêm chữ | 11/11 oxi hoá – khử (70 s hai quả cầu); 10/11 Văn (slide chữ); 12/11 P3 dễ bị hiểu thành "ghi thêm chữ cho người tắt tiếng" |
 | | số đổi mà hình đứng yên; hình đổi lệch lúc lời nói | 20/10 đạo hàm (trục số tự hiện, bảng nhảy số); 23/10 (`cue`) |
-| | hình gợi sai điều muốn nói | 26/10 vectơ KG (trục sâu gần song song vectơ); 07/11 Oxyz (máy bay chúc mũi sai hướng) |
+| | hình gợi sai điều muốn nói | 26/10 vectơ KG (trục sâu gần song song vectơ); 07/11 Oxyz (máy bay chúc mũi sai hướng); 12/11 lớp chuyển động lệch khỏi vùng chứa (sóng đè bờ đất) |
 | **P4** một khái niệm một tên | hai hệ thuật ngữ / ký hiệu | 11/11 bảng tuần hoàn (1–18 và IA; sodium và natri) |
 | | một màu hai nghĩa; mũi tên dùng sai nghĩa | 23/10 cực trị (màu); 22/10 đơn điệu ("Cực trị → bài sau") |
 | **P5** chữ đọc được | chữ không vừa hộp | 11/11 bảng tuần hoàn ("Na" to hơn ô); 06/11 (thẻ tràn, chữ rớt dòng) |
@@ -278,3 +278,11 @@ am - c Bình: Dành cho các môn Tự nhiên (Toán, Lý, Hóa, Tin) — dứt 
 - **Luật**: P3 viết lại thành "tắt tiếng **và che chữ** vẫn hiểu — nhờ hình, không nhờ chữ; ghi lời đọc lên màn hình không làm đạt P3" (AGENTS.md, `viet-kich-ban`, `dung-video`, mẫu báo cáo). Kiểm chú thích đổi tên thành **phép thử chú thích (P2)**: tên ngắn trên vật, mỗi thứ một lần, không thêm câu giải thích.
 - **Chặn bằng công cụ**: `check_script` cảnh báo dòng có `text` mà `show` là "giữ nguyên" (chữ thay hình). Đã đo 18 kịch bản cũ: chưa dòng nào như vậy, nên cảnh báo không báo nhầm video cũ. Không thêm ngưỡng "% dòng có chữ": các video hiện có dao động 35–77% (mẫu `tich-vo-huong` 58%), chưa có bằng chứng video nào nhiều chữ quá.
 - Họ lỗi: P3 "chỉ thêm chữ"; P4 cho chính bộ luật (một tên hai nghĩa).
+
+### 12/11/2026 — Lớp hình chuyển động lệch nhau (sóng đè lên bờ đất)
+- **Người dùng hỏi**: có gì kiểm các lớp hình chuyển động đã ăn khớp chưa; ví dụ sông có lớp đất, lớp nước, lớp sóng mà sóng lệch đè lên đất — cần giải pháp tổng quát.
+- **Hiện trạng**: `check-layout` chỉ đo chữ/điểm/khung (`data-text`, `data-mark`, `data-box`) bằng khung chữ nhật, 2 frame mỗi dòng; lớp hình vẽ (đất, nước, sóng) không được đo; vật `data-moving` chồng chỉ là cảnh báo. Video `demo-van-an-du` có sóng vẽ suốt chiều ngang, không đè bờ chỉ nhờ bến được vẽ sau.
+- **Gốc rễ**: mỗi lớp tự tính toạ độ riêng, lớp trong không "biết" hình của lớp chứa nó; lỗi chỉ hiện ở vài frame nên ảnh tĩnh dễ sót.
+- **Luật**: `dung-video` quy tắc 13 — một nguồn hình cho mỗi vùng; lớp chuyển động bên trong đặt trong `Region` (cắt theo hình vùng, mép vẽ đè lên trên); vật phải nằm trọn mà không cắt được thì gắn `data-inside`.
+- **Chặn bằng công cụ**: `LayoutProbe` so điểm trên nét vẽ của vật `data-inside` với hình thật của vùng `data-region` (`isPointInFill`) → lỗi "lệch ra ngoài vùng"; `check-layout` tự chạy lượt chuyển động (mỗi 6 frame suốt dòng có `data-inside`), thêm `--props`; `stills.mjs --onion` chồng 8 frame, tô hồng phần chuyển động. Thử ở phòng lab b04: bản đúng 0 lỗi; bản cố ý lỗi (`labLoi`) bắt được sóng và cá lệch, lượt chuyển động bắt thêm các frame mà 2 frame/dòng bỏ sót.
+- Họ lỗi: P3 "hình gợi sai điều muốn nói"; P2 rác thị giác.

@@ -3,7 +3,7 @@ import { continueRender, delayRender, getInputProps } from "remotion";
 import { MIN_FONT as MIN_THEME, layout } from "./theme";
 
 // Chỉ chạy khi render với inputProps { layoutCheck: true } (scripts/check-layout.mjs).
-// Đo khung bao mọi [data-text] / [data-mark], in kết quả ra console để script đọc.
+// Đo khung bao mọi [data-text] / [data-mark], và vật [data-inside] so với vùng [data-region]; in kết quả ra console để script đọc.
 
 type Item = { el: Element; kind: string; label: string; r: DOMRect; zone: string };
 
@@ -133,6 +133,94 @@ const measure = () => {
 
   issues.push(...renderIssues());
   return issues;
+};
+
+// --- Lớp ăn khớp: vật gắn data-inside="<id>" phải nằm trọn trong hình thật của vùng data-region="<id>" ---
+// (skill dung-video › quy tắc 13; component Region). So theo hình (isPointInFill), không theo khung chữ nhật,
+// nên dùng được cho vùng cong: lòng sông, cốc, tế bào, lãnh thổ. check-layout chạy phép kiểm này ở nhiều frame (--motion).
+const GEOMETRY = "path, line, circle, ellipse, rect, polygon, polyline";
+const INSIDE_TOL = 1.5; // px được phép lấn (khử răng cưa)
+
+/** Các điểm (toạ độ màn hình) trên viền mực của một hình: dọc đường tâm, lệch ra nửa nét vẽ theo 4 hướng. */
+const inkPoints = (g: SVGGeometryElement): { x: number; y: number }[] => {
+  const ctm = g.getScreenCTM();
+  if (!ctm) return [];
+  let len = 0;
+  try {
+    len = g.getTotalLength();
+  } catch {
+    return [];
+  }
+  if (!(len > 0)) return [];
+  const cs = getComputedStyle(g);
+  const stroked = cs.stroke !== "none" && parseFloat(cs.strokeWidth || "0") > 0;
+  const half = stroked ? Math.max(0, (parseFloat(cs.strokeWidth) * Math.hypot(ctm.a, ctm.b)) / 2 - INSIDE_TOL) : 0;
+  const n = Math.min(400, Math.max(12, Math.ceil(len / 6)));
+  const out: { x: number; y: number }[] = [];
+  for (let i = 0; i <= n; i++) {
+    const p = g.getPointAtLength((len * i) / n);
+    const s = new DOMPoint(p.x, p.y).matrixTransform(ctm);
+    out.push({ x: s.x, y: s.y });
+    if (half > 0) out.push({ x: s.x + half, y: s.y }, { x: s.x - half, y: s.y }, { x: s.x, y: s.y + half }, { x: s.x, y: s.y - half });
+  }
+  return out;
+};
+
+/** Vật HTML (div) gắn data-inside: lấy điểm trên 4 cạnh khung. */
+const rectPoints = (r: DOMRect): { x: number; y: number }[] => {
+  const out: { x: number; y: number }[] = [];
+  const t = INSIDE_TOL;
+  for (let i = 0; i <= 8; i++) {
+    const fx = r.left + t + ((r.width - 2 * t) * i) / 8;
+    const fy = r.top + t + ((r.height - 2 * t) * i) / 8;
+    out.push({ x: fx, y: r.top + t }, { x: fx, y: r.bottom - t }, { x: r.left + t, y: fy }, { x: r.right - t, y: fy });
+  }
+  return out;
+};
+
+const regionHas = (regions: Element[], p: { x: number; y: number }) =>
+  regions.some((reg) => {
+    if (reg instanceof SVGGeometryElement) {
+      const ctm = reg.getScreenCTM();
+      if (!ctm) return false;
+      const local = new DOMPoint(p.x, p.y).matrixTransform(ctm.inverse());
+      return reg.isPointInFill(local) || reg.isPointInStroke(local);
+    }
+    const r = reg.getBoundingClientRect();
+    return p.x >= r.left && p.x <= r.right && p.y >= r.top && p.y <= r.bottom;
+  });
+
+const insideIssues = () => {
+  const issues: string[] = [];
+  const holders = Array.from(document.querySelectorAll("[data-inside]"));
+  for (const holder of holders) {
+    if (effectiveOpacity(holder) < 0.05) continue;
+    const id = holder.getAttribute("data-inside") ?? "";
+    // đã nằm trong lớp bị Region cắt theo đúng vùng này: phần lệch ra không hiện, không phải lỗi
+    if (holder.closest(`[data-region-clip="${CSS.escape(id)}"]`)) continue;
+    const name = holder.getAttribute("data-name") ?? holder.getAttribute("data-mark") ?? holder.tagName.toLowerCase();
+    const regions = Array.from(document.querySelectorAll(`[data-region="${CSS.escape(id)}"]`));
+    if (!regions.length) {
+      issues.push(`không thấy vùng data-region="${id}" cho vật "${name}" (data-inside)`);
+      continue;
+    }
+    const shapes: Element[] = holder instanceof SVGGeometryElement ? [holder] : Array.from(holder.querySelectorAll(GEOMETRY));
+    const pts: { x: number; y: number }[] = [];
+    if (shapes.length) {
+      for (const s of shapes) if (s instanceof SVGGeometryElement && effectiveOpacity(s) >= 0.05) pts.push(...inkPoints(s));
+    } else {
+      pts.push(...rectPoints(holder.getBoundingClientRect()));
+    }
+    const out = pts.filter((p) => !regionHas(regions, p));
+    if (out.length) {
+      const xs = out.map((p) => p.x);
+      const ys = out.map((p) => p.y);
+      issues.push(
+        `lệch ra ngoài vùng "${id}" — ${name}: ${out.length}/${pts.length} điểm, x ${Math.round(Math.min(...xs))}–${Math.round(Math.max(...xs))}, y ${Math.round(Math.min(...ys))}–${Math.round(Math.max(...ys))}`,
+      );
+    }
+  }
+  return { issues, count: holders.length };
 };
 
 // --- Lỗi hiển thị bắt được bằng máy (phép thử P5 "chữ đọc được"; skill dung-video › mục 0) ---
@@ -302,7 +390,7 @@ export const LayoutProbe: React.FC = () => {
       requestAnimationFrame(() =>
         requestAnimationFrame(() => {
           if (cancelled) return;
-          console.log("LAYOUT_RESULT " + JSON.stringify({ issues: measure(), ...composition() }));
+          console.log("LAYOUT_RESULT " + JSON.stringify({ issues: measure(), inside: insideIssues(), ...composition() }));
           continueRender(handle);
         }),
       ),
