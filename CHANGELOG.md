@@ -37,6 +37,10 @@ Mỗi bản phát hành có một mục, bản mới nhất ở trên cùng. Ng�
 - Bước soát bố cục tự bắt thêm: công thức bị lỗi hiện chữ đỏ, công thức chưa hiện thành công thức, nhãn "mô hình" thừa, chữ to hơn ô/khung chứa nó.
 - Các lớp hình chuyển động (sóng trong lòng sông, bọt khí trong cốc, bào quan trong tế bào) không còn lệch ra ngoài lớp chứa: bước soát bố cục kiểm suốt cả đoạn chuyển động, và có ảnh chồng nhiều khung hình để thấy ngay vật đi tới đâu.
 - Phép thử "tắt tiếng vẫn hiểu" nói rõ là hiểu **nhờ hình**, không phải nhờ ghi thêm chữ lên màn hình; kiểm tra kịch bản báo khi một dòng chỉ thêm chữ mà hình đứng yên.
+- Video **Sinh** về cơ thể rõ hơn: mọi cơ quan được nhắc tới đều có tên đặt đúng trên cơ quan; mỗi quá trình (thức ăn, oxygen, carbon dioxide) hiện lần lượt với một màu riêng khác hẳn nhau, mũi tên đi từ ngoài cơ thể theo mạch máu tới tế bào; máu vận chuyển được thấy qua cửa sổ soi vào mạch máu. Glucose, ATP, amino acid vẽ theo cấu trúc thật giản lược thay cho các cục tròn.
+- Sinh có sẵn hình dựng: cơ thể người với đường đi của thức ăn, oxygen, carbon dioxide; cửa sổ soi vào mao mạch ở mô, phổi, ruột; glucose phân giải thành carbon dioxide, ATP tách nhóm phosphate, amino acid, chuỗi tinh bột và protein.
+- Công thức hóa học có chỉ số ở giữa (H₂O, H₂SO₄) không còn bị mất chữ phía sau trên nhãn.
+- Mọi môn: hai thứ khác nghĩa trên cùng hình phải khác hẳn màu, không chỉ đậm nhạt. Lời đọc có câu dài ngắn xen nhau và chỗ đổi giọng để nghe không đều đều.
 
 ### Cần làm sau khi cập nhật
 - Dùng Codex thay cho Gemini/Antigravity (xem `docs/HUONG_DAN_CODEX.md`).

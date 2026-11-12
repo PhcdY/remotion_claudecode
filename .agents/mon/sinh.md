@@ -39,6 +39,8 @@ Sinh học là môn của sự chuyển động sống, mọi cơ chế đều g
 - **Dòng thẩm thấu & Nước**: Các chấm hạt nước màu xanh lơ di chuyển qua màng bán thấm về phía có áp suất thẩm thấu cao hơn (nơi nồng độ chất tan cao hơn).
 - **Dòng xung điện thần kinh**: Làn sóng đổi màu phát sáng bùng nổ chạy dọc sợi trục axon (hiệu ứng đảo cực $\text{Na}^+$).
 - **Dòng nhựa cây**: Dòng mạch gỗ (nước và khoáng) một chiều từ rễ xối lên lá; Dòng mạch rây (saccharose) hai chiều từ lá đến các cơ quan dự trữ.
+- **Trao đổi chất với môi trường — vẽ đủ đường, không cắt đầu cắt đuôi**: chất đi từ **môi trường → cơ quan trao đổi (miệng – ruột, mũi – phổi, rễ, lá) → máu/mạch → tế bào nơi dùng**, và chất thải đi ngược lại **tế bào → máu → cơ quan thải → môi trường**. Mũi tên bắt đầu *ngoài* cơ thể (đĩa thức ăn, không khí) và kết thúc ở tế bào, không mọc ra giữa bụng. Đoạn nào lời đọc nói ("hấp thu qua ruột", "máu vận chuyển", "thải ra khi thở ra") thì đoạn đó phải thấy trên hình.
+- **Máu vận chuyển = thấy mạch máu và thấy hạt đi theo mạch**: vẽ mạch (đỏ giàu O₂ / tím chàm nghèo O₂ theo bảng màu), hạt chất (chấm màu của chất, mục Bảng màu) nhập vào mạch ở cơ quan trao đổi rồi trôi theo mạch tới mô. Không thay bằng một nhãn chữ "Máu vận chuyển" đặt lên thân người (P3: khái niệm mới → hình mới).
 
 ---
 
@@ -71,6 +73,24 @@ Sinh học là môn của sự chuyển động sống, mọi cơ chế đều g
 3. **Bước 3 — Diễn hoạt cơ chế dòng chảy**: Các hạt chất tan, dòng máu, bóng truyền tin hoặc dòng ion bắt đầu chuyển động, tương tác và biến đổi kèm hiệu ứng co bóp/mở đóng.
 4. **Bước 4 — Đúc kết quy luật & Ý nghĩa sinh học**: Xuất hiện câu chốt bản chất, liên hệ trực tiếp lời giải thích với hiện tượng mở đầu ở Hook.
 
+### Sơ đồ cơ thể có nhiều quá trình (trao đổi chất, tuần hoàn, hô hấp…)
+Một hình cơ thể gánh nhiều quá trình (chất dinh dưỡng, O₂, CO₂, máu…) rất dễ thành mớ mũi tên chồng nhau mà người xem không biết lời đọc đang nói cái nào (13/11/2026). Dựng bằng `HumanBody` (mục 6) — component đã làm sẵn các ý dưới đây; vẫn soát lại trên stills.
+- **Cơ quan có nhãn đặt đúng chỗ**: mọi cơ quan lời đọc nhắc tới đều có nhãn — tim có thì ruột, phổi cũng có (`dung-video` › quy tắc 7). Nhãn nằm **trên chính cơ quan** khi vừa, hoặc ngay sát bên ngoài có đường dẫn; phải gần cơ quan của mình hơn cơ quan bên cạnh (không lơ lửng giữa phổi và tim). Cơ quan vẽ đúng vị trí giải phẫu tương đối (phổi hai bên tim, ruột ở bụng dưới).
+- **Mỗi quá trình một beat, một lớp**: sơ đồ có sẵn chỗ cho các quá trình; quá trình đang được đọc sáng màu của chất, quá trình đã nói xong mờ (`dim`), quá trình chưa tới chưa hiện (`dung-video` › thực đơn hình "Quá trình nhiều bước"). Mỗi quá trình một màu khác hẳn sắc (Bảng màu bên dưới).
+- **Chỗ trao đổi xảy ra bên trong cơ quan → soi vào**: chất đi từ ruột/phổi vào máu, từ máu vào tế bào là cơ chế ở tầng mô — mở cửa sổ soi (kính lúp) từ đúng cơ quan đó ra mặt cắt mao mạch – tế bào, hạt chất đi qua thành mạch. Hình cơ thể vẫn ở trên màn hình làm khung định vị. Đây là beat riêng trong cùng cảnh, không nhảy sang một cảnh rời hẳn. Dựng bằng `ZoomCallout` + `CapillaryExchange` (mục 6).
+- **Mũi tên đi theo đường thật**: mũi tên chất trong cơ thể đi theo mạch máu, không vẽ cung tự do bắc qua đầu người; mũi tên của hai quá trình không cắt nhau ở cùng một cơ quan (tách hai làn, hoặc tách hai beat).
+
+### Phân tử có tên — dùng cấu trúc thật, giản lược
+Lời đọc gọi tên một chất (glucose, ATP, amino acid, O₂, CO₂, H₂O) thì hình phải gợi đúng chất đó, không dùng cụm hình tròn chung chung (13/11/2026: "Glucose", "Amino acid", "ATP" đều là mấy cục tròn → người xem không thấy chúng khác nhau).
+- Dựng bằng `src/components/biology/Biomolecule.tsx` (mục 6).
+- **Phân tử nhỏ** (O₂, CO₂, H₂O): mô hình quả cầu theo màu CPK (`SmallMolecule`, dựa trên `Atom` của gói Hóa), kèm công thức. Màu CPK của nguyên tử giữ nguyên trong quả cầu; mũi tên/đường đi của chất vẫn dùng màu chất ở Bảng màu.
+- **Phân tử lớn — khung giản lược đủ nhận ra**, không vẽ công thức cấu tạo đầy đủ (quá dày, chữ không đọc được ở cỡ video):
+  - Glucose: vòng 6 cạnh (5 C + 1 O) kèm nhãn $\text{C}_6\text{H}_{12}\text{O}_6$.
+  - ATP: chuỗi **adenine – ribose – 3 nhóm phosphate**, nhóm phosphate cuối là chỗ tách ra giải phóng năng lượng.
+  - Amino acid: khung C ở giữa với nhóm $-\text{NH}_2$, $-\text{COOH}$ và gốc R.
+  - Protein, tinh bột, lipid: chuỗi nhiều mắt của đơn phân tương ứng (chuỗi vòng glucose, chuỗi amino acid) — để phân giải thấy được *chuỗi đứt ra thành đơn phân*.
+- **Phân giải / tổng hợp thấy được từ hình**: chất lớn tách thành đúng các chất nhỏ có tên (glucose → CO₂ + H₂O), không phải cụm tròn này biến thành cụm tròn khác.
+
 ---
 
 ### Bảng màu Sinh học chuẩn (Bio-Palette)
@@ -82,6 +102,11 @@ Tuân theo brand 9Study nhưng phối màu sinh học trực quan:
 - **Dịch lọc & Bài tiết**: Vàng hổ phách `#FBBF24` / `#EAB308`.
 - **Màng sinh chất (Phospholipid)**: Đầu ưa nước tím hồng `#8B5CF6`, Đuôi kị nước vàng nhạt `#FDE68A`.
 - **Base DNA**: Adenine (Xanh lam `#3B82F6`), Thymine/Uracil (Đỏ cam `#F97316`), Guanine (Vàng `#EAB308`), Cytosine (Xanh lục `#10B981`).
+- **Chất trao đổi với môi trường** (mũi tên, hạt chất, đường đi) — mỗi chất một sắc màu, giữ nguyên trong mọi video:
+  - $\text{O}_2$: đỏ san hô `#EF4444` (cùng nghĩa với máu giàu O₂).
+  - $\text{CO}_2$: tím chàm `#6366F1` (cùng nghĩa với máu nghèo O₂).
+  - Chất dinh dưỡng: xanh mòng két `#0D9488` (không dùng chung cảnh với màu diệp lục).
+  - **Không** dùng cặp xanh brand `#4B87F4` / chàm `#3D4AEF` cho hai chất khác nhau — chỉ khác độ đậm, nhìn lướt là lẫn (`dung-video` › quy tắc 11).
 
 ---
 
@@ -127,3 +152,7 @@ Các component cốt lõi trong `src/components/biology/`:
 - `NephronTubule.tsx`: Cấu trúc ống lượn Nephron với dòng lọc và tái hấp thu dưỡng chất.
 - `NeuronSynapse.tsx`: Xung điện chạy dọc sợi axon và phóng thích chất dẫn truyền qua khe synapse.
 - `DNAHelix.tsx`: Chuỗi xoắn kép DNA với các cặp base bổ sung $A-T, G-C$.
+- `HumanBody.tsx` (13/11/2026): cơ thể người nhìn thẳng — phổi, tim, dạ dày, ruột, mô cơ đúng vị trí; mạch máu; 6 đường đi của chất (`food`, `nutrient`, `o2Air`, `o2Blood`, `co2Blood`, `co2Out`) từ môi trường tới tế bào và ngược lại, mỗi đường `active` (sáng, hạt chạy theo mạch) / `done` (mờ) / chưa khai báo (ẩn), tự tách làn khi đi chung mạch. Nhãn tên đặt bằng `AutoLabels` + `humanBodyLabelSpots` / `humanBodyObstacles` (sát mép cơ quan). Mô nhận chất: đùi (mặc định) hoặc `tissue="heart"`.
+- `CapillaryExchange.tsx` (13/11/2026): mặt cắt mao mạch với hồng cầu trôi; `site` = `tissue` / `lung` / `intestine` tự quyết chiều đi của O₂, CO₂, chất dinh dưỡng qua thành mạch. Mở ra từ cơ thể bằng `ZoomCallout` (`src/components/ZoomCallout.tsx`, cửa sổ soi cho hình không phải đồ thị) + `humanBodySoi`.
+- `Biomolecule.tsx` (13/11/2026): `SmallMolecule` (O₂, CO₂, H₂O theo CPK), `GlucoseRing` / `GlucoseBreakdown` (vòng glucose gãy, 6 carbon thành 6 CO₂), `ATPChain` (adenine – ribose – 3 phosphate, `release` tách nhóm cuối + tia năng lượng), `AminoAcid`, `MonomerChain` (tinh bột / protein, `split` đứt thành đơn phân). Tên chất đặt bằng `AutoLabels`, neo vào các hàm `*Anchors`.
+- Màu chất, cơ quan, phân tử dùng chung: `src/components/biology/palette.ts`. Mẫu dùng đủ cả bốn: `src/videos/lab-thanh-phan/sinh.tsx` (cảnh 4–7).

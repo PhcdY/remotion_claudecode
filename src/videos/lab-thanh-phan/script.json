@@ -49,6 +49,65 @@
         { "text": "", "speak": "Đây là cảnh thử các lớp hình ăn khớp với nhau.", "show": "hiện bờ đất, lòng sông, sóng và cá", "at": "" },
         { "text": "", "speak": "Vậy sóng và con cá chuyển động mà vẫn luôn nằm trong lòng sông.", "show": "giữ nguyên", "at": "" }
       ]
+    },
+    {
+      "id": "b05",
+      "scene": 4,
+      "section": "BẢN CHẤT",
+      "keyword": "",
+      "visual": "CẢNH 4 — HumanBody (Sinh): cơ thể nhìn thẳng, đĩa thức ăn và không khí bên trái; nhãn Tim, Phổi, Ruột, Dạ dày neo bằng AutoLabels.",
+      "lines": [
+        { "text": "", "speak": "Đây là cảnh thử sơ đồ cơ thể cho môn Sinh, mỗi cơ quan đều có tên.", "show": "hiện cơ thể và nhãn cơ quan", "at": "" },
+        { "text": "", "speak": "Thức ăn đi từ đĩa vào miệng, xuống dạ dày rồi tới ruột.", "show": "đường thức ăn sáng, hạt chạy từ đĩa vào miệng tới ruột", "at": "" },
+        { "text": "", "speak": "Chất dinh dưỡng từ ruột vào máu, theo mạch máu tới mô cơ.", "show": "đường thức ăn mờ, chất dinh dưỡng từ ruột vào máu tới mô cơ", "at": "" },
+        { "text": "", "speak": "Không khí đi qua mũi, xuống hai lá phổi.", "show": "không khí vào mũi, xuống phổi", "at": "" }
+      ]
+    },
+    {
+      "id": "b06",
+      "scene": 4,
+      "section": "BẢN CHẤT",
+      "keyword": "",
+      "visual": "Giữ CẢNH 4; mở cửa sổ soi từ mô cơ ở đùi ra mặt cắt mao mạch – tế bào (ZoomCallout + CapillaryExchange).",
+      "lines": [
+        { "text": "", "speak": "Oxygen từ phổi vào máu, rồi theo mạch máu tới mô cơ.", "show": "oxygen từ phổi vào máu, theo mạch tới mô cơ", "at": "" },
+        { "text": "", "speak": "Soi vào đây, oxygen và chất dinh dưỡng rời mạch máu đi vào tế bào.", "show": "vòng soi trên mô cơ, khung mao mạch hiện; oxygen và chất dinh dưỡng đi vào tế bào", "at": "" },
+        { "text": "", "speak": "Ngược lại, carbon dioxide từ tế bào đi vào máu.", "show": "carbon dioxide từ tế bào vào máu", "at": "" },
+        { "text": "", "speak": "Máu đưa carbon dioxide về phổi, rồi thải ra khi thở ra.", "show": "khung soi tắt; carbon dioxide theo máu về phổi rồi thở ra", "at": "" }
+      ]
+    },
+    {
+      "id": "b07",
+      "scene": 5,
+      "section": "BẢN CHẤT",
+      "keyword": "",
+      "visual": "CẢNH 5 — Biomolecule: vòng glucose phân giải thành 6 CO₂; ATP tách nhóm phosphate cuối.",
+      "lines": [
+        { "text": "", "speak": "Đây là glucose, và đây là a t p.", "show": "hiện vòng glucose và ATP", "at": "" },
+        { "text": "", "speak": "Glucose bị phân giải thành sáu phân tử carbon dioxide.", "show": "vòng glucose gãy, 6 carbon bay ra thành 6 CO₂", "at": "" },
+        { "text": "", "speak": "Nhóm phosphate cuối tách ra, giải phóng năng lượng.", "show": "nhóm phosphate cuối của ATP tách ra, tia năng lượng", "at": "" }
+      ]
+    },
+    {
+      "id": "b08",
+      "scene": 6,
+      "section": "BẢN CHẤT",
+      "keyword": "",
+      "visual": "CẢNH 6 — amino acid, chuỗi tinh bột và chuỗi protein đứt thành đơn phân; ba phân tử nhỏ O₂, CO₂, H₂O.",
+      "lines": [
+        { "text": "", "speak": "Amino acid có nhóm amine, nhóm carboxyl và gốc R.", "show": "hiện amino acid và ba phân tử nhỏ", "at": "" },
+        { "text": "", "speak": "Tinh bột và protein bị cắt thành từng đơn phân.", "show": "hai chuỗi đứt thành đơn phân", "at": "" }
+      ]
+    },
+    {
+      "id": "b09",
+      "scene": 7,
+      "section": "BẢN CHẤT",
+      "keyword": "",
+      "visual": "CẢNH 7 — CapillaryExchange ở phổi và ở ruột cạnh nhau.",
+      "lines": [
+        { "text": "", "speak": "Ở phổi oxygen vào máu, ở ruột chất dinh dưỡng vào máu.", "show": "phổi: oxygen vào máu, carbon dioxide ra phế nang; ruột: chất dinh dưỡng vào máu", "at": "" }
+      ]
     }
   ]
 }

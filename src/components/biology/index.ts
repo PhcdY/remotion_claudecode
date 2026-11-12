@@ -4,3 +4,7 @@ export * from "./HeartPump";
 export * from "./NephronTubule";
 export * from "./NeuronSynapse";
 export * from "./DNAHelix";
+export * from "./palette";
+export * from "./Biomolecule";
+export * from "./HumanBody";
+export * from "./CapillaryExchange";
