@@ -19,20 +19,20 @@ Mỗi bài học dưới đây gán vào một phép thử P0–P5 (`viet-kich-b
 | | từ khó trong câu định nghĩa | 10/11 Văn |
 | | ký hiệu trước thứ nó gọi tên | 11/11 oxi hoá – khử (bỏ luật "20% cuối", thay bằng thứ tự từng khái niệm) |
 | **P2** biết mình đang xem gì | không định hướng (chưa thấy thứ trong tiêu đề) | 11/11 bảng tuần hoàn |
-| | vật không tự nói / không tên / không chú thích | 11/11 bảng tuần hoàn (hai cốc); 20/10 đạo hàm ("$s$: m"); 26/10 vectơ KG (đường gióng không chú thích) |
+| | vật không tự nói / không tên / không chú thích | 13/11 Sinh trao đổi chất (ruột, phổi không nhãn dù tim có); 11/11 bảng tuần hoàn (hai cốc); 20/10 đạo hàm ("$s$: m"); 26/10 vectơ KG (đường gióng không chú thích) |
 | | quá nhiều cảnh, nhân vật trang trí, phép biến hình lạ | 20/10 đạo hàm (Bolt → bóng → …; xoay đường chạy; Bolt → $s=t^2$); 17/10 (người leo núi, đèn giao thông, tag thường trực) |
 | | rác thị giác còn lại / khung trống đầu cảnh / cảnh nháy | 06–07/11 Oxyz (state leakage); 26/10 vectơ KG; 23/10 (BeatShell nháy) |
 | **P3** tắt tiếng, che chữ vẫn hiểu nhờ hình | lời khác – hình giống (so sánh) | 11/11 bảng tuần hoàn (Li = Na); 22/10 đơn điệu ("so sánh đi chứ") |
-| | một hình cho mọi khái niệm / chỉ thêm chữ | 11/11 oxi hoá – khử (70 s hai quả cầu); 10/11 Văn (slide chữ); 12/11 P3 dễ bị hiểu thành "ghi thêm chữ cho người tắt tiếng" |
+| | một hình cho mọi khái niệm / chỉ thêm chữ | 13/11 Sinh trao đổi chất ("máu vận chuyển" chỉ là nhãn; glucose, ATP, amino acid đều là cục tròn; mọi quá trình chồng một hình); 11/11 oxi hoá – khử (70 s hai quả cầu); 10/11 Văn (slide chữ); 12/11 P3 dễ bị hiểu thành "ghi thêm chữ cho người tắt tiếng" |
 | | số đổi mà hình đứng yên; hình đổi lệch lúc lời nói | 20/10 đạo hàm (trục số tự hiện, bảng nhảy số); 23/10 (`cue`) |
-| | hình gợi sai điều muốn nói | 26/10 vectơ KG (trục sâu gần song song vectơ); 07/11 Oxyz (máy bay chúc mũi sai hướng); 12/11 lớp chuyển động lệch khỏi vùng chứa (sóng đè bờ đất) |
+| | hình gợi sai điều muốn nói / thiếu đoạn đường | 13/11 Sinh trao đổi chất (mũi tên thức ăn không bắt đầu từ ngoài cơ thể); 26/10 vectơ KG (trục sâu gần song song vectơ); 07/11 Oxyz (máy bay chúc mũi sai hướng); 12/11 lớp chuyển động lệch khỏi vùng chứa (sóng đè bờ đất) |
 | **P4** một khái niệm một tên | hai hệ thuật ngữ / ký hiệu | 11/11 bảng tuần hoàn (1–18 và IA; sodium và natri) |
-| | một màu hai nghĩa; mũi tên dùng sai nghĩa | 23/10 cực trị (màu); 22/10 đơn điệu ("Cực trị → bài sau") |
+| | một màu hai nghĩa; hai nghĩa chỉ khác đậm nhạt; mũi tên dùng sai nghĩa | 13/11 Sinh trao đổi chất (O₂ xanh, CO₂ chàm); 23/10 cực trị (màu); 22/10 đơn điệu ("Cực trị → bài sau") |
 | **P5** chữ đọc được | chữ không vừa hộp | 11/11 bảng tuần hoàn ("Na" to hơn ô); 06/11 (thẻ tràn, chữ rớt dòng) |
-| | chữ/nhãn đè nét, đè nhau, cụt mép, bị đẩy xa | 17/10 đạo hàm; 23/10 (nhãn tay, đệm, `phases`); 06–07/11 Oxyz; 08/11 Sử ("Thăng L…"); 10/11 (nhãn giật); 10/11 Văn (khối ý chồng) |
+| | chữ/nhãn đè nét, đè nhau, cụt mép, bị đẩy xa | 13/11 Sinh trao đổi chất ("Tim" lơ lửng giữa phổi và tim; "Máu vận chuyển" đè ruột); 17/10 đạo hàm; 23/10 (nhãn tay, đệm, `phases`); 06–07/11 Oxyz; 08/11 Sử ("Thăng L…"); 10/11 (nhãn giật); 10/11 Văn (khối ý chồng) |
 | | ký hiệu viết tay hiện vỡ / công thức lỗi lặng lẽ | 08/11 (`$ o$`); 07/11 (`\v`); 26/10 (`\vec`); 11/11 (mũ Unicode, `\ce` chữ đỏ); 06/11 (gạch ngang trên số) |
 | | hình bé tí giữa khung | 08/11 Sử |
-| **Ngoài sáu phép thử** (tầng 2 — xem/nghe dễ chịu, quy trình) | nhịp và giọng đọc | 19–26/10 Vivibe (dấu ngắt, phiên âm); 22/10 (`speed`); 23/10 (câu hỏi đoán sượng) |
+| **Ngoài sáu phép thử** (tầng 2 — xem/nghe dễ chịu, quy trình) | nhịp và giọng đọc | 13/11 Sinh trao đổi chất (đều đều, buồn ngủ); 19–26/10 Vivibe (dấu ngắt, phiên âm); 22/10 (`speed`); 23/10 (câu hỏi đoán sượng) |
 | | kết không có cảm giác kết | 19–20/10 đạo hàm |
 | | thừa, gây cười, kém hấp dẫn | 10/11 (nhãn "mô hình" thừa); 22/10 (câu hài); 10/11 Văn (minh hoạ quá đơn giản) |
 | | quy trình, công cụ | 23/10 (storyboard trước audio; học sinh ảo); 24/10 (token); 08/11 (link `file:///`); 07/11 (asset) |
@@ -306,3 +306,12 @@ am - c Bình: Dành cho các môn Tự nhiên (Toán, Lý, Hóa, Tin) — dứt 
 - Ghép giọng: giọng Anh khác giới với giọng Việt nghe như hai người chen lời. Nối sát hai đoạn nghe vội, nối dài nghe đứt. → Giọng Anh cùng giới (`tts_config.json` › `englishVoice`), nghỉ theo dấu câu ở chỗ đổi giọng, cân độ to theo giọng Việt, ≤ 2 đoạn `<en>` mỗi dòng, câu mẫu đứng riêng một dòng.
 - Hóa: người dùng muốn lời đọc giữ tên Việt quen (natri, butin) và chữ trên hình là tên quốc tế. Bảng cấm tên cũ áp cả vào `speak`, còn gói bảo phiên âm tên Anh ("xô-đi-um"). → Gói Hóa mục 2.2 và 5: bảng cấm chỉ áp cho phần chữ (`hoa.json` › `truongMacDinh`). `speak` đọc tên Việt, `caption` bắt buộc ghi tên quốc tế. Cặp tên ở `phonetic_dict.json` › `hoa` › `ten_chat`.
 
+### 13/11/2026 — Sinh: sơ đồ cơ thể trao đổi chất (video CTV, `.agents/gop-y/trao-doi-chat-sinh-11.md`)
+
+Video dựng từ bản 1 (`v1.0.0`). So với `main-codex`: mô hình rối, khái niệm "máu vận chuyển" không có hình, "thêm cảnh riêng cho quá trình" đã có luật sau bản 1 (thực đơn "Quá trình nhiều bước", P3 "khái niệm mới → hình mới", cửa sổ soi). Nhãn "Tim" lệch và nhãn đè ruột là làm trái luật đã có từ bản 1. Phần dưới là chỗ luật còn hở.
+- Ruột, phổi không có nhãn trong khi tim có. Gốc: ngoại lệ "lời đọc đã gọi tên thì miễn chú thích" (10/11) bị áp cho bộ phận trong sơ đồ. → `dung-video` quy tắc 7, `viet-kich-ban` › Hình và số tượng trưng: không miễn khi bộ phận cùng loại đã có nhãn, hoặc hình giản lược không ai nhận ra. P2.
+- Mũi tên O₂ (xanh brand) và CO₂ (chàm) chỉ khác đậm nhạt → "hơi hoa mắt". → `dung-video` quy tắc 11: hai nghĩa trên cùng hình phải khác hẳn sắc màu; gói Sinh: màu cố định cho O₂, CO₂, chất dinh dưỡng. P4.
+- Mũi tên "chất dinh dưỡng" mọc từ dưới giường vào bụng, thiếu đoạn lấy thức ăn từ ngoài. → Gói Sinh mục 1: vẽ đủ đường môi trường → cơ quan trao đổi → máu → tế bào. P3.
+- Glucose, ATP, amino acid, "chất ban đầu" đều là cụm hình tròn. → Gói Sinh mục 3 › Phân tử có tên: cấu trúc thật, giản lược (vòng glucose, chuỗi ATP, khung amino acid, quả cầu CPK). Không vẽ công thức cấu tạo đầy đủ vì chữ quá dày ở cỡ video. P3.
+- Người góp ý hỏi có nên "thêm một cảnh riêng" cho máu vận chuyển O₂/CO₂. → Có, nhưng là beat soi vào mao mạch trong cùng cảnh, hình cơ thể ở góc làm khung định vị (gói Sinh mục 3 › Sơ đồ cơ thể); cảnh rời hẳn sẽ trái luật "không thả dù người xem".
+- Giọng đều đều. → `viet-kich-ban` › `speak` › Chống đều đều: câu dài ngắn xen nhau, mỗi beat một chỗ đổi giọng; `tao-audio`: nghe cả beat đầu, đều đều thì sửa `speak` ở B1. Tầng 2.

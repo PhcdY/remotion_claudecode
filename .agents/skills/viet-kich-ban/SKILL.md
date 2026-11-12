@@ -299,6 +299,7 @@ Luật chung cho mọi môn; gói môn có thể thay (vd. Toán: mô hình tr�
 | | số dễ bị tưởng là số thật: dân số, giá cả, GDP, quân số, tỉ lệ % | nhãn nhỏ "Số liệu minh họa" ở góc video (khi cần kỹ hơn) | không nhắc |
 
 - **Điều kiện của loại 1**: hình gợi ngay ra sự vật, hoặc lời đọc đã gọi tên nó. Không thoả (hình lạ, người xem không đoán được là gì) → chú thích tên vật như mọi thành phần khác, vẫn không gọi là "mô hình".
+  - **Bộ phận trong sơ đồ không phải loại 1**: cơ quan trong cơ thể, bộ phận máy, khu vực trên bản đồ… mà một bộ phận đã có nhãn thì mọi bộ phận lời đọc nhắc tới đều có nhãn (ghi `text` + `at` ở dòng nó được nhắc lần đầu). Hình giản lược tới mức che tên đi không ai đoán được (thanh màu = ruột) cũng phải có nhãn dù lời đọc đã gọi tên (`dung-video` › quy tắc 7).
 - **Máy chặn**: `check_script` báo lỗi `[mo-hinh]` khi `keyword`/`text`/`caption` là nhãn "mô hình" ("mô hình", "Mô hình: …", "… mô hình, không phải …", "Mô hình minh hoạ"), và khi `visual`/`show` định ghi nhãn đó (chữ trong ngoặc; câu đang bỏ nhãn như "không nhãn 'mô hình'", "nhãn 'mô hình' tắt" thì không tính); cảnh báo khi nhãn nhỏ không phải "Số liệu minh họa"/"Ảnh minh họa", và khi `speak` giải thích "đây là mô hình", "tình huống giả định"; `check-layout` báo lỗi khi nhãn "mô hình" hiện trên hình.
 - **Video dựng trước 10/11/2026** (vd. `ban-chat-dao-ham`, `don-dieu`, `tich-vo-huong`, `toi-uu-lon-nhom`, `vecto-khong-gian`, `cuc-tri-gtln-gtnn`, `demo-giai-doan-2`) còn nhãn kiểu cũ: **không tự sửa** video đó. Chỉ render lại nguyên bản → khi người dùng đồng ý, ghi `"ngoaiLeDaDuyet": {"mo-hinh": "video trước 10/11, giữ nguyên"}`. Người dùng bảo dựng lại → sửa ở B1 theo luật này (lời đọc đổi thì tạo lại audio dòng đó).
 - **Nhãn nhỏ** (loại 2, 3): chữ thường 22–24px, Regular 400, màu chữ phụ, độ mờ ~0,75; góc dưới phải video (ngang dải câu chốt) hoặc góc ảnh minh hoạ; tối đa **1 nhãn mỗi cảnh**, hiện từ lúc số/ảnh xuất hiện tới hết cảnh. Ghi trong `visual` ("nhãn nhỏ 'Số liệu minh họa' góc dưới phải, từ dòng 2"), không phải `text`.
@@ -318,6 +319,7 @@ Nội dung tương đương ý của dòng, đọc tự nhiên. **Không chứa 
 - **`...` để ngắt rồi nhấn — tối đa 1 lần mỗi beat**, trước cả một cụm trọn nghĩa hoặc sau từ chuyển ý ("Tức là... vận tốc trung bình mười lăm mét một giây."); không đặt giữa cụm chặt ("đo... kiểu gì" ✗).
 - Từ chuyển ý ("Vậy thì", "Nhưng", "Tức là", "Để ý") để câu dính thành mạch; chúng cũng tính là chỗ ngắt.
 - Không chèn thẻ điều khiển (`<break>`…). Nhịp chỉ đến từ dấu câu và cách viết.
+- **Chống đều đều** (13/11/2026, Sinh: "giọng đều đều, dễ buồn ngủ"): giọng TTS đọc mọi câu cùng một khuôn thì nghe như ru ngủ. Trong mỗi beat, câu **dài ngắn xen nhau** (có một câu ngắn ≤ 6 từ chốt ý: "Đó chính là oxygen."), và có **một chỗ đổi giọng**: câu hỏi người xem tự đặt ("Vậy oxygen đi đâu?"), từ chuyển ý đối lập ("Nhưng", "Ngược lại"), hoặc `...` trước chữ chốt. Tránh chuỗi 3+ dòng liền cùng khuôn "X là Y" / "X đi vào Y".
 
 ### `caption` (tuỳ chọn)
 

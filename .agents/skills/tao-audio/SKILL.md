@@ -15,6 +15,7 @@ Giọng chuẩn: **giọng clone của người dùng trên Vivibe**, gọi qua 
 
 Giọng phải nghe như **một giáo viên đang giảng cho học sinh**: rõ, ấm, có nhịp, có nhấn vào ý chính, ngắt hơi theo cụm nghĩa. Không đều đều kiểu đọc máy, không ngắt giữa cụm từ.
 Vivibe không có thẻ chỉnh tông; tông giọng đến từ mẫu clone, nhịp đến từ **`speak` ở B1**: dấu câu đặt đúng cụm nghĩa, câu ngắn, `...` trước chỗ cần nhấn. Đọc sai hay ngắt sai thì sửa `speak` ở B1 rồi tạo lại dòng đó, không chỉnh file audio.
+Lúc nghe thử beat đầu (Bước 2), nghe thêm cả beat liền một mạch: thấy **đều đều** (mọi câu cùng một khuôn, không chỗ nào giọng lên xuống) thì quay lại B1 sửa `speak` theo mục "Chống đều đều" của skill `viet-kich-ban`, không đổi `speed` (13/11/2026).
 
 Đã test (19/10/2026, giọng clone): `...` cho cảm giác dừng rồi nhấn vào phần sau — người dùng chọn cách này. Nghe b01 thật: mỗi dấu câu giữa dòng dừng ≈ 0,3–0,4 s, dòng có 3 chỗ ngắt nghe vấp; `...` đặt giữa cụm chặt ("đo... kiểu gì") nghe gãy → quy tắc ngắt nghỉ ở skill `viet-kich-ban`. Thẻ `<break>` bị đọc sai (audio dài gấp đôi). Tách câu thành nhiều lần gọi rồi chèn khoảng lặng thì điều khiển được độ dài nghỉ nhưng không dùng.
 
