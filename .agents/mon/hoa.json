@@ -1,5 +1,7 @@
 {
   "_ghiChu": "File máy đọc của gói hoa.md. check_script.py đọc 'thuatNgu' (bảng thuật ngữ chốt) và 'thayLuat' (ngưỡng mặc định gói được thay). Cách viết: .agents/mon/_mau.md › File máy đọc.",
+  "_ghiChuTruong": "Bảng tên cũ chỉ áp cho phần chữ (truongMacDinh). Lời đọc speak dùng tên tiếng Việt quen — check_script kiểm riêng theo scripts/phonetic_dict.json › hoa › ten_chat (hoa.md › mục 5).",
+  "truongMacDinh": ["title", "keyword", "text", "caption"],
   "thuatNgu": [
     {"khongDung": ["natri"], "dung": "sodium", "muc": "loi", "thongBao": "{noi}: {truong} dùng tên cũ '{tu}' — SGK 2018 dùng IUPAC: {dung} (gói hoa.md › mục 2.2)"},
     {"khongDung": ["kali"], "dung": "potassium", "muc": "loi", "thongBao": "{noi}: {truong} dùng tên cũ '{tu}' — SGK 2018 dùng IUPAC: {dung} (gói hoa.md › mục 2.2)"},
@@ -13,7 +15,7 @@
     {"khongDung": ["cacbon"], "dung": "carbon", "muc": "loi", "thongBao": "{noi}: {truong} dùng tên cũ '{tu}' — SGK 2018 dùng IUPAC: {dung} (gói hoa.md › mục 2.2)"},
     {"khongDung": ["photpho"], "dung": "phosphorus", "muc": "loi", "thongBao": "{noi}: {truong} dùng tên cũ '{tu}' — SGK 2018 dùng IUPAC: {dung} (gói hoa.md › mục 2.2)"},
     {"khongDung": ["silic"], "dung": "silicon", "muc": "loi", "thongBao": "{noi}: {truong} dùng tên cũ '{tu}' — SGK 2018 dùng IUPAC: {dung} (gói hoa.md › mục 2.2)"},
-    {"khongDung": ["clo"], "dung": "chlorine", "muc": "loi", "ngoaiLe": ["clo-rin", "clo-rai", "clo-rích", "clo-rát"], "_ghiChu": "phiên âm tên IUPAC (hoa.md › mục 5) không phải tên cũ", "thongBao": "{noi}: {truong} dùng tên cũ '{tu}' — SGK 2018 dùng IUPAC: {dung} (gói hoa.md › mục 2.2)"},
+    {"khongDung": ["clo"], "dung": "chlorine", "muc": "loi", "thongBao": "{noi}: {truong} dùng tên cũ '{tu}' — SGK 2018 dùng IUPAC: {dung} (gói hoa.md › mục 2.2)"},
     {"khongDung": ["flo"], "dung": "fluorine", "muc": "loi", "thongBao": "{noi}: {truong} dùng tên cũ '{tu}' — SGK 2018 dùng IUPAC: {dung} (gói hoa.md › mục 2.2)"},
     {"khongDung": ["brom"], "dung": "bromine", "muc": "loi", "thongBao": "{noi}: {truong} dùng tên cũ '{tu}' — SGK 2018 dùng IUPAC: {dung} (gói hoa.md › mục 2.2)"},
     {"khongDung": ["iot"], "dung": "iodine", "muc": "loi", "thongBao": "{noi}: {truong} dùng tên cũ '{tu}' — SGK 2018 dùng IUPAC: {dung} (gói hoa.md › mục 2.2)"},
@@ -44,7 +46,7 @@
     {"khongDung": ["lưu huỳnh"], "dung": "sulfur", "muc": "canh-bao", "thongBao": "{noi}: {truong} có '{tu}' — nếu là tên nguyên tố thì dùng {dung} cho đồng nhất (hoa.md › mục 2.2)"},
     {"khongDung": ["thủy ngân"], "dung": "mercury", "muc": "canh-bao", "thongBao": "{noi}: {truong} có '{tu}' — nếu là tên nguyên tố thì dùng {dung} cho đồng nhất (hoa.md › mục 2.2)"},
 
-    {"regex": "nhóm\\s+(1[0-8]|[1-9])(?![\\wÀ-ỹ])", "dung": "IA…VIIIA / IB…VIIIB", "muc": "loi", "ma": "nhom-so", "thongBao": "{noi}: {truong} gọi nhóm bằng số cột '{tu}' — chỉ dùng {dung} (hoa.md › mục 2.3)"},
+    {"regex": "nhóm\\s+(1[0-8]|[1-9])(?![\\wÀ-ỹ])", "truong": ["title", "keyword", "text", "caption", "speak"], "dung": "IA…VIIIA / IB…VIIIB", "muc": "loi", "ma": "nhom-so", "thongBao": "{noi}: {truong} gọi nhóm bằng số cột '{tu}' — chỉ dùng {dung} (hoa.md › mục 2.3)"},
     {"regex": "nhóm\\s+(một|hai|ba|bốn|năm|sáu|bảy|tám|mười[\\wÀ-ỹ ]*?)(?!\\s+[ab](?![\\wÀ-ỹ]))(?![\\wÀ-ỹ])", "truong": ["speak"], "dung": "'nhóm một A', 'nhóm tám B'", "muc": "loi", "ma": "nhom-doc", "thongBao": "{noi}: speak đọc '{tu}' thiếu A/B — đọc {dung} (hoa.md › mục 2.3)"},
     {"khongDung": ["đồng"], "dung": "copper", "muc": "canh-bao",
      "ngoaiLe": ["đồng thời", "đồng nhất", "đồng đều", "đồng ý", "đồng hồ", "đồng dạng", "đồng phân", "đồng vị", "đồng biến", "đồng bộ", "đồng loạt", "đồng nghĩa", "đồng chất", "đồng hành", "đồng tâm", "đồng môn", "đồng đội", "đồng cảm", "đồng lòng", "đồng thanh", "đồng minh", "đồng tình", "đồng bằng", "đồng ruộng", "đồng cỏ", "đồng xu",

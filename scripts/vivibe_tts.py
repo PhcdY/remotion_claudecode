@@ -9,12 +9,18 @@ Dùng:
 
 API key: biến môi trường VIVIBE_API_KEY, hoặc dòng `VIVIBE_API_KEY=...` trong .env ở gốc project.
 Giọng: chọn mỗi lần chạy bằng --voice (người dùng báo). Tốc độ: scripts/tts_config.json (speed); beat có trường "speed" thì dùng tốc độ riêng của beat đó.
-Hỗ trợ Multi-Voice: beat hoặc line có trường "voice" riêng thì sẽ dùng giọng riêng đó (hỗ trợ phân vai đối thoại, câu mẫu tiếng Anh).
+Hỗ trợ Multi-Voice: beat hoặc line có trường "voice" riêng thì sẽ dùng giọng riêng đó (phân vai đối thoại).
+
+Hai thứ tiếng trong một dòng (gói anh.md › mục 5): đoạn <en>…</en> trong `speak` đọc bằng giọng tiếng Anh, phần còn lại
+bằng giọng Việt. Giọng Anh: --en-voice, mặc định theo `englishVoice` trong tts_config.json (cùng giới với giọng Việt,
+để câu không đổi từ giọng nữ sang giọng nam giữa chừng). Mỗi đoạn tạo riêng và lưu ở out/_lam-viec/<audio-dir>/doan-giong/,
+nên chỉnh cách ghép không tốn credit. Ghép: cân độ to đoạn Anh theo giọng Việt của dòng, chèn nghỉ theo dấu câu ở chỗ
+đổi giọng (scripts/song_ngu.py), ra một MP3 mỗi dòng. Manifest ghi mốc từng đoạn (`segments`) cho align_words.py.
 
 Đầu ra: public/audio/<slug>/<beatId>-lNN.mp3 (mỗi dòng 1 file) + manifest.json.
 
 Hành vi:
-- Kiểm tra cả kịch bản trước khi gọi API: dòng trống hoặc `speak` còn ký hiệu toán → dừng, không tốn credit.
+- Kiểm tra cả kịch bản trước khi gọi API: dòng trống, `speak` còn ký hiệu toán, thẻ <en> sai → dừng, không tốn credit.
 - Cache: dòng có (voice, speed, speak) không đổi và đã có file thì bỏ qua. --force tạo lại các dòng được chọn.
 - Không tự gửi lại job tạo giọng khi lỗi (mỗi lần gửi là một lần trừ credit); chỉ retry bước hỏi trạng thái / tải file.
 - Vivibe chỉ cho mỗi tài khoản một job tại một thời điểm → tạo lần lượt từng dòng. Bị từ chối vì
@@ -37,6 +43,9 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import song_ngu  # noqa: E402
+
 ROOT = Path(__file__).resolve().parent.parent
 CONFIG_PATH = ROOT / "scripts" / "tts_config.json"
 API_URL = "https://api.lucylab.io/json-rpc"
@@ -45,6 +54,12 @@ POLL_TIMEOUT = 300  # giây cho mỗi dòng
 BUSY_TIMEOUT = 120  # giây chờ khi tài khoản còn job khác đang chạy
 # Cắt lặng thừa ở đầu và cuối file (giữ KEEP_EDGE giây) để nghỉ giữa các dòng do B3 quyết định.
 SILENCE_DB, KEEP_EDGE = -45, 0.08
+# Đoạn trong dòng ghép giọng giữ lặng mép ngắn hơn: khoảng nghỉ ở chỗ đổi giọng do song_ngu.gap_after quyết định.
+SEG_EDGE = 0.02
+# Độ to (LUFS) đo trên giọng Việt các bài đã làm (−17…−21): dòng chỉ có tiếng Anh cân về mức này.
+NARRATOR_LUFS = -19.0
+MAX_GAIN_DB = 10.0
+MIX_VERSION = "mix2"  # đổi khi đổi cách ghép → dòng ghép được ghép lại từ đoạn đã lưu, không tốn credit
 SAFE_ID = re.compile(r"^[A-Za-z0-9_-]+$")
 LATEX_HINT = re.compile(r"[$\\^_{}]")
 
@@ -97,14 +112,18 @@ def rpc(key: str, method: str, payload: dict, retries: int = 1) -> dict:
     return data.get("result") or {}
 
 
-def find_ffmpeg() -> str:
-    bundled = ROOT / "node_modules" / "@remotion" / "compositor-win32-x64-msvc" / "ffmpeg.exe"
+def find_tool(name: str) -> str:
+    bundled = ROOT / "node_modules" / "@remotion" / "compositor-win32-x64-msvc" / f"{name}.exe"
     if bundled.exists():
         return str(bundled)
-    found = shutil.which("ffmpeg")
+    found = shutil.which(name)
     if not found:
-        sys.exit("Không tìm thấy ffmpeg (chạy `npm install` để có bản đi kèm Remotion).")
+        sys.exit(f"Không tìm thấy {name} (chạy `npm install` để có bản đi kèm Remotion).")
     return found
+
+
+def find_ffmpeg() -> str:
+    return find_tool("ffmpeg")
 
 
 def line_hash(voice: str, speed: float, speak: str) -> str:
@@ -122,7 +141,13 @@ def submit(key: str, speak: str, voice: str, speed: float) -> dict:
             time.sleep(POLL_EVERY)
 
 
-def trim_filter(ffmpeg: str, wav: Path) -> str:
+def run_ffmpeg(ffmpeg: str, args: list[str]) -> None:
+    res = subprocess.run([ffmpeg, "-y", "-loglevel", "error", *args], capture_output=True, text=True, encoding="utf-8", errors="replace")
+    if res.returncode != 0:
+        raise ApiError(f"ffmpeg lỗi: {res.stderr.strip()[:300]}")
+
+
+def trim_filter(ffmpeg: str, wav: Path, keep: float = KEEP_EDGE) -> str:
     """Bộ lọc atrim bỏ lặng đầu/cuối (ffmpeg của Remotion không có silenceremove)."""
     res = subprocess.run(
         [ffmpeg, "-hide_banner", "-i", str(wav), "-af", f"silencedetect=n={SILENCE_DB}dB:d=0.05", "-f", "null", "-"],
@@ -137,13 +162,14 @@ def trim_filter(ffmpeg: str, wav: Path) -> str:
     ends = [float(x) for x in re.findall(r"silence_end: ([\d.]+)", log)]
     begin, end = 0.0, total
     if starts and starts[0] < 0.01 and ends:
-        begin = max(0.0, ends[0] - KEEP_EDGE)
+        begin = max(0.0, ends[0] - keep)
     if starts and (len(ends) < len(starts) or ends[-1] >= total - 0.05) and starts[-1] > begin:
-        end = min(total, starts[-1] + KEEP_EDGE)
+        end = min(total, starts[-1] + keep)
     return f"atrim=start={begin:.3f}:end={end:.3f},asetpts=PTS-STARTPTS"
 
 
-def synthesize(key: str, ffmpeg: str, speak: str, voice: str, speed: float, out: Path) -> None:
+def fetch_wav(key: str, speak: str, voice: str, speed: float, wav: Path) -> None:
+    """Gửi một job Vivibe, chờ xong, tải WAV về `wav`."""
     job = submit(key, speak, voice, speed)
     export_id = job.get("projectExportId")
     if not export_id:
@@ -161,35 +187,117 @@ def synthesize(key: str, ffmpeg: str, speak: str, voice: str, speed: float, out:
             raise ApiError(f"Quá {POLL_TIMEOUT}s chưa xong (export {export_id}, state={state})")
         time.sleep(POLL_EVERY)
 
+    download_err = None
+    for attempt in range(1, 4):
+        try:
+            with urllib.request.urlopen(status["url"], timeout=120) as r:
+                wav.write_bytes(r.read())
+            if wav.stat().st_size >= 1000:
+                download_err = None
+                break
+        except Exception as e:
+            download_err = e
+            time.sleep(2 * attempt)
+    if download_err:
+        raise ApiError(f"Không thể tải audio từ URL sau 3 lần thử: {download_err}")
+    if wav.stat().st_size < 1000:
+        raise ApiError(f"File tải về quá nhỏ ({wav.stat().st_size} byte)")
+
+
+def synthesize(key: str, ffmpeg: str, speak: str, voice: str, speed: float, out: Path) -> None:
     wav = out.with_suffix(".tmp.wav")
     tmp = out.with_suffix(".tmp.mp3")
     try:
-        download_err = None
-        for attempt in range(1, 4):
-            try:
-                with urllib.request.urlopen(status["url"], timeout=120) as r:
-                    wav.write_bytes(r.read())
-                if wav.stat().st_size >= 1000:
-                    download_err = None
-                    break
-            except Exception as e:
-                download_err = e
-                time.sleep(2 * attempt)
-        if download_err:
-            raise ApiError(f"Không thể tải audio từ URL sau 3 lần thử: {download_err}")
-        if wav.stat().st_size < 1000:
-            raise ApiError(f"File tải về quá nhỏ ({wav.stat().st_size} byte)")
-        res = subprocess.run(
-            [ffmpeg, "-y", "-loglevel", "error", "-i", str(wav), "-af", trim_filter(ffmpeg, wav), "-codec:a", "libmp3lame", "-q:a", "2", str(tmp)],
-            capture_output=True,
-            text=True,
-        )
-        if res.returncode != 0:
-            raise ApiError(f"ffmpeg lỗi: {res.stderr.strip()[:300]}")
+        fetch_wav(key, speak, voice, speed, wav)
+        run_ffmpeg(ffmpeg, ["-i", str(wav), "-af", trim_filter(ffmpeg, wav), "-codec:a", "libmp3lame", "-q:a", "2", str(tmp)])
         os.replace(tmp, out)
     finally:
         wav.unlink(missing_ok=True)
         tmp.unlink(missing_ok=True)
+
+
+# ---------- dòng ghép hai giọng ----------
+
+def seg_hash(voice: str, speed: float, text: str) -> str:
+    return hashlib.sha256(f"vivibe-seg|{voice}|{speed}|{text}".encode("utf-8")).hexdigest()[:16]
+
+
+def seg_path(cache_dir: Path, voice: str, speed: float, text: str) -> Path:
+    return cache_dir / f"{seg_hash(voice, speed, text)}.wav"
+
+
+def make_segment(key: str, ffmpeg: str, text: str, voice: str, speed: float, cache_dir: Path) -> Path:
+    """WAV của một đoạn (đã cắt lặng mép, 44,1 kHz mono). Đã có trong cache thì dùng lại, không gọi API."""
+    target = seg_path(cache_dir, voice, speed, text)
+    if target.exists():
+        return target
+    cache_dir.mkdir(parents=True, exist_ok=True)
+    raw = target.with_suffix(".raw.wav")
+    tmp = target.with_suffix(".tmp.wav")
+    try:
+        fetch_wav(key, text, voice, speed, raw)
+        run_ffmpeg(ffmpeg, ["-i", str(raw), "-af", trim_filter(ffmpeg, raw, SEG_EDGE) + ",aresample=44100",
+                            "-ac", "1", "-c:a", "pcm_s16le", str(tmp)])
+        os.replace(tmp, target)
+    finally:
+        raw.unlink(missing_ok=True)
+        tmp.unlink(missing_ok=True)
+    return target
+
+
+def loudness(ffmpeg: str, wav: Path) -> tuple[float | None, float]:
+    """(LUFS tích hợp hoặc None nếu không đo được, đỉnh dBTP).
+    LUFS cần cửa sổ 0,4 s: đoạn ngắn ("is", "S.") được nối lặp với chính nó tới ≥ 1,2 s rồi mới đo."""
+    copies = max(1, -(-1.2 // max(wav_seconds(wav), 0.05)))
+    copies = int(min(copies, 30))
+    inputs = []
+    for _ in range(copies):
+        inputs += ["-i", str(wav)]
+    graph = "".join(f"[{k}:a]" for k in range(copies)) + f"concat=n={copies}:v=0:a=1,loudnorm=print_format=json"
+    res = subprocess.run([ffmpeg, "-hide_banner", *inputs, "-filter_complex", graph, "-f", "null", "-"],
+                         capture_output=True, text=True, encoding="utf-8", errors="replace")
+    m = re.search(r"\{[^{}]*\"input_i\"[^{}]*\}", res.stderr)
+    if not m:
+        return None, 0.0
+    info = json.loads(m.group(0))
+    i, tp = float(info["input_i"]), float(info["input_tp"])
+    return (i if i > -60 else None), tp
+
+
+def wav_seconds(wav: Path) -> float:
+    r = subprocess.run([find_tool("ffprobe"), "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(wav)],
+                       capture_output=True, text=True, check=True)
+    return float(r.stdout.strip())
+
+
+def mix_line(ffmpeg: str, parts: list[dict], out: Path) -> list[dict]:
+    """Ghép các đoạn (dict: lang, text, wav, voice_name) thành một MP3. Trả về mốc từng đoạn cho manifest."""
+    levels = [loudness(ffmpeg, p["wav"]) for p in parts]
+    vi = [lv[0] for p, lv in zip(parts, levels) if p["lang"] == "vi" and lv[0] is not None]
+    target = sum(vi) / len(vi) if vi else NARRATOR_LUFS
+    inputs, chains, labels, marks, t = [], [], [], [], 0.0
+    for k, (p, (lufs, peak)) in enumerate(zip(parts, levels)):
+        gain = 0.0
+        if p["lang"] == "en" and lufs is not None:
+            gain = max(-MAX_GAIN_DB, min(MAX_GAIN_DB, target - lufs, -1.0 - peak))
+        gap = song_ngu.gap_after(p["text"]) if k < len(parts) - 1 else 0.0
+        dur = wav_seconds(p["wav"])
+        marks.append({"lang": p["lang"], "text": p["text"], "voice_name": p["voice_name"], "start": round(t, 3), "end": round(t + dur, 3)})
+        t += dur + gap
+        inputs += ["-i", str(p["wav"])]
+        chain = f"[{k}:a]aformat=sample_rates=44100:channel_layouts=mono,volume={gain:.2f}dB"
+        if gap:
+            chain += f",apad=pad_dur={gap:.3f}"
+        chains.append(chain + f"[a{k}]")
+        labels.append(f"[a{k}]")
+    graph = ";".join(chains) + ";" + "".join(labels) + f"concat=n={len(parts)}:v=0:a=1[out]"
+    tmp = out.with_suffix(".tmp.mp3")
+    try:
+        run_ffmpeg(ffmpeg, [*inputs, "-filter_complex", graph, "-map", "[out]", "-codec:a", "libmp3lame", "-q:a", "2", str(tmp)])
+        os.replace(tmp, out)
+    finally:
+        tmp.unlink(missing_ok=True)
+    return marks
 
 
 def load_script(path: Path) -> dict:
@@ -233,6 +341,14 @@ def resolve_voice(key: str, wanted: str) -> tuple[str, str]:
     sys.exit(f"Không thấy giọng {wanted!r}. Giọng hiện có: {names}")
 
 
+def english_voice_for(config: dict, vi_name: str, override: str | None) -> str:
+    """Tên giọng Anh cho phần <en>: --en-voice, rồi bảng englishVoice theo giọng Việt, rồi mặc định."""
+    if override:
+        return override
+    table = config.get("englishVoice") or {}
+    return (table.get("theoGiongViet") or {}).get(vi_name) or table.get("macDinh") or "anh-female"
+
+
 def list_voices(key: str) -> int:
     items = fetch_voices(key)
     if not items:
@@ -250,6 +366,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="Tạo audio từng dòng cho script.json bằng Vivibe")
     ap.add_argument("script", type=Path, nargs="?")
     ap.add_argument("--voice", help="id hoặc tên giọng Vivibe mặc định cho lần chạy này (bắt buộc khi tạo)")
+    ap.add_argument("--en-voice", help="giọng đọc các đoạn <en>…</en> (mặc định: englishVoice trong tts_config.json, cùng giới với --voice)")
     ap.add_argument("--list-voices", action="store_true", help="in danh sách giọng của tài khoản rồi thoát")
     ap.add_argument("--only", nargs="+", default=[], help="chỉ tạo các beat (b01) hoặc dòng (b01-l02) này")
     ap.add_argument("--estimate", action="store_true", help="chỉ đếm ký tự sẽ gửi, không gọi API")
@@ -270,7 +387,9 @@ def main() -> int:
     default_voice, default_voice_name = resolve_voice(key_api, args.voice)
 
     data = load_script(args.script)
-    out_dir = ROOT / "public" / "audio" / (args.audio_dir or data["slug"])
+    audio_dir = args.audio_dir or data["slug"]
+    out_dir = ROOT / "public" / "audio" / audio_dir
+    seg_dir = ROOT / "out" / "_lam-viec" / audio_dir / "doan-giong"
     manifest_path = out_dir / "manifest.json"
     old: dict[str, str] = {}
     if manifest_path.exists():
@@ -294,6 +413,7 @@ def main() -> int:
                 problems.append(f"{key}: thiếu 'speak'")
             elif LATEX_HINT.search(speak):
                 problems.append(f"{key}: 'speak' còn ký hiệu toán: {speak!r}")
+            problems += [f"{key}: {p}" for p in song_ngu.problems(speak)]
 
             # Dòng có thể chỉ định voice riêng (ưu tiên hơn beat)
             l_voice, l_voice_name = b_voice, b_voice_name
@@ -302,7 +422,17 @@ def main() -> int:
 
             # tốc độ riêng của beat, mặc định theo tts_config.json
             sp = float(beat.get("speed", speed))
-            rows.append((beat["id"], i, key, speak, line.get("text", speak), sp, l_voice, l_voice_name))
+            row = {"beat": beat["id"], "line": i, "key": key, "speak": speak, "text": line.get("text", speak),
+                   "speed": sp, "voice": l_voice, "voice_name": l_voice_name, "segs": None, "hash": line_hash(l_voice, sp, speak)}
+            if song_ngu.has_en(speak) and not song_ngu.problems(speak):
+                en_voice, en_name = resolve_voice(key_api, english_voice_for(config, l_voice_name, args.en_voice))
+                row["segs"] = [
+                    {"lang": lang, "text": text, "send": song_ngu.tts_text(lang, text),
+                     "voice": en_voice if lang == "en" else l_voice, "voice_name": en_name if lang == "en" else l_voice_name}
+                    for lang, text in song_ngu.segments(speak)
+                ]
+                row["hash"] = line_hash(f"{l_voice}+{en_voice}+{MIX_VERSION}", sp, speak)
+            rows.append(row)
     if problems:
         print("Kịch bản chưa sẵn sàng — sửa ở B1 rồi chạy lại:")
         for p in problems:
@@ -312,52 +442,86 @@ def main() -> int:
     def selected(beat_id: str, key: str) -> bool:
         return not args.only or beat_id in args.only or key in args.only
 
+    def cost(row: dict) -> list[tuple[str, int]]:
+        """(giọng, số ký tự) sẽ gửi cho dòng này; đoạn đã lưu thì không tính."""
+        if not row["segs"]:
+            return [(row["voice_name"], len(row["speak"]))]
+        return [(s["voice_name"], len(s["send"])) for s in row["segs"]
+                if args.force or not seg_path(seg_dir, s["voice"], row["speed"], s["send"]).exists()]
+
     todo = []
     voice_counts: dict[str, int] = {}
-    for beat_id, _, key, speak, _, sp, line_voice, line_voice_name in rows:
-        target = out_dir / f"{key}.mp3"
-        cached = old.get(target.name) == line_hash(line_voice, sp, speak) and target.exists()
-        if selected(beat_id, key) and (args.force or not cached):
-            todo.append((key, speak, target, sp, line_voice, line_voice_name))
-            voice_counts[line_voice_name] = voice_counts.get(line_voice_name, 0) + len(speak)
+    for row in rows:
+        target = out_dir / f"{row['key']}.mp3"
+        cached = old.get(target.name) == row["hash"] and target.exists()
+        if selected(row["beat"], row["key"]) and (args.force or not cached):
+            todo.append(row)
+            for name, n in cost(row):
+                voice_counts[name] = voice_counts.get(name, 0) + n
 
-    chars = sum(len(s) for _, s, _, _, _, _ in todo)
+    chars = sum(voice_counts.values())
+    mixed = sum(1 for r in todo if r["segs"])
     summary_voices = ", ".join(f"{v}: {c} ký tự" for v, c in voice_counts.items()) or f"{default_voice_name}: 0 ký tự"
-    print(f"Giọng chính: {default_voice_name} · tốc độ: {speed} · {len(todo)} dòng cần tạo · tổng {chars} ký tự ({summary_voices})")
+    print(f"Giọng chính: {default_voice_name} · tốc độ: {speed} · {len(todo)} dòng cần tạo"
+          + (f" ({mixed} dòng ghép giọng Anh–Việt)" if mixed else "") + f" · tổng {chars} ký tự ({summary_voices})")
     if args.estimate or not todo:
         return 0
 
     ffmpeg = find_ffmpeg()
     out_dir.mkdir(parents=True, exist_ok=True)
     failed: list[tuple[str, str]] = []
+    seg_marks: dict[str, list[dict]] = {}
 
-    for key, speak, target, sp, line_voice, line_voice_name in todo:
+    for row in todo:
+        target = out_dir / f"{row['key']}.mp3"
         try:
-            synthesize(key_api, ffmpeg, speak, line_voice, sp, target)
-            print(f"✓ {key}.mp3 [{line_voice_name}]", flush=True)
+            if row["segs"]:
+                parts = []
+                for s in row["segs"]:
+                    if args.force:
+                        seg_path(seg_dir, s["voice"], row["speed"], s["send"]).unlink(missing_ok=True)
+                    wav = make_segment(key_api, ffmpeg, s["send"], s["voice"], row["speed"], seg_dir)
+                    parts.append({**s, "wav": wav})
+                seg_marks[row["key"]] = mix_line(ffmpeg, parts, target)
+                names = " + ".join(dict.fromkeys(s["voice_name"] for s in row["segs"]))
+                print(f"✓ {row['key']}.mp3 [{names}]", flush=True)
+            else:
+                synthesize(key_api, ffmpeg, row["speak"], row["voice"], row["speed"], target)
+                print(f"✓ {row['key']}.mp3 [{row['voice_name']}]", flush=True)
         except Exception as e:
-            failed.append((key, str(e)))
+            failed.append((row["key"], str(e)))
 
+    old_entries: dict[str, dict] = {}
+    if manifest_path.exists():
+        try:
+            old_entries = {e["file"]: e for e in json.loads(manifest_path.read_text("utf-8"))["lines"]}
+        except (json.JSONDecodeError, KeyError):
+            pass
     failed_keys = {k for k, _ in failed}
+    todo_keys = {r["key"] for r in todo}
     entries, missing = [], []
-    for beat_id, i, key, speak, text, sp, line_voice, line_voice_name in rows:
+    for row in rows:
+        key = row["key"]
         target = out_dir / f"{key}.mp3"
-        h = line_hash(line_voice, sp, speak)
-        fresh = any(k == key for k, _, _, _, _, _ in todo) and key not in failed_keys
+        fresh = key in todo_keys and key not in failed_keys
         if not target.exists():
-            missing.append((beat_id, key, key))
+            missing.append((row["beat"], key, key))
             continue
-        if not fresh and old.get(target.name) != h:
-            missing.append((beat_id, key, f"{key} (audio cũ, lệch kịch bản/giọng)"))
-        entries.append({
-            "beat": beat_id,
-            "line": i,
+        if not fresh and old.get(target.name) != row["hash"]:
+            missing.append((row["beat"], key, f"{key} (audio cũ, lệch kịch bản/giọng)"))
+        entry = {
+            "beat": row["beat"],
+            "line": row["line"],
             "file": target.name,
-            "hash": h if fresh else old.get(target.name),
-            "voice": line_voice,
-            "voice_name": line_voice_name,
-            "text": text,
-        })
+            "hash": row["hash"] if fresh else old.get(target.name),
+            "voice": row["voice"],
+            "voice_name": row["voice_name"],
+            "text": row["text"],
+        }
+        segs = seg_marks.get(key) if fresh else (old_entries.get(target.name) or {}).get("segments")
+        if segs:
+            entry["segments"] = segs
+        entries.append(entry)
 
     manifest = {
         "slug": data["slug"],

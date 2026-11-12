@@ -8,7 +8,7 @@ File máy đọc của gói: `.agents/mon/hoa.json` (bảng thuật ngữ chốt
 > Gặp tình huống file này không nói tới → **hỏi người dùng**, không tự đặt luật. Sai kiến thức là lỗi nặng nhất.
 
 ## Thay luật chung
-Không có — gói Hóa chỉ thêm vào luật chung, không thay luật nào.
+- **`viet-kich-ban` › `caption` chỉ khi `speak` có phiên âm ký hiệu**: với Hóa, dòng nào `speak` đọc tên chất bằng tên tiếng Việt (natri, axit axetic…) thì **bắt buộc có `caption`** ghi tên quốc tế, vì phụ đề không được hiện tên Việt (mục 5). `check_script` báo lỗi `[ten-chat-phu-de]`.
 
 ---
 
@@ -22,7 +22,7 @@ Luật 1, 2, 3, 10, 11, 12, 13 nay là phép thử chung (P2, P3, P0) và luật
 | 2 | **Vật thật phải tự nói**: tắt tiếng vẫn biết đây là chất gì | 2 hình chữ nhật xám trong 2 cốc, không tên | Thẻ tên "Lithium (Li)", ký hiệu trên miếng kim loại, cốc có thành/vạch | 6.2 |
 | 3 | **Lời nói khác → hình khác.** Lời nói "giống" ở điểm nào thì hình giống đúng điểm đó, còn lại phải khác | Li và Na vẽ y hệt nhau | Cùng sủi bọt + cùng hồng (giống: cùng kiểu phản ứng); Na chảy tròn, chạy nhanh, sủi mạnh (khác: mức độ) | 1.5, 6.2 |
 | 4 | **Không vẽ tay bảng tuần hoàn / ô nguyên tố** — dùng `PeriodicTable`, `ElementTile` | Ô 25 px, chữ "Na" to hơn ô, tràn viền | Component tự tính cỡ chữ theo hai giới hạn: vừa ô và ≥ 28px; ô quá nhỏ thì tên đặt cạnh ô, ngoài lưới chữ. Nhấn bằng tô nền + viền | 6.3, 6.4 |
-| 5 | **Một hệ tên duy nhất: IUPAC tiếng Anh** cho mọi nguyên tố, chất | Lúc "Sodium", lúc "natri"; "axit" | sodium, potassium, iron, acid, base, oxide… (cả trên hình và lời đọc) | 2.2 |
+| 5 | **Chữ ghi tên quốc tế (IUPAC), lời đọc tên tiếng Việt quen** | Trên hình lúc "Sodium", lúc "natri"; lời đọc "xô-đi-um" | Hình, nhãn, phụ đề: sodium, acetic acid, butyne. Lời đọc: tên Việt quen theo bảng mục 5 | 2.2, 5 |
 | 6 | **Gọi nhóm theo SGK THPT: IA…VIIIA, IB…VIIIB** | Trục ghi 1–18, rồi lại giải thích "1 ↔ IA" | Trục ghi IA, IIA, IIIB…; lời đọc "nhóm một A". Không bao giờ "nhóm 1" | 2.3 |
 | 7 | **Số liệu lấy từ `elements.ts`**, không gõ theo trí nhớ | Tự gõ khối lượng, Z | `ElementTile symbol="Na"` tự lấy 11, Sodium, 22,99 | 2.5 |
 | 8 | **Hạt trước, ký hiệu sau — cho từng khái niệm** (P1): ký hiệu/quy tắc chỉ hiện sau khi đã thấy thứ nó gọi tên | Phương trình hiện từ đầu, chưa thấy hạt nào đổi | Electron chạy từ Fe sang $\ce{Cu^2+}$ → rồi mới "số oxi hoá". Không hạn mức thời lượng cho phần ký hiệu | 1.1 |
@@ -66,7 +66,7 @@ Người xem bấm vào video vì tiêu đề. **3–6 giây đầu phải cho h
 - **Dòng 1 của b01** đưa thứ trong tiêu đề lên sân khấu lớn, sáng đúng chỗ câu hỏi nhắm tới.
 - Ví dụ bài "Cấu tạo bảng tuần hoàn — vì sao có hàng và cột?":
   - b01-l01 `show`: "bảng tuần hoàn đầy đủ (PeriodicTable width 1560); chu kì 3 sáng lên" — `speak`: "Một trăm mười tám nguyên tố, xếp thành hàng ngang và cột dọc."
-  - b01-l02 `show`: "nhóm IA sáng lên; Li và Na được khoanh" — `speak`: "Vì sao lithium và sodium lại đứng chung một cột?"
+  - b01-l02 `show`: "nhóm IA sáng lên; Li và Na được khoanh" — `speak`: "Vì sao liti và natri lại đứng chung một cột?" — `caption`: "Vì sao lithium và sodium lại đứng chung một cột?"
   - b01-l03 trở đi: thí nghiệm Li, Na thả vào nước (MetalInWater) — bằng chứng "giống nhau".
 - SAI: mở bằng 2 cốc nước không tên, 15 giây sau mới thấy bảng → người xem không biết đang xem cái gì.
 
@@ -90,7 +90,8 @@ Luật chung (mọi môn): loại video `"loai"`, *Bảng nội dung* theo mẫu
 - **Bảng chốt ở mục 2.2–2.3 là chuẩn của dự án.** Thuật ngữ nào không có ở đây và không chắc SGK dùng thế nào → ghi vào "chỗ còn nghi ngờ" khi báo dàn ý, hỏi người dùng.
 
 ### 2.2. Danh pháp — MỘT hệ duy nhất: IUPAC tiếng Anh (luật 0.5)
-Áp dụng cho `title`, `keyword`, `text`, `caption`, nhãn trên hình **và** `speak` (viết phiên âm của tên tiếng Anh). Không trộn tên Việt cũ, không ghi kèm tên Việt trong ngoặc.
+Áp dụng cho **mọi chữ người xem thấy**: `title`, `keyword`, `text`, `caption` (phụ đề), nhãn trên hình. Không trộn tên Việt cũ, không ghi kèm tên Việt trong ngoặc.
+**Lời đọc `speak` thì ngược lại: đọc tên tiếng Việt quen** (natri, kali, axit axetic, butin) — mục 5. Người dùng chốt 12/11/2026: nghe như giáo viên vẫn giảng, nhìn thấy đúng tên SGK 2018.
 
 | Nhóm | Dùng (IUPAC) | KHÔNG dùng |
 |---|---|---|
@@ -101,7 +102,7 @@ Luật chung (mọi môn): loại video `"loai"`, *Bảng nội dung* theo mẫu
 | Gốc/hợp chất | chloride, sulfate, nitrate, carbonate, sodium hydroxide, acetic acid, ethanol, methane | clorua, sunfat, nitrat, cacbonat, natri hiđroxit, axit axetic, ancol etylic, metan |
 
 - **Giữ tiếng Việt**: từ thường không phải danh pháp — *nước, muối ăn, khí, dung dịch, kết tủa, oxi hoá, khử, chu kì, nhóm, ô nguyên tố*. ("oxi hoá – khử" là thuật ngữ SGK, giữ nguyên.)
-- `py scripts/check_script.py <slug>` **báo lỗi** tên cũ (natri, axit, hiđro…) và **cảnh báo** tên Việt quen (sắt, nhôm…). Cảnh báo "sắt/đồng…" mà đúng là tên nguyên tố → sửa sang tên tiếng Anh; nếu là từ thường (vd. "đồng thời") thì bỏ qua.
+- `py scripts/check_script.py <slug>` **báo lỗi** tên cũ (natri, axit, hiđro…) và **cảnh báo** tên Việt quen (sắt, nhôm…) **trong phần chữ** (bảng `hoa.json`, `truongMacDinh`). Cảnh báo "sắt/đồng…" mà đúng là tên nguyên tố → sửa sang tên tiếng Anh; nếu là từ thường (vd. "đồng thời") thì bỏ qua. Lời đọc kiểm riêng ở mục 5.
 
 ### 2.3. Bảng tuần hoàn — thuật ngữ chốt (luật 0.6)
 | Khái niệm | Viết trên hình | Lời đọc (`speak`) | Ghi chú |
@@ -162,39 +163,45 @@ Vòng tròn kính lúp (`ZoomInset`) nối nét đứt từ chỗ phản ứng t
 
 ---
 
-## 5. Lời đọc tên chất (B1 viết `speak`, B2 nghe thử)
-- Trên hình (`text`, `caption`, nhãn): tên IUPAC tiếng Anh viết chuẩn.
-- Trong `speak`: **phiên âm tiếng Việt của tên tiếng Anh** để giọng Vivibe đọc trơn. Dòng nào có phiên âm → thêm `caption` viết chuẩn và đưa vào danh sách nghe thử.
-- Cột "Đã nghe thử": chỉ điền "đạt" sau khi B2 nghe thật. Dòng "chưa" → bắt buộc nằm trong danh sách nghe thử.
+## 5. Lời đọc tên chất: đọc tên Việt, hiện tên quốc tế (B1 viết `speak` + `caption`, B2 nghe thử)
 
-| Trên hình | `speak` | Đã nghe thử |
+Người xem nghe tên chất như giáo viên vẫn gọi, còn chữ trên hình và phụ đề là tên SGK 2018:
+
+```json
+{ "text": "butyne", "speak": "Chất này là butin.", "caption": "Chất này là butyne." }
+{ "text": "$\\ce{NaOH}$", "speak": "Natri hiđroxit làm quỳ tím hoá xanh.", "caption": "Sodium hydroxide làm quỳ tím hoá xanh." }
+```
+
+- `speak`: tên tiếng Việt quen, viết chính tả thường. **Không** đọc tên tiếng Anh ("sodium") và không phiên âm kiểu Anh ("xô-đi-um", "a-xê-tích a-xít").
+- `caption`: chép `speak`, thay tên Việt bằng tên quốc tế. Bắt buộc ở mọi dòng có tên chất (phụ đề lấy `caption`, thiếu thì lấy `speak` → hiện "natri").
+- Bảng cặp tên đầy đủ (máy đọc): `scripts/phonetic_dict.json` › `hoa` › `ten_chat` (`khóa` = tên quốc tế, `doc` = lời đọc). Chất chưa có → thêm vào bảng, hỏi người dùng nếu không chắc cách gọi quen.
+- `check_script` kiểm theo bảng đó:
+  - **Lỗi** `[doc-ten-chat]` khi `speak` đọc tên quốc tế.
+  - **Lỗi** `[ten-chat-phu-de]` khi `speak` đọc tên Việt mà `caption` thiếu tên quốc tế. Với tên trùng từ thường (sắt, đồng, vàng, bạc, chì) thì chỉ cảnh báo.
+  - **Cảnh báo** khi còn phiên âm kiểu Anh.
+  - Đưa dòng có tên chất vào danh sách nghe thử.
+- Đồng phân có số chỉ vị trí: đọc số bằng chữ ("but một in", "propan hai ol"), chữ ghi `but-1-yne`, `propan-2-ol`.
+- Cột "Đã nghe thử": chỉ điền "đạt" sau khi B2 nghe thật.
+
+| Trên hình / phụ đề | `speak` | Đã nghe thử |
 |---|---|---|
-| lithium (Li) | li-thi-um | chưa |
-| sodium (Na) | xô-đi-um | chưa |
-| potassium (K) | pô-tát-xi-um | chưa |
-| magnesium (Mg) | mác-nhê-xi-um | chưa |
-| calcium (Ca) | can-xi-um | chưa |
-| aluminium (Al) | a-lu-mi-ni-um | chưa |
-| iron (Fe) | ai-ơn | chưa |
-| copper (Cu) | cóp-pơ | chưa |
-| zinc (Zn) | din | chưa |
-| silver (Ag) | xiu-vơ | chưa |
-| gold (Au) | gâu | chưa |
-| hydrogen, khí $\ce{H2}$ | hai-đờ-rô-giần / khí hắt hai | chưa |
-| oxygen, $\ce{O2}$ | óc-xi-giần / khí ô hai | chưa |
-| chlorine | clo-rin | chưa |
-| $\ce{H2O}$ | nước / hắt hai ô | |
-| $\ce{CO2}$ | xê ô hai / các-bon đi-ô-xít | |
-| $\ce{NaCl}$ | xô-đi-um clo-rai / muối ăn | |
-| $\ce{NaOH}$ | xô-đi-um hy-đrô-xít | |
-| $\ce{HCl}$ | hy-đrô-clo-rích a-xít | |
-| $\ce{H2SO4}$ | sun-phu-rích a-xít | |
-| $\ce{HNO3}$ | ni-trích a-xít | |
-| $\ce{CH4}$, $\ce{C2H4}$, $\ce{C2H2}$ | mê-than, ê-thi-len, a-xê-ti-len | |
-| $\ce{C2H5OH}$ | ê-tha-non | |
-| $\ce{CH3COOH}$ | a-xê-tích a-xít | |
-| $\ce{CuSO4}$, $\ce{AgNO3}$ | cóp-pơ sun-phát, xiu-vơ ni-trát | |
-| phenolphthalein | phê-nol-ph-ta-lê-in | chưa |
+| lithium (Li), sodium (Na), potassium (K) | liti, natri, kali | natri: chưa (mẫu 12/11) |
+| magnesium, calcium, barium | magie, canxi, bari | chưa |
+| aluminium, iron, copper, zinc | nhôm, sắt, đồng, kẽm | chưa |
+| silver, gold, lead, tin, mercury | bạc, vàng, chì, thiếc, thủy ngân | chưa |
+| hydrogen, oxygen, nitrogen, carbon | hiđro, oxi, nitơ, cacbon | chưa |
+| chlorine, fluorine, bromine, iodine, sulfur, phosphorus | clo, flo, brom, iot, lưu huỳnh, photpho | chưa |
+| acid, base, oxide, hydroxide | axit, bazơ, oxit, hiđroxit | chưa |
+| chloride, sulfate, nitrate, carbonate | clorua, sunfat, nitrat, cacbonat | chưa |
+| sodium chloride, $\ce{NaCl}$ | natri clorua / muối ăn | |
+| sodium hydroxide, $\ce{NaOH}$ | natri hiđroxit | chưa (mẫu 12/11) |
+| hydrochloric / sulfuric / nitric acid | axit clohiđric / sunfuric / nitric | |
+| acetic acid, $\ce{CH3COOH}$ | axit axetic | chưa (mẫu 12/11) |
+| methane, ethene, ethyne | metan, etilen, axetilen | |
+| butyne, but-1-yne, but-2-yne | butin, but một in, but hai in | chưa (mẫu 12/11) |
+| ethanol, $\ce{C2H5OH}$ | etanol | |
+| copper(II) sulfate | đồng hai sunfat | |
+| $\ce{H2O}$, $\ce{CO2}$ | nước, khí cacbonic | |
 | nhóm IA, VIIIB | nhóm một A, nhóm tám B | chưa |
 | $e^-$ | e-léc-tron | |
 | $\Delta_r H^\circ_{298}$ | biến thiên en-tan-pi chuẩn | |

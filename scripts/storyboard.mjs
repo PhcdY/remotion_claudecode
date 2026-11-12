@@ -85,7 +85,7 @@ for (const tb of timeline.beats) {
     <b>Dòng ${i + 1}</b> <span class="t">${(frame / composition.fps).toFixed(1)} s</span>
     ${line.show ? `<p class="show">hình: ${esc(line.show)}${line.at ? ` · chữ gắn: ${esc(line.at)}` : ""}</p>` : ""}
     ${line.text ? `<p class="text">chữ: ${esc(line.text)}</p>` : ""}
-    <p class="speak">${esc(line.speak)}</p>
+    <p class="speak">${esc(line.speak).replace(/&lt;en&gt;(.*?)&lt;\/en&gt;/g, '<i class="en">$1</i>')}</p>
   </figcaption>
 </figure>`);
     n++;

@@ -4,6 +4,10 @@
 Bài học kinh nghiệm thực tế ghi tại: `.agents/lessons.md`.
 Gói **thêm vào** luật chung; chỉ dòng nào trong mục **"Thay luật chung"** mới thay luật chung (skill `viet-kich-ban` › mục 0 › Ba tầng luật). Gói chưa có mục đó → luật chung thắng khi hai bên nói khác.
 
+## Thay luật chung
+- **`viet-kich-ban` › `speak` không chứa ký hiệu `< >`**: môn Anh được dùng thẻ `<en>…</en>` để đánh dấu tiếng Anh đọc nguyên văn (mục 5). Trong `<en>` được dùng dấu nháy của dạng rút gọn (`don't`).
+- **`tao-audio` › Cấu hình, giọng theo môn**: `--voice` là giọng Việt thuyết minh (nữ - c Nhi hoặc nam - c Bình), không phải giọng Anh. Giọng Anh cho phần `<en>` tự chọn cùng giới (mục 5.1).
+
 ---
 
 ## 1. Bản chất môn học & Tư duy kể chuyện (B1)
@@ -48,8 +52,8 @@ graph LR
    - Kiến thức và từ vựng bám sát các bộ SGK chính thức: *Global Success*, *Friends Global*, *Bright*, *i-Learn Smart World*.
    - Không lạm dụng các thuật ngữ ngôn ngữ học quá hàn lâm làm người xem hoảng sợ (ví dụ: dùng "Góc nhìn thời gian" thay vì "Telic Aspectuality", dùng "Khối bổ nghĩa" thay vì "Non-restrictive relative clause modifier").
 3. **Lằn ranh 3: Phân định ranh giới Ngôn ngữ Lời dẫn (Vietnamese) và Ngôn ngữ Đích (English)**:
-   - Lời thuyết minh (`speak`) sử dụng tiếng Việt tự nhiên, mạch lạc, đóng vai trò người dẫn đường tư duy.
-   - Các từ ngữ, cụm từ, câu mẫu tiếng Anh phải được trình bày trang trọng, chuẩn xác trên hình ảnh (`text`, Typography) kèm phiên âm IPA khi cần thiết.
+   - Lời giảng (`speak`) bằng tiếng Việt tự nhiên, mạch lạc, đóng vai trò người dẫn đường tư duy.
+   - Từ, cụm, câu mẫu tiếng Anh hiện chuẩn xác trên hình (`text`, Typography), kèm IPA khi cần. Trong `speak`, chúng được **đọc nguyên văn bằng giọng Anh**, không dịch sang tiếng Việt (mục 5).
 
 ---
 
@@ -156,36 +160,62 @@ graph TD
 
 ---
 
-## 5. Đọc Tiếng Anh trong Giọng đọc Vivibe TTS (B2)
+## 5. Lời đọc hai thứ tiếng: tiếng Anh đọc nguyên văn bằng giọng Anh (B1, B2)
 
 > [!CAUTION]
-> **Vivibe TTS là mô hình giọng clone Tiếng Việt.**  
-> Khi đọc tiếng Anh, nếu đưa nguyên câu tiếng Anh vào `speak`, mô hình sẽ đọc theo kiểu bẹt âm hoặc phát âm sai trọng âm.  
-> Vì vậy, kịch bản môn Tiếng Anh bắt buộc tuân thủ bộ quy chuẩn phiên âm và chia dòng dưới đây:
+> **Đã gặp (12/11/2026, người xem thật):** lời đọc dịch câu mẫu sang tiếng Việt và giọng Việt đọc từ tiếng Anh. `play` thành "chỉ chơi"; *She is happy* thành "câu cô ấy vui"; `be` đọc "bê" thay vì /biː/. Người xem nói nội dung dễ hiểu nhưng câu chữ loạn, vì phải tự dịch ngược ra tiếng Anh.
+> **Luật:** từ, cụm, câu tiếng Anh đang được dạy thì **đọc nguyên văn bằng giọng Anh**, không dịch, không phiên âm kiểu Việt (`ắp`, `đao`, `bi`).
 
-### 5.1. Bảng Quy chuẩn Phiên âm cho Lời đọc (`speak`)
+### 5.1. Đánh dấu tiếng Anh trong `speak`
 
-| Cụm ngữ pháp / Từ tiếng Anh | Viết trong `text` | Viết trong `speak` | Viết trong `caption` |
-|---|---|---|---|
-| $S + V + O$ | $S + V + O$ | chủ ngữ, động từ, tân ngữ | S + V + O |
-| $V\text{-ing}$ | $V\text{-ing}$ | vê-ing | V-ing |
-| $V\text{-ed}$ | $V\text{-ed}$ | vê-ê-đê *(hoặc "động từ quá khứ")* | V-ed |
-| $V_3 / V_{pp}$ | $V_3$ | vê ba *(hoặc "quá khứ phân từ")* | V3 / Past participle |
-| Past Simple | Past Simple | quá khứ đơn | Past Simple |
-| Present Perfect | Present Perfect | hiện tại hoàn thành | Present Perfect |
-| Past Continuous | Past Continuous | quá khứ tiếp diễn | Past Continuous |
-| Passive Voice | Passive Voice | câu bị động | Passive Voice |
-| Relative Clause | Relative Clause | mệnh đề quan hệ | Relative Clause |
-| In / On / At | in, on, at | in... on... at | in, on, at |
-| Up / Down / Out | up, down, out | ắp... đao... ao *(hoặc đọc giải nghĩa)* | up, down, out |
-| Modal Verbs | Modal Verbs | động từ khuyết thiếu | Modal Verbs |
+Bọc đúng phần tiếng Anh bằng `<en>…</en>`, phần còn lại là lời giảng tiếng Việt:
 
-### 5.2. Chiến lược Xử lý Câu Ví Dụ Mẫu Tiếng Anh
-Khi cần đưa ra một câu ví dụ tiếng Anh hoàn chỉnh (vd: *"I have lost my key"*):
-1. **Visual Display là chủ đạo**: Câu tiếng Anh hoàn chỉnh hiển thị sắc nét trên màn hình bằng Typography sang trọng, có highlight màu từng cụm từ theo nhịp giải thích.
-2. **Lời đọc dẫn dắt bằng nghĩa & cấu trúc**: Giọng thuyết minh tập trung phân tích nghĩa và vị trí từ thay vì cố đọc cả câu dài bằng giọng clone tiếng Việt:
-   - *Ví dụ*: Thay vì ép Vivibe đọc *"Ai hæv lɔst maɪ ki"*, viết lời đọc: `"Người bản xứ nói... I have lost my key... với thì hiện tại hoàn thành."` (cho từ ngắn vào giữa dấu ngắt `...`).
-3. **Mọi dòng có từ tiếng Anh BẮT BUỘC có `caption`** và phải được liệt kê vào danh sách `CẦN NGHE THỬ` để người dùng thẩm định trước khi tạo toàn bài.
+```json
+{ "text": "play → plays", "speak": "Động từ <en>play</en> chỉ cần thêm <en>s</en>." }
+{ "text": "She is happy", "speak": "<en>She is happy.</en>" }
+{ "text": "is = be",      "speak": "<en>is</en> là một dạng của động từ <en>be</en>." }
+```
+
+- B2 đọc phần `<en>` bằng giọng tiếng Anh **cùng giới** với giọng Việt (nữ - c Nhi → `anh-female`, nam - c Bình → `anh-male`). Đổi giọng nam ↔ nữ giữa câu nghe như hai người chen lời. Bảng ghép ở `scripts/tts_config.json` › `englishVoice`, ghi đè bằng `--en-voice`.
+- Không cần `caption`: phụ đề lấy `speak` đã bỏ thẻ ("Động từ play chỉ cần thêm s."). `cue` cũng viết không thẻ (`"cue": "play"`).
+- Chữ cái đứng riêng (`<en>s</en>`) được đọc theo tên chữ /es/.
+- Dạng rút gọn để nguyên trong `<en>`: `<en>I don't know.</en>`.
+- Thuật ngữ ngữ pháp là **lời giảng**, nói tiếng Việt như SGK: "quá khứ đơn", "câu bị động", "tính từ". Chỉ bọc `<en>` khi đang dạy chính chữ tiếng Anh đó (vd. dạy đọc tên thì *Past Simple*).
+- Nghĩa tiếng Việt (nếu cần) nói **sau** ví dụ gốc: "<en>give up</en>, nghĩa là từ bỏ."
+
+### 5.2. Viết cho chỗ đổi giọng nghe liền
+
+Mỗi chỗ đổi giọng là một đường nối hai bản ghi, nên nối càng ít và càng đúng chỗ ngắt tự nhiên thì càng êm.
+- **Câu mẫu đứng riêng một dòng**, đọc trọn bằng giọng Anh (`<en>She is happy.</en>`). Dòng sau mới phân tích. Người xem nghe trọn câu trước rồi mới nghe tách.
+- **≤ 2 đoạn `<en>` mỗi dòng** (≤ 4 chỗ nối). Nhiều hơn thì tách dòng.
+- Đặt chỗ đổi giọng ở ranh giới cụm: sau dấu `:` hoặc `,`, hoặc từ mẫu đứng cuối cụm ("…của động từ <en>be</en>."). Tránh kẹp từ Anh giữa hai âm tiết Việt dính nhau ("cái <en>be</en> này nó").
+- Không lồng câu giảng dài vào giữa hai đoạn Anh. Viết "<en>is</en> là một dạng của <en>be</en>." thì được, nhưng tránh "<en>is</en>, mà như đã thấy ở câu trên thì thực chất nó là <en>be</en>".
+- Nghỉ ở chỗ đổi giọng do B2 tự chèn theo dấu câu ngay trước chỗ đổi (`scripts/song_ngu.py`): không dấu ≈ 0,14 s; `, ; :` ≈ 0,3 s; `. ? !` ≈ 0,45 s. Muốn ngắt dài hơn thì thêm dấu câu, không chèn `...`.
+
+### 5.3. Kiểm và nghe thử
+
+- B1: `py scripts/check_script.py <slug>`
+  - **Lỗi** `[en-chua-boc]` khi `speak` có từ tiếng Anh chưa bọc `<en>`, ví dụ "Động từ play…".
+  - **Cảnh báo** khi `text` hiện câu tiếng Anh mà `speak` không đọc nguyên văn từ nào, tức là đang dịch.
+  - Mọi dòng có `<en>` vào danh sách **CẦN NGHE THỬ**.
+- B2: `--estimate` báo riêng ký tự của giọng Việt và giọng Anh. Nghe thử các dòng ghép giọng (`--only b03-l02 …`) trước khi tạo cả bài. Cần nghe kỹ ba chỗ:
+  - Từ Anh đọc đúng: `be` là /biː/, `s` là /es/.
+  - Chỗ nối không gãy, không hụt hơi.
+  - Giọng Anh không to hay nhỏ hơn giọng Việt. B2 tự cân độ to theo giọng Việt của dòng.
+  Lỗi nhịp thì sửa chỗ đặt `<en>` hoặc dấu câu ở B1. Mỗi đoạn đã tạo được lưu lại (`out/_lam-viec/<slug>/doan-giong/`), nên chạy lại sau khi chỉnh cách ghép không tốn credit.
+
+### 5.4. Bảng cách viết `speak`
+
+| Trên hình (`text`) | `speak` |
+|---|---|
+| $S + V + O$ | `chủ ngữ, động từ, tân ngữ` |
+| $V\text{-ing}$ | `động từ thêm <en>-ing</en>` |
+| $V_3 / V_{pp}$ | `quá khứ phân từ` |
+| Past Simple, Present Perfect | `quá khứ đơn, hiện tại hoàn thành` *(lời giảng)* |
+| in / on / at | `<en>in</en>, <en>on</en>, <en>at</en>` |
+| up / down / out | `<en>up</en>, <en>down</en>, <en>out</en>` |
+| I have lost my key | `Người bản xứ nói: <en>I have lost my key.</en>` |
+| /prɪˈzent/ vs /ˈpreznt/ | `<en>present</en>… và <en>present</en>` *(nghe thử: giọng Anh đọc theo ngữ cảnh, trọng âm có thể không đổi — cần thì đọc trong cụm: `<en>to present a gift</en>`)* |
 
 ---
 

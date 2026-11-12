@@ -309,7 +309,7 @@ Luật chung cho mọi môn; gói môn có thể thay (vd. Toán: mô hình tr�
 
 ### `speak` — lời cho TTS đọc
 
-Nội dung tương đương ý của dòng, đọc tự nhiên. **Không chứa ký hiệu** (`$ \ ^ _ { } = + / ' √ < >`) — script B2 chặn. Cách đọc ký hiệu, công thức, tên riêng: **xem gói môn `.agents/mon/<mon>.md`** (mặc định nói theo nghĩa, không đọc chữ cái; các quy tắc phiên âm bắt buộc để Vivibe không đọc sai được script `check_script.py` kiểm tra tự động).
+Nội dung tương đương ý của dòng, đọc tự nhiên. **Không chứa ký hiệu** (`$ \ ^ _ { } = + / ' √ < >`) — script B2 chặn. Ngoại lệ duy nhất: thẻ `<en>…</en>` bọc tiếng Anh đọc nguyên văn bằng giọng Anh (môn Anh, gói `anh.md` › mục 5; trong thẻ được dùng dấu nháy của `don't`). Cách đọc ký hiệu, công thức, tên riêng: **xem gói môn `.agents/mon/<mon>.md`** (mặc định nói theo nghĩa, không đọc chữ cái; các quy tắc phiên âm bắt buộc để Vivibe không đọc sai được script `check_script.py` kiểm tra tự động).
 
 **Viết cho tai nghe**:
 - **Ít chỗ ngắt**: mỗi `,` `.` `:` `?` `...` giữa dòng làm giọng dừng ≈ 0,3–0,4 s. Mỗi dòng **≤ 2 chỗ ngắt, nên là 1**; câu ≤ ~20 từ; mỗi dòng thường là một câu.
@@ -321,7 +321,7 @@ Nội dung tương đương ý của dòng, đọc tự nhiên. **Không chứa 
 
 ### `caption` (tuỳ chọn)
 
-Phụ đề đầy đủ xuất thành file riêng (`.srt`/`.vtt`) từ `speak`. Dòng nào `speak` có phiên âm ký hiệu ("ích-không", "f của x") → thêm `caption` viết như phụ đề thường ("Tại x₀, đạo hàm bằng 10."). `check_script.py` báo dòng thiếu.
+Phụ đề đầy đủ xuất thành file riêng (`.srt`/`.vtt`) từ `speak` (đã bỏ thẻ `<en>`). Dòng nào `speak` có phiên âm ký hiệu ("ích-không", "f của x") → thêm `caption` viết như phụ đề thường ("Tại x₀, đạo hàm bằng 10."). Hóa: dòng đọc tên chất bằng tên Việt ("natri") → `caption` ghi tên quốc tế ("sodium") (gói `hoa.md` › mục 5). `check_script.py` báo dòng thiếu.
 
 ### `keyword`
 
