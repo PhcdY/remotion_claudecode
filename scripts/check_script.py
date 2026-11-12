@@ -409,7 +409,7 @@ def main() -> int:
         elif bid != f"b{bi + 1:02d}":
             warns.append(f"{where}: id nên là b{bi + 1:02d} (liên tục; đổi id thì phải tạo lại audio)")
         for field in ("section", "keyword", "visual"):
-            if field == "keyword" and subject == "su" and b.get(field) == "":
+            if field == "keyword" and b.get(field) == "":
                 continue
             if not b.get(field):
                 errors.append(f"{where}: thiếu {field}")
@@ -565,6 +565,8 @@ def main() -> int:
                     warns.append(f"{w}: có cue nhưng không có show (cue là lúc thay đổi trên hình vào)")
 
             # --- text ---
+            quote_source = line.get("quoteSource")
+            quoted_text = isinstance(quote_source, str) and bool(quote_source.strip())
             if text:
                 if '\t' in text or '\x0b' in text or '\x0c' in text:
                     errors.append(f"{w}: text chứa ký tự điều khiển ẩn (tab/vtab) do gõ thiếu escape lệnh LaTeX (ví dụ '\\to' thành '\\t' + 'o') — sửa thành '\\\\to' hoặc dùng ký tự Unicode '→': {repr(text)}")
@@ -574,7 +576,7 @@ def main() -> int:
                     warns.append(f"{w}: môn xã hội nên dùng trực tiếp ký tự Unicode '→' thay vì LaTeX '$\\to$' để typography mượt mà: {text}")
                 if not is_pure_math(text) and visible_len(text) > 40:
                     warns.append(f"{w}: text dài {visible_len(text)} ký tự (≤ ~35): {text}")
-                if text.rstrip().endswith("."):
+                if text.rstrip().endswith(".") and not quoted_text:
                     warns.append(f"{w}: text là ghi chú, không dấu chấm cuối: {text}")
                 outside = MATH.sub(" ", text)
                 if UNIT_GLUED.search(outside):
@@ -585,7 +587,7 @@ def main() -> int:
                         break
                 if "→" in text and re.search(r"bài sau|tức là", text):
                     warns.append(f"{w}: mũi tên → chỉ dùng đúng nghĩa (suy ra, dồn về): {text}")
-                if text.strip() == speak.strip():
+                if text.strip() == speak.strip() and not quoted_text:
                     warns.append(f"{w}: text chép nguyên speak")
 
             chars = len(speak)

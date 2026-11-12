@@ -108,12 +108,12 @@ Mỗi beat là một `<Sequence>` từ `startFrame` đến `endFrame`, gồm 4 l
 |---|---|---|
 | `section` | **không hiện thường trực.** Chỉ `TRONG ĐỀ THI`, `BẪY THƯỜNG GẶP` và `GIẢI ĐÁP` (có nghĩa với người xem) hiện thành thẻ mở beat: chữ to giữa vùng hình, ~1,2s, rồi biến mất trước khi hình chính vào. Các nhãn khác chỉ dùng nội bộ. | đầu beat |
 | `scene` + `visual` | cảnh, bố cục, thành phần của beat | đầu beat |
-| `lines[i].show` (+ `cue`) | **thay đổi duy nhất** trên hình ở dòng i | bắt đầu ở `C[i]` (lúc giọng nói tới cụm `cue`; không có `cue` thì đầu dòng), vào trong 0,5–1 s rồi đứng yên |
-| `keyword` | **câu chốt của beat**, không phải tag ở góc. Chữ to, dải dưới cùng vùng hình (không che hình), giữ tới hết beat | lúc ý của beat vừa rõ, mặc định = `startFrame` dòng cuối |
-| `lines[i].text` + `at` | **chữ trong cảnh**: nhãn/công thức/kết quả gắn vào vật ghi ở `at`, đặt bằng `AutoLabels` (quy tắc 12) hoặc trong thẻ/công thức đang có; `""` → dòng không thêm chữ | vào đúng `startFrame` của dòng i; ở lại khi còn được nói tới, mờ đi khi hết vai trò |
+| `lines[i].show` (+ `cue`) | **thay đổi chính** trên hình ở dòng i | bắt đầu ở `C[i]` (lúc giọng nói tới cụm `cue`; không có `cue` thì đầu dòng). Xem quy tắc 9 để chọn độ dài |
+| `keyword` | **câu chốt trên hình khi cần**. `""` → không hiện. Nếu có, đặt trong vùng sạch dưới hình, dùng nền cục bộ khi cần tách chữ | lúc ý của beat vừa rõ, mặc định = `startFrame` dòng cuối |
+| `lines[i].text` + `at` | **chữ trong cảnh**: dùng `AutoLabels` cho nhãn neo, đặt trích dẫn ở vùng sạch cạnh người hoặc tư liệu. `""` → dòng không thêm chữ | nhãn thường vào ở `startFrame`; đoạn trích có thể vào theo `cue` nếu kịch bản ghi rõ. Tắt khi hết vai trò |
 | audio dòng i | `<Audio>` | đúng `startFrame` của dòng i |
 
-**Chữ trong cảnh (video mới):** `BeatShell subtitle={false}` — không dải phụ đề ở đáy; vùng hình kéo tới y = 1040, câu chốt ở dải 950–1040. Lý do: người xem hiểu tốt hơn khi chữ nằm sát hình liên quan và màn hình không in lại câu đang đọc; dải ghi chú tách khỏi hình làm chữ lúc nhiều lúc ít, mắt phải nhảy qua lại. Phụ đề đầy đủ xuất thành file riêng (Bước 5). Các video dựng trước 23/10/2026 giữ chế độ cũ (`Subtitle`), chỉ đổi khi người dùng bảo dựng lại.
+**Chữ trong cảnh (video mới):** `BeatShell subtitle={false}` — không dải phụ đề ở đáy; vùng hình kéo tới y = 1040, câu chốt ở dải 950–1040. Giữ nhãn sát hình liên quan, dùng nguyên văn khi chính trích dẫn là tư liệu cần xem. Phụ đề đầy đủ xuất thành file riêng (Bước 5). Các video dựng trước 23/10/2026 giữ chế độ cũ (`Subtitle`), chỉ đổi khi người dùng bảo dựng lại.
 Kịch bản cũ không có `at` → đặt `text` cạnh thứ sinh ra con số/kết luận đó, ghi giả định vào báo cáo.
 
 **Hình đổi đúng lúc lời nói tới (`cue`):** beat nhận `C[i]` = frame giọng bắt đầu nói cụm `cue` của dòng i (bằng `L[i]` nếu dòng không có `cue`) và hàm `cue(i, "cụm")` cho cụm bất kỳ trong dòng — dùng `C[i]` thay `L[i]` làm mốc cho thay đổi của `show`. Mốc từng từ lấy từ `public/audio/<dir>/words.json` (`python scripts/align_words.py <slug> [--audio-dir <dir>]`, chạy sau mỗi lần tạo/sửa audio); thiếu file hoặc bản nháp thì ước tính theo số âm tiết. Cách căn: dò khoảng lặng trong audio (ffmpeg) ở chỗ có dấu câu, chia đều âm tiết giữa các khoảng lặng — sai số ~0,1–0,3 s; thấy lệch rõ khi xem thì báo người dùng (có thể nâng lên nhận dạng giọng nói Whisper, phải tải model ~470MB).
@@ -124,7 +124,7 @@ Kịch bản cũ không có `at` → đặt `text` cạnh thứ sinh ra con số
 - `visual`: dựng đúng mô tả. Cụm "khi đọc dòng N" → animation bắt đầu ở `startFrame` dòng N. Mô tả mơ hồ → chọn cách đơn giản nhất và ghi giả định vào báo cáo.
 - `visual` vi phạm quy tắc 8–10 dưới đây: nhãn dài → tự rút gọn theo quy tắc 8 và ghi vào báo cáo; còn nhiều thay đổi dồn vào một dòng, số đổi mà hình không có gì đổi theo, nhân vật không có vai trò → **báo người dùng để sửa ở B1** (vì phải chia lại dòng/lời đọc), không tự dựng cho đủ.
 - Beat `GIẢI ĐÁP` dùng lại đúng hình của beat `HIỆN TƯỢNG` (cùng component, cùng bố cục) rồi thêm lớp giải thích lên trên, để người xem nhận ra ngay "đây là câu hỏi lúc đầu".
-- **Kết có cảm giác kết**: đáp án cụ thể của câu hỏi mở đầu (con số) hiện to, rõ ở trọng tâm hình. Trong dòng cuối, hình **đứng yên** (không chuyển động mới), chỉ câu kết luận/`keyword` hiện lên; giữ nguyên khung đó hết `TAIL` rồi mới sang `BrandOutro`. Không cắt sang outro khi hình còn đang chạy.
+- **Kết có cảm giác kết**: đáp án của câu hỏi mở đầu hiện rõ ở trọng tâm hình. Dòng cuối giữ hình kết quả cho người xem quan sát. Nếu kịch bản có `keyword`, đặt câu chốt gọn ở vùng sạch hoặc dùng bố cục đã duyệt trong storyboard. Giữ khung hết `TAIL` rồi sang `BrandOutro`.
 - Màu ghi theo vai trò → `role` trong `src/components/roles.ts` (quy tắc 11).
 
 ## Quy tắc bố cục (bắt buộc, khung 1920×1080)
@@ -143,7 +143,7 @@ Kịch bản cũ không có `at` → đặt `text` cạnh thứ sinh ra con số
 Lề trái/phải tối thiểu 90px. Ngoài logo, không có tag/nhãn/cột chữ thường trực — cả khung là sân khấu của hình.
 
 **1. Không chồng lấn, không dính sát & Sân khấu Toàn khung (Hero Stage).**
-- **Sân khấu Toàn khung (Hero Stage Canvas — Chống lỗi hình bé tí lọt thỏm)**: Tuyệt đối CẤM tạo một chiếc Card/Box nhỏ kích thước 800–1000px đặt ở giữa màn hình làm sa bàn hay sân khấu chính (gây lãng phí 70% diện tích và ép các thành phần hình ảnh chen chúc đè nhau). Sa bàn quân sự (Sử), bản đồ địa lý (Địa), sơ đồ thể chế/cải cách, phòng thí nghiệm (Hóa), mô hình tế bào (Sinh) BẮT BUỘC sử dụng `StagePanel` (`src/components/Card.tsx`) chiếm trọn không gian khả dụng rộng **1740px** (từ `x: 90` tới `x: 1830`) và cao **800–930px** (từ `y: 110` tới `y: 930/1040`).
+- **Sân khấu toàn khung**: Hình chính phải chiếm ít nhất 75% vùng khả dụng (xem `AGENTS.md`). `StagePanel` là cách dựng sân khấu có khung. Nếu tranh, bản đồ hay bối cảnh là nền của chính cảnh, có thể để hình phủ khung và giữ vùng an toàn cho chữ. Chọn bố cục ngay khi duyệt storyboard.
 - **Chống Tràn Khung & Cắt Cụt Chữ (Zero Cut-off Guarantee)**: Mọi điểm mốc/nhãn neo nằm ở phía bên phải khung hình (x > 1400px hoặc sát mép panel) BẮT BUỘC đặt chữ dạt sang phía Tây (Tây Bắc/Tây Nam) hoặc dùng `anchor: "left"` / `textAnchor: "end"` để thân chữ phát triển ngược vào trong lòng sân khấu. TUYỆT ĐỐI KHÔNG để chữ thò ra ngoài mép bị chém cụt đuôi (như lỗi cụt chữ *Thăng Long*).
 - **Mọi văn bản UI trong thẻ/danh sách BẮT BUỘC bọc `<MathText />`**: CẤM hiển thị chuỗi thô `{item.text}` trong JSX; luôn bọc qua `<MathText text={...} />` để tự động hóa giải lỗi escape `\to` thành `$ o$` và hiển thị công thức sắc nét. Trong các môn Xã hội, ưu tiên dùng trực tiếp ký tự Unicode `→` (hoặc `->`).
 - Hai thành phần bất kỳ (badge, nhãn, thẻ, dấu `?`, hình) không đè lên nhau và không chạm viền nhau. Khoảng hở tối thiểu **40px** giữa hai khối; nhãn gắn vào một điểm cách điểm đó 16–30px.
@@ -188,6 +188,9 @@ Thiếu chỗ thì bớt chữ hoặc bớt thành phần, không thu nhỏ ch�
 
 Các mức trên có **một nguồn duy nhất**: `MIN_FONT` trong `src/components/theme.ts` (check-layout đọc từ đó). Không gõ số px nhỏ hơn ở bất cứ đâu.
 
+**Độ rõ của chữ trên hình:** Kiểm trên ảnh render và khi chạy qua đoạn camera hoặc nền đang di chuyển. Ưu tiên đặt chữ trực tiếp trên vùng sạch của nền gốc. Dùng nét và màu đủ đậm, kiểm dấu tiếng Việt trong font đã chọn. Khi nền đổi sáng tối dưới chữ, dời nhãn sang vùng sạch và nối bằng đường dẫn hoặc thêm một mảng nền nhỏ, đủ đặc, vừa với cụm chữ. Chữ cần đọc giữ độ đậm ổn định trong thời gian đọc. Chỉ dùng fade ngắn lúc vào hoặc ra. Soát cả câu chốt trên nền cảnh và các khung thu nhỏ như khi xem trên điện thoại.
+- Với font trích dẫn từng lỗi dấu, ưu tiên một tệp font local có đủ ký tự Việt, kèm giấy phép. Chờ font nạp xong trước khi render. Soát các chữ có dấu kép trên khung trích từ MP4.
+
 **Chữ trong hộp — luôn hai giới hạn cùng lúc** (đã gặp 11/11: sửa "chữ to hơn ô" bằng giới hạn trên, chữ thành 15–23px):
 - Cỡ chữ tính bằng `fitFont` (`src/components/fit.ts`): vừa hộp **và** không dưới `MIN_FONT` của loại chữ. Không viết `fontSize: size * 0.42` trơn.
 - `fitFont` trả `fits: false` (hộp quá nhỏ để thoả cả hai) → xử lý **rõ ràng**: đưa chữ ra ngoài có đường dẫn, xuống dòng, bỏ dòng phụ, hoặc nới hộp. Không lặng lẽ thu nhỏ chữ, không để chữ tràn.
@@ -203,14 +206,16 @@ Ngoại lệ: **nhóm vật tượng trưng** (đám đông, lưới 10×10 ngư
 
 **6. Biến đổi phải có mốc tham chiếu.**
 Người xem phải nhận ra *cái gì đang thay đổi*. Nếu khung nhìn đổi mà không có mốc, hình sẽ trông như bị biến dạng.
-- **Phóng to (zoom)** dựng theo kiểu **kính lúp** (dùng nó mỗi khi giải thích tiếp tuyến, giới hạn, "rất gần"):
+- **Phóng to để đối chiếu toàn thể với chi tiết** dùng **kính lúp** (vd. giải thích tiếp tuyến, giới hạn, "rất gần"):
   - hình gốc giữ nguyên, đường cong vẫn cong rõ;
   - trên hình gốc có một khung nhỏ đánh dấu vùng đang soi, khung này **co dần** quanh điểm;
   - một ô phóng to lớn (kích thước cố định) nối với khung bằng hai đường dẫn, hiện nội dung bên trong khung;
   - trong ô có lưới và vạch chia ghi số, các số đổi theo mức phóng (2 → 2,1 → 2,01), mức phóng ghi sát ô.
   
   Không zoom bằng cách đổi miền vẽ của chính đồ thị mà bỏ hết trục và lưới.
-- Dịch khung, đổi tỉ lệ trục: giữ trục và vạch chia có số để người xem thấy khung đang đổi chứ không phải hình đang đổi.
+- **Dịch hoặc zoom để theo vật hay chuyển điểm nhìn**: giữ một mốc như vạch đường, cửa sổ, địa danh hay mép hiện vật để người xem nhận ra vẫn là cùng cảnh. Khi đổi tỉ lệ đồ thị, giữ trục và vạch chia có số.
+- **Ảnh dùng để diễn hoạt**: chọn khung rộng đủ vùng đệm, kiểm độ nét ở khung cận nhất. Tách phông và các vật cần di chuyển hoặc che khuất. Ảnh tư liệu và hiện vật có thể giữ nguyên rồi soi đúng vùng trên ảnh gốc. Chữ và đường dẫn là lớp riêng để bật, tắt theo lời.
+- **Trích dẫn và nhãn**: đặt phần trích ngay cạnh người, vật hay chi tiết liên quan và hiện theo nhịp đọc. Giữ phần trích rõ nét suốt đoạn phân tích. Hai câu đang được đối chiếu cùng nằm trên hình cho tới hết lời đối chiếu. Với chân dung tư liệu, có thể đổi khung nhẹ quanh khuôn mặt, giữ ảnh đúng nguồn. Nhãn định danh tắt sau khi đã đọc nếu màu, hình dáng hoặc vị trí đủ để tiếp tục nhận ra vật.
 
 **7. Mọi thứ trên màn hình đều có chú thích.**
 Phép thử chú thích (thuộc P2): **chỉ nhìn khung hình**, người xem vẫn biết từng con số, ký hiệu, hình là gì. Không biết → thiếu chú thích: thêm tên ngắn gắn trên vật (mỗi thứ một lần, ≤ ~5 từ — xem mục "ít chữ" khi soát stills), không thêm câu giải thích. Đây không phải P3: P3 che chữ đi và soát hình.
@@ -235,7 +240,7 @@ Phép thử chú thích (thuộc P2): **chỉ nhìn khung hình**, người xem 
 - Đếm nhanh mỗi frame: ngoài câu chốt, chữ mới xuất hiện trong dòng đang đọc ≤ ~8 từ.
 
 **9. Nhịp hình: một thay đổi mỗi lần, và thay đổi là lời giải thích.**
-- Mỗi dòng **tối đa một thay đổi chính** trên hình. Thay đổi vào trong 0,5–1 s đầu dòng rồi **đứng yên** để người xem nhìn; không xếp nhiều điểm/hàng/nhãn hiện nối nhau trong một dòng.
+- Mỗi dòng **tối đa một thay đổi chính** trên hình. Nhãn và hiệu ứng chỉ điểm thường vào trong 0,5–1 giây. Chuyển động cần quan sát có thể đi hết dòng hoặc tiếp qua dòng sau khi vẫn là cùng hành động. Bắt đầu theo `cue`, ghi chỗ tiếp diễn và chỗ dừng trong `show`, rồi giữ kết quả đủ lâu để xem. Camera bám vật có thể đi cùng hành động nếu giúp người xem theo kịp.
 - **Số đổi ⇔ hình đổi, cùng lúc**: bảng nhảy sang hàng mới thì vạch/đoạn tô tương ứng trên hình co lại (hoặc giãn ra) đúng lúc đó, nhãn số đi theo vạch; con số mới phải trông như *sinh ra* từ chuyển động trên hình (đoạn co lại → giá trị chạy tới số mới), không tự hiện ở một chỗ khác.
 - Không mở một hình biểu diễn mới (trục số, bảng, đồ thị khác) khi hình đang có biểu diễn được điều đó. Cần hình mới thì nối với hình cũ bằng bước người xem tự hiểu (lấy số từ hình cũ → bảng nhỏ → chấm từng điểm → nối đồ thị), hình cũ vẫn thấy trong lúc nối.
 - **Không dùng phép biến hình lạ mắt** (xoay đường chạy thành trục, nhân vật nằm ngang, gập/cuộn hình). Đã thử 20/10/2026: người xem không hiểu. Trục, đồ thị, nhân vật luôn ở tư thế quen thuộc.
@@ -277,7 +282,7 @@ Cảnh có nhiều lớp lồng nhau (đất – lòng sông – sóng; cốc �
 
 ## Bước 2b — Storyboard (bản nháp, trước B2)
 
-Với cảnh có hành động kéo dài hoặc camera dịch/zoom, xem cả đoạn chuyển trong Studio, kể cả qua ranh giới beat. Ảnh cuối dòng dùng để kiểm bố cục và trạng thái đích.
+Với cảnh có hành động kéo dài hoặc camera dịch/zoom, xem cả đoạn chuyển trong Studio, kể cả qua ranh giới beat. Ảnh cuối dòng dùng để kiểm bố cục và trạng thái đích. Trong bản duyệt, chọn đoạn có nền khó đọc nhất và xem chữ ở cỡ thu nhỏ. Soát lại đoạn đó trên timeline có tiếng trước khi xuất.
 
 1. Dựng đủ các beat với `draft: true` (mặc định của composition cho tới khi có audio).
 2. `node scripts/check-layout.mjs <id> --draft` → sửa hết lỗi.

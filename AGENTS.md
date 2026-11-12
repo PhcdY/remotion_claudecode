@@ -50,7 +50,7 @@ B1 `viet-kich-ban` → B3 nháp + storyboard (`dung-video` › Bước 2b) → B
       "id": "b01",
       "scene": 1,                       // số cảnh; beat liền nhau cùng cảnh thì hình nối liền
       "section": "HIỆN TƯỢNG",         // cấu trúc; chỉ TRONG ĐỀ THI / BẪY THƯỜNG GẶP / GIẢI ĐÁP hiện trên video
-      "keyword": "Nhưng TẠI SAO?",      // câu chốt của beat, hiện lúc đọc dòng cuối, được dùng $...$; môn Sử có thể để ""
+      "keyword": "Nhưng TẠI SAO?",      // câu chốt trên hình nếu cần, được dùng $...$; để "" khi hình và lời đã đủ ý
       "visual": "cảnh, bố cục, thành phần lúc beat bắt đầu",
       "lineGap": 0.5,                   // (tuỳ chọn) nghỉ giữa các dòng, chỉ cho chuỗi "vì sao"
       "lines": [
@@ -59,6 +59,7 @@ B1 `viet-kich-ban` → B3 nháp + storyboard (`dung-video` › Bước 2b) → B
           "cue": "(tuỳ chọn) cụm nguyên văn trong speak: thay đổi vào đúng lúc giọng nói tới",
           "at": "vật mà text gắn vào (bắt buộc khi có text)",
           "text": "chữ mới hiện TRONG CẢNH ở dòng này, cạnh vật nó nói tới (≤ ~35 ký tự, ký hiệu/số, LaTeX trong $...$); \"\" nếu không có",
+          "quoteSource": "(tuỳ chọn) nguồn của đoạn trích nguyên văn trong text",
           "speak": "lời đọc, không ký hiệu; '...' trước chỗ cần nhấn",
           "caption": "(tuỳ chọn) phụ đề khi speak có phiên âm ký hiệu",
           "pauseAfter": 1.5             // (tuỳ chọn) nghỉ sau câu hỏi đoán, ≤ 2 s
@@ -72,10 +73,10 @@ B1 `viet-kich-ban` → B3 nháp + storyboard (`dung-video` › Bước 2b) → B
 ## Quy tắc khi dựng video
 
 - **Thời gian lấy từ audio, không đoán.** Đọc `public/audio/<slug>/manifest.json`, đo độ dài từng file
-  (trong `calculateMetadata`), mỗi dòng `text` hiện lên đúng lúc file audio của nó bắt đầu.
+  (trong `calculateMetadata`). Nhãn thường hiện lúc audio của dòng bắt đầu. Trích dẫn có thể vào theo `cue` đã ghi trong kịch bản.
   Tổng thời lượng composition = tổng audio + khoảng nghỉ.
 - Khoảng nghỉ: 0.25s giữa các dòng, 0.6s giữa các beat (hằng số ở `src/components/timeline.ts`). Beat có `lineGap` thì dùng giá trị đó giữa các dòng; dòng có `pauseAfter` thì nghỉ thêm.
-- **Chữ sống trong cảnh**: video mới không có dải phụ đề; `text` đặt cạnh vật ghi ở `at` bằng `AutoLabels` (nhãn neo tự tránh nhau). Video cũ (trước 23/10/2026) giữ `Subtitle`.
+- **Chữ sống trong cảnh**: đặt `text` cạnh vật ghi ở `at`. Dùng `AutoLabels` cho nhãn neo. Trích dẫn có thể đặt ở vùng sạch cạnh tư liệu và chia theo cụm đọc. Soát độ tương phản trên hình thật theo `dung-video` quy tắc 4. Video cũ (trước 23/10/2026) giữ `Subtitle`.
 - **Một sân khấu toàn khung** *(mặc định — tầng 2; chi tiết `dung-video` quy tắc 1)*: toàn bộ khung 1920×1080 là sân khấu. Hình chính (đồ thị, sa bàn, sơ đồ, tế bào, thí nghiệm) chiếm ≥ 75% diện tích khả dụng (rộng ≥ 1500px, cao ≥ 750px), không co cụm vào một thẻ nhỏ 800–1000px giữa màn hình (`check-layout` cảnh báo). Bố cục khác hay hơn → đề xuất ở storyboard. Beat cùng `scene` nối liền (không mờ ở ranh giới); màu theo vai trò `role` (`src/components/roles.ts`), ≤ 5 màu nhấn mỗi cảnh.
 - **Không cắt cụt chữ ở mép** *(P5 — chữ đọc được; `check-layout` chặn)*: không ký tự nào sát mép khung (< 30px). Cách thường làm: nhãn neo ở phía phải (x > 1400px hoặc sát mép panel) đặt chữ dạt sang trái (anchor left / textAnchor end) để thân chữ vào trong sân khấu.
 - **Mũi tên không đè mục tiêu** *(mặc định — tầng 2)*: mũi tên chỉ dẫn / tác động dừng cách mục tiêu ≥ 24px; nhãn của mũi tên đặt ở gốc hoặc giữa thân, không đè lên ngọn nơi mục tiêu đứng.

@@ -27,6 +27,8 @@ import { DemoVanAnDuComposition } from "./videos/demo-van-an-du/Video";
 import { MalaccaDemoComposition } from "./videos/demo-malacca/Video";
 import { BachDangDemoComposition } from "./videos/demo-bach-dang/Video";
 import { HistoryReelComposition } from "./videos/demo-su-nhieu-canh/Video";
+import { VanCanhXuanDemo } from "./videos/demo-van-canh-xuan/Video";
+import { LyQuanTinhDemo } from "./videos/demo-ly-quan-tinh/Video";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -59,6 +61,8 @@ export const RemotionRoot: React.FC = () => {
       <MalaccaDemoComposition />
       <BachDangDemoComposition />
       <HistoryReelComposition />
+      <VanCanhXuanDemo />
+      <LyQuanTinhDemo />
     </>
   );
 };
