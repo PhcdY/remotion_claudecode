@@ -22,10 +22,10 @@ Mỗi bài học dưới đây gán vào một phép thử P0–P5 (`viet-kich-b
 | | vật không tự nói / không tên / không chú thích | 11/11 bảng tuần hoàn (hai cốc); 20/10 đạo hàm ("$s$: m"); 26/10 vectơ KG (đường gióng không chú thích) |
 | | quá nhiều cảnh, nhân vật trang trí, phép biến hình lạ | 20/10 đạo hàm (Bolt → bóng → …; xoay đường chạy; Bolt → $s=t^2$); 17/10 (người leo núi, đèn giao thông, tag thường trực) |
 | | rác thị giác còn lại / khung trống đầu cảnh / cảnh nháy | 06–07/11 Oxyz (state leakage); 26/10 vectơ KG; 23/10 (BeatShell nháy) |
-| **P3** tắt tiếng hiểu đúng lời | lời khác – hình giống (so sánh) | 11/11 bảng tuần hoàn (Li = Na); 22/10 đơn điệu ("so sánh đi chứ") |
-| | một hình cho mọi khái niệm / chỉ thêm chữ | 11/11 oxi hoá – khử (70 s hai quả cầu); 10/11 Văn (slide chữ) |
+| **P3** tắt tiếng, che chữ vẫn hiểu nhờ hình | lời khác – hình giống (so sánh) | 11/11 bảng tuần hoàn (Li = Na); 22/10 đơn điệu ("so sánh đi chứ") |
+| | một hình cho mọi khái niệm / chỉ thêm chữ | 11/11 oxi hoá – khử (70 s hai quả cầu); 10/11 Văn (slide chữ); 12/11 P3 dễ bị hiểu thành "ghi thêm chữ cho người tắt tiếng" |
 | | số đổi mà hình đứng yên; hình đổi lệch lúc lời nói | 20/10 đạo hàm (trục số tự hiện, bảng nhảy số); 23/10 (`cue`) |
-| | hình gợi sai điều muốn nói | 26/10 vectơ KG (trục sâu gần song song vectơ); 07/11 Oxyz (máy bay chúc mũi sai hướng) |
+| | hình gợi sai điều muốn nói | 26/10 vectơ KG (trục sâu gần song song vectơ); 07/11 Oxyz (máy bay chúc mũi sai hướng); 12/11 lớp chuyển động lệch khỏi vùng chứa (sóng đè bờ đất) |
 | **P4** một khái niệm một tên | hai hệ thuật ngữ / ký hiệu | 11/11 bảng tuần hoàn (1–18 và IA; sodium và natri) |
 | | một màu hai nghĩa; mũi tên dùng sai nghĩa | 23/10 cực trị (màu); 22/10 đơn điệu ("Cực trị → bài sau") |
 | **P5** chữ đọc được | chữ không vừa hộp | 11/11 bảng tuần hoàn ("Na" to hơn ô); 06/11 (thẻ tràn, chữ rớt dòng) |
@@ -271,3 +271,18 @@ am - c Bình: Dành cho các môn Tự nhiên (Toán, Lý, Hóa, Tin) — dứt 
 - **Nguyên nhân gốc**: một góp ý về một video Hóa được nâng thành luật bắt buộc của gói môn, kèm cửa mở trong component chung (prop `intro` của `ExplainerVideo`) và ghi chú "nên thành luật chung mọi môn". Đổi thứ mọi video đều có (thumb, khung brand) là việc của người dùng, không phải của một gói môn.
 - **Sửa**: xóa `ChemIntro`; bỏ prop `intro` (giờ `ExplainerVideo` luôn dùng `BrandIntro`, không môn nào tự thay được); gói `hoa.md` bỏ luật thumb (mục 0 còn 14 luật, đánh số lại), mục 6.1 ghi rõ dùng `BrandIntro` chung; `check_script` bỏ cảnh báo "thiếu ChemIntro"; phòng thử `hoa-thanh-phan` dùng `BrandIntro` ở frame 0.
 - **Bài học**: góp ý chạm tới phần chung của mọi video (thumb, khung brand, font) → nêu ở điểm duyệt cho người dùng chọn, không tự đưa vào gói môn.
+
+### 12/11/2026 — P3 "tắt tiếng vẫn hiểu" dễ bị hiểu thành "ghi thêm chữ"
+- **Người dùng hỏi**: P3 có khiến model sinh nhiều chữ hơn bình thường (để người tắt tiếng hiểu) không.
+- **Gốc rễ**: (1) câu tóm tắt P3 ("tắt tiếng vẫn hiểu đúng điều lời đọc khẳng định") không nói hiểu *bằng gì* — cách dễ nhất để đạt là chép điều lời đọc khẳng định lên màn hình; (2) cùng tên "phép thử tắt tiếng" dùng cho hai việc: P3 (hình nói đúng lời) và kiểm chú thích (mỗi số, ký hiệu có tên trên hình — thuộc P2). Một tên hai nghĩa nên luật "gắn nhãn" bị đọc như một phần của P3.
+- **Luật**: P3 viết lại thành "tắt tiếng **và che chữ** vẫn hiểu — nhờ hình, không nhờ chữ; ghi lời đọc lên màn hình không làm đạt P3" (AGENTS.md, `viet-kich-ban`, `dung-video`, mẫu báo cáo). Kiểm chú thích đổi tên thành **phép thử chú thích (P2)**: tên ngắn trên vật, mỗi thứ một lần, không thêm câu giải thích.
+- **Chặn bằng công cụ**: `check_script` cảnh báo dòng có `text` mà `show` là "giữ nguyên" (chữ thay hình). Đã đo 18 kịch bản cũ: chưa dòng nào như vậy, nên cảnh báo không báo nhầm video cũ. Không thêm ngưỡng "% dòng có chữ": các video hiện có dao động 35–77% (mẫu `tich-vo-huong` 58%), chưa có bằng chứng video nào nhiều chữ quá.
+- Họ lỗi: P3 "chỉ thêm chữ"; P4 cho chính bộ luật (một tên hai nghĩa).
+
+### 12/11/2026 — Lớp hình chuyển động lệch nhau (sóng đè lên bờ đất)
+- **Người dùng hỏi**: có gì kiểm các lớp hình chuyển động đã ăn khớp chưa; ví dụ sông có lớp đất, lớp nước, lớp sóng mà sóng lệch đè lên đất — cần giải pháp tổng quát.
+- **Hiện trạng**: `check-layout` chỉ đo chữ/điểm/khung (`data-text`, `data-mark`, `data-box`) bằng khung chữ nhật, 2 frame mỗi dòng; lớp hình vẽ (đất, nước, sóng) không được đo; vật `data-moving` chồng chỉ là cảnh báo. Video `demo-van-an-du` có sóng vẽ suốt chiều ngang, không đè bờ chỉ nhờ bến được vẽ sau.
+- **Gốc rễ**: mỗi lớp tự tính toạ độ riêng, lớp trong không "biết" hình của lớp chứa nó; lỗi chỉ hiện ở vài frame nên ảnh tĩnh dễ sót.
+- **Luật**: `dung-video` quy tắc 13 — một nguồn hình cho mỗi vùng; lớp chuyển động bên trong đặt trong `Region` (cắt theo hình vùng, mép vẽ đè lên trên); vật phải nằm trọn mà không cắt được thì gắn `data-inside`.
+- **Chặn bằng công cụ**: `LayoutProbe` so điểm trên nét vẽ của vật `data-inside` với hình thật của vùng `data-region` (`isPointInFill`) → lỗi "lệch ra ngoài vùng"; `check-layout` tự chạy lượt chuyển động (mỗi 6 frame suốt dòng có `data-inside`), thêm `--props`; `stills.mjs --onion` chồng 8 frame, tô hồng phần chuyển động. Thử ở phòng lab b04: bản đúng 0 lỗi; bản cố ý lỗi (`labLoi`) bắt được sóng và cá lệch, lượt chuyển động bắt thêm các frame mà 2 frame/dòng bỏ sót.
+- Họ lỗi: P3 "hình gợi sai điều muốn nói"; P2 rác thị giác.

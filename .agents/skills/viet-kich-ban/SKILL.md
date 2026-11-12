@@ -25,7 +25,7 @@ Lý do và lời góp ý gốc của từng luật: `.agents/lessons.md`.
 | **P0** | **Đúng và đủ nội dung đã duyệt**: không sai kiến thức; không tự thu hẹp hay mở rộng | Prompt "phản ứng oxi hoá – khử" → video "Đồng từ đâu ra?", thiếu quy tắc số oxi hoá (Hóa 11/11). Hook dân số làm lẫn đạo hàm với đạo hàm bậc hai (Toán 22/10) | *Bảng nội dung* (Bước 1) được duyệt: mọi mục của thẻ bài học có beat, mục bỏ là do người dùng chọn | `check_script` (thẻ bài học), checklist Nội dung |
 | **P1** | **Không nhảy bước — thấy trước, gọi tên sau**: ký hiệu, thuật ngữ, công thức mới chỉ xuất hiện khi trên hình đã có thứ nó gọi tên và người xem đã thấy thứ đó hoạt động; phép ghép chỉ sau khi từng thành phần đã có nghĩa. Phép thử: chỉ vào từng ký hiệu trong công thức — người xem đã thấy cái này trên hình chưa? | Chỉ đoạn $f(x)-f(x_0)$ khi chưa hiểu $f(x_0)$ (Toán 20/10). Phương trình hiện khi chưa thấy hạt nào đổi (Hóa). Luật cũ "công thức chỉ ở ~20% cuối" ép cắt phần công thức của video bài học (Hóa, Lý) | Kéo lò xo, thấy lực gấp đôi thì dãn gấp đôi → rồi viết $F = k\Delta l$, $F$ gắn cạnh mũi tên lực, $\Delta l$ cạnh đoạn dãn. Cát tuyến quay dần → rồi mới gọi "tiếp tuyến". Công thức hiện ở đầu, giữa hay cuối video đều được — thứ tự tính **cho từng khái niệm**. Công thức bài trước và thứ ghi trong tiêu đề được hiện ngay | Bước 3 "theo dõi người xem", `hoc-sinh-ao` |
 | **P2** | **Lúc nào cũng biết mình đang xem gì**, và nó liên quan gì tới tiêu đề/câu hỏi | 15 s đầu là hai cốc nước không tên, chưa thấy bảng tuần hoàn (Hóa 11/11). Đổi Bolt → $s=t^2$, người xem tưởng vẫn là Bolt (Toán 20/10) | Thứ trong tiêu đề hiện trên sân khấu lớn ở dòng đầu; vật thật có tên trên vật; câu đầu beat nói hình mới là gì. Cố ý giấu tên để hỏi vẫn đạt, nếu lời đọc đang hỏi đúng điều đó | checklist có frame |
-| **P3** | **Tắt tiếng vẫn hiểu đúng điều lời đọc khẳng định**: xem stills không tiếng, nói lại được cái gì giống, khác, đổi, mới | Li và Na vẽ y hệt trong khi lời nói "Na mạnh hơn" (Hóa). 70 s chỉ hai quả cầu, khái niệm sau chỉ thêm chữ (Hóa). Bảng nhảy số mà vạch đứng yên (Toán 20/10). Video Văn toàn thẻ chữ (10/11) | Giống ở đâu → hình giống đúng ở đó; khác ở đâu → nhìn thấy khác ở đó. **Khái niệm mới → hình mới**: một thay đổi nhìn thấy được của riêng nó (vật, bộ phận, lớp mới trên cùng sân khấu), không chỉ thêm dòng chữ. Số đổi → hình đổi | mục "CẦN SOÁT HÌNH" của `check_script`, stills không tiếng |
+| **P3** | **Tắt tiếng vẫn hiểu — nhờ HÌNH, không nhờ chữ**: xem stills không tiếng **và che hết chữ** (`text`, `keyword`), vẫn nói lại được cái gì giống, khác, đổi, mới mà lời đọc khẳng định. Ghi lời đọc lên màn hình **không** làm đạt P3 | Li và Na vẽ y hệt trong khi lời nói "Na mạnh hơn" (Hóa). 70 s chỉ hai quả cầu, khái niệm sau chỉ thêm chữ (Hóa). Bảng nhảy số mà vạch đứng yên (Toán 20/10). Video Văn toàn thẻ chữ (10/11) | Giống ở đâu → hình giống đúng ở đó; khác ở đâu → nhìn thấy khác ở đó. **Khái niệm mới → hình mới**: một thay đổi nhìn thấy được của riêng nó (vật, bộ phận, lớp mới trên cùng sân khấu), không chỉ thêm dòng chữ. Số đổi → hình đổi. Chữ chỉ để gọi tên thứ hình đã cho thấy (quy tắc `text`), không thay hình | mục "CẦN SOÁT HÌNH" của `check_script`, stills không tiếng đã che chữ |
 | **P4** | **Một khái niệm một tên** trong cả video (một danh pháp, một cách gọi, một ký hiệu cho một đại lượng) | Vừa "nhóm 1–18" vừa "IA…VIIIA"; lúc "sodium" lúc "natri" (Hóa 11/11) | Theo bảng thuật ngữ chốt của gói môn | `check_script` (đọc `.agents/mon/<mon>.json`) |
 | **P5** | **Chữ đọc được**: không tràn, không đè, đủ cỡ, công thức hiện đúng | Chữ "Na" to hơn ô bảng tuần hoàn (Hóa). "$ o$" thay cho mũi tên (Sử 08/11). "Thăng L…" bị cắt ở mép (Sử) | Ở B1: `text` ngắn, gắn vào vật. Ở B3: component tính cỡ chữ theo hộp, `MathText` | `check_script` (B1), `check-layout` (B3) |
 
@@ -43,7 +43,7 @@ Lý do và lời góp ý gốc của từng luật: `.agents/lessons.md`.
 P0 Bảng nội dung đã duyệt: có/không · mục bỏ/đã duyệt khác lời: … · check_script: … lỗi
 P1 Đã theo dõi người xem từng dòng; dòng dùng thứ chưa dạy: … (không có / đã sửa)
 P2 Dòng 1 của b01 cho thấy thứ trong tiêu đề: có/không · vật nào chưa có tên: …
-P3 Mỗi dòng trong "CẦN SOÁT HÌNH": show cho thấy đúng chỗ giống/khác? · khái niệm mới nào chỉ thêm chữ: …
+P3 Che hết text/keyword: mỗi dòng trong "CẦN SOÁT HÌNH" vẫn thấy đúng chỗ giống/khác qua show? · khái niệm mới nào chỉ thêm chữ: …
 P4 check_script thuật ngữ: … lỗi / cảnh báo đã soát
 P5 text dài > 35 ký tự: …
 Đề xuất ngoại lệ (nếu có): …
@@ -207,7 +207,7 @@ Người dùng chốt kịch bản → sang **B3 bản nháp + storyboard** (ski
 7. **Khái niệm mới định nghĩa bằng hình trước khi dùng**: dòng riêng nói *nó là gì* và hình chỉ đúng nó, rồi mới nói nó *bằng gì / dùng làm gì*. Mọi câu "A chính là B" phải được **cho thấy** trên hình.
 8. **Người xem luôn biết đang xem gì**: hình, bảng, công thức hay bước mới → câu đầu của beat nói rõ đó là gì, để làm gì. Không để hình mới hiện mà lời chưa giới thiệu.
 9. **Nhịp hình: mỗi dòng tối đa một thay đổi trên hình**, và thay đổi đó là *nguyên nhân* nhìn thấy được của con số/kết luận dòng đó nói. Không để số, điểm, hàng bảng tự hiện liên tiếp mà hình không làm gì.
-10. **Chữ sống trong cảnh** — xem quy tắc `text`. Phép thử tắt tiếng: chỉ nhìn màn hình vẫn biết mỗi con số, ký hiệu, hình là gì (hình tượng trưng loại 1 — mục "Hình và số tượng trưng" — được miễn chú thích).
+10. **Chữ sống trong cảnh** — xem quy tắc `text`. Phép thử chú thích (thuộc P2): chỉ nhìn màn hình vẫn biết mỗi con số, ký hiệu, hình là gì — nhờ tên ngắn gắn trên vật, mỗi thứ một lần (hình tượng trưng loại 1 — mục "Hình và số tượng trưng" — được miễn chú thích). Đây không phải P3: P3 che chữ đi và soát hình.
 11. **Liên hệ đề thi bằng một ví dụ cụ thể — chỉ khi dạng bài dùng đúng khái niệm của video.** Video chỉ nêu bản chất một khái niệm → không có phần đề thi, không mượn dạng bài của bài khác.
     **Video bài học**: mỗi bẫy thi T… của thẻ là nội dung (P0) và có **hình riêng cho thấy cách sai và cách đúng** (P3), không gộp thành một dòng chữ. Mặc định là một beat `TRONG ĐỀ THI`/`BẪY THƯỜNG GẶP`; đặt ngay lúc khái niệm đó vừa dạy cũng được nếu hay hơn — ghi ở Bảng nội dung. Nếu có phần đề thi:
     - vẫn trong ví dụ xuyên suốt (dạng bài kể lại bằng chính nhân vật của video);
@@ -366,7 +366,7 @@ Phụ đề đầy đủ xuất thành file riêng (`.srt`/`.vtt`) từ `speak`.
 **Hình và chữ**
 - [ ] Một ví dụ xuyên suốt, ≤ ~3 cảnh, không nhân vật trang trí, không phép biến hình lạ mắt.
 - [ ] `show`: đúng một thay đổi mỗi dòng, số mới nào cũng có thay đổi trên hình làm nguyên nhân; `text` nào cũng có `at`; beat cùng cảnh nối liền nhau.
-- [ ] Phép thử tắt tiếng: mỗi con số có tên đại lượng/đơn vị đọc được ở đâu đó trên màn hình, đúng một lần (số trừu tượng trên trục, hình tượng trưng loại 1 được miễn).
+- [ ] Phép thử chú thích (P2): mỗi con số có tên đại lượng/đơn vị đọc được ở đâu đó trên màn hình, đúng một lần (số trừu tượng trên trục, hình tượng trưng loại 1 được miễn).
 
 **Lời đọc**
 - [ ] Đọc liền câu đầu các beat thành một mạch nhân quả; không câu đùa; giọng tài liệu, không xưng hô.
