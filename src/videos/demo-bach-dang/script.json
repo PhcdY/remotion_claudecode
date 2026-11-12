@@ -1,0 +1,23 @@
+{
+  "slug": "demo-bach-dang",
+  "title": "Bạch Đằng năm 938",
+  "subject": "su",
+  "beats": [
+    {
+      "id": "b01",
+      "scene": 1,
+      "section": "HIỆN TƯỢNG",
+      "keyword": "",
+      "visual": "CẢNH 1 — Sơ đồ cửa sông Bạch Đằng. Phía phải thông ra biển. Hai bờ và cửa sông giữ xuyên suốt.",
+      "lines": [
+        {"show": "Vùng cửa sông sáng lên", "text": "", "speak": "Vì sao đoàn chiến thuyền Nam Hán vào được sông Bạch Đằng, nhưng lúc quay ra lại mắc kẹt?"},
+        {"show": "Đội thuyền lớn của Lưu Hoằng Tháo tiến từ biển tới cửa sông", "text": "", "speak": "Năm chín trăm ba mươi tám, Lưu Hoằng Tháo dẫn chiến thuyền Nam Hán từ biển tiến vào cửa sông."},
+        {"show": "Đội thuyền nhẹ của Ngô Quyền tiến ra đón", "text": "", "speak": "Ngô Quyền cho một đội thuyền nhẹ từ trong sông ra đón đánh."},
+        {"show": "Đội thuyền nhẹ quay vào trong sông với đội thuyền Nam Hán đuổi theo", "text": "", "speak": "Đội thuyền nhẹ giả thua, quay vào trong sông. Lưu Hoằng Tháo cho thuyền đuổi theo."},
+        {"show": "Mặt nước hạ xuống để lộ bãi cọc", "text": "", "speak": "Lúc thuyền Nam Hán đi qua, nước triều cao che khuất bãi cọc. Đến khi nước rút, cọc mới lộ ra."},
+        {"show": "Quân Ngô Quyền từ trong sông tiến ra phản công", "text": "", "speak": "Ngô Quyền cho quân mai phục tiến ra phản công."},
+        {"show": "Đội thuyền Nam Hán quay ra biển và mắc lại ở cửa sông", "text": "", "speak": "Thuyền Nam Hán quay ra biển thì vướng cọc. Cùng một cửa sông, nước triều đã biến đường tiến thành chỗ mắc kẹt."}
+      ]
+    }
+  ]
+}

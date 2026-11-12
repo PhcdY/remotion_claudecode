@@ -14,7 +14,7 @@ export const KeyTakeaway: React.FC<{ text: string; from: number; top?: number; b
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const pop = spring({ frame: frame - from, fps, config: { damping: 16, stiffness: 150 } });
-  if (frame < from) return null;
+  if (!text || frame < from) return null;
   return (
     <div
       style={{

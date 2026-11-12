@@ -1,0 +1,51 @@
+{
+  "slug": "demo-su-nhieu-canh",
+  "subject": "su",
+  "title": "Bốn cảnh thử môn Lịch sử",
+  "beats": [
+    {
+      "id": "b01",
+      "scene": 1,
+      "section": "HIỆN TƯỢNG",
+      "keyword": "",
+      "visual": "CẢNH 1 — Chân dung Hồ Chí Minh năm 1945 ở cạnh trích dẫn.",
+      "lines": [
+        {"show": "Chân dung Hồ Chí Minh hiện lên", "text": "", "speak": "Ngày hai tháng chín năm một nghìn chín trăm bốn mươi lăm, Chủ tịch Hồ Chí Minh đọc Tuyên ngôn Độc lập."},
+        {"show": "Câu trích hiện từng vế cạnh chân dung", "text": "", "speak": "Nước Việt Nam có quyền hưởng tự do và độc lập, và sự thực đã thành một nước tự do và độc lập."}
+      ]
+    },
+    {
+      "id": "b02",
+      "scene": 2,
+      "section": "BẢN CHẤT",
+      "keyword": "",
+      "visual": "CẢNH 2 — Trang chữ ký Hiệp định Paris năm 1973.",
+      "lines": [
+        {"show": "Camera tiến về chữ ký của Nguyễn Thị Bình trên trang hiệp định", "text": "", "speak": "Trên trang ký Hiệp định Pa-ri năm một nghìn chín trăm bảy mươi ba, đây là chữ ký của bà Nguyễn Thị Bình."},
+        {"show": "Đường chỉ bên dưới chữ ký sáng lên", "text": "", "speak": "Bà ký với tư cách Bộ trưởng Ngoại giao của Chính phủ Cách mạng lâm thời Cộng hòa miền Nam Việt Nam."}
+      ]
+    },
+    {
+      "id": "b03",
+      "scene": 3,
+      "section": "BẢN CHẤT",
+      "keyword": "",
+      "visual": "CẢNH 3 — Thửa ruộng, hộ nhận khoán và các bao thóc.",
+      "lines": [
+        {"show": "Bao thóc xuất hiện từ thửa ruộng", "text": "", "speak": "Với Khoán Mười, hộ gia đình trực tiếp nhận khoán sản xuất."},
+        {"show": "Phần thóc vượt khoán chuyển về phía nhà của hộ", "text": "", "speak": "Sau khi giao phần thóc theo khoán, hộ được hưởng phần vượt khoán. Làm thêm thì phần hộ giữ lại tăng."}
+      ]
+    },
+    {
+      "id": "b04",
+      "scene": 4,
+      "section": "GIẢI ĐÁP",
+      "keyword": "",
+      "visual": "CẢNH 4 — Ảnh mặt trống đồng Ngọc Lũ và phần phóng to.",
+      "lines": [
+        {"show": "Mặt trống đồng Ngọc Lũ hiện trọn vẹn", "text": "", "speak": "Đây là mặt trống đồng Ngọc Lũ của văn hóa Đông Sơn."},
+        {"show": "Vùng soi mở rộng một cụm hoa văn chim trên ảnh gốc", "text": "", "speak": "Nhìn kỹ vành hoa văn này, ta thấy những con chim mỏ dài nối nhau quanh mặt trống."}
+      ]
+    }
+  ]
+}

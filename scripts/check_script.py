@@ -409,6 +409,8 @@ def main() -> int:
         elif bid != f"b{bi + 1:02d}":
             warns.append(f"{where}: id nên là b{bi + 1:02d} (liên tục; đổi id thì phải tạo lại audio)")
         for field in ("section", "keyword", "visual"):
+            if field == "keyword" and subject == "su" and b.get(field) == "":
+                continue
             if not b.get(field):
                 errors.append(f"{where}: thiếu {field}")
         sec = b.get("section", "")

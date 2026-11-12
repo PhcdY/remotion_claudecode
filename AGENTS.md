@@ -50,7 +50,7 @@ B1 `viet-kich-ban` → B3 nháp + storyboard (`dung-video` › Bước 2b) → B
       "id": "b01",
       "scene": 1,                       // số cảnh; beat liền nhau cùng cảnh thì hình nối liền
       "section": "HIỆN TƯỢNG",         // cấu trúc; chỉ TRONG ĐỀ THI / BẪY THƯỜNG GẶP / GIẢI ĐÁP hiện trên video
-      "keyword": "Nhưng TẠI SAO?",      // câu chốt của beat, hiện lúc đọc dòng cuối, được dùng $...$
+      "keyword": "Nhưng TẠI SAO?",      // câu chốt của beat, hiện lúc đọc dòng cuối, được dùng $...$; môn Sử có thể để ""
       "visual": "cảnh, bố cục, thành phần lúc beat bắt đầu",
       "lineGap": 0.5,                   // (tuỳ chọn) nghỉ giữa các dòng, chỉ cho chuỗi "vì sao"
       "lines": [

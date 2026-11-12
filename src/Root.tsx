@@ -24,6 +24,9 @@ import { BiologyShowcaseComposition } from "./videos/biology-showcase/Video";
 import { DemoTuongTrungCuComposition } from "./videos/demo-tuong-trung-cu/Video";
 import { DemoTuongTrungMoiComposition } from "./videos/demo-tuong-trung-moi/Video";
 import { DemoVanAnDuComposition } from "./videos/demo-van-an-du/Video";
+import { MalaccaDemoComposition } from "./videos/demo-malacca/Video";
+import { BachDangDemoComposition } from "./videos/demo-bach-dang/Video";
+import { HistoryReelComposition } from "./videos/demo-su-nhieu-canh/Video";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -53,6 +56,9 @@ export const RemotionRoot: React.FC = () => {
       <DemoTuongTrungCuComposition />
       <DemoTuongTrungMoiComposition />
       <DemoVanAnDuComposition />
+      <MalaccaDemoComposition />
+      <BachDangDemoComposition />
+      <HistoryReelComposition />
     </>
   );
 };
