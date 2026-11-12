@@ -40,9 +40,7 @@ export const ExplainerVideo: React.FC<{
   draft?: boolean;
   /** true: dải phụ đề kiểu cũ; mặc định chữ sống trong cảnh */
   subtitle?: boolean;
-  /** ảnh mở đầu riêng của môn (vd. Hóa: <ChemIntro …/>); không truyền thì dùng BrandIntro chung */
-  intro?: React.ReactNode;
-}> = ({ script, timeline, beats, draft = false, subtitle = false, intro }) => {
+}> = ({ script, timeline, beats, draft = false, subtitle = false }) => {
   useKatexFonts();
   const { fps } = useVideoConfig();
   if (!timeline) return null;
@@ -51,7 +49,7 @@ export const ExplainerVideo: React.FC<{
   return (
     <BrandFrame logoFrom={timeline.introFrames} logoUntil={timeline.outroStart}>
       <Sequence name="intro" durationInFrames={timeline.introFrames}>
-        {intro ?? <BrandIntro title={script.title} />}
+        <BrandIntro title={script.title} />
       </Sequence>
       {timeline.beats.map((b, i) => {
         const Visual = beats[b.id];

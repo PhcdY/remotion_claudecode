@@ -12,28 +12,26 @@ Không có — gói Hóa chỉ thêm vào luật chung, không thay luật nào.
 
 ---
 
-## 0. 16 luật bắt buộc (đọc trước B1 và B3)
+## 0. 14 luật bắt buộc (đọc trước B1 và B3)
 
-Luật 3, 4, 5, 12, 13, 14, 15 nay là phép thử chung (P2, P3, P0) và luật chung của hai skill; giữ ở đây vì có ví dụ Hóa.
+Luật 1, 2, 3, 10, 11, 12, 13 nay là phép thử chung (P2, P3, P0) và luật chung của hai skill; giữ ở đây vì có ví dụ Hóa.
 
 | # | Luật | SAI (đã gặp) | ĐÚNG | Chi tiết |
 |---|---|---|---|---|
-| 1 | **Thumb có hình chính của đúng thứ trong tiêu đề** | Logo + 1 dòng chữ, không hình | Tiêu đề "bảng tuần hoàn" → thumb có bảng tuần hoàn, tô 1 hàng + 1 cột | 6.1 |
-| 2 | **Thumb có 1–2 từ khóa nổi bật** (màu khác + to hơn) | Cả câu cùng màu navy, cùng cỡ | "Vì sao có **hàng** và **cột**?" — "hàng" cam, "cột" chàm, to hơn 18% | 6.1 |
-| 3 | **Định hướng trước, thí nghiệm sau**: thứ ghi trong tiêu đề phải hiện ngay đầu video | Vào thẳng 2 cốc nước, 15 s sau mới thấy bảng | Dòng 1: bảng tuần hoàn, sáng 1 hàng rồi 1 cột → dòng 2: "vì sao Li và Na cùng cột?" → thí nghiệm | 1.4 |
-| 4 | **Vật thật phải tự nói**: tắt tiếng vẫn biết đây là chất gì | 2 hình chữ nhật xám trong 2 cốc, không tên | Thẻ tên "Lithium (Li)", ký hiệu trên miếng kim loại, cốc có thành/vạch | 6.2 |
-| 5 | **Lời nói khác → hình khác.** Lời nói "giống" ở điểm nào thì hình giống đúng điểm đó, còn lại phải khác | Li và Na vẽ y hệt nhau | Cùng sủi bọt + cùng hồng (giống: cùng kiểu phản ứng); Na chảy tròn, chạy nhanh, sủi mạnh (khác: mức độ) | 1.5, 6.2 |
-| 6 | **Không vẽ tay bảng tuần hoàn / ô nguyên tố** — dùng `PeriodicTable`, `ElementTile` | Ô 25 px, chữ "Na" to hơn ô, tràn viền | Component tự tính cỡ chữ theo hai giới hạn: vừa ô và ≥ 28px; ô quá nhỏ thì tên đặt cạnh ô, ngoài lưới chữ. Nhấn bằng tô nền + viền | 6.3, 6.4 |
-| 7 | **Một hệ tên duy nhất: IUPAC tiếng Anh** cho mọi nguyên tố, chất | Lúc "Sodium", lúc "natri"; "axit" | sodium, potassium, iron, acid, base, oxide… (cả trên hình và lời đọc) | 2.2 |
-| 8 | **Gọi nhóm theo SGK THPT: IA…VIIIA, IB…VIIIB** | Trục ghi 1–18, rồi lại giải thích "1 ↔ IA" | Trục ghi IA, IIA, IIIB…; lời đọc "nhóm một A". Không bao giờ "nhóm 1" | 2.3 |
-| 9 | **Số liệu lấy từ `elements.ts`**, không gõ theo trí nhớ | Tự gõ khối lượng, Z | `ElementTile symbol="Na"` tự lấy 11, Sodium, 22,99 | 2.5 |
-| 10 | **Hạt trước, ký hiệu sau — cho từng khái niệm** (P1): ký hiệu/quy tắc chỉ hiện sau khi đã thấy thứ nó gọi tên | Phương trình hiện từ đầu, chưa thấy hạt nào đổi | Electron chạy từ Fe sang $\ce{Cu^2+}$ → rồi mới "số oxi hoá". Không hạn mức thời lượng cho phần ký hiệu | 1.1 |
-| 11 | **Sân khấu ≥ 75% khung**: hình chính rộng ≥ 1500 px | Bảng tuần hoàn 450 px trong một thẻ trắng | `PeriodicTable width={1560}` | 6.3 + `AGENTS.md` |
-| 12 | **Soát bằng mắt trước khi báo xong**: chạy `check_script`, xuất stills, làm *phép thử tắt tiếng*, điền checklist mục 7 | Báo xong khi lint sạch | Dán checklist mục 7 (có/không + frame) vào báo cáo | 7 |
-| 13 | **Nội dung do người dùng duyệt**: agent không tự thu hẹp hay bỏ ý; trình *Bảng nội dung* (thẻ bài học → beat → hình) ở bước dàn ý | Prompt "phản ứng oxi hoá – khử" → video thành "Đồng từ đâu ra?", thiếu quy tắc số oxi hoá, thiếu ion | Bảng K1–K10 ↔ beat; mục nào bỏ là do người dùng chọn, ghi `boQuaDaDuyet` | 1.6, 2.6 |
-| 14 | **Video bài học: tiêu đề là tên bài**, hook chỉ là cửa vào ≤ 20 s | Tiêu đề = câu hỏi của hook | `kicker` "Phản ứng oxi hoá – khử", `title` câu hỏi ngắn | 1.6 |
-| 15 | **Khái niệm mới → hình mới** (không chỉ thêm chữ lên hình cũ) — P3 | 70 s chỉ hai quả cầu Fe, Cu²⁺; khái niệm sau chỉ thêm dòng chữ | Số oxi hoá → `OxidationFormula`; tên gọi chéo → `RedoxRoleTable`; electron nhường = nhận → `ElectronBalance` | 6.7 |
-| 16 | **Không đổi font; ion/công thức viết `$\ce{...}$`, không dùng ký tự mũ Unicode** | "Cu²⁺" gõ tay hiện vỡ thành "Cu²·" | `$\ce{Cu^2+}$` | 6.9 |
+| 1 | **Định hướng trước, thí nghiệm sau**: thứ ghi trong tiêu đề phải hiện ngay đầu video | Vào thẳng 2 cốc nước, 15 s sau mới thấy bảng | Dòng 1: bảng tuần hoàn, sáng 1 hàng rồi 1 cột → dòng 2: "vì sao Li và Na cùng cột?" → thí nghiệm | 1.4 |
+| 2 | **Vật thật phải tự nói**: tắt tiếng vẫn biết đây là chất gì | 2 hình chữ nhật xám trong 2 cốc, không tên | Thẻ tên "Lithium (Li)", ký hiệu trên miếng kim loại, cốc có thành/vạch | 6.2 |
+| 3 | **Lời nói khác → hình khác.** Lời nói "giống" ở điểm nào thì hình giống đúng điểm đó, còn lại phải khác | Li và Na vẽ y hệt nhau | Cùng sủi bọt + cùng hồng (giống: cùng kiểu phản ứng); Na chảy tròn, chạy nhanh, sủi mạnh (khác: mức độ) | 1.5, 6.2 |
+| 4 | **Không vẽ tay bảng tuần hoàn / ô nguyên tố** — dùng `PeriodicTable`, `ElementTile` | Ô 25 px, chữ "Na" to hơn ô, tràn viền | Component tự tính cỡ chữ theo hai giới hạn: vừa ô và ≥ 28px; ô quá nhỏ thì tên đặt cạnh ô, ngoài lưới chữ. Nhấn bằng tô nền + viền | 6.3, 6.4 |
+| 5 | **Một hệ tên duy nhất: IUPAC tiếng Anh** cho mọi nguyên tố, chất | Lúc "Sodium", lúc "natri"; "axit" | sodium, potassium, iron, acid, base, oxide… (cả trên hình và lời đọc) | 2.2 |
+| 6 | **Gọi nhóm theo SGK THPT: IA…VIIIA, IB…VIIIB** | Trục ghi 1–18, rồi lại giải thích "1 ↔ IA" | Trục ghi IA, IIA, IIIB…; lời đọc "nhóm một A". Không bao giờ "nhóm 1" | 2.3 |
+| 7 | **Số liệu lấy từ `elements.ts`**, không gõ theo trí nhớ | Tự gõ khối lượng, Z | `ElementTile symbol="Na"` tự lấy 11, Sodium, 22,99 | 2.5 |
+| 8 | **Hạt trước, ký hiệu sau — cho từng khái niệm** (P1): ký hiệu/quy tắc chỉ hiện sau khi đã thấy thứ nó gọi tên | Phương trình hiện từ đầu, chưa thấy hạt nào đổi | Electron chạy từ Fe sang $\ce{Cu^2+}$ → rồi mới "số oxi hoá". Không hạn mức thời lượng cho phần ký hiệu | 1.1 |
+| 9 | **Sân khấu ≥ 75% khung**: hình chính rộng ≥ 1500 px | Bảng tuần hoàn 450 px trong một thẻ trắng | `PeriodicTable width={1560}` | 6.3 + `AGENTS.md` |
+| 10 | **Soát bằng mắt trước khi báo xong**: chạy `check_script`, xuất stills, làm *phép thử tắt tiếng*, điền checklist mục 7 | Báo xong khi lint sạch | Dán checklist mục 7 (có/không + frame) vào báo cáo | 7 |
+| 11 | **Nội dung do người dùng duyệt**: agent không tự thu hẹp hay bỏ ý; trình *Bảng nội dung* (thẻ bài học → beat → hình) ở bước dàn ý | Prompt "phản ứng oxi hoá – khử" → video thành "Đồng từ đâu ra?", thiếu quy tắc số oxi hoá, thiếu ion | Bảng K1–K10 ↔ beat; mục nào bỏ là do người dùng chọn, ghi `boQuaDaDuyet` | 1.6, 2.6 |
+| 12 | **Video bài học: tiêu đề là tên bài**, hook chỉ là cửa vào ≤ 20 s | Tiêu đề = câu hỏi của hook | `title` bắt đầu bằng "Phản ứng oxi hoá – khử" (thumb `BrandIntro` chung hiện đúng dòng này) | 1.6 |
+| 13 | **Khái niệm mới → hình mới** (không chỉ thêm chữ lên hình cũ) — P3 | 70 s chỉ hai quả cầu Fe, Cu²⁺; khái niệm sau chỉ thêm dòng chữ | Số oxi hoá → `OxidationFormula`; tên gọi chéo → `RedoxRoleTable`; electron nhường = nhận → `ElectronBalance` | 6.7 |
+| 14 | **Không đổi font; ion/công thức viết `$\ce{...}$`, không dùng ký tự mũ Unicode** | "Cu²⁺" gõ tay hiện vỡ thành "Cu²·" | `$\ce{Cu^2+}$` | 6.9 |
 
 ---
 
@@ -63,25 +61,25 @@ Mỗi quá trình trừu tượng gán cho một **chuyển động thị giác 
 ### 1.3. Mở đầu bằng hiện tượng bất ngờ (Hook)
 Hiện tượng thị giác gây tò mò (giọt không màu làm cả bình hồng rực; đinh iron trong dung dịch xanh lam bị bọc lớp copper đỏ). Câu hỏi: *"ở thế giới hạt, chuyện gì đang xảy ra?"*
 
-### 1.4. Định hướng trước, thí nghiệm sau (luật 0.3)
+### 1.4. Định hướng trước, thí nghiệm sau (luật 0.1)
 Người xem bấm vào video vì tiêu đề. **3–6 giây đầu phải cho họ thấy đúng thứ tiêu đề nói tới**, rồi mới vào thí nghiệm làm bằng chứng.
-- Thumb (6.1) đã có hình chính → **dòng 1 của b01** nhắc lại hình đó trên sân khấu lớn, sáng đúng chỗ câu hỏi nhắm tới.
+- **Dòng 1 của b01** đưa thứ trong tiêu đề lên sân khấu lớn, sáng đúng chỗ câu hỏi nhắm tới.
 - Ví dụ bài "Cấu tạo bảng tuần hoàn — vì sao có hàng và cột?":
   - b01-l01 `show`: "bảng tuần hoàn đầy đủ (PeriodicTable width 1560); chu kì 3 sáng lên" — `speak`: "Một trăm mười tám nguyên tố, xếp thành hàng ngang và cột dọc."
   - b01-l02 `show`: "nhóm IA sáng lên; Li và Na được khoanh" — `speak`: "Vì sao lithium và sodium lại đứng chung một cột?"
   - b01-l03 trở đi: thí nghiệm Li, Na thả vào nước (MetalInWater) — bằng chứng "giống nhau".
 - SAI: mở bằng 2 cốc nước không tên, 15 giây sau mới thấy bảng → người xem không biết đang xem cái gì.
 
-### 1.5. Lời nói so sánh → hình so sánh (luật 0.5)
+### 1.5. Lời nói so sánh → hình so sánh (luật 0.3)
 Luật chung: phép thử P3 (`viet-kich-ban` › mục 0, `dung-video` › mục 0) — giống ở đâu thì hình giống đúng ở đó, khác ở đâu thì nhìn thấy khác ở đó; `check_script` liệt kê các dòng có lời so sánh để soát. Riêng Hóa:
 - Ví dụ: Li và Na **cùng** sủi bọt khí, **cùng** hóa hồng với phenolphthalein (giống: cùng kiểu phản ứng); Na chảy tròn, chạy nhanh, sủi mạnh (khác: mức độ).
 - Chưa biết thực tế hai chất khác nhau ra sao → tra bảng 6.2 hoặc hỏi người dùng, không đoán.
 - Lời đọc không được ngầm nói "giống hệt": viết "**cùng kiểu** phản ứng, nhưng sodium phản ứng **mạnh hơn**".
 
-### 1.6. Nội dung video: agent đề xuất, người dùng duyệt (luật 0.13, 0.14)
+### 1.6. Nội dung video: agent đề xuất, người dùng duyệt (luật 0.11, 0.12)
 Luật chung (mọi môn): loại video `"loai"`, *Bảng nội dung* theo mẫu cố định, thẻ bài học, `boQuaDaDuyet`/`daPhuDaDuyet` — skill `viet-kich-ban` › Đầu vào, Thẻ bài học, Bước 1. Riêng Hóa:
 - Phần "người xem sẽ thấy gì" của Bảng nội dung nêu hình Hóa tương ứng (mục 6.7: công thức ghi số oxi hoá, bảng hai cột chất khử/chất oxi hoá, cái cân electron…).
-- Video bài học: thumb `ChemIntro` có `kicker` = tên bài, `title` = câu hỏi ngắn (6.1).
+- Video bài học: `title` của `script.json` bắt đầu bằng tên bài; thumb là `BrandIntro` chung (6.1).
 
 ---
 
@@ -91,7 +89,7 @@ Luật chung (mọi môn): loại video `"loai"`, *Bảng nội dung* theo mẫu
 - Chương trình **SGK GDPT 2018** (*Kết nối tri thức*, *Cánh diều*). Tra `references/hoa/` trước khi viết.
 - **Bảng chốt ở mục 2.2–2.3 là chuẩn của dự án.** Thuật ngữ nào không có ở đây và không chắc SGK dùng thế nào → ghi vào "chỗ còn nghi ngờ" khi báo dàn ý, hỏi người dùng.
 
-### 2.2. Danh pháp — MỘT hệ duy nhất: IUPAC tiếng Anh (luật 0.7)
+### 2.2. Danh pháp — MỘT hệ duy nhất: IUPAC tiếng Anh (luật 0.5)
 Áp dụng cho `title`, `keyword`, `text`, `caption`, nhãn trên hình **và** `speak` (viết phiên âm của tên tiếng Anh). Không trộn tên Việt cũ, không ghi kèm tên Việt trong ngoặc.
 
 | Nhóm | Dùng (IUPAC) | KHÔNG dùng |
@@ -105,7 +103,7 @@ Luật chung (mọi môn): loại video `"loai"`, *Bảng nội dung* theo mẫu
 - **Giữ tiếng Việt**: từ thường không phải danh pháp — *nước, muối ăn, khí, dung dịch, kết tủa, oxi hoá, khử, chu kì, nhóm, ô nguyên tố*. ("oxi hoá – khử" là thuật ngữ SGK, giữ nguyên.)
 - `py scripts/check_script.py <slug>` **báo lỗi** tên cũ (natri, axit, hiđro…) và **cảnh báo** tên Việt quen (sắt, nhôm…). Cảnh báo "sắt/đồng…" mà đúng là tên nguyên tố → sửa sang tên tiếng Anh; nếu là từ thường (vd. "đồng thời") thì bỏ qua.
 
-### 2.3. Bảng tuần hoàn — thuật ngữ chốt (luật 0.8)
+### 2.3. Bảng tuần hoàn — thuật ngữ chốt (luật 0.6)
 | Khái niệm | Viết trên hình | Lời đọc (`speak`) | Ghi chú |
 |---|---|---|---|
 | Hàng ngang | chu kì 1 … chu kì 7 | "chu kì ba" | SGK viết **chu kì** (không "chu kỳ") |
@@ -128,7 +126,7 @@ Luật chung (mọi môn): loại video `"loai"`, *Bảng nội dung* theo mẫu
 - "Chất khử thì bị khử" → **tên gọi chéo**: chất khử *bị oxi hoá* (quá trình oxi hoá), chất oxi hoá *bị khử* (quá trình khử). Luôn dựng bằng `RedoxRoleTable`.
 - "Số oxi hoá +2 và điện tích 2+ là một cách viết" → số oxi hoá: dấu trước ($+2$, đặt trên ký hiệu); điện tích ion: dấu sau ($\ce{Cu^2+}$).
 
-### 2.5. Số liệu và sự thật — không lấy từ trí nhớ (luật 0.9)
+### 2.5. Số liệu và sự thật — không lấy từ trí nhớ (luật 0.7)
 - Z, ký hiệu, tên, nhóm, chu kì, khối lượng: lấy từ `src/components/chemistry/elements.ts` (`element("Na")`). Thiếu khối lượng một nguyên tố → tra SGK, thêm vào `ATOMIC_MASS`, báo người dùng.
 - Màu chất, màu lửa, kết tủa, hành vi thí nghiệm: bảng 6.2. Không có trong bảng → hỏi người dùng.
 - Cấu hình electron, số electron từng lớp: tự tính lại một lần (điền theo thứ tự 1s 2s 2p 3s 3p 4s 3d…), ghi phép tính vào báo cáo.
@@ -205,37 +203,10 @@ Vòng tròn kính lúp (`ZoomInset`) nối nét đứt từ chỗ phản ứng t
 
 ## 6. Dựng hình Remotion (B3)
 
-### 6.1. Thumb — ảnh mở đầu `ChemIntro` (luật 0.1, 0.2)
-Video Hóa **không dùng `BrandIntro`** (logo + một dòng chữ một màu). Truyền `intro` cho `ExplainerVideo`:
+### 6.1. Thumb — dùng `BrandIntro` chung như mọi môn
+Video Hóa dùng ảnh mở đầu chung `BrandIntro` (logo + `title` của `script.json`) mà `ExplainerVideo` tự đặt. **Không làm thumb riêng cho Hóa** (hình chính, từ khóa đổi màu…): người dùng chốt ngày 12/11/2026 mọi môn dùng một thumb. Thấy cần thumb khác → nêu ở storyboard, người dùng chọn (lối thoát của `AGENTS.md`).
 
-```tsx
-import { ChemIntro, HERO_STACK } from "../../components/chemistry/ChemIntro";
-import { PeriodicTable } from "../../components/chemistry/PeriodicTable";
-import { colors } from "../../components/theme";
-
-<ExplainerVideo script={script} timeline={timeline} beats={beats} draft={draft}
-  intro={
-    <ChemIntro
-      kicker="Bảng tuần hoàn"                 // tên chủ đề, nhỏ, xám (≤ 30 ký tự)
-      title="Vì sao có hàng và cột?"          // câu hỏi ngắn (≤ 40 ký tự, ≤ 8 từ)
-      highlight={["hàng", "cột"]}             // 1–2 cụm NẰM NGUYÊN VĂN trong title
-      hero={
-        <PeriodicTable left={HERO_STACK.left + 170} top={HERO_STACK.top + 20} width={1400}
-          showFBlock={false} symbols="highlighted"
-          highlights={[{ period: 3, color: colors.warn }, { group: "IA", color: colors.brandIndigo }]} />
-      }
-    />
-  }
-/>
-```
-
-Quy cách:
-1. **Hình chính (`hero`) là đúng vật trong tiêu đề**, chiếm vùng `HERO_STACK` (1740 × 620) hoặc `HERO_SIDE`. Bảng tuần hoàn → `PeriodicTable`; phản ứng → `LabGlassware`/`MetalInWater` đang phản ứng rõ nhất; phân tử → `Atom` + `ChemicalBond` cỡ lớn. Hình phải **đang ở trạng thái gợi câu hỏi** (hàng + cột đang sáng; cốc đang sủi, đang đổi màu).
-2. **Từ khóa**: chọn 1–2 từ mang câu hỏi (danh từ chính hoặc chữ "vì sao"/"mạnh hơn"…), không chọn từ phụ. Màu mặc định cam + chàm; được dùng màu nổi khác (`colors.c2`, `colors.increase`) — **nền và logo đã mang thương hiệu, từ khóa không bắt buộc màu xanh brand**. Màu từ khóa nên trùng màu chỗ được tô trên hình (từ "hàng" cam ↔ chu kì tô cam).
-3. Không fade-in: thumb hiện đủ **ngay frame 0** (nền tảng thường lấy frame đầu làm ảnh bìa). `ChemIntro` đã làm sẵn.
-4. Soát: `node scripts/stills.mjs <id> 0` → nhìn ảnh ở cỡ nhỏ (thu còn 320 px): vẫn đọc được từ khóa và nhận ra hình chính.
-
-### 6.2. Vật thật phải tự nói (luật 0.4, 0.5)
+### 6.2. Vật thật phải tự nói (luật 0.2, 0.3)
 **Phép thử tắt tiếng**: xem storyboard/stills không có tiếng. Với mỗi cảnh, trả lời được 3 câu: *đây là chất/dụng cụ gì? đang xảy ra gì? (nếu có 2 vật) chúng khác nhau ở đâu?* — câu nào không trả lời được → sửa hình, không sửa lời.
 
 Mỗi vật thật cần:
@@ -261,7 +232,7 @@ Kim loại kiềm + nước dùng sẵn component (đã có đủ dấu hiệu t
 ```
 Cần neo nhãn vào miếng kim loại đang chạy → `metalInWaterAnchor(props, frame, fps)`.
 
-### 6.3. Bảng tuần hoàn — `PeriodicTable` (luật 0.6, 0.11)
+### 6.3. Bảng tuần hoàn — `PeriodicTable` (luật 0.4, 0.9)
 **Cấm tự vẽ bảng bằng div/SVG.** Component đã đúng hình dạng SGK (H và He ở hai đầu, khoảng trống chu kì 1–3, hai hàng lanthanide/actinide tách riêng, VIIIB gộp 3 cột).
 
 ```tsx
@@ -302,7 +273,7 @@ H trắng `#FFFFFF` (viền `#CBD5E1`) · C xám than `#334155` · O đỏ san h
 ### 6.6. Vai trò màu (`role`)
 `main` chất chính · `focus` liên kết đang đổi / $e^-$ / thứ đang nói tới · `pairA`–`pairB` chất oxi hoá–chất khử, acid–base · `warn` bẫy, năng lượng hoạt hoá cản trở · `dim` dung môi, khung nền. ≤ 5 màu nhấn mỗi cảnh.
 
-### 6.7. Loại khái niệm → hình (luật 0.15)
+### 6.7. Loại khái niệm → hình (luật 0.13)
 Luật chung: P3 "khái niệm mới → hình mới" và thực đơn hình (`dung-video` › mục 0). Hình nghèo không phải do thiếu "sáng tạo" mà do dùng một hình cho mọi khái niệm. Component Hóa cho từng loại (dùng, hoặc đề xuất cách khác ở storyboard):
 
 | Loại khái niệm | Hình | Component |
@@ -337,12 +308,12 @@ Luật chung: P3 "khái niệm mới → hình mới" và thực đơn hình (`d
 Xem tất cả chạy thật: composition `hoa-thanh-phan` (frame 600–1080); thử cỡ nhỏ nhất / lớn nhất: frame 1080–1229.
 
 ### 6.8. Kích thước
-Các component trên đã có cỡ chữ ≥ 36 px; đặt chúng **to** (bảng vai trò rộng ≥ 1100, cân ≥ 900, công thức `fontSize` 100–130). Sân khấu ≥ 75% khung (luật 0.11).
+Các component trên đã có cỡ chữ ≥ 36 px; đặt chúng **to** (bảng vai trò rộng ≥ 1100, cân ≥ 900, công thức `fontSize` 100–130). Sân khấu ≥ 75% khung (luật 0.9).
 
-### 6.9. Font và cách viết ký hiệu (luật 0.16)
+### 6.9. Font và cách viết ký hiệu (luật 0.14)
 - **Không đổi font, không thêm font, không sửa `fontFamily`** trong component. Chữ dùng font chung của dự án (component Hóa đã đặt sẵn).
 - Ion, công thức trong `text`/`keyword`/nhãn: viết `$\ce{Cu^2+}$`, `$\ce{SO4^2-}$`, `$\ce{H2SO4}$`. **Cấm ký tự mũ/chỉ số Unicode** (²⁺, ₄): font không có glyph, hiện vỡ. `check_script` báo lỗi.
-- `\ce` cần extension mhchem: tự nạp khi video import bất kỳ thứ gì từ `components/chemistry`. Video Hóa luôn import (ít nhất `ChemIntro`); `check_script` báo lỗi nếu script có `\ce` mà video không import.
+- `\ce` cần extension mhchem: tự nạp khi video import bất kỳ thứ gì từ `components/chemistry`. Script có `\ce` mà video chưa dùng component Hóa nào → thêm `import "../../components/chemistry/mhchem";`. `check_script` báo lỗi nếu script có `\ce` mà video không import.
 - Số oxi hoá (dấu trước, trên ký hiệu) chỉ vẽ bằng `OxidationFormula`, không gõ tay.
 
 ---
@@ -364,7 +335,7 @@ node scripts/stills.mjs <compositionId> 0 <frame giữa mỗi beat...>
 ```
 
 **Nhìn stills, trả lời từng câu** (một câu "không" = chưa xong):
-1. Frame 0 có hình chính của đúng thứ trong tiêu đề, và 1–2 từ khóa khác màu, to hơn?
+1. Frame 0 là thumb chung `BrandIntro` (logo + tiêu đề), không có thumb riêng?
 2. Trong 6 giây đầu, thứ trong tiêu đề hiện trên sân khấu lớn?
 3. Tắt tiếng, mỗi cảnh: biết chất/dụng cụ gì, đang xảy ra gì?
 4. Mỗi chỗ lời nói "giống/khác/mạnh hơn": hình giống/khác đúng điểm đó (≥ 2 dấu hiệu khác)?
@@ -386,7 +357,6 @@ node scripts/stills.mjs <compositionId> 0 <frame giữa mỗi beat...>
 
 | Ngày | Video | Lỗi | Họ lỗi | Chặn bằng |
 |---|---|---|---|---|
-| 11/11/2026 | cau-tao-bang-tuan-hoan | Thumb chỉ logo + chữ một màu | Thumb không có hình, không điểm nhấn | `ChemIntro`, luật 0.1–0.2, `check_script` cảnh báo khi Video.tsx thiếu ChemIntro |
 | 11/11/2026 | cau-tao-bang-tuan-hoan | Vào thí nghiệm trước khi thấy bảng tuần hoàn | Không định hướng | Mục 1.4 |
 | 11/11/2026 | cau-tao-bang-tuan-hoan | 2 hình chữ nhật trong 2 cốc, không tên | Vật không tự nói | Mục 6.2, `MetalInWater` (thẻ tên + ký hiệu) |
 | 11/11/2026 | cau-tao-bang-tuan-hoan | Li và Na vẽ y hệt nhau dù tính chất khác mức độ | Lời khác – hình giống | Mục 1.5, bảng 6.2 |
@@ -398,11 +368,12 @@ node scripts/stills.mjs <compositionId> 0 <frame giữa mỗi beat...>
 | 11/11/2026 | phan-ung-oxi-hoa-khu | Tên gọi chéo, electron nhường = nhận chỉ lướt qua | Bẫy thi không có beat/hình riêng | Mục 1.6 bước 3, `RedoxRoleTable`, `ElectronBalance` |
 | 11/11/2026 | phan-ung-oxi-hoa-khu | 70 s hai quả cầu; chỉ ví dụ Fe/Cu; không có hình số oxi hoá trong hợp chất | Một hình cho mọi khái niệm | Mục 6.7, `OxidationFormula` |
 | 12/11/2026 | hoa-thanh-phan | Sau khi chặn "chữ to hơn ô", số chu kì/tên nhóm còn 22px, ký hiệu bảng nhỏ 15px, nhãn cốc 30px, dòng trong ô nguyên tố dính nhau | Chữ không vừa hộp (chỉ chặn một phía) | `fitFont` hai giới hạn, tên ra cạnh ô khi ô nhỏ; đoạn thử cỡ nhỏ/lớn trong `hoa-thanh-phan` (frame 1080–1229) phải qua `check-layout` |
+| 12/11/2026 | (gói Hóa) | Thêm thumb riêng `ChemIntro` cho Hóa, khác thumb chung của mọi môn | Gói môn tự làm khác luật chung mà người dùng chưa duyệt | Người dùng chốt mọi môn dùng `BrandIntro`; bỏ `ChemIntro` và prop `intro` của `ExplainerVideo` |
 | 11/11/2026 | phan-ung-oxi-hoa-khu | "Cu²⁺" gõ ký tự mũ bị vỡ; `\ce` thiếu mhchem nên hiện chữ đỏ | Ký hiệu viết tay | Mục 6.9, `check_script`, chemistry tự nạp mhchem |
 
 **Năm câu hỏi tổng quát** — tự hỏi ở mọi bài, kể cả bài chưa có trong bảng trên (nay là phép thử chung P0–P5, `viet-kich-ban` › mục 0):
 0. **Video có dạy đúng và đủ thứ người dùng yêu cầu không?** (Bảng nội dung đã duyệt; không tự thu hẹp theo hook)
-1. **Người xem có biết mình đang xem cái gì không?** (thumb + 6 giây đầu cho thấy đúng chủ đề; mỗi vật có tên)
+1. **Người xem có biết mình đang xem cái gì không?** (6 giây đầu cho thấy đúng chủ đề; mỗi vật có tên)
 2. **Hình có nói đúng điều lời nói không?** (giống ↔ giống, khác ↔ khác, mạnh ↔ mạnh; tắt tiếng vẫn hiểu)
 3. **Mỗi khái niệm chỉ có một tên?** (một hệ danh pháp, một cách gọi nhóm, một ký hiệu cho một đại lượng)
 4. **Thứ gì đặt trong hộp có vừa hộp không?** (chữ trong ô, nhãn trong thẻ, hình trong khung — dùng component tính cỡ theo hộp, không gõ số px tay)

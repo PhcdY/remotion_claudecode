@@ -1,12 +1,11 @@
 import React from "react";
 import { AbsoluteFill, Composition, Sequence, interpolate, useCurrentFrame } from "remotion";
-import { BrandBackground } from "../../components/BrandFrame";
+import { BrandBackground, BrandIntro } from "../../components/BrandFrame";
 import { MathText, useKatexFonts } from "../../components/MathText";
 import { ElectronBalance } from "../../components/chemistry/ElectronBalance";
 import { NailInCopperSulfate } from "../../components/chemistry/NailInCopperSulfate";
 import { OxidationFormula } from "../../components/chemistry/OxidationFormula";
 import { RedoxRoleTable } from "../../components/chemistry/RedoxRoleTable";
-import { ChemIntro, HERO_STACK } from "../../components/chemistry/ChemIntro";
 import { ElementTile } from "../../components/chemistry/ElementTile";
 import { MetalInWater } from "../../components/chemistry/MetalInWater";
 import { PeriodicTable, periodicCell } from "../../components/chemistry/PeriodicTable";
@@ -16,33 +15,12 @@ import { role } from "../../components/roles";
 import { colors } from "../../components/theme";
 
 // Phòng thử component Hóa (gói môn Hóa › mục 6–7). Không phải video đăng.
-// 0 thumb (3 s) · 90 kim loại kiềm + nước (9 s) · 360 bảng tuần hoàn (5 s) · 510 ô nguyên tố (3 s).
+// 0 thumb chung BrandIntro (3 s) · 90 kim loại kiềm + nước (9 s) · 360 bảng tuần hoàn (5 s) · 510 ô nguyên tố (3 s).
 // 600 đinh iron + CuSO4 · 720 số oxi hoá · 840 bảng vai trò · 960 cân electron.
 // 1080–1229: THỬ CỠ NHỎ NHẤT / LỚN NHẤT của từng component (skill dung-video › quy tắc 4 — nghiệm thu component dùng chung).
 //   1080 bảng 700 + 1000 · 1110 bảng 1740 có Z · 1140 ô nguyên tố 220/tên dài/340 · 1170 cốc hẹp + rộng · 1200 cốc đinh 400 + 560.
 // Soát: node scripts/stills.mjs hoa-thanh-phan 0 130 200 330 470 560 700 800 940 1000 1070
 // Nghiệm thu (phải 0 lỗi): node scripts/check-layout.mjs hoa-thanh-phan --frames 0,150,300,420,550,650,780,900,1020,1070,1095,1125,1155,1185,1215
-
-const Thumb: React.FC = () => (
-  <ChemIntro
-    kicker="Bảng tuần hoàn"
-    title="Vì sao có hàng và cột?"
-    highlight={["hàng", "cột"]}
-    hero={
-      <PeriodicTable
-        left={HERO_STACK.left + 170}
-        top={HERO_STACK.top + 20}
-        width={1400}
-        showFBlock={false}
-        symbols="highlighted"
-        highlights={[
-          { period: 3, color: colors.warn },
-          { group: "IA", color: colors.brandIndigo },
-        ]}
-      />
-    }
-  />
-);
 
 const Metals: React.FC = () => (
   <AbsoluteFill>
@@ -181,7 +159,7 @@ const Lab: React.FC = () => {
     <AbsoluteFill>
       <BrandBackground />
       <Sequence durationInFrames={90}>
-        <Thumb />
+        <BrandIntro title="Phòng thử component Hóa" />
       </Sequence>
       <Sequence from={90} durationInFrames={270}>
         <Metals />
