@@ -220,7 +220,7 @@ def check_terms(rules: list[dict], where: str, field: str, value: str, errors: l
         (errors if r.get("muc", "loi") == "loi" else warns).append(msg)
 
 
-# --- Hóa: chỉ những gì gắn với font/thumb/mhchem (gói hoa.md › 6.1, 6.9) — thuật ngữ đã ở .agents/mon/hoa.json ---
+# --- Hóa: chỉ những gì gắn với font/mhchem (gói hoa.md › 6.9) — thuật ngữ đã ở .agents/mon/hoa.json ---
 HOA_SUPERSCRIPT = re.compile(r"[⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻]")
 
 
@@ -610,11 +610,8 @@ def main() -> int:
             for li, line in enumerate(b.get("lines") or []):
                 fields_of(f"{bid}-l{li + 1:02d}", [(f, line.get(f) or "") for f in ("text", "caption", "speak")])
 
-    # --- Hóa: thumb và mhchem (gói hoa.md › 6.1, 6.9) ---
+    # --- Hóa: mhchem (gói hoa.md › 6.9) ---
     if subject == "hoa":
-        video_tsx = path.parent / "Video.tsx"
-        if video_tsx.exists() and "ChemIntro" not in video_tsx.read_text(encoding="utf-8"):
-            warns.append("Video.tsx chưa dùng ChemIntro (thumb có hình chính + từ khóa nổi bật) — hoa.md › mục 6.1")
         # \ce cần extension mhchem: nạp khi import bất kỳ thứ gì từ components/chemistry
         raw = json.dumps(s, ensure_ascii=False)
         tsx = "".join(f.read_text(encoding="utf-8") for f in path.parent.glob("*.tsx"))

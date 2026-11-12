@@ -6,7 +6,6 @@ export * from "./LabGlassware";
 export * from "./elements";
 export * from "./PeriodicTable";
 export * from "./ElementTile";
-export * from "./ChemIntro";
 export * from "./MetalInWater";
 export * from "./OxidationFormula";
 export * from "./RedoxRoleTable";
