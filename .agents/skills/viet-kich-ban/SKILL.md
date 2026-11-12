@@ -113,6 +113,7 @@ Sau Bảng nội dung, dàn ý bày đủ:
 3. **Hiện tượng**: bảng chấm 3 ý tốt nhất ở Bước 0 (ý chọn + 2 dự phòng), nguồn kiểm chứng, đáp án sẽ đưa ở `GIẢI ĐÁP`, kết quả ba phép thử (mỗi phép một câu).
 4. **Hình trung tâm + khoảnh khắc "à ra thế"** (beat nào).
 5. **Ví dụ xuyên suốt** và danh sách **cảnh** (≤ ~3): cảnh sau nối từ cảnh trước bằng bước nào; số nào là số thật (kèm nguồn), số nào là số minh hoạ (mục "Hình và số tượng trưng").
+   - Khi dùng ảnh hoặc tranh, ghi vật nào phải còn nhận ra ở khung sau, lớp nào cần tách để di chuyển hay lộ dần, và chi tiết nào hình phải cho thấy. Chốt khung rộng và khung cận trước khi đặt ảnh.
 6. **Đường hiểu**: tiền đề → các bậc hiểu lần lượt → sau video làm được gì (một câu, gắn với dạng bài nào). Đánh dấu **bước khó**.
 7. **Chuỗi "vì sao"**: từng mắt xích, mỗi mắt xích một dòng, xuất phát từ thứ học sinh nhớ.
 8. **Giải phẫu định nghĩa/công thức trên hình**: cụm nào ↔ thứ gì trên hình.
@@ -161,7 +162,7 @@ Người dùng chốt kịch bản → sang **B3 bản nháp + storyboard** (ski
       "id": "b01",                       // b01, b02, … liên tục
       "scene": 1,                        // số cảnh; beat liền nhau cùng cảnh thì hình nối liền, không nháy
       "section": "HIỆN TƯỢNG",           // nhãn bên dưới
-      "keyword": "Nhưng vì sao?",        // câu chốt của beat, ≤ 6 từ, được dùng $...$
+      "keyword": "Nhưng vì sao?",        // câu chốt trên hình nếu cần, ≤ 6 từ, được dùng $...$; có thể để ""
       "visual": "cảnh, bố cục, thành phần lúc beat bắt đầu", // quy tắc `visual`
       "lineGap": 0.5,                    // TUỲ CHỌN: nghỉ giữa các dòng (giây, ≤ 0,5), chỉ cho chuỗi "vì sao"
       "lines": [
@@ -267,11 +268,13 @@ Chỉ `TRONG ĐỀ THI`, `BẪY THƯỜNG GẶP`, `GIẢI ĐÁP` hiện cho ngư
 Không có dải phụ đề ghi chú; chữ nằm **trong cảnh, cạnh thứ nó nói tới** (người xem học tốt hơn khi chữ đặt sát hình liên quan và khi màn hình không in lại câu đang đọc).
 - Mỗi chữ phải **gắn với một vật trên hình**: nhãn kết quả cạnh thứ sinh ra nó ("$f'(2) = 3$" cạnh điểm), dấu/biến đổi trên công thức đang có, chú thích một thành phần. `visual` ghi rõ `text` dòng N gắn vào đâu.
 - **Có `text` khi dòng chốt một kết quả nhìn được** (số, dấu, ký hiệu, kết luận); **`""`** khi dòng chỉ dẫn dắt, chuyển ý, hỏi, hoặc hình đã nói đủ. Dòng cuối beat: `keyword` hiện → `text` để `""`.
-- Ưu tiên ký hiệu, số, mũi tên: "0,81 s → 44 km/h", "$\Delta t \to 0$". Không viết lại câu của `speak`. ≤ ~35 ký tự (dòng chỉ có công thức được dài hơn), không dấu chấm.
+- Nhãn thường ưu tiên ký hiệu, số, mũi tên: "0,81 s → 44 km/h", "$\Delta t \to 0$". Nhãn thường dùng tối đa khoảng 35 ký tự, bỏ dấu chấm cuối và tránh lặp lời dẫn. Trích dẫn giữ nguyên câu chữ và dấu câu của nguồn.
 - **Một thông tin chỉ nằm một chỗ**: nhãn/trục đã có số thì `text` không ghi lại.
 - **Mũi tên → chỉ đúng nghĩa & Chuẩn hóa Unicode (Chống lỗi `$ o$)**: Trong các môn Xã hội (Sử, Địa, Văn, KTPL) hoặc khi diễn giải bằng văn bản, BẮT BUỘC dùng trực tiếp ký tự Unicode `→` (hoặc `->`). TUYỆT ĐỐI CẤM gõ `$\to$` trong văn bản thường vì JSON parser sẽ nuốt `\t` thành TAB và hiển thị lỗi dị dạng `$ o$`. Trong các môn Tự nhiên (Toán, Lý, Hóa), nếu dùng LaTeX thì bắt buộc escape đúng double backslash `"$\\to$"` trong file JSON.
 - Chữ hết vai trò thì gỡ (`visual` ghi lúc nào mờ đi). Mỗi frame, chữ mới ngoài câu chốt ≤ ~8 từ.
 - Tên đại lượng chú thích **một lần** ở chỗ cố định (tên trục, tiêu đề cột, chú giải ký hiệu), sau đó chỉ dùng ký hiệu. Chú giải đọc lên có nghĩa ("quãng đường $s$ (m)"), không viết tắt kiểu "$s$: m · $t$: s".
+
+**Trích dẫn trên hình:** Khi chính lời nói, câu thơ hoặc tư liệu là đối tượng cần xem, đối chiếu nguyên văn và ghi nguồn trong dàn ý. Ghi `quoteSource` ở dòng có `text` trích nguyên văn. Lời đọc có thể đọc đúng đoạn đó. Ghi phần trích, lúc hiện, lúc tắt và hình đi cùng. Giữ phần trích đến hết lời phân tích về nó. Khi phân tích quan hệ giữa hai câu hay hai cụm, bố trí để người xem đọc được cả hai cùng lúc. Tên người, tác phẩm và bối cảnh có thể hiện ngắn khi giới thiệu. Lời dẫn đọc lại trích dẫn thì ghi rõ trong kế hoạch âm thanh.
 
 ### Số và đơn vị
 
@@ -322,7 +325,7 @@ Phụ đề đầy đủ xuất thành file riêng (`.srt`/`.vtt`) từ `speak`.
 
 ### `keyword`
 
-≤ 6 từ, là *kết luận* của beat (beat hook được là câu hỏi), không lặp nguyên văn một dòng `text`. B3 hiện nó thành câu chốt trong vùng hình lúc đọc dòng cuối. Môn Sử có thể ghi `keyword: ""` khi hình và lời đã chốt ý (xem gói môn › Thay luật chung).
+Ghi `keyword: ""` khi hình và lời đã chốt đủ ý. Chỉ dùng câu chốt trên hình nếu người xem cần giữ lại một kết quả, ký hiệu hoặc kết luận ngắn. Câu chốt tối đa 6 từ, beat hook có thể dùng câu hỏi. Nếu một nhãn ngay cạnh vật đã làm được việc này, dùng `text` ở đó và để `keyword: ""`.
 
 ### `scene`, `visual`, `show`, `at` — đủ cụ thể để dựng mà không phải đoán
 
@@ -330,7 +333,7 @@ Phụ đề đầy đủ xuất thành file riêng (`.srt`/`.vtt`) từ `speak`.
 - **`visual`** (beat): mở bằng tên cảnh ("CẢNH 2 — …" lần đầu, "Giữ CẢNH 2." sau đó), rồi tả **trạng thái lúc beat bắt đầu**: bố cục, trục, hàm, thành phần, thứ gì từ beat trước còn ở lại / mờ đi. Đánh dấu "BƯỚC KHÓ". Thay đổi theo từng dòng **không** viết ở đây.
   * **Sân khấu toàn khung** (chi tiết `dung-video` quy tắc 1): tả bối cảnh trải rộng cả khung 1920×1080; không tả kiểu "đặt trong một thẻ/hộp nhỏ ở giữa".
   * **An toàn mép biên**: Các địa danh, công thức hoặc nhãn ở phía biên phải ($x > 1400$px) phải ghi rõ "nhãn dạt sang trái điểm neo" để chống tràn viền cắt cụt chữ.
-- **`show`** (dòng): **đúng một thay đổi** trên hình, viết ngắn, động từ + vật + vai trò màu ("điểm (2; 4) sáng màu tăng", "khung soi co về quanh đỉnh", "giữ nguyên"); thay đổi đó là *nguyên nhân* nhìn thấy được của con số/kết luận dòng đó nói. Có chữ "rồi", "đồng thời", ";" là đang gói hai thay đổi → tách dòng (`check_script.py` cảnh báo). Bảng/nhãn đổi số thì hình đổi tương ứng trong cùng `show`.
+- **`show`** (dòng): **tối đa một thay đổi chính** trên hình, viết ngắn, động từ + vật + vai trò màu ("điểm (2; 4) sáng màu tăng", "khung soi co về quanh đỉnh", "giữ nguyên"). Thay đổi làm rõ nguyên nhân của con số/kết luận. Hành động dài có thể tiếp qua dòng sau nếu các dòng đang giải thích cùng hành động. Ghi rõ phần tiếp diễn. Tách dòng khi có hai thay đổi độc lập. Bảng/nhãn đổi số thì hình đổi tương ứng trong cùng `show`.
 - **`cue`** (dòng, tuỳ chọn): cụm **nguyên văn** trong `speak` mà thay đổi của `show` phải vào đúng lúc giọng nói tới (vd. dòng "Vậy ba là điểm cực đại, còn sáu là giá trị cực đại." + `cue: "giá trị cực đại"` → nhãn đổi khi giọng nói cụm đó, không phải ngay đầu câu). Dùng khi chữ/hình quan trọng nằm ở **nửa sau** câu, hoặc câu nhắc tới hai thứ lần lượt; thiếu `cue` thì thay đổi vào đầu dòng. Hình và lời phải tới cùng lúc: hình vào trước lời thì người xem nhìn mà chưa biết nhìn gì, vào sau thì nghe mà chưa thấy.
 - **`at`** (dòng): vật mà `text` gắn vào ("đỉnh (3; 6)", "cột $f(x_0)$", "công thức, dưới mẫu số"); bắt buộc khi có `text`.
 - Số liệu cụ thể: hàm, khoảng vẽ trục, toạ độ, giá trị — đúng toán/khoa học (kiểm ở checklist).
@@ -338,7 +341,7 @@ Phụ đề đầy đủ xuất thành file riêng (`.srt`/`.vtt`) từ `speak`.
 - Chú thích từng thành phần, ghi rõ chữ sẽ hiện; nhãn trên hình ≤ ~5 từ; thông tin hết vai trò thì ghi lúc gỡ; vật quá gần nhau → ghi cách tách.
 - Nhân vật/vật minh hoạ phải có vai trò: ghi nó biểu diễn đại lượng nào, chuyển động theo quy luật nào.
 - Giải phẫu định nghĩa: mỗi dòng ghi cụm nào sáng lên và thứ gì trên hình sáng cùng màu.
-- Chuyển cảnh bằng bước giải thích được, không phép biến hình. Phóng to mặc định kiểu **kính lúp**. Môn có cách dựng riêng thì đọc mục **Thay luật chung** của gói môn (Sử: camera trên cùng nền bản đồ hoặc hiện vật).
+- Chuyển cảnh bằng bước giải thích được, không phép biến hình. Khi người xem cần đối chiếu toàn cảnh với chi tiết, dùng kính lúp. Khi cần theo vật hoặc đổi điểm nhìn, có thể dịch hay zoom trên cùng cảnh. Ghi rõ mốc nào vẫn thấy được khi camera đổi. Xem thêm yêu cầu riêng của gói môn.
 - Không thẻ/tag trang trí.
 
 ## Độ dài

@@ -12,6 +12,8 @@ export const OUTRO = 2.5; // BrandOutro
 
 export type ScriptLine = {
   text: string;
+  /** Nguồn khi text trích nguyên văn tư liệu. */
+  quoteSource?: string;
   speak?: string;
   caption?: string;
   /** nghỉ thêm sau dòng (giây), vd. sau câu hỏi đoán */

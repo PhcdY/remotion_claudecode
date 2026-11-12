@@ -1,0 +1,21 @@
+{
+  "slug": "demo-ly-quan-tinh",
+  "title": "Vì sao phanh xe làm người chúi tới?",
+  "subject": "ly",
+  "beats": [
+    {
+      "id": "b01",
+      "scene": 1,
+      "section": "HIỆN TƯỢNG",
+      "keyword": "Quán tính",
+      "visual": "CẢNH 1 — Nhìn ngang xe buýt đi sang phải. Thấy người đứng trong khoang. Lề đường và cửa sổ giữ vai trò mốc khi camera tiến gần.",
+      "lines": [
+        {"show": "Xe buýt chạy ngang qua các cột bên đường", "text": "", "speak": "Đang đứng trên xe buýt, vì sao lúc xe phanh, người lại chúi về phía trước?"},
+        {"show": "Khung nhìn tiến gần hành khách", "text": "", "speak": "Trước khi phanh, cả người và xe đang cùng chuyển động về phía trước."},
+        {"show": "Xe giảm tốc", "cue": "xe giảm tốc", "text": "", "speak": "Khi tài xế đạp phanh, xe giảm tốc. Sàn xe làm bàn chân đang bám vào nó chậm theo."},
+        {"show": "Vạch mốc làm rõ thân trên đã tiến thêm so với bàn chân", "text": "", "speak": "Thân trên vẫn còn đà tiến trong chốc lát, nên nó đi tới trước bàn chân."},
+        {"show": "Giữ tư thế chúi cùng mốc bàn chân", "text": "", "speak": "Vậy người chúi về trước vì thân trên có xu hướng giữ chuyển động cũ. Đó là quán tính."}
+      ]
+    }
+  ]
+}

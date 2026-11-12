@@ -1,0 +1,21 @@
+{
+  "slug": "demo-van-canh-xuan",
+  "title": "Một vài bông hoa, cả một mùa xuân",
+  "subject": "van",
+  "beats": [
+    {
+      "id": "b01",
+      "scene": 1,
+      "section": "HIỆN TƯỢNG",
+      "keyword": "",
+      "visual": "CẢNH 1 — Tranh minh họa Cảnh ngày xuân trong Truyện Kiều. Giữ đồng cỏ làm nền, tách cành và hoa thành hai lớp. Hai câu thơ hiện lần lượt ở khoảng trời bên trái, cùng ở lại đến hết lời phân tích. Tên tác giả và tác phẩm hiện ngắn lúc đọc câu đầu.",
+      "lines": [
+        {"show": "Khung rộng mở ra trên đồng cỏ", "text": "", "speak": "Vì sao Nguyễn Du chỉ đặt vài bông hoa trắng mà cả bức tranh xuân lại có điểm nhìn?"},
+        {"show": "Tầm mắt theo đồng cỏ ra đường chân trời", "text": "Cỏ non xanh tận chân trời,", "at": "đồng cỏ ở xa", "speak": "Cỏ non xanh tận chân trời.", "quoteSource": "Nguyễn Du, Truyện Kiều, câu 41, https://vi.wikisource.org/wiki/Truy%E1%BB%87n_Ki%E1%BB%81u"},
+        {"show": "Cành lê vào từ góc phải", "text": "Cành lê trắng điểm một vài bông hoa.", "at": "cành lê tiền cảnh", "speak": "Cành lê trắng điểm một vài bông hoa.", "quoteSource": "Nguyễn Du, Truyện Kiều, câu 42, https://vi.wikisource.org/wiki/Truy%E1%BB%87n_Ki%E1%BB%81u"},
+        {"show": "Những bông hoa trắng hiện trên cành", "text": "", "speak": "Màu xanh trải rộng làm nền. Vài chấm trắng trên cành kéo mắt trở về gần."},
+        {"show": "Giữ nguyên khung có cả đồng cỏ và cành lê", "text": "", "speak": "Vậy chỉ bằng một nền rộng và một điểm xuyết nhỏ, Nguyễn Du cho bức tranh có xa, có gần."}
+      ]
+    }
+  ]
+}

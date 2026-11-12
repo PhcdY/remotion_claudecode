@@ -292,3 +292,10 @@ am - c Bình: Dành cho các môn Tự nhiên (Toán, Lý, Hóa, Tin) — dứt 
 - Góp ý người dùng: ảnh mẫu đẹp nhưng một số video ít hình, chữ nhiều, chuyển từ ảnh này sang ảnh khác làm đứt cảnh. → Gói Sử mục 0 và 6.1: lên hành động ngay ở B1, tạo nền và vật thể riêng, nối beat qua mốc neo, cho phép camera và hành động chạy theo lời, giảm chữ khi hình đủ nghĩa. Kiểm tra cả đoạn chạy ở bản nháp.
 - Clip Malacca: zoom và chuyển động ổn, người xem khó biết phần nước nào là eo biển, dải tiêu đề làm bản đồ mất một phần khung. → Gói Sử mục 6.1: khoanh đúng vùng nước, cho thấy hai bờ trước khi tàu chạy, đặt tên và mốc năm ngay trong cảnh.
 - Clip Bạch Đằng: nhãn bám tàu lâu, kéo chữ vào lúc hai đội gặp nhau dù màu đã phân biệt đủ. → Gói Sử mục 6.1: định danh ngắn khi xuất hiện, chốt mốc tắt nhãn và kiểm tra giữa đoạn chuyển động.
+
+### 12/11/2026 — Chữ hòa vào nền tranh và cảnh chuyển động
+
+- Clip thử Văn và Lý: câu chốt trên đồng cỏ bị hòa nền, font trích dẫn hiện dấu tiếng Việt thiếu đều và nhãn ở sàn xe thiếu độ tách. → `dung-video` quy tắc 4: chọn vùng ít chi tiết, kiểm font có dấu, dùng mảng nền nhỏ đủ đặc khi cần, soát khung thu nhỏ và giữa đoạn chuyển động.
+- Clip thử Văn vẫn bị báo lỗi font sau khi chuyển sang Lora tải theo bộ ký tự. → Dùng một tệp Lora local đầy đủ cho câu thơ, chờ nạp xong khi render và soát các chữ có dấu kép trên MP4.
+- Người dùng làm rõ góp ý về chữ: câu thơ đặt trực tiếp trên nền trời; chữ dưới chỉ giữ khi cần. → B1/B3 cho phép `keyword: ""` ở mọi môn và ưu tiên vùng sạch để đặt chữ.
+- Clip thử Văn tắt câu thơ ngay sau khi đọc dù lời vẫn phân tích hai câu. → Giữ phần trích suốt đoạn phân tích, hiện hai câu cùng lúc khi đối chiếu. Nhãn giới thiệu có vòng đời riêng.

@@ -1,7 +1,7 @@
 import React from "react";
 import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 import { MathText } from "./MathText";
-import { colors, fontSize, fontText, layout, tint } from "./theme";
+import { colors, fontSize, fontText, layout } from "./theme";
 
 // Câu chốt của beat: hiện từ `from` (frame tương đối), nằm ở dải dưới của vùng hình.
 // top/bottom: dải chứa câu chốt (mặc định dải trên vùng phụ đề; chế độ chữ trong cảnh truyền dải thấp hơn).
@@ -36,7 +36,8 @@ export const KeyTakeaway: React.FC<{ text: string; from: number; top?: number; b
           padding: "6px 40px",
           borderRadius: 18,
           borderLeft: `8px solid ${colors.accent}`,
-          background: tint(colors.accent, 0.08),
+          background: colors.panel,
+          boxShadow: "0 5px 18px rgba(14, 16, 70, 0.12)",
           color: colors.accent,
           fontFamily: fontText,
           fontWeight: 800,

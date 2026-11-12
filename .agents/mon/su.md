@@ -8,7 +8,6 @@ Gói **thêm vào** luật chung; các ngoại lệ của môn Sử nằm trong 
 
 - **B1 › `scene`, `visual`, `show`, `at`; B3 › quy tắc 6** — Khi đổi điểm nhìn trên cùng bản đồ, hiện vật hay bối cảnh, cho camera dịch và zoom trên chính sân khấu đó. Giữ một mốc nhận ra được trong lúc chuyển hoặc chỉ rõ vùng sắp soi trước khi zoom. Kính lúp vẫn dùng khi cần nhìn toàn thể và chi tiết cùng lúc.
 - **B3 › Bước 2, quy tắc 9** — Một hành động mang thông tin có thể chạy hết dòng hoặc qua các dòng kế tiếp nếu cần để thấy diễn biến. `show` ghi điểm bắt đầu, phần tiếp diễn và lúc dừng ở các dòng liên quan. Mỗi dòng vẫn có tối đa một thay đổi chính. Camera bám vật đang chạy được tính cùng hành động khi nó giúp giữ vật trong tầm mắt. Chừa thời gian nhìn ở trạng thái kết quả.
-- **B1 › `keyword`; B3 › Bước 2** — Cho phép `keyword: ""` ở beat mà hình và lời đã chốt được ý. `text: ""` là lựa chọn mặc định khi hình đã nói đủ. Dùng chữ ngắn cạnh vật khi cần định danh, chỉ mốc thời gian hoặc đọc số liệu. Câu chốt viết lên hình chỉ khi nó giúp học sinh nắm được ý.
 
 ---
 

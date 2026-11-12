@@ -26,6 +26,8 @@ Mỗi bản phát hành có một mục, bản mới nhất ở trên cùng. Ng�
 - Mọi môn: làm video theo **bài SGK** thì Codex trình bảng nội dung (kiến thức nào, ở đoạn nào, hình gì) để bạn duyệt trước, không tự thu hẹp chủ đề; có mẫu "thẻ bài học" chung, kiểm tra kịch bản báo khi thiếu kiến thức của thẻ. Luật làm video gọn lại thành sáu phép thử dễ nhớ (đủ nội dung, không nhảy bước, biết đang xem gì, tắt tiếng vẫn hiểu, một khái niệm một tên, chữ đọc được). Thấy cách hay hơn luật thì Codex đề xuất để bạn duyệt, không im lặng làm khác.
 
 ### Sửa lỗi
+- Mọi môn có thể giữ hình liền mạch khi camera đổi góc nhìn. Trích dẫn ở lại đến hết lời phân tích, còn nhãn giới thiệu tắt sớm. Câu chốt ở đáy chỉ hiện khi người xem cần giữ lại một ý.
+- Thêm hai clip thử Văn và Lý. Clip Văn giữ hai câu thơ trực tiếp trên nền trời với font tiếng Việt nạp từ tệp local. Clip Lý dùng cửa sổ và sàn xe làm mốc khi giải thích quán tính.
 - Video Sử giữ bản đồ và hiện vật liền mạch qua các đoạn zoom. Nhãn chỉ hiện lúc cần đọc. Có bản thử Malacca, Bạch Đằng và bốn cảnh về trích dẫn, ngoại giao, cải cách, văn minh.
 - Các ý liệt kê không còn hiện chồng lên nhau: chỗ của từng ý được chia sẵn, và bước soát bố cục tự báo khi hai khối đè nhau.
 - Nhãn gắn vào vật đang chuyển động (thuyền, xe, người) không còn giật hay nhảy chỗ.
