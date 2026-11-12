@@ -322,7 +322,7 @@ Phụ đề đầy đủ xuất thành file riêng (`.srt`/`.vtt`) từ `speak`.
 
 ### `keyword`
 
-≤ 6 từ, là *kết luận* của beat (beat hook được là câu hỏi), không lặp nguyên văn một dòng `text`. B3 hiện nó thành câu chốt trong vùng hình lúc đọc dòng cuối.
+≤ 6 từ, là *kết luận* của beat (beat hook được là câu hỏi), không lặp nguyên văn một dòng `text`. B3 hiện nó thành câu chốt trong vùng hình lúc đọc dòng cuối. Môn Sử có thể ghi `keyword: ""` khi hình và lời đã chốt ý (xem gói môn › Thay luật chung).
 
 ### `scene`, `visual`, `show`, `at` — đủ cụ thể để dựng mà không phải đoán
 
@@ -338,7 +338,7 @@ Phụ đề đầy đủ xuất thành file riêng (`.srt`/`.vtt`) từ `speak`.
 - Chú thích từng thành phần, ghi rõ chữ sẽ hiện; nhãn trên hình ≤ ~5 từ; thông tin hết vai trò thì ghi lúc gỡ; vật quá gần nhau → ghi cách tách.
 - Nhân vật/vật minh hoạ phải có vai trò: ghi nó biểu diễn đại lượng nào, chuyển động theo quy luật nào.
 - Giải phẫu định nghĩa: mỗi dòng ghi cụm nào sáng lên và thứ gì trên hình sáng cùng màu.
-- Chuyển cảnh bằng bước giải thích được, không phép biến hình. Phóng to: kiểu **kính lúp** (hình gốc giữ nguyên, khung soi co dần, ô phóng cạnh bên có vạch chia).
+- Chuyển cảnh bằng bước giải thích được, không phép biến hình. Phóng to mặc định kiểu **kính lúp**. Môn có cách dựng riêng thì đọc mục **Thay luật chung** của gói môn (Sử: camera trên cùng nền bản đồ hoặc hiện vật).
 - Không thẻ/tag trang trí.
 
 ## Độ dài

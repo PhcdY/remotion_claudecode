@@ -26,6 +26,7 @@ Mỗi bản phát hành có một mục, bản mới nhất ở trên cùng. Ng�
 - Mọi môn: làm video theo **bài SGK** thì Codex trình bảng nội dung (kiến thức nào, ở đoạn nào, hình gì) để bạn duyệt trước, không tự thu hẹp chủ đề; có mẫu "thẻ bài học" chung, kiểm tra kịch bản báo khi thiếu kiến thức của thẻ. Luật làm video gọn lại thành sáu phép thử dễ nhớ (đủ nội dung, không nhảy bước, biết đang xem gì, tắt tiếng vẫn hiểu, một khái niệm một tên, chữ đọc được). Thấy cách hay hơn luật thì Codex đề xuất để bạn duyệt, không im lặng làm khác.
 
 ### Sửa lỗi
+- Video Sử giữ bản đồ và hiện vật liền mạch qua các đoạn zoom. Nhãn chỉ hiện lúc cần đọc. Có bản thử Malacca, Bạch Đằng và bốn cảnh về trích dẫn, ngoại giao, cải cách, văn minh.
 - Các ý liệt kê không còn hiện chồng lên nhau: chỗ của từng ý được chia sẵn, và bước soát bố cục tự báo khi hai khối đè nhau.
 - Nhãn gắn vào vật đang chuyển động (thuyền, xe, người) không còn giật hay nhảy chỗ.
 - Hóa: chữ trong bảng tuần hoàn, ô nguyên tố, cốc thí nghiệm luôn đủ to để đọc mà không tràn ô; bảng nhỏ tự ghi tên ô được tô ngay cạnh ô.

@@ -100,6 +100,8 @@ FPS = 30, INTRO = 1.6s, LEAD_IN = 0.3s, GAP_LINE = 0.25s, GAP_BEAT = 0.6s, TAIL 
 
 ## Bước 2 — Map script.json → màn hình
 
+Áp dụng mục **Thay luật chung** của gói môn cho bảng dưới và quy tắc bố cục. Với Sử, đọc thêm mục 6.1 trước khi tạo ảnh và dựng các lớp chuyển động.
+
 Mỗi beat là một `<Sequence>` từ `startFrame` đến `endFrame`, gồm 4 lớp:
 
 | Trường | Hiện thế nào | Lúc nào |
@@ -274,6 +276,8 @@ Cảnh có nhiều lớp lồng nhau (đất – lòng sông – sóng; cốc �
 - Mẫu: phòng lab `lab-thanh-phan` b04 (bản đúng; bản cố ý lỗi chạy với `--props '{"labLoi":true}'`).
 
 ## Bước 2b — Storyboard (bản nháp, trước B2)
+
+Với cảnh có hành động kéo dài hoặc camera dịch/zoom, xem cả đoạn chuyển trong Studio, kể cả qua ranh giới beat. Ảnh cuối dòng dùng để kiểm bố cục và trạng thái đích.
 
 1. Dựng đủ các beat với `draft: true` (mặc định của composition cho tới khi có audio).
 2. `node scripts/check-layout.mjs <id> --draft` → sửa hết lỗi.

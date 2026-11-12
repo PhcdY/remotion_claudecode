@@ -2,7 +2,13 @@
 
 Đọc kèm skill `viet-kich-ban` (B1), `tao-audio` (B2), `dung-video` (B3). Tài liệu này là **quy chuẩn cốt lõi** kết nối giữa **Biên kịch Sử (Storyteller)** và **Hệ thống Dựng Video Remotion (Tech Builder)**.
 Bài học kinh nghiệm thực tế ghi tại: `.agents/lessons.md`.
-Gói **thêm vào** luật chung; chỉ dòng nào trong mục **"Thay luật chung"** mới thay luật chung (skill `viet-kich-ban` › mục 0 › Ba tầng luật). Gói chưa có mục đó → luật chung thắng khi hai bên nói khác.
+Gói **thêm vào** luật chung; các ngoại lệ của môn Sử nằm trong mục **"Thay luật chung"**.
+
+## 0. Thay luật chung
+
+- **B1 › `scene`, `visual`, `show`, `at`; B3 › quy tắc 6** — Khi đổi điểm nhìn trên cùng bản đồ, hiện vật hay bối cảnh, cho camera dịch và zoom trên chính sân khấu đó. Giữ một mốc nhận ra được trong lúc chuyển hoặc chỉ rõ vùng sắp soi trước khi zoom. Kính lúp vẫn dùng khi cần nhìn toàn thể và chi tiết cùng lúc.
+- **B3 › Bước 2, quy tắc 9** — Một hành động mang thông tin có thể chạy hết dòng hoặc qua các dòng kế tiếp nếu cần để thấy diễn biến. `show` ghi điểm bắt đầu, phần tiếp diễn và lúc dừng ở các dòng liên quan. Mỗi dòng vẫn có tối đa một thay đổi chính. Camera bám vật đang chạy được tính cùng hành động khi nó giúp giữ vật trong tầm mắt. Chừa thời gian nhìn ở trạng thái kết quả.
+- **B1 › `keyword`; B3 › Bước 2** — Cho phép `keyword: ""` ở beat mà hình và lời đã chốt được ý. `text: ""` là lựa chọn mặc định khi hình đã nói đủ. Dùng chữ ngắn cạnh vật khi cần định danh, chỉ mốc thời gian hoặc đọc số liệu. Câu chốt viết lên hình chỉ khi nó giúp học sinh nắm được ý.
 
 ---
 
@@ -131,16 +137,19 @@ Giọng đọc AI (Vivibe) cần được kiểm soát chặt chẽ khi đọc t
 
 ## 6. Dựng hình Remotion & Cơ chế Phối hợp Asset (B3)
 
-### 6.1. Workflow Đóng góp & Đồng bộ Asset/Component (Request User → Maintainer Push)
-> [!IMPORTANT]
-> **Cơ chế Request từ User và Đóng góp vào Nhánh Default (`main-codex`)**:
-> 1. **Khi User đang làm video ở Local mà thiếu Asset/Component**:
->    - AI chủ động **Request trực tiếp từ User hiện tại**: Yêu cầu User gửi ảnh tư liệu, bản đồ gốc hoặc phác thảo địa hình vào chat (*"Bạn gửi cho tôi ảnh/tài liệu của trận địa này để tôi code component nhé"*).
->    - Nhận được ảnh từ User $\to$ AI phân tích và dựng thành code SVG/React component hoàn chỉnh trong `src/components/su/`.
-> 2. **Cơ chế Đóng góp & Đồng bộ Framework (Maintainer Workflow)**:
->    - Sau khi hoàn thành, component mới sẽ được gửi cho Maintainer (Người quản trị Framework).
->    - Maintainer kiểm duyệt chất lượng và **tự tay push lên nhánh default (`main-codex`)**.
->    - Khi component đã nằm trong một bản phát hành, mọi Creator khác chỉ cần nói "cập nhật bản mới nhất" (skill `phien-ban`) là có sẵn trong `src/components/` để dùng lại, không phải dựng lại.
+### 6.1. Lên cảnh và tạo từng lớp ảnh để diễn hoạt
+
+Tham khảo [EZ Sử](https://www.youtube.com/@ezsu) về cách dùng đồ họa chuyển động để kể diễn biến. B1 ghi ngay trong dàn ý mỗi đoạn dùng sân khấu nào, vật gì giữ qua các beat, hành động nào giải thích ý đang nói. Trong `visual` ghi khung nhìn, mốc neo và trạng thái các lớp lúc vào beat. Trong `show` ghi vật nào xuất hiện từ đâu, đi đâu, dừng ở đâu hoặc camera bám theo mốc nào. Nếu nhiều dòng liên tiếp chỉ đổi chữ trong khi lời đang kể diễn biến, thiết kế lại bằng hình trước khi chốt.
+
+- **Bản đồ** — Dùng một nền đã đối chiếu địa lý cho cả đoạn. Cho bản đồ phủ khung. Nếu cần tên cảnh hoặc niên đại, đặt chữ ngay trên bản đồ cạnh vùng đang giới thiệu. Với eo biển, cửa sông hoặc vùng nước khó nhận ra, khoanh đúng phần nước và cho thấy hai bờ trước khi cho tàu chạy. Đặt địa danh, tàu, biểu tượng các bên và đường đi bằng cùng hệ tọa độ. Khi đổi camera, nền và vật thể cùng đổi theo; nhãn vẫn neo đúng chỗ và giữ cỡ chữ dễ đọc. Biểu tượng xuất hiện ở vị trí có căn cứ và ở lại nếu cảnh sau còn cần đến. Với Malacca, mở rộng để thấy tuyến nối hai vùng biển, cho tàu đi vào từ phía tây bắc, bám theo tàu khi soi chỗ hẹp giữa Sumatra và bán đảo Mã Lai, rồi lùi ra trên cùng nền để thấy tuyến đi tiếp.
+- **Hiện vật, nhân vật, cải cách** — Giữ ảnh hiện vật rồi mở vùng soi đúng trên ảnh gốc. Trong cảnh tái hiện, tách người và đạo cụ khỏi phông để diễn hành động có ý nghĩa. Khi giải thích một chính sách, giữ cùng nhà, ruộng hay quầy hàng và cho thấy vật được chuyển, chia hoặc đổi chủ thế nào. Chọn tư liệu thật cho chi tiết cần quan sát; ảnh dựng lại ghi “Ảnh minh họa” theo B1.
+- **Trước khi tạo ảnh** — Chốt khung rộng nhất, mức zoom gần nhất, hướng nhìn, điểm neo và lớp nào cần di chuyển hay che khuất. Tạo nền sạch, đủ vùng đệm và độ nét ở khung gần nhất. Xuất nhân vật, tàu, đạo cụ cần động thành lớp riêng có nền trong suốt hoặc SVG. Dùng ảnh gốc làm tham chiếu nếu cần thêm góc nhìn; giữ nhận dạng, tỷ lệ, hướng sáng và bảng màu nhất quán. Chữ, đường đi và ký hiệu cần hiện theo lời dựng bằng Remotion.
+- **Vòng đời nhãn** — Ghi lúc hiện và lúc tắt trong kế hoạch cảnh. Tên phe, nhân vật và phương hướng hiện lúc cần định danh, rồi tắt khi người xem đã nhận ra bằng màu, dáng hoặc vị trí. Với nhãn ngắn, thử giữ khoảng 2 giây ở tốc độ thật rồi chỉnh theo độ dài chữ. Khi hai nhóm gặp nhau hoặc camera bám chuyển động, gỡ nhãn đã đọc. Chỉ gọi lại tên nếu cảnh đã đổi đủ nhiều để người xem có thể nhầm.
+- **Bản nháp** — Ngoài storyboard tĩnh, xem đoạn qua ranh giới beat ở tốc độ thật và tắt tiếng. Kiểm tra có nhận ra mốc cũ trong khung mới, theo được vật đang chuyển động và thấy hành động làm đổi tình thế. Soát cả giữa cú zoom hoặc đoạn di chuyển để bắt nhảy vị trí, khung hở, ảnh vỡ và nhãn che vật. Bước khó có thể giữ hình cho người xem quan sát.
+
+Ưu tiên tư liệu sẵn có, ảnh tạo riêng hoặc hình vector theo nhu cầu của cảnh. Nếu thiếu tư liệu lịch sử cần xác thực, tìm nguồn phù hợp hoặc xin người dùng bản gốc nếu họ có. Khi có component dùng chung đủ chín, maintainer kiểm duyệt và tích hợp vào `main-codex`.
+
+Đặt ảnh dùng thật trong `public/` của dự án và nạp qua `staticFile` để Studio và render dùng cùng file. Trước khi duyệt, mở bản nháp từ workspace và kiểm tra các lớp ảnh đã tải đủ.
 
 ### 6.2. Bộ Core Components chuyên dụng môn Sử (Đặt tại `src/components/su/`)
 > **Chưa có trong bản chính (10/11/2026).** Bản nháp `TacticalMap`, `DossierCard`, `ReformDiagram`, `PowerBalance` mới nằm ở một nhánh lưu trữ trên máy người quản trị, chưa đưa lên GitHub. Trước khi dùng, kiểm `src/components/su/` có tồn tại không; chưa có thì dựng trong thư mục video.

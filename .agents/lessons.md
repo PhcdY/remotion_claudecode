@@ -286,3 +286,9 @@ am - c Bình: Dành cho các môn Tự nhiên (Toán, Lý, Hóa, Tin) — dứt 
 - **Luật**: `dung-video` quy tắc 13 — một nguồn hình cho mỗi vùng; lớp chuyển động bên trong đặt trong `Region` (cắt theo hình vùng, mép vẽ đè lên trên); vật phải nằm trọn mà không cắt được thì gắn `data-inside`.
 - **Chặn bằng công cụ**: `LayoutProbe` so điểm trên nét vẽ của vật `data-inside` với hình thật của vùng `data-region` (`isPointInFill`) → lỗi "lệch ra ngoài vùng"; `check-layout` tự chạy lượt chuyển động (mỗi 6 frame suốt dòng có `data-inside`), thêm `--props`; `stills.mjs --onion` chồng 8 frame, tô hồng phần chuyển động. Thử ở phòng lab b04: bản đúng 0 lỗi; bản cố ý lỗi (`labLoi`) bắt được sóng và cá lệch, lượt chuyển động bắt thêm các frame mà 2 frame/dòng bỏ sót.
 - Họ lỗi: P3 "hình gợi sai điều muốn nói"; P2 rác thị giác.
+
+### 12/11/2026 — Lịch sử: hình phải kể diễn biến
+
+- Góp ý người dùng: ảnh mẫu đẹp nhưng một số video ít hình, chữ nhiều, chuyển từ ảnh này sang ảnh khác làm đứt cảnh. → Gói Sử mục 0 và 6.1: lên hành động ngay ở B1, tạo nền và vật thể riêng, nối beat qua mốc neo, cho phép camera và hành động chạy theo lời, giảm chữ khi hình đủ nghĩa. Kiểm tra cả đoạn chạy ở bản nháp.
+- Clip Malacca: zoom và chuyển động ổn, người xem khó biết phần nước nào là eo biển, dải tiêu đề làm bản đồ mất một phần khung. → Gói Sử mục 6.1: khoanh đúng vùng nước, cho thấy hai bờ trước khi tàu chạy, đặt tên và mốc năm ngay trong cảnh.
+- Clip Bạch Đằng: nhãn bám tàu lâu, kéo chữ vào lúc hai đội gặp nhau dù màu đã phân biệt đủ. → Gói Sử mục 6.1: định danh ngắn khi xuất hiện, chốt mốc tắt nhãn và kiểm tra giữa đoạn chuyển động.
