@@ -35,7 +35,7 @@ for (const tb of timeline.beats) {
   if (!sb) throw new Error(`Không thấy beat ${tb.id} trong script.json`);
   tb.lines.forEach((tl, i) => {
     const line = sb.lines[i];
-    const text = (line.caption ?? line.speak ?? "").replace(/\.\.\./g, " ").replace(/\s+/g, " ").trim();
+    const text = (line.caption ?? (line.speak ?? "").replace(/<\/?en>/g, "")).replace(/\.\.\./g, " ").replace(/\s+/g, " ").trim();
     if (text) cues.push({ start: tl.startFrame / fps, end: tl.endFrame / fps, text });
     lineMap.push({ beat: tb.id, section: sb.section, line: i + 1, start: tl.startFrame / fps, end: tl.endFrame / fps, speak: line.speak, text: line.text, show: line.show });
   });

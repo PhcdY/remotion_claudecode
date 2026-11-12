@@ -23,10 +23,10 @@ Hệ thống tự động hoá sản xuất video giáo dục giải thích bả
 2. **Roster 3 Giọng đọc Vivibe TTS (Multi-Voice Engine)**:
    - `nam - c Bình`: Dứt khoát, logic, chặt chẽ — dành cho các môn Tự nhiên.
    - `nữ - c Nhi`: Ấm áp, truyền cảm, giàu cảm xúc — dành cho các môn Xã hội.
-   - `anh-male`: Giọng bản xứ chuẩn IPA, song ngữ mượt mà — dành cho môn Tiếng Anh.
+   - Tiếng Anh: thuyết minh bằng giọng Việt, từ và câu mẫu trong `<en>…</en>` đọc bằng giọng Anh cùng giới (`anh-female` / `anh-male`), ghép liền trong một dòng.
    - Hỗ trợ đổi giọng linh hoạt theo từng cảnh/dòng (`voice` field) và tự động khử giật đầu file.
 3. **Từ điển Phiên âm Khoa học Tập trung (`scripts/phonetic_dict.json`)**:
-   - Tự động chuẩn hóa cách phát âm danh pháp IUPAC, công thức cấu tạo hóa học, ký hiệu toán học, chữ viết tắt quốc tế (*ASEAN*, *UNCLOS*, *NATO*) và thuật ngữ khoa học đời thực.
+   - Cặp tên chất Hóa (chữ ghi tên quốc tế, lời đọc tên Việt quen), ký hiệu toán học, chữ viết tắt quốc tế (*ASEAN*, *UNCLOS*, *NATO*) và thuật ngữ khoa học đời thực — `check_script.py` dựa vào đây để kiểm lời đọc.
 4. **Quy trình 3 Trạm Tinh gọn (Local-First)**:
    - Bước 1 (Kịch bản) $\to$ Bước 2 (Duyệt hình Storyboard miễn phí) $\to$ Bước 3 (Tạo Audio TTS & Xuất MP4).
 

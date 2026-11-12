@@ -61,10 +61,13 @@ export const DRAFT_CHARS_PER_SEC = 20;
 
 const STRIP = /^["'“”‘’([]+|["'“”‘’)\],.:;?!…]+$/g;
 
+/** Lời đọc bỏ thẻ <en>…</en> của dòng ghép giọng Anh–Việt — khớp `plain` trong scripts/song_ngu.py. */
+export const plainSpeak = (speak: string) => speak.replace(/<\/?en>/g, "");
+
 /** Tách từ của lời đọc — khớp speak_tokens trong scripts/align_words.py (sửa một bên thì sửa cả hai). */
 export const speakTokens = (speak: string) => {
   const out: { w: string; syl: number }[] = [];
-  for (const raw of speak.replace(/\.\.\./g, "…").split(/\s+/)) {
+  for (const raw of plainSpeak(speak).replace(/\.\.\./g, "…").split(/\s+/)) {
     const w = raw.replace(STRIP, "").toLowerCase();
     if (!w) continue;
     out.push({ w, syl: Math.max(1, w.split("-").filter(Boolean).length) });
@@ -102,7 +105,7 @@ export const findPhrase = (words: { w: string }[], phrase: string) => {
 export const buildTimeline = async (script: Script, audioDir = script.slug, draft = false): Promise<Timeline> => {
   if (draft) {
     const durations = script.beats.map((b) =>
-      b.lines.map((l) => Math.max(1, (l.speak ?? l.text).length / DRAFT_CHARS_PER_SEC)),
+      b.lines.map((l) => Math.max(1, plainSpeak(l.speak ?? l.text).length / DRAFT_CHARS_PER_SEC)),
     );
     return layoutTimeline(script, durations, () => "", (bi, li, dur) => estimateWords(script.beats[bi].lines[li].speak ?? "", dur));
   }

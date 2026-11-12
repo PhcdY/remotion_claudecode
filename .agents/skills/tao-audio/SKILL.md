@@ -24,13 +24,13 @@ Vivibe không có thẻ chỉnh tông; tông giọng đến từ mẫu clone, nh
 2. **Roster 3 Giọng đọc Chuẩn hóa Vivibe (Hỏi người dùng hoặc đề xuất theo môn)**:
    - `nam - c Bình`: Dứt khoát, logic, chuẩn mực — dành cho các môn Tự nhiên (Toán, Lý, Hóa, Sinh, Tin).
    - `nữ - c Nhi`: Ấm áp, truyền cảm, nhịp nhàng — dành cho các môn Xã hội (Sử, Địa, Văn, KTPL).
-   - `anh-male`: Giọng bản xứ chuẩn IPA song ngữ — dành cho môn Tiếng Anh.
+   - Môn Tiếng Anh: `--voice` vẫn là một trong hai giọng Việt trên (thuyết minh). Đoạn `<en>…</en>` tự đọc bằng giọng Anh **cùng giới** (`anh-female` / `anh-male`, bảng `englishVoice` trong `scripts/tts_config.json`; ghi đè bằng `--en-voice`). Gói `anh.md` › mục 5.
    Chạy `py scripts/vivibe_tts.py --list-voices` nếu cần xem toàn bộ danh sách giọng. Khi chạy lệnh, truyền giọng bằng `--voice "<tên hoặc id>"`.
-3. **Multi-Voice (Hỗ trợ đa giọng trong một bài)**:
-   - Kịch bản hỗ trợ trường `"voice"` ở cấp độ từng beat hoặc từng dòng `lines[i]`.
-   - Script tự động chèn khoảng lặng 0.3s khi đổi giọng giữa các nhân vật/cảnh và tự động làm mềm mào đầu âm thanh (80ms).
+3. **Nhiều giọng trong một bài**:
+   - Trường `"voice"` ở beat hoặc dòng `lines[i]`: cả dòng đọc bằng giọng đó (phân vai). Nghỉ giữa các dòng vẫn do B3 quyết định.
+   - **Hai thứ tiếng trong một dòng** (`<en>…</en>` trong `speak`): script tạo riêng từng đoạn, lưu ở `out/_lam-viec/<slug>/doan-giong/`. Sau đó cân độ to đoạn Anh theo giọng Việt của dòng, chèn nghỉ theo dấu câu ở chỗ đổi giọng (≈ 0,14 / 0,3 / 0,45 s) và ghép thành một MP3. `manifest.json` ghi mốc từng đoạn (`segments`), `align_words.py` căn từ trong từng đoạn. Chỉnh cách ghép (`MIX_VERSION` trong `vivibe_tts.py`) rồi chạy lại thì dùng lại đoạn đã lưu, không tốn credit. `--estimate` báo ký tự riêng cho từng giọng.
 4. **Từ điển Phiên âm Tập trung (`scripts/phonetic_dict.json`)**:
-   - `scripts/check_script.py` và `scripts/vivibe_tts.py` tự động tra cứu từ điển để phát hiện và phiên âm chuẩn: danh pháp IUPAC (*acetic acid* $\to$ *a-xê-tích a-xít*), nhóm chức hóa học, ký hiệu toán học, chữ viết tắt quốc tế (*ASEAN*, *NATO*), thuật ngữ địa lí (*El Niño* $\to$ *En Ni-nô*).
+   - `scripts/check_script.py` tra từ điển để kiểm cách đọc: tên chất Hóa (`hoa` › `ten_chat`: tên quốc tế ↔ tên Việt đọc trong `speak`, ví dụ *acetic acid* ↔ "axit axetic"), chữ viết tắt quốc tế (*ASEAN*, *NATO*), thuật ngữ địa lí (*El Niño* → *En Ni-nô*). Script không tự sửa `speak`: lời gửi Vivibe đúng như B1 đã duyệt.
 5. `speed` trong `scripts/tts_config.json` (0.5–2.0, mặc định 1.0) là tốc độ chung. Chỉ đổi khi người dùng nghe xong thấy cả bài nhanh/chậm.
    Beat có trường `"speed"` trong `script.json` thì đọc theo tốc độ đó (cache tính theo tốc độ từng dòng). **Không dùng để làm chậm đoạn giải thích**: đã thử 0.85 (22/10) → người dùng: "đừng thay đổi tốc độ nói thuần, cần thay đổi nhịp". Đoạn nào nhanh quá → quay lại B1 chia nhỏ thành nhiều câu ngắn (skill `viet-kich-ban` › câu trả lời "vì sao").
 

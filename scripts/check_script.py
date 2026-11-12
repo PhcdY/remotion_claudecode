@@ -22,6 +22,9 @@ import unicodedata
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import song_ngu  # noqa: E402  (thẻ <en>…</en> trong speak — gói anh.md › mục 5)
+
 ROOT = Path(__file__).resolve().parent.parent
 MON_DIR = ROOT / ".agents" / "mon"
 PHONETIC_DICT_PATH = ROOT / "scripts" / "phonetic_dict.json"
@@ -38,16 +41,16 @@ if PHONETIC_DICT_PATH.exists():
 SUBJECT_VOICE_ROSTER = {
     "toan": ("nam - c Bình", "Môn Tự nhiên — giọng dứt khoát, logic"),
     "ly": ("nam - c Bình", "Môn Tự nhiên — giọng dứt khoát, khoa học"),
-    "hoa": ("nam - c Bình", "Môn Tự nhiên — phát âm chuẩn thuật ngữ IUPAC"),
+    "hoa": ("nam - c Bình", "Môn Tự nhiên — đọc tên chất theo cách gọi tiếng Việt, chữ ghi tên quốc tế"),
     "tin": ("nam - c Bình", "Môn Tự nhiên — tư duy thuật toán"),
     "su": ("nữ - c Nhi", "Môn Xã hội — truyền cảm, giàu cảm xúc"),
     "dia": ("nữ - c Nhi", "Môn Xã hội — biểu cảm, gần gũi"),
     "van": ("nữ - c Nhi", "Môn Xã hội — ngân vang, lắng đọng"),
     "ktpl": ("nữ - c Nhi", "Môn Xã hội — rõ ràng, đĩnh đạc"),
     "sinh": ("nam - c Bình", "Môn Tự nhiên — giọng dứt khoát, logic"),
-    "anh": ("anh-male", "Môn Ngoại ngữ — mô hình đa ngôn ngữ chuẩn ngữ âm IPA"),
+    "anh": ("nữ - c Nhi", "giọng Việt thuyết minh; đoạn <en> tự dùng giọng Anh cùng giới (tts_config.json › englishVoice)"),
     "gtktpl": ("nữ - c Nhi", "Môn Xã hội — rõ ràng, đĩnh đạc (alias của ktpl)"),
-    "tienganh": ("anh-male", "Môn Ngoại ngữ — mô hình đa ngôn ngữ chuẩn ngữ âm IPA (alias của anh)"),
+    "tienganh": ("nữ - c Nhi", "giọng Việt thuyết minh; đoạn <en> tự dùng giọng Anh cùng giới (alias của anh)"),
 }
 
 # Ước lượng thời lượng (khớp src/components/timeline.ts và đo giọng Vivibe ≈ 20 ký tự/giây)
@@ -79,6 +82,72 @@ MULTI_CHANGE = re.compile(r"\b(rồi|sau đó|tiếp theo|đồng thời|cùng l
 RAW_CHEM = re.compile(r"\b(CH3COOH|C2H5OH|CH3COOC2H5|H2SO4|HCl|HNO3|NaOH|KOH|Fe2O3|FeO|Fe3O4|Al2O3|NaCl|CaCO3|CO2|SO2|CH4|C2H6|C2H4|C2H2|C6H6)\b", re.IGNORECASE)
 # Chữ viết tắt môn Sử/Địa/Khoa học cần phiên âm có gạch nối
 RAW_ABBR = re.compile(r"\b(ASEAN|NATO|UNESCO|WTO|DNA|RNA|APEC|TCN|SCN)\b")
+
+# --- Tiếng Anh trong lời đọc (gói anh.md › mục 5) ---
+ENGLISH_SUBJECTS = {"anh", "tienganh"}
+# Âm tiết tiếng Việt không dấu: phụ âm đầu + vần + phụ âm cuối hợp lệ. Từ Latin không khớp (play, she, is, happy)
+# gần như chắc là tiếng Anh. Từ trông giống tiếng Việt (be, the, it) bắt bằng danh sách riêng.
+VI_SYLLABLE = re.compile(r"^(ngh|ng|nh|ch|gh|gi|kh|ph|qu|th|tr|[bcdghklmnprstvx])?[aeiouy]{1,3}(ng|nh|ch|[cmnpt])?$")
+EN_LOOKALIKE = {"be", "the", "it", "he", "we", "are", "was", "were", "has", "have", "had", "did", "does", "will",
+                "would", "could", "should", "must", "of", "if", "or", "by", "my", "your", "his", "her", "its", "our",
+                "their", "this", "that", "these", "those", "am", "is", "an", "in", "on", "at", "up", "out"}
+LATIN_WORD = re.compile(r"(?<![\wÀ-ỹ'’-])[A-Za-z]+(?:['’][A-Za-z]+)?(?![\wÀ-ỹ'’-])")
+
+
+def english_words(text: str) -> list[str]:
+    """Từ có vẻ là tiếng Anh trong một đoạn lời Việt (không tính chữ cái đứng riêng, đã có PHONETIC lo)."""
+    out = []
+    for w in LATIN_WORD.findall(text):
+        low = w.lower()
+        if len(low) < 2:
+            continue
+        if low in EN_LOOKALIKE or "'" in low or "’" in low or not VI_SYLLABLE.match(low):
+            out.append(w)
+    return out
+
+
+# --- Hóa: tên chất (gói hoa.md › 2.2, 5) — speak đọc tên tiếng Việt, chữ trên hình/phụ đề ghi tên quốc tế ---
+def chem_names() -> list[dict]:
+    """[{quocTe, doc, moHo}] từ phonetic_dict.json › hoa › ten_chat (tên dài trước để 'sodium chloride' thắng 'sodium')."""
+    table = (PHONETIC_DICT.get("hoa") or {}).get("ten_chat") or {}
+    rows = [{"quocTe": k, **v} for k, v in table.items() if not k.startswith("_")]
+    return sorted(rows, key=lambda r: -len(r["quocTe"]))
+
+
+def chem_issues(where: str, speak: str, caption: str, errors: list[str], warns: list[str], listen: list[str]) -> None:
+    names = chem_names()
+    low_speak, low_cap = norm_vi(speak), norm_vi(caption)
+    taken: list[tuple[int, int]] = []
+
+    def find(phrase: str, hay: str, skip: list[str] | None = None):
+        spans = [m.span() for e in (skip or []) for m in re.finditer(vi_pattern(e), hay)]
+        for m in re.finditer(W_ + vi_pattern(phrase) + _W, hay):
+            if not any(a <= m.start() < b for a, b in taken + spans):
+                yield m
+
+    said = False
+    for r in names:
+        for m in ([] if r.get("quocTeLaTuViet") else find(r["quocTe"], low_speak)):
+            taken.append(m.span())
+            errors.append(f"{where}: speak đọc tên quốc tế '{r['quocTe']}' — lời đọc dùng tên tiếng Việt '{r['doc']}', "
+                          f"giữ '{r['quocTe']}' trên hình và caption (hoa.md › mục 5) [doc-ten-chat]")
+        for m in find(r["doc"], low_speak, r.get("ngoaiLe")):
+            taken.append(m.span())
+            said = True
+            if re.search(W_ + vi_pattern(r["quocTe"]) + _W, low_cap):
+                continue
+            msg = (f"{where}: speak đọc '{r['doc']}' nhưng caption không ghi tên quốc tế '{r['quocTe']}' — "
+                   f"phụ đề phải hiện '{r['quocTe']}' (hoa.md › mục 5)")
+            if r.get("moHo"):
+                warns.append(msg + " — bỏ qua nếu '" + r["doc"] + "' ở đây không phải tên chất")
+            else:
+                errors.append(msg + " [ten-chat-phu-de]")
+    for old in ((PHONETIC_DICT.get("hoa") or {}).get("doc_cu_kieu_anh") or []):
+        if re.search(W_ + vi_pattern(old) + _W, low_speak):
+            warns.append(f"{where}: speak có '{old}' (phiên âm kiểu tiếng Anh) — đọc tên tiếng Việt quen như 'natri', 'kali' (hoa.md › mục 5)")
+    if said:
+        listen.append(f"{where} (tên chất đọc tiếng Việt): {speak}")
+
 
 # --- Bảng thuật ngữ chốt + ngưỡng của gói môn (file máy đọc .agents/mon/<mon>.json) ---
 # Phép thử P4 "một khái niệm một tên" (skill viet-kich-ban › mục 0). Cách viết file: .agents/mon/_mau.md › File máy đọc.
@@ -182,7 +251,7 @@ def load_goi(subject: str) -> tuple[dict, list[str]]:
             probs.append(f"{f.name} › thuatNgu[{i}]: muc phải là 'loi' hoặc 'canh-bao'")
         ex = [re.compile(vi_pattern(e), re.IGNORECASE) for e in r.get("ngoaiLe") or []]
         code = r.get("ma") or "thuat-ngu:" + (r.get("khongDung") or ["?"])[0].strip().lower().replace(" ", "-")
-        rules.append({**r, "_rx": rx, "_ex": ex, "_ma": code})
+        rules.append({**r, "truong": r.get("truong") or data.get("truongMacDinh"), "_rx": rx, "_ex": ex, "_ma": code})
     data["_rules"] = rules
     return data, probs
 
@@ -278,7 +347,11 @@ def check_goi(subject: str) -> list[str]:
             continue
         cells: list[tuple[str, str]] = []
         if in_code:
-            cells = [("khối code", re.sub(r"\S*/\S*", " ", st))]  # bỏ đường dẫn file
+            pairs = re.findall(r'"(\w+)":\s*"((?:[^"\\]|\\.)*)"', st)
+            if any(k in TERM_FIELDS for k, _ in pairs):  # ví dụ JSON: kiểm từng trường theo đúng tên của nó
+                cells = [(k, v) for k, v in pairs if k in TERM_FIELDS]
+            else:
+                cells = [("khối code", re.sub(r"\S*/\S*", " ", st))]  # bỏ đường dẫn file
         elif st.startswith("|"):
             row = [c.strip() for c in st.strip("|").split("|")]
             if header is None:
@@ -453,7 +526,11 @@ def main() -> int:
         for li, line in enumerate(lines):
             w = f"{bid}-l{li + 1:02d}"
             text = line.get("text")
-            speak = (line.get("speak") or "").strip()
+            raw_speak = (line.get("speak") or "").strip()
+            speak = song_ngu.plain(raw_speak).strip()
+            segs = song_ngu.segments(raw_speak)
+            vi_speak = " ".join(t for lang, t in segs if lang == "vi")
+            en_parts = [t for lang, t in segs if lang == "en"]
             if text is None:
                 errors.append(f"{w}: thiếu trường text (để \"\" nếu không có chữ)")
                 text = ""
@@ -462,8 +539,25 @@ def main() -> int:
                 continue
 
             # --- speak ---
-            if SPEAK_SYMBOLS.search(speak):
-                errors.append(f"{w}: speak còn ký hiệu '{SPEAK_SYMBOLS.search(speak).group(0)}' — viết bằng chữ")
+            for p_ in song_ngu.problems(raw_speak):
+                errors.append(f"{w}: {p_} (gói anh.md › mục 5)")
+            sym = SPEAK_SYMBOLS.search(vi_speak + " " + " ".join(t.replace("'", "").replace("’", "") for t in en_parts))
+            if sym:
+                errors.append(f"{w}: speak còn ký hiệu '{sym.group(0)}' — viết bằng chữ")
+            if en_parts:
+                listen.append(f"{w} (ghép giọng Anh–Việt — nghe từ Anh đọc đúng, chỗ đổi giọng không gãy): {raw_speak}")
+                if subject not in ENGLISH_SUBJECTS:
+                    warns.append(f"{w}: <en> dùng ngoài môn Anh — chỉ khi thật sự đọc nguyên văn tiếng Anh")
+            if subject in ENGLISH_SUBJECTS:
+                loose = english_words(vi_speak)
+                if loose:
+                    errors.append(f"{w}: từ tiếng Anh {', '.join(dict.fromkeys(loose))} trong speak chưa bọc <en>…</en> — giọng Việt sẽ đọc sai "
+                                  f"(vd. 'be' thành 'bê') (gói anh.md › mục 5) [en-chua-boc]")
+                shown = [x for x in english_words(MATH.sub(" ", text or "")) if x.lower() not in {"s", "v", "o"}]
+                said_en = " ".join(en_parts).lower()
+                if len(shown) >= 2 and not any(x.lower() in said_en for x in shown):
+                    warns.append(f"{w}: text có tiếng Anh '{text}' mà speak không đọc nguyên văn từ nào — đừng dịch câu mẫu sang tiếng Việt; "
+                                 f"đọc nó trong <en>…</en> rồi mới giảng (gói anh.md › mục 5)")
             if FAKE_UNITS.search(text):
                 errors.append(f"{w}: đơn vị tự chế ('{FAKE_UNITS.search(text).group(0)}') — dùng đơn vị có thật hoặc số trơn")
             dots += speak.count("...")
@@ -480,13 +574,13 @@ def main() -> int:
                 warns.append(f"{w}: xưng hô '{m.group(0)}' — giọng trung tính")
 
             # --- Kiểm tra phiên âm Toán học bắt buộc ---
-            hit_vec = re.search(r"\b(vectơ|véc tơ|véc-tơ)\s+[A-Z]\s+[A-Z]\b", speak)
+            hit_vec = re.search(r"\b(vectơ|véc tơ|véc-tơ)\s+[A-Z]\s+[A-Z]\b", vi_speak)
             if hit_vec:
                 errors.append(f"{w}: vectơ tên ghép viết rời ('{hit_vec.group(0)}') — Vivibe sẽ đọc sai kiểu tiếng Anh ('O me'); phải viết gạch nối phiên âm như 'véc-tơ ô-mờ', 'véc-tơ a-mờ'")
             hit_j = re.search(r"\b(vectơ|véc tơ|véc-tơ)\s+gi\b|\b(vectơ|véc tơ|véc-tơ)\s+j\b", speak, re.IGNORECASE)
             if hit_j:
                 errors.append(f"{w}: vectơ đơn vị j viết là '{hit_j.group(0)}' — Vivibe đọc thành 'giây'; phải viết là 'véc-tơ di'")
-            hit_prime = re.search(r"\b[A-Za-z]\s+phẩy\b|\b[A-Za-z]'\b", speak)
+            hit_prime = re.search(r"\b[A-Za-z]\s+phẩy\b|\b[A-Za-z]'\b", vi_speak)
             if hit_prime:
                 errors.append(f"{w}: ký hiệu phẩy viết là '{hit_prime.group(0)}' — Vivibe đọc sai ('êm phẩy'); phải viết phiên âm như 'mờ-phẩy', 'a-phẩy'")
             hit_end_point = re.search(r"\bđiểm\s+[A-Z][.?!]", speak)
@@ -494,20 +588,16 @@ def main() -> int:
                 warns.append(f"{w}: điểm đứng cuối câu ('{hit_end_point.group(0)}') — Vivibe dễ nuốt âm; nên viết phiên âm như 'điểm mờ.'")
 
             # --- Kiểm tra Hóa học & Công thức phân tử / cấu tạo (GDPT 2018) ---
-            hit_chem = RAW_CHEM.search(speak)
+            hit_chem = RAW_CHEM.search(vi_speak)
             if hit_chem:
                 errors.append(f"{w}: speak chứa công thức hóa học thô ('{hit_chem.group(0)}') — Vivibe sẽ đọc vẹt từng chữ; phải viết phiên âm tên chất (xem scripts/phonetic_dict.json)")
 
-            # Kiểm tra danh pháp IUPAC Hóa học viết nguyên tiếng Anh chưa phiên âm
-            if PHONETIC_DICT and "hoa" in PHONETIC_DICT:
-                iupac_map = PHONETIC_DICT["hoa"].get("iupac_terms", {})
-                for term, info in iupac_map.items():
-                    if re.search(rf"\b{re.escape(term)}\b", speak, re.IGNORECASE):
-                        warns.append(f"{w}: speak chứa danh pháp tiếng Anh '{term}' — nên viết phiên âm gạch nối '{info['speak']}' để giọng đọc mượt mà")
-                        listen.append(f"{w} (thuật ngữ IUPAC): {speak}")
+            # Tên chất: đọc tên tiếng Việt, phụ đề ghi tên quốc tế (hoa.md › mục 5)
+            if subject == "hoa":
+                chem_issues(w, speak, line.get("caption") or "", errors, warns, listen)
 
             # --- Kiểm tra chữ viết tắt Lịch sử/Địa lý/Khoa học ---
-            hit_abbr = RAW_ABBR.search(speak)
+            hit_abbr = RAW_ABBR.search(vi_speak)
             if hit_abbr:
                 errors.append(f"{w}: chữ viết tắt '{hit_abbr.group(0)}' trong speak — phải viết phiên âm gạch nối (vd. 'A-xê-an', 'Na-tô') để AI không đọc đánh vần")
 
@@ -530,10 +620,10 @@ def main() -> int:
             if mc:
                 compare.append(f"{w} ('{mc.group(1)}'): {speak}  ← show: {line.get('show') or '—'}")
 
-            if PHONETIC.search(speak):
+            if PHONETIC.search(vi_speak):
                 listen.append(f"{w} (đọc ký hiệu): {speak}")
                 if not line.get("caption"):
-                    warns.append(f"{w}: speak có phiên âm ký hiệu ('{PHONETIC.search(speak).group(0)}') — thêm caption")
+                    warns.append(f"{w}: speak có phiên âm ký hiệu ('{PHONETIC.search(vi_speak).group(0)}') — thêm caption")
 
             pause = line.get("pauseAfter")
             if pause is not None:
@@ -587,12 +677,13 @@ def main() -> int:
                         break
                 if "→" in text and re.search(r"bài sau|tức là", text):
                     warns.append(f"{w}: mũi tên → chỉ dùng đúng nghĩa (suy ra, dồn về): {text}")
-                if text.strip() == speak.strip() and not quoted_text:
+                if text.strip() == speak.strip() and not quoted_text and not en_parts:
                     warns.append(f"{w}: text chép nguyên speak")
 
             chars = len(speak)
             total_chars += chars
             bsec += chars / CHARS_PER_SEC + (pause or 0) + (gap if li > 0 else 0)
+            bsec += sum(song_ngu.gap_after(t) for _, t in segs[:-1])  # nghỉ ở chỗ đổi giọng
 
         if dots > 1:
             warns.append(f"{bid}: '...' dùng {dots} lần (≤ 1 mỗi beat)")

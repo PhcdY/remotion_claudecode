@@ -299,3 +299,10 @@ am - c Bình: Dành cho các môn Tự nhiên (Toán, Lý, Hóa, Tin) — dứt 
 - Clip thử Văn vẫn bị báo lỗi font sau khi chuyển sang Lora tải theo bộ ký tự. → Dùng một tệp Lora local đầy đủ cho câu thơ, chờ nạp xong khi render và soát các chữ có dấu kép trên MP4.
 - Người dùng làm rõ góp ý về chữ: câu thơ đặt trực tiếp trên nền trời; chữ dưới chỉ giữ khi cần. → B1/B3 cho phép `keyword: ""` ở mọi môn và ưu tiên vùng sạch để đặt chữ.
 - Clip thử Văn tắt câu thơ ngay sau khi đọc dù lời vẫn phân tích hai câu. → Giữ phần trích suốt đoạn phân tích, hiện hai câu cùng lúc khi đối chiếu. Nhãn giới thiệu có vòng đời riêng.
+
+### 13/11/2026 — Thoại hai thứ tiếng (Anh) và tên chất (Hóa)
+
+- Người xem thật (bạn của người dùng) xem video Tiếng Anh: kiến thức dễ hiểu nhưng câu chữ loạn. "Động từ play…" thành "Động từ chỉ chơi…", *She is happy* thành "Câu cô ấy vui dùng động từ be", "be" đọc "bê". Gốc lỗi: gói Anh cũ bảo lời đọc giải nghĩa bằng tiếng Việt và phiên âm kiểu Việt ("ắp", "đao"), vì giọng clone Việt đọc tiếng Anh sai. → Gói Anh mục 5: tiếng Anh đọc nguyên văn trong `<en>…</en>`, B2 ghép giọng Anh cùng giới vào cùng dòng. `check_script` báo từ Anh chưa bọc `[en-chua-boc]` và câu mẫu bị dịch.
+- Ghép giọng: giọng Anh khác giới với giọng Việt nghe như hai người chen lời. Nối sát hai đoạn nghe vội, nối dài nghe đứt. → Giọng Anh cùng giới (`tts_config.json` › `englishVoice`), nghỉ theo dấu câu ở chỗ đổi giọng, cân độ to theo giọng Việt, ≤ 2 đoạn `<en>` mỗi dòng, câu mẫu đứng riêng một dòng.
+- Hóa: người dùng muốn lời đọc giữ tên Việt quen (natri, butin) và chữ trên hình là tên quốc tế. Bảng cấm tên cũ áp cả vào `speak`, còn gói bảo phiên âm tên Anh ("xô-đi-um"). → Gói Hóa mục 2.2 và 5: bảng cấm chỉ áp cho phần chữ (`hoa.json` › `truongMacDinh`). `speak` đọc tên Việt, `caption` bắt buộc ghi tên quốc tế. Cặp tên ở `phonetic_dict.json` › `hoa` › `ten_chat`.
+

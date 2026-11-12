@@ -222,8 +222,8 @@ Nếu video đang render ở chế độ nền:
 - **Roster giọng đọc Vivibe**:
   - `nam - c Bình`: Dành cho các môn Tự nhiên.
   - `nữ - c Nhi`: Dành cho các môn Xã hội.
-  - `anh-male`: Dành cho Tiếng Anh (chuẩn IPA).
-- **Từ điển phát âm tự động**: `scripts/phonetic_dict.json` tự động chuẩn hoá cách đọc danh pháp IUPAC, công thức cấu tạo, từ viết tắt và ký hiệu khoa học.
+  - Tiếng Anh: chọn một trong hai giọng Việt trên; từ/câu tiếng Anh tự đọc bằng giọng Anh cùng giới.
+- **Từ điển phát âm tự động**: `scripts/phonetic_dict.json` giữ cách đọc tên chất Hóa (đọc tên Việt, hiện tên quốc tế), từ viết tắt và ký hiệu khoa học để kiểm kịch bản.
 - **Tài liệu tham khảo SGK**: Nằm tại `references/<môn>/...` (đã trích xuất sẵn nội dung cốt lõi).
 - **Tỷ lệ khung hình chuẩn**: 16:9 (1920 × 1080), 30 fps.
 - **Thời lượng tối ưu**: Từ 2 phút 30 giây đến 4 phút (giải thích sâu bản chất, không nhảy cóc).

@@ -1,5 +1,10 @@
 {
   "engine": "vivibe",
   "speed": 1.0,
+  "englishVoice": {
+    "_ghiChu": "Giọng đọc đoạn <en>…</en> (gói anh.md › mục 5). Cùng giới với giọng Việt để câu không đổi từ nữ sang nam giữa chừng. --en-voice ghi đè.",
+    "theoGiongViet": { "nữ - c Nhi": "anh-female", "nam - c Bình": "anh-male", "male vivibe 1": "anh-male" },
+    "macDinh": "anh-female"
+  },
   "note": "Giọng không cố định: người dùng báo mỗi lần chạy, truyền bằng --voice. API key để trong .env (VIVIBE_API_KEY)."
 }

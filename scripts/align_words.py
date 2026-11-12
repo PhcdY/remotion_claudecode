@@ -19,6 +19,9 @@ import subprocess
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from song_ngu import plain  # noqa: E402  (bỏ thẻ <en> của dòng ghép giọng)
+
 ROOT = Path(__file__).resolve().parent.parent
 NOISE_DB = -35
 MIN_SILENCE = 0.1
@@ -72,13 +75,22 @@ def silences(path: Path, dur: float) -> list[tuple[float, float]]:
     return res
 
 
-def align(speak: str, path: Path) -> dict:
-    toks = speak_tokens(speak)
+def align(speak: str, path: Path, segments: list[dict] | None = None) -> dict:
+    """segments (dòng ghép giọng Anh–Việt, từ manifest): căn riêng từng đoạn trong khung [start, end] của nó."""
     dur = duration(path)
-    if not toks:
-        return {"dur": dur, "words": []}
     sil = silences(path, dur)
-    t0, t1 = 0.03, max(0.06, dur - 0.03)
+    if segments:
+        words = []
+        for seg in segments:
+            inside = [(a, b) for a, b in sil if a >= seg["start"] and b <= seg["end"]]
+            words += align_window(speak_tokens(seg["text"]), inside, seg["start"] + 0.02, max(seg["start"] + 0.04, seg["end"] - 0.02))
+        return {"dur": round(dur, 3), "words": words}
+    return {"dur": round(dur, 3), "words": align_window(speak_tokens(speak), sil, 0.03, max(0.06, dur - 0.03))}
+
+
+def align_window(toks: list[dict], sil: list[tuple[float, float]], t0: float, t1: float) -> list[dict]:
+    if not toks:
+        return []
     total = sum(t["syl"] for t in toks)
     # chỗ ngắt theo dấu câu: chỉ số âm tiết tích luỹ sau từ có dấu ngắt
     cum, bounds = 0, []
@@ -110,7 +122,7 @@ def align(speak: str, path: Path) -> dict:
                 break
         words.append({"w": t["w"], "s": round(start, 3)})
         acc += t["syl"]
-    return {"dur": round(dur, 3), "words": words}
+    return words
 
 
 def main() -> int:
@@ -123,6 +135,7 @@ def main() -> int:
     base = ROOT / "public" / "audio" / audio_dir
     manifest = json.loads((base / "manifest.json").read_text(encoding="utf-8"))
     files = {(m["beat"], m["line"]): m["file"] for m in manifest["lines"]}
+    segs = {(m["beat"], m["line"]): m.get("segments") for m in manifest["lines"]}
     out, missing = {}, []
     for b in script["beats"]:
         for i, line in enumerate(b["lines"], start=1):
@@ -130,7 +143,7 @@ def main() -> int:
             if not f or not (base / f).exists():
                 missing.append(f"{b['id']}-l{i:02d}")
                 continue
-            out[f"{b['id']}-l{i:02d}"] = align(line["speak"], base / f)
+            out[f"{b['id']}-l{i:02d}"] = align(plain(line["speak"]), base / f, segs.get((b["id"], i)))
     (base / "words.json").write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"✓ public/audio/{audio_dir}/words.json — {len(out)} dòng" + (f"; thiếu audio: {', '.join(missing)}" if missing else ""))
     return 0

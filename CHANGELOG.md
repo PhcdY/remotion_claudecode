@@ -19,9 +19,11 @@ Mỗi bản phát hành có một mục, bản mới nhất ở trên cùng. Ng�
 - Văn và Sử dùng nền sáng như các môn khác.
 - Câu định nghĩa được viết bằng từ dễ hiểu; từ hay, từ hiếm chỉ dùng sau khi đã giải thích xong.
 - Hóa có sẵn bảng tuần hoàn đúng hình SGK (chữ luôn nằm gọn trong ô), ô nguyên tố phóng to, và thí nghiệm kim loại kiềm thả vào nước (lithium, sodium, potassium phản ứng mạnh yếu khác nhau, có thẻ tên).
-- Kiểm tra kịch bản Hóa tự báo tên chất kiểu cũ (natri, axit…) và cách gọi nhóm "nhóm 1" — dùng tên IUPAC tiếng Anh và nhóm IA…VIIIA cho đồng nhất.
+- Kiểm tra kịch bản Hóa tự báo tên chất kiểu cũ (natri, axit…) trên hình và phụ đề, và cách gọi nhóm "nhóm 1" — dùng tên IUPAC tiếng Anh và nhóm IA…VIIIA cho đồng nhất.
 - Video **Hóa** theo bài SGK: trước khi viết, Codex trình bảng nội dung (kiến thức nào, ở đoạn nào, hình gì) để bạn duyệt; không tự thu hẹp chủ đề hay bỏ ý. Có sẵn "thẻ bài học" cho Hóa 10 Bài 5 và Bài 13, kiểm tra kịch bản báo khi thiếu kiến thức của thẻ.
 - Hóa có thêm hình cho phản ứng oxi hoá – khử: công thức ghi số oxi hoá trên từng nguyên tố (tự kiểm tổng), bảng chất khử / chất oxi hoá dễ nhầm, cái cân electron nhường = nhận, đinh iron trong dung dịch copper(II) sulfate.
+- Video **Tiếng Anh** đọc từ và câu mẫu bằng giọng Anh thật, ghép liền với giọng Việt trong cùng một câu ("Động từ *play* chỉ cần thêm *s*"); giọng Anh cùng giới, cùng độ to với giọng Việt. Không còn dịch câu mẫu sang tiếng Việt hay đọc "be" thành "bê"; kiểm tra kịch bản báo ngay khi có từ tiếng Anh chưa đánh dấu.
+- Video **Hóa** đọc tên chất như cũ (natri, axit axetic, butin) nhưng chữ trên hình và phụ đề luôn là tên quốc tế (sodium, acetic acid, butyne); kiểm tra kịch bản báo khi phụ đề còn tên Việt hoặc lời đọc dùng tên tiếng Anh.
 - Minh họa Văn theo kiểu tranh phẳng nhiều chi tiết (đò mui tre, áo dài, nón lá…), có video mẫu "Thuyền về có nhớ bến chăng".
 - Mọi môn: làm video theo **bài SGK** thì Codex trình bảng nội dung (kiến thức nào, ở đoạn nào, hình gì) để bạn duyệt trước, không tự thu hẹp chủ đề; có mẫu "thẻ bài học" chung, kiểm tra kịch bản báo khi thiếu kiến thức của thẻ. Luật làm video gọn lại thành sáu phép thử dễ nhớ (đủ nội dung, không nhảy bước, biết đang xem gì, tắt tiếng vẫn hiểu, một khái niệm một tên, chữ đọc được). Thấy cách hay hơn luật thì Codex đề xuất để bạn duyệt, không im lặng làm khác.
 
