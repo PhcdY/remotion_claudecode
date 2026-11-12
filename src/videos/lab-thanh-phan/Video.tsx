@@ -10,6 +10,7 @@ import { Region } from "../../components/region";
 import { colors, fontText, layout, tint } from "../../components/theme";
 import { FPS, Script } from "../../components/timeline";
 import scriptJson from "./script.json";
+import { Beat05, Beat06, Beat07, Beat08, Beat09 } from "./sinh";
 
 // Composition thử thành phần dùng chung (nhãn tự đặt, cảnh liền mạch, chế độ nháp). Không phải video đăng.
 
@@ -132,7 +133,7 @@ const Beat04: React.FC<BeatProps> = () => {
   );
 };
 
-const BEATS: Record<string, React.FC<BeatProps>> = { b01: Beat01, b02: Beat02, b03: Beat03, b04: Beat04 };
+const BEATS: Record<string, React.FC<BeatProps>> = { b01: Beat01, b02: Beat02, b03: Beat03, b04: Beat04, b05: Beat05, b06: Beat06, b07: Beat07, b08: Beat08, b09: Beat09 };
 
 const Lab: React.FC<ExplainerProps> = ({ timeline, draft }) => (
   <ExplainerVideo script={script} timeline={timeline} beats={BEATS} draft={draft} />

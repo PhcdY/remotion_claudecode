@@ -5,7 +5,7 @@
 - Bản xem: file "Feedback video AI.docx" (ảnh chụp các cảnh: người nằm trên giường – tim, phổi, ruột, mô cơ tim; cảnh phân giải glucose, ATP, amino acid)
 - Slug tạm đặt (chưa có tên thật từ CTV).
 
-**Lưu ý cho CTV**: video làm từ bản 1, nhiều luật hình và diễn hoạt đã được sửa trong bản mới. **Trước khi sửa video, cập nhật lên bản mới nhất** (hỏi Codex "cập nhật bản mới nhất" — skill `phien-ban`), rồi dựng lại theo cột cuối.
+**Lưu ý cho CTV**: video làm từ bản 1, nhiều luật hình và diễn hoạt đã được sửa trong bản mới. **Trước khi sửa video, cập nhật lên bản mới nhất** (hỏi Codex "cập nhật bản mới nhất" — skill `phien-ban`), rồi dựng lại theo cột cuối. Bản mới có sẵn hình dựng cho đúng các cảnh này (gói Sinh › mục 6): `HumanBody` (cơ thể, cơ quan có nhãn, đường đi từng chất), `ZoomCallout` + `CapillaryExchange` (soi vào mao mạch – tế bào), `Biomolecule` (glucose, ATP, amino acid, O₂/CO₂/H₂O); mẫu ở `src/videos/lab-thanh-phan/sinh.tsx`.
 
 Cột "Đã sửa skill": **có từ bản mới** = luật đã có trên `main-codex` sau bản 1, lần này không sửa; **vừa sửa** = thêm/sửa ở nhánh `sinh_fix_gop-y-trao-doi-chat`.
 

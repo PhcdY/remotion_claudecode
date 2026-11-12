@@ -1,3 +1,10 @@
 .katex-display {
   margin: 0 !important;
 }
+
+/* mhchem chèn ký tự ẩn (color: transparent) để căn chỉ số, vd. \ce{H2O}. Halo (text-shadow) của nhãn vẫn vẽ
+   lên ký tự ẩn đó và che mất chữ phía sau ("H₂O" hiện thành "H₂ )"). Ký tự ẩn thì không có halo. */
+.katex [style*="color:transparent"],
+.katex [style*="color: transparent"] {
+  text-shadow: none !important;
+}
