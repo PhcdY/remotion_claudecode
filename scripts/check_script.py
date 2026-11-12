@@ -553,6 +553,8 @@ def main() -> int:
                     warns.append(f"{w}: show có vẻ nhiều hơn một thay đổi ('{hit}'): {show}")
                 if text and not (line.get("at") or "").strip():
                     errors.append(f"{w}: có text nhưng thiếu at (chữ gắn vào vật nào)")
+                if text and re.match(r"(giữ nguyên|không đổi)\b", show, re.IGNORECASE):
+                    warns.append(f"{w}: hình giữ nguyên mà thêm text — chữ đang thay hình (P3: che chữ vẫn phải hiểu). Cho hình đổi ở show, hoặc để text \"\": {text}")
             cue = (line.get("cue") or "").strip()
             if cue:
                 if not tokens_in(cue, speak):
@@ -745,7 +747,7 @@ def main() -> int:
 
     for title, items in (
         ("LỖI", errors), ("CẢNH BÁO", warns), ("CẦN NGHE THỬ", listen),
-        ("CẦN SOÁT HÌNH — lời so sánh (P3: stills không tiếng phải thấy đúng chỗ giống/khác)", compare),
+        ("CẦN SOÁT HÌNH — lời so sánh (P3: stills không tiếng, che chữ, phải thấy đúng chỗ giống/khác)", compare),
         ("ĐÃ DUYỆT (không tính lỗi)", approved),
     ):
         if items:

@@ -30,6 +30,7 @@ Mỗi bản phát hành có một mục, bản mới nhất ở trên cùng. Ng�
 - Nhãn gắn vào vật đang chuyển động (thuyền, xe, người) không còn giật hay nhảy chỗ.
 - Hóa: chữ trong bảng tuần hoàn, ô nguyên tố, cốc thí nghiệm luôn đủ to để đọc mà không tràn ô; bảng nhỏ tự ghi tên ô được tô ngay cạnh ô.
 - Bước soát bố cục tự bắt thêm: công thức bị lỗi hiện chữ đỏ, công thức chưa hiện thành công thức, nhãn "mô hình" thừa, chữ to hơn ô/khung chứa nó.
+- Phép thử "tắt tiếng vẫn hiểu" nói rõ là hiểu **nhờ hình**, không phải nhờ ghi thêm chữ lên màn hình; kiểm tra kịch bản báo khi một dòng chỉ thêm chữ mà hình đứng yên.
 
 ### Cần làm sau khi cập nhật
 - Dùng Codex thay cho Gemini/Antigravity (xem `docs/HUONG_DAN_CODEX.md`).
