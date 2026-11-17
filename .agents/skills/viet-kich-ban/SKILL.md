@@ -259,7 +259,7 @@ Chỉ `TRONG ĐỀ THI`, `BẪY THƯỜNG GẶP`, `GIẢI ĐÁP` hiện cho ngư
 
 **Mạch nhân quả giữa các beat**: mỗi beat mở bằng lý do nó tồn tại so với beat trước — "nên…", "nhưng…", "vậy thì…", "còn… thì sao?" — không "tiếp theo", "bây giờ ta sẽ".
 
-**Giọng văn**: trung tính, không xưng hô ("bạn", "các em", "mình", "chúng ta", "tôi"); câu khẳng định hoặc câu hỏi không chủ ngữ. Giọng giảng mang tính tài liệu: điềm tĩnh, rõ, có nhấn nhá — như phim tài liệu khoa học kể cho người đang tò mò. Không dồn dập, không quảng cáo, không rào đón, không "rất dễ thôi".
+**Giọng văn**: trung tính, không xưng hô ("bạn", "các em", "mình", "chúng ta", "tôi"); câu khẳng định hoặc câu hỏi không chủ ngữ. "Người ta" (chủ ngữ chung, như "người ta gọi là…") không phải xưng hô, được dùng. Giọng giảng mang tính tài liệu: điềm tĩnh, rõ, có nhấn nhá — như phim tài liệu khoa học kể cho người đang tò mò. Không dồn dập, không quảng cáo, không rào đón, không "rất dễ thôi".
 
 ## Quy tắc từng trường
 
@@ -319,7 +319,24 @@ Nội dung tương đương ý của dòng, đọc tự nhiên. **Không chứa 
 - **`...` để ngắt rồi nhấn — tối đa 1 lần mỗi beat**, trước cả một cụm trọn nghĩa hoặc sau từ chuyển ý ("Tức là... vận tốc trung bình mười lăm mét một giây."); không đặt giữa cụm chặt ("đo... kiểu gì" ✗).
 - Từ chuyển ý ("Vậy thì", "Nhưng", "Tức là", "Để ý") để câu dính thành mạch; chúng cũng tính là chỗ ngắt.
 - Không chèn thẻ điều khiển (`<break>`…). Nhịp chỉ đến từ dấu câu và cách viết.
-- **Chống đều đều** (13/11/2026, Sinh: "giọng đều đều, dễ buồn ngủ"): giọng TTS đọc mọi câu cùng một khuôn thì nghe như ru ngủ. Trong mỗi beat, câu **dài ngắn xen nhau** (có một câu ngắn ≤ 6 từ chốt ý: "Đó chính là oxygen."), và có **một chỗ đổi giọng**: câu hỏi người xem tự đặt ("Vậy oxygen đi đâu?"), từ chuyển ý đối lập ("Nhưng", "Ngược lại"), hoặc `...` trước chữ chốt. Tránh chuỗi 3+ dòng liền cùng khuôn "X là Y" / "X đi vào Y".
+- **Chống đều đều** (13/11/2026, Sinh: "giọng đều đều, dễ buồn ngủ"): giọng TTS đọc mọi câu cùng một khuôn thì nghe như ru ngủ. Trong mỗi beat, câu **dài ngắn xen nhau** (có một câu ngắn ≤ 6 từ chốt ý: "Đó chính là oxygen."), và có **một chỗ đổi giọng**: câu hỏi người xem tự đặt ("Vậy oxygen đi đâu?"), từ chuyển ý đối lập ("Nhưng", "Ngược lại"), hoặc `...` trước chữ chốt. Tránh chuỗi 3+ dòng liền cùng khuôn "X là Y" / "X đi vào Y" (`check_script` cảnh báo `[van-noi:cung-khuon]`). Liệt kê nhiều tên (các lần chuyển thể, các loại lực) thì đi theo cặp thuận–ngược và đổi cách nói từng câu: "Rắn chảy thành lỏng gọi là nóng chảy. / Còn lỏng đông lại thành rắn thì gọi là đông đặc."
+
+**Văn nói, không văn viết** (17/11/2026, Lý 12 Bài 1: "chuyển động của hạt phấn hoa: chuyển động Brao-nơ" nghe rời, không tự nhiên). Lời đọc là **lời giảng**, không phải chữ trên slide đọc to lên. Phép thử: đọc to câu đó như đang giảng cho một học sinh ngồi cạnh — câu nào mình sẽ không nói ra miệng như thế thì viết lại.
+- **Không dùng dấu `:` trong `speak`** (`check_script` cảnh báo `[van-noi:hai-cham]`). Mắt đọc `:` như dấu "bằng", tai chỉ nghe một chỗ dừng, nên hai vế rời nhau và mất quan hệ giữa chúng. Nói bằng từ:
+  | Văn viết (nhãn) | Văn nói |
+  |---|---|
+  | Hạt phấn hoa chuyển động ngoằn ngoèo: chuyển động Brao-nơ. | Hạt phấn hoa chạy ngoằn ngoèo như thế, người ta gọi là chuyển động Brao-nơ. |
+  | Nước được tạo từ những hạt riêng biệt: các phân tử nước. | Nước được tạo nên từ những hạt rất nhỏ, gọi là phân tử nước. |
+  | Đang nóng chảy mà vẫn đun: nhiệt độ tăng hay giữ nguyên? | Đá đang tan mà vẫn đun tiếp, thì nhiệt độ tăng hay đứng yên? |
+  | Đúc kim loại: nung chảy rồi rót vào khuôn. | Khi đúc, người ta nung kim loại cho chảy ra rồi rót vào khuôn. |
+  | Lời giải là: mọi drone nhận cùng một vectơ. | Lời giải là... mọi drone nhận cùng một vectơ. (báo trước rồi nhấn: dùng `...`, vẫn tính 1 lần mỗi beat) |
+- **Gọi tên bằng lời** (P1 "thấy trước, gọi tên sau"): "…, gọi là X", "người ta gọi đó là X", "…, đó chính là X", "Hiện tượng này có tên là X." Không ghép kiểu nhãn `text` ("X: Y", "X — Y").
+- **Từ nối không ngắt**: "thì", "là", "nên", "mà", "càng… càng…", "gọi là" nối hai vế mà **không thêm chỗ dừng** — đúng cách để câu liền mạch mà vẫn ≤ 2 chỗ ngắt. Câu ngắn **không** có nghĩa là câu cụt: "Khi nước nóng lên, tốc độ chuyển động trung bình tăng." → "Nước càng nóng thì các phân tử chuyển động càng nhanh."
+- **Câu đủ chủ ngữ, không kiểu ghi chép**: "Nguội đi, kim loại đông đặc." / "Làm lạnh hơi để ngưng tụ." → "Để nguội, kim loại đông đặc lại theo hình khuôn." / "Làm lạnh phần hơi đó, nó ngưng tụ thành rượu." Cần chủ ngữ người thì dùng "người ta".
+- **Không danh từ hoá**: nói bằng động từ/tính từ. "Sự liên kết giữ đá có hình dạng…" → "Các phân tử bám chặt lấy nhau, nên đá giữ được hình dạng…". `check_script` cảnh báo câu mở bằng "Sự …" `[van-noi:danh-tu-hoa]`.
+- **Từ của sách, không của lời giảng** — đổi sang từ thường: "khác biệt ấy" → "khác nhau ở chỗ nào"; "lực đẩy trội lên" → "chúng lại đẩy nhau ra"; "dấu vết gián tiếp" → "không thấy phân tử, nhưng thấy được dấu vết"; "không thể gán một nhiệt độ…" → "không có một nhiệt độ…"; "nhằm", "do đó", "bởi lẽ", "đối với", "được xem là", "hay nói cách khác" → "để", "nên", "vì", "với", "là", "tức là" (`check_script` cảnh báo `[van-noi:tu-van-viet]`). Thuật ngữ SGK cần dạy thì giữ đúng (P0, P4), chỉ đổi phần câu quanh nó. "Xét" trong Toán được dùng khi đang giải bài ("Xét lúc năm giây…").
+- **Điều kiện nói một lần rồi giữ ngầm**: "ở áp suất chuẩn", "bỏ qua ma sát" nói ở dòng đầu tiên cần nó, đặt đầu câu; các dòng sau không chèn lại vào giữa câu. "Đun tiếp ở áp suất khí quyển chuẩn, nước sôi khoảng một trăm độ xê." → "Đun tiếp tới khoảng một trăm độ xê, nước bắt đầu sôi."
+- **Từ nối mở beat phải đúng quan hệ** ("Mạch nhân quả giữa các beat"): "Nhưng" chỉ khi thật sự đối lập; ý cộng thêm thì "Không chỉ thế, …" / "… còn …"; ý chuyển sang trường hợp khác thì "Còn … thì sao?". Không chèn "Nhưng" chỉ để có từ nối.
 
 ### `caption` (tuỳ chọn)
 
@@ -375,6 +392,7 @@ Ghi `keyword: ""` khi hình và lời đã chốt đủ ý. Chỉ dùng câu ch�
 
 **Lời đọc**
 - [ ] Đọc liền câu đầu các beat thành một mạch nhân quả; không câu đùa; giọng tài liệu, không xưng hô.
+- [ ] Đã đọc to từng dòng như đang giảng: không dấu `:`, gọi tên bằng "gọi là…", câu đủ chủ ngữ, không danh từ hoá, điều kiện không lặp giữa câu (`speak` › Văn nói, không văn viết).
 - [ ] Câu định nghĩa và câu giải thích lần đầu một khái niệm chỉ dùng từ thường; không từ hiếm, từ chuyên ngành ngoài bài, từ văn chương bay bổng (Style › Lời định nghĩa).
 - [ ] Câu hỏi đoán (nếu có) cụ thể, trả lời được bằng mắt, có `pauseAfter`, đáp án ở dòng sau, đã đưa vào danh sách nghe thử.
 - [ ] Ký hiệu môn học, danh pháp, quy tắc phiên âm: đã đối chiếu chính xác theo gói môn `.agents/mon/<mon>.md`.
