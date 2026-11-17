@@ -31,16 +31,20 @@ Hành vi:
 from __future__ import annotations
 
 import argparse
+import array
 import hashlib
 import json
+import math
 import os
 import re
 import shutil
 import subprocess
 import sys
+import tempfile
 import time
 import urllib.error
 import urllib.request
+import wave
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -59,7 +63,10 @@ SEG_EDGE = 0.02
 # Độ to (LUFS) đo trên giọng Việt các bài đã làm (−17…−21): dòng chỉ có tiếng Anh cân về mức này.
 NARRATOR_LUFS = -19.0
 MAX_GAIN_DB = 10.0
-MIX_VERSION = "mix2"  # đổi khi đổi cách ghép → dòng ghép được ghép lại từ đoạn đã lưu, không tốn credit
+MIX_VERSION = "mix3"  # đổi khi đổi cách ghép → dòng ghép được ghép lại từ đoạn đã lưu, không tốn credit
+# Fade mép thật ngắn để nối về im lặng êm, giữ nguyên độ dài và không chồng hai giọng.
+SEG_FADE_IN = 0.018
+SEG_FADE_OUT = 0.030
 SAFE_ID = re.compile(r"^[A-Za-z0-9_-]+$")
 LATEX_HINT = re.compile(r"[$\\^_{}]")
 
@@ -270,9 +277,47 @@ def wav_seconds(wav: Path) -> float:
     return float(r.stdout.strip())
 
 
+def fade_segment(source: Path, target: Path) -> None:
+    """Fade PCM samples, keeping source cache and sample count intact.
+
+    The bundled Remotion ffmpeg lacks afade. Cached segments are 16-bit mono WAV.
+    """
+    with wave.open(str(source), "rb") as stream:
+        params = stream.getparams()
+        if params.sampwidth != 2 or params.nchannels != 1:
+            raise ApiError("Đoạn cache phải là WAV PCM 16-bit mono để fade an toàn")
+        samples = array.array("h")
+        samples.frombytes(stream.readframes(params.nframes))
+    if sys.byteorder != "little":
+        samples.byteswap()
+    n_in = min(round(SEG_FADE_IN * params.framerate), len(samples) // 4)
+    n_out = min(round(SEG_FADE_OUT * params.framerate), len(samples) // 4)
+    for i in range(n_in):
+        samples[i] = round(samples[i] * math.sin(math.pi * 0.5 * i / max(1, n_in - 1)))
+    for i in range(n_out):
+        samples[-1 - i] = round(samples[-1 - i] * math.sin(math.pi * 0.5 * i / max(1, n_out - 1)))
+    if sys.byteorder != "little":
+        samples.byteswap()
+    with wave.open(str(target), "wb") as stream:
+        stream.setparams(params)
+        stream.writeframes(samples.tobytes())
+
+
 def mix_line(ffmpeg: str, parts: list[dict], out: Path) -> list[dict]:
     """Ghép các đoạn (dict: lang, text, wav, voice_name) thành một MP3. Trả về mốc từng đoạn cho manifest."""
     levels = [loudness(ffmpeg, p["wav"]) for p in parts]
+    # Fade trước khi chèn nghỉ; không fade cả gap vì cú ngắt cuối lời sẽ vẫn còn.
+    # Không crossfade lời nói: giữ nguyên độ dài, không chồng âm cuối/âm đầu hai giọng.
+    with tempfile.TemporaryDirectory(prefix="vivibe-mix-", dir=out.parent) as temp:
+        faded = []
+        for i, part in enumerate(parts):
+            wav = Path(temp) / f"{i}.wav"
+            fade_segment(part["wav"], wav)
+            faded.append({**part, "wav": wav})
+        return _mix_faded(ffmpeg, faded, out, levels)
+
+
+def _mix_faded(ffmpeg: str, parts: list[dict], out: Path, levels: list[tuple[float | None, float]]) -> list[dict]:
     vi = [lv[0] for p, lv in zip(parts, levels) if p["lang"] == "vi" and lv[0] is not None]
     target = sum(vi) / len(vi) if vi else NARRATOR_LUFS
     inputs, chains, labels, marks, t = [], [], [], [], 0.0
