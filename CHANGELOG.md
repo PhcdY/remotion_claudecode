@@ -12,11 +12,14 @@ Mỗi bản phát hành có một mục, bản mới nhất ở trên cùng. Ng�
 
 ## Bản 3 — 2026-11-17
 
-Sửa phần đổi giọng Việt–Anh trong video tiếng Anh cho tự nhiên hơn.
+Lời đọc nghe giống lời giảng hơn (luật văn nói), và phần đổi giọng Việt–Anh trong video tiếng Anh tự nhiên hơn.
 
 ### Chung (mọi môn)
 
-Không có thay đổi chung trong bản này.
+**Có gì mới**
+- Luật **văn nói, không văn viết** cho lời đọc: không dùng dấu hai chấm, gọi tên bằng "…, gọi là X", câu đủ chủ ngữ, không mở câu bằng danh từ hóa ("Sự …"), điều kiện nói một lần, câu mở beat đúng quan hệ với beat trước.
+- Kiểm tra kịch bản cảnh báo khi lời đọc có dấu ":", có từ văn viết (nhằm, do đó, đối với, bởi lẽ…), mở câu bằng "Sự …", hoặc có 3 dòng liền cùng khuôn "X là Y" nghe đều đều.
+- Sổ tay bài học có thêm góp ý ngày 17/11 (Lý 12 Bài 1).
 
 ### Tiếng Anh
 
