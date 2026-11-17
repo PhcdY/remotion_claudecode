@@ -546,6 +546,9 @@ def main() -> int:
                 errors.append(f"{w}: speak còn ký hiệu '{sym.group(0)}' — viết bằng chữ")
             if en_parts:
                 listen.append(f"{w} (ghép giọng Anh–Việt — nghe từ Anh đọc đúng, chỗ đổi giọng không gãy): {raw_speak}")
+                for short in song_ngu.short_en_parts(raw_speak):
+                    warns.append(f"{w}: đoạn Anh rất ngắn '{short}' dễ bật hơi, nhấn căng và lệch âm sắc khi đổi giọng — "
+                                 "ưu tiên đọc một câu tự nhiên chứa từ cần học; chỉ đọc lẻ khi thật sự dạy phát âm và đã nghe duyệt (gói anh.md › mục 5.2)")
                 if subject not in ENGLISH_SUBJECTS:
                     warns.append(f"{w}: <en> dùng ngoài môn Anh — chỉ khi thật sự đọc nguyên văn tiếng Anh")
             if subject in ENGLISH_SUBJECTS:

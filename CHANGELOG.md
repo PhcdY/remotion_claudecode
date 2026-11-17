@@ -10,6 +10,11 @@ Mỗi bản phát hành có một mục, bản mới nhất ở trên cùng. Ng�
 
 ## Chưa phát hành
 
+### Tiếng Anh
+
+**Sửa lỗi**
+- Chỗ đổi giọng Việt–Anh có fade nhẹ và thêm nhịp nghỉ để bớt khựng, bớt vội. Lời đọc ưu tiên câu tự nhiên chứa từ cần học; kiểm tra kịch bản nhắc nghe thử khi đoạn Anh chỉ có một, hai từ. Bản ghi đã tạo được dùng lại khi chỉnh cách nối, không tốn thêm credit.
+
 ## Bản 2 — 2026-11-13
 
 Bản đầu tiên làm việc với **Codex** (thay Gemini/Antigravity). Có thêm luật làm video chung cho mọi môn (sáu phép thử, bảng nội dung duyệt trước), bước soát bố cục bắt được nhiều lỗi hơn, và nâng cấp lớn cho Hóa, Sinh, Sử, Văn, Tiếng Anh.

@@ -185,12 +185,14 @@ Bọc đúng phần tiếng Anh bằng `<en>…</en>`, phần còn lại là l�
 
 ### 5.2. Viết cho chỗ đổi giọng nghe liền
 
+**Người dùng chốt 17/11/2026 — dùng cách 2:** đọc một câu Anh tự nhiên có chứa từ đang học, ví dụ “Nghe một câu có từ này: `<en>This song has strong beats.</en>`”, tô từ cần học trên hình; tránh tạo một từ lẻ có giọng nhấn quá căng rồi kẹp giữa lời Việt. Các ví dụ từ lẻ ở 5.1 là minh họa cú pháp, không phải khuôn lời đọc mặc định. `check_script` cảnh báo đoạn Anh 1–2 từ để nghe soát, không khẳng định cứ dài hơn là nghe tốt. Chỗ nối vẫn cần nghe duyệt: dùng fade mép rất ngắn và đủ nhịp nghỉ, không trộn chồng hai người nói, không cắt âm đầu/cuối để nối sát. Không tự sửa lời đã duyệt ở B3; quay lại B1 khi cần thay nội dung.
+
 Mỗi chỗ đổi giọng là một đường nối hai bản ghi, nên nối càng ít và càng đúng chỗ ngắt tự nhiên thì càng êm.
 - **Câu mẫu đứng riêng một dòng**, đọc trọn bằng giọng Anh (`<en>She is happy.</en>`). Dòng sau mới phân tích. Người xem nghe trọn câu trước rồi mới nghe tách.
 - **≤ 2 đoạn `<en>` mỗi dòng** (≤ 4 chỗ nối). Nhiều hơn thì tách dòng.
 - Đặt chỗ đổi giọng ở ranh giới cụm: sau dấu `:` hoặc `,`, hoặc từ mẫu đứng cuối cụm ("…của động từ <en>be</en>."). Tránh kẹp từ Anh giữa hai âm tiết Việt dính nhau ("cái <en>be</en> này nó").
 - Không lồng câu giảng dài vào giữa hai đoạn Anh. Viết "<en>is</en> là một dạng của <en>be</en>." thì được, nhưng tránh "<en>is</en>, mà như đã thấy ở câu trên thì thực chất nó là <en>be</en>".
-- Nghỉ ở chỗ đổi giọng do B2 tự chèn theo dấu câu ngay trước chỗ đổi (`scripts/song_ngu.py`): không dấu ≈ 0,14 s; `, ; :` ≈ 0,3 s; `. ? !` ≈ 0,45 s. Muốn ngắt dài hơn thì thêm dấu câu, không chèn `...`.
+- Nghỉ ở chỗ đổi giọng do B2 tự chèn theo dấu câu ngay trước chỗ đổi (`scripts/song_ngu.py`): không dấu 0,24 s; `, ; :` 0,42 s; `. ? !` 0,60 s. Fade mép đoạn 18 ms vào / 30 ms ra, giữ nguyên độ dài, không chồng hai giọng. Muốn ngắt dài hơn thì thêm dấu câu, không chèn `...`.
 
 ### 5.3. Kiểm và nghe thử
 

@@ -17,13 +17,19 @@ VI_MARK = re.compile(r"[À-ỹđĐ]")
 PUNCT_ONLY = re.compile(r"^[\s.,:;?!…\"'“”‘’()\-–—]*$")
 
 # Nghỉ ở chỗ đổi giọng (giây), theo dấu câu ngay trước chỗ đổi.
-GAP_NO_PUNCT = 0.14   # giữa cụm: "Động từ | play | chỉ cần…" — đủ tách từ mẫu, không gãy câu
-GAP_COMMA = 0.30      # sau , ; :
-GAP_SENTENCE = 0.45   # sau . ? ! …
+GAP_NO_PUNCT = 0.24   # đổi người đọc cần một nhịp riêng, tránh chồm lên nhau
+GAP_COMMA = 0.42      # sau , ; : (dẫn vào câu mẫu)
+GAP_SENTENCE = 0.60   # sau . ? ! … (trọn câu rồi mới trở lại lời giảng)
 
 
 def has_en(speak: str) -> bool:
     return "<en>" in (speak or "")
+
+
+def short_en_parts(speak: str) -> list[str]:
+    """Flag tiny English exports for listening review; length cannot predict delivery quality."""
+    return [text for lang, text in segments(speak)
+            if lang == "en" and 1 <= len(re.findall(r"[A-Za-z]+(?:['’\-][A-Za-z]+)*", text)) <= 2]
 
 
 def plain(speak: str) -> str:
