@@ -10,6 +10,14 @@ Mỗi bản phát hành có một mục, bản mới nhất ở trên cùng. Ng�
 
 ## Chưa phát hành
 
+## Bản 3 — 2026-11-17
+
+Sửa phần đổi giọng Việt–Anh trong video tiếng Anh cho tự nhiên hơn.
+
+### Chung (mọi môn)
+
+Không có thay đổi chung trong bản này.
+
 ### Tiếng Anh
 
 **Sửa lỗi**
