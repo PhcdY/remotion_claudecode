@@ -67,6 +67,14 @@ SAFE_ID = re.compile(r"^[a-z0-9_-]+$")
 MATH = re.compile(r"\$[^$]*\$")
 SPEAK_SYMBOLS = re.compile(r"[$\\^_{}=+/'√<>]")
 PRONOUNS = re.compile(r"\b(bạn|các em|chúng ta|mình|tôi)\b", re.IGNORECASE)
+# Văn nói, không văn viết (viet-kich-ban › speak, 17/11/2026): lời đọc là lời giảng, không phải nhãn slide đọc to.
+WRITTEN_WORDS = re.compile(
+    r"(?<![\wÀ-ỹ])(nhằm|do đó|bởi lẽ|đối với|được xem là|được coi là|hay nói cách khác|trội lên)(?![\wÀ-ỹ])",
+    re.IGNORECASE,
+)
+NOMINAL_START = re.compile(r"(?:^|[.?!…]\s+)(Sự)\s+\S+")
+# dòng ngắn khuôn "X (gọi) là Y" — 3 dòng liền nhau trong một beat nghe đều đều
+SAME_MOLD = re.compile(r"^[^,?]{0,60}(?<![\wÀ-ỹ])(gọi là|là)(?![\wÀ-ỹ])[^,?]{0,40}[.!]?$", re.IGNORECASE)
 # "trăm m" làm đơn vị: "(trăm m)", "4 trăm m". Không bắt "một trăm mét" trong speak (đó là số 100).
 FAKE_UNITS = re.compile(r"(?:\(\s*|\d\s*)(trăm|chục)\s*(m|mét|km|giây|s|phút)\b", re.IGNORECASE)
 UNIT = r"(km/h|m/s²|m/s|km|cm|mm|kg|mg|ml|m|s|h|°C)"
@@ -523,6 +531,7 @@ def main() -> int:
             warns.append(f"{where}: {len(lines)} dòng (> 8) — cân nhắc tách beat")
         dots = 0
         bsec = 0.0
+        mold_run: list[str] = []
         for li, line in enumerate(lines):
             w = f"{bid}-l{li + 1:02d}"
             text = line.get("text")
@@ -575,6 +584,24 @@ def main() -> int:
             m = PRONOUNS.search(speak)
             if m:
                 warns.append(f"{w}: xưng hô '{m.group(0)}' — giọng trung tính")
+            # --- văn nói, không văn viết (viet-kich-ban › speak › Văn nói) ---
+            if ":" in vi_speak:
+                warns.append(f"{w}: speak có dấu ':' — tai chỉ nghe một chỗ dừng, hai vế rời nhau; nói bằng từ "
+                             f"('…, gọi là X', 'người ta gọi đó là X', '… thì …') hoặc '...' nếu là báo trước rồi nhấn [van-noi:hai-cham]: {speak}")
+            mw = WRITTEN_WORDS.search(vi_speak)
+            if mw:
+                warns.append(f"{w}: từ văn viết '{mw.group(1)}' — đổi sang lời giảng (để, nên, vì, với, là, tức là…) [van-noi:tu-van-viet]: {speak}")
+            mn = NOMINAL_START.search(vi_speak)
+            if mn:
+                warns.append(f"{w}: câu mở bằng danh từ hoá '{mn.group(0).strip()}' — nói bằng động từ/tính từ "
+                             f"('Các phân tử bám chặt lấy nhau…') [van-noi:danh-tu-hoa]: {speak}")
+            if SAME_MOLD.match(vi_speak) and len(vi_speak.split()) <= 12:
+                mold_run.append(w)
+                if len(mold_run) == 3:
+                    warns.append(f"{mold_run[0]}…{w}: 3+ dòng liền cùng khuôn 'X (gọi) là Y' — nghe đều đều; đi theo cặp thuận–ngược, "
+                                 f"đổi cách nói từng câu (viet-kich-ban › Chống đều đều) [van-noi:cung-khuon]")
+            else:
+                mold_run = []
 
             # --- Kiểm tra phiên âm Toán học bắt buộc ---
             hit_vec = re.search(r"\b(vectơ|véc tơ|véc-tơ)\s+[A-Z]\s+[A-Z]\b", vi_speak)
