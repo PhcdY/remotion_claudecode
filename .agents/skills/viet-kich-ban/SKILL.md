@@ -60,7 +60,7 @@ P5 text dài > 35 ký tự: …
 ## Đầu vào
 
 Người dùng đưa: **chủ đề** + **ý bản chất muốn nói** (+ kỳ thi, độ dài, ghi chú nếu có).
-- **Xác định loại video** (`"loai"` trong `script.json`; không chắc → hỏi):
+- **Xác định loại video** (`"loai"` trong `script.json`; không chắc → hỏi, ghi `trang-thai.json` `"dangCho": "loai-video"` — AGENTS.md › Trạng thái):
   - **Video bài học** (`"bai-hoc"`): prompt nêu tên một bài/chủ đề SGK ("phản ứng oxi hoá – khử", "tính đơn điệu"). Nội dung = **thẻ bài học** của bài đó (mục "Thẻ bài học" dưới đây). Tiêu đề **chứa** tên bài; hook ≤ 20 s chỉ là cửa vào, không thay chủ đề.
   - **Video hiện tượng** (`"hien-tuong"`): prompt nêu một câu hỏi/hiện tượng cụ thể ("vì sao đinh đổi màu?"). Nội dung = phần kiến thức đủ để trả lời câu đó. Vẫn trình Bảng nội dung.
 - Thiếu ý bản chất → đề xuất 2–3 góc bản chất, hỏi chọn.
@@ -73,7 +73,7 @@ Người dùng đưa: **chủ đề** + **ý bản chất muốn nói** (+ kỳ 
 
 - Vị trí: `references/<môn>/lop-<lớp>/bai-<NN>-<ten>.md` (được nằm trong `tap-1/`, `tap-2/`; `NN` hai chữ số, khớp `"bai": "Bài 13. …"`). File được tính là thẻ khi có mục `## Từ khóa kiểm tra`; file tóm tắt SGK chưa có mục đó thì *chưa có thẻ*.
 - Mẫu: `references/_mau-the-bai-hoc.md` — kiến thức lõi K1…, bẫy thi T1…, ví dụ đã kiểm số, hiện tượng gợi ý, gợi ý chia video, Từ khóa kiểm tra.
-- **Chưa có thẻ** → soạn thẻ theo mẫu, dựa trên SGK (`references/<môn>/…`), ghi "Trạng thái: chờ duyệt". Được trình thẻ cùng lúc với Bảng nội dung, nhưng nói rõ "thẻ chờ duyệt" — người dùng duyệt thẻ (phạm vi kiến thức) trước, rồi mới chốt Bảng nội dung. Số liệu trong ví dụ tự kiểm và ghi phép kiểm.
+- **Chưa có thẻ** → soạn thẻ theo mẫu, dựa trên SGK (`references/<môn>/…`), ghi "Trạng thái: chờ duyệt". Được trình thẻ cùng lúc với Bảng nội dung, nhưng nói rõ "thẻ chờ duyệt" — người dùng duyệt thẻ (phạm vi kiến thức) trước, rồi mới chốt Bảng nội dung. Số liệu trong ví dụ tự kiểm và ghi phép kiểm. Chờ duyệt thẻ → `trang-thai.json` `"dangCho": "the-bai-hoc"`.
 - **Từ khóa kiểm tra** của thẻ là **cụm lời thường** sẽ có trong lời đọc hoặc chữ trên hình ("tổng số oxi hoá", "hợp lực"), không LaTeX, không ký hiệu (`\vec F`, `$...$` không bao giờ khớp — `check_script` báo lỗi thẻ). Ghi vài cách nói (`cụm1 | cụm2`).
 - Thẻ là chuẩn chung của dự án: đang làm một video thì không sửa thẻ; thấy thẻ sai → báo người dùng.
 
@@ -122,7 +122,7 @@ Sau Bảng nội dung, dàn ý bày đủ:
 11. **Danh sách beat**: `section` · ý chính 1 câu · hình định dùng · câu nối với beat trước ("nên…" / "nhưng…").
 12. **Ước lượng thời lượng**; **ý đã cắt** và lý do.
 
-**Chờ người dùng duyệt** rồi mới viết đầy đủ. Người dùng bảo làm luôn → vẫn viết dàn ý ra trước (đầu báo cáo) và đi theo nó.
+**Chờ người dùng duyệt** (`trang-thai.json` `"dangCho": "bang-noi-dung"`) rồi mới viết đầy đủ. Người dùng bảo làm luôn → vẫn viết dàn ý ra trước (đầu báo cáo) và đi theo nó.
 
 ### Bước 2 — Viết `script.json`
 
@@ -138,7 +138,7 @@ Theo schema và quy tắc bên dưới. File đã tồn tại → hỏi trước
 4. `python scripts/check_script.py <slug>` — **lỗi phải bằng 0**; từng cảnh báo hoặc sửa, hoặc ghi lý do giữ.
 4b. **Học sinh ảo**: giao cho agent con `hoc-sinh-ao` (định nghĩa ở `.codex/agents/hoc-sinh-ao.toml`), đưa đường dẫn `script.json` và **tiền đề** (học sinh đã học gì, bài trước dạy gì, chưa học gì). Agent đọc độc lập, không thấy dàn ý. Sửa mọi chỗ mức *nặng* và *vừa*; chỗ giữ nguyên thì ghi lý do trong báo cáo. Đoạn "giải thích lại ý chính" của agent mà lệch ý bản chất → video chưa dạy được ý đó, quay lại chuỗi "vì sao". Sửa nhiều thì gọi lại một lần nữa.
 5. Chạy checklist cuối file (phần máy không kiểm được).
-6. Báo: số beat, số ký tự `speak`, thời lượng ước tính, **danh sách dòng cần nghe thử** (script in sẵn) và **mọi chỗ còn nghi ngờ**.
+6. Báo: số beat, số ký tự `speak`, thời lượng ước tính, **danh sách dòng cần nghe thử** (script in sẵn) và **mọi chỗ còn nghi ngờ**. Chờ chốt → `trang-thai.json` `"dangCho": "chot-kich-ban"`.
 
 Người dùng chốt kịch bản → sang **B3 bản nháp + storyboard** (skill `dung-video` › Bước 2b), duyệt hình xong mới tạo audio (B2). Góp ý ở storyboard về chữ/lời/nhịp sửa ở đây, chưa tốn credit giọng đọc.
 

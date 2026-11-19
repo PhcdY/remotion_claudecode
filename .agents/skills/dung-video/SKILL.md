@@ -289,7 +289,7 @@ Với cảnh có hành động kéo dài hoặc camera dịch/zoom, xem cả đo
 1. Dựng đủ các beat với `draft: true` (mặc định của composition cho tới khi có audio).
 2. `node scripts/check-layout.mjs <id> --draft` → sửa hết lỗi.
 3. `node scripts/storyboard.mjs <id>` → `out/_lam-viec/<id>/storyboard/index.html`: mỗi dòng một ảnh (cuối dòng, lúc thay đổi đã hiện đủ) kèm `show`, `text`, lời đọc. Tự soát từng ảnh theo Bước 4, rồi `node scripts/storyboard.mjs <id> --review` → `out/_lam-viec/<id>/storyboard/review/`: **mỗi beat một ảnh nhỏ** (cuối beat, scale 0,3) + `review.md` (lời đọc, thay đổi hình, chữ của từng dòng). Giao cho agent con `hoc-sinh-ao` (`.codex/agents/hoc-sinh-ao.toml`) với **đúng thư mục `review/`** + tiền đề, dặn **mỗi ảnh đọc đúng một lần**, theo thứ tự; không đưa thư mục ảnh đầy đủ. Agent dừng giữa chừng (lỗi, hết lượt) thì **không** cho chạy tiếp ngay: xem nó đã đọc bao nhiêu ảnh, có mở lại ảnh không, rồi mới quyết (24/10: agent xem 67 ảnh cỡ 0,5, mở lại mỗi ảnh ~20 lần, tốn 68% token cả phiên và chạm giới hạn hai lần). Sửa chỗ *nặng*/*vừa* về hình ở đây, chỗ về lời/chữ báo người dùng. Xong mới đưa người dùng đường dẫn trang `index.html` để mở xem, kèm tóm tắt những gì học sinh ảo đã bắt và đã sửa.
-4. Người dùng duyệt. Góp ý về hình → sửa code; về chữ/lời/nhịp → sửa ở B1 (chưa tốn audio). Duyệt xong mới sang B2.
+4. Người dùng duyệt (`trang-thai.json` `"tram": "b3-nhap"`, `"dangCho": "storyboard"` — AGENTS.md › Trạng thái). Góp ý về hình → sửa code; về chữ/lời/nhịp → sửa ở B1 (chưa tốn audio). Duyệt xong mới sang B2.
 5. Sau B2: `python scripts/align_words.py <slug>` (mốc từng từ cho `cue`), bỏ `draft` khỏi `defaultProps`, chạy lại Bước 0 đầy đủ + Bước 4 với thời gian thật.
 
 ## Bước 3 — Cấu trúc code
@@ -332,7 +332,7 @@ src/Root.tsx             đăng ký <Composition id="<slug>" ...> 1920×1080, 30
 ## Bước 5 — Xem trước, rồi render
 
 - Người dùng muốn xem nhanh ("demo", "chưa cần render") → mở Remotion Studio (chạy nền `npx remotion studio --no-open`, rồi đưa người dùng link `http://localhost:3000/<compositionId>`) ở trang composition, không render.
-- Render khi người dùng bảo, **chạy nền và ghi tiến độ ra file** để trả lời được "đến đâu rồi":
+- Render khi người dùng bảo (lúc chờ: `trang-thai.json` `"tram": "b3-hoan-thien"`, `"dangCho": "xem-studio"`), **chạy nền và ghi tiến độ ra file** để trả lời được "đến đâu rồi":
   ```
   npx remotion render <id> "$(node scripts/out-path.mjs <slug> --id <id>)" > out/_lam-viec/<id>/render.log 2>&1
   ```
@@ -340,7 +340,7 @@ src/Root.tsx             đăng ký <Composition id="<slug>" ...> 1920×1080, 30
   Không dùng `--log=error` (mất dòng tiến độ). Hỏi tiến độ → đọc dòng cuối của log (frame đã render / tổng), báo phần trăm và thời gian còn lại ước tính.
 - Mốc thời gian (máy người dùng, 21/10/2026): video 3:53 (≈ 7000 frame) render ≈ 14–15 phút; 2:49 ≈ 6–8 phút. Báo mốc này lúc bắt đầu render.
 - Xong: đo thời lượng file bằng `ffprobe`, gửi file cho người dùng. `out/` bị gitignore, không commit video.
-- **Phụ đề**: `node scripts/export-captions.mjs <slug> [--id <compositionId>]` → `<id>.srt` + `<id>.vtt` + `<id>.timeline.json` cạnh video trong thư mục bài (từ `caption`, thiếu thì `speak`, đúng mốc thời gian của audio). Gửi kèm video để tải lên web/YouTube dạng phụ đề bật–tắt được; không in phụ đề lên hình.
+- **Phụ đề**: `node scripts/export-captions.mjs <slug> [--id <compositionId>]` → `<id>.srt` + `<id>.vtt` + `<id>.timeline.json` cạnh video trong thư mục bài (từ `caption`, thiếu thì `speak`, đúng mốc thời gian của audio). Gửi kèm video để tải lên web/YouTube dạng phụ đề bật–tắt được; không in phụ đề lên hình. Có video + phụ đề → `trang-thai.json` `"dangCho": "thanh-pham"`.
 
 ## Bước 6 — Kiểm với người xem thật
 
