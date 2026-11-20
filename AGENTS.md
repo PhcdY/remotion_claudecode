@@ -37,6 +37,46 @@ B1 `viet-kich-ban` → B3 nháp + storyboard (`dung-video` › Bước 2b) → B
    `out/<Môn>/Lớp <lop>/<chuong>/<bai>/`: video + phụ đề (người dùng xem). `out/_lam-viec/<id>/`: stills, storyboard (agent dùng). Không để file nào khác ở gốc `out/`.
 6. **Người xem thật** → học sinh xem thử, số liệu giữ chân người xem; thời điểm → câu: `py scripts/beat_at.py <id> 1:23`. Soát kịch bản/storyboard bằng agent/skill `hoc-sinh-ao`.
 
+## Trạng thái cho app (`trang-thai.json`)
+
+Khi vào mỗi chặng (`tram`), khi dừng ở một cổng duyệt, và khi làm tiếp sau câu trả lời của người dùng, agent ghi `<OUTPUT_DIR hoặc out>/_lam-viec/<slug>/trang-thai.json` (thư mục = `workDir` trong `scripts/lib/paths.mjs`). App đọc file này để biết đang ở đâu và cần hiện gì. Agent không dựa vào file này để quyết định việc làm.
+
+```jsonc
+{
+  "tram": "b2-audio",       // b1-kich-ban | b3-nhap | b2-audio | b3-hoan-thien | xong
+  "dangCho": "nghe-thu",    // một giá trị ở bảng dưới; null = agent đang làm
+  "duLieu": { "files": ["C:/…/public/audio/<slug>/b01-l01.mp3"] },  // thứ app cần hiện ở cổng này; {} nếu không có
+  "loi": null               // null, hoặc một câu nói lỗi đang chặn ("check_script: 2 lỗi", "Vivibe: hết credit")
+}
+```
+
+| `tram` | `dangCho` | Người dùng làm gì | `duLieu` |
+|---|---|---|---|
+| `b1-kich-ban` | `loai-video` | chọn loại video (chỉ khi agent không chắc) | `{"deXuat": "bai-hoc", "lyDo": "…"}` |
+| `b1-kich-ban` | `the-bai-hoc` | duyệt thẻ bài học mới soạn (chỉ khi chưa có thẻ) | `{"the": "<…/references/….md>"}` |
+| `b1-kich-ban` | `bang-noi-dung` | duyệt Bảng nội dung + dàn ý | `{"noiDung": "<markdown Bảng nội dung + dàn ý>"}` |
+| `b1-kich-ban` | `chot-kich-ban` | chốt `script.json` | `{"script": "<…/script.json>", "canhBao": 3, "thoiLuongUoc": "3:20"}` |
+| `b3-nhap` | `storyboard` | duyệt storyboard nháp | `{"storyboard": "<…/storyboard/index.html>"}` |
+| `b2-audio` | `giong-va-chi-phi` | chọn giọng, đồng ý số ký tự | `{"giongDeXuat": "nam - c Bình", "soDong": 58, "soKyTu": 3400}` |
+| `b2-audio` | `nghe-thu` | nghe b01 và các dòng cần nghe thử | `{"files": ["<…mp3>", …]}` |
+| `b2-audio` | `nghe-lai` | nghe lại các dòng ký hiệu sau khi tạo cả bài | `{"files": ["<…mp3>", …], "thoiLuong": "3:45"}` |
+| `b3-hoan-thien` | `xem-studio` | xem bản dựng trong Studio, bảo render | `{"studio": "http://localhost:3000/<id>"}` |
+| `b3-hoan-thien` | `thanh-pham` | nhận mp4, góp ý cuối | `{"video": "<…mp4>", "phuDe": ["<…srt>", "<…vtt>"]}` |
+| `xong` | `null` | — | `{"video": "<…mp4>"}` |
+
+- Đường dẫn trong `duLieu` là **đường dẫn tuyệt đối thật**, lấy từ kết quả của script (`storyboard.mjs`, `out-path.mjs`, `vivibe_tts.py`…), để app không phải tự dựng đường dẫn theo `OUTPUT_DIR`.
+- **Ghi nguyên tử** (app theo dõi bằng `fs.watch`): ghi trọn nội dung ra `trang-thai.json.tmp` cùng thư mục rồi đổi tên đè lên file thật:
+  `node -e "require('fs').renameSync(process.argv[1], process.argv[2])" "<thư mục>/trang-thai.json.tmp" "<thư mục>/trang-thai.json"`.
+  Không ghi thẳng vào `trang-thai.json`, không sửa từng phần. Đổi tên báo `EPERM` (Windows, app đang mở file) thì thử lại sau 1 s.
+- **Vào chặng mới** (`b1-kich-ban`, `b3-nhap`, `b2-audio`, `b3-hoan-thien`) → ghi ngay `"tram": "<chặng>"`, `"dangCho": null`, `"duLieu": {}`, `"loi": null`, trước khi làm việc gì của chặng. Đứt giữa chặng thì app vẫn biết đang dở ở đâu, và không đọc nhầm `xong` còn sót từ lần làm trước của cùng slug.
+- Làm tiếp sau câu trả lời → ghi `"dangCho": null`, `"duLieu": {}`, `tram` là bước đang làm. Cổng có điều kiện (`loai-video`, `the-bai-hoc`) không xảy ra thì bỏ qua.
+- Lỗi chặn (check_script còn lỗi, TTS lỗi, render hỏng) → ghi `loi`, giữ `tram`. `dangCho` là cổng đang chờ nếu cần người dùng quyết, còn lại để `null`. Hết lỗi thì `loi` về `null`.
+- Góp ý ở `thanh-pham` → sửa rồi quay lại `xem-studio`; không còn góp ý → `xong`.
+- **Nhảy ngược là hợp lệ**, app không coi là lỗi. Ngoài đường `thanh-pham` → `xem-studio` ở trên, có hai đường quay lại:
+  - `nghe-thu` → `chot-kich-ban` (`tram` về `b1-kich-ban`): Vivibe đọc sai → sửa `speak` ở B1, người dùng chốt lại, rồi tạo lại đúng dòng đó (`--only <beatId>-lNN`) và quay về `nghe-thu` (`tao-audio` Bước 2).
+  - `thanh-pham` → `bang-noi-dung` (`tram` về `b1-kich-ban`): lỗi cấu trúc kịch bản → duyệt lại dàn ý rồi đi lại các chặng sau, không vá trên video cũ (Workflow bước 4).
+- **Giới hạn đã biết**: luồng bản giọng khác (`--audio-dir <slug>-<hậu tố>`) không ghi `trang-thai.json`. Không ghi trạng thái của luồng đó vào file của slug gốc.
+
 ## Schema `script.json`
 
 ```jsonc
