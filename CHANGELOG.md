@@ -10,6 +10,15 @@ Mỗi bản phát hành có một mục, bản mới nhất ở trên cùng. Ng�
 
 ## Chưa phát hành
 
+## Bản 4 — 2026-11-23
+
+Video Văn bớt máy móc: hình diễn theo lời giảng, mỗi ý có một khung hình riêng, và keyword được bôi ngay trên câu văn.
+
+### Chung (mọi môn)
+
+**Có gì mới**
+- Codex ghi lại đang làm tới bước nào và đang chờ bạn duyệt gì, để app theo dõi hiện được tiến độ làm video.
+
 ### Ngữ văn
 
 **Có gì mới**
@@ -19,6 +28,10 @@ Mỗi bản phát hành có một mục, bản mới nhất ở trên cùng. Ng�
 - Bước dàn ý có **bảng duyệt từng ý**: khung hình, câu lên hình, cụm được bôi, màu và cách hình phản ứng. Có thêm danh sách tự kiểm trước khi xuất video.
 - Ngữ liệu chưa có trong thư viện phải ghi nguồn và nhắc đối chiếu SGK; tranh minh họa không được trái với câu gốc.
 - Clip thử **"Một đoạn văn, ba cách viết"** để xem mẫu cách làm mới.
+
+### Các môn khác
+
+Không có thay đổi riêng.
 
 ## Bản 3 — 2026-11-17
 
