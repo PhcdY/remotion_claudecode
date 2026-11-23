@@ -10,6 +10,16 @@ Mỗi bản phát hành có một mục, bản mới nhất ở trên cùng. Ng�
 
 ## Chưa phát hành
 
+### Ngữ văn
+
+**Có gì mới**
+- **Bôi keyword theo lời giảng**: câu gốc hiện lúc đọc, vệt màu chạy qua đúng cụm quan trọng, phần còn lại mờ đi, rồi câu rút khỏi màn hình và chỉ còn ghi chú ngắn cạnh hình.
+- **Hình kể chuyện thay vì một tranh zoom ra zoom vào**: hình diễn đúng việc lời đang nói, mỗi ý lớn có một khung hình riêng, không để hình đứng yên quá lâu, câu hỏi đoán có lựa chọn ngay trên hình, cảm xúc thể hiện qua màu cảnh và dáng người.
+- Nhãn khái niệm mới kiểu **ghi chú bên lề sách**, gọn và mềm hơn tag có nền.
+- Bước dàn ý có **bảng duyệt từng ý**: khung hình, câu lên hình, cụm được bôi, màu và cách hình phản ứng. Có thêm danh sách tự kiểm trước khi xuất video.
+- Ngữ liệu chưa có trong thư viện phải ghi nguồn và nhắc đối chiếu SGK; tranh minh họa không được trái với câu gốc.
+- Clip thử **"Một đoạn văn, ba cách viết"** để xem mẫu cách làm mới.
+
 ## Bản 3 — 2026-11-17
 
 Lời đọc nghe giống lời giảng hơn (luật văn nói), và phần đổi giọng Việt–Anh trong video tiếng Anh tự nhiên hơn.
