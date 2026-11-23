@@ -1,0 +1,81 @@
+{
+  "slug": "demo-van-doc-boi-rut",
+  "title": "Một đoạn văn, ba cách viết",
+  "subject": "van",
+  "beats": [
+    {
+      "id": "b01",
+      "scene": 1,
+      "section": "HIỆN TƯỢNG",
+      "keyword": "",
+      "visual": "CẢNH 1 — Toàn cảnh đường làng buổi sớm mùa thu, sương trôi. Hai mẹ con đứng ở đầu đường. Câu gốc hiện ở khoảng trời bên trái, tối đa hai dòng cùng lúc.",
+      "lines": [
+        {"show": "Sương tan dần, con đường làng và hai mẹ con hiện ra", "text": "", "speak": "Một đoạn rất ngắn trong Tôi đi học, mà có tới ba cách viết."},
+        {"show": "Dòng 1 của câu gốc hiện theo giọng đọc", "text": "Mẹ tôi âu yếm nắm tay tôi dẫn đi", "at": "khoảng trời bên trái", "speak": "Mẹ tôi âu yếm nắm tay tôi dẫn đi,", "quoteSource": "Thanh Tịnh, Tôi đi học, https://baophapluat.vn/toi-di-hoc-post56513.html"},
+        {"show": "Dòng 2 của câu gốc hiện theo giọng đọc", "text": "trên con đường làng dài và hẹp", "at": "khoảng trời bên trái", "speak": "trên con đường làng dài và hẹp.", "quoteSource": "Thanh Tịnh, Tôi đi học, https://baophapluat.vn/toi-di-hoc-post56513.html"},
+        {"show": "Hai dòng trên rút đi, cụm thứ ba hiện", "text": "lần này tự nhiên tôi thấy lạ", "at": "khoảng trời bên trái", "speak": "Và lần này tự nhiên tôi thấy lạ.", "quoteSource": "Thanh Tịnh, Tôi đi học, https://baophapluat.vn/toi-di-hoc-post56513.html"},
+        {"show": "Ba cụm cùng hiện cạnh vật của nó, sáng lần lượt trong lúc chờ", "text": "", "speak": "Cụm nào kể việc, cụm nào tả cảnh, cụm nào nói cảm xúc?", "pauseAfter": 1.5}
+      ]
+    },
+    {
+      "id": "b02",
+      "scene": 2,
+      "section": "BẢN CHẤT",
+      "keyword": "",
+      "visual": "CẢNH 2 — Khung đi ngang theo hai mẹ con. Nền trôi theo nhiều lớp khi họ bước, dấu chân để lại phía sau. Câu gốc ở trên, cụm hành động được bôi vàng.",
+      "lines": [
+        {"show": "Vệt vàng chạy qua cụm nắm tay tôi dẫn đi, phần còn lại mờ đi", "cue": "nắm tay", "text": "Mẹ tôi âu yếm nắm tay tôi dẫn đi", "at": "phía trên hai mẹ con", "speak": "Bắt đầu từ nắm tay, dẫn đi.", "quoteSource": "Thanh Tịnh, Tôi đi học, https://baophapluat.vn/toi-di-hoc-post56513.html"},
+        {"show": "Hai bàn tay nắm lại và hai người bước đi", "cue": "nắm lấy", "text": "", "speak": "Người mẹ nắm lấy tay con, rồi hai mẹ con cùng bước."},
+        {"show": "Nền trôi, dấu chân nối dài phía sau", "text": "", "speak": "Việc này nối tiếp việc kia."},
+        {"show": "Câu dài rút đi, nhãn ghi chú Tự sự nối vào hai bàn tay", "cue": "tự sự", "text": "Tự sự", "at": "hai bàn tay đang nắm", "speak": "Câu văn đang kể việc, đó là tự sự."}
+      ]
+    },
+    {
+      "id": "b03",
+      "scene": 3,
+      "section": "BẢN CHẤT",
+      "keyword": "",
+      "visual": "CẢNH 3 — Góc nhìn dọc con đường về phía xa. Lá đang rơi đứng lại giữa không trung. Câu gốc ở trên, cụm tả đường được bôi xanh ngọc.",
+      "lines": [
+        {"show": "Lá rơi đứng lại, khung hình nhìn dọc con đường", "cue": "dừng lại", "text": "trên con đường làng dài và hẹp", "at": "khoảng trời phía trên đường", "speak": "Giờ thời gian dừng lại, mắt nhìn vào con đường.", "quoteSource": "Thanh Tịnh, Tôi đi học, https://baophapluat.vn/toi-di-hoc-post56513.html"},
+        {"show": "Bôi cụm con đường làng dài, con đường kéo dài về phía chân trời", "cue": "dài", "text": "", "speak": "Con đường dài, kéo tít về phía xa."},
+        {"show": "Bôi tiếp và hẹp, hai mép đường khép vào", "cue": "hẹp", "text": "", "speak": "Lại hẹp, hai mép đường như khép vào."},
+        {"show": "Câu dài rút đi, nhãn ghi chú Miêu tả nối vào mép đường", "cue": "miêu tả", "text": "Miêu tả", "at": "mép con đường", "speak": "Không có việc gì xảy ra, chỉ có dáng vẻ của cảnh, đó là miêu tả."}
+      ]
+    },
+    {
+      "id": "b04",
+      "scene": 4,
+      "section": "BẢN CHẤT",
+      "keyword": "",
+      "visual": "CẢNH 4 — Lại khung đi ngang, nhưng đứa trẻ khựng lại. Cả cảnh ngả sang màu lạ, những vòng sóng lan ra từ ngực đứa trẻ. Cụm cảm xúc được bôi hồng.",
+      "lines": [
+        {"show": "Vệt hồng chạy qua cụm tự nhiên tôi thấy lạ", "cue": "tự nhiên", "text": "lần này tự nhiên tôi thấy lạ", "at": "phía trên hai mẹ con", "speak": "Vẫn con đường ấy, nhưng lần này tự nhiên tôi thấy lạ.", "quoteSource": "Thanh Tịnh, Tôi đi học, https://baophapluat.vn/toi-di-hoc-post56513.html"},
+        {"show": "Đứa trẻ khựng lại, cảnh đổi màu, sóng lan từ ngực", "cue": "khựng lại", "text": "", "speak": "Đứa trẻ khựng lại, cả khung cảnh như đổi màu."},
+        {"show": "Câu dài rút đi, nhãn ghi chú Biểu cảm nối vào đứa trẻ", "cue": "biểu cảm", "text": "Biểu cảm", "at": "đứa trẻ", "speak": "Cảnh không đổi, lòng người đổi, đó là biểu cảm."}
+      ]
+    },
+    {
+      "id": "b05",
+      "scene": 5,
+      "section": "VÍ DỤ",
+      "keyword": "",
+      "visual": "CẢNH 5 — Toàn cảnh sương. Cụm mới hiện trên trời, ba lựa chọn nằm dưới cụm. Trả lời xong, sương và gió thổi qua cảnh.",
+      "lines": [
+        {"show": "Cụm mới hiện, ba lựa chọn sáng lần lượt trong lúc chờ", "text": "sương thu và gió lạnh", "at": "khoảng trời giữa khung", "speak": "Còn cụm sương thu và gió lạnh thì sao?", "pauseAfter": 1.5, "quoteSource": "Thanh Tịnh, Tôi đi học, https://baophapluat.vn/toi-di-hoc-post56513.html"},
+        {"show": "Gió thổi lá và sương qua cảnh, lựa chọn Miêu tả được gạch chân", "cue": "miêu tả", "text": "Miêu tả", "at": "dưới cụm sương thu và gió lạnh", "speak": "Sương và gió là dáng vẻ của buổi sớm, nên đây là miêu tả."}
+      ]
+    },
+    {
+      "id": "b06",
+      "scene": 6,
+      "section": "TỔNG KẾT",
+      "keyword": "",
+      "visual": "CẢNH 6 — Ba khung tròn nhỏ gom lại ba hình đã xem: bàn tay nắm, con đường, vòng sóng. Tên ba cách viết nằm dưới, đúng màu đã bôi.",
+      "lines": [
+        {"show": "Ba khung tròn hiện lần lượt", "text": "", "speak": "Muốn phân biệt, hãy hỏi câu văn đang làm gì."},
+        {"show": "Từng tên sáng đúng lúc được gọi", "cue": "tự sự", "text": "Kể · Tả · Bộc lộ", "at": "dưới ba khung tròn", "speak": "Vậy kể là tự sự, tả là miêu tả, bộc lộ là biểu cảm."}
+      ]
+    }
+  ]
+}
