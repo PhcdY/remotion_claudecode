@@ -10,6 +10,10 @@ Mỗi bản phát hành có một mục, bản mới nhất ở trên cùng. Ng�
 
 ## Chưa phát hành
 
+## Bản 5 — 2026-11-27
+
+Nội dung được ưu tiên hơn thời lượng: video bài học và mọi video Văn được dài tới 6 phút. Lời giảng Văn bớt máy móc, và giọng đọc không còn ngắt lệch ở dấu phẩy.
+
 ### Chung (mọi môn)
 
 **Có gì mới**
