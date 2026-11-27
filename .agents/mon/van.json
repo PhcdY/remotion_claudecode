@@ -18,5 +18,5 @@
      "dung": "để câu chữ của tác giả và hình gánh cảm xúc", "muc": "canh-bao", "ma": "van:sen", "ngoaiLe": ["biết bao nhiêu", "biết bao giờ"],
      "thongBao": "{noi}: speak tự cảm thán '{tu}' — {dung}; dòng đọc nguyên văn ngữ liệu thì bỏ qua (van.md › mục 1 › Hành văn, ý 7)"}
   ],
-  "thayLuat": {"canhToiDa": 6}
+  "thayLuat": {"canhToiDa": 6, "tongGiay": [150, 360], "kyTu": [2700, 6500]}
 }

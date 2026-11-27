@@ -343,4 +343,5 @@ Video dựng từ bản 1 (`v1.0.0`). So với `main-codex`: mô hình rối, kh
 - Gốc rễ: mẫu gọi tên "…, đó chính là X" của `viet-kich-ban` (giữ P1) được áp cho từng ý; Văn không có luật về lời bình nên mặc định theo khuôn khoa học "câu chốt = tên/lý do".
 - Giữ quyết định 23/11 (giọng đọc trung tính, không xưng hô); chỉ thêm luật cách viết câu.
 - Luật: `van.md` › mục 1 › **Hành văn** (cảm → chữ → vì sao → tên; khuôn gọi tên ≤ 2 lần; đọc – bình – đọc lại; khoảng lặng sau câu trích; nối câu bằng thứ câu trước để lại; không khen chung, không sến; thử đổi chữ; nhịp bằng cặp vế), mục 0 (`pauseAfter` sau câu trích), mục 7. `van.json`: cảnh báo cụm sáo. `check_script`: `[van:khuon-goi-ten]`, bỏ cảnh báo `pauseAfter` ở dòng có `quoteSource` (chỉ môn Văn).
+- Người dùng chốt thêm: mọi video Văn (hiện tượng lẫn bài học) tới 6:00 → `van.md` › mục 0, `van.json` › `thayLuat` (`tongGiay` 150–360, `kyTu` 2700–6500).
 - Nguồn: Poetry Unbound (đọc – bình – đọc lại); CBC Doc Project, Nieman Storyboard (pointing, không sến, viết theo hơi đọc); Wikipedia "Signs of AI writing", skill `viet-nhu-nguoi` (cụm sáo). Không cài skill nào: chúng viết cho văn đọc bằng mắt, dễ phá luật `speak`.

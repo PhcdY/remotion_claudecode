@@ -13,9 +13,10 @@ Chỉ áp cho video Văn. Giọng đọc giữ nguyên luật chung (trung tính
 | `viet-kich-ban` › ≤ ~3 cảnh | ≤ 6 cảnh; **đổi cảnh khi đổi ý lớn**. Vẫn một ngữ liệu xuyên suốt, cảnh sau là cách nhìn khác của cùng ngữ liệu | mọi video | Video "Phân biệt tự sự, biểu cảm và miêu tả" dùng một tranh suốt 3:09, người xem chán · người dùng · 23/11/2026 |
 | `dung-video` › quy tắc 9 (một thay đổi mỗi dòng) | Từ được bôi và phản ứng của tranh tính là **một** thay đổi. Một hành động có thể chạy qua nhiều dòng; `show` ghi điểm bắt đầu và lúc dừng | mọi video | Hình phải diễn cùng lời · người dùng · 23/11/2026 |
 | `viet-kich-ban` › Câu hỏi đoán 1–2 lần | 2–3 lần, trả lời bằng thao tác trên hình (mục 1 › Hình kể chuyện, ý 4) | mọi video | Thêm chỗ cho người xem tự nghĩ · người dùng · 23/11/2026 |
+| `viet-kich-ban` › Độ dài 2:30–4:00 (video hiện tượng) | 2:30–6:00 cho **mọi** video Văn (≈ 2700–6500 ký tự `speak`). Thời gian thêm dành cho đọc – bình – đọc lại và khoảng lặng sau câu trích, không dành cho ý phụ; vượt 6:00 thì đề xuất tách video | mọi video | Lời bình cần chỗ để câu chữ thấm, khoảng lặng và đọc lại làm video dài ra · người dùng · 27/11/2026 |
 | `viet-kich-ban` › `pauseAfter` chỉ sau câu hỏi đoán | Dòng đọc nguyên văn ngữ liệu (có `quoteSource`) được `pauseAfter` 0,8–1,5 s | mọi video | Câu thơ cần một khoảng lặng để thấm trước khi phân tích · người dùng · 27/11/2026 |
 
-Ngưỡng số cảnh ghi ở `.agents/mon/van.json`.
+Ngưỡng số cảnh, thời lượng, số ký tự ghi ở `.agents/mon/van.json`.
 
 ---
 
