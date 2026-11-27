@@ -1,5 +1,22 @@
 {
-  "_ghiChu": "File máy đọc của gói van.md. check_script.py đọc 'thayLuat' (ngưỡng mặc định gói được thay). Cách viết: .agents/mon/_mau.md › File máy đọc.",
-  "thuatNgu": [],
-  "thayLuat": {"canhToiDa": 6}
+  "_ghiChu": "File máy đọc của gói van.md. check_script.py đọc 'thuatNgu' (ở đây: cụm sáo kiểu văn mẫu, mục 1 › Hành văn, ý 6) và 'thayLuat' (ngưỡng mặc định gói được thay). Cách viết: .agents/mon/_mau.md › File máy đọc.",
+  "truongMacDinh": ["speak", "keyword"],
+  "thuatNgu": [
+    {"khongDung": ["thể hiện sâu sắc", "khắc họa thành công", "khắc hoạ thành công", "góp phần làm nổi bật", "góp phần thể hiện"],
+     "dung": "nói việc chữ đó làm (\"làm con đường như dài ra\", \"kéo mắt về gần\")", "muc": "canh-bao", "ma": "van:cum-sao",
+     "thongBao": "{noi}: {truong} có cụm sáo '{tu}' — {dung} (van.md › mục 1 › Hành văn, ý 6)"},
+    {"khongDung": ["nghệ thuật đặc sắc", "vô cùng tinh tế", "hết sức tinh tế", "tài tình", "độc đáo"],
+     "dung": "chỉ ra chỗ khác thường bằng chữ có trong bài (\"chỉ một chữ điểm mà…\")", "muc": "canh-bao", "ma": "van:khen-chung",
+     "thongBao": "{noi}: {truong} khen chung '{tu}' — {dung} (van.md › mục 1 › Hành văn, ý 6)"},
+    {"khongDung": ["giá trị nhân văn sâu sắc", "để lại ấn tượng sâu sắc", "ý nghĩa sâu sắc"],
+     "dung": "nói điều người đọc nhận ra (\"người đọc thương đứa trẻ hơn\")", "muc": "canh-bao", "ma": "van:sau-sac",
+     "thongBao": "{noi}: {truong} có cụm sáo '{tu}' — {dung} (van.md › mục 1 › Hành văn, ý 6)"},
+    {"khongDung": ["qua đó", "có thể nói", "nhìn chung", "bên cạnh đó", "ngoài ra"], "truong": ["speak"],
+     "dung": "\"vậy\", \"tức là\", nối bằng chữ câu trước để lại, hoặc bỏ", "muc": "canh-bao", "ma": "van:noi-van-mau",
+     "thongBao": "{noi}: speak có từ nối văn mẫu '{tu}' — {dung} (van.md › mục 1 › Hành văn, ý 5–6)"},
+    {"khongDung": ["thật xúc động", "đẹp biết bao", "biết bao", "ôi"], "truong": ["speak"],
+     "dung": "để câu chữ của tác giả và hình gánh cảm xúc", "muc": "canh-bao", "ma": "van:sen", "ngoaiLe": ["biết bao nhiêu", "biết bao giờ"],
+     "thongBao": "{noi}: speak tự cảm thán '{tu}' — {dung}; dòng đọc nguyên văn ngữ liệu thì bỏ qua (van.md › mục 1 › Hành văn, ý 7)"}
+  ],
+  "thayLuat": {"canhToiDa": 6, "tongGiay": [150, 360], "kyTu": [2700, 6500]}
 }

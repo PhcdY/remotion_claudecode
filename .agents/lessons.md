@@ -32,7 +32,7 @@ Mỗi bài học dưới đây gán vào một phép thử P0–P5 (`viet-kich-b
 | | chữ/nhãn đè nét, đè nhau, cụt mép, bị đẩy xa | 13/11 Sinh trao đổi chất ("Tim" lơ lửng giữa phổi và tim; "Máu vận chuyển" đè ruột); 17/10 đạo hàm; 23/10 (nhãn tay, đệm, `phases`); 06–07/11 Oxyz; 08/11 Sử ("Thăng L…"); 10/11 (nhãn giật); 10/11 Văn (khối ý chồng) |
 | | ký hiệu viết tay hiện vỡ / công thức lỗi lặng lẽ | 08/11 (`$ o$`); 07/11 (`\v`); 26/10 (`\vec`); 11/11 (mũ Unicode, `\ce` chữ đỏ); 06/11 (gạch ngang trên số) |
 | | hình bé tí giữa khung | 08/11 Sử |
-| **Ngoài sáu phép thử** (tầng 2 — xem/nghe dễ chịu, quy trình) | nhịp và giọng đọc | 13/11 Sinh trao đổi chất (đều đều, buồn ngủ); 19–26/10 Vivibe (dấu ngắt, phiên âm); 22/10 (`speed`); 23/10 (câu hỏi đoán sượng) |
+| **Ngoài sáu phép thử** (tầng 2 — xem/nghe dễ chịu, quy trình) | nhịp và giọng đọc | 27/11 Văn (khuôn gọi tên lặp, khen chung, câu thơ không có khoảng lặng); 13/11 Sinh trao đổi chất (đều đều, buồn ngủ); 19–26/10 Vivibe (dấu ngắt, phiên âm); 22/10 (`speed`); 23/10 (câu hỏi đoán sượng) |
 | | kết không có cảm giác kết | 19–20/10 đạo hàm |
 | | thừa, gây cười, kém hấp dẫn | 10/11 (nhãn "mô hình" thừa); 22/10 (câu hài); 10/11 Văn (minh hoạ quá đơn giản) |
 | | quy trình, công cụ | 23/10 (storyboard trước audio; học sinh ảo); 24/10 (token); 08/11 (link `file:///`); 07/11 (asset) |
@@ -336,3 +336,13 @@ Video dựng từ bản 1 (`v1.0.0`). So với `main-codex`: mô hình rối, kh
 - Chốt: làm hết máy móc bằng **hình và cách truyền tải**, không đổi giọng. Keyword theo cách **đọc, bôi, rút**: câu gốc hiện lúc đọc, vệt màu chạy qua cụm key khi phân tích, câu rút đi còn nhãn cạnh vật. Tag dạng viên bị chê "xấu, thô" → nhãn ghi chú bên lề.
 - Luật: `van.md` › mục 0 (Thay luật chung), mục 1 › Hình kể chuyện, mục 3.4, mục 6; `van.json` (`canhToiDa` 6). Component: `src/components/van/` (`QuoteMarker`, `MarginNote`, `useVanQuoteFont`). Mẫu: `demo-van-doc-boi-rut`, người dùng xem và chốt cùng ngày. Các ngưỡng (8–10 giây, 2–6 từ) là mức khởi đầu, chỉnh tiếp theo góp ý từ video thật.
 - Thêm vào gói: bảng ý lớn ở dàn ý, mẫu `script.json`, đối chiếu ngữ liệu khi `references` chưa có, checklist nghiệm thu (mục 7). `QuoteMarker` báo lỗi khi cụm bôi không có trong câu, để lỗi không bị lọt im lặng.
+
+### 27/11/2026 — Văn: hành văn máy móc dù hình đã sửa
+
+- Người dùng: "lối hành văn ảnh hưởng rất nhiều đến hiệu quả truyền đạt", hỏi Văn có đang dập khuôn, máy móc không.
+- Soát gói và hai kịch bản Văn: gói 221 dòng gần hết nói về hình; lời văn chỉ có luật định nghĩa và phiên âm, còn lại theo luật `speak` chung viết cho bài giảng khoa học. `demo-van-doc-boi-rut` dùng khuôn "…, đó là X" 4 lần (cộng câu kết "kể là tự sự, tả là miêu tả, bộc lộ là biểu cảm") → nghe như bài tập dán nhãn. `[van-noi:cung-khuon]` không bắt được vì chỉ đếm 3 dòng liền trong một beat. Câu thơ đọc xong phân tích ngay: `pauseAfter` chỉ cho câu hỏi đoán.
+- Gốc rễ: mẫu gọi tên "…, đó chính là X" của `viet-kich-ban` (giữ P1) được áp cho từng ý; Văn không có luật về lời bình nên mặc định theo khuôn khoa học "câu chốt = tên/lý do".
+- Giữ quyết định 23/11 (giọng đọc trung tính, không xưng hô); chỉ thêm luật cách viết câu.
+- Luật: `van.md` › mục 1 › **Hành văn** (cảm → chữ → vì sao → tên; khuôn gọi tên ≤ 2 lần; đọc – bình – đọc lại; khoảng lặng sau câu trích; nối câu bằng thứ câu trước để lại; không khen chung, không sến; thử đổi chữ; nhịp bằng cặp vế), mục 0 (`pauseAfter` sau câu trích), mục 7. `van.json`: cảnh báo cụm sáo. `check_script`: `[van:khuon-goi-ten]`, bỏ cảnh báo `pauseAfter` ở dòng có `quoteSource` (chỉ môn Văn).
+- Người dùng chốt thêm: mọi video Văn (hiện tượng lẫn bài học) tới 6:00 → `van.md` › mục 0, `van.json` › `thayLuat` (`tongGiay` 150–360, `kyTu` 2700–6500).
+- Nguồn: Poetry Unbound (đọc – bình – đọc lại); CBC Doc Project, Nieman Storyboard (pointing, không sến, viết theo hơi đọc); Wikipedia "Signs of AI writing", skill `viet-nhu-nguoi` (cụm sáo). Không cài skill nào: chúng viết cho văn đọc bằng mắt, dễ phá luật `speak`.
