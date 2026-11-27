@@ -17,7 +17,7 @@ Lý do và lời góp ý gốc của từng luật: `.agents/lessons.md`.
 
 **Ba tầng luật** (chung cho `viet-kich-ban`, `dung-video` và mọi gói môn):
 - **Tầng 1 — sáu phép thử dưới đây**: kết quả người xem phải đạt. CỨNG: trượt là lỗi. Không gói môn, không ngoại lệ nào tắt được.
-- **Tầng 2 — mặc định**: mọi luật khác trong skill (≤ 3 cảnh, hook ≤ 20 s, 2:30–4:00, một ví dụ xuyên suốt, "Khung nội dung"…). Đây là *cách thường đạt* phép thử. Gói môn chỉ thay được khi ghi trong mục **"Thay luật chung"** của gói (ngưỡng số thì thêm ở `.agents/mon/<mon>.json › thayLuat`). Gói nói khác luật chung mà không có trong mục đó → làm theo luật chung, ghi vào "Chỗ còn nghi ngờ".
+- **Tầng 2 — mặc định**: mọi luật khác trong skill (≤ 3 cảnh, hook ≤ 20 s, độ dài 2:30–4:00 / bài học 2:30–6:00, một ví dụ xuyên suốt, "Khung nội dung"…). Đây là *cách thường đạt* phép thử. Gói môn chỉ thay được khi ghi trong mục **"Thay luật chung"** của gói (ngưỡng số thì thêm ở `.agents/mon/<mon>.json › thayLuat`). Gói nói khác luật chung mà không có trong mục đó → làm theo luật chung, ghi vào "Chỗ còn nghi ngờ".
 - **Tầng 3 — gợi ý** (thực đơn hình, mẫu câu, component): dùng, hoặc tự đề xuất cách khác ở điểm duyệt.
 
 | # | Phép thử (CỨNG) | SAI đã gặp | ĐÚNG | Kiểm bằng |
@@ -53,7 +53,7 @@ P5 text dài > 35 ký tự: …
 
 - Người xem: học sinh THPT ôn **THPTQG, TSA, HSA** (và các kỳ ĐGNL tương tự). Video đăng trên web 9Study.
 - Mục tiêu: hiểu **vì sao**, để làm được cả bài lạ.
-- Video ngang 16:9, **2:30 – 4:00**. Bước khó cần thêm thời gian thì thêm; vẫn không đủ thì **cắt ý phụ**, không nói nhanh hơn.
+- Video ngang 16:9, **2:30 – 4:00**; video bài học **2:30 – 6:00** (mục Độ dài). Nội dung đứng trước thời lượng: bước khó cần thêm thời gian thì thêm; vẫn không đủ thì **cắt ý phụ**, không nói nhanh hơn.
 - **Không nhảy bước — điều kiện tiên quyết.** Mỗi bước chỉ dựa trên thứ người xem *đã* hiểu. Ký hiệu, hình, khái niệm nào cũng được giải thích riêng và có thời gian nhìn trước khi đem ghép.
 - **"Dễ theo" chưa phải "hiểu".** Video giảng trơn tru làm người xem *tưởng* đã hiểu (nghiên cứu của Derek Muller, Veritasium). Vì vậy video cần chỗ để người xem tự nghĩ (câu hỏi đoán) và chỗ chạm vào cách hiểu sai — xem "Phần nên có".
 
@@ -91,7 +91,7 @@ Phần lớn lỗi người dùng bắt được là lỗi dàn ý; viết xong 
 - loại video (bài học theo bài nào / hiện tượng) và **ý xuyên suốt** (một câu);
 - các phần của video: *sẽ giải thích gì* · *người xem sẽ thấy gì*;
 - hook (hiện tượng / câu đề thi / cách hiểu sai) và nguồn kiểm chứng;
-- **cái gì không có trong video và vì sao** (bỏ trống nếu đủ); ước tính tổng thời lượng; đề xuất tách nếu > 4:00;
+- **cái gì không có trong video và vì sao** (bỏ trống nếu đủ); ước tính tổng thời lượng; đề xuất tách nếu vượt trần (hiện tượng 4:00, bài học 6:00);
 - đề xuất ngoại lệ (mục 0 › Lối thoát) và chỗ còn nghi ngờ, nếu có.
 
 Ví dụ đã được người dùng khen (Hóa 10, Bài 13):
@@ -104,7 +104,7 @@ Video "Phản ứng oxi hoá – khử — Hóa 10" đi theo mạch: hiểu số
 Ước tính 6–7 phút → đề xuất chia hai video: (1) Số oxi hoá; (2) Phản ứng oxi hoá – khử. Chưa chốt thay cho bạn.
 ```
 **Agent tự soát trước khi trình** (không cần hiện ra): mọi mục K… và T… của thẻ đều nằm trong một phần của bảng, hoặc ở "không có trong video" kèm lý do — không âm thầm bỏ. `check_script` còn chặn lại ở bước kịch bản. Video hiện tượng không có thẻ: các phần chính là các ý kiến thức sẽ dạy.
-- Ước tính > 4:00 → **không tự cắt**; đề xuất cách tách (thẻ mục "Gợi ý chia video", chưa có thì tự đề xuất), người dùng chọn.
+- Ước tính vượt trần (hiện tượng 4:00, bài học 6:00) → **không tự cắt**; đề xuất cách tách (thẻ mục "Gợi ý chia video", chưa có thì tự đề xuất), người dùng chọn.
 
 Sau Bảng nội dung, dàn ý bày đủ:
 
@@ -128,7 +128,7 @@ Sau Bảng nội dung, dàn ý bày đủ:
 
 Theo schema và quy tắc bên dưới. File đã tồn tại → hỏi trước khi ghi đè.
 - **Sửa một phần kịch bản** → beat giữ nguyên cũng rà lại theo quy tắc hiện tại và theo những gì beat mới đã (hoặc chưa) dạy.
-- **Rút thời lượng** → cắt ý phụ; không cắt bước giải thích của ý chính, không cắt hình so sánh. Mục của thẻ bài học và bẫy thi **không phải ý phụ** (P0): vượt 4:00 thì đề xuất tách video, không tự cắt.
+- **Rút thời lượng** → cắt ý phụ; không cắt bước giải thích của ý chính, không cắt hình so sánh. Mục của thẻ bài học và bẫy thi **không phải ý phụ** (P0): vượt 6:00 thì đề xuất tách video, không tự cắt.
 
 ### Bước 3 — Gọt, kiểm, báo cáo
 
@@ -365,8 +365,10 @@ Ghi `keyword: ""` khi hình và lời đã chốt đủ ý. Chỉ dùng câu ch�
 
 ## Độ dài
 
-- **2:30 – 4:00** (cả intro/outro). Vượt 4:00 → báo kèm đề xuất ý phụ có thể cắt; video bài học thì đề xuất **tách video** (không cắt mục của thẻ). Người dùng yêu cầu khác → theo người dùng. Gói môn được thay ngưỡng (mục "Thay luật chung" của gói).
-- Giọng Vivibe ≈ 20 ký tự/giây (đo 19–22/10/2026) → **≈ 2700–4300 ký tự `speak`**. 8–16 beat; `HIỆN TƯỢNG` ≤ 20 s, `GIẢI ĐÁP` 15–30 s, không beat nào > 40 s. `check_script.py` ước lượng sẵn.
+- **Video hiện tượng: 2:30 – 4:00** (cả intro/outro). Vượt 4:00 → báo kèm đề xuất ý phụ có thể cắt.
+- **Video bài học: 2:30 – 6:00.** Thời lượng thêm dành cho bước giải thích khó và đủ mục của thẻ, không dành cho ý phụ. Vượt 6:00 → đề xuất **tách video** (mỗi phần có hook và lời giải riêng), không cắt mục của thẻ. Lý do trần 6:00: người xem video học tập dừng ở khoảng 6 phút dù video dài bao nhiêu (Guo, Kim, Rubin 2014 — 6,9 triệu lượt xem edX).
+- Người dùng yêu cầu khác → theo người dùng. Gói môn được thay ngưỡng (mục "Thay luật chung" của gói).
+- Giọng Vivibe ≈ 20 ký tự/giây (đo 19–22/10/2026, đo lại 27/11/2026: 20,5) → **≈ 2700–4300 ký tự `speak`** (bài học ≈ 2700–6500). Hiện tượng 8–16 beat, bài học có thể tới ~22; `HIỆN TƯỢNG` ≤ 20 s, `GIẢI ĐÁP` 15–30 s, không beat nào > 40 s. `check_script.py` ước lượng sẵn.
 
 ## Checklist (phần `check_script.py` không kiểm được)
 

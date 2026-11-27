@@ -16,7 +16,7 @@ Gói **thêm vào** luật chung; các ngoại lệ của môn Sử nằm trong 
 > [!IMPORTANT]
 > **Mục tiêu tối thượng: Giải thích VÌ SAO chứ không chỉ CÁI GÌ / KHI NÀO.**
 > Học sinh không chán lịch sử, chỉ chán việc học vẹt mốc năm vô hồn và nghe liệt kê sự kiện dàn trải.
-> Video của chúng ta dài **2:30 – 4:00**, tuyệt đối **KHÔNG làm phim tài liệu 30 phút kể lể từ A đến Z**.
+> Video của chúng ta dài **2:30 – 4:00** (video bài học tới 6:00), tuyệt đối **KHÔNG làm phim tài liệu 30 phút kể lể từ A đến Z**.
 > Chiến lược duy nhất: **PHẪU THUẬT BƯỚC NGOẶT BẢN CHẤT (The Crucial Pivot)** — Khoét sâu vào đúng **MỘT NÚT THẮT SINH TỬ** hoặc **MỘT QUYẾT ĐỊNH ĐỊNH MỆNH** làm thay đổi toàn bộ cục diện của bài học trong SGK.
 
 ### 1.1. Hook linh hoạt (Tuyệt đối KHÔNG máy móc ép thành "Nghịch lý")

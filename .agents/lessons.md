@@ -52,6 +52,7 @@ Mỗi bài học dưới đây gán vào một phép thử P0–P5 (`viet-kich-b
 - 22/10 · đơn điệu · "Đạo hàm = 3 nên sang phải 0,1 lên 0,3" → không nối với công thức. → lập luận đi thẳng từ công thức học sinh nhớ.
 - 22/10 · đơn điệu · Đọc chậm `speed: 0.85` → "đừng thay đổi tốc độ nói thuần, cần thay đổi nhịp". → chậm = chia nhỏ dòng, không đặt `speed`.
 - 22/10 · đơn điệu · Rút thời lượng bằng cách cắt dòng vẽ $f$ → "đồng biến cụ thể là như nào, so sánh đi chứ". → không cắt bước giải thích/hình so sánh để bù thời lượng.
+- 27/11 · chung · Soát tốc độ đọc: giọng không bị thời lượng ép (`speed` 1.0 chung mọi môn, đo 20,5 ký tự/giây), nhưng trần 4:00 dồn ý cho video bài học phải dạy đủ thẻ (bài gộp 3 bài Lý 12 đã 3,8 phút audio). Người dùng: "quan trọng bây giờ là nội dung". → video bài học 2:30–6:00, vượt thì tách video; video hiện tượng giữ 2:30–4:00.
 
 ## Phạm vi
 - 22/10 · đơn điệu · 4 beat dựng lại tỉ số, tính $h'(2)$ bằng bảng → "lòng vòng quá, nói ở bài trước rồi". → bài trước chỉ nhắc một dòng + công thức.

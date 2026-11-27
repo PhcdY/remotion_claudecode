@@ -18,7 +18,7 @@ Gói **thêm vào** luật chung; chỉ dòng nào trong mục **"Thay luật ch
 > 1. *Ngữ pháp bị toán học hóa*: $S + V + O$, công thức 12 thì, công thức câu điều kiện... học sinh học vẹt nhưng không hiểu *vì sao người bản xứ lại chọn cách nói đó*.
 > 2. *Nhiễu loạn tư duy mẹ đẻ (L1 Interference)*: Tiếng Việt là ngôn ngữ đơn lập, không biến hình, không có thì ngữ pháp (chỉ có từ chỉ thời gian: đã, đang, sẽ). Khi học sinh dịch máy móc từng từ, họ rơi vào mọi bẫy của đề thi.
 > 3. *Học từ vựng cơ học*: Học thuộc danh sách hàng trăm phrasal verbs (*give up, look up, turn down...*) hay collocations như những sự kết hợp ngẫu nhiên, không biết rằng chúng tuân theo **ngữ pháp nhận thức không gian (Spatial Cognitive Grammar)**.
-> Video của chúng ta dài **2:30 – 4:00**, tuyệt đối **KHÔNG biến video thành tiết học ngữ pháp truyền thống đọc chép hay mẹo khoanh bừa trắc nghiệm**.
+> Video của chúng ta dài **2:30 – 4:00** (video bài học tới 6:00), tuyệt đối **KHÔNG biến video thành tiết học ngữ pháp truyền thống đọc chép hay mẹo khoanh bừa trắc nghiệm**.
 > Chiến lược duy nhất: **GIẢI PHÃU GÓC NHÌN BẢN XỨ BẰNG MÔ HÌNH THỊ GIÁC (Visual Cognitive Explainer)** — Xuất phát từ một nghịch lý ngôn ngữ hoặc bẫy tư duy kinh điển $\to$ Dựng mô hình nhận thức không gian $\to$ Thấu hiểu vì sao người bản xứ tư duy như vậy $\to$ Chốt hạ bản chất và xử lý gọn gàng câu hỏi trong đề thi.
 
 ### 1.1. Năm Góc Vào Bài (Hook) Đắt Giá cho Tiếng Anh
