@@ -6,13 +6,14 @@ Gói **thêm vào** luật chung; chỉ dòng nào trong mục **"Thay luật ch
 
 ## 0. Thay luật chung
 
-Chỉ áp cho video Văn. Giọng đọc giữ nguyên luật chung (trung tính, không xưng hô): độ cuốn của video Văn đến từ **hình và cách truyền tải**.
+Chỉ áp cho video Văn. Giọng đọc giữ nguyên luật chung (trung tính, không xưng hô): độ cuốn của video Văn đến từ **hình và cách truyền tải**. Cách viết câu của lời giảng có luật riêng ở mục 1 › Hành văn.
 
 | Luật chung | Gói thay thành | Áp cho | Lý do · ai chốt · ngày |
 |---|---|---|---|
 | `viet-kich-ban` › ≤ ~3 cảnh | ≤ 6 cảnh; **đổi cảnh khi đổi ý lớn**. Vẫn một ngữ liệu xuyên suốt, cảnh sau là cách nhìn khác của cùng ngữ liệu | mọi video | Video "Phân biệt tự sự, biểu cảm và miêu tả" dùng một tranh suốt 3:09, người xem chán · người dùng · 23/11/2026 |
 | `dung-video` › quy tắc 9 (một thay đổi mỗi dòng) | Từ được bôi và phản ứng của tranh tính là **một** thay đổi. Một hành động có thể chạy qua nhiều dòng; `show` ghi điểm bắt đầu và lúc dừng | mọi video | Hình phải diễn cùng lời · người dùng · 23/11/2026 |
 | `viet-kich-ban` › Câu hỏi đoán 1–2 lần | 2–3 lần, trả lời bằng thao tác trên hình (mục 1 › Hình kể chuyện, ý 4) | mọi video | Thêm chỗ cho người xem tự nghĩ · người dùng · 23/11/2026 |
+| `viet-kich-ban` › `pauseAfter` chỉ sau câu hỏi đoán | Dòng đọc nguyên văn ngữ liệu (có `quoteSource`) được `pauseAfter` 0,8–1,5 s | mọi video | Câu thơ cần một khoảng lặng để thấm trước khi phân tích · người dùng · 27/11/2026 |
 
 Ngưỡng số cảnh ghi ở `.agents/mon/van.json`.
 
@@ -62,6 +63,35 @@ Ngưỡng số cảnh ghi ở `.agents/mon/van.json`.
 - Chụp ảnh giữa một beat bất kỳ, tắt tiếng: nếu chỉ thấy các khối chữ xếp hàng thì **chưa đạt**. Phải có ít nhất một vật/hình mà chữ gắn vào.
 - Xếp ảnh giữa các beat cạnh nhau: nếu mọi ảnh là cùng một tranh, chỉ khác độ zoom hoặc vòng khoanh thì **chưa đạt**.
 - Ngữ liệu trên màn hình: tối đa 1–2 câu thơ/vế câu cùng lúc (mục 2).
+
+### Hành văn: lời bình, không lời phân loại (chốt 27/11/2026)
+
+Luật `speak` chung (văn nói, ≤ 2 chỗ ngắt, câu ≤ ~20 từ, không xưng hô) vẫn giữ. Mục này thêm cái riêng của Văn: người xem phải **nghe ra chỗ hay của câu chữ**, không chỉ biết nó tên là gì.
+Nguồn tham khảo: Poetry Unbound (đọc – bình – đọc lại), hướng dẫn viết cho radio của CBC (nối câu bằng hình ảnh, không sến), Wikipedia "Signs of AI writing" và skill `viet-nhu-nguoi` (cụm sáo, khen chung).
+
+1. **Cảm trước, giải thích sau, gọi tên cuối.** Thứ tự cho mỗi chỗ phân tích: đọc ngữ liệu → để người xem tự cảm (câu hỏi đoán hoặc một nhận xét về cảm giác) → chỉ ra chữ tạo nên cảm giác đó (bôi, mục 3.4) → nói vì sao chữ đó làm được thế → gọi tên biện pháp hay thuật ngữ nếu bài cần. **Câu chốt nói câu văn làm được gì**, không dừng ở tên biện pháp.
+   - Không đạt: "Ở đây tác giả dùng phép điểm xuyết."
+   - Đạt: "Nền xanh trải rộng, vài chấm trắng kéo mắt về gần. Chỉ thế thôi, bức tranh đã có xa, có gần." (`demo-van-canh-xuan`)
+2. **Không lặp một khuôn gọi tên.** Khuôn "…, đó là X" / "…, gọi là X" dùng **tối đa 2 lần mỗi video** (`check_script` cảnh báo `[van:khuon-goi-ten]`). Các lần khác: tên khái niệm hiện bằng nhãn `MarginNote` còn lời nói việc câu văn đang làm, hoặc gọi tên ở đầu câu, hoặc nối tên vào lý do. Mỗi thuật ngữ của bài vẫn được **nói thành lời ít nhất một lần** (P0), các lần sau mới để nhãn gánh.
+   | Khuôn lặp (đã gặp, `demo-van-doc-boi-rut`) | Cách khác |
+   |---|---|
+   | "Câu văn đang kể việc, đó là tự sự." | "Việc này nối tiếp việc kia. Kể việc như thế, người ta gọi là tự sự." |
+   | "Không có việc gì xảy ra, chỉ có dáng vẻ của cảnh, đó là miêu tả." | "Không có việc gì xảy ra. Câu văn chỉ dừng lại để ngắm con đường." (nhãn *miêu tả* hiện cạnh con đường) |
+   | "Cảnh không đổi, lòng người đổi, đó là biểu cảm." | "Con đường vẫn thế. Cái lạ nằm trong lòng đứa trẻ." (nhãn *biểu cảm*) |
+   | Câu kết đọc lại cả bảng: "kể là tự sự, tả là miêu tả, bộc lộ là biểu cảm." | Một câu trả lời hook; ba nhãn đã có trên hình tự làm phần tổng kết. |
+3. **Đọc – bình – đọc lại.** Ngữ liệu chính được đọc nguyên văn trọn câu trước khi phân tích, và **đọc lại một lần** sau khi đã phân tích xong ý lớn đó (hoặc ở GIẢI ĐÁP). Lần đọc lại, các vệt bôi và nhãn đã có trên hình, người xem nghe ra điều lần đầu chưa thấy. Mỗi video đọc lại tối đa 2 chỗ. Dòng đọc lại giữ nguyên `speak`, `text`, `quoteSource` của lần đầu.
+4. **Câu trích có khoảng lặng.** Dòng đọc nguyên văn ngữ liệu có `pauseAfter` 0,8–1,5 s (mục 0); câu thơ ngắt theo nhịp thơ (mục 5). Lời giảng không chung một dòng với câu trích: câu trích một dòng, lời bình dòng sau.
+5. **Nối câu bằng thứ câu trước để lại.** Câu sau mở bằng chữ hoặc hình ảnh mà câu trước vừa nói tới ("…con đường làng dài và hẹp." → "Con đường dài, kéo tít về phía xa."). Đó là mạch của bài bình. Không mở bằng "Tiếp theo", "Ngoài ra", "Bên cạnh đó".
+6. **Nói cụ thể, không khen chung.** Phép thử: thay tên một tác phẩm khác vào câu mà câu vẫn đúng → câu rỗng, viết lại bằng chữ, hình ảnh có thật trong bài. Cụm sáo kiểu văn mẫu (`check_script` cảnh báo `[van:cum-sao]`):
+   | Không nói | Nói thay bằng |
+   |---|---|
+   | "thể hiện sâu sắc", "khắc họa thành công", "góp phần làm nổi bật" | việc chữ đó làm: "làm con đường như dài ra", "kéo mắt về gần" |
+   | "nghệ thuật đặc sắc", "độc đáo", "tinh tế", "tài tình" | chỉ ra chỗ khác thường: "chỉ một chữ *điểm* mà…" |
+   | "giá trị nhân văn sâu sắc", "để lại ấn tượng sâu sắc" | điều người đọc nhận ra: "người đọc thương đứa trẻ hơn" |
+   | "qua đó", "có thể nói", "nhìn chung" | "vậy", "tức là", hoặc bỏ |
+7. **Không sến.** Cảm xúc do câu chữ của tác giả và hình gánh. Lời giảng không tự cảm thán ("thật xúc động", "đẹp biết bao", "ôi") và không chồng tính từ.
+8. **Thử đổi chữ** (khi giải thích một chữ đắt). Đặt chữ của tác giả cạnh một chữ thường hơn, hình đổi theo chữ thay rồi trở lại ("điểm một vài bông hoa" → thử "có một vài bông hoa": các chấm trắng nhòe vào nền, mắt không còn chỗ dừng → trả lại chữ "điểm"). Chữ thay hiện rõ là bản thử (gạch ngang, mờ, nhãn "thử đổi") để không lẫn với ngữ liệu (P0). Tối đa 1–2 lần mỗi video.
+9. **Câu bình có nhịp nhờ cặp vế, không nhờ dấu phẩy.** Muốn câu có nhịp mà vẫn ≤ 2 chỗ ngắt: "không phải… mà là…", "càng… càng…", "vẫn… nhưng…", hai câu ngắn đặt cạnh nhau ("Cảnh không đổi. Lòng người đổi.").
 
 ---
 
@@ -209,6 +239,9 @@ Môn Văn **không có đại lượng vật lý**, áp dụng các quy chuẩn 
 ## 7. Checklist nghiệm thu video Văn
 
 - [ ] Dàn ý có bảng ý lớn, khung hình, câu lên hình, cụm bôi, màu, hình phản ứng.
+- [ ] Mỗi chỗ phân tích đi theo thứ tự cảm → chữ → vì sao → tên; câu chốt nói câu văn làm được gì (mục 1 › Hành văn).
+- [ ] Khuôn "…, đó là X" / "…, gọi là X" ≤ 2 lần; không cụm sáo, không câu thay tên tác phẩm khác vẫn đúng.
+- [ ] Ngữ liệu chính được đọc lại sau khi phân tích; dòng trích có khoảng lặng; lời bình không chung dòng với câu trích.
 - [ ] Ngữ liệu đã đối chiếu, `quoteSource` ghi nguồn, tranh không trái câu gốc.
 - [ ] Mỗi ý lớn một khung hình; không có một tranh dùng suốt bài rồi chỉ zoom.
 - [ ] Lời nói hành động nào, hình diễn hành động đó.

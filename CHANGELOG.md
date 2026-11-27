@@ -10,6 +10,16 @@ Mỗi bản phát hành có một mục, bản mới nhất ở trên cùng. Ng�
 
 ## Chưa phát hành
 
+### Ngữ văn
+
+**Có gì mới**
+- **Lời giảng Văn bớt máy móc**: có luật hành văn riêng cho Văn. Mỗi chỗ phân tích đi theo thứ tự cảm nhận → chữ tạo nên cảm nhận → vì sao → tên biện pháp. Câu thơ được đọc, bình, rồi đọc lại. Có khoảng lặng sau câu trích, và có cách "thử đổi chữ" để thấy chữ của tác giả hay ở đâu.
+- Kiểm tra kịch bản nhắc khi lời đọc lặp khuôn "…, đó là X" quá 2 lần trong một video, hoặc dùng cụm sáo kiểu văn mẫu ("thể hiện sâu sắc", "nghệ thuật đặc sắc", "qua đó"…) hay tự cảm thán ("thật xúc động").
+
+### Các môn khác
+
+Không có thay đổi riêng.
+
 ## Bản 4 — 2026-11-23
 
 Video Văn bớt máy móc: hình diễn theo lời giảng, mỗi ý có một khung hình riêng, và keyword được bôi ngay trên câu văn.

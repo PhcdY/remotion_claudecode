@@ -74,6 +74,12 @@ WRITTEN_WORDS = re.compile(
 )
 NOMINAL_START = re.compile(r"(?:^|[.?!…]\s+)(Sự)\s+\S+")
 # dòng ngắn khuôn "X (gọi) là Y" — 3 dòng liền nhau trong một beat nghe đều đều
+# Văn: khuôn gọi tên ở cuối câu ("…, đó là tự sự.", "…, gọi là ẩn dụ.") lặp suốt video nghe như dán nhãn (van.md › mục 1 › Hành văn, ý 2)
+NAMING_TAILS = {
+    "đó là X": re.compile(r"[,.;]\s*(?:nên\s+|vậy\s+|thì\s+)?(?:đó|đây|ấy)\s+(?:chính\s+)?là\s+[^,.?!…]{1,30}[.!…]?\s*$", re.IGNORECASE),
+    "gọi là X": re.compile(r"(?<![\wÀ-ỹ])gọi\s+(?:đó\s+|nó\s+)?là\s+[^,.?!…]{1,30}[.!…]?\s*$", re.IGNORECASE),
+}
+NAMING_MAX = 2
 SAME_MOLD = re.compile(r"^[^,?]{0,60}(?<![\wÀ-ỹ])(gọi là|là)(?![\wÀ-ỹ])[^,?]{0,40}[.!]?$", re.IGNORECASE)
 # "trăm m" làm đơn vị: "(trăm m)", "4 trăm m". Không bắt "một trăm mét" trong speak (đó là số 100).
 FAKE_UNITS = re.compile(r"(?:\(\s*|\d\s*)(trăm|chục)\s*(m|mét|km|giây|s|phút)\b", re.IGNORECASE)
@@ -479,6 +485,7 @@ def main() -> int:
     scenes: list[int] = []
 
     total_chars = 0
+    naming: dict[str, list[str]] = {k: [] for k in NAMING_TAILS}
     total_sec = INTRO + LEAD_IN + TAIL + OUTRO + GAP_BEAT * max(len(beats) - 1, 0)
     beat_secs: list[tuple[str, str, float]] = []
 
@@ -595,6 +602,10 @@ def main() -> int:
             if mn:
                 warns.append(f"{w}: câu mở bằng danh từ hoá '{mn.group(0).strip()}' — nói bằng động từ/tính từ "
                              f"('Các phân tử bám chặt lấy nhau…') [van-noi:danh-tu-hoa]: {speak}")
+            if subject == "van":
+                for k, rx in NAMING_TAILS.items():
+                    if rx.search(vi_speak):
+                        naming[k].append(w)
             if SAME_MOLD.match(vi_speak) and len(vi_speak.split()) <= 12:
                 mold_run.append(w)
                 if len(mold_run) == 3:
@@ -659,7 +670,9 @@ def main() -> int:
             if pause is not None:
                 if pause > 2:
                     warns.append(f"{w}: pauseAfter {pause} > 2 s")
-                if "?" not in speak:
+                if subject == "van" and (line.get("quoteSource") or "").strip():
+                    pass  # Văn: khoảng lặng sau câu trích (van.md › mục 0, mục 1 › Hành văn, ý 4)
+                elif "?" not in speak:
                     warns.append(f"{w}: pauseAfter chỉ dùng sau câu hỏi đoán")
                 else:
                     listen.append(f"{w} (câu hỏi đoán — giọng lên cuối câu?): {speak}")
@@ -817,6 +830,11 @@ def main() -> int:
         errors = kept
         if len(waivers) > MAX_WAIVERS:
             warns.append(f"{len(waivers)} ngoại lệ đã duyệt (> {MAX_WAIVERS}) — luật có thể đang sai: báo người bảo trì sửa luật thay vì duyệt tiếp")
+
+    for k, ws in naming.items():
+        if len(ws) > NAMING_MAX:
+            warns.append(f"khuôn gọi tên '…, {k}' dùng {len(ws)} lần ({', '.join(ws)}; ≤ {NAMING_MAX}) — nghe như dán nhãn; để nhãn MarginNote gọi tên, "
+                         f"lời nói việc câu văn làm (van.md › mục 1 › Hành văn, ý 2) [van:khuon-goi-ten]")
 
     # --- cấu trúc cả bài (ngưỡng: tầng 2, gói môn thay được trong thayLuat) ---
     if len(set(scenes)) > lim["canhToiDa"]:
