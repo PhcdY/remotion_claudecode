@@ -10,6 +10,14 @@ Mỗi bản phát hành có một mục, bản mới nhất ở trên cùng. Ng�
 
 ## Chưa phát hành
 
+### Chung (mọi môn)
+
+**Có gì mới**
+- Video bài học được dài tới 6 phút (trước là 4 phút), để đủ chỗ giải thích kỹ phần khó mà không phải bỏ bớt nội dung của bài. Video hiện tượng vẫn 2:30–4:00. Bài cần dài hơn 6 phút thì Codex đề xuất tách thành nhiều phần.
+
+**Sửa lỗi**
+- Giọng đọc không còn dễ ngắt lệch ở dấu phẩy, kiểu "Tốc độ giảm đều, nên…" bị đọc thành "Tốc độ giảm, đều nên…". Có luật viết câu để mỗi chỗ ngắt chỉ có một cách đọc. Kiểm tra kịch bản báo những câu dễ bị ngắt lệch và đưa chúng vào danh sách nghe thử.
+
 ### Ngữ văn
 
 **Có gì mới**
@@ -20,10 +28,6 @@ Mỗi bản phát hành có một mục, bản mới nhất ở trên cùng. Ng�
 ### Các môn khác
 
 Không có thay đổi riêng.
-### Chung (mọi môn)
-
-**Có gì mới**
-- Video bài học được dài tới 6 phút (trước là 4 phút), để đủ chỗ giải thích kỹ phần khó mà không phải bỏ bớt nội dung của bài. Video hiện tượng vẫn 2:30–4:00. Bài cần dài hơn 6 phút thì Codex đề xuất tách thành nhiều phần.
 
 ## Bản 4 — 2026-11-23
 

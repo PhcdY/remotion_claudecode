@@ -32,7 +32,7 @@ Mỗi bài học dưới đây gán vào một phép thử P0–P5 (`viet-kich-b
 | | chữ/nhãn đè nét, đè nhau, cụt mép, bị đẩy xa | 13/11 Sinh trao đổi chất ("Tim" lơ lửng giữa phổi và tim; "Máu vận chuyển" đè ruột); 17/10 đạo hàm; 23/10 (nhãn tay, đệm, `phases`); 06–07/11 Oxyz; 08/11 Sử ("Thăng L…"); 10/11 (nhãn giật); 10/11 Văn (khối ý chồng) |
 | | ký hiệu viết tay hiện vỡ / công thức lỗi lặng lẽ | 08/11 (`$ o$`); 07/11 (`\v`); 26/10 (`\vec`); 11/11 (mũ Unicode, `\ce` chữ đỏ); 06/11 (gạch ngang trên số) |
 | | hình bé tí giữa khung | 08/11 Sử |
-| **Ngoài sáu phép thử** (tầng 2 — xem/nghe dễ chịu, quy trình) | nhịp và giọng đọc | 27/11 Văn (khuôn gọi tên lặp, khen chung, câu thơ không có khoảng lặng); 13/11 Sinh trao đổi chất (đều đều, buồn ngủ); 19–26/10 Vivibe (dấu ngắt, phiên âm); 22/10 (`speed`); 23/10 (câu hỏi đoán sượng) |
+| **Ngoài sáu phép thử** (tầng 2 — xem/nghe dễ chịu, quy trình) | nhịp và giọng đọc | 27/11 Văn (khuôn gọi tên lặp, khen chung, câu thơ không có khoảng lặng); 13/11 Sinh trao đổi chất (đều đều, buồn ngủ); 19–26/10 Vivibe (dấu ngắt, phiên âm); 27/11 Lý (ngắt lệch một chữ ở dấu phẩy); 22/10 (`speed`); 23/10 (câu hỏi đoán sượng) |
 | | kết không có cảm giác kết | 19–20/10 đạo hàm |
 | | thừa, gây cười, kém hấp dẫn | 10/11 (nhãn "mô hình" thừa); 22/10 (câu hài); 10/11 Văn (minh hoạ quá đơn giản) |
 | | quy trình, công cụ | 23/10 (storyboard trước audio; học sinh ảo); 24/10 (token); 08/11 (link `file:///`); 07/11 (asset) |
@@ -346,3 +346,12 @@ Video dựng từ bản 1 (`v1.0.0`). So với `main-codex`: mô hình rối, kh
 - Luật: `van.md` › mục 1 › **Hành văn** (cảm → chữ → vì sao → tên; khuôn gọi tên ≤ 2 lần; đọc – bình – đọc lại; khoảng lặng sau câu trích; nối câu bằng thứ câu trước để lại; không khen chung, không sến; thử đổi chữ; nhịp bằng cặp vế), mục 0 (`pauseAfter` sau câu trích), mục 7. `van.json`: cảnh báo cụm sáo. `check_script`: `[van:khuon-goi-ten]`, bỏ cảnh báo `pauseAfter` ở dòng có `quoteSource` (chỉ môn Văn).
 - Người dùng chốt thêm: mọi video Văn (hiện tượng lẫn bài học) tới 6:00 → `van.md` › mục 0, `van.json` › `thayLuat` (`tongGiay` 150–360, `kyTu` 2700–6500).
 - Nguồn: Poetry Unbound (đọc – bình – đọc lại); CBC Doc Project, Nieman Storyboard (pointing, không sến, viết theo hơi đọc); Wikipedia "Signs of AI writing", skill `viet-nhu-nguoi` (cụm sáo). Không cài skill nào: chúng viết cho văn đọc bằng mắt, dễ phá luật `speak`.
+
+### 27/11/2026 — Lý: giọng ngắt lệch một chữ ở dấu phẩy
+
+- Góp ý (video Lý của CTV, không có nguồn trong repo): "Tốc độ giảm đều, nên xe chuyển động chậm dần đều" bị đọc thành "Tốc độ giảm, đều nên…" → khó hiểu.
+- Soát: `vivibe_tts.py` gửi `speak` nguyên văn, dấu phẩy không mất. Vivibe tự gom "đều nên" (nghĩa "tất cả đều nên") thành cụm rồi ngắt trước nó.
+- Gốc rễ: (1) luật `speak` coi dấu phẩy là chỗ giọng chắc chắn dừng; (2) `check_script` chỉ đếm số chỗ ngắt, không xét chữ hai bên dấu phẩy; (3) bước nghe thử / nghe lại chỉ gồm beat đầu, ký hiệu, câu hỏi đoán, nên dòng này lọt. Cùng họ với "ích-không ứng với" → "không ứng" (20/10, gói `toan.md`).
+- Luật: `viet-kich-ban` › `speak` › **Mỗi chỗ ngắt chỉ có một cách đọc** (phép thử đọc liền hai chữ hai bên dấu phẩy; sửa: từ nối lên đầu câu, đổi chữ cuối vế, tách câu; không biến mọi phẩy thành chấm). `check_script`: `[ngat:hai-cach]` + đưa vào "CẦN NGHE THỬ". `tao-audio` Bước 2–3: nghe thử và nghe lại các dòng này.
+- Không dò bằng audio (mốc khoảng lặng của `align_words`): ngắt lệch một chữ không đổi số chỗ ngắt, khó tách khỏi sai số đo.
+- Quét repo lúc thêm luật: 5 dòng ở 4 video Toán cũ ("nối lại, được…", "ngược lại, nên…", "vẫn còn, chưa…") — đều có hai cách đọc thật; chưa nghe lại audio cũ.
