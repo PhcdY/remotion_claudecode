@@ -50,7 +50,7 @@ Lúc nghe thử beat đầu (Bước 2), nghe thêm cả beat liền một mạc
 4. Lỗi một dòng: đọc thông báo, báo người dùng. **Không chạy lại ngay để thử** — mỗi lần gửi là một lần trừ credit. Người dùng đồng ý thì `--only <beatId>-lNN`.
 5. **Mốc từng từ**: `py scripts/align_words.py <slug>` (bản giọng khác thêm `--audio-dir <slug>-<hậu tố>`) → `words.json` cạnh `manifest.json`, cho `cue` ở B3. Chạy lại mỗi khi tạo lại dòng nào.
 6. Báo cáo: số dòng đã tạo / lỗi, số ký tự đã gửi, tổng thời lượng audio (đo bằng `ffprobe` đi kèm Remotion, `node_modules/@remotion/compositor-win32-x64-msvc/ffprobe.exe`).
-   Ước lượng thời lượng video = tổng audio + khoảng nghỉ của B3 (≈ 0,25s mỗi dòng, 0,6s mỗi beat, ~5s intro/outro). Ngoài khung 2:30 – 4:00 → báo người dùng trước khi sang B3; sửa bằng cách quay lại B1, không đổi `speed` để bù.
+   Ước lượng thời lượng video = tổng audio + khoảng nghỉ của B3 (≈ 0,25s mỗi dòng, 0,6s mỗi beat, ~5s intro/outro). Ngoài khung 2:30 – 4:00 (video bài học 2:30 – 6:00) → báo người dùng trước khi sang B3; sửa bằng cách quay lại B1, không đổi `speed` để bù.
 
 ## Quy ước file
 

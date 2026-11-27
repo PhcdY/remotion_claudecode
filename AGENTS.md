@@ -1,6 +1,6 @@
 # Video AI — video giải thích bản chất (Remotion, nhiều môn)
 
-Video 2:30–4:00 (ưu tiên số một là dễ hiểu, không nhảy bước: bước khó được thêm thời gian, thiếu nữa thì cắt ý phụ), mở bằng một hook và kết bằng lời giải cho nó, **ngang 16:9 (1920×1080, 30fps)**, giọng đọc tiếng Việt, giải thích *vì sao* chứ không chỉ *cái gì*.
+Video 2:30–4:00, video bài học tới 6:00 (ưu tiên số một là dễ hiểu, không nhảy bước: bước khó được thêm thời gian, thiếu nữa thì cắt ý phụ), mở bằng một hook và kết bằng lời giải cho nó, **ngang 16:9 (1920×1080, 30fps)**, giọng đọc tiếng Việt, giải thích *vì sao* chứ không chỉ *cái gì*.
 Hai loại video (`"loai"` trong `script.json`, không chắc thì hỏi): **video bài học** — dạy đủ một bài SGK theo *thẻ bài học* `references/<môn>/lop-<lớp>/bai-<NN>-….md`, tiêu đề chứa tên bài, hook ≤ 20 s chỉ là cửa vào; **video hiện tượng** — trả lời một câu "vì sao".
 Dùng cho Toán, Lý, Hóa, Sinh, Sử, Địa…: luật riêng từng môn ở **gói môn** `.agents/mon/<mon>.md` (Toán: `toan.md`; môn mới tạo từ `_mau.md` cùng người dùng).
 **Mục tiêu duy nhất là trải nghiệm người xem.** Trước khi đề xuất hướng thiết kế mới: xem video mẫu được khen và nghiên cứu liên quan, tự phản biện.
