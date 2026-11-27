@@ -72,6 +72,14 @@ WRITTEN_WORDS = re.compile(
     r"(?<![\wÀ-ỹ])(nhằm|do đó|bởi lẽ|đối với|được xem là|được coi là|hay nói cách khác|trội lên)(?![\wÀ-ỹ])",
     re.IGNORECASE,
 )
+# Chỗ ngắt hai cách đọc (viet-kich-ban › speak › Mỗi chỗ ngắt chỉ có một cách đọc, 27/11/2026): vế trước kết bằng chữ hay đứng
+# trước vị ngữ ("đều", "cũng"…), vế sau mở bằng từ nối → TTS có thể gom "đều nên" thành cụm, ngắt lệch một chữ.
+# Danh sách chỉ để tìm dòng nghi ngờ đưa đi nghe, không phải danh sách cấm.
+BREAK_AMBIG = re.compile(
+    r"(?<![\wÀ-ỹ])(đều|cũng|lại|vẫn|còn|mới|cứ|càng|chỉ|luôn|đã|sẽ|đang)\s*(?:,|\.\.\.|…)\s*"
+    r"(nên|thì|mà|là|phải|cần|được|bị|không|chưa|có)(?![\wÀ-ỹ])",
+    re.IGNORECASE,
+)
 NOMINAL_START = re.compile(r"(?:^|[.?!…]\s+)(Sự)\s+\S+")
 # dòng ngắn khuôn "X (gọi) là Y" — 3 dòng liền nhau trong một beat nghe đều đều
 # Văn: khuôn gọi tên ở cuối câu ("…, đó là tự sự.", "…, gọi là ẩn dụ.") lặp suốt video nghe như dán nhãn (van.md › mục 1 › Hành văn, ý 2)
@@ -608,6 +616,11 @@ def main() -> int:
                 for k, rx in NAMING_TAILS.items():
                     if rx.search(vi_speak):
                         naming[k].append(w)
+            mb = BREAK_AMBIG.search(vi_speak)
+            if mb:
+                warns.append(f"{w}: chỗ ngắt '{mb.group(0)}' có hai cách đọc — giọng có thể gom '{mb.group(1)} {mb.group(2)}' thành một cụm, ngắt lệch một chữ; "
+                             f"đưa từ nối lên đầu câu ('Vì …, …'), đổi chữ cuối vế, hoặc tách câu (viet-kich-ban › Mỗi chỗ ngắt chỉ có một cách đọc) [ngat:hai-cach]: {speak}")
+                listen.append(f"{w} (chỗ ngắt hai cách đọc '{mb.group(0)}' — giọng ngắt đúng dấu phẩy hay lệch một chữ?): {speak}")
             if SAME_MOLD.match(vi_speak) and len(vi_speak.split()) <= 12:
                 mold_run.append(w)
                 if len(mold_run) == 3:

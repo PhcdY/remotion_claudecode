@@ -315,6 +315,11 @@ Nội dung tương đương ý của dòng, đọc tự nhiên. **Không chứa 
 **Viết cho tai nghe**:
 - **Ít chỗ ngắt**: mỗi `,` `.` `:` `?` `...` giữa dòng làm giọng dừng ≈ 0,3–0,4 s. Mỗi dòng **≤ 2 chỗ ngắt, nên là 1**; câu ≤ ~20 từ; mỗi dòng thường là một câu.
 - Dấu phẩy chỉ ở ranh giới cụm nghĩa lớn nhất, ngay trước phần quan trọng nhất. Không tách danh từ khỏi phần bổ nghĩa, số khỏi đơn vị.
+- **Mỗi chỗ ngắt chỉ có một cách đọc** (27/11/2026, Lý: "Tốc độ giảm đều, nên…" bị đọc thành "Tốc độ giảm, đều nên…"). Giọng TTS ngắt theo cụm từ nó quen, dấu phẩy chỉ là gợi ý. Phép thử: đọc liền chữ cuối vế trước với chữ đầu vế sau. Nếu hai chữ ghép thành một cụm quen ("đều nên", "lại thì", "cũng là", "vẫn phải"), giọng có thể ngắt lệch một chữ và câu đổi nghĩa. Sửa theo thứ tự:
+  1. Đưa từ nối lên đầu câu: "**Vì** tốc độ giảm đều, xe chuyển động chậm dần đều."
+  2. Kết vế trước bằng chữ không dính được về sau: "Tốc độ giảm **đều đặn**, nên…"
+  3. Tách thành hai câu, khi hai vế đủ dài để đứng riêng.
+  Không đổi mọi dấu phẩy thành dấu chấm: câu cụt nghe như ghi chép ("Văn nói, không văn viết"). Cùng họ lỗi với "không" dính sang động từ sau (gói `toan.md`). `check_script` cảnh báo dòng nghi ngờ `[ngat:hai-cach]` và đưa vào danh sách nghe thử; đúng hay sai do tai người quyết.
 - Không mở câu bằng "Và", "Mà", "Còn" ngay sau một câu hỏi trong cùng dòng.
 - **`...` để ngắt rồi nhấn — tối đa 1 lần mỗi beat**, trước cả một cụm trọn nghĩa hoặc sau từ chuyển ý ("Tức là... vận tốc trung bình mười lăm mét một giây."); không đặt giữa cụm chặt ("đo... kiểu gì" ✗).
 - Từ chuyển ý ("Vậy thì", "Nhưng", "Tức là", "Để ý") để câu dính thành mạch; chúng cũng tính là chỗ ngắt.
@@ -394,6 +399,7 @@ Ghi `keyword: ""` khi hình và lời đã chốt đủ ý. Chỉ dùng câu ch�
 
 **Lời đọc**
 - [ ] Đọc liền câu đầu các beat thành một mạch nhân quả; không câu đùa; giọng tài liệu, không xưng hô.
+- [ ] Ở mỗi dấu phẩy, chữ hai bên không ghép thành cụm quen; dòng `[ngat:hai-cach]` đã viết lại hoặc đưa vào nghe thử.
 - [ ] Đã đọc to từng dòng như đang giảng: không dấu `:`, gọi tên bằng "gọi là…", câu đủ chủ ngữ, không danh từ hoá, điều kiện không lặp giữa câu (`speak` › Văn nói, không văn viết).
 - [ ] Câu định nghĩa và câu giải thích lần đầu một khái niệm chỉ dùng từ thường; không từ hiếm, từ chuyên ngành ngoài bài, từ văn chương bay bổng (Style › Lời định nghĩa).
 - [ ] Câu hỏi đoán (nếu có) cụ thể, trả lời được bằng mắt, có `pauseAfter`, đáp án ở dòng sau, đã đưa vào danh sách nghe thử.
