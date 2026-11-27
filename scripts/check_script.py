@@ -169,7 +169,9 @@ DEFAULTS = {
     "canhToiDa": 3, "hienTuongToiDaGiay": 20, "giaiDapGiay": [15, 30], "beatToiDaGiay": 40,
     "tongGiay": [TOTAL_MIN, TOTAL_MAX], "kyTu": [CHARS_MIN, CHARS_MAX],
 }
-DEFAULTS_BY_LOAI = {"bai-hoc": {"canhToiDa": 5}}
+# video bài học dạy đủ một bài SGK, không tự cắt mục của thẻ → trần 6:00 (Guo 2014: người xem dừng ở ~6 phút dù video dài bao nhiêu)
+# 6:00 ≈ 360 s − ~37 s intro/outro + nghỉ ≈ 323 s audio × 20 ký tự/giây ≈ 6500 ký tự
+DEFAULTS_BY_LOAI = {"bai-hoc": {"canhToiDa": 5, "tongGiay": [150, 360], "kyTu": [2700, 6500]}}
 LOAI = ("bai-hoc", "hien-tuong")
 # video bài học được mở bằng hiện tượng, câu đề thi hoặc cách hiểu sai (viet-kich-ban › Video bài học)
 HOOK_SECTIONS_BAI_HOC = {"HIỆN TƯỢNG", "CÂU HỎI", "TRONG ĐỀ THI", "BẪY THƯỜNG GẶP", "GỐC RỄ"}

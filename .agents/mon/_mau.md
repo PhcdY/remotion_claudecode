@@ -12,7 +12,7 @@ Chỉ thay được luật **tầng 2** (mặc định); sáu phép thử P0–P
 
 | Luật chung | Gói thay thành | Áp cho (mọi video / bài học / hiện tượng) | Lý do · ai chốt · ngày |
 |---|---|---|---|
-| (vd.) `viet-kich-ban` › Độ dài: 2:30–4:00 | tới 5:00 | bài học | … |
+| (vd.) `viet-kich-ban` › Độ dài video hiện tượng: 2:30–4:00 | tới 5:00 | hiện tượng | … |
 
 Không thay gì → ghi "Không có". Ngưỡng số (số cảnh, giây, ký tự) ghi thêm vào `thayLuat` của file máy đọc.
 

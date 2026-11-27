@@ -13,7 +13,7 @@ Gói **thêm vào** luật chung; chỉ dòng nào trong mục **"Thay luật ch
 > Học sinh thường sợ môn này vì:
 > 1. *Phần Kinh tế*: Cảm giác trừu tượng, giáo điều, không thấy dòng tiền chạy đi đâu ngoài đời thực.
 > 2. *Phần Pháp luật*: Sợ học vẹt từng điều khoản luật khô cứng; dễ nhầm lẫn các chủ thể và loại vi phạm trong câu hỏi tình huống đề thi.
-> Video của chúng ta dài **2:30 – 4:00**, tuyệt đối **KHÔNG biến video thành giờ đọc văn bản luật hay bài giảng kinh tế học hàn lâm**.
+> Video của chúng ta dài **2:30 – 4:00** (video bài học tới 6:00), tuyệt đối **KHÔNG biến video thành giờ đọc văn bản luật hay bài giảng kinh tế học hàn lâm**.
 > Chiến lược duy nhất: **GIẢI PHÃU TÌNH HUỐNG THỰC TẾ & NGHỊCH LÝ ĐỜI THƯỜNG (The Real-World Micro Case Study)** — Dùng một tình huống va chạm thực tiễn sát sườn học sinh/công dân trẻ để bóc tách: *Động lực kinh tế ngầm thúc đẩy hành vi* $\to$ *Quy luật chi phối* $\to$ *Ranh giới pháp lý điều chỉnh* $\to$ *Bài học đắt giá cho bản thân và đề thi*.
 
 ### 1.1. Năm Góc Vào Bài (Hook) Đắt Giá cho KTPL

@@ -10,6 +10,11 @@ Mỗi bản phát hành có một mục, bản mới nhất ở trên cùng. Ng�
 
 ## Chưa phát hành
 
+### Chung (mọi môn)
+
+**Có gì mới**
+- Video bài học được dài tới 6 phút (trước là 4 phút), để đủ chỗ giải thích kỹ phần khó mà không phải bỏ bớt nội dung của bài. Video hiện tượng vẫn 2:30–4:00. Bài cần dài hơn 6 phút thì Codex đề xuất tách thành nhiều phần.
+
 ## Bản 4 — 2026-11-23
 
 Video Văn bớt máy móc: hình diễn theo lời giảng, mỗi ý có một khung hình riêng, và keyword được bôi ngay trên câu văn.

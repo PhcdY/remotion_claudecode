@@ -11,7 +11,7 @@ Gói **thêm vào** luật chung; chỉ dòng nào trong mục **"Thay luật ch
 > [!IMPORTANT]
 > **Mục tiêu tối thượng: Giải thích VÌ SAO chứ không chỉ CÁI GÌ / Ở ĐÂU.**
 > Học sinh thường sợ môn Địa vì nghĩ là môn học vẹt số liệu, liệt kê tỉnh thành, khoáng sản, diện tích vô hồn.
-> Video của chúng ta dài **2:30 – 4:00**, tuyệt đối **KHÔNG trình chiếu như một bài giảng thuyết minh liệt kê từ đầu đến cuối SGK**.
+> Video của chúng ta dài **2:30 – 4:00** (video bài học tới 6:00), tuyệt đối **KHÔNG trình chiếu như một bài giảng thuyết minh liệt kê từ đầu đến cuối SGK**.
 > Chiến lược duy nhất: **PHẪU THUẬT CƠ CHẾ BẢN CHẤT (The Mechanism Behind the Phenomenon)** — Đi tìm gốc rễ của **MỘT HIỆN TƯỢNG TỰ NHIÊN KỲ THÚ** hoặc **MỘT BÀI TOÁN KHÔNG GIAN ĐẶC THÙ**, giải thích rõ nguyên nhân $\to$ quá trình vận động $\to$ hệ quả cảnh quan & đời sống.
 
 ### 1.1. Hook linh hoạt (Tuyệt đối KHÔNG máy móc)
